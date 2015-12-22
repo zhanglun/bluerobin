@@ -1,0 +1,1 @@
+{"version":3,"sources":["../scripts.babel/contentscript.js"],"names":[],"mappings":"AAAA,YAAY,CAAC;;AAEb,OAAO,CAAC,GAAG,CAAC,+BAA+B,CAAC,CAAC","file":"contentscript.js","sourcesContent":["'use strict';\n\nconsole.log('\\'Allo \\'Allo! Content script');\n"]}

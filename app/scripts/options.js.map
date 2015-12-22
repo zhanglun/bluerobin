@@ -1,0 +1,1 @@
+{"version":3,"sources":["../scripts.babel/options.js"],"names":[],"mappings":"AAAA,YAAY,CAAC;;AAEb,OAAO,CAAC,GAAG,CAAC,uBAAuB,CAAC,CAAC","file":"options.js","sourcesContent":["'use strict';\n\nconsole.log('\\'Allo \\'Allo! Option');\n"]}
