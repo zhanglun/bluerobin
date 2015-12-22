@@ -1,4 +1,6 @@
 'use strict';
 
 console.log('\'Allo \'Allo! Popup');
-//# sourceMappingURL=popup.js.map
+import Person from './test';
+
+console.log(Person);

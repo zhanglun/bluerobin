@@ -4,14 +4,14 @@
   "manifest_version": 2,
   "description": "__MSG_appDescription__",
   "icons": {
-    "16": "images/icon-16.png",
-    "128": "images/icon-128.png"
+    "16": "extension/images/icon-16.png",
+    "128": "extension/images/icon-128.png"
   },
   "default_locale": "en",
   "background": {
     "scripts": [
-      "scripts/chromereload.js",
-      "scripts/background.js"
+      "extension/chromereload.js",
+      "extension/background.js"
     ]
   },
   "permissions": [
@@ -34,7 +34,7 @@
     "newtab": "index.html"
   },
   "options_ui": {
-    "page": "options.html",
+    "page": "extension/options/options.html",
     "chrome_style": true
   },
   "content_scripts": [
@@ -44,7 +44,7 @@
         "https://*/*"
       ],
       "js": [
-        "scripts/contentscript.js"
+        "extension/contentscript.js"
       ],
       "run_at": "document_end",
       "all_frames": false
@@ -55,13 +55,13 @@
   },
   "browser_action": {
     "default_icon": {
-      "19": "images/icon-19.png",
-      "38": "images/icon-38.png"
+      "19": "extension/images/icon-19.png",
+      "38": "extension/images/icon-38.png"
     },
     "default_title": "bluerobin",
-    "default_popup": "popup.html"
+    "default_popup": "extension/popup/popup.html"
   },
   "web_accessible_resources": [
-    "images/icon-48.png"
+    "extension/images/icon-48.png"
   ]
 }
