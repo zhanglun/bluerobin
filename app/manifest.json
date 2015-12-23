@@ -18,6 +18,7 @@
     "tabs",
     "http://*/*",
     "https://*/*",
+    "chrome-extension-resource:/*",
     "background",
     "bookmarks",
     "clipboardRead",
