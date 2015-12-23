@@ -33,7 +33,7 @@ gulp.task('webpack:build-dev', function() {
 });
 
 gulp.task('watch', function(){
-  gulp.watch('./app/**/*.js', ['webpack:build-dev']);
+  gulp.watch(['./app/**/*.js', './app/components/**/*.vue'], ['webpack:build-dev']);
 })
 
 

@@ -1,23 +1,30 @@
 <style lang="sass">
-  .wrapper{
-    background: #eee;
-  }
+ .wrapper{
+  height: 100%;
+ } 
 </style>
 
 <template>
  <div class="wrapper">
     <header>
-      <h2>Hello!</h2>
+      <h1>Hello!</h1>
     </header>  
+    <task></task>
  </div>
 
 </template>
 
 
 <script>
+  import Task from './task/index.vue'
   export default{
     data(){
-      return msg: 'Hello from BlueRobin'
+      return {
+        msg: 'Hello from BlueRobin'
+      }
+    },
+    components: {
+      task: Task
     }
   }
 </script>

@@ -14,16 +14,21 @@ module.exports = {
   },
   module: {
     loaders: [{
-        test: /\.vue$/, loader: 'vue'
+        test: /\.vue$/,
+        loader: 'vue',
+        include: APP_PATH
       }, {
-        test: /\.css$/, loader: 'style-loader!css-loader!sass-loader'
+        test: /\.css$|\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader',
+        include: APP_PATH
       }, {
         test: /\.js$/, 
         exclude: /node_modules/, 
         loader: "babel-loader",
         query: {
             presets: ['es2015']
-        }
+        },
+        include: APP_PATH
       }
     ] 
   },
