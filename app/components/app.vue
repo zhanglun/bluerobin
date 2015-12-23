@@ -1,11 +1,13 @@
-<style>
-
+<style lang="sass">
+  .wrapper{
+    background: #eee;
+  }
 </style>
 
 <template>
  <div class="wrapper">
     <header>
-      Hello!
+      <h2>Hello!</h2>
     </header>  
  </div>
 
@@ -13,7 +15,9 @@
 
 
 <script>
-  module.exports = {
-    
-  };
+  export default{
+    data(){
+      return msg: 'Hello from BlueRobin'
+    }
+  }
 </script>

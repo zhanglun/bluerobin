@@ -1,6 +1,7 @@
-console.log('welcome to bluerobin!~~');
-var Vue = require('vue');
-var App = require('./components/app.vue');
+require('./public/stylesheets/base.scss');
+
+import Vue from 'vue';
+import App from './components/app.vue';
 
 // 入口
 new Vue({
