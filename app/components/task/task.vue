@@ -26,8 +26,7 @@ $editbox-height: 34px;
 .task-item {
   height: $editbox-height + 10;
   line-height: $editbox-height;
-	border: 1px solid #d4d4d4;
-	margin-top: -1px;
+	margin-top: 4px;
 	padding: 4px 10px;
   box-sizing: border-box;
   font-size: 14px;
