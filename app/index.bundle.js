@@ -56,7 +56,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(33);
+	__webpack_require__(32);
 	
 	// 入口
 	new _vue2.default({
@@ -9610,7 +9610,7 @@
 	var __vue_script__, __vue_template__
 	__webpack_require__(4)
 	__vue_script__ = __webpack_require__(8)
-	__vue_template__ = __webpack_require__(32)
+	__vue_template__ = __webpack_require__(31)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -10111,7 +10111,7 @@
 	var __vue_script__, __vue_template__
 	__webpack_require__(12)
 	__vue_script__ = __webpack_require__(14)
-	__vue_template__ = __webpack_require__(31)
+	__vue_template__ = __webpack_require__(30)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -10181,7 +10181,7 @@
 	
 	var _taskList2 = _interopRequireDefault(_taskList);
 	
-	var _taskInputer = __webpack_require__(26);
+	var _taskInputer = __webpack_require__(25);
 	
 	var _taskInputer2 = _interopRequireDefault(_taskInputer);
 	
@@ -10238,7 +10238,7 @@
 	var __vue_script__, __vue_template__
 	__webpack_require__(16)
 	__vue_script__ = __webpack_require__(18)
-	__vue_template__ = __webpack_require__(25)
+	__vue_template__ = __webpack_require__(24)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -10304,7 +10304,7 @@
 		value: true
 	});
 	
-	var _stringify = __webpack_require__(19);
+	var _stringify = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"babel-runtime/core-js/json/stringify\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
 	var _stringify2 = _interopRequireDefault(_stringify);
 	
@@ -10312,7 +10312,7 @@
 	
 	var _proxyBabel2 = _interopRequireDefault(_proxyBabel);
 	
-	var _task = __webpack_require__(20);
+	var _task = __webpack_require__(19);
 	
 	var _task2 = _interopRequireDefault(_task);
 	
@@ -10373,16 +10373,10 @@
 /* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"core-js/library/fn/json/stringify\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())), __esModule: true };
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var __vue_script__, __vue_template__
-	__webpack_require__(21)
-	__vue_script__ = __webpack_require__(23)
-	__vue_template__ = __webpack_require__(24)
+	__webpack_require__(20)
+	__vue_script__ = __webpack_require__(22)
+	__vue_template__ = __webpack_require__(23)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -10399,13 +10393,13 @@
 	})()}
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(22);
+	var content = __webpack_require__(21);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(7)(content, {});
@@ -10425,7 +10419,7 @@
 	}
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
@@ -10439,7 +10433,7 @@
 
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -10758,25 +10752,25 @@
 	// </script>
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"task-item\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\">\r\n  \t<div class=\"task-checker\">\r\n  \t\t<input type=\"checkbox\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n  \t</div>\r\n    <div class=\"task-actions\">\r\n\t    <span v-on:click=\"deleteTask(task)\">删除</span>\r\n    <!-- <span>2</span> -->\r\n  \t</div>\r\n \t\t<div class=\"task-content\" v-on:dblclick=\"edit(task)\">\r\n   \t\t<div data-val=\"{{task.title}}\">{{task.title}}</div>\r\n   \t\t<input type=\"text\" value=\"{{task.title}}\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:keyup.enter=\"updateTask(task)\" v-on:blur=\"updateTask(task)\"/>\r\n\t\t</div>\r\n  </div>";
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports) {
 
 	module.exports = "<h3>Task List</h3>\r\n\t<task v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"$index\"></task>";
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(27)
-	__vue_script__ = __webpack_require__(29)
-	__vue_template__ = __webpack_require__(30)
+	__webpack_require__(26)
+	__vue_script__ = __webpack_require__(28)
+	__vue_template__ = __webpack_require__(29)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -10793,13 +10787,13 @@
 	})()}
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(28);
+	var content = __webpack_require__(27);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(7)(content, {});
@@ -10819,7 +10813,7 @@
 	}
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
@@ -10833,7 +10827,7 @@
 
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -10875,31 +10869,31 @@
 	// </script>
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports) {
 
 	module.exports = "<input type=\"text\" v-model=\"newTaskTitle\" id=\"taskInputer\" v-on:keyup.enter=\"createTask\" autofocus>";
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"task-container\">\r\n\t\t<taskinputer></taskinputer>\r\n\t\t<tasklist></taskist>\r\n\t</div>";
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"wrapper\">\r\n    <header>\r\n      <h1>Hello!</h1>\r\n    </header>\r\n    <task></task>\r\n </div>";
 
 /***/ },
-/* 33 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(34);
+	var content = __webpack_require__(33);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(7)(content, {});
@@ -10919,7 +10913,7 @@
 	}
 
 /***/ },
-/* 34 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
