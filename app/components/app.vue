@@ -7,8 +7,6 @@
 <template>
  <div class="wrapper">
     <header>
-      <h1>Hello!</h1>
-    </header>
     <task></task>
  </div>
 

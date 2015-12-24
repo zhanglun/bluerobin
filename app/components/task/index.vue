@@ -1,5 +1,10 @@
 <style lang="sass">
-
+	.task-container{
+		max-width:660px;
+		min-width: 500px;
+		margin: 0 auto;
+		box-sizing: border-sizing;
+	}
 </style>
 
 <template>

@@ -30,7 +30,7 @@
 				Proxy.Task.get()
 				.then(function(data){
 					console.log(data);
-					_this.tasklist = data;
+					_this.tasklist = data.splice(180);
 					return data;
 				});
 			}
@@ -39,7 +39,6 @@
 			'add new task': function(data){
 				var _this = this;
 				console.log('Component: TaskList 收到了来自 App的new task');
-				console.log(data);
 				Proxy.Task.create(JSON.stringify(data))
 				.then(function(){
 					_this.tasklist.push(data);

@@ -1,12 +1,10 @@
 <style lang="sass?outputstyle=expanded">
+@import "../../public/stylesheets/base.scss";
+
+$editbox-height: 34px;
 .red {
   color: #f00;
 }
-.task-item{
-	/*background: #343;*/
-}
-$editbox-height: 34px;
-
 .dib {
   display: inline-block;
 }
@@ -18,19 +16,30 @@ $editbox-height: 34px;
 .modify {
   width: 100%;
   box-sizing: border-box;
-  height: $editbox-height;
   line-height: $editbox-height;
+  height: $editbox-height;
   padding: 0 4px;
 }
 
 .task-item {
+  @extend .flex-box;
   height: $editbox-height + 10;
   line-height: $editbox-height;
-	margin-top: 4px;
+	margin-top: -1px;
 	padding: 4px 10px;
   box-sizing: border-box;
+  border: 1px solid #e8e8e8;
   font-size: 14px;
   background: rgba(255, 255, 255, 0.8);
+  
+  .task-check, .task-actions{
+    -webkit-flex: 0 1 auto;
+    flex: 0 1 auto;
+  }
+  .task-content{
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+  }
   &.finished {
     .task-content {
     	cursor: default;
@@ -43,7 +52,8 @@ $editbox-height: 34px;
 	      display: none;
 	    }
 	    > input {
-	      display: block;
+	      display: inline-block;
+        vertical-align: middle;
 	    }
   	}
   }
@@ -55,7 +65,6 @@ $editbox-height: 34px;
 }
 
 .task-checker {
-  float: left;
   > input[type=checkbox] {
     //display: none;
     & + label {
@@ -83,14 +92,12 @@ $editbox-height: 34px;
 }
 
 .task-content {
-  margin-left: 20px;
-  margin-right:100px;
   > input {
     @extend .modify;
     border: 1px solid #d4d4d4;
     display: none;
     outline: none;
-    font-size: 16px;
+    font-size: 14px;
   }
   > div {
     padding: 0 5px;
@@ -115,8 +122,6 @@ $editbox-height: 34px;
 }
 
 .task-actions {
-  display: none;
-  float: right;
   width: 100px;
   text-align: right;
   overflow: hidden;
@@ -134,14 +139,14 @@ $editbox-height: 34px;
   	<div class="task-checker">
   		<input type="checkbox" v-on:change = "toggleTask(task)" :checked="task.completed">
   	</div>
+    <div class="task-content" v-on:dblclick="edit(task)">
+      <div data-val="{{task.title}}">{{task.title}}</div>
+      <input type="text" value="{{task.title}}" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:keyup.enter="updateTask(task)" v-on:blur="updateTask(task)"/>
+    </div>
     <div class="task-actions">
 	    <span v-on:click="deleteTask(task)">删除</span>
     <!-- <span>2</span> -->
   	</div>
- 		<div class="task-content" v-on:dblclick="edit(task)">
-   		<div data-val="{{task.title}}">{{task.title}}</div>
-   		<input type="text" value="{{task.title}}" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:keyup.enter="updateTask(task)" v-on:blur="updateTask(task)"/>
-		</div>
   </div>
 </template>
 

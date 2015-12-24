@@ -1,5 +1,5 @@
-// var root = 'http://jsonplaceholder.typicode.com';
-var root = 'http://localhost:1234/api';
+var root = 'http://jsonplaceholder.typicode.com';
+// var root = 'http://localhost:1234/api';
 
 let proxy = {};
 proxy.Task = {};
@@ -10,7 +10,7 @@ proxy.Task = {};
  * @return {[type]}        [description]
  */
 proxy.Task.get = function(params) {
-  return fetch(root + '/tasks', {
+  return fetch(root + '/todos', {
       method: 'GET',
       body: params
     })
@@ -21,9 +21,36 @@ proxy.Task.get = function(params) {
     });
 }
 
+/**
+ * 创建 task
+ * @param  {[type]} task [description]
+ * @return {[type]}      [description]
+ */
 proxy.Task.create = function(task) {
-  return fetch(root + '/tasks', {
+  return fetch(root + '/todos', {
       method: 'post',
+      header: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(task)
+    })
+    .then(function(res) {
+      if (res.ok) {
+        return res.json();
+      }
+    });
+
+}
+
+/**
+ * 删除 task
+ * @param  {[type]} task [description]
+ * @return {[type]}      [description]
+ */
+proxy.Task.delete = function(task) {
+  return fetch(root + '/todos', {
+      method: 'delete',
       header: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -35,8 +62,7 @@ proxy.Task.create = function(task) {
         return res.json();
       }
     });
-}
-
+};
 
 
 proxy.getBackgroundImage = function() {

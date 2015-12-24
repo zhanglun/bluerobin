@@ -19,3 +19,15 @@ h2{
 	font-size: 30px;
 	text-align: center;
 }
+
+
+
+.flex-box{
+  display: -webkit-flex;
+  display: flex;
+  >div{
+    -webkit-flex: 1 auto 1;
+    flex: 1 auto 1;
+  }
+}
+
