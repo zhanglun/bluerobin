@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var sourcemaps = require('gulp-sourcemaps');
 var babel = require('gulp-babel');
 var gutil = require("gulp-util");
+var rename = require("gulp-rename");
 var webpack = require("webpack");
 var webpackConfig = require('./webpack.config.js');
 
@@ -12,6 +13,9 @@ gulp.task('babel', function(){
 		presets: ['es2015']
 	}))
 	.pipe(sourcemaps.write('.'))
+  .pipe(rename(function(path){
+    path.basename = path.basename.replace(/.babel/ig,'')
+  }))
 	.pipe(gulp.dest('./app'));
 });
 
@@ -41,5 +45,6 @@ gulp.task('watch', function(){
 
 gulp.task('default', [
   'webpack:build-dev',
+  'babel',
   'watch'
 ]);

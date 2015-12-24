@@ -1,14 +1,14 @@
 <style lang="sass">
  .wrapper{
   height: 100%;
- } 
+ }
 </style>
 
 <template>
  <div class="wrapper">
     <header>
       <h1>Hello!</h1>
-    </header>  
+    </header>
     <task></task>
  </div>
 
@@ -16,7 +16,9 @@
 
 
 <script>
+  import Common from '../public/javascripts/common.babel.js';
   import Task from './task/index.vue'
+
   export default{
     data(){
       return {
@@ -27,4 +29,3 @@
       task: Task
     }
   }
-</script>

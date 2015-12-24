@@ -56,7 +56,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(31);
+	__webpack_require__(33);
 	
 	// 入口
 	new _vue2.default({
@@ -9607,20 +9607,22 @@
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var __vue_script__, __vue_template__
 	__webpack_require__(4)
-	module.exports = __webpack_require__(8)
-	
+	__vue_script__ = __webpack_require__(8)
+	__vue_template__ = __webpack_require__(32)
+	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(30)
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/app.vue"
+	  var id = "D:\\Code\\bluerobin\\app\\components\\app.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
-	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	    hotAPI.update(id, module.exports, __vue_template__)
 	  }
 	})()}
 
@@ -9640,8 +9642,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-0194f028&file=app.vue!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./app.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-0194f028&file=app.vue!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./app.vue");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-2a4db44e&file=app.vue!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./app.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-2a4db44e&file=app.vue!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./app.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -9984,12 +9986,43 @@
 	  value: true
 	});
 	
-	var _index = __webpack_require__(9);
+	var _commonBabel = __webpack_require__(9);
+	
+	var _commonBabel2 = _interopRequireDefault(_commonBabel);
+	
+	var _index = __webpack_require__(11);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	// <style lang="sass">
+	
+	//  .wrapper{
+	
+	//   height: 100%;
+	
+	//  }
+	
+	// </style>
+	
+	// <template>
+	
+	//  <div class="wrapper">
+	
+	//     <header>
+	
+	//       <h1>Hello!</h1>
+	
+	//     </header>
+	
+	//     <task></task>
+	
+	//  </div>
+	
+	// </template>
+	
+	// <script>
 	exports.default = {
 	  data: function data() {
 	    return {
@@ -10001,54 +10034,107 @@
 	    task: _index2.default
 	  }
 	};
-	// </script>
-	// <style lang="sass">
-	//  .wrapper{
-	//   height: 100%;
-	//  }
-	// </style>
-
-	// <template>
-	//  <div class="wrapper">
-	//     <header>
-	//       <h1>Hello!</h1>
-	//     </header> 
-	//     <task></task>
-	//  </div>
-
-	// </template>
-
-	// <script>
 
 /***/ },
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(10)
-	module.exports = __webpack_require__(12)
+	'use strict';
+
+	var _proxyBabel = __webpack_require__(10);
+
+	var _proxyBabel2 = _interopRequireDefault(_proxyBabel);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	'use strict';
 	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	// var root = 'http://jsonplaceholder.typicode.com';
+	var root = 'http://localhost:1234/api';
+	
+	var proxy = {};
+	proxy.Task = {};
+	
+	/**
+	 * 获取task
+	 * @param  {[type]} params querystring
+	 * @return {[type]}        [description]
+	 */
+	proxy.Task.get = function (params) {
+	  return fetch(root + '/tasks', {
+	    method: 'GET',
+	    body: params
+	  }).then(function (res) {
+	    if (res.ok) {
+	      return res.json();
+	    }
+	  });
+	};
+	
+	proxy.Task.create = function (task) {
+	  return fetch(root + '/tasks', {
+	    method: 'post',
+	    header: {
+	      'Accept': 'application/json',
+	      'Content-Type': 'application/json'
+	    },
+	    body: task
+	  }).then(function (res) {
+	    if (res.ok) {
+	      return res.json();
+	    }
+	  });
+	};
+	
+	proxy.getBackgroundImage = function () {
+	  return fetch('http://ww1.sinaimg.cn/large/7e8b4ac8jw1ez8vuclmvcj21hc0xc7fn.jpg').then(function (res) {
+	    return res.blob();
+	  }).then(function (myBlob) {
+	    var objectURL = URL.createObjectURL(myBlob);
+	    return objectURL;
+	  });
+	};
+	
+	exports.default = proxy;
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(12)
+	__vue_script__ = __webpack_require__(14)
+	__vue_template__ = __webpack_require__(31)
+	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(29)
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/index.vue"
+	  var id = "D:\\Code\\bluerobin\\app\\components\\task\\index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
-	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	    hotAPI.update(id, module.exports, __vue_template__)
 	  }
 	})()}
 
 /***/ },
-/* 10 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(11);
+	var content = __webpack_require__(13);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(7)(content, {});
@@ -10057,8 +10143,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-cdd13166&file=index.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-cdd13166&file=index.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-14f89733&file=index.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-14f89733&file=index.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./index.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -10068,7 +10154,7 @@
 	}
 
 /***/ },
-/* 11 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
@@ -10082,39 +10168,37 @@
 
 
 /***/ },
-/* 12 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	// <style lang="sass">
+	var _vue = __webpack_require__(1);
 	
-	// </style>
+	var _vue2 = _interopRequireDefault(_vue);
 	
-	// <template>
-	// 	<div class="task-container">
-	// 		<taskinputer></taskinputer>
-	// 		<tasklist></taskist>
-	// 	</div>
-	// </template>
+	var _taskList = __webpack_require__(15);
 	
-	// <script>
-	var Vue = __webpack_require__(1);
-	var TaskList = __webpack_require__(13);
-	var TaskInputer = __webpack_require__(24);
+	var _taskList2 = _interopRequireDefault(_taskList);
+	
+	var _taskInputer = __webpack_require__(26);
+	
+	var _taskInputer2 = _interopRequireDefault(_taskInputer);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	module.exports = {
 	
 		data: function data() {
 			return {
 				value: '',
-				taskList: TaskList
+				taskList: _taskList2.default
 			};
 		},
 	
 		components: {
-			tasklist: TaskList,
-			taskinputer: TaskInputer
+			tasklist: _taskList2.default,
+			taskinputer: _taskInputer2.default
 		},
 	
 		ready: function ready() {},
@@ -10129,36 +10213,55 @@
 	};
 	
 	// </script>
+	// <style lang="sass">
+	
+	// </style>
+	
+	// <template>
+	
+	// 	<div class="task-container">
+	
+	// 		<taskinputer></taskinputer>
+	
+	// 		<tasklist></taskist>
+	
+	// 	</div>
+	
+	// </template>
+	
+	// <script>undefined
 
 /***/ },
-/* 13 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(14)
-	module.exports = __webpack_require__(16)
-	
+	var __vue_script__, __vue_template__
+	__webpack_require__(16)
+	__vue_script__ = __webpack_require__(18)
+	__vue_template__ = __webpack_require__(25)
+	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(23)
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/taskList.vue"
+	  var id = "D:\\Code\\bluerobin\\app\\components\\task\\taskList.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
-	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	    hotAPI.update(id, module.exports, __vue_template__)
 	  }
 	})()}
 
 /***/ },
-/* 14 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(15);
+	var content = __webpack_require__(17);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(7)(content, {});
@@ -10167,8 +10270,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-4a839518&file=taskList.vue!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskList.vue", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-4a839518&file=taskList.vue!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskList.vue");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-4cc89372&file=taskList.vue!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskList.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-4cc89372&file=taskList.vue!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskList.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -10178,7 +10281,7 @@
 	}
 
 /***/ },
-/* 15 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
@@ -10192,82 +10295,117 @@
 
 
 /***/ },
-/* 16 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _stringify = __webpack_require__(19);
+	
+	var _stringify2 = _interopRequireDefault(_stringify);
+	
+	var _proxyBabel = __webpack_require__(10);
+	
+	var _proxyBabel2 = _interopRequireDefault(_proxyBabel);
+	
+	var _task = __webpack_require__(20);
+	
+	var _task2 = _interopRequireDefault(_task);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// <style>
 	
 	// </style>
 	
 	// <template>
+	
 	// 	<h3>Task List</h3>
+	
 	// 	<task v-for="task in tasklist" :task="task" :index="$index" track-by="$index"></task>
+	
 	// </template>
 	
 	// <script>
 	// http://zhanglun.daoapp.io/api/todo/tasks
-	var Task = __webpack_require__(17);
-	var taskList = __webpack_require__(21);
-	
-	module.exports = {
+	exports.default = {
 		data: function data() {
 			return {
 				tasklist: []
 			};
 		},
+	
 		components: {
-			task: Task
+			task: _task2.default
 		},
 		ready: function ready() {
 			this.getTaskList();
 		},
+	
 		methods: {
 			'getTaskList': function getTaskList() {
-				this.tasklist = taskList;
-				return taskList;
+				var _this = this;
+				_proxyBabel2.default.Task.get().then(function (data) {
+					console.log(data);
+					_this.tasklist = data;
+					return data;
+				});
 			}
 		},
 		events: {
 			'add new task': function addNewTask(data) {
+				var _this = this;
 				console.log('Component: TaskList 收到了来自 App的new task');
-				this.tasklist.push(data);
-				console.log(this.tasklist);
+				console.log(data);
+				_proxyBabel2.default.Task.create((0, _stringify2.default)(data)).then(function () {
+					_this.tasklist.push(data);
+				});
 			}
 		}
 	};
 	// </script>
 
 /***/ },
-/* 17 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(18)
-	module.exports = __webpack_require__(20)
-	
+	module.exports = { "default": __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"core-js/library/fn/json/stringify\""); e.code = 'MODULE_NOT_FOUND'; throw e; }())), __esModule: true };
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(21)
+	__vue_script__ = __webpack_require__(23)
+	__vue_template__ = __webpack_require__(24)
+	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(22)
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/task.vue"
+	  var id = "D:\\Code\\bluerobin\\app\\components\\task\\task.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
-	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	    hotAPI.update(id, module.exports, __vue_template__)
 	  }
 	})()}
 
 /***/ },
-/* 18 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(19);
+	var content = __webpack_require__(22);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(7)(content, {});
@@ -10276,8 +10414,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-55969f4c&file=task.vue!./../../../node_modules/sass-loader/index.js?outputstyle=expanded!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./task.vue", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-55969f4c&file=task.vue!./../../../node_modules/sass-loader/index.js?outputstyle=expanded!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./task.vue");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-761aebb4&file=task.vue!./../../../node_modules/sass-loader/index.js?outputstyle=expanded!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./task.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-761aebb4&file=task.vue!./../../../node_modules/sass-loader/index.js?outputstyle=expanded!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./task.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -10287,7 +10425,7 @@
 	}
 
 /***/ },
-/* 19 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
@@ -10301,161 +10439,282 @@
 
 
 /***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
+/* 23 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
 	// <style lang="sass?outputstyle=expanded">
+	
 	// .red {
+	
 	//   color: #f00;
+	
 	// }
+	
 	// .task-item{
+	
 	// 	/*background: #343;*/
+	
 	// }
+	
 	// $editbox-height: 34px;
 	
 	// .dib {
+	
 	//   display: inline-block;
+	
 	// }
 	
 	// .app-main {
+	
 	//   box-sizing: border-box;
+	
 	// }
 	
 	// .modify {
+	
 	//   width: 100%;
+	
 	//   box-sizing: border-box;
+	
 	//   height: $editbox-height;
+	
 	//   line-height: $editbox-height;
+	
 	//   padding: 0 4px;
+	
 	// }
 	
 	// .task-item {
+	
 	//   height: $editbox-height + 10;
+	
 	//   line-height: $editbox-height;
+	
 	// 	margin-top: 4px;
+	
 	// 	padding: 4px 10px;
+	
 	//   box-sizing: border-box;
+	
 	//   font-size: 14px;
+	
 	//   background: rgba(255, 255, 255, 0.8);
+	
 	//   &.finished {
+	
 	//     .task-content {
+	
 	//     	cursor: default;
+	
 	//       text-decoration: line-through;
+	
 	//     }
+	
 	//   }
+	
 	//   &.editing {
+	
 	//   	.task-content{
+	
 	// 	    > div {
+	
 	// 	      display: none;
+	
 	// 	    }
+	
 	// 	    > input {
+	
 	// 	      display: block;
+	
 	// 	    }
+	
 	//   	}
+	
 	//   }
+	
 	//   &:hover {
+	
 	//     .task-actions {
+	
 	//       display: block;
+	
 	//     }
+	
 	//   }
+	
 	// }
 	
 	// .task-checker {
+	
 	//   float: left;
+	
 	//   > input[type=checkbox] {
+	
 	//     //display: none;
+	
 	//     & + label {
+	
 	//       display: none;
+	
 	//       //display: block;
+	
 	//       width: 14px;
+	
 	//       height: 14px;
+	
 	//       min-height: 14px;
+	
 	//       padding: 0;
+	
 	//       font-size: 14px;
+	
 	//       text-align: center;
+	
 	//       line-height: 14px;
+	
 	//       border: 1px solid #d4d4d4;
+	
 	//     }
+	
 	//     & + label::before {
+	
 	//       content: '🐶';
+	
 	//       display: block;
+	
 	//       width: 100%;
+	
 	//       height: 100%;
+	
 	//     }
+	
 	//     &:checked + label::before {
+	
 	//       content: '🐔';
+	
 	//     }
+	
 	//   }
+	
 	// }
 	
 	// .task-content {
+	
 	//   margin-left: 20px;
+	
 	//   margin-right:100px;
+	
 	//   > input {
+	
 	//     @extend .modify;
+	
 	//     border: 1px solid #d4d4d4;
+	
 	//     display: none;
+	
 	//     outline: none;
+	
 	//     font-size: 16px;
+	
 	//   }
+	
 	//   > div {
+	
 	//     padding: 0 5px;
+	
 	//     white-space: nowrap;
+	
 	//     overflow: hidden;
+	
 	//     text-overflow: ellipsis;
+	
 	//     -webkit-user-select: none;
+	
 	//   }
+	
 	// }
 	
 	// #task-completed {
+	
 	//   display: none;
+	
 	// }
 	
 	// .task-footer {
+	
 	//   a {
+	
 	//     display: inline-block;;
+	
 	//   }
+	
 	//   .todo-count {
+	
 	//     display: inline-block;
+	
 	//   }
+	
 	// }
 	
 	// .task-actions {
+	
 	//   display: none;
+	
 	//   float: right;
+	
 	//   width: 100px;
+	
 	//   text-align: right;
+	
 	//   overflow: hidden;
+	
 	// }
 	
 	// #task-category {
+	
 	//   .list-group-item {
+	
 	//     background: rgba(255, 255, 255, 0.8);
+	
 	//   }
+	
 	// }
+	
 	// </style>
 	
 	// <template>
-	//   <div class="task-item" v-bind:class="{finished: task.isDone, editing: task == taskEditing}">
+	
+	//   <div class="task-item" v-bind:class="{finished: task.completed, editing: task == taskEditing}">
+	
 	//   	<div class="task-checker">
-	//   		<input type="checkbox" v-on:change = "toggleTask(task)" :checked="task.isDone">
+	
+	//   		<input type="checkbox" v-on:change = "toggleTask(task)" :checked="task.completed">
+	
 	//   	</div>
+	
 	//     <div class="task-actions">
+	
 	// 	    <span v-on:click="deleteTask(task)">删除</span>
+	
 	//     <!-- <span>2</span> -->
+	
 	//   	</div>
+	
 	//  		<div class="task-content" v-on:dblclick="edit(task)">
+	
 	//    		<div data-val="{{task.title}}">{{task.title}}</div>
+	
 	//    		<input type="text" value="{{task.title}}" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:keyup.enter="updateTask(task)" v-on:blur="updateTask(task)"/>
-	// 		</div>  	
+	
+	// 		</div>
+	
 	//   </div>
+	
 	// </template>
 	
 	// <script>
-	
-	var taskList = __webpack_require__(21);
 	
 	module.exports = {
 	  props: ['task', 'index'],
@@ -10480,10 +10739,10 @@
 	  },
 	  methods: {
 	    toggleTask: function toggleTask(task) {
-	      this.task.isDone = !this.task.isDone;
+	      this.task.completed = !this.task.completed;
 	    },
 	    edit: function edit(task) {
-	      if (task.isDone) {
+	      if (task.completed) {
 	        return false;
 	      }
 	      this.taskEditing = task;
@@ -10499,159 +10758,48 @@
 	// </script>
 
 /***/ },
-/* 21 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	var data = [{
-	  "_id": "560d447d9fbbe652317a2387",
-	  "title": "https://github.com/philc/vimium",
-	  "__v": 0,
-	  "lables": [],
-	  "isOverdue": false,
-	  "isDone": true,
-	  "utime": "2015-10-01T14:34:37.726Z",
-	  "deadline": "2015-10-01T14:34:37.726Z",
-	  "ctime": "2015-10-01T14:34:37.726Z"
-	}, {
-	  "_id": "5612972e14b535d10bacae2b",
-	  "title": "明天早上起来做早饭",
-	  "__v": 0,
-	  "category": "archive",
-	  "lables": [],
-	  "isOverdue": false,
-	  "isDone": true,
-	  "utime": "2015-10-05T15:28:46.536Z",
-	  "deadline": "2015-10-05T15:28:46.536Z",
-	  "ctime": "2015-10-05T15:28:46.536Z"
-	}, {
-	  "_id": "5612974f14b535d10bacae2e",
-	  "title": "收拾厨房",
-	  "__v": 0,
-	  "lables": [],
-	  "isOverdue": false,
-	  "isDone": true,
-	  "utime": "2015-10-05T15:29:19.217Z",
-	  "deadline": "2015-10-05T15:29:19.217Z",
-	  "ctime": "2015-10-05T15:29:19.217Z"
-	}, {
-	  "_id": "5612975114b535d10bacae2f",
-	  "title": "倒垃圾",
-	  "__v": 0,
-	  "lables": [],
-	  "isOverdue": false,
-	  "isDone": true,
-	  "utime": "2015-10-05T15:29:21.706Z",
-	  "deadline": "2015-10-05T15:29:21.706Z",
-	  "ctime": "2015-10-05T15:29:21.706Z"
-	}, {
-	  "_id": "561368b114b535d10bacae30",
-	  "title": "萨尔范德萨的发生地方",
-	  "__v": 0,
-	  "lables": [],
-	  "isOverdue": false,
-	  "isDone": true,
-	  "utime": "2015-10-06T06:22:41.248Z",
-	  "deadline": "2015-10-06T06:22:41.248Z",
-	  "ctime": "2015-10-06T06:22:41.247Z"
-	}, {
-	  "_id": "56152d78f4c64768185ec39f",
-	  "title": "todo 增加新功能",
-	  "__v": 0,
-	  "lables": [],
-	  "isOverdue": false,
-	  "isDone": false,
-	  "utime": "2015-10-07T14:34:32.212Z",
-	  "deadline": "2015-10-07T14:34:32.212Z",
-	  "ctime": "2015-10-07T14:34:32.212Z"
-	}, {
-	  "_id": "5669855f2695c1b610def9fc",
-	  "title": "aaaa",
-	  "__v": 0,
-	  "lables": [],
-	  "isOverdue": false,
-	  "isDone": false,
-	  "utime": "2015-12-10T13:59:59.304Z",
-	  "deadline": "2015-12-10T13:59:59.304Z",
-	  "ctime": "2015-12-10T13:59:59.304Z"
-	}, {
-	  "_id": "566985602695c1b610def9fd",
-	  "title": "aaa",
-	  "__v": 0,
-	  "lables": [],
-	  "isOverdue": false,
-	  "isDone": false,
-	  "utime": "2015-12-10T14:00:00.546Z",
-	  "deadline": "2015-12-10T14:00:00.546Z",
-	  "ctime": "2015-12-10T14:00:00.546Z"
-	}, {
-	  "_id": "566985612695c1b610def9fe",
-	  "title": "123",
-	  "__v": 0,
-	  "lables": [],
-	  "isOverdue": false,
-	  "isDone": false,
-	  "utime": "2015-12-10T14:00:01.277Z",
-	  "deadline": "2015-12-10T14:00:01.277Z",
-	  "ctime": "2015-12-10T14:00:01.276Z"
-	}, {
-	  "_id": "566985622695c1b610def9ff",
-	  "title": "3123",
-	  "__v": 0,
-	  "lables": [],
-	  "isOverdue": false,
-	  "isDone": false,
-	  "utime": "2015-12-10T14:00:02.165Z",
-	  "deadline": "2015-12-10T14:00:02.165Z",
-	  "ctime": "2015-12-10T14:00:02.165Z"
-	}];
-	
-	// var data = [];
-	
-	module.exports = data;
-
-/***/ },
-/* 22 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"task-item\" v-bind:class=\"{finished: task.isDone, editing: task == taskEditing}\">\n  \t<div class=\"task-checker\">\n  \t\t<input type=\"checkbox\" v-on:change = \"toggleTask(task)\" :checked=\"task.isDone\">\n  \t</div>\n    <div class=\"task-actions\">\n\t    <span v-on:click=\"deleteTask(task)\">删除</span>\n    <!-- <span>2</span> -->\n  \t</div>\n \t\t<div class=\"task-content\" v-on:dblclick=\"edit(task)\">\n   \t\t<div data-val=\"{{task.title}}\">{{task.title}}</div>\n   \t\t<input type=\"text\" value=\"{{task.title}}\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:keyup.enter=\"updateTask(task)\" v-on:blur=\"updateTask(task)\"/>\n\t\t</div>  \t\n  </div>";
-
-/***/ },
-/* 23 */
-/***/ function(module, exports) {
-
-	module.exports = "<h3>Task List</h3>\n\t<task v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"$index\"></task>";
-
-/***/ },
 /* 24 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"task-item\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\">\r\n  \t<div class=\"task-checker\">\r\n  \t\t<input type=\"checkbox\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n  \t</div>\r\n    <div class=\"task-actions\">\r\n\t    <span v-on:click=\"deleteTask(task)\">删除</span>\r\n    <!-- <span>2</span> -->\r\n  \t</div>\r\n \t\t<div class=\"task-content\" v-on:dblclick=\"edit(task)\">\r\n   \t\t<div data-val=\"{{task.title}}\">{{task.title}}</div>\r\n   \t\t<input type=\"text\" value=\"{{task.title}}\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:keyup.enter=\"updateTask(task)\" v-on:blur=\"updateTask(task)\"/>\r\n\t\t</div>\r\n  </div>";
+
+/***/ },
+/* 25 */
+/***/ function(module, exports) {
+
+	module.exports = "<h3>Task List</h3>\r\n\t<task v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"$index\"></task>";
+
+/***/ },
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(25)
-	module.exports = __webpack_require__(27)
-	
+	var __vue_script__, __vue_template__
+	__webpack_require__(27)
+	__vue_script__ = __webpack_require__(29)
+	__vue_template__ = __webpack_require__(30)
+	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(28)
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/taskInputer.vue"
+	  var id = "D:\\Code\\bluerobin\\app\\components\\task\\taskInputer.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
-	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	    hotAPI.update(id, module.exports, __vue_template__)
 	  }
 	})()}
 
 /***/ },
-/* 25 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(26);
+	var content = __webpack_require__(28);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(7)(content, {});
@@ -10660,8 +10808,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-51e884ed&file=taskInputer.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskInputer.vue", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-51e884ed&file=taskInputer.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskInputer.vue");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-6cc3b053&file=taskInputer.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskInputer.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-6cc3b053&file=taskInputer.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskInputer.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -10671,7 +10819,7 @@
 	}
 
 /***/ },
-/* 26 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();
@@ -10685,7 +10833,7 @@
 
 
 /***/ },
-/* 27 */
+/* 29 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -10695,7 +10843,9 @@
 	// </style>
 	
 	// <template>
+	
 	// 	<input type="text" v-model="newTaskTitle" id="taskInputer" v-on:keyup.enter="createTask" autofocus>	
+	
 	// </template>
 	
 	// <script>
@@ -10725,31 +10875,31 @@
 	// </script>
 
 /***/ },
-/* 28 */
+/* 30 */
 /***/ function(module, exports) {
 
 	module.exports = "<input type=\"text\" v-model=\"newTaskTitle\" id=\"taskInputer\" v-on:keyup.enter=\"createTask\" autofocus>";
 
 /***/ },
-/* 29 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"task-container\">\n\t\t<taskinputer></taskinputer>\n\t\t<tasklist></taskist>\n\t</div>";
-
-/***/ },
-/* 30 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"wrapper\">\n    <header>\n      <h1>Hello!</h1>\n    </header>  \n    <task></task>\n </div>";
-
-/***/ },
 /* 31 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"task-container\">\r\n\t\t<taskinputer></taskinputer>\r\n\t\t<tasklist></taskist>\r\n\t</div>";
+
+/***/ },
+/* 32 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"wrapper\">\r\n    <header>\r\n      <h1>Hello!</h1>\r\n    </header>\r\n    <task></task>\r\n </div>";
+
+/***/ },
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(32);
+	var content = __webpack_require__(34);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(7)(content, {});
@@ -10769,7 +10919,7 @@
 	}
 
 /***/ },
-/* 32 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(6)();

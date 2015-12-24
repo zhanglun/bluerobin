@@ -130,9 +130,9 @@ $editbox-height: 34px;
 </style>
 
 <template>
-  <div class="task-item" v-bind:class="{finished: task.isDone, editing: task == taskEditing}">
+  <div class="task-item" v-bind:class="{finished: task.completed, editing: task == taskEditing}">
   	<div class="task-checker">
-  		<input type="checkbox" v-on:change = "toggleTask(task)" :checked="task.isDone">
+  		<input type="checkbox" v-on:change = "toggleTask(task)" :checked="task.completed">
   	</div>
     <div class="task-actions">
 	    <span v-on:click="deleteTask(task)">删除</span>
@@ -141,13 +141,12 @@ $editbox-height: 34px;
  		<div class="task-content" v-on:dblclick="edit(task)">
    		<div data-val="{{task.title}}">{{task.title}}</div>
    		<input type="text" value="{{task.title}}" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:keyup.enter="updateTask(task)" v-on:blur="updateTask(task)"/>
-		</div>  	
+		</div>
   </div>
 </template>
 
 <script>
 
-var taskList = require('./_mock.js');
 
 module.exports = {
 	props: ['task', 'index'],
@@ -159,7 +158,7 @@ module.exports = {
   },
   ready: function(){
 
-  }, 
+  },
 
   directives: {
     'task-autofocus': function (value) {
@@ -174,10 +173,10 @@ module.exports = {
   },
   methods: {
   	toggleTask: function(task){
-  		this.task.isDone = !this.task.isDone;
+  		this.task.completed = !this.task.completed;
   	},
   	edit: function(task){
-  		if(task.isDone){
+  		if(task.completed){
   			return false;
   		}
   		this.taskEditing = task;

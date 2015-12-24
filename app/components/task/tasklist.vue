@@ -1,5 +1,5 @@
 <style>
-	
+
 </style>
 
 <template>
@@ -9,11 +9,11 @@
 
 <script>
 // http://zhanglun.daoapp.io/api/todo/tasks
-	var Task = require('./task.vue');
-	var taskList = require('./_mock.js');
+	import Proxy from '../../services/proxy.babel.js';
+	import Task from './task.vue';
 
-	module.exports = {
-		data: function(){
+	export default {
+		data() {
 			return {
 				tasklist: []
 			}
@@ -21,20 +21,29 @@
 		components: {
 			task: Task
 		},
-		ready: function(){
+		ready() {
 			this.getTaskList();
 		},
 		methods: {
-			'getTaskList': function(){
-				this.tasklist = taskList;
-				return taskList;
+			'getTaskList': function() {
+				var _this = this;
+				Proxy.Task.get()
+				.then(function(data){
+					console.log(data);
+					_this.tasklist = data;
+					return data;
+				});
 			}
 		},
 		events: {
 			'add new task': function(data){
+				var _this = this;
 				console.log('Component: TaskList 收到了来自 App的new task');
-				this.tasklist.push(data);
-				console.log(this.tasklist);
+				console.log(data);
+				Proxy.Task.create(JSON.stringify(data))
+				.then(function(){
+					_this.tasklist.push(data);
+				});
 			}
 		}
 	};

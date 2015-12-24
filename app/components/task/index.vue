@@ -1,5 +1,5 @@
 <style lang="sass">
-	
+
 </style>
 
 <template>
@@ -10,9 +10,11 @@
 </template>
 
 <script>
-	var Vue = require('vue');
-	var TaskList = require('./taskList.vue');
-	var TaskInputer = require('./taskInputer.vue');
+
+	import Vue from 'vue';
+	import TaskList from './taskList.vue';
+	import TaskInputer from './taskInputer.vue';
+
 
 	module.exports = {
 
@@ -22,7 +24,6 @@
 		  	taskList: TaskList
 	  	}
 	  },
-
 
 	  components: {
 	    tasklist: TaskList,
@@ -41,6 +42,6 @@
 	  		this.$broadcast('add new task', data);
 	  	}
 	  }
-	};	
+	};
 
 </script>
