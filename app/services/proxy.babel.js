@@ -1,5 +1,17 @@
-var root = 'http://jsonplaceholder.typicode.com';
-// var root = 'http://localhost:1234/api';
+// var root = 'http://jsonplaceholder.typicode.com';
+var root = 'http://localhost:1234/api';
+
+function JSON2FormData(json) {
+  var str = "";
+  for (var key in json) {
+    if (str != "") {
+      str += "&";
+    }
+    str += key + "=" + encodeURIComponent(json[key]);
+  }
+  return str;
+};
+
 
 let proxy = {};
 proxy.Task = {};
@@ -10,7 +22,7 @@ proxy.Task = {};
  * @return {[type]}        [description]
  */
 proxy.Task.get = function(params) {
-  return fetch(root + '/todos', {
+  return fetch(root + '/tasks', {
       method: 'GET',
       body: params
     })
@@ -27,13 +39,14 @@ proxy.Task.get = function(params) {
  * @return {[type]}      [description]
  */
 proxy.Task.create = function(task) {
-  return fetch(root + '/todos', {
+  // var data = new FormData();
+  // data.append('task', JSON.stringify({task:task}));
+  return fetch(root + '/tasks', {
       method: 'post',
-      header: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
       },
-      body: JSON.stringify(task)
+      body: JSON2FormData(task)
     })
     .then(function(res) {
       if (res.ok) {
@@ -49,12 +62,9 @@ proxy.Task.create = function(task) {
  * @return {[type]}      [description]
  */
 proxy.Task.delete = function(task) {
-  return fetch(root + '/todos', {
+  console.log(task);
+  return fetch(root + '/tasks/' + task._id, {
       method: 'delete',
-      header: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
       body: task
     })
     .then(function(res) {

@@ -31,7 +31,7 @@ $editbox-height: 34px;
   border: 1px solid #e8e8e8;
   font-size: 14px;
   background: rgba(255, 255, 255, 0.8);
-  
+
   .task-check, .task-actions{
     -webkit-flex: 0 1 auto;
     flex: 0 1 auto;
@@ -144,7 +144,7 @@ $editbox-height: 34px;
       <input type="text" value="{{task.title}}" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:keyup.enter="updateTask(task)" v-on:blur="updateTask(task)"/>
     </div>
     <div class="task-actions">
-	    <span v-on:click="deleteTask(task)">删除</span>
+	    <span v-on:click="deleteTask(task, $index)">删除</span>
     <!-- <span>2</span> -->
   	</div>
   </div>
@@ -152,6 +152,7 @@ $editbox-height: 34px;
 
 <script>
 
+import Proxy from '../../services/proxy.babel.js';
 
 module.exports = {
 	props: ['task', 'index'],
@@ -187,11 +188,10 @@ module.exports = {
   		this.taskEditing = task;
   	},
   	updateTask: function(task){
-  		console.log('update task');
   		this.taskEditing = null;
   	},
-  	deleteTask: function(){
-
+  	deleteTask: function(task, $index){
+        this.$dispatch('delete task', task);
   	}
   }
 

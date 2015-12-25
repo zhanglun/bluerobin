@@ -29,20 +29,26 @@
 				var _this = this;
 				Proxy.Task.get()
 				.then(function(data){
-					console.log(data);
-					_this.tasklist = data.splice(180);
+					_this.tasklist = data;
 					return data;
 				});
 			}
 		},
 		events: {
-			'add new task': function(data){
+			'add task': function(task){
 				var _this = this;
-				console.log('Component: TaskList 收到了来自 App的new task');
-				Proxy.Task.create(JSON.stringify(data))
-				.then(function(){
-					_this.tasklist.push(data);
+				console.log('Component: TaskList 收到了来自 App 的 new task');
+				Proxy.Task.create(task)
+				.then(function(res){
+					_this.tasklist.unshift(res);
 				});
+			},
+			'delete task': function(task){
+				var _this = this;
+    		Proxy.Task.delete(task)
+     		.then(function(){
+     			_this.tasklist.$remove(task);
+     		});
 			}
 		}
 	};

@@ -42,9 +42,13 @@
 
 	  },
 	  events: {
-	  	'create new task': function(data){
+	  	'create task': function(task){
 	  		console.log('components: App 收到了 来自 taskinputer 的数据');
-	  		this.$broadcast('add new task', data);
+	  		this.$broadcast('add task', task);
+	  	},
+	  	'delete task': function(task){
+	  		console.log('components: App 收到了 来自 Task 的消息');
+	  		this.$broadcast('delete task', task);
 	  	}
 	  }
 	};
