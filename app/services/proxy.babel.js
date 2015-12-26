@@ -80,7 +80,7 @@ proxy.Task.delete = function(task) {
  * @param  {[type]} task [description]
  * @return {[type]}      [description]
  */
-proxy.Task.modify = function(task) {
+proxy.Task.edit = function(task) {
   return fetch(root + '/tasks/' + task._id, {
       method: 'put',
       headers: {

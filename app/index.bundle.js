@@ -10119,7 +10119,7 @@
 	 * @param  {[type]} task [description]
 	 * @return {[type]}      [description]
 	 */
-	proxy.Task.modify = function (task) {
+	proxy.Task.edit = function (task) {
 	  return fetch(root + '/tasks/' + task._id, {
 	    method: 'put',
 	    headers: {
@@ -10251,9 +10251,9 @@
 				console.log('components: App 收到了 来自 Task 的消息');
 				this.$broadcast('delete task', task);
 			},
-			'modify task': function modifyTask(task) {
-				console.log('task !modify!!!------------!!!');
-				this.$broadcast('modify task', task);
+			'edit task': function editTask(task) {
+				console.log('task !edit!!!------------!!!');
+				this.$broadcast('edit task', task);
 			}
 		}
 	};
@@ -10406,11 +10406,11 @@
 					_this.tasklist.$remove(task);
 				});
 			},
-			'modify task': function modifyTask(task) {
+			'edit task': function editTask(task) {
 				var _this = this;
-				console.log('Component: TaskList 收到了来自 App 的 modify task');
-				_proxyBabel2.default.Task.modify(task).then(function (res) {
-					console.log('modify task success!');
+				console.log('Component: TaskList 收到了来自 App 的 edit task');
+				_proxyBabel2.default.Task.edit(task).then(function (res) {
+					console.log('edit task success!');
 				});
 			}
 		}
@@ -10514,6 +10514,7 @@
 	  methods: {
 	    toggleTask: function toggleTask(task) {
 	      this.task.completed = !this.task.completed;
+	      this.$dispatch('edit task', task);
 	    },
 	    edit: function edit(task) {
 	      if (task.completed) {
@@ -10525,7 +10526,7 @@
 	      this.$dispatch('delete task', task);
 	    },
 	
-	    modifyTask: function modifyTask(task) {
+	    doEdit: function doEdit(task) {
 	      // 如果没有正在编辑的task说明目前并没有编辑操作
 	      // 这里也解决了 一个问题：在 input上绑定了 blur 和 keyup两个事件
 	      // 按下 enter 执行完成之后，会触发 blur，所以应该执行之后将 taskEditing 置为 null
@@ -10533,7 +10534,7 @@
 	        return false;
 	      }
 	      this.taskEditing = null;
-	      this.$dispatch('modify task', task);
+	      this.$dispatch('edit task', task);
 	    }
 	  }
 	
@@ -10682,7 +10683,7 @@
 	//   	</div>
 	//     <div class="task-content" v-on:dblclick="edit(task)">
 	//       <div data-val="{{task.title}}">{{task.title}}</div>
-	//       <input type="text" value="{{task.title}}" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="modifyTask(task)" v-on:keyup.enter="modifyTask(task, $event)" />
+	//       <input type="text" value="{{task.title}}" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
 	//     </div>
 	//     <div class="task-actions">
 	// 	    <span v-on:click="deleteTask(task, $index)">删除</span>
@@ -10697,7 +10698,7 @@
 /* 23 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"task-item\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\">\n  \t<div class=\"task-checker\">\n  \t\t<input type=\"checkbox\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n  \t</div>\n    <div class=\"task-content\" v-on:dblclick=\"edit(task)\">\n      <div data-val=\"{{task.title}}\">{{task.title}}</div>\n      <input type=\"text\" value=\"{{task.title}}\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"modifyTask(task)\" v-on:keyup.enter=\"modifyTask(task, $event)\" />\n    </div>\n    <div class=\"task-actions\">\n\t    <span v-on:click=\"deleteTask(task, $index)\">删除</span>\n    <!-- <span>2</span> -->\n  \t</div>\n  </div>";
+	module.exports = "<div class=\"task-item\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\">\n  \t<div class=\"task-checker\">\n  \t\t<input type=\"checkbox\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n  \t</div>\n    <div class=\"task-content\" v-on:dblclick=\"edit(task)\">\n      <div data-val=\"{{task.title}}\">{{task.title}}</div>\n      <input type=\"text\" value=\"{{task.title}}\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n    </div>\n    <div class=\"task-actions\">\n\t    <span v-on:click=\"deleteTask(task, $index)\">删除</span>\n    <!-- <span>2</span> -->\n  \t</div>\n  </div>";
 
 /***/ },
 /* 24 */

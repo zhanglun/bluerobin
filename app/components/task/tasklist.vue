@@ -50,12 +50,12 @@
      			_this.tasklist.$remove(task);
      		});
 			},
-			'modify task': function(task){
+			'edit task': function(task){
 				var _this = this;
-				console.log('Component: TaskList 收到了来自 App 的 modify task');
-				Proxy.Task.modify(task)
+				console.log('Component: TaskList 收到了来自 App 的 edit task');
+				Proxy.Task.edit(task)
 				.then(function(res){
-					console.log('modify task success!');
+					console.log('edit task success!');
 				})
 			}
 		}

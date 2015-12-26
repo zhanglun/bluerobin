@@ -141,7 +141,7 @@ $editbox-height: 34px;
   	</div>
     <div class="task-content" v-on:dblclick="edit(task)">
       <div data-val="{{task.title}}">{{task.title}}</div>
-      <input type="text" value="{{task.title}}" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="modifyTask(task)" v-on:keyup.enter="modifyTask(task, $event)" />
+      <input type="text" value="{{task.title}}" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
     </div>
     <div class="task-actions">
 	    <span v-on:click="deleteTask(task, $index)">删除</span>
@@ -180,6 +180,7 @@ module.exports = {
   methods: {
   	toggleTask: function(task){
   		this.task.completed = !this.task.completed;
+      this.$dispatch('edit task', task);
   	},
   	edit: function(task){
   		if(task.completed){
@@ -191,7 +192,7 @@ module.exports = {
       this.$dispatch('delete task', task);
   	},
 
-    modifyTask: function(task){
+    doEdit: function(task){
       // 如果没有正在编辑的task说明目前并没有编辑操作
       // 这里也解决了 一个问题：在 input上绑定了 blur 和 keyup两个事件
       // 按下 enter 执行完成之后，会触发 blur，所以应该执行之后将 taskEditing 置为 null
@@ -199,7 +200,7 @@ module.exports = {
         return false;
       }
       this.taskEditing = null;
-      this.$dispatch('modify task', task);
+      this.$dispatch('edit task', task);
     }
   }
 

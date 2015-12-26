@@ -50,9 +50,9 @@
 	  		console.log('components: App 收到了 来自 Task 的消息');
 	  		this.$broadcast('delete task', task);
 	  	},
-	  	'modify task': function(task){
-	  		console.log('task !modify!!!------------!!!');
-	  		this.$broadcast('modify task', task);
+	  	'edit task': function(task){
+	  		console.log('task !edit!!!------------!!!');
+	  		this.$broadcast('edit task', task);
 	  	}
 	  }
 	};
