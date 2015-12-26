@@ -49,6 +49,14 @@
      		.then(function(){
      			_this.tasklist.$remove(task);
      		});
+			},
+			'modify task': function(task){
+				var _this = this;
+				console.log('Component: TaskList 收到了来自 App 的 modify task');
+				Proxy.Task.modify(task)
+				.then(function(res){
+					console.log('modify task success!');
+				})
 			}
 		}
 	};

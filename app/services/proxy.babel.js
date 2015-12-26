@@ -1,5 +1,6 @@
 // var root = 'http://jsonplaceholder.typicode.com';
-var root = 'http://localhost:1234/api';
+// var root = 'http://localhost:1234/api';
+var root = 'http://zhanglun.daoapp.io/api';
 
 function JSON2FormData(json) {
   var str = "";
@@ -66,6 +67,26 @@ proxy.Task.delete = function(task) {
   return fetch(root + '/tasks/' + task._id, {
       method: 'delete',
       body: task
+    })
+    .then(function(res) {
+      if (res.ok) {
+        return res.json();
+      }
+    });
+};
+
+/**
+ * [modify description]
+ * @param  {[type]} task [description]
+ * @return {[type]}      [description]
+ */
+proxy.Task.modify = function(task) {
+  return fetch(root + '/tasks/' + task._id, {
+      method: 'put',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: JSON2FormData(task)
     })
     .then(function(res) {
       if (res.ok) {
