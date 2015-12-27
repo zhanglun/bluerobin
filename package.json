@@ -2,6 +2,7 @@
   "name": "bluerobin",
   "private": true,
   "dependencies": {
+    "passport": "^0.3.2",
     "vue": "^1.0.12"
   },
   "devDependencies": {
