@@ -125,6 +125,7 @@ $editbox-height: 34px;
   width: 100px;
   text-align: right;
   overflow: hidden;
+  display: none;
 }
 
 #task-category {
@@ -144,8 +145,7 @@ $editbox-height: 34px;
       <input type="text" value="{{task.title}}" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
     </div>
     <div class="task-actions">
-	    <span v-on:click="deleteTask(task, $index)">删除</span>
-    <!-- <span>2</span> -->
+	    <span v-on:click="deleteTask(task, $index)" class="icon-bin"></span>
   	</div>
   </div>
 </template>

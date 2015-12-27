@@ -10043,8 +10043,8 @@
 	  value: true
 	});
 	// var root = 'http://jsonplaceholder.typicode.com';
-	// var root = 'http://localhost:1234/api';
-	var root = 'http://zhanglun.daoapp.io/api';
+	var root = 'http://localhost:1234/api';
+	// var root = 'http://zhanglun.daoapp.io/api';
 	
 	function JSON2FormData(json) {
 	  var str = "";
@@ -10082,8 +10082,6 @@
 	 * @return {[type]}      [description]
 	 */
 	proxy.Task.create = function (task) {
-	  // var data = new FormData();
-	  // data.append('task', JSON.stringify({task:task}));
 	  return fetch(root + '/tasks', {
 	    method: 'post',
 	    headers: {
@@ -10473,7 +10471,7 @@
 	
 	
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\nhtml, body {\n  width: 100%;\n  height: 100%;\n  font-size: 10px;\n  margin: 0;\n  padding: 0; }\n\nbody {\n  background: #eee; }\n\nh1, h2, h3 {\n  margin: 0;\n  padding: 0; }\n\nh2 {\n  font-size: 30px;\n  text-align: center; }\n\n.flex-box, .task-item {\n  display: -webkit-flex;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex; }\n  .flex-box > div, .task-item > div {\n    -webkit-flex: 1 auto 1;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 auto 1;\n            flex: 1 auto 1; }\n\n.red {\n  color: #f00; }\n\n.dib {\n  display: inline-block; }\n\n.app-main {\n  box-sizing: border-box; }\n\n.modify, .task-content > input {\n  width: 100%;\n  box-sizing: border-box;\n  line-height: 34px;\n  height: 34px;\n  padding: 0 4px; }\n\n.task-item {\n  height: 44px;\n  line-height: 34px;\n  margin-top: -1px;\n  padding: 4px 10px;\n  box-sizing: border-box;\n  border: 1px solid #e8e8e8;\n  font-size: 14px;\n  background: rgba(255, 255, 255, 0.8); }\n  .task-item .task-check, .task-item .task-actions {\n    -webkit-flex: 0 1 auto;\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 auto;\n            flex: 0 1 auto; }\n  .task-item .task-content {\n    -webkit-flex: 1 1 auto;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 auto;\n            flex: 1 1 auto; }\n  .task-item.finished .task-content {\n    cursor: default;\n    text-decoration: line-through; }\n  .task-item.editing .task-content > div {\n    display: none; }\n  .task-item.editing .task-content > input {\n    display: inline-block;\n    vertical-align: middle; }\n  .task-item:hover .task-actions {\n    display: block; }\n\n.task-checker > input[type=checkbox] + label {\n  display: none;\n  width: 14px;\n  height: 14px;\n  min-height: 14px;\n  padding: 0;\n  font-size: 14px;\n  text-align: center;\n  line-height: 14px;\n  border: 1px solid #d4d4d4; }\n\n.task-checker > input[type=checkbox] + label::before {\n  content: '\\1F436';\n  display: block;\n  width: 100%;\n  height: 100%; }\n\n.task-checker > input[type=checkbox]:checked + label::before {\n  content: '\\1F414'; }\n\n.task-content > input {\n  border: 1px solid #d4d4d4;\n  display: none;\n  outline: none;\n  font-size: 14px; }\n\n.task-content > div {\n  padding: 0 5px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  -webkit-user-select: none; }\n\n#task-completed {\n  display: none; }\n\n.task-footer a {\n  display: inline-block; }\n\n.task-footer .todo-count {\n  display: inline-block; }\n\n.task-actions {\n  width: 100px;\n  text-align: right;\n  overflow: hidden; }\n\n#task-category .list-group-item {\n  background: rgba(255, 255, 255, 0.8); }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\nhtml, body {\n  width: 100%;\n  height: 100%;\n  font-size: 10px;\n  margin: 0;\n  padding: 0; }\n\nbody {\n  background: #eee; }\n\nh1, h2, h3 {\n  margin: 0;\n  padding: 0; }\n\nh2 {\n  font-size: 30px;\n  text-align: center; }\n\n.flex-box, .task-item {\n  display: -webkit-flex;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex; }\n  .flex-box > div, .task-item > div {\n    -webkit-flex: 1 auto 1;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 auto 1;\n            flex: 1 auto 1; }\n\n.red {\n  color: #f00; }\n\n.dib {\n  display: inline-block; }\n\n.app-main {\n  box-sizing: border-box; }\n\n.modify, .task-content > input {\n  width: 100%;\n  box-sizing: border-box;\n  line-height: 34px;\n  height: 34px;\n  padding: 0 4px; }\n\n.task-item {\n  height: 44px;\n  line-height: 34px;\n  margin-top: -1px;\n  padding: 4px 10px;\n  box-sizing: border-box;\n  border: 1px solid #e8e8e8;\n  font-size: 14px;\n  background: rgba(255, 255, 255, 0.8); }\n  .task-item .task-check, .task-item .task-actions {\n    -webkit-flex: 0 1 auto;\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 auto;\n            flex: 0 1 auto; }\n  .task-item .task-content {\n    -webkit-flex: 1 1 auto;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 auto;\n            flex: 1 1 auto; }\n  .task-item.finished .task-content {\n    cursor: default;\n    text-decoration: line-through; }\n  .task-item.editing .task-content > div {\n    display: none; }\n  .task-item.editing .task-content > input {\n    display: inline-block;\n    vertical-align: middle; }\n  .task-item:hover .task-actions {\n    display: block; }\n\n.task-checker > input[type=checkbox] + label {\n  display: none;\n  width: 14px;\n  height: 14px;\n  min-height: 14px;\n  padding: 0;\n  font-size: 14px;\n  text-align: center;\n  line-height: 14px;\n  border: 1px solid #d4d4d4; }\n\n.task-checker > input[type=checkbox] + label::before {\n  content: '\\1F436';\n  display: block;\n  width: 100%;\n  height: 100%; }\n\n.task-checker > input[type=checkbox]:checked + label::before {\n  content: '\\1F414'; }\n\n.task-content > input {\n  border: 1px solid #d4d4d4;\n  display: none;\n  outline: none;\n  font-size: 14px; }\n\n.task-content > div {\n  padding: 0 5px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  -webkit-user-select: none; }\n\n#task-completed {\n  display: none; }\n\n.task-footer a {\n  display: inline-block; }\n\n.task-footer .todo-count {\n  display: inline-block; }\n\n.task-actions {\n  width: 100px;\n  text-align: right;\n  overflow: hidden;\n  display: none; }\n\n#task-category .list-group-item {\n  background: rgba(255, 255, 255, 0.8); }\n", ""]);
 	
 	// exports
 
@@ -10667,6 +10665,7 @@
 	//   width: 100px;
 	//   text-align: right;
 	//   overflow: hidden;
+	//   display: none;
 	// }
 	
 	// #task-category {
@@ -10686,8 +10685,7 @@
 	//       <input type="text" value="{{task.title}}" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
 	//     </div>
 	//     <div class="task-actions">
-	// 	    <span v-on:click="deleteTask(task, $index)">删除</span>
-	//     <!-- <span>2</span> -->
+	// 	    <span v-on:click="deleteTask(task, $index)" class="icon-bin"></span>
 	//   	</div>
 	//   </div>
 	// </template>
@@ -10698,7 +10696,7 @@
 /* 23 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"task-item\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\">\n  \t<div class=\"task-checker\">\n  \t\t<input type=\"checkbox\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n  \t</div>\n    <div class=\"task-content\" v-on:dblclick=\"edit(task)\">\n      <div data-val=\"{{task.title}}\">{{task.title}}</div>\n      <input type=\"text\" value=\"{{task.title}}\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n    </div>\n    <div class=\"task-actions\">\n\t    <span v-on:click=\"deleteTask(task, $index)\">删除</span>\n    <!-- <span>2</span> -->\n  \t</div>\n  </div>";
+	module.exports = "<div class=\"task-item\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\">\n  \t<div class=\"task-checker\">\n  \t\t<input type=\"checkbox\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n  \t</div>\n    <div class=\"task-content\" v-on:dblclick=\"edit(task)\">\n      <div data-val=\"{{task.title}}\">{{task.title}}</div>\n      <input type=\"text\" value=\"{{task.title}}\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n    </div>\n    <div class=\"task-actions\">\n\t    <span v-on:click=\"deleteTask(task, $index)\" class=\"icon-bin\"></span>\n  \t</div>\n  </div>";
 
 /***/ },
 /* 24 */

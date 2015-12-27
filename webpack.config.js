@@ -5,7 +5,7 @@ var APP_PATH = path.resolve(ROOT_PATH, 'app');
 var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
 
 module.exports = {
-	entry: {
+  entry: {
     index: APP_PATH + '/index.js'
   },
   output: {
@@ -14,27 +14,29 @@ module.exports = {
   },
   module: {
     loaders: [{
-        test: /\.vue$/,
-        loader: 'vue',
-        include: APP_PATH
-      }, {
-        test: /\.css$|\.scss$/,
-        loader: 'style-loader!css-loader!sass-loader',
-        include: APP_PATH
-      }, {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: "babel-loader",
-        query: {
-            presets: ['es2015']
-        },
-        include: APP_PATH
-      }
-    ]
+      test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+      loader: 'file-loader'
+    }, {
+      test: /\.vue$/,
+      loader: 'vue',
+      include: APP_PATH
+    }, {
+      test: /\.css$|\.scss$/,
+      loader: 'style-loader!css-loader!sass-loader',
+      include: APP_PATH
+    }, {
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: "babel-loader",
+      query: {
+        presets: ['es2015']
+      },
+      include: APP_PATH
+    }]
   },
   babel: {
     presets: ['es2015'],
     plugins: ['transform-runtime']
   },
-  plugins:[]
+  plugins: []
 }

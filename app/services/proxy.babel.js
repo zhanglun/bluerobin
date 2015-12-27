@@ -1,6 +1,6 @@
 // var root = 'http://jsonplaceholder.typicode.com';
-// var root = 'http://localhost:1234/api';
-var root = 'http://zhanglun.daoapp.io/api';
+var root = 'http://localhost:1234/api';
+// var root = 'http://zhanglun.daoapp.io/api';
 
 function JSON2FormData(json) {
   var str = "";
@@ -40,8 +40,6 @@ proxy.Task.get = function(params) {
  * @return {[type]}      [description]
  */
 proxy.Task.create = function(task) {
-  // var data = new FormData();
-  // data.append('task', JSON.stringify({task:task}));
   return fetch(root + '/tasks', {
       method: 'post',
       headers: {
