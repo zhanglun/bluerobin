@@ -74,7 +74,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*!
-	 * Vue.js v1.0.12
+	 * Vue.js v1.0.13
 	 * (c) 2015 Evan You
 	 * Released under the MIT License.
 	 */
@@ -922,22 +922,10 @@
 	  }
 	}
 	
-	/**
-	 * Replace all interpolation tags in a piece of text.
-	 *
-	 * @param {String} text
-	 * @return {String}
-	 */
-	
-	function removeTags(text) {
-	  return text.replace(tagRE, '');
-	}
-	
 	var text$1 = Object.freeze({
 	  compileRegex: compileRegex,
 	  parseText: parseText,
-	  tokensToExp: tokensToExp,
-	  removeTags: removeTags
+	  tokensToExp: tokensToExp
 	});
 	
 	var delimiters = ['{{', '}}'];
@@ -2038,7 +2026,7 @@
 	
 	def(arrayProto, '$set', function $set(index, val) {
 	  if (index >= this.length) {
-	    this.length = index + 1;
+	    this.length = Number(index) + 1;
 	  }
 	  return this.splice(index, 1, val)[0];
 	});
@@ -2154,8 +2142,7 @@
 	
 	Observer.prototype.walk = function (obj) {
 	  var keys = Object.keys(obj);
-	  var i = keys.length;
-	  while (i--) {
+	  for (var i = 0, l = keys.length; i < l; i++) {
 	    this.convert(keys[i], obj[keys[i]]);
 	  }
 	};
@@ -2167,8 +2154,7 @@
 	 */
 	
 	Observer.prototype.observeArray = function (items) {
-	  var i = items.length;
-	  while (i--) {
+	  for (var i = 0, l = items.length; i < l; i++) {
 	    observe(items[i]);
 	  }
 	};
@@ -2232,10 +2218,8 @@
 	 */
 	
 	function copyAugment(target, src, keys) {
-	  var i = keys.length;
-	  var key;
-	  while (i--) {
-	    key = keys[i];
+	  for (var i = 0, l = keys.length; i < l; i++) {
+	    var key = keys[i];
 	    def(target, key, src[key]);
 	  }
 	}
@@ -3419,7 +3403,7 @@
 	var cloak = {
 	  bind: function bind() {
 	    var el = this.el;
-	    this.vm.$once('hook:compiled', function () {
+	    this.vm.$once('pre-hook:compiled', function () {
 	      el.removeAttribute('v-cloak');
 	    });
 	  }
@@ -3431,9 +3415,20 @@
 	  }
 	};
 	
+	var ON = 700;
+	var MODEL = 800;
+	var BIND = 850;
+	var TRANSITION = 1100;
+	var EL = 1500;
+	var COMPONENT = 1500;
+	var PARTIAL = 1750;
+	var SLOT = 1750;
+	var FOR = 2000;
+	var IF = 2000;
+	
 	var el = {
 	
-	  priority: 1500,
+	  priority: EL,
 	
 	  bind: function bind() {
 	    /* istanbul ignore if */
@@ -3584,7 +3579,7 @@
 	
 	var bind = {
 	
-	  priority: 850,
+	  priority: BIND,
 	
 	  bind: function bind() {
 	    var attr = this.arg;
@@ -3634,34 +3629,43 @@
 	  handleObject: style.handleObject,
 	
 	  handleSingle: function handleSingle(attr, value) {
-	    if (!this.descriptor.interp && attrWithPropsRE.test(attr) && attr in this.el) {
-	      this.el[attr] = attr === 'value' ? value == null // IE9 will set input.value to "null" for null...
+	    var el = this.el;
+	    var interp = this.descriptor.interp;
+	    if (!interp && attrWithPropsRE.test(attr) && attr in el) {
+	      el[attr] = attr === 'value' ? value == null // IE9 will set input.value to "null" for null...
 	      ? '' : value : value;
 	    }
 	    // set model props
 	    var modelProp = modelProps[attr];
-	    if (modelProp) {
-	      this.el[modelProp] = value;
+	    if (!interp && modelProp) {
+	      el[modelProp] = value;
 	      // update v-model if present
-	      var model = this.el.__v_model;
+	      var model = el.__v_model;
 	      if (model) {
 	        model.listener();
 	      }
 	    }
 	    // do not set value attribute for textarea
-	    if (attr === 'value' && this.el.tagName === 'TEXTAREA') {
-	      this.el.removeAttribute(attr);
+	    if (attr === 'value' && el.tagName === 'TEXTAREA') {
+	      el.removeAttribute(attr);
 	      return;
 	    }
 	    // update attribute
 	    if (value != null && value !== false) {
-	      if (xlinkRE.test(attr)) {
-	        this.el.setAttributeNS(xlinkNS, attr, value);
+	      if (attr === 'class') {
+	        // handle edge case #1960:
+	        // class interpolation should not overwrite Vue transition class
+	        if (el.__v_trans) {
+	          value += ' ' + el.__v_trans.id + '-transition';
+	        }
+	        setClass(el, value);
+	      } else if (xlinkRE.test(attr)) {
+	        el.setAttributeNS(xlinkNS, attr, value);
 	      } else {
-	        this.el.setAttribute(attr, value);
+	        el.setAttribute(attr, value);
 	      }
 	    } else {
-	      this.el.removeAttribute(attr);
+	      el.removeAttribute(attr);
 	    }
 	  }
 	};
@@ -3717,7 +3721,7 @@
 	var on = {
 	
 	  acceptStatement: true,
-	  priority: 700,
+	  priority: ON,
 	
 	  bind: function bind() {
 	    // deal with iframes
@@ -4108,7 +4112,7 @@
 	
 	var model = {
 	
-	  priority: 800,
+	  priority: MODEL,
 	  twoWay: true,
 	  handlers: handlers,
 	  params: ['lazy', 'number', 'debounce'],
@@ -4680,7 +4684,7 @@
 	
 	var vIf = {
 	
-	  priority: 2000,
+	  priority: IF,
 	
 	  bind: function bind() {
 	    var el = this.el;
@@ -4743,7 +4747,7 @@
 	
 	var vFor = {
 	
-	  priority: 2000,
+	  priority: FOR,
 	
 	  params: ['track-by', 'stagger', 'enter-stagger', 'leave-stagger'],
 	
@@ -5738,7 +5742,7 @@
 	
 	var transition = {
 	
-	  priority: 1100,
+	  priority: TRANSITION,
 	
 	  update: function update(id, oldId) {
 	    var el = this.el;
@@ -5789,7 +5793,7 @@
 	      // important: defer the child watcher creation until
 	      // the created hook (after data observation)
 	      var self = this;
-	      child.$once('hook:created', function () {
+	      child.$once('pre-hook:created', function () {
 	        self.childWatcher = new Watcher(child, childKey, function (val) {
 	          parentWatcher.set(val);
 	        }, {
@@ -5812,7 +5816,7 @@
 	
 	var component = {
 	
-	  priority: 1500,
+	  priority: COMPONENT,
 	
 	  params: ['keep-alive', 'transition-mode', 'inline-template'],
 	
@@ -7005,12 +7009,8 @@
 	    // attribute interpolations
 	    if (tokens) {
 	      value = tokensToExp(tokens);
-	      if (name === 'class') {
-	        pushDir('class', internalDirectives['class'], true);
-	      } else {
-	        arg = name;
-	        pushDir('bind', publicDirectives.bind, true);
-	      }
+	      arg = name;
+	      pushDir('bind', publicDirectives.bind, true);
 	      // warn against mixing mustaches with v-bind
 	      if (process.env.NODE_ENV !== 'production') {
 	        if (name === 'class' && Array.prototype.some.call(attrs, function (attr) {
@@ -7671,6 +7671,7 @@
 	   */
 	
 	  Vue.prototype._callHook = function (hook) {
+	    this.$emit('pre-hook:' + hook);
 	    var handlers = this.$options[hook];
 	    if (handlers) {
 	      for (var i = 0, j = handlers.length; i < j; i++) {
@@ -7747,13 +7748,7 @@
 	  // remove attribute
 	  if ((name !== 'cloak' || this.vm._isCompiled) && this.el && this.el.removeAttribute) {
 	    var attr = descriptor.attr || 'v-' + name;
-	    if (attr !== 'class') {
-	      this.el.removeAttribute(attr);
-	    } else {
-	      // for class interpolations, only remove the parts that
-	      // need to be interpolated.
-	      setClass(this.el, removeTags(this.el.getAttribute('class')).trim().replace(/\s+/g, ' '));
-	    }
+	    this.el.removeAttribute(attr);
 	  }
 	
 	  // copy def properties
@@ -7863,7 +7858,8 @@
 	      called = true;
 	    }
 	  }, {
-	    immediate: true
+	    immediate: true,
+	    user: false
 	  });(this._paramUnwatchFns || (this._paramUnwatchFns = [])).push(unwatch);
 	};
 	
@@ -8552,7 +8548,8 @@
 	    var watcher = new Watcher(vm, expOrFn, cb, {
 	      deep: options && options.deep,
 	      sync: options && options.sync,
-	      filters: parsed && parsed.filters
+	      filters: parsed && parsed.filters,
+	      user: !options || options.user !== false
 	    });
 	    if (options && options.immediate) {
 	      cb.call(vm, watcher.value);
@@ -9316,7 +9313,7 @@
 	
 	var partial = {
 	
-	  priority: 1750,
+	  priority: PARTIAL,
 	
 	  params: ['name'],
 	
@@ -9367,7 +9364,7 @@
 	
 	var slot = {
 	
-	  priority: 1750,
+	  priority: SLOT,
 	
 	  bind: function bind() {
 	    var host = this.vm;
@@ -9472,7 +9469,7 @@
 	  partial: partial
 	};
 	
-	Vue.version = '1.0.12';
+	Vue.version = '1.0.13';
 	
 	/**
 	 * Vue and every constructor that extends Vue has an
@@ -9607,20 +9604,22 @@
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var __vue_script__, __vue_template__
 	__webpack_require__(4)
-	module.exports = __webpack_require__(8)
-	
+	__vue_script__ = __webpack_require__(8)
+	__vue_template__ = __webpack_require__(31)
+	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(31)
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/app.vue"
+	  var id = "D:\\Code\\bluerobin\\app\\components\\app.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
-	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	    hotAPI.update(id, module.exports, __vue_template__)
 	  }
 	})()}
 
@@ -9640,8 +9639,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-0194f028&file=app.vue!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./app.vue", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-0194f028&file=app.vue!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./app.vue");
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-2a4db44e&file=app.vue!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./app.vue", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-2a4db44e&file=app.vue!./../../node_modules/sass-loader/index.js!./../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./app.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -9995,15 +9994,23 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// <style lang="sass">
+	
 	//  .wrapper{
+	
 	//   height: 100%;
+	
 	//  }
+	
 	// </style>
 	
 	// <template>
+	
 	//  <div class="wrapper">
+	
 	//     <header>
+	
 	//     <task></task>
+	
 	//  </div>
 	
 	// </template>
@@ -10146,20 +10153,22 @@
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var __vue_script__, __vue_template__
 	__webpack_require__(12)
-	module.exports = __webpack_require__(14)
-	
+	__vue_script__ = __webpack_require__(14)
+	__vue_template__ = __webpack_require__(30)
+	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(30)
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/index.vue"
+	  var id = "D:\\Code\\bluerobin\\app\\components\\task\\index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
-	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	    hotAPI.update(id, module.exports, __vue_template__)
 	  }
 	})()}
 
@@ -10179,8 +10188,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-cdd13166&file=index.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-cdd13166&file=index.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./index.vue");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-14f89733&file=index.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./index.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-14f89733&file=index.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./index.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -10258,19 +10267,31 @@
 	
 	// </script>
 	// <style lang="sass">
+	
 	// 	.task-container{
+	
 	// 		max-width:660px;
+	
 	// 		min-width: 500px;
+	
 	// 		margin: 0 auto;
+	
 	// 		box-sizing: border-sizing;
+	
 	// 	}
+	
 	// </style>
 	
 	// <template>
+	
 	// 	<div class="task-container">
+	
 	// 		<taskinputer></taskinputer>
+	
 	// 		<tasklist></taskist>
+	
 	// 	</div>
+	
 	// </template>
 	
 	// <script>undefined
@@ -10279,20 +10300,22 @@
 /* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var __vue_script__, __vue_template__
 	__webpack_require__(16)
-	module.exports = __webpack_require__(18)
-	
+	__vue_script__ = __webpack_require__(18)
+	__vue_template__ = __webpack_require__(24)
+	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(24)
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/taskList.vue"
+	  var id = "D:\\Code\\bluerobin\\app\\components\\task\\taskList.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
-	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	    hotAPI.update(id, module.exports, __vue_template__)
 	  }
 	})()}
 
@@ -10312,8 +10335,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-4a839518&file=taskList.vue!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskList.vue", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-4a839518&file=taskList.vue!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskList.vue");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-4cc89372&file=taskList.vue!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskList.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-4cc89372&file=taskList.vue!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskList.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -10361,8 +10384,11 @@
 	// </style>
 	
 	// <template>
+	
 	// 	<h3>Task List</h3>
+	
 	// 	<task v-for="task in tasklist" :task="task" :index="$index" track-by="$index"></task>
+	
 	// </template>
 	
 	// <script>
@@ -10419,20 +10445,22 @@
 /* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var __vue_script__, __vue_template__
 	__webpack_require__(20)
-	module.exports = __webpack_require__(22)
-	
+	__vue_script__ = __webpack_require__(22)
+	__vue_template__ = __webpack_require__(23)
+	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(23)
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/task.vue"
+	  var id = "D:\\Code\\bluerobin\\app\\components\\task\\task.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
-	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	    hotAPI.update(id, module.exports, __vue_template__)
 	  }
 	})()}
 
@@ -10452,8 +10480,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-55969f4c&file=task.vue!./../../../node_modules/sass-loader/index.js?outputstyle=expanded!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./task.vue", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-55969f4c&file=task.vue!./../../../node_modules/sass-loader/index.js?outputstyle=expanded!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./task.vue");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-761aebb4&file=task.vue!./../../../node_modules/sass-loader/index.js?outputstyle=expanded!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./task.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-761aebb4&file=task.vue!./../../../node_modules/sass-loader/index.js?outputstyle=expanded!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./task.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -10539,155 +10567,281 @@
 	};
 	// </script>
 	// <style lang="sass?outputstyle=expanded">
+	
 	// @import "../../public/stylesheets/base.scss";
 	
 	// $editbox-height: 34px;
+	
 	// .red {
+	
 	//   color: #f00;
+	
 	// }
+	
 	// .dib {
+	
 	//   display: inline-block;
+	
 	// }
 	
 	// .app-main {
+	
 	//   box-sizing: border-box;
+	
 	// }
 	
 	// .modify {
+	
 	//   width: 100%;
+	
 	//   box-sizing: border-box;
+	
 	//   line-height: $editbox-height;
+	
 	//   height: $editbox-height;
+	
 	//   padding: 0 4px;
+	
 	// }
 	
 	// .task-item {
+	
 	//   @extend .flex-box;
+	
 	//   height: $editbox-height + 10;
+	
 	//   line-height: $editbox-height;
+	
 	// 	margin-top: -1px;
+	
 	// 	padding: 4px 10px;
+	
 	//   box-sizing: border-box;
+	
 	//   border: 1px solid #e8e8e8;
+	
 	//   font-size: 14px;
+	
 	//   background: rgba(255, 255, 255, 0.8);
 	
 	//   .task-check, .task-actions{
+	
 	//     -webkit-flex: 0 1 auto;
+	
 	//     flex: 0 1 auto;
+	
 	//   }
+	
 	//   .task-content{
+	
 	//     -webkit-flex: 1 1 auto;
+	
 	//     flex: 1 1 auto;
+	
 	//   }
+	
 	//   &.finished {
+	
 	//     .task-content {
+	
 	//     	cursor: default;
+	
 	//       text-decoration: line-through;
+	
 	//     }
+	
 	//   }
+	
 	//   &.editing {
+	
 	//   	.task-content{
+	
 	// 	    > div {
+	
 	// 	      display: none;
+	
 	// 	    }
+	
 	// 	    > input {
+	
 	// 	      display: inline-block;
+	
 	//         vertical-align: middle;
+	
 	// 	    }
+	
 	//   	}
+	
 	//   }
+	
 	//   &:hover {
+	
 	//     .task-actions {
+	
 	//       display: block;
+	
 	//     }
+	
 	//   }
+	
 	// }
 	
 	// .task-checker {
+	
 	//   > input[type=checkbox] {
+	
 	//     //display: none;
+	
 	//     & + label {
+	
 	//       display: none;
+	
 	//       //display: block;
+	
 	//       width: 14px;
+	
 	//       height: 14px;
+	
 	//       min-height: 14px;
+	
 	//       padding: 0;
+	
 	//       font-size: 14px;
+	
 	//       text-align: center;
+	
 	//       line-height: 14px;
+	
 	//       border: 1px solid #d4d4d4;
+	
 	//     }
+	
 	//     & + label::before {
+	
 	//       content: '🐶';
+	
 	//       display: block;
+	
 	//       width: 100%;
+	
 	//       height: 100%;
+	
 	//     }
+	
 	//     &:checked + label::before {
+	
 	//       content: '🐔';
+	
 	//     }
+	
 	//   }
+	
 	// }
 	
 	// .task-content {
+	
 	//   > input {
+	
 	//     @extend .modify;
+	
 	//     border: 1px solid #d4d4d4;
+	
 	//     display: none;
+	
 	//     outline: none;
+	
 	//     font-size: 14px;
+	
 	//   }
+	
 	//   > div {
+	
 	//     padding: 0 5px;
+	
 	//     white-space: nowrap;
+	
 	//     overflow: hidden;
+	
 	//     text-overflow: ellipsis;
+	
 	//     -webkit-user-select: none;
+	
 	//   }
+	
 	// }
 	
 	// #task-completed {
+	
 	//   display: none;
+	
 	// }
 	
 	// .task-footer {
+	
 	//   a {
+	
 	//     display: inline-block;;
+	
 	//   }
+	
 	//   .todo-count {
+	
 	//     display: inline-block;
+	
 	//   }
+	
 	// }
 	
 	// .task-actions {
+	
 	//   width: 100px;
+	
 	//   text-align: right;
+	
 	//   overflow: hidden;
+	
 	//   display: none;
+	
 	// }
 	
 	// #task-category {
+	
 	//   .list-group-item {
+	
 	//     background: rgba(255, 255, 255, 0.8);
+	
 	//   }
+	
 	// }
+	
 	// </style>
 	
 	// <template>
+	
 	//   <div class="task-item" v-bind:class="{finished: task.completed, editing: task == taskEditing}">
+	
 	//   	<div class="task-checker">
+	
 	//   		<input type="checkbox" v-on:change = "toggleTask(task)" :checked="task.completed">
+	
 	//   	</div>
+	
 	//     <div class="task-content" v-on:dblclick="edit(task)">
+	
 	//       <div data-val="{{task.title}}">{{task.title}}</div>
+	
 	//       <input type="text" value="{{task.title}}" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
+	
 	//     </div>
+	
 	//     <div class="task-actions">
+	
 	// 	    <span v-on:click="deleteTask(task, $index)" class="icon-bin"></span>
+	
 	//   	</div>
+	
 	//   </div>
+	
 	// </template>
 	
 	// <script>undefined
@@ -10696,32 +10850,34 @@
 /* 23 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"task-item\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\">\n  \t<div class=\"task-checker\">\n  \t\t<input type=\"checkbox\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n  \t</div>\n    <div class=\"task-content\" v-on:dblclick=\"edit(task)\">\n      <div data-val=\"{{task.title}}\">{{task.title}}</div>\n      <input type=\"text\" value=\"{{task.title}}\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n    </div>\n    <div class=\"task-actions\">\n\t    <span v-on:click=\"deleteTask(task, $index)\" class=\"icon-bin\"></span>\n  \t</div>\n  </div>";
+	module.exports = "<div class=\"task-item\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\">\r\n  \t<div class=\"task-checker\">\r\n  \t\t<input type=\"checkbox\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n  \t</div>\r\n    <div class=\"task-content\" v-on:dblclick=\"edit(task)\">\r\n      <div data-val=\"{{task.title}}\">{{task.title}}</div>\r\n      <input type=\"text\" value=\"{{task.title}}\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n    </div>\r\n    <div class=\"task-actions\">\r\n\t    <span v-on:click=\"deleteTask(task, $index)\" class=\"icon-bin\"></span>\r\n  \t</div>\r\n  </div>";
 
 /***/ },
 /* 24 */
 /***/ function(module, exports) {
 
-	module.exports = "<h3>Task List</h3>\n\t<task v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"$index\"></task>";
+	module.exports = "<h3>Task List</h3>\r\n\t<task v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"$index\"></task>";
 
 /***/ },
 /* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var __vue_script__, __vue_template__
 	__webpack_require__(26)
-	module.exports = __webpack_require__(28)
-	
+	__vue_script__ = __webpack_require__(28)
+	__vue_template__ = __webpack_require__(29)
+	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
-	;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(29)
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/taskInputer.vue"
+	  var id = "D:\\Code\\bluerobin\\app\\components\\task\\taskInputer.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
-	    hotAPI.update(id, module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
+	    hotAPI.update(id, module.exports, __vue_template__)
 	  }
 	})()}
 
@@ -10741,8 +10897,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-51e884ed&file=taskInputer.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskInputer.vue", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-51e884ed&file=taskInputer.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskInputer.vue");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-6cc3b053&file=taskInputer.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskInputer.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-6cc3b053&file=taskInputer.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskInputer.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -10776,7 +10932,9 @@
 	// </style>
 	
 	// <template>
+	
 	// 	<input type="text" v-model="newTaskTitle" id="taskInputer" v-on:keyup.enter="createTask" autofocus>
+	
 	// </template>
 	
 	// <script>
@@ -10815,13 +10973,13 @@
 /* 30 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"task-container\">\n\t\t<taskinputer></taskinputer>\n\t\t<tasklist></taskist>\n\t</div>";
+	module.exports = "<div class=\"task-container\">\r\n\t\t<taskinputer></taskinputer>\r\n\t\t<tasklist></taskist>\r\n\t</div>";
 
 /***/ },
 /* 31 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"wrapper\">\n    <header>\n    <task></task>\n </div>";
+	module.exports = "<div class=\"wrapper\">\r\n    <header>\r\n    <task></task>\r\n </div>";
 
 /***/ },
 /* 32 */
