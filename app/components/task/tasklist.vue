@@ -51,7 +51,7 @@
 				var _this = this;
     		Proxy.Task.delete(task)
      		.then(function(){
-     			_this.tasklist.$remove(task);
+	     		_this.tasklist.$remove(task);
      		});
 			},
 			'edit task': function(task){

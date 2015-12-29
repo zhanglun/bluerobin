@@ -168,10 +168,10 @@ $editbox-height: 34px;
   	</div>
     <div class="task-content" v-on:dblclick="edit(task)">
       <div data-val="{{task.title}}">{{task.title}}</div>
-      <input type="text" value="{{task.title}}" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
+      <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
     </div>
     <div class="task-actions">
-	    <span v-on:click="deleteTask(task, $index)" class="icon-bin"></span>
+	    <span v-on:click="deleteTask(task)" class="icon-bin"></span>
   	</div>
   </div>
 </template>
@@ -214,7 +214,7 @@ module.exports = {
   		}
   		this.taskEditing = task;
   	},
-  	deleteTask: function(task, $index){
+  	deleteTask: function(task){
       this.$dispatch('delete task', task);
   	},
 
