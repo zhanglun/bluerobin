@@ -8,7 +8,7 @@
 	    display: block;
 	    height: 40px;
 	    font-size: 14px;
-	    padding: 0 6px;
+	    padding: 0 8px;
 	    outline: none;
 	    border:none ;
 		  background: rgba(255, 255, 255, 0.8);

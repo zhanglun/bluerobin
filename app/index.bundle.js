@@ -10516,7 +10516,7 @@
 	
 	
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/**\r\n * 可以抽出的部分\r\n */\n.flex-box, .task-item {\n  display: -webkit-flex;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex; }\n  .flex-box > div, .task-item > div {\n    -webkit-flex: 1 auto 1;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 auto 1;\n            flex: 1 auto 1; }\n\n.red {\n  color: #f00; }\n\n.dib {\n  display: inline-block; }\n\n.app-main {\n  box-sizing: border-box; }\n\n.modify, .task-content > input {\n  width: 100%;\n  box-sizing: border-box;\n  line-height: 34px;\n  height: 34px;\n  padding: 0 4px; }\n\n.task-item {\n  height: 44px;\n  line-height: 34px;\n  margin-top: -1px;\n  padding: 4px 10px;\n  box-sizing: border-box;\n  border: 1px solid #e8e8e8;\n  font-size: 14px;\n  color: #343434;\n  background: rgba(255, 255, 255, 0.8);\n  /*transition: all 3.3s ease;*/ }\n  .task-item .task-check, .task-item .task-actions {\n    -webkit-flex: 0 1 auto;\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 auto;\n            flex: 0 1 auto; }\n  .task-item .task-content {\n    -webkit-flex: 1 1 auto;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 auto;\n            flex: 1 1 auto; }\n  .task-item.finished .task-content {\n    cursor: default;\n    text-decoration: line-through; }\n  .task-item.editing .task-content > div {\n    display: none; }\n  .task-item.editing .task-content > input {\n    display: inline-block;\n    vertical-align: middle; }\n  .task-item:hover .task-actions {\n    display: block; }\n\n.task-checker > input[type=checkbox] + label {\n  display: none;\n  width: 14px;\n  height: 14px;\n  min-height: 14px;\n  padding: 0;\n  font-size: 14px;\n  text-align: center;\n  line-height: 14px;\n  border: 1px solid #d4d4d4; }\n\n.task-checker > input[type=checkbox] + label::before {\n  content: '\\1F436';\n  display: block;\n  width: 100%;\n  height: 100%; }\n\n.task-checker > input[type=checkbox]:checked + label::before {\n  content: '\\1F414'; }\n\n.task-content > input {\n  border: 1px solid #d4d4d4;\n  display: none;\n  outline: none;\n  font-size: 14px; }\n\n.task-content > div {\n  padding: 0 5px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  -webkit-user-select: none; }\n\n#task-completed {\n  display: none; }\n\n.task-footer a {\n  display: inline-block; }\n\n.task-footer .todo-count {\n  display: inline-block; }\n\n.task-actions {\n  width: 100px;\n  text-align: right;\n  overflow: hidden;\n  display: none; }\n\n#task-category .list-group-item {\n  background: rgba(255, 255, 255, 0.8); }\n\n.animation_showtask-transition {\n  -webkit-transition: all 0.5s ease;\n  transition: all 0.5s ease; }\n\n.animation_showtask-enter, .animation_showtask-leave {\n  opacity: 0; }\n\n.animation_showtask-enter {\n  -webkit-transform: rotateX(180deg);\n          transform: rotateX(180deg); }\n\n.animation_showtask-leave {\n  -webkit-transform: rotateX(0deg);\n          transform: rotateX(0deg); }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n.flex-box, .task-item {\n  display: -webkit-flex;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex; }\n  .flex-box > div, .task-item > div {\n    -webkit-flex: 1 auto 1;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 auto 1;\n            flex: 1 auto 1; }\n\n.red {\n  color: #f00; }\n\n.dib {\n  display: inline-block; }\n\n.app-main {\n  box-sizing: border-box; }\n\n.modify, .task-content > input {\n  width: 100%;\n  box-sizing: border-box;\n  line-height: 34px;\n  height: 34px;\n  padding: 0 4px; }\n\n.task-item {\n  height: 44px;\n  line-height: 34px;\n  margin-top: -1px;\n  padding: 4px 10px;\n  box-sizing: border-box;\n  border: 1px solid #e8e8e8;\n  font-size: 14px;\n  color: #343434;\n  background: rgba(255, 255, 255, 0.8);\n  /*transition: all 3.3s ease;*/ }\n  .task-item .task-check, .task-item .task-actions {\n    -webkit-flex: 0 1 auto;\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 auto;\n            flex: 0 1 auto; }\n  .task-item .task-content {\n    -webkit-flex: 1 1 auto;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 auto;\n            flex: 1 1 auto; }\n  .task-item.finished .task-content {\n    cursor: default;\n    text-decoration: line-through; }\n  .task-item.editing .task-content > div {\n    display: none; }\n  .task-item.editing .task-content > input {\n    display: inline-block;\n    vertical-align: middle; }\n  .task-item:hover .task-actions {\n    display: block; }\n\n.task-checker > input[type=checkbox] + label {\n  display: none;\n  width: 14px;\n  height: 14px;\n  min-height: 14px;\n  padding: 0;\n  font-size: 14px;\n  text-align: center;\n  line-height: 14px;\n  border: 1px solid #d4d4d4; }\n\n.task-checker > input[type=checkbox] + label::before {\n  content: '\\1F436';\n  display: block;\n  width: 100%;\n  height: 100%; }\n\n.task-checker > input[type=checkbox]:checked + label::before {\n  content: '\\1F414'; }\n\n.task-content > input {\n  border: 1px solid #d4d4d4;\n  display: none;\n  outline: none;\n  font-size: 14px; }\n\n.task-content > div {\n  padding: 0 5px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  -webkit-user-select: none; }\n\n#task-completed {\n  display: none; }\n\n.task-footer a {\n  display: inline-block; }\n\n.task-footer .todo-count {\n  display: inline-block; }\n\n.task-actions {\n  width: 100px;\n  text-align: right;\n  overflow: hidden;\n  display: none; }\n\n#task-category .list-group-item {\n  background: rgba(255, 255, 255, 0.8); }\n\n.animation_showtask-transition {\n  -webkit-transition: all 0.5s ease;\n  transition: all 0.5s ease; }\n\n.animation_showtask-enter, .animation_showtask-leave {\n  opacity: 0; }\n\n.animation_showtask-enter {\n  -webkit-transform: rotateX(180deg);\n          transform: rotateX(180deg); }\n\n.animation_showtask-leave {\n  -webkit-transform: rotateX(0deg);\n          transform: rotateX(0deg); }\n", ""]);
 	
 	// exports
 
@@ -10584,12 +10584,6 @@
 	};
 	// </script>
 	// <style lang="sass?outputstyle=expanded">
-	
-	// /**
-	
-	//  * 可以抽出的部分
-	
-	//  */
 	
 	// .flex-box{
 	
@@ -10981,7 +10975,7 @@
 	
 	
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n.taks-inputer {\n  box-sizing: border-box;\n  width: 100%; }\n  .taks-inputer > input {\n    width: 100%;\n    box-sizing: border-box;\n    display: block;\n    height: 40px;\n    font-size: 14px;\n    padding: 0 6px;\n    outline: none;\n    border: none;\n    background: rgba(255, 255, 255, 0.8);\n    font-family: '\\5FAE\\8F6F\\96C5\\9ED1';\n    color: #6B6B6B; }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n.taks-inputer {\n  box-sizing: border-box;\n  width: 100%; }\n  .taks-inputer > input {\n    width: 100%;\n    box-sizing: border-box;\n    display: block;\n    height: 40px;\n    font-size: 14px;\n    padding: 0 8px;\n    outline: none;\n    border: none;\n    background: rgba(255, 255, 255, 0.8);\n    font-family: '\\5FAE\\8F6F\\96C5\\9ED1';\n    color: #6B6B6B; }\n", ""]);
 	
 	// exports
 
@@ -11012,7 +11006,7 @@
 	
 	// 	    font-size: 14px;
 	
-	// 	    padding: 0 6px;
+	// 	    padding: 0 8px;
 	
 	// 	    outline: none;
 	

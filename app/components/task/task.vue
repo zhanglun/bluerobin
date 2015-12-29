@@ -1,10 +1,5 @@
 <style lang="sass?outputstyle=expanded">
 
-/**
- * 可以抽出的部分
- */
-
-
 .flex-box{
   display: -webkit-flex;
   display: flex;
@@ -13,10 +8,6 @@
     flex: 1 auto 1;
   }
 }
-
-
-
-
 
 $editbox-height: 34px;
 .red {
