@@ -44,7 +44,7 @@
 				console.log('Component: TaskList 收到了来自 App 的 new task');
 				Proxy.Task.create(task)
 				.then(function(res){
-					_this.tasklist.unshift(res);
+					_this.tasklist.push(res);
 				});
 			},
 			'delete task': function(task){
