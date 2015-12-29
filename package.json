@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "passport": "^0.3.2",
+    "pure": "^2.67.0",
     "vue": "^1.0.12"
   },
   "devDependencies": {
@@ -11,6 +12,7 @@
     "babel-plugin-transform-runtime": "^6.3.13",
     "babel-preset-es2015": "^6.3.13",
     "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^0.9.1",
     "file-loader": "^0.8.5",
     "grunt-chrome-manifest": "~0.3.0",
     "gulp": "^3.9.0",
@@ -18,6 +20,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
+    "image-webpack-loader": "^1.6.2",
     "jit-grunt": "^0.9.1",
     "jshint-stylish": "~2.0.1",
     "node-sass": "^3.4.2",

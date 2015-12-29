@@ -1,4 +1,5 @@
 <style lang="sass">
+// @import "../public/stylesheets/base.scss";
  .wrapper{
   height: 100%;
  }
@@ -6,7 +7,10 @@
 
 <template>
  <div class="wrapper">
-    <header>
+    <appHeader></appHeader>
+    <div class="cotainer">
+
+    </div>
     <task></task>
  </div>
 
@@ -16,6 +20,7 @@
 <script>
   import Common from '../public/javascripts/common.babel.js';
   import Task from './task/index.vue'
+  import AppHeader from './header/header.vue';
 
   export default{
     data(){
@@ -24,6 +29,7 @@
       }
     },
     components: {
-      task: Task
+      task: Task,
+      appheader: AppHeader
     }
   }

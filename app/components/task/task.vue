@@ -1,5 +1,22 @@
 <style lang="sass?outputstyle=expanded">
-@import "../../public/stylesheets/base.scss";
+
+/**
+ * 可以抽出的部分
+ */
+
+
+.flex-box{
+  display: -webkit-flex;
+  display: flex;
+  >div{
+    -webkit-flex: 1 auto 1;
+    flex: 1 auto 1;
+  }
+}
+
+
+
+
 
 $editbox-height: 34px;
 .red {
@@ -30,7 +47,10 @@ $editbox-height: 34px;
   box-sizing: border-box;
   border: 1px solid #e8e8e8;
   font-size: 14px;
+  color: #343434;
   background: rgba(255, 255, 255, 0.8);
+
+  /*transition: all 3.3s ease;*/
 
   .task-check, .task-actions{
     -webkit-flex: 0 1 auto;
@@ -133,10 +153,25 @@ $editbox-height: 34px;
     background: rgba(255, 255, 255, 0.8);
   }
 }
+
+
+.animation_showtask-transition {
+  transition: all 0.5s ease;
+}
+.animation_showtask-enter, .animation_showtask-leave {
+  opacity: 0;
+}
+.animation_showtask-enter{
+  transform: rotateX(180deg);
+}
+.animation_showtask-leave{
+  transform: rotateX(0deg);
+}
+
 </style>
 
 <template>
-  <div class="task-item" v-bind:class="{finished: task.completed, editing: task == taskEditing}">
+  <div class="task-item" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}">
   	<div class="task-checker">
   		<input type="checkbox" v-on:change = "toggleTask(task)" :checked="task.completed">
   	</div>

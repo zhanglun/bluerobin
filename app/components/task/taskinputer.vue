@@ -1,9 +1,27 @@
 <style lang="sass">
-
+	.taks-inputer{
+		box-sizing: border-box;
+		width:100%;
+		>input{
+	    width: 100%;
+	    box-sizing: border-box;
+	    display: block;
+	    height: 40px;
+	    font-size: 14px;
+	    padding: 0 6px;
+	    outline: none;
+	    border:none ;
+		  background: rgba(255, 255, 255, 0.8);
+		  font-family: '微软雅黑';
+		  color: #6B6B6B;
+		}
+	}
 </style>
 
 <template>
-	<input type="text" v-model="newTaskTitle" id="taskInputer" v-on:keyup.enter="createTask" autofocus>
+	<div class="taks-inputer">
+		<input type="text" v-model="newTaskTitle" id="taskInputer" v-on:keyup.enter="createTask" autofocus placeholder="What is your focus today...">
+	</div>
 </template>
 
 <script>

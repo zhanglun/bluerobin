@@ -1,5 +1,3 @@
-require('./public/stylesheets/base.scss');
-
 import Vue from 'vue';
 import App from './components/app.vue';
 

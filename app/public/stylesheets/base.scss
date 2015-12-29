@@ -7,7 +7,10 @@ html, body{
 }
 
 body{
-	background: #eee;
+	background: #eee url('../images/bg2.jpg') no-repeat center;
+  background-size: cover;
+  font-family: '微软雅黑';
+  // font-family: "Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti!important
 }
 
 h1,h2,h3{
@@ -21,13 +24,4 @@ h2{
 }
 
 
-
-.flex-box{
-  display: -webkit-flex;
-  display: flex;
-  >div{
-    -webkit-flex: 1 auto 1;
-    flex: 1 auto 1;
-  }
-}
 

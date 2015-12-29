@@ -61,7 +61,6 @@ proxy.Task.create = function(task) {
  * @return {[type]}      [description]
  */
 proxy.Task.delete = function(task) {
-  console.log(task);
   return fetch(root + '/tasks/' + task._id, {
       method: 'delete',
       body: task

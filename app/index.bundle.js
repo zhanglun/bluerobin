@@ -56,8 +56,6 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(32);
-	
 	// 入口
 	new _vue2.default({
 	  el: 'body',
@@ -9607,7 +9605,7 @@
 	var __vue_script__, __vue_template__
 	__webpack_require__(4)
 	__vue_script__ = __webpack_require__(8)
-	__vue_template__ = __webpack_require__(31)
+	__vue_template__ = __webpack_require__(36)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -9991,31 +9989,12 @@
 	
 	var _index2 = _interopRequireDefault(_index);
 	
+	var _header = __webpack_require__(31);
+	
+	var _header2 = _interopRequireDefault(_header);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// <style lang="sass">
-	
-	//  .wrapper{
-	
-	//   height: 100%;
-	
-	//  }
-	
-	// </style>
-	
-	// <template>
-	
-	//  <div class="wrapper">
-	
-	//     <header>
-	
-	//     <task></task>
-	
-	//  </div>
-	
-	// </template>
-	
-	// <script>
 	exports.default = {
 	  data: function data() {
 	    return {
@@ -10024,9 +10003,38 @@
 	  },
 	
 	  components: {
-	    task: _index2.default
+	    task: _index2.default,
+	    appheader: _header2.default
 	  }
-	};
+	}; // <style lang="sass">
+	
+	// // @import "../public/stylesheets/base.scss";
+
+	//  .wrapper{
+
+	//   height: 100%;
+
+	//  }
+
+	// </style>
+
+	// <template>
+
+	//  <div class="wrapper">
+
+	//     <appHeader></appHeader>
+
+	//     <div class="cotainer">
+
+	//     </div>
+
+	//     <task></task>
+
+	//  </div>
+
+	// </template>
+
+	// <script>
 
 /***/ },
 /* 9 */
@@ -10108,7 +10116,6 @@
 	 * @return {[type]}      [description]
 	 */
 	proxy.Task.delete = function (task) {
-	  console.log(task);
 	  return fetch(root + '/tasks/' + task._id, {
 	    method: 'delete',
 	    body: task
@@ -10207,7 +10214,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".task-container {\n  max-width: 660px;\n  min-width: 500px;\n  margin: 0 auto;\n  box-sizing: border-sizing; }\n", ""]);
+	exports.push([module.id, ".task-container {\n  max-width: 660px;\n  min-width: 500px;\n  margin: 20px auto;\n  box-sizing: border-sizing; }\n", ""]);
 	
 	// exports
 
@@ -10274,7 +10281,7 @@
 	
 	// 		min-width: 500px;
 	
-	// 		margin: 0 auto;
+	// 		margin: 20px auto;
 	
 	// 		box-sizing: border-sizing;
 	
@@ -10335,8 +10342,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-4cc89372&file=taskList.vue!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskList.vue", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-4cc89372&file=taskList.vue!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskList.vue");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-4cc89372&file=taskList.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskList.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-4cc89372&file=taskList.vue!./../../../node_modules/sass-loader/index.js!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./taskList.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -10354,7 +10361,7 @@
 	
 	
 	// module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, ".task-list {\n  margin-top: 14px;\n  -webkit-transform: perspective(1000px);\n          transform: perspective(1000px); }\n", ""]);
 	
 	// exports
 
@@ -10379,15 +10386,25 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// <style>
+	// <style lang="sass">
+	
+	// .task-list{
+	
+	// 	margin-top:14px;
+	
+	//  transform: perspective(1000px);
+	
+	// }
 	
 	// </style>
 	
 	// <template>
 	
-	// 	<h3>Task List</h3>
+	// 	<div class="task-list">
 	
-	// 	<task v-for="task in tasklist" :task="task" :index="$index" track-by="$index"></task>
+	// 		<task v-for="task in tasklist" :task="task" :index="$index" track-by="$index"></task>
+	
+	// 	</div>
 	
 	// </template>
 	
@@ -10499,7 +10516,7 @@
 	
 	
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\nhtml, body {\n  width: 100%;\n  height: 100%;\n  font-size: 10px;\n  margin: 0;\n  padding: 0; }\n\nbody {\n  background: #eee; }\n\nh1, h2, h3 {\n  margin: 0;\n  padding: 0; }\n\nh2 {\n  font-size: 30px;\n  text-align: center; }\n\n.flex-box, .task-item {\n  display: -webkit-flex;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex; }\n  .flex-box > div, .task-item > div {\n    -webkit-flex: 1 auto 1;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 auto 1;\n            flex: 1 auto 1; }\n\n.red {\n  color: #f00; }\n\n.dib {\n  display: inline-block; }\n\n.app-main {\n  box-sizing: border-box; }\n\n.modify, .task-content > input {\n  width: 100%;\n  box-sizing: border-box;\n  line-height: 34px;\n  height: 34px;\n  padding: 0 4px; }\n\n.task-item {\n  height: 44px;\n  line-height: 34px;\n  margin-top: -1px;\n  padding: 4px 10px;\n  box-sizing: border-box;\n  border: 1px solid #e8e8e8;\n  font-size: 14px;\n  background: rgba(255, 255, 255, 0.8); }\n  .task-item .task-check, .task-item .task-actions {\n    -webkit-flex: 0 1 auto;\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 auto;\n            flex: 0 1 auto; }\n  .task-item .task-content {\n    -webkit-flex: 1 1 auto;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 auto;\n            flex: 1 1 auto; }\n  .task-item.finished .task-content {\n    cursor: default;\n    text-decoration: line-through; }\n  .task-item.editing .task-content > div {\n    display: none; }\n  .task-item.editing .task-content > input {\n    display: inline-block;\n    vertical-align: middle; }\n  .task-item:hover .task-actions {\n    display: block; }\n\n.task-checker > input[type=checkbox] + label {\n  display: none;\n  width: 14px;\n  height: 14px;\n  min-height: 14px;\n  padding: 0;\n  font-size: 14px;\n  text-align: center;\n  line-height: 14px;\n  border: 1px solid #d4d4d4; }\n\n.task-checker > input[type=checkbox] + label::before {\n  content: '\\1F436';\n  display: block;\n  width: 100%;\n  height: 100%; }\n\n.task-checker > input[type=checkbox]:checked + label::before {\n  content: '\\1F414'; }\n\n.task-content > input {\n  border: 1px solid #d4d4d4;\n  display: none;\n  outline: none;\n  font-size: 14px; }\n\n.task-content > div {\n  padding: 0 5px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  -webkit-user-select: none; }\n\n#task-completed {\n  display: none; }\n\n.task-footer a {\n  display: inline-block; }\n\n.task-footer .todo-count {\n  display: inline-block; }\n\n.task-actions {\n  width: 100px;\n  text-align: right;\n  overflow: hidden;\n  display: none; }\n\n#task-category .list-group-item {\n  background: rgba(255, 255, 255, 0.8); }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/**\r\n * 可以抽出的部分\r\n */\n.flex-box, .task-item {\n  display: -webkit-flex;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex; }\n  .flex-box > div, .task-item > div {\n    -webkit-flex: 1 auto 1;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 auto 1;\n            flex: 1 auto 1; }\n\n.red {\n  color: #f00; }\n\n.dib {\n  display: inline-block; }\n\n.app-main {\n  box-sizing: border-box; }\n\n.modify, .task-content > input {\n  width: 100%;\n  box-sizing: border-box;\n  line-height: 34px;\n  height: 34px;\n  padding: 0 4px; }\n\n.task-item {\n  height: 44px;\n  line-height: 34px;\n  margin-top: -1px;\n  padding: 4px 10px;\n  box-sizing: border-box;\n  border: 1px solid #e8e8e8;\n  font-size: 14px;\n  color: #343434;\n  background: rgba(255, 255, 255, 0.8);\n  /*transition: all 3.3s ease;*/ }\n  .task-item .task-check, .task-item .task-actions {\n    -webkit-flex: 0 1 auto;\n    -webkit-box-flex: 0;\n        -ms-flex: 0 1 auto;\n            flex: 0 1 auto; }\n  .task-item .task-content {\n    -webkit-flex: 1 1 auto;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 1 auto;\n            flex: 1 1 auto; }\n  .task-item.finished .task-content {\n    cursor: default;\n    text-decoration: line-through; }\n  .task-item.editing .task-content > div {\n    display: none; }\n  .task-item.editing .task-content > input {\n    display: inline-block;\n    vertical-align: middle; }\n  .task-item:hover .task-actions {\n    display: block; }\n\n.task-checker > input[type=checkbox] + label {\n  display: none;\n  width: 14px;\n  height: 14px;\n  min-height: 14px;\n  padding: 0;\n  font-size: 14px;\n  text-align: center;\n  line-height: 14px;\n  border: 1px solid #d4d4d4; }\n\n.task-checker > input[type=checkbox] + label::before {\n  content: '\\1F436';\n  display: block;\n  width: 100%;\n  height: 100%; }\n\n.task-checker > input[type=checkbox]:checked + label::before {\n  content: '\\1F414'; }\n\n.task-content > input {\n  border: 1px solid #d4d4d4;\n  display: none;\n  outline: none;\n  font-size: 14px; }\n\n.task-content > div {\n  padding: 0 5px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  -webkit-user-select: none; }\n\n#task-completed {\n  display: none; }\n\n.task-footer a {\n  display: inline-block; }\n\n.task-footer .todo-count {\n  display: inline-block; }\n\n.task-actions {\n  width: 100px;\n  text-align: right;\n  overflow: hidden;\n  display: none; }\n\n#task-category .list-group-item {\n  background: rgba(255, 255, 255, 0.8); }\n\n.animation_showtask-transition {\n  -webkit-transition: all 0.5s ease;\n  transition: all 0.5s ease; }\n\n.animation_showtask-enter, .animation_showtask-leave {\n  opacity: 0; }\n\n.animation_showtask-enter {\n  -webkit-transform: rotateX(180deg);\n          transform: rotateX(180deg); }\n\n.animation_showtask-leave {\n  -webkit-transform: rotateX(0deg);\n          transform: rotateX(0deg); }\n", ""]);
 	
 	// exports
 
@@ -10568,7 +10585,27 @@
 	// </script>
 	// <style lang="sass?outputstyle=expanded">
 	
-	// @import "../../public/stylesheets/base.scss";
+	// /**
+	
+	//  * 可以抽出的部分
+	
+	//  */
+	
+	// .flex-box{
+	
+	//   display: -webkit-flex;
+	
+	//   display: flex;
+	
+	//   >div{
+	
+	//     -webkit-flex: 1 auto 1;
+	
+	//     flex: 1 auto 1;
+	
+	//   }
+	
+	// }
 	
 	// $editbox-height: 34px;
 	
@@ -10622,7 +10659,11 @@
 	
 	//   font-size: 14px;
 	
+	//   color: #343434;
+	
 	//   background: rgba(255, 255, 255, 0.8);
+	
+	//   /*transition: all 3.3s ease;*/
 	
 	//   .task-check, .task-actions{
 	
@@ -10814,11 +10855,35 @@
 	
 	// }
 	
+	// .animation_showtask-transition {
+	
+	//   transition: all 0.5s ease;
+	
+	// }
+	
+	// .animation_showtask-enter, .animation_showtask-leave {
+	
+	//   opacity: 0;
+	
+	// }
+	
+	// .animation_showtask-enter{
+	
+	//   transform: rotateX(180deg);
+	
+	// }
+	
+	// .animation_showtask-leave{
+	
+	//   transform: rotateX(0deg);
+	
+	// }
+	
 	// </style>
 	
 	// <template>
 	
-	//   <div class="task-item" v-bind:class="{finished: task.completed, editing: task == taskEditing}">
+	//   <div class="task-item" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}">
 	
 	//   	<div class="task-checker">
 	
@@ -10850,13 +10915,13 @@
 /* 23 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"task-item\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\">\r\n  \t<div class=\"task-checker\">\r\n  \t\t<input type=\"checkbox\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n  \t</div>\r\n    <div class=\"task-content\" v-on:dblclick=\"edit(task)\">\r\n      <div data-val=\"{{task.title}}\">{{task.title}}</div>\r\n      <input type=\"text\" value=\"{{task.title}}\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n    </div>\r\n    <div class=\"task-actions\">\r\n\t    <span v-on:click=\"deleteTask(task, $index)\" class=\"icon-bin\"></span>\r\n  \t</div>\r\n  </div>";
+	module.exports = "<div class=\"task-item\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\">\r\n  \t<div class=\"task-checker\">\r\n  \t\t<input type=\"checkbox\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n  \t</div>\r\n    <div class=\"task-content\" v-on:dblclick=\"edit(task)\">\r\n      <div data-val=\"{{task.title}}\">{{task.title}}</div>\r\n      <input type=\"text\" value=\"{{task.title}}\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n    </div>\r\n    <div class=\"task-actions\">\r\n\t    <span v-on:click=\"deleteTask(task, $index)\" class=\"icon-bin\"></span>\r\n  \t</div>\r\n  </div>";
 
 /***/ },
 /* 24 */
 /***/ function(module, exports) {
 
-	module.exports = "<h3>Task List</h3>\r\n\t<task v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"$index\"></task>";
+	module.exports = "<div class=\"task-list\">\r\n\t\t<task v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"$index\"></task>\r\n\t</div>";
 
 /***/ },
 /* 25 */
@@ -10916,7 +10981,7 @@
 	
 	
 	// module
-	exports.push([module.id, "", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n.taks-inputer {\n  box-sizing: border-box;\n  width: 100%; }\n  .taks-inputer > input {\n    width: 100%;\n    box-sizing: border-box;\n    display: block;\n    height: 40px;\n    font-size: 14px;\n    padding: 0 6px;\n    outline: none;\n    border: none;\n    background: rgba(255, 255, 255, 0.8);\n    font-family: '\\5FAE\\8F6F\\96C5\\9ED1';\n    color: #6B6B6B; }\n", ""]);
 	
 	// exports
 
@@ -10929,11 +10994,49 @@
 	
 	// <style lang="sass">
 	
+	// 	.taks-inputer{
+	
+	// 		box-sizing: border-box;
+	
+	// 		width:100%;
+	
+	// 		>input{
+	
+	// 	    width: 100%;
+	
+	// 	    box-sizing: border-box;
+	
+	// 	    display: block;
+	
+	// 	    height: 40px;
+	
+	// 	    font-size: 14px;
+	
+	// 	    padding: 0 6px;
+	
+	// 	    outline: none;
+	
+	// 	    border:none ;
+	
+	// 		  background: rgba(255, 255, 255, 0.8);
+	
+	// 		  font-family: '微软雅黑';
+	
+	// 		  color: #6B6B6B;
+	
+	// 		}
+	
+	// 	}
+	
 	// </style>
 	
 	// <template>
 	
-	// 	<input type="text" v-model="newTaskTitle" id="taskInputer" v-on:keyup.enter="createTask" autofocus>
+	// 	<div class="taks-inputer">
+	
+	// 		<input type="text" v-model="newTaskTitle" id="taskInputer" v-on:keyup.enter="createTask" autofocus placeholder="What is your focus today...">
+	
+	// 	</div>
 	
 	// </template>
 	
@@ -10967,7 +11070,7 @@
 /* 29 */
 /***/ function(module, exports) {
 
-	module.exports = "<input type=\"text\" v-model=\"newTaskTitle\" id=\"taskInputer\" v-on:keyup.enter=\"createTask\" autofocus>";
+	module.exports = "<div class=\"taks-inputer\">\r\n\t\t<input type=\"text\" v-model=\"newTaskTitle\" id=\"taskInputer\" v-on:keyup.enter=\"createTask\" autofocus placeholder=\"What is your focus today...\">\r\n\t</div>";
 
 /***/ },
 /* 30 */
@@ -10977,9 +11080,26 @@
 
 /***/ },
 /* 31 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div class=\"wrapper\">\r\n    <header>\r\n    <task></task>\r\n </div>";
+	var __vue_script__, __vue_template__
+	__webpack_require__(32)
+	__vue_script__ = __webpack_require__(34)
+	__vue_template__ = __webpack_require__(35)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "D:\\Code\\bluerobin\\app\\components\\header\\header.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
 
 /***/ },
 /* 32 */
@@ -10997,8 +11117,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./base.scss", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./base.scss");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-639320f4&file=header.vue!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./header.vue", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/vue-loader/lib/style-rewriter.js?id=_v-639320f4&file=header.vue!./../../../node_modules/vue-loader/lib/selector.js?type=style&index=0!./header.vue");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -11016,10 +11136,61 @@
 	
 	
 	// module
-	exports.push([module.id, "html, body {\n  width: 100%;\n  height: 100%;\n  font-size: 10px;\n  margin: 0;\n  padding: 0; }\n\nbody {\n  background: #eee; }\n\nh1, h2, h3 {\n  margin: 0;\n  padding: 0; }\n\nh2 {\n  font-size: 30px;\n  text-align: center; }\n\n.flex-box {\n  display: -webkit-flex;\n  display: flex; }\n  .flex-box > div {\n    -webkit-flex: 1 auto 1;\n    flex: 1 auto 1; }\n", ""]);
+	exports.push([module.id, "header{\r\n  width: 100%;\r\n  height:50px;\r\n  background: rgba(255, 255, 255, 0.6);\r\n }", ""]);
 	
 	// exports
 
+
+/***/ },
+/* 34 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	// <style>
+	
+	//  header{
+	
+	//   width: 100%;
+	
+	//   height:50px;
+	
+	//   background: rgba(255, 255, 255, 0.6);
+	
+	//  }
+	
+	// </style>
+	
+	// <template>
+	
+	//     <header>
+	
+	//     </header>
+	
+	// </template>
+	
+	// <script>
+	module.exports = {
+	  data: function data() {
+	    return {};
+	  },
+	  ready: function ready() {}
+	
+	};
+	
+	// </script>
+
+/***/ },
+/* 35 */
+/***/ function(module, exports) {
+
+	module.exports = "<header>\r\n    </header>";
+
+/***/ },
+/* 36 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"wrapper\">\r\n    <appHeader></appHeader>\r\n    <div class=\"cotainer\">\r\n\r\n    </div>\r\n    <task></task>\r\n </div>";
 
 /***/ }
 /******/ ]);

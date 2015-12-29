@@ -2,7 +2,7 @@
 	.task-container{
 		max-width:660px;
 		min-width: 500px;
-		margin: 0 auto;
+		margin: 20px auto;
 		box-sizing: border-sizing;
 	}
 </style>

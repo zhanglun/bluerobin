@@ -1,10 +1,14 @@
-<style>
-
+<style lang="sass">
+.task-list{
+	margin-top:14px;
+ transform: perspective(1000px);
+}
 </style>
 
 <template>
-	<h3>Task List</h3>
-	<task v-for="task in tasklist" :task="task" :index="$index" track-by="$index"></task>
+	<div class="task-list">
+		<task v-for="task in tasklist" :task="task" :index="$index" track-by="$index"></task>
+	</div>
 </template>
 
 <script>
