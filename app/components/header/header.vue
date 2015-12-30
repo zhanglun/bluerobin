@@ -9,18 +9,19 @@
 <template>
 
     <header>
+    <!-- <a href="#/task">Task</a> -->
+    <!-- <a href="#/login">UserLogin</a> -->
     </header>
 
 </template>
 
 <script>
-module.exports = {
-  data: function(){
+export default {
+  data(){
     return {
-
     };
   },
-  ready: function(){
+  ready(){
   }
 
 };

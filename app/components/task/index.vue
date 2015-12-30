@@ -36,6 +36,7 @@
 	  },
 
 	  ready: function(){
+	  	console.log('tasklistbbb');
 	  },
 
 	  methods: {

@@ -21,9 +21,9 @@ module.exports = {
     }, {
       test: /\.(jpe?g|png|gif|svg)$/i,
       loaders: [
-        // 'file?hash=sha512&digest=hex&name=/build/img/[hash].[ext]',
-        // 'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false',
-        'url?limit=10000&&hash=sha512&digest=hex&name=/build/images/[hash].[ext]'
+        'file?hash=sha512&digest=hex&name=/build/images/[hash].[ext]',
+        'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}, svgo:{plugins:[{removeViewBox: false},{removeEmptyAttrs: false}]}}',
+        // 'url?limit=10000&&hash=sha512&digest=hex&name=/build/images/[hash].[ext]'
       ]
     }, {
       test: /\.vue$/,
