@@ -1,0 +1,239 @@
+.wrapper {
+  height: 100%; }
+.task-container {
+  max-width: 660px;
+  min-width: 500px;
+  margin: 20px auto;
+  box-sizing: border-sizing; }
+.task-list {
+  margin-top: 14px;
+  -webkit-transform: perspective(1000px);
+          transform: perspective(1000px); }
+@charset "UTF-8";
+.flex-box, .task-item {
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+  .flex-box > div, .task-item > div {
+    -webkit-flex: 1 auto 1;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 auto 1;
+            flex: 1 auto 1; }
+
+.red {
+  color: #f00; }
+
+.dib {
+  display: inline-block; }
+
+.app-main {
+  box-sizing: border-box; }
+
+.modify, .task-content > input {
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 34px;
+  height: 34px;
+  padding: 0 4px; }
+
+.task-item {
+  height: 44px;
+  line-height: 34px;
+  margin-top: -1px;
+  padding: 4px 10px;
+  box-sizing: border-box;
+  border: 1px solid #e8e8e8;
+  font-size: 14px;
+  color: #343434;
+  background: rgba(255, 255, 255, 0.8);
+  /*transition: all 3.3s ease;*/ }
+  .task-item .task-check, .task-item .task-actions {
+    -webkit-flex: 0 1 auto;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1 auto;
+            flex: 0 1 auto; }
+  .task-item .task-content {
+    -webkit-flex: 1 1 auto;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto; }
+  .task-item.finished .task-content {
+    cursor: default;
+    text-decoration: line-through; }
+  .task-item.editing .task-content > div {
+    display: none; }
+  .task-item.editing .task-content > input {
+    display: inline-block;
+    vertical-align: middle; }
+  .task-item:hover .task-actions {
+    display: block; }
+
+.task-checker > input[type=checkbox] + label {
+  display: none;
+  width: 14px;
+  height: 14px;
+  min-height: 14px;
+  padding: 0;
+  font-size: 14px;
+  text-align: center;
+  line-height: 14px;
+  border: 1px solid #d4d4d4; }
+
+.task-checker > input[type=checkbox] + label::before {
+  content: '\1F436';
+  display: block;
+  width: 100%;
+  height: 100%; }
+
+.task-checker > input[type=checkbox]:checked + label::before {
+  content: '\1F414'; }
+
+.task-content > input {
+  border: 1px solid #d4d4d4;
+  display: none;
+  outline: none;
+  font-size: 14px; }
+
+.task-content > div {
+  padding: 0 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-user-select: none; }
+
+#task-completed {
+  display: none; }
+
+.task-footer a {
+  display: inline-block; }
+
+.task-footer .todo-count {
+  display: inline-block; }
+
+.task-actions {
+  width: 100px;
+  text-align: right;
+  overflow: hidden;
+  display: none; }
+
+#task-category .list-group-item {
+  background: rgba(255, 255, 255, 0.8); }
+
+/*
+  Task item animation
+ */
+.animation_showtask-transition {
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease; }
+
+.animation_showtask-enter, .animation_showtask-leave {
+  opacity: 0;
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg); }
+
+.animation_showtask-enter {
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg); }
+
+.animation_showtask-leave {
+  /*height:0;*/
+  padding-top: 0;
+  padding-bottom: 0;
+  border: 0;
+  /*transform: rotateX(0deg);*/ }
+@charset "UTF-8";
+.taks-inputer {
+  box-sizing: border-box;
+  width: 100%; }
+  .taks-inputer > input {
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    height: 40px;
+    font-size: 14px;
+    padding: 0 8px;
+    outline: none;
+    border: none;
+    background: rgba(255, 255, 255, 0.8);
+    font-family: '\5FAE\8F6F\96C5\9ED1';
+    color: #6B6B6B; }
+header{
+  width: 100%;
+  height:50px;
+  background: rgba(255, 255, 255, 0.6);
+ }@font-face {
+    font-family: 'icomoon';
+    src:    url(/build/fonts/420f5892bb63ac34157abc7a1af3da70.eot);
+    src:    url(/build/fonts/420f5892bb63ac34157abc7a1af3da70.eot#iefix) format('embedded-opentype'),
+        url(/build/fonts/77b77d1cfb82a0191d3546184bfc5358.ttf) format('truetype'),
+        url(/build/fonts/c6cd8a41ff76cce83f529254b986e00a.woff) format('woff'),
+        url(/build/fonts/8e232a8c715f915fb164609f7f58f223.svg#icomoon) format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-location:before {
+    content: "\E90C";
+}
+.icon-spinner6:before {
+    content: "\E900";
+}
+.icon-bin:before {
+    content: "\E902";
+}
+.icon-attachment:before {
+    content: "\E901";
+}
+.icon-checkbox-checked:before {
+    content: "\E903";
+}
+.icon-github:before {
+    content: "\E913";
+}
+
+
+html, body{
+  width:100%;
+  height:100%;
+  font-size:10px;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+	background: #eee url(/build/images/2e16e9d3828acc00f1fa4799dcc4d404.jpg) fixed no-repeat center;
+  background-size: cover;
+  font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', 宋体, 黑体, sans-serif;
+  // font-family: "Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti!important
+}
+
+h1,h2,h3{
+  margin:0;
+  padding:0;
+}
+
+h2{
+	font-size: 30px;
+	text-align: center;
+}
+
+
+
+
+/*# sourceMappingURL=style.bundle.css.map*/

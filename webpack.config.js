@@ -11,17 +11,19 @@ module.exports = {
   },
   output: {
     path: APP_PATH,
+    // publicPath: '/build',
     filename: './[name].bundle.js'
   },
   module: {
     loaders: [{
       test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-      loader: 'file-loader'
+      loader: 'file-loader?name=/build/fonts/[hash].[ext]'
     }, {
       test: /\.(jpe?g|png|gif|svg)$/i,
       loaders: [
-        'file?hash=sha512&digest=hex&name=[hash].[ext]',
-        'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+        // 'file?hash=sha512&digest=hex&name=/build/img/[hash].[ext]',
+        // 'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false',
+        'url?limit=10000&&hash=sha512&digest=hex&name=/build/images/[hash].[ext]'
       ]
     }, {
       test: /\.vue$/,
@@ -37,13 +39,15 @@ module.exports = {
       include: APP_PATH
     }, {
       test: /\.css$|\.scss$/,
-      loader: ['style-loader', 'css-loader?sourceMap', 'sass-loader'],
+      // loaders: ['style-loader', 'css-loader?sourceMap', 'sass-loader'],
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap', 'sass-loader'),
       include: APP_PATH
-    }, ],
-    vue: {
-      loaders: {
-        sass: ExtractTextPlugin.extract("css!sass")
-      }
+    }],
+  },
+  vue: {
+    loaders: {
+      css: ExtractTextPlugin.extract("css"),
+      sass: ExtractTextPlugin.extract("css!sass")
     }
   },
   babel: {

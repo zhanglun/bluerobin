@@ -1,13 +1,13 @@
 <style lang="sass">
 .task-list{
 	margin-top:14px;
- transform: perspective(1000px);
+ 	transform: perspective(1000px);
 }
 </style>
 
 <template>
 	<div class="task-list">
-		<task v-for="task in tasklist" :task="task" :index="$index" track-by="$index"></task>
+		<task v-for="task in tasklist" :task="task" :index="$index"></task>
 	</div>
 </template>
 

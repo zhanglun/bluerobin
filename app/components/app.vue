@@ -3,6 +3,7 @@
  .wrapper{
   height: 100%;
  }
+
 </style>
 
 <template>

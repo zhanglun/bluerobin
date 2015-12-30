@@ -1,4 +1,4 @@
-<style lang="sass?outputstyle=expanded">
+<style lang="sass">
 
 .flex-box{
   display: -webkit-flex;
@@ -146,17 +146,26 @@ $editbox-height: 34px;
 }
 
 
+
+/*
+  Task item animation
+ */
 .animation_showtask-transition {
   transition: all 0.5s ease;
 }
 .animation_showtask-enter, .animation_showtask-leave {
   opacity: 0;
+  transform: rotateX(180deg);
 }
 .animation_showtask-enter{
   transform: rotateX(180deg);
 }
 .animation_showtask-leave{
-  transform: rotateX(0deg);
+  /*height:0;*/
+  padding-top:0;
+  padding-bottom:0;
+  border:0;
+  /*transform: rotateX(0deg);*/
 }
 
 </style>
@@ -193,7 +202,7 @@ module.exports = {
   },
 
   directives: {
-    'task-autofocus': function (value) {
+    'task-autofocus'(value) {
       if (!value) {
         return;
       }
@@ -204,21 +213,21 @@ module.exports = {
     }
   },
   methods: {
-  	toggleTask: function(task){
+  	toggleTask(task) {
   		this.task.completed = !this.task.completed;
       this.$dispatch('edit task', task);
   	},
-  	edit: function(task){
+  	edit(task) {
   		if(task.completed){
   			return false;
   		}
   		this.taskEditing = task;
   	},
-  	deleteTask: function(task){
+  	deleteTask(task) {
       this.$dispatch('delete task', task);
   	},
 
-    doEdit: function(task){
+    doEdit(task) {
       // 如果没有正在编辑的task说明目前并没有编辑操作
       // 这里也解决了 一个问题：在 input上绑定了 blur 和 keyup两个事件
       // 按下 enter 执行完成之后，会触发 blur，所以应该执行之后将 taskEditing 置为 null

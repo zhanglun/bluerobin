@@ -5,6 +5,7 @@ var gutil = require("gulp-util");
 var rename = require("gulp-rename");
 var webpack = require("webpack");
 var webpackConfig = require('./webpack.config.js');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 gulp.task('babel', function(){
 	return gulp.src(['./app/**/*.babel.js'])
@@ -23,6 +24,9 @@ gulp.task('babel', function(){
 var webpackConfigDev = Object.create(webpackConfig);
 webpackConfigDev.devtool = 'source-map';
 webpackConfigDev.debug = true;
+// webpackConfigDev.plugins.concat(
+//   new ExtractTextPlugin('style.bundle.css')
+// );
 
 // create a single instance of the compiler to allow caching
 var devCompiler = webpack(webpackConfigDev);
@@ -36,11 +40,35 @@ gulp.task('webpack:build-dev', function() {
   });
 });
 
+
+gulp.task('webpack:build', function(){
+    // modify some webpack config options
+  var myConfig = Object.create(webpackConfig);
+  myConfig.plugins = myConfig.plugins.concat(
+    new webpack.DefinePlugin({
+      "process.env": {
+        // This has effect on the react lib size
+        "NODE_ENV": JSON.stringify("production")
+      }
+    }),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin(),
+    new ExtractTextPlugin('style.bundle.css')
+  );
+
+  // run webpack
+  webpack(myConfig, function(err, stats) {
+    if(err) throw new gutil.PluginError("webpack:build", err);
+    gutil.log("[webpack:build]", stats.toString({
+      colors: true
+    }));
+    callback();
+  });
+});
+
 gulp.task('watch', function(){
-  gulp.watch(['./app/**/*.js', './app/components/**/*.vue'], ['webpack:build-dev']);
+  gulp.watch(['./app/**/*.js', './app/components/**/*.vue', './app/**/*.scss'], ['webpack:build-dev']);
 })
-
-
 
 
 gulp.task('default', [
@@ -48,3 +76,5 @@ gulp.task('default', [
   'babel',
   'watch'
 ]);
+
+gulp.task('build', ['webpack:build']);
