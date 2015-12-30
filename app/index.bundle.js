@@ -91,7 +91,7 @@
 	router.start(_app2.default, '#app');
 	
 	// 入口
-	new _vue2.default({
+	var BlueRobin = new _vue2.default({
 	  el: 'body',
 	  ready: function ready() {
 	    console.log(11);
@@ -12254,11 +12254,11 @@
 
 	//     <div class="cotainer">
 
-	//       <!-- <router-view></router-view> -->
+	//       <router-view></router-view>
 
 	//     </div>
 
-	//     <task></task>
+	//     <!-- <task></task> -->
 
 	//  </div>
 
@@ -13239,9 +13239,9 @@
 	
 	//     <header>
 	
-	//     <!-- <a href="#/task">Task</a> -->
+	//     <a href="#/task">Task</a>
 	
-	//     <!-- <a href="#/login">UserLogin</a> -->
+	//     <a href="#/login">UserLogin</a>
 	
 	//     </header>
 	
@@ -13261,13 +13261,13 @@
 /* 28 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\r\n    <!-- <a href=\"#/task\">Task</a> -->\r\n    <!-- <a href=\"#/login\">UserLogin</a> -->\r\n    </header>";
+	module.exports = "<header>\r\n    <a href=\"#/task\">Task</a>\r\n    <a href=\"#/login\">UserLogin</a>\r\n    </header>";
 
 /***/ },
 /* 29 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"wrapper\">\r\n    <appHeader></appHeader>\r\n    <div class=\"cotainer\">\r\n      <!-- <router-view></router-view> -->\r\n    </div>\r\n    <task></task>\r\n </div>";
+	module.exports = "<div class=\"wrapper\">\r\n    <appHeader></appHeader>\r\n    <div class=\"cotainer\">\r\n      <router-view></router-view>\r\n    </div>\r\n    <!-- <task></task> -->\r\n </div>";
 
 /***/ },
 /* 30 */
@@ -13309,13 +13309,31 @@
 	});
 	// <style lang="sass">
 	
+	//  .login-form {
+	
+	//   width:400px;
+	
+	//   padding:14px;
+	
+	//   box-sizing: box-sizing;
+	
+	//   margin: 0 auto;
+	
+	//   background: rgba(255,255,255,0.8);
+	
+	//  }
+	
 	// </style>
 	
 	// <template>
 	
-	//   <div>
+	//   <div class="container">
 	
-	//     User login
+	//     <div class="login-form">
+	
+	//       <div class="login-flash">What's your email address?</div>
+	
+	//     </div>
 	
 	//   </div>
 	
@@ -13336,7 +13354,7 @@
 /* 33 */
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n    User login\r\n  </div>";
+	module.exports = "<div class=\"container\">\r\n    <div class=\"login-form\">\r\n      <div class=\"login-flash\">What's your email address?</div>\r\n    </div>\r\n  </div>";
 
 /***/ },
 /* 34 */

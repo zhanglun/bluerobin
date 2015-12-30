@@ -27,7 +27,7 @@ router.redirect({
 router.start(App, '#app')
 
 // 入口
-new Vue({
+var BlueRobin = new Vue({
   el: 'body',
   ready(){
     console.log(11);

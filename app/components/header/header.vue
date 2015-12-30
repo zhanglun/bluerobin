@@ -9,8 +9,8 @@
 <template>
 
     <header>
-    <!-- <a href="#/task">Task</a> -->
-    <!-- <a href="#/login">UserLogin</a> -->
+    <a href="#/task">Task</a>
+    <a href="#/login">UserLogin</a>
     </header>
 
 </template>

@@ -10,9 +10,9 @@
  <div class="wrapper">
     <appHeader></appHeader>
     <div class="cotainer">
-      <!-- <router-view></router-view> -->
+      <router-view></router-view>
     </div>
-    <task></task>
+    <!-- <task></task> -->
  </div>
 
 </template>

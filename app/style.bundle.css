@@ -162,7 +162,13 @@ header{
   width: 100%;
   height:50px;
   background: rgba(255, 255, 255, 0.6);
- }@font-face {
+ }.login-form {
+  width: 400px;
+  padding: 14px;
+  box-sizing: box-sizing;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.8); }
+@font-face {
     font-family: 'icomoon';
     src:    url(/build/fonts/420f5892bb63ac34157abc7a1af3da70.eot);
     src:    url(/build/fonts/420f5892bb63ac34157abc7a1af3da70.eot#iefix) format('embedded-opentype'),
@@ -235,5 +241,9 @@ h2{
 
 
 
-
+.container{
+  width:100%;
+  max-width:1024px;
+  margin:0 auto;
+}
 /*# sourceMappingURL=style.bundle.css.map*/
