@@ -1,10 +1,17 @@
 .wrapper {
   height: 100%; }
+
+.animate_routerview {
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease; }
+
+.animate_routerview-enter, .animate_routerview-leave {
+  height: 0; }
 .task-container {
   max-width: 660px;
   min-width: 500px;
   margin: 20px auto;
-  box-sizing: border-sizing; }
+  box-sizing: border-box; }
 .task-list {
   margin-top: 14px;
   -webkit-transform: perspective(1000px);

@@ -67,7 +67,7 @@ gulp.task('webpack:build', function(){
 });
 
 gulp.task('watch', function(){
-  gulp.watch(['./app/**/*.js', './app/components/**/*.vue', './app/**/*.scss'], ['webpack:build-dev']);
+  gulp.watch(['./app/**/*.js', './app/components/*.vue', './app/components/**/*.vue', './app/**/*.scss'], ['webpack:build-dev']);
 })
 
 

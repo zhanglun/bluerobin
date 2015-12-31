@@ -12244,6 +12244,18 @@
 
 	//  }
 
+	//  .animate_routerview{
+
+	//   transition: all 0.4s ease;
+
+	//  }
+
+	//  .animate_routerview-enter, .animate_routerview-leave{
+
+	//   height: 0;
+
+	//  }
+
 	// </style>
 
 	// <template>
@@ -12254,7 +12266,7 @@
 
 	//     <div class="cotainer">
 
-	//       <router-view></router-view>
+	//       <router-view transition="animate_routerview"></router-view>
 
 	//     </div>
 
@@ -12481,7 +12493,7 @@
 	
 	// 		margin: 20px auto;
 	
-	// 		box-sizing: border-sizing;
+	// 		box-sizing: border-box;
 	
 	// 	}
 	
@@ -13267,7 +13279,7 @@
 /* 29 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"wrapper\">\r\n    <appHeader></appHeader>\r\n    <div class=\"cotainer\">\r\n      <router-view></router-view>\r\n    </div>\r\n    <!-- <task></task> -->\r\n </div>";
+	module.exports = "<div class=\"wrapper\">\r\n    <appHeader></appHeader>\r\n    <div class=\"cotainer\">\r\n      <router-view transition=\"animate_routerview\"></router-view>\r\n    </div>\r\n    <!-- <task></task> -->\r\n </div>";
 
 /***/ },
 /* 30 */
