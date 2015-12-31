@@ -8,10 +8,14 @@
 </style>
 
 <template>
+<div class="container">
+
 	<div class="task-container">
 		<taskinputer></taskinputer>
 		<tasklist></taskist>
 	</div>
+
+</div>
 </template>
 
 <script>

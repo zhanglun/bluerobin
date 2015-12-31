@@ -8,7 +8,7 @@
  }
 </style>
 <template>
-  <div class="container">
+  <div class="container" >
     <div class="login-form">
       <div class="login-flash">What's your email address?</div>
     </div>

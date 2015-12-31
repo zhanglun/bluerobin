@@ -12244,7 +12244,7 @@
 
 	//  }
 
-	//  .animate_routerview{
+	//  .animate_routerview-transition{
 
 	//   transition: all 0.4s ease;
 
@@ -12253,6 +12253,8 @@
 	//  .animate_routerview-enter, .animate_routerview-leave{
 
 	//   height: 0;
+
+	//   opacity: 0;
 
 	//  }
 
@@ -12264,11 +12266,7 @@
 
 	//     <appHeader></appHeader>
 
-	//     <div class="cotainer">
-
-	//       <router-view transition="animate_routerview"></router-view>
-
-	//     </div>
+	//     <router-view  transition="animate_routerview"></router-view>
 
 	//     <!-- <task></task> -->
 
@@ -12501,6 +12499,8 @@
 	
 	// <template>
 	
+	// <div class="container">
+	
 	// 	<div class="task-container">
 	
 	// 		<taskinputer></taskinputer>
@@ -12508,6 +12508,8 @@
 	// 		<tasklist></taskist>
 	
 	// 	</div>
+	
+	// </div>
 	
 	// </template>
 	
@@ -13193,7 +13195,7 @@
 /* 24 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"task-container\">\r\n\t\t<taskinputer></taskinputer>\r\n\t\t<tasklist></taskist>\r\n\t</div>";
+	module.exports = "<div class=\"container\">\r\n\r\n\t<div class=\"task-container\">\r\n\t\t<taskinputer></taskinputer>\r\n\t\t<tasklist></taskist>\r\n\t</div>\r\n\r\n</div>";
 
 /***/ },
 /* 25 */
@@ -13279,7 +13281,7 @@
 /* 29 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"wrapper\">\r\n    <appHeader></appHeader>\r\n    <div class=\"cotainer\">\r\n      <router-view transition=\"animate_routerview\"></router-view>\r\n    </div>\r\n    <!-- <task></task> -->\r\n </div>";
+	module.exports = "<div class=\"wrapper\">\r\n    <appHeader></appHeader>\r\n    <router-view  transition=\"animate_routerview\"></router-view>\r\n    <!-- <task></task> -->\r\n </div>";
 
 /***/ },
 /* 30 */
@@ -13339,7 +13341,7 @@
 	
 	// <template>
 	
-	//   <div class="container">
+	//   <div class="container" >
 	
 	//     <div class="login-form">
 	
@@ -13366,7 +13368,7 @@
 /* 33 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container\">\r\n    <div class=\"login-form\">\r\n      <div class=\"login-flash\">What's your email address?</div>\r\n    </div>\r\n  </div>";
+	module.exports = "<div class=\"container\" >\r\n    <div class=\"login-form\">\r\n      <div class=\"login-flash\">What's your email address?</div>\r\n    </div>\r\n  </div>";
 
 /***/ },
 /* 34 */
