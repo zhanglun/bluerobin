@@ -2,20 +2,16 @@
 	.task-container{
 		max-width:660px;
 		min-width: 500px;
-		margin: 20px auto;
+		margin: 0px auto;
 		box-sizing: border-box;
 	}
 </style>
 
 <template>
-<div class="container">
-
-	<div class="task-container">
-		<taskinputer></taskinputer>
-		<tasklist></taskist>
-	</div>
-
-</div>
+  <div class="task-container" transition="animate_routerview">
+	  <taskinputer></taskinputer>
+	  <tasklist></tasklist>
+  </div>
 </template>
 
 <script>

@@ -13,7 +13,8 @@ var router = new Router()
 
 router.map({
   '/task': {
-    component: TaskView
+    component: TaskView,
+    activeLinkClass: "asdfasdf"
   },
   '/login': {
     component: UserLogin

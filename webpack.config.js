@@ -40,7 +40,7 @@ module.exports = {
     }, {
       test: /\.css$|\.scss$/,
       // loaders: ['style-loader', 'css-loader?sourceMap', 'sass-loader'],
-      loader: ExtractTextPlugin.extract('style-loader', 'css-loader?sourceMap', 'sass-loader'),
+      loader: ExtractTextPlugin.extract(['css-loader?sourceMap', 'sass-loader']),
       include: APP_PATH
     }],
   },

@@ -8,9 +8,13 @@
  }
 </style>
 <template>
-  <div class="container" >
+  <div class="container" transition="animate_routerview">
     <div class="login-form">
       <div class="login-flash">What's your email address?</div>
+      <input type="text" placeholder="Email" />
+      <div class="login-flash">What's your password</div>
+      <input type="password" placeholder="Password"/>
+      <button type="button">Go -></button>
     </div>
   </div>
 </template>

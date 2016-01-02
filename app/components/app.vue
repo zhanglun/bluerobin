@@ -7,19 +7,22 @@
   transition: all 0.4s ease;
  }
  .animate_routerview-enter, .animate_routerview-leave{
-  height: 0;
   opacity: 0;
+  height:0;
+  transform: translate3d(20px, 0, 0);
  }
 
 </style>
 
 <template>
- <div class="wrapper">
+<div class="app">
+  
     <appHeader></appHeader>
-    <router-view  transition="animate_routerview"></router-view>
-    <!-- <task></task> -->
- </div>
+    <div class="container">
+      <router-view ></router-view>
+    </div>
 
+</div>
 </template>
 
 

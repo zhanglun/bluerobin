@@ -1,36 +1,35 @@
-
 @import "../fonts/style.css";
-
-
-html, body{
-  width:100%;
-  height:100%;
-  font-size:10px;
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-size: 10px;
   margin: 0;
   padding: 0;
 }
 
-body{
-	background: #eee url('../images/bg2.jpg') fixed no-repeat center;
+body {
+  background: #eee url('../images/bg2.jpg') fixed no-repeat center;
   background-size: cover;
   font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', 宋体, 黑体, sans-serif;
   // font-family: "Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti!important
 }
 
-h1,h2,h3{
-  margin:0;
-  padding:0;
+h1,
+h2,
+h3 {
+  margin: 0;
+  padding: 0;
 }
 
-h2{
-	font-size: 30px;
-	text-align: center;
+h2 {
+  font-size: 30px;
+  text-align: center;
 }
 
-
-
-.container{
-  width:100%;
-  max-width:1024px;
-  margin:0 auto;
+.container {
+  width: 100%;
+  // max-width:1024px;
+  max-width: 960px;
+  margin: 0 auto;
 }
