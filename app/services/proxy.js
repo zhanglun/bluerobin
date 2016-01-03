@@ -100,5 +100,19 @@ proxy.getBackgroundImage = function () {
   });
 };
 
+proxy.User.login = function (user) {
+  return fetch(root + "user/login", {
+    method: 'post',
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: JSON2FormData(user)
+  }).then(function (res) {
+    if (res.ok) {
+      return res.json();
+    }
+  });
+};
+
 exports.default = proxy;
 //# sourceMappingURL=proxy.babel.js.map

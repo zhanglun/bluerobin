@@ -11,22 +11,35 @@
   <div class="container" transition="animate_routerview">
     <div class="login-form">
       <div class="login-flash">What's your email address?</div>
-      <input type="text" placeholder="Email" />
+      <input type="text" placeholder="Email" v-model="user.username"/>
       <div class="login-flash">What's your password</div>
-      <input type="password" placeholder="Password"/>
-      <button type="button">Go -></button>
+      <input type="password" placeholder="Password" v-model="user.password"/>
+      <button type="button" v-on:click="doLogin">Go -></button>
     </div>
   </div>
 </template>
 <script>
+
+  import Proxy from '../../services/proxy.babel.js';
   export default {
     data(){
       return {
-
+        user: {
+          username: '',
+          password: '',
+        }
       }
     },
     ready(){
       console.log('login');
-    }
+    },
+    methods: {
+      doLogin: function(){
+        Proxy.User.login(this.user)
+        .then(function(){
+          console.log(arguments); 
+        });
+      }
+    }      
   }
 </script>
