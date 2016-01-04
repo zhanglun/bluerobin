@@ -46,29 +46,29 @@
 
 	'use strict';
 	
-	var _vue = __webpack_require__(2);
+	var _vue = __webpack_require__(1);
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _vueRouter = __webpack_require__(4);
+	var _vueRouter = __webpack_require__(3);
 	
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 	
-	var _app = __webpack_require__(5);
+	var _app = __webpack_require__(4);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _index = __webpack_require__(10);
+	var _index = __webpack_require__(9);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _login = __webpack_require__(31);
+	var _login = __webpack_require__(30);
 	
 	var _login2 = _interopRequireDefault(_login);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(36);
+	__webpack_require__(34);
 	
 	_vue2.default.use(_vueRouter2.default);
 	
@@ -104,8 +104,7 @@
 	});
 
 /***/ },
-/* 1 */,
-/* 2 */
+/* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/*!
@@ -9536,10 +9535,10 @@
 	}
 	
 	module.exports = Vue;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -9636,7 +9635,7 @@
 
 
 /***/ },
-/* 4 */
+/* 3 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -12175,13 +12174,13 @@
 	module.exports = Router;
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(6)
-	__vue_script__ = __webpack_require__(7)
-	__vue_template__ = __webpack_require__(30)
+	__webpack_require__(5)
+	__vue_script__ = __webpack_require__(6)
+	__vue_template__ = __webpack_require__(29)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -12198,13 +12197,13 @@
 	})()}
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12213,15 +12212,15 @@
 	  value: true
 	});
 	
-	var _commonBabel = __webpack_require__(8);
+	var _commonBabel = __webpack_require__(7);
 	
 	var _commonBabel2 = _interopRequireDefault(_commonBabel);
 	
-	var _index = __webpack_require__(10);
+	var _index = __webpack_require__(9);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _header = __webpack_require__(26);
+	var _header = __webpack_require__(25);
 	
 	var _header2 = _interopRequireDefault(_header);
 	
@@ -12271,19 +12270,19 @@
 	// <script>
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _proxyBabel = __webpack_require__(9);
+	var _proxyBabel = __webpack_require__(8);
 
 	var _proxyBabel2 = _interopRequireDefault(_proxyBabel);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -12406,13 +12405,13 @@
 	exports.default = proxy;
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(11)
-	__vue_script__ = __webpack_require__(12)
-	__vue_template__ = __webpack_require__(25)
+	__webpack_require__(10)
+	__vue_script__ = __webpack_require__(11)
+	__vue_template__ = __webpack_require__(24)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -12429,26 +12428,26 @@
 	})()}
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _vue = __webpack_require__(2);
+	var _vue = __webpack_require__(1);
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _taskList = __webpack_require__(13);
+	var _taskList = __webpack_require__(12);
 	
 	var _taskList2 = _interopRequireDefault(_taskList);
 	
-	var _taskInputer = __webpack_require__(21);
+	var _taskInputer = __webpack_require__(20);
 	
 	var _taskInputer2 = _interopRequireDefault(_taskInputer);
 	
@@ -12511,13 +12510,13 @@
 	// <script>undefined
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(14)
-	__vue_script__ = __webpack_require__(15)
-	__vue_template__ = __webpack_require__(20)
+	__webpack_require__(13)
+	__vue_script__ = __webpack_require__(14)
+	__vue_template__ = __webpack_require__(19)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -12534,13 +12533,13 @@
 	})()}
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12549,11 +12548,11 @@
 		value: true
 	});
 	
-	var _proxyBabel = __webpack_require__(9);
+	var _proxyBabel = __webpack_require__(8);
 	
 	var _proxyBabel2 = _interopRequireDefault(_proxyBabel);
 	
-	var _task = __webpack_require__(16);
+	var _task = __webpack_require__(15);
 	
 	var _task2 = _interopRequireDefault(_task);
 	
@@ -12624,13 +12623,13 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(17)
-	__vue_script__ = __webpack_require__(18)
-	__vue_template__ = __webpack_require__(19)
+	__webpack_require__(16)
+	__vue_script__ = __webpack_require__(17)
+	__vue_template__ = __webpack_require__(18)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -12647,18 +12646,18 @@
 	})()}
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var _proxyBabel = __webpack_require__(9);
+	var _proxyBabel = __webpack_require__(8);
 	
 	var _proxyBabel2 = _interopRequireDefault(_proxyBabel);
 	
@@ -12903,25 +12902,25 @@
 	// <script>undefined
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"task-item\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\">\n  \t<div class=\"task-checker\">\n  \t\t<input type=\"checkbox\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n  \t</div>\n    <div class=\"task-content\" v-on:dblclick=\"edit(task)\">\n      <div data-val=\"{{task.title}}\">{{task.title}}</div>\n      <input type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n    </div>\n    <div class=\"task-actions\">\n\t    <span v-on:click=\"deleteTask(task)\" class=\"icon-bin\"></span>\n  \t</div>\n  </div>";
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"task-list\">\n\t\t<task v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></task>\n\t</div>";
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(22)
-	__vue_script__ = __webpack_require__(23)
-	__vue_template__ = __webpack_require__(24)
+	__webpack_require__(21)
+	__vue_script__ = __webpack_require__(22)
+	__vue_template__ = __webpack_require__(23)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -12938,13 +12937,13 @@
 	})()}
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -13003,25 +13002,25 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"taks-inputer\">\n\t\t<input type=\"text\" v-model=\"newTaskTitle\" id=\"taskInputer\" v-on:keyup.enter=\"createTask\" autofocus placeholder=\"What is your focus today...\">\n\t</div>";
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"task-container\" transition=\"animate_routerview\">\n\t  <taskinputer></taskinputer>\n\t  <tasklist></tasklist>\n  </div>";
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(27)
-	__vue_script__ = __webpack_require__(28)
-	__vue_template__ = __webpack_require__(29)
+	__webpack_require__(26)
+	__vue_script__ = __webpack_require__(27)
+	__vue_template__ = __webpack_require__(28)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -13038,13 +13037,13 @@
 	})()}
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -13081,25 +13080,25 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports) {
 
 	module.exports = "<header>\n      <a v-link=\"'task'\">Task</a>\n      <a v-link=\"'login'\">UserLogin</a>\n    </header>";
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"app\">\n  \n    <appHeader></appHeader>\n    <div class=\"container\">\n      <router-view ></router-view>\n    </div>\n\n</div>";
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(32)
-	__vue_script__ = __webpack_require__(34)
-	__vue_template__ = __webpack_require__(35)
+	__webpack_require__(31)
+	__vue_script__ = __webpack_require__(32)
+	__vue_template__ = __webpack_require__(33)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -13116,14 +13115,13 @@
 	})()}
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 33 */,
-/* 34 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13132,7 +13130,7 @@
 	  value: true
 	});
 	
-	var _proxyBabel = __webpack_require__(9);
+	var _proxyBabel = __webpack_require__(8);
 	
 	var _proxyBabel2 = _interopRequireDefault(_proxyBabel);
 	
@@ -13153,7 +13151,7 @@
 	
 	  methods: {
 	    doLogin: function doLogin() {
-	      _proxyBabel2.default.User.login(this.user).then(function () {
+	      _proxyBabel2.default.User.login(this.user).then(function (res) {
 	        console.log(arguments);
 	      });
 	    }
@@ -13184,13 +13182,13 @@
 	// <script>
 
 /***/ },
-/* 35 */
+/* 33 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"container\" transition=\"animate_routerview\">\n    <div class=\"login-form\">\n      <div class=\"login-flash\">What's your email address?</div>\n      <input type=\"text\" placeholder=\"Email\" v-model=\"user.username\"/>\n      <div class=\"login-flash\">What's your password</div>\n      <input type=\"password\" placeholder=\"Password\" v-model=\"user.password\"/>\n      <button type=\"button\" v-on:click=\"doLogin\">Go -></button>\n    </div>\n  </div>";
 
 /***/ },
-/* 36 */
+/* 34 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

@@ -36,8 +36,9 @@
     methods: {
       doLogin: function(){
         Proxy.User.login(this.user)
-        .then(function(){
-          console.log(arguments); 
+        .then(function(res){
+          console.log(arguments);
+
         });
       }
     }      
