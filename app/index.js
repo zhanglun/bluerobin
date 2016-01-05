@@ -22,7 +22,7 @@ router.map({
 })
 
 router.redirect({
-  '*': '/login'
+  '*': '/task'
 })
 
 router.start(App, '#app')

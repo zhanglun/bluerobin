@@ -1,3 +1,5 @@
 'use strict';
 
-console.log('\'Allo \'Allo! Content script');
+console.time('\'Allo \'Allo! Content script');
+console.timeEnd('\'Allo \'Allo! Content script');
+console.log(new Date().getTime());

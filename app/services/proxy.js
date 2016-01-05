@@ -20,6 +20,7 @@ function JSON2FormData(json) {
 
 var proxy = {};
 proxy.Task = {};
+proxy.User = {};
 
 /**
  * 获取task
@@ -101,12 +102,26 @@ proxy.getBackgroundImage = function () {
 };
 
 proxy.User.login = function (user) {
-  return fetch(root + "user/login", {
+  return fetch(root + "/user/login", {
     method: 'post',
     headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     },
     body: JSON2FormData(user)
+  }).then(function (res) {
+    if (res.ok) {
+      return res.json();
+    }
+  });
+};
+
+/**
+ * 获取上传token
+ * @return {[type]} [description]
+ */
+proxy, Upload.getUptoken = function () {
+  return fetch(root + '/qiniu/token', {
+    method: 'get'
   }).then(function (res) {
     if (res.ok) {
       return res.json();
