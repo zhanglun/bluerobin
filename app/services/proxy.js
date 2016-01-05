@@ -21,6 +21,7 @@ function JSON2FormData(json) {
 var proxy = {};
 proxy.Task = {};
 proxy.User = {};
+proxy.Upload = {};
 
 /**
  * 获取task
@@ -119,7 +120,7 @@ proxy.User.login = function (user) {
  * 获取上传token
  * @return {[type]} [description]
  */
-proxy, Upload.getUptoken = function () {
+proxy.Upload.getUptoken = function () {
   return fetch(root + '/qiniu/token', {
     method: 'get'
   }).then(function (res) {

@@ -13222,7 +13222,7 @@
 	
 	// <style lang="sass">
 	
-	// 	.taks-inputer{
+	// 	.task-inputer{
 	
 	// 		box-sizing: border-box;
 	
@@ -13260,7 +13260,7 @@
 	
 	// <template>
 	
-	// 	<div class="taks-inputer">
+	// 	<div class="task-inputer">
 	
 	// 		<input type="text" v-model="newTaskTitle" id="taskInputer" v-on:keyup.enter="createTask" autofocus placeholder="What is your focus today..." v-on:paste="upload($event)">
 	
@@ -13295,19 +13295,6 @@
 			upload: function upload(e) {
 				var items = e.clipboardData && e.clipboardData.items;
 				console.log(items);
-				var data = { files: [] };
-				if (items && items.length) {
-					for (var i = 0; i < items.length; i++) {
-						var item = items[i];
-						var file = item.getAsFile && item.getAsFile();
-						if (file) {
-							file.name = "剪切板贴图.png";
-							data.files.push(file);
-						}
-					}
-					if (data.files.length > 0) {}
-					// r(data.files);
-				}
 			}
 		}
 	
@@ -13319,7 +13306,7 @@
 /* 23 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"taks-inputer\">\r\n\t\t<input type=\"text\" v-model=\"newTaskTitle\" id=\"taskInputer\" v-on:keyup.enter=\"createTask\" autofocus placeholder=\"What is your focus today...\" v-on:paste=\"upload($event)\">\r\n\t</div>";
+	module.exports = "<div class=\"task-inputer\">\r\n\t\t<input type=\"text\" v-model=\"newTaskTitle\" id=\"taskInputer\" v-on:keyup.enter=\"createTask\" autofocus placeholder=\"What is your focus today...\" v-on:paste=\"upload($event)\">\r\n\t</div>";
 
 /***/ },
 /* 24 */

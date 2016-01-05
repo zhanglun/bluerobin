@@ -1,5 +1,5 @@
 <style lang="sass">
-	.taks-inputer{
+	.task-inputer{
 		box-sizing: border-box;
 		width:100%;
 		>input{
@@ -19,7 +19,7 @@
 </style>
 
 <template>
-	<div class="taks-inputer">
+	<div class="task-inputer">
 		<input type="text" v-model="newTaskTitle" id="taskInputer" v-on:keyup.enter="createTask" autofocus placeholder="What is your focus today..." v-on:paste="upload($event)">
 	</div>
 </template>
@@ -52,21 +52,6 @@ module.exports = {
 		upload(e){
 			var items = e.clipboardData && e.clipboardData.items;
 			console.log(items);
-      var data = { files: [] };
-      if (items && items.length) {
-          for(var i = 0;i <items.length; i++){
-          	var item = items[i];
-            var file = item.getAsFile && item.getAsFile();
-            if (file) {
-                file.name = "剪切板贴图.png";
-                data.files.push(file);
-            }
-          }
-          if (data.files.length > 0){
-
-          }
-              // r(data.files);
-      }
 		}
 	}
 

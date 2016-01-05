@@ -153,10 +153,10 @@
   border: 0;
   /*transform: rotateX(0deg);*/ }
 @charset "UTF-8";
-.taks-inputer {
+.task-inputer {
   box-sizing: border-box;
   width: 100%; }
-  .taks-inputer > input {
+  .task-inputer > input {
     width: 100%;
     box-sizing: border-box;
     display: block;
