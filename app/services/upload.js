@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-function uploadrInit() {
+function uploadrInit(opt) {
     var uploader = Qiniu.uploader({
         runtimes: 'html5,flash,html4', //上传模式,依次退化
         browse_button: 'browse', //上传选择的点选按钮，**必需**
@@ -25,11 +25,11 @@ function uploadrInit() {
         drop_element: 'container', //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
         paste_element: 'taskInputer',
         chunk_size: '4mb', //分块上传时，每片的体积
-        // auto_start: true, //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+        auto_start: true, //选择文件后自动上传，若关闭需要自己绑定事件触发上传
         init: {
             'FilesAdded': function FilesAdded(up, files) {
+                console.log(files);
                 plupload.each(files, function (file) {
-                    console.log(file);
                     // 文件添加进队列后,处理相关的事情
                 });
             },

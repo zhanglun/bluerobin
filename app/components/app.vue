@@ -15,25 +15,20 @@
 </style>
 
 <template>
-<div class="app">
+  <div class="app">
+      <home></home>
+      <!-- <appHeader></appHeader> -->
+      <router-view ></router-view>
 
-    <appHeader></appHeader>
-
-    <div id="container">
-        <span id="browse">[Browse...]</span>
-        <span id="start-upload">[Start Upload]</spam>
-
-    <router-view ></router-view>
-       </div>
-
-</div>
+  </div>
 </template>
 
 
 <script>
   import Common from '../public/javascripts/common.babel.js';
   import Uploader from '../services/upload.babel.js';
-  import TaskView from './task/index.vue'
+  import TaskView from './task/index.vue';
+  import HomeView from './home/home.vue';
   import AppHeaderView from './header/header.vue';
 
 
@@ -49,9 +44,10 @@
       // uploader.init();
       uploader.bind('FilesAdded', function() {
         console.log('hello man,a file is uploaded');
-    });
+      });
     },
     components: {
+      home: HomeView,
       task: TaskView,
       appheader: AppHeaderView
     }
