@@ -32,6 +32,7 @@
 
 <script>
   import Common from '../public/javascripts/common.babel.js';
+  import Uploader from '../services/upload.babel.js';
   import TaskView from './task/index.vue'
   import AppHeaderView from './header/header.vue';
 
@@ -44,9 +45,9 @@
       }
     },
     ready(){
-      var uploader = uploadrInit();
+      var uploader = Uploader();
       // uploader.init();
-      uploader.bind('FileUploaded', function() {
+      uploader.bind('FilesAdded', function() {
         console.log('hello man,a file is uploaded');
     });
     },

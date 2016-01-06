@@ -22,15 +22,26 @@
 	<div class="task-inputer">
 		<input type="text" v-model="newTaskTitle" id="taskInputer" v-on:keyup.enter="createTask" autofocus placeholder="What is your focus today..." v-on:paste="upload($event)">
 	</div>
+	<div>
+		<img v-bind:src="imagesrc | blob2src" alt="" v-for="imagesrc in fileList">
+	</div>
 </template>
 
 <script>
+import Uploader from '../../services/upload.babel.js';
 
 module.exports = {
-	data: function(){
+	data(){
 		return {
 			title: 'task inputer',
 			newTaskTitle: '',
+			fileList: [],
+			imageList: []
+		}
+	},
+	filters: {
+		blob2src: function(blob){
+			return URL.createObjectURL(blob);
 		}
 	},
 	ready(){
@@ -50,8 +61,22 @@ module.exports = {
 		},
 
 		upload(e){
+			var _this = this;
+			var uploader = Uploader();
 			var items = e.clipboardData && e.clipboardData.items;
-			console.log(items);
+			if(items && items.length){
+				for(var i=0; i<items.length; i++){
+					var file = items[i].getAsFile && items[i].getAsFile();
+					if (file) {
+						_this.fileList.push(file);
+					}
+				}
+			}
+
+    	uploader.bind('PostInit', function(){
+    			uploader.addFile(_this.fileList);
+    	});
+
 		}
 	}
 

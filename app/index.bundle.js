@@ -58,17 +58,17 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _index = __webpack_require__(9);
+	var _index = __webpack_require__(10);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _login = __webpack_require__(30);
+	var _login = __webpack_require__(31);
 	
 	var _login2 = _interopRequireDefault(_login);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(34);
+	__webpack_require__(35);
 	
 	_vue2.default.use(_vueRouter2.default);
 	
@@ -12180,7 +12180,7 @@
 	var __vue_script__, __vue_template__
 	__webpack_require__(5)
 	__vue_script__ = __webpack_require__(6)
-	__vue_template__ = __webpack_require__(29)
+	__vue_template__ = __webpack_require__(30)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -12216,82 +12216,21 @@
 	
 	var _commonBabel2 = _interopRequireDefault(_commonBabel);
 	
-	var _index = __webpack_require__(9);
+	var _uploadBabel = __webpack_require__(9);
+	
+	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
+	
+	var _index = __webpack_require__(10);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _header = __webpack_require__(25);
+	var _header = __webpack_require__(26);
 	
 	var _header2 = _interopRequireDefault(_header);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function uploadrInit() {
-	  var uploader = Qiniu.uploader({
-	    runtimes: 'html5,flash,html4', //上传模式,依次退化
-	    browse_button: 'browse', //上传选择的点选按钮，**必需**
-	    uptoken_url: 'http://localhost:1234/api/qiniu/token',
-	    //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
-	    // uptoken : '<Your upload token>',
-	    //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
-	    // unique_names: true,
-	    // 默认 false，key为文件名。若开启该选项，SDK会为每个文件自动生成key（文件名）
-	    // save_key: true,
-	    // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK在前端将不对key进行任何处理
-	    domain: 'http://7i7gl0.com1.z0.glb.clouddn.com/',
-	    //bucket 域名，下载资源时用到，**必需**
-	    container: 'container', //上传区域DOM ID，默认是browser_button的父元素，
-	    max_file_size: '100mb', //最大文件体积限制
-	    flash_swf_url: 'vendor/plupload-2.1.8/js/Moxie.swf', //引入flash,相对路径
-	    max_retries: 3, //上传失败最大重试次数
-	    dragdrop: true, //开启可拖曳上传
-	    drop_element: 'container', //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
-	    paste_element: 'taskInputer',
-	    chunk_size: '4mb', //分块上传时，每片的体积
-	    auto_start: true, //选择文件后自动上传，若关闭需要自己绑定事件触发上传
-	    init: {
-	      'FilesAdded': function FilesAdded(up, files) {
-	        plupload.each(files, function (file) {
-	          console.log(file);
-	          // 文件添加进队列后,处理相关的事情
-	        });
-	      },
-	      'BeforeUpload': function BeforeUpload(up, file) {
-	        // 每个文件上传前,处理相关的事情
-	      },
-	      'UploadProgress': function UploadProgress(up, file) {
-	        // 每个文件上传时,处理相关的事情
-	      },
-	      'FileUploaded': function FileUploaded(up, file, info) {
-	        console.log(arguments);
-	        // 每个文件上传成功后,处理相关的事情
-	        // 其中 info 是文件上传成功后，服务端返回的json，形式如
-	        // {
-	        //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
-	        //    "key": "gogopher.jpg"
-	        //  }
-	        // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
-	        // var domain = up.getOption('domain');
-	        // var res = parseJSON(info);
-	        // var sourceLink = domain + res.key; 获取上传成功后的文件的Url
-	      },
-	      'Error': function Error(up, err, errTip) {
-	        //上传出错时,处理相关的事情
-	      },
-	      'UploadComplete': function UploadComplete() {
-	        //队列文件处理完毕后,处理相关的事情
-	      },
-	      'Key': function Key(up, file) {
-	        // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
-	        // 该配置必须要在 unique_names: false , save_key: false 时才生效
-	        // var key = "";
-	        // do something with key here
-	        return file.name;
-	      }
-	    }
-	  });
-	  return uploader;
-	} // <style lang="sass">
+	// <style lang="sass">
 	
 	//  .wrapper{
 	
@@ -12338,7 +12277,6 @@
 	// </template>
 	
 	// <script>
-	
 	exports.default = {
 	  data: function data() {
 	    return {
@@ -12346,9 +12284,9 @@
 	    };
 	  },
 	  ready: function ready() {
-	    var uploader = uploadrInit();
+	    var uploader = (0, _uploadBabel2.default)();
 	    // uploader.init();
-	    uploader.bind('FileUploaded', function () {
+	    uploader.bind('FilesAdded', function () {
 	      console.log('hello man,a file is uploaded');
 	    });
 	  },
@@ -12511,12 +12449,90 @@
 
 /***/ },
 /* 9 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	function uploadrInit(opt) {
+	    var uploader = Qiniu.uploader({
+	        runtimes: 'html5,flash,html4', //上传模式,依次退化
+	        browse_button: 'browse', //上传选择的点选按钮，**必需**
+	        uptoken_url: 'http://localhost:1234/api/qiniu/token',
+	        //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
+	        // uptoken : '<Your upload token>',
+	        //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
+	        // unique_names: true,
+	        // 默认 false，key为文件名。若开启该选项，SDK会为每个文件自动生成key（文件名）
+	        // save_key: true,
+	        // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK在前端将不对key进行任何处理
+	        domain: 'http://7i7gl0.com1.z0.glb.clouddn.com/',
+	        //bucket 域名，下载资源时用到，**必需**
+	        container: 'container', //上传区域DOM ID，默认是browser_button的父元素，
+	        max_file_size: '100mb', //最大文件体积限制
+	        flash_swf_url: 'vendor/plupload-2.1.8/js/Moxie.swf', //引入flash,相对路径
+	        max_retries: 3, //上传失败最大重试次数
+	        dragdrop: true, //开启可拖曳上传
+	        drop_element: 'container', //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
+	        paste_element: 'taskInputer',
+	        chunk_size: '4mb', //分块上传时，每片的体积
+	        auto_start: true, //选择文件后自动上传，若关闭需要自己绑定事件触发上传
+	        init: {
+	            'FilesAdded': function FilesAdded(up, files) {
+	                console.log(files);
+	                plupload.each(files, function (file) {
+	                    // 文件添加进队列后,处理相关的事情
+	                });
+	            },
+	            'BeforeUpload': function BeforeUpload(up, file) {
+	                // 每个文件上传前,处理相关的事情
+	            },
+	            'UploadProgress': function UploadProgress(up, file) {
+	                // 每个文件上传时,处理相关的事情
+	            },
+	            'FileUploaded': function FileUploaded(up, file, info) {
+	                console.log(arguments);
+	                // 每个文件上传成功后,处理相关的事情
+	                // 其中 info 是文件上传成功后，服务端返回的json，形式如
+	                // {
+	                //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
+	                //    "key": "gogopher.jpg"
+	                //  }
+	                // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
+	                // var domain = up.getOption('domain');
+	                // var res = parseJSON(info);
+	                // var sourceLink = domain + res.key; 获取上传成功后的文件的Url
+	            },
+	            'Error': function Error(up, err, errTip) {
+	                //上传出错时,处理相关的事情
+	            },
+	            'UploadComplete': function UploadComplete() {
+	                //队列文件处理完毕后,处理相关的事情
+	            },
+	            'Key': function Key(up, file) {
+	                // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
+	                // 该配置必须要在 unique_names: false , save_key: false 时才生效
+	                // var key = "";
+	                // do something with key here
+	                return file.name;
+	            }
+	        }
+	    });
+	    return uploader;
+	}
+	
+	exports.default = uploadrInit;
+
+/***/ },
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(10)
-	__vue_script__ = __webpack_require__(11)
-	__vue_template__ = __webpack_require__(24)
+	__webpack_require__(11)
+	__vue_script__ = __webpack_require__(12)
+	__vue_template__ = __webpack_require__(25)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -12533,13 +12549,13 @@
 	})()}
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12548,11 +12564,11 @@
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _taskList = __webpack_require__(12);
+	var _taskList = __webpack_require__(13);
 	
 	var _taskList2 = _interopRequireDefault(_taskList);
 	
-	var _taskInputer = __webpack_require__(20);
+	var _taskInputer = __webpack_require__(21);
 	
 	var _taskInputer2 = _interopRequireDefault(_taskInputer);
 	
@@ -12625,13 +12641,13 @@
 	// <script>undefined
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(13)
-	__vue_script__ = __webpack_require__(14)
-	__vue_template__ = __webpack_require__(19)
+	__webpack_require__(14)
+	__vue_script__ = __webpack_require__(15)
+	__vue_template__ = __webpack_require__(20)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -12648,13 +12664,13 @@
 	})()}
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12667,7 +12683,7 @@
 	
 	var _proxyBabel2 = _interopRequireDefault(_proxyBabel);
 	
-	var _task = __webpack_require__(15);
+	var _task = __webpack_require__(16);
 	
 	var _task2 = _interopRequireDefault(_task);
 	
@@ -12746,13 +12762,13 @@
 	// </script>
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(16)
-	__vue_script__ = __webpack_require__(17)
-	__vue_template__ = __webpack_require__(18)
+	__webpack_require__(17)
+	__vue_script__ = __webpack_require__(18)
+	__vue_template__ = __webpack_require__(19)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -12769,13 +12785,13 @@
 	})()}
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13174,25 +13190,25 @@
 	// <script>undefined
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"task-item\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\">\r\n  \t<div class=\"task-checker\">\r\n  \t\t<input type=\"checkbox\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n  \t</div>\r\n    <div class=\"task-content\" v-on:dblclick=\"edit(task)\">\r\n      <div data-val=\"{{task.title}}\">{{task.title}}</div>\r\n      <input type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n    </div>\r\n    <div class=\"task-actions\">\r\n\t    <span v-on:click=\"deleteTask(task)\" class=\"icon-bin\"></span>\r\n  \t</div>\r\n  </div>";
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"task-list\">\r\n\t\t<task v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></task>\r\n\t</div>";
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(21)
-	__vue_script__ = __webpack_require__(22)
-	__vue_template__ = __webpack_require__(23)
+	__webpack_require__(22)
+	__vue_script__ = __webpack_require__(23)
+	__vue_template__ = __webpack_require__(24)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -13209,17 +13225,75 @@
 	})()}
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 22 */
-/***/ function(module, exports) {
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
+	var _uploadBabel = __webpack_require__(9);
+	
+	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	module.exports = {
+		data: function data() {
+			return {
+				title: 'task inputer',
+				newTaskTitle: '',
+				fileList: [],
+				imageList: []
+			};
+		},
+	
+		filters: {
+			blob2src: function blob2src(blob) {
+				return URL.createObjectURL(blob);
+			}
+		},
+		ready: function ready() {},
+	
+		methods: {
+			createTask: function createTask() {
+				if (!this.newTaskTitle) {
+					return false;
+				}
+				this.$dispatch('create task', {
+					title: this.newTaskTitle,
+					ctime: new Date()
+				});
+	
+				this.newTaskTitle = '';
+			},
+	
+			upload: function upload(e) {
+				var _this = this;
+				var uploader = (0, _uploadBabel2.default)();
+				var items = e.clipboardData && e.clipboardData.items;
+				if (items && items.length) {
+					for (var i = 0; i < items.length; i++) {
+						var file = items[i].getAsFile && items[i].getAsFile();
+						if (file) {
+							_this.fileList.push(file);
+						}
+					}
+				}
+	
+				uploader.bind('PostInit', function () {
+					uploader.addFile(_this.fileList);
+				});
+			}
+		}
+	
+	};
+	
+	// </script>
 	// <style lang="sass">
 	
 	// 	.task-inputer{
@@ -13266,62 +13340,36 @@
 	
 	// 	</div>
 	
+	// 	<div>
+	
+	// 		<img v-bind:src="imagesrc | blob2src" alt="" v-for="imagesrc in fileList">
+	
+	// 	</div>
+	
 	// </template>
 	
 	// <script>
-	
-	module.exports = {
-		data: function data() {
-			return {
-				title: 'task inputer',
-				newTaskTitle: ''
-			};
-		},
-		ready: function ready() {},
-	
-		methods: {
-			createTask: function createTask() {
-				if (!this.newTaskTitle) {
-					return false;
-				}
-				this.$dispatch('create task', {
-					title: this.newTaskTitle,
-					ctime: new Date()
-				});
-	
-				this.newTaskTitle = '';
-			},
-	
-			upload: function upload(e) {
-				var items = e.clipboardData && e.clipboardData.items;
-				console.log(items);
-			}
-		}
-	
-	};
-	
-	// </script>
-
-/***/ },
-/* 23 */
-/***/ function(module, exports) {
-
-	module.exports = "<div class=\"task-inputer\">\r\n\t\t<input type=\"text\" v-model=\"newTaskTitle\" id=\"taskInputer\" v-on:keyup.enter=\"createTask\" autofocus placeholder=\"What is your focus today...\" v-on:paste=\"upload($event)\">\r\n\t</div>";
 
 /***/ },
 /* 24 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"task-container\" transition=\"animate_routerview\">\r\n\t  <taskinputer></taskinputer>\r\n\t  <tasklist></tasklist>\r\n  </div>";
+	module.exports = "<div class=\"task-inputer\">\r\n\t\t<input type=\"text\" v-model=\"newTaskTitle\" id=\"taskInputer\" v-on:keyup.enter=\"createTask\" autofocus placeholder=\"What is your focus today...\" v-on:paste=\"upload($event)\">\r\n\t</div>\r\n\t<div>\r\n\t\t<img v-bind:src=\"imagesrc | blob2src\" alt=\"\" v-for=\"imagesrc in fileList\">\r\n\t</div>";
 
 /***/ },
 /* 25 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"task-container\" transition=\"animate_routerview\">\r\n\t  <taskinputer></taskinputer>\r\n\t  <tasklist></tasklist>\r\n  </div>";
+
+/***/ },
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(26)
-	__vue_script__ = __webpack_require__(27)
-	__vue_template__ = __webpack_require__(28)
+	__webpack_require__(27)
+	__vue_script__ = __webpack_require__(28)
+	__vue_template__ = __webpack_require__(29)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -13338,13 +13386,13 @@
 	})()}
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -13389,25 +13437,25 @@
 	// </script>
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports) {
 
 	module.exports = "<header>\r\n<!--       <a v-link=\"'task'\">Task</a>\r\n      <a v-link=\"'login'\">UserLogin</a>\r\n -->    </header>";
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"app\">\r\n\r\n    <appHeader></appHeader>\r\n\r\n    <div id=\"container\">\r\n        <span id=\"browse\">[Browse...]</span>\r\n        <span id=\"start-upload\">[Start Upload]</spam>\r\n\r\n    <router-view ></router-view>\r\n       </div>\r\n\r\n</div>";
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(31)
-	__vue_script__ = __webpack_require__(32)
-	__vue_template__ = __webpack_require__(33)
+	__webpack_require__(32)
+	__vue_script__ = __webpack_require__(33)
+	__vue_template__ = __webpack_require__(34)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -13424,13 +13472,13 @@
 	})()}
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13510,13 +13558,13 @@
 	// <script>
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"container\" transition=\"animate_routerview\">\r\n    <div class=\"login-form\">\r\n      <div class=\"login-flash\">What's your email address?</div>\r\n      <input type=\"text\" placeholder=\"Email\" v-model=\"user.username\"/>\r\n      <div class=\"login-flash\">What's your password</div>\r\n      <input type=\"password\" placeholder=\"Password\" v-model=\"user.password\"/>\r\n      <button type=\"button\" v-on:click=\"doLogin\">Go -></button>\r\n    </div>\r\n  </div>";
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
