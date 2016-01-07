@@ -43,7 +43,7 @@
 			currentTime: {
 				cached: true,
 				get: function(){
-					return new Date(this.now).toTimeString().split(' ')[0]
+					return new Date(this.now).toTimeString().split(' ')[0].replace(/\:\d{2}$/, '')
 				}
 			}
 		},
