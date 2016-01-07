@@ -19,7 +19,7 @@
       <home></home>
       <!-- <appHeader></appHeader> -->
       <router-view ></router-view>
-
+      <bar></bar>
   </div>
 </template>
 
@@ -30,6 +30,7 @@
   import TaskView from './task/index.vue';
   import HomeView from './home/home.vue';
   import AppHeaderView from './header/header.vue';
+  import BarView from './bar/navbar.vue';
 
 
 
@@ -49,6 +50,7 @@
     components: {
       home: HomeView,
       task: TaskView,
-      appheader: AppHeaderView
+      appheader: AppHeaderView,
+      bar: BarView;
     }
   }

@@ -36,7 +36,8 @@ module.exports = {
 			title: 'task inputer',
 			newTaskTitle: '',
 			fileList: [],
-			imageList: []
+			imageList: [],
+			uploader: null
 		}
 	},
 	filters: {
