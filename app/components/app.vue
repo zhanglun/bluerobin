@@ -1,6 +1,6 @@
 <style lang="sass">
 
- .wrapper{
+ .app{
   height: 100%;
  }
  .animate_routerview-transition{
@@ -16,7 +16,6 @@
 
 <template>
   <div class="app">
-      <home></home>
       <!-- <appHeader></appHeader> -->
       <router-view ></router-view>
       <bar></bar>
@@ -42,15 +41,13 @@
     },
     ready(){
       var uploader = Uploader();
-      // uploader.init();
       uploader.bind('FilesAdded', function() {
         console.log('hello man,a file is uploaded');
       });
     },
     components: {
-      home: HomeView,
       task: TaskView,
       appheader: AppHeaderView,
-      bar: BarView;
+      bar: BarView
     }
   }

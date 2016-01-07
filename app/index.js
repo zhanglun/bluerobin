@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+
 import App from './components/app.vue';
+import HomeView from './components/home/home.vue';
 import TaskView from './components/task/index.vue';
 import UserLogin from './components/user/login.vue';
 
@@ -18,11 +20,14 @@ router.map({
   },
   '/login': {
     component: UserLogin
+  },
+  '/home': {
+    component: HomeView
   }
 })
 
 router.redirect({
-  '*': '/task'
+  '*': '/home'
 })
 
 router.start(App, '#app')

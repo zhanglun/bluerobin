@@ -1,4 +1,4 @@
-.wrapper {
+.app {
   height: 100%; }
 
 .animate_routerview-transition {
@@ -168,11 +168,35 @@
     background: rgba(255, 255, 255, 0.8);
     font-family: '\5FAE\8F6F\96C5\9ED1';
     color: #6B6B6B; }
+.home {
+  height: 100%; }
+  .home .clock {
+    color: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); }
+    .home .clock > h1 {
+      display: inline-block;
+      font-size: 12em;
+      font-weight: lighter;
+      letter-spacing: -2px;
+      line-height: 0; }
 header{
   width: 100%;
   height:50px;
   background: rgba(255, 255, 255, 0.6);
- }.login-form {
+ }.app-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0; }
+  .app-bar-item {
+    width: 20px;
+    height: 20px; }
+.login-form {
   width: 400px;
   padding: 14px;
   box-sizing: box-sizing;
@@ -184,7 +208,7 @@ header{
     src:    url(/build/fonts/420f5892bb63ac34157abc7a1af3da70.eot#iefix) format('embedded-opentype'),
         url(/build/fonts/77b77d1cfb82a0191d3546184bfc5358.ttf) format('truetype'),
         url(/build/fonts/c6cd8a41ff76cce83f529254b986e00a.woff) format('woff'),
-        url(/build/fonts/8e232a8c715f915fb164609f7f58f223.svg#icomoon) format('svg');
+        url(/build/fonts/b4379e353f095da11c42c7972cd26df6.svg#icomoon) format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -226,16 +250,16 @@ header{
 @charset "UTF-8";
 html,
 body {
+  font-size: 10px;
   width: 100%;
   height: 100%;
-  font-size: 10px;
   margin: 0;
   padding: 0; }
 
 body {
+  font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', 宋体, 黑体, sans-serif;
   background: #eee url(/build/images/f39abc212ffc22b24b936998c2e783ab.jpg) fixed no-repeat center;
-  background-size: cover;
-  font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', 宋体, 黑体, sans-serif; }
+  background-size: cover; }
 
 h1,
 h2,
@@ -251,5 +275,18 @@ h2 {
   width: 100%;
   max-width: 960px;
   margin: 0 auto; }
+
+.box-center {
+  margin-right: auto;
+  margin-left: auto; }
+
+.text-center {
+  text-align: center; }
+
+.grid-12 {
+  width: 100%; }
+
+.grid-6 {
+  width: 50%; }
 
 /*# sourceMappingURL=style.bundle.css.map*/

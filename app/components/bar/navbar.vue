@@ -6,7 +6,6 @@
   &-item{
     width:20px;
     height:20px;
-
   }
 }
 
@@ -14,8 +13,11 @@
 
 <template>
   <div class="app-bar">
+  <div class="app-bar-item">
+    <a v-link="'home'">Home</a>
+  </div>
       <div class="app-bar-item">
-        aaa
+        <a v-link="'task'">Task</a> 
       </div>
   </div>
 </template>
