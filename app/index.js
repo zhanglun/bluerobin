@@ -31,7 +31,6 @@ router.start(App, '#app')
 var BlueRobin = new Vue({
   el: 'body',
   ready(){
-    console.log(11);
   },
   components: {
     app: App

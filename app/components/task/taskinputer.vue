@@ -45,7 +45,7 @@ module.exports = {
 		}
 	},
 	ready(){
-
+		this.$set('uploader', Uploader());
 	},
 	methods: {
 		createTask: function(){
@@ -62,7 +62,7 @@ module.exports = {
 
 		upload(e){
 			var _this = this;
-			var uploader = Uploader();
+			var uploader = _this.uploader
 			var items = e.clipboardData && e.clipboardData.items;
 			if(items && items.length){
 				for(var i=0; i<items.length; i++){
