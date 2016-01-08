@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 import App from './components/app.vue';
 import HomeView from './components/home/home.vue';
-import TaskView from './components/task/index.vue';
+import TaskView from './components/task/task.vue';
 import UserLogin from './components/user/login.vue';
 
 require('./public/stylesheets/base.scss');

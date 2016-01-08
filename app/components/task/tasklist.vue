@@ -6,15 +6,17 @@
 </style>
 
 <template>
-	<div class="task-list">
-		<task v-for="task in tasklist" :task="task" :index="$index"></task>
+	<div class="task-list nicescroll">
+		<div class="nicescroll-inner">
+			<taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
+		</div>
 	</div>
 </template>
 
 <script>
 // http://zhanglun.daoapp.io/api/todo/tasks
 	import Proxy from '../../services/proxy.babel.js';
-	import Task from './task.vue';
+	import TaskItemView from './taskItem.vue';
 
 	export default {
 		data() {
@@ -23,7 +25,7 @@
 			}
 		},
 		components: {
-			task: Task
+			taskitem: TaskItemView
 		},
 		ready() {
 			this.getTaskList();

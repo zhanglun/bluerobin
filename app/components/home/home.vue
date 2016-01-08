@@ -2,6 +2,7 @@
 	.home{
 		height:100%;
 		.clock{
+		  -webkit-user-select: none;
 			color: rgba(255, 255,255, 0.8);
 			position: absolute;
 			width: 100%;
@@ -11,7 +12,7 @@
 			transform: translate(-50%,-50%);
 			&>h1{
 				display: inline-block;
-				font-size: 12em;
+				font-size: 15em;
 				font-weight: lighter;
 				letter-spacing: -2px;
 				line-height: 0;
@@ -24,7 +25,7 @@
 
 <template>
 	<div class="home">
-			<div class="clock" v-if="currentTime !== 'Invalid'">
+			<div class="clock">
 				<h1 class="time" v-text="currentTime">
 					13:40
 				</h1>
@@ -48,10 +49,11 @@
 			}
 		},
 		ready(){
-			console.log('Welcome to BlueRobin %s', this.currentTime);
 			var _this = this;
+	    _this.$data.now = Date.now();
+			console.log('Welcome to BlueRobin %s', this.currentTime);
       setInterval(function () {
-         _this.$data.now = Date.now()
+        _this.$data.now = Date.now()
       }, 1000)
 		},
 	};

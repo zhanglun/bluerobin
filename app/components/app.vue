@@ -2,6 +2,11 @@
 
  .app{
   height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
  }
  .animate_routerview-transition{
   transition: all 0.4s ease;
@@ -26,7 +31,7 @@
 <script>
   import Common from '../public/javascripts/common.babel.js';
   import Uploader from '../services/upload.babel.js';
-  import TaskView from './task/index.vue';
+  import TaskView from './task/task.vue';
   import HomeView from './home/home.vue';
   import AppHeaderView from './header/header.vue';
   import BarView from './bar/navbar.vue';
@@ -40,10 +45,6 @@
       }
     },
     ready(){
-      var uploader = Uploader();
-      uploader.bind('FilesAdded', function() {
-        console.log('hello man,a file is uploaded');
-      });
     },
     components: {
       task: TaskView,
