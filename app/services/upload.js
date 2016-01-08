@@ -61,7 +61,7 @@ function uploadrInit(opt) {
                 // 该配置必须要在 unique_names: false , save_key: false 时才生效
                 // var key = "";
                 // do something with key here
-                // return file.name;
+                return file.name;
             }
         }
     });

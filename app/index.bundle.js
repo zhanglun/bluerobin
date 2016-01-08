@@ -12335,6 +12335,7 @@
 	// var root = 'http://zhanglun.daoapp.io/api';
 	
 	function JSON2FormData(json) {
+	
 	  var str = "";
 	  for (var key in json) {
 	    if (str != "") {
@@ -13413,7 +13414,6 @@
 	
 				this.newTaskTitle = '';
 			},
-	
 			upload: function upload(e) {
 				var _this = this;
 				var newFiles = [];
@@ -13437,8 +13437,15 @@
 				uploader.bind('PostInit', function () {
 					uploader.addFile(newFiles);
 				});
-				uploader.bind('FileUploaded', function () {
-					console.log(arguments);
+				uploader.bind('FileUploaded', function (up, file, res) {
+					_this.attachments.push({
+						name: file.name,
+						url: file.key,
+						size: file.size,
+						width: file.width,
+						height: file.height,
+						type: file.type
+					});
 				});
 			}
 		}

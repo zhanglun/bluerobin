@@ -93,7 +93,7 @@ module.exports = {
 	},
 
 	methods: {
-		createTask: function(){
+		createTask(){
 			if(!this.newTaskTitle){
 				return false;
 			}
@@ -129,10 +129,16 @@ module.exports = {
     	uploader.bind('PostInit', function(){
     			uploader.addFile(newFiles);
     	});
-    	uploader.bind('FileUploaded', function(){
-    		console.log(arguments);
+    	uploader.bind('FileUploaded', function(up, file, res){
+    		_this.attachments.push({
+    			name: file.name,
+    			url: file.key,
+    			size: file.size,
+    			width: file.width,
+    			height: file.height,
+    			type: file.type
+    		});
     	});
-
 		}
 	}
 

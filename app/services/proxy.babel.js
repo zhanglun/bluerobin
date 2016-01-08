@@ -3,6 +3,7 @@ var root = 'http://localhost:1234/api';
 // var root = 'http://zhanglun.daoapp.io/api';
 
 function JSON2FormData(json) {
+
   var str = "";
   for (var key in json) {
     if (str != "") {
