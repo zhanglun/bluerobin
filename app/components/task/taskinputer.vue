@@ -104,6 +104,7 @@ module.exports = {
 				});
 
 			this.newTaskTitle = '';
+			this.attachments = [];
 		},
 
 		upload(e){
