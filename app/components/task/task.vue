@@ -3,6 +3,7 @@
 		max-width:660px;
 		min-width: 500px;
 		margin: 80px auto;
+		height: 65%;
 		box-sizing: border-box;
 	}
 </style>

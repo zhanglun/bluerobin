@@ -4,10 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 // var root = 'http://jsonplaceholder.typicode.com';
-var root = 'http://localhost:1234/api';
-// var root = 'http://zhanglun.daoapp.io/api';
+// var root = 'http://localhost:1234/api';
+var root = 'http://zhanglun.daoapp.io/api';
 
 function JSON2FormData(json) {
+
   var str = "";
   for (var key in json) {
     if (str != "") {

@@ -1,4 +1,6 @@
 @import '../fonts/style.css';
+@import './variables';
+
 html,
 body {
   font-size: 10px;
@@ -72,7 +74,7 @@ input{
 
 .nicescroll{
   overflow: hidden;
-  width: 100%;
+  width: 102%;
   height: 100%;
   &-inner{
     width: 100%;

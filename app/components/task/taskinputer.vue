@@ -1,8 +1,10 @@
 <style lang="sass">
+@import '../../public/stylesheets/variables';
+
 	.task-inputer{
 		box-sizing: border-box;
 		width:100%;
-	  background: rgba(255, 255, 255, 0.8);
+		background: $white;
 		&-bar{
 			overflow: hidden;
 		  padding: 8px 8px;
@@ -20,7 +22,6 @@
 	    font-size: 14px;
 	    outline: none;
 	    border:none ;
-		  // background: rgba(255, 255, 255, 0.8);
 		  background: none;
 		  font-family: '微软雅黑';
 		  color: #6B6B6B;
@@ -29,7 +30,7 @@
 	.task-images{
 		padding:0 4px;
 		width:100%;
-	  background: rgba(255, 255, 255, 0.8);
+		background: $white;
 	  box-sizing: border-box;
 		>div{
 			box-sizing: border-box;

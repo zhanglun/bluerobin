@@ -1,5 +1,7 @@
 <style lang="sass">
 
+@import '../../public/stylesheets/variables';
+
 .flex-box{
   display: -webkit-flex;
   display: flex;
@@ -39,7 +41,7 @@ $editbox-height: 34px;
   // border: 1px solid #e8e8e8;
   font-size: 14px;
   color: #343434;
-  background: rgba(255, 255, 255, 0.8);
+  background: $white;
 
   /*transition: all 3.3s ease;*/
 

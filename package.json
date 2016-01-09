@@ -5,6 +5,7 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "pure": "^2.67.0",
+    "request": "^2.67.0",
     "vue": "^1.0.12",
     "vue-router": "^0.7.7"
   },

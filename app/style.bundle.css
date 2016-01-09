@@ -19,12 +19,22 @@
   max-width: 660px;
   min-width: 500px;
   margin: 80px auto;
+  height: 65%;
   box-sizing: border-box; }
 .task-list {
   margin-top: 14px;
   -webkit-transform: perspective(1000px);
           transform: perspective(1000px); }
 @charset "UTF-8";
+/* ====================================================== */
+/* Variables
+/* ====================================================== */
+/**
+ * gird
+ */
+.gird-12 {
+  width: 100%; }
+
 .flex-box, .task-item {
   display: -webkit-flex;
   display: -webkit-box;
@@ -60,7 +70,7 @@
   box-sizing: border-box;
   font-size: 14px;
   color: #343434;
-  background: rgba(255, 255, 255, 0.8);
+  background: #fff;
   /*transition: all 3.3s ease;*/ }
   .task-item .task-check, .task-item .task-actions {
     -webkit-flex: 0 1 auto;
@@ -157,10 +167,19 @@
   border: 0;
   /*transform: rotateX(0deg);*/ }
 @charset "UTF-8";
+/* ====================================================== */
+/* Variables
+/* ====================================================== */
+/**
+ * gird
+ */
+.gird-12 {
+  width: 100%; }
+
 .task-inputer {
   box-sizing: border-box;
   width: 100%;
-  background: rgba(255, 255, 255, 0.8); }
+  background: #fff; }
   .task-inputer-bar {
     overflow: hidden;
     padding: 8px 8px; }
@@ -183,7 +202,7 @@
 .task-images {
   padding: 0 4px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.8);
+  background: #fff;
   box-sizing: border-box; }
   .task-images > div {
     box-sizing: border-box;
@@ -1740,6 +1759,15 @@ header{
 }
 
 @charset "UTF-8";
+/* ====================================================== */
+/* Variables
+/* ====================================================== */
+/**
+ * gird
+ */
+.gird-12 {
+  width: 100%; }
+
 html,
 body {
   font-size: 10px;
@@ -1795,7 +1823,7 @@ input {
 
 .nicescroll {
   overflow: hidden;
-  width: 100%;
+  width: 102%;
   height: 100%; }
   .nicescroll-inner {
     width: 100%;
