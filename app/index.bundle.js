@@ -12991,11 +12991,8 @@
 	//   transform: rotateX(180deg);
 	// }
 	// .animation_showtask-leave{
-	//   /*height:0;*/
-	//   padding-top:0;
-	//   padding-bottom:0;
-	//   border:0;
-	//   /*transform: rotateX(0deg);*/
+	//   transition: all 0.3s ease;
+	//   transform: translateX(-100%);
 	// }
 	
 	// </style>
