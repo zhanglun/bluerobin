@@ -14,7 +14,7 @@ body {
   min-height: 100%;
   overflow: hidden;
   font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', 宋体, 黑体, sans-serif;
-  background: #eee url('../images/bg3.jpg') fixed no-repeat center;
+  background: #eee url('../images/bg7.jpg') fixed no-repeat center;
   background-size: cover;
 }
 
@@ -72,14 +72,26 @@ input{
   // background: rgba(0,0,0,0.6)
 }
 
-.nicescroll{
-  overflow: hidden;
-  width: 102%;
-  height: 100%;
-  &-inner{
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    padding-right: 35px; /* Increase this value for cross-browser compatibility */
-  }
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(31,27,27,0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(255,0,0,0.4);
 }

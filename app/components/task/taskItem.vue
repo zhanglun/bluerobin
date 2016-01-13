@@ -35,7 +35,6 @@ $editbox-height: 34px;
   @extend .flex-box;
   height: $editbox-height + 10;
   line-height: $editbox-height;
-	margin-top: 2px;
 	padding: 4px 10px;
   box-sizing: border-box;
   // border: 1px solid #e8e8e8;
@@ -44,7 +43,9 @@ $editbox-height: 34px;
   background: $white;
 
   /*transition: all 3.3s ease;*/
-
+  & + &{
+    margin-top: 2px;
+  }
   .task-check, .task-actions{
     -webkit-flex: 0 1 auto;
     flex: 0 1 auto;

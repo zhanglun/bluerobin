@@ -1,16 +1,21 @@
 <style lang="sass">
+.task-list-container{
+	height: 100%;
+	box-sizing: border-box;
+	margin-top: 15px;
+	overflow: auto;
+}
 .task-list{
-	margin-top:14px;
  	transform: perspective(1000px);
 }
 </style>
 
 <template>
-	<div class="task-list nicescroll">
-		<div class="nicescroll-inner">
-			<taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
-		</div>
+<div class="task-list-container">
+	<div class="task-list">
+		<taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
 	</div>
+</div>
 </template>
 
 <script>
