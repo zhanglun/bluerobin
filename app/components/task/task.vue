@@ -13,6 +13,7 @@
 	  <taskinputer></taskinputer>
 	  <tasklist></tasklist>
   </div>
+  <taskModal></taskModal>
 </template>
 
 <script>
@@ -20,6 +21,7 @@
 	import Vue from 'vue';
 	import TaskList from './taskList.vue';
 	import TaskInputer from './taskInputer.vue';
+	import TaskModal from './taskModal.vue';
 
 
 	module.exports = {
@@ -33,7 +35,8 @@
 
 	  components: {
 	    tasklist: TaskList,
-	    taskinputer: TaskInputer
+	    taskinputer: TaskInputer,
+	    taskmodal: TaskModal
 	  },
 
 	  ready: function(){

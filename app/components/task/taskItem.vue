@@ -71,6 +71,12 @@ $editbox-height: 34px;
 	    }
   	}
   }
+  &.expaned{
+    transform: rotateX(100deg);
+  }
+  &.visiable{
+    visibility: hidden;
+  }
   &:hover {
     .task-actions {
       display: block;
@@ -171,7 +177,7 @@ $editbox-height: 34px;
 </style>
 
 <template>
-  <div class="task-item" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}">
+  <div class="task-item" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
   	<div class="task-checker">
   		<input type="checkbox" v-on:change = "toggleTask(task)" :checked="task.completed">
   	</div>
@@ -180,6 +186,7 @@ $editbox-height: 34px;
       <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
     </div>
     <div class="task-actions">
+      <span v-on:click="expandBroad(task)" class="icon-grin"></span>
 	    <span v-on:click="deleteTask(task)" class="icon-bin"></span>
   	</div>
   </div>
@@ -194,7 +201,8 @@ module.exports = {
   data: function(){
   	return {
   		editing: false,
-  		taskEditing: null
+  		taskEditing: null,
+      taskExpanding: null
   	}
   },
   ready: function(){
@@ -236,6 +244,12 @@ module.exports = {
       }
       this.taskEditing = null;
       this.$dispatch('edit task', task);
+    },
+
+    expandBroad(task){
+      this.taskExpanding = null;
+      this.taskExpanding = task;
+      console.log(this.taskExpanding);
     }
   }
 
