@@ -528,10 +528,18 @@
 			}
 		},
 		{
+			"file": "app/services/proxy.babel.js",
+			"settings":
+			{
+				"buffer_size": 2743,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "app/components/task/taskItem.vue",
 			"settings":
 			{
-				"buffer_size": 4763,
+				"buffer_size": 4816,
 				"line_ending": "Windows"
 			}
 		},
@@ -543,6 +551,22 @@
 				"line_ending": "Windows",
 				"name": "Evernote: Webpack记录：",
 				"scratch": true
+			}
+		},
+		{
+			"file": "app/components/task/taskModal.vue",
+			"settings":
+			{
+				"buffer_size": 1987,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/components/task/task.vue",
+			"settings":
+			{
+				"buffer_size": 1204,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -577,21 +601,29 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 90.0,
-		"last_filter": "setvue",
+		"height": 180.0,
+		"last_filter": "install",
 		"selected_items":
 		[
 			[
-				"setvue",
-				"Set Syntax: Vue Component"
+				"install",
+				"Package Control: Install Package"
 			],
 			[
 				"set vue",
 				"Set Syntax: Vue Component"
 			],
 			[
+				"pack",
+				"Package Control: List Packages"
+			],
+			[
 				"install ",
 				"Package Control: Install Package"
+			],
+			[
+				"setvue",
+				"Set Syntax: Vue Component"
 			],
 			[
 				"set scss",
@@ -600,10 +632,6 @@
 			[
 				"evern li",
 				"Evernote: List recent notes"
-			],
-			[
-				"install",
-				"Package Control: Install Package"
 			],
 			[
 				"Evernote",
@@ -716,10 +744,6 @@
 			[
 				"gut",
 				"GutterColor: Fix Current Color Scheme"
-			],
-			[
-				"pack",
-				"Package Control: List Packages"
 			],
 			[
 				"utf",
@@ -974,7 +998,7 @@
 				"Preferences: Settings - User"
 			]
 		],
-		"width": 382.0
+		"width": 494.0
 	},
 	"console":
 	{
@@ -995,10 +1019,18 @@
 	},
 	"expanded_folders":
 	[
-		"/E/Code/bluerobin"
+		"/E/Code/bluerobin",
+		"/E/Code/bluerobin/app",
+		"/E/Code/bluerobin/app/components",
+		"/E/Code/bluerobin/app/components/task",
+		"/E/Code/bluerobin/app/services"
 	],
 	"file_history":
 	[
+		"/E/Code/bluerobin/app/components/app.vue",
+		"/E/Code/bluerobin/app/services/upload.babel.js",
+		"/E/Code/bluerobin/app/index.bundle.js",
+		"/E/Code/bluerobin/app/components/task/task.vue",
 		"/E/Code/bluerobin/app/public/stylesheets/base.scss",
 		"/E/Code/bluerobin/app/extension/contentscript.js",
 		"/D/Code/bluerobin/app/components/task/taskItem.vue",
@@ -1122,11 +1154,7 @@
 		"/D/Code/CodeJourney/todolist/app/main.scss",
 		"/D/Code/CodeJourney/todolist/app/variables.scss",
 		"/D/Code/CodeJourney/todolist/app/sub.js",
-		"/D/MingDao/MDNode/MD.SecretaryWeb/app/middlewares/handler.js",
-		"/D/MingDao/MDNode/MD.SecretaryWeb/app/controllers/home.js",
-		"/D/MingDao/MDNode/MD.SecretaryWeb/app/controllers/api.js",
-		"/D/MingDao/MDNode/MD.Offical/app/controllers/offical_info.js",
-		"/D/MingDao/MDNode/MD.Offical/app/controllers/offical_handler.js"
+		"/D/MingDao/MDNode/MD.SecretaryWeb/app/middlewares/handler.js"
 	],
 	"find":
 	{
@@ -1137,6 +1165,7 @@
 		"height": 161.0,
 		"where_history":
 		[
+			"",
 			"aap/components",
 			"components",
 			""
@@ -1147,6 +1176,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"h1",
+			"qiniu/token",
 			"JS%20%E4%B8%AD%20%E7%9A%84Promise%20",
 			"taskitem",
 			"template",
@@ -1272,9 +1303,7 @@
 			"getWordCollection",
 			"getYourResult",
 			"[^(0-9])]",
-			"'",
-			"getWordCollection",
-			"^i[a-z]e$"
+			"'"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1292,7 +1321,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1308,8 +1337,8 @@
 						"selection":
 						[
 							[
-								362,
-								362
+								1235,
+								1235
 							]
 						],
 						"settings":
@@ -1375,30 +1404,61 @@
 							],
 							"origin_encoding": "UTF-8",
 							"syntax": "Packages/Vue Syntax Highlight/vue.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 60.0,
+						"translation.y": 1080.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "app/components/task/taskItem.vue",
+					"file": "app/services/proxy.babel.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4763,
+						"buffer_size": 2743,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3575,
-								3575
+								1868,
+								1868
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1380.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/components/task/taskItem.vue",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4816,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4669,
+								4669
 							]
 						],
 						"settings":
@@ -1408,20 +1468,20 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3637.0,
+						"translation.y": 4615.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"semi_transient": false,
 					"settings":
 					{
@@ -1445,10 +1505,70 @@
 							"syntax": "Packages/Evernote/Evernote.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1280.0,
+						"translation.y": 1340.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/components/task/taskModal.vue",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1987,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1222,
+								1222
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Vue Syntax Highlight/vue.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1200.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/components/task/task.vue",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1204,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								281,
+								281
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Vue Syntax Highlight/vue.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1517,6 +1637,10 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"prxoy",
+				"bluerobin\\app\\services\\proxy.babel.js"
+			],
 			[
 				"taski",
 				"bluerobin\\app\\components\\task\\taskItem.vue"
@@ -1958,14 +2082,14 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
 	"show_minimap": true,
 	"show_open_files": true,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 236.0,
 	"status_bar_visible": true,
 	"template_settings":

@@ -82,6 +82,7 @@ module.exports = {
 			fileList: [],
 			imageList: [],
 			uploader: null,
+      newFile: null,
 			attachments: []
 		}
 	},
@@ -91,6 +92,23 @@ module.exports = {
 		}
 	},
 	ready(){
+    var _this = this;
+		this.$set('uploader', Uploader({
+			container: 'taskWriter'
+		}));
+    this.uploader.bind('PostInit', function(){
+      _this.uploader.addFile(_this.newFile);
+    });
+    this.uploader.bind('FileUploaded', function(up, file, res){
+      _this.attachments.push({
+        name: file.name,
+        url: file.key,
+        size: file.size,
+        width: file.width,
+        height: file.height,
+        type: file.type
+      });
+    });
 	},
 
 	methods: {
@@ -110,11 +128,6 @@ module.exports = {
 
 		upload(e){
 			var _this = this;
-			var newFiles = [];
-			_this.$set('uploader', Uploader({
-				container: 'taskWriter'
-			}));
-			var uploader = _this.uploader;
 			var items = e.clipboardData && e.clipboardData.items;
 			if(items && items.length){
 				for(var i=0; i<items.length; i++){
@@ -122,25 +135,12 @@ module.exports = {
 					if (file) {
 						file.name = guid() + '.' + file.type.replace(/^\w*\//ig, '');
 						_this.fileList.push(file);
-						newFiles.push(file);
+						_this.newFile = file;
 						_this.imageList.push(URL.createObjectURL(file));
 					}
 				}
 			}
 
-    	uploader.bind('PostInit', function(){
-    			uploader.addFile(newFiles);
-    	});
-    	uploader.bind('FileUploaded', function(up, file, res){
-    		_this.attachments.push({
-    			name: file.name,
-    			url: file.key,
-    			size: file.size,
-    			width: file.width,
-    			height: file.height,
-    			type: file.type
-    		});
-    	});
 		}
 	}
 

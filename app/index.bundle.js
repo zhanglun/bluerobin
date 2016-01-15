@@ -12617,7 +12617,7 @@
 	
 	//   </div>
 	
-	//   <taskModal></taskModal>
+	//   <taskModal :task = "taskOpened"></taskModal>
 	
 	// </template>
 	
@@ -12628,7 +12628,8 @@
 		data: function data() {
 			return {
 				value: '',
-				taskList: _taskList2.default
+				taskList: _taskList2.default,
+				taskOpened: null
 			};
 		},
 	
@@ -12652,10 +12653,12 @@
 				this.$broadcast('edit task', task);
 			},
 			'open task': function openTask(task) {
-				this.$broadcast('open task', task);
+				this.taskOpened = task;
+				// this.$broadcast('open task', task);
 			},
 			'packup task': function packupTask(task) {
-				this.$broadcast('packup task', task);
+				this.taskOpened = null;
+				// this.$broadcast('packup task', task);
 			}
 		}
 	};
@@ -13436,6 +13439,7 @@
 				fileList: [],
 				imageList: [],
 				uploader: null,
+				newFile: null,
 				attachments: []
 			};
 		},
@@ -13445,7 +13449,25 @@
 				return URL.createObjectURL(blob);
 			}
 		},
-		ready: function ready() {},
+		ready: function ready() {
+			var _this = this;
+			this.$set('uploader', (0, _uploadBabel2.default)({
+				container: 'taskWriter'
+			}));
+			this.uploader.bind('PostInit', function () {
+				_this.uploader.addFile(_this.newFile);
+			});
+			this.uploader.bind('FileUploaded', function (up, file, res) {
+				_this.attachments.push({
+					name: file.name,
+					url: file.key,
+					size: file.size,
+					width: file.width,
+					height: file.height,
+					type: file.type
+				});
+			});
+		},
 	
 		methods: {
 			createTask: function createTask() {
@@ -13463,11 +13485,6 @@
 			},
 			upload: function upload(e) {
 				var _this = this;
-				var newFiles = [];
-				_this.$set('uploader', (0, _uploadBabel2.default)({
-					container: 'taskWriter'
-				}));
-				var uploader = _this.uploader;
 				var items = e.clipboardData && e.clipboardData.items;
 				if (items && items.length) {
 					for (var i = 0; i < items.length; i++) {
@@ -13475,25 +13492,11 @@
 						if (file) {
 							file.name = guid() + '.' + file.type.replace(/^\w*\//ig, '');
 							_this.fileList.push(file);
-							newFiles.push(file);
+							_this.newFile = file;
 							_this.imageList.push(URL.createObjectURL(file));
 						}
 					}
 				}
-	
-				uploader.bind('PostInit', function () {
-					uploader.addFile(newFiles);
-				});
-				uploader.bind('FileUploaded', function (up, file, res) {
-					_this.attachments.push({
-						name: file.name,
-						url: file.key,
-						size: file.size,
-						width: file.width,
-						height: file.height,
-						type: file.type
-					});
-				});
 			}
 		}
 	
@@ -13617,22 +13620,6 @@
 	
 	// }
 	
-	// /*
-	
-	//  * the following styles are auto-applied to elements with
-	
-	//  * v-transition="modal" when their visiblity is toggled
-	
-	//  * by Vue.js.
-	
-	//  *
-	
-	//  * You can easily play with the modal transition by editing
-	
-	//  * these styles.
-	
-	//  */
-	
 	// .modal-enter, .modal-leave {
 	
 	//   opacity: 0;
@@ -13695,9 +13682,9 @@
 	
 	// <script>
 	exports.default = {
+	  props: ['task'],
 	  data: function data() {
 	    return {
-	      task: null,
 	      show: false
 	    };
 	  },
@@ -13705,13 +13692,11 @@
 	  methods: {
 	    packupTask: function packupTask() {
 	      this.$dispatch('packup task', this.task);
-	      this.task = null;
 	      this.show = false;
 	    }
 	  },
 	  events: {
 	    'open task': function openTask(task) {
-	      this.task = task;
 	      this.show = true;
 	    }
 	  }
@@ -13729,7 +13714,7 @@
 /* 29 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"task-container\" transition=\"animate_routerview\">\r\n\t  <taskinputer></taskinputer>\r\n\t  <tasklist></tasklist>\r\n  </div>\r\n  <taskModal></taskModal>";
+	module.exports = "<div class=\"task-container\" transition=\"animate_routerview\">\r\n\t  <taskinputer></taskinputer>\r\n\t  <tasklist></tasklist>\r\n  </div>\r\n  <taskModal :task = \"taskOpened\"></taskModal>";
 
 /***/ },
 /* 30 */

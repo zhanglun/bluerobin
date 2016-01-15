@@ -13,7 +13,7 @@
 	  <taskinputer></taskinputer>
 	  <tasklist></tasklist>
   </div>
-  <taskModal></taskModal>
+  <taskModal :task = "taskOpened"></taskModal>
 </template>
 
 <script>
@@ -29,7 +29,8 @@
 	  data: function(){
 	  	return {
 		  	value: '',
-		  	taskList: TaskList
+		  	taskList: TaskList,
+        taskOpened: null,
 	  	}
 	  },
 
@@ -56,10 +57,12 @@
 	  		this.$broadcast('edit task', task);
 	  	},
 	  	'open task': function(task){
-	  		this.$broadcast('open task', task);
+        this.taskOpened = task;
+	  		// this.$broadcast('open task', task);
 	  	},
 	  	'packup task': function(task){
-	  		this.$broadcast('packup task', task);
+        this.taskOpened = null;
+	  		// this.$broadcast('packup task', task);
 	  	}
 	  }
 	};

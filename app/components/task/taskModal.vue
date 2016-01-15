@@ -40,15 +40,6 @@
   float: right;
 }
 
-/*
- * the following styles are auto-applied to elements with
- * v-transition="modal" when their visiblity is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
-
 .modal-enter, .modal-leave {
   opacity: 0;
 }
@@ -87,9 +78,9 @@
 
 <script>
 	export default{
+    props: ['task'],
 		data(){
       return {
-        task: null,
         show: false
       }
       
@@ -97,13 +88,11 @@
     methods: {
       packupTask(){
         this.$dispatch('packup task', this.task);
-        this.task = null;
         this.show = false;
       }
     },
     events: {
       'open task'(task){
-        this.task = task;
         this.show = true;
       }
     }
