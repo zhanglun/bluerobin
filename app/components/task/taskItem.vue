@@ -37,7 +37,6 @@ $editbox-height: 34px;
   line-height: $editbox-height;
 	padding: 4px 10px;
   box-sizing: border-box;
-  // border: 1px solid #e8e8e8;
   font-size: 14px;
   color: #343434;
   background: $white;
@@ -53,6 +52,7 @@ $editbox-height: 34px;
   .task-content{
     -webkit-flex: 1 1 auto;
     flex: 1 1 auto;
+      overflow: hidden;
   }
   &.finished {
     .task-content {
@@ -247,9 +247,13 @@ module.exports = {
     },
 
     expandBroad(task){
+      // this.taskExpanding = task;
+      this.$dispatch('open task', task);
+    }
+  },
+  events: {
+    'packup task'(task){
       this.taskExpanding = null;
-      this.taskExpanding = task;
-      console.log(this.taskExpanding);
     }
   }
 

@@ -19,7 +19,6 @@
 </template>
 
 <script>
-// http://zhanglun.daoapp.io/api/todo/tasks
 	import Proxy from '../../services/proxy.babel.js';
 	import TaskItemView from './taskItem.vue';
 

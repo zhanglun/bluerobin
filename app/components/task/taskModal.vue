@@ -1,4 +1,4 @@
-<style lang="sass">
+<style>
 	.modal-mask {
   position: fixed;
   z-index: 9998;
@@ -66,25 +66,19 @@
       <div class="modal-container">
 
         <div class="modal-header">
-          <slot name="header">
-            default header
-          </slot>
+            <h1>{{task.title}}</h1>
         </div>
         
         <div class="modal-body">
-          <slot name="body">
             default body
-          </slot>
         </div>
 
         <div class="modal-footer">
-          <slot name="footer">
             default footer
             <button class="modal-default-button"
-              @click="show = false">
+              @click="packupTask">
               OK
             </button>
-          </slot>
         </div>
       </div>
     </div>
@@ -93,7 +87,26 @@
 
 <script>
 	export default{
-		data(){},
+		data(){
+      return {
+        task: null,
+        show: false
+      }
+      
+    },
+    methods: {
+      packupTask(){
+        this.$dispatch('packup task', this.task);
+        this.task = null;
+        this.show = false;
+      }
+    },
+    events: {
+      'open task'(task){
+        this.task = task;
+        this.show = true;
+      }
+    }
 
 	}
 </script>
