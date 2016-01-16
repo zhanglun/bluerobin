@@ -22,10 +22,8 @@
   height: 65%;
   box-sizing: border-box; }
 .task-list-container {
-  height: 100%;
   box-sizing: border-box;
-  margin-top: 15px;
-  overflow: auto; }
+  margin-top: 15px; }
 
 .task-list {
   -webkit-transform: perspective(1000px);
@@ -1840,7 +1838,6 @@ body {
 
 body {
   min-height: 100%;
-  overflow: hidden;
   font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', 宋体, 黑体, sans-serif;
   background: #eee url(/build/images/6407249ad272a8878c2ea3517f16c060.jpg) fixed no-repeat center;
   background-size: cover; }

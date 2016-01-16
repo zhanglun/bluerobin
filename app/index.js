@@ -27,7 +27,7 @@ router.map({
 })
 
 router.redirect({
-  '*': '/home'
+  '*': '/task'
 })
 
 router.start(App, '#app')

@@ -23,7 +23,7 @@
   <div class="app">
       <!-- <appHeader></appHeader> -->
       <router-view ></router-view>
-      <bar></bar>
+      <!-- <bar></bar> -->
   </div>
 </template>
 

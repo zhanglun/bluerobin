@@ -1,9 +1,7 @@
 <style lang="sass">
 .task-list-container{
-	height: 100%;
 	box-sizing: border-box;
 	margin-top: 15px;
-	overflow: auto;
 }
 .task-list{
  	transform: perspective(1000px);
