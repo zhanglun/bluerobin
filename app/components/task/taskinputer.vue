@@ -7,24 +7,26 @@
 		background: $white;
 		&-bar{
 			overflow: hidden;
-		  padding: 8px 8px;
+		  padding: 8px;
 		  >.icon-*{
 		  	display: inline-block;
 		  	margin:0 6px;
 		  }
 		}
-		>input{
+		>textarea{
 	    width: 100%;
 	    box-sizing: border-box;
 	    display: block;
 	    height: 40px;
-		  padding: 0 8px;
+		  padding: 8px;
 	    font-size: 14px;
 	    outline: none;
 	    border:none ;
 		  background: none;
 		  font-family: '微软雅黑';
 		  color: #6B6B6B;
+		  outline: none;
+		  resize:none;
 		}
 	}
 	.task-images{
@@ -48,7 +50,7 @@
 
 <template>
 	<div class="task-inputer" id="taskWriter">
-		<input type="text" v-model="newTaskTitle" id="taskInputer" v-on:keyup.enter="createTask" placeholder="What is your focus today..." v-on:paste="upload($event)" />
+		<textarea type="text" v-model="newTaskTitle" id="taskInputer" v-on:keyup.enter="createTask" placeholder="What is your focus today..." v-on:paste="upload($event)" ></textarea>
 		<div class="task-inputer-bar">
 			<span id="browse" class="icon-images"></span>
 		</div>
@@ -74,7 +76,7 @@ function guid() {
     s4() + '-' + s4() + s4() + s4();
 }
 
-module.exports = {
+export default {
 	data(){
 		return {
 			title: 'task inputer',

@@ -191,22 +191,24 @@
   background: #fff; }
   .task-inputer-bar {
     overflow: hidden;
-    padding: 8px 8px; }
+    padding: 8px; }
     .task-inputer-bar > .icon-* {
       display: inline-block;
       margin: 0 6px; }
-  .task-inputer > input {
+  .task-inputer > textarea {
     width: 100%;
     box-sizing: border-box;
     display: block;
     height: 40px;
-    padding: 0 8px;
+    padding: 8px;
     font-size: 14px;
     outline: none;
     border: none;
     background: none;
     font-family: '\5FAE\8F6F\96C5\9ED1';
-    color: #6B6B6B; }
+    color: #6B6B6B;
+    outline: none;
+    resize: none; }
 
 .task-images {
   padding: 0 4px;

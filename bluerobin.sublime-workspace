@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"task",
+				"taskOpened"
+			],
+			[
 				"tra",
 				"transform"
 			],
@@ -62,10 +66,6 @@
 			[
 				"Local",
 				"localStrategy"
-			],
-			[
-				"task",
-				"tasklist"
 			],
 			[
 				"bui",
@@ -520,53 +520,20 @@
 	"buffers":
 	[
 		{
-			"file": "app/components/task/taskList.vue",
+			"file": "package.json",
 			"settings":
 			{
-				"buffer_size": 1418,
-				"line_ending": "Windows"
+				"buffer_size": 1021,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/services/proxy.babel.js",
+			"contents": "\"op\": \"GetCardDetail\"\n\"post\": \"d774a618-cf10-4bf5-8f10-a6ce969ebdc9\"\n\"task\": \"c14ad72b-bc65-4bb3-8533-be515f52e6f4\"\n\"vote\": \"4e78f500-0275-44aa-975c-4642f5fde760\"\n\"calendar\": \"0E85AB5E-C38F-4D3F-8E28-85A0AA0174C7\"",
 			"settings":
 			{
-				"buffer_size": 2743,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/components/task/taskItem.vue",
-			"settings":
-			{
-				"buffer_size": 4816,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "---\ntitle: Webpack记录：\ntags: []\nnotebook: Study\n---\n\n### Extract-text-webpacl-plugin 的使用\n\n**输出CSS**\n\n1. 在module中配置css的loader\n\n```js\n{\n  test: /\\.css$|\\.scss$/,\n  loader: ExtractTextPlugin.extract(['css-loader?sourceMap', 'sass-loader']),\n}\n\n2. 在plugin的数组中添加\n\n```js\nplugin: [\n    new ExtractTextPlugin('style.bundle.css')\n]\n```\n\n此时，抽离出来的CSS会放在配置中`output.path`对应的目录下。\n\n\n**自定义输出路径**\n\n\nplugin中的输出文件名修改输出的路径\n\n\n```js\n'style.bundle.css' -> [output.path] + 'style.bundle.css'\n\n'./css/style.bundle.css' -> [output.path] + './css/style.bundle.css' -> 输出到output.path的css文件夹中\n\n'./../style.bundle.css' -> [output.path] + './../style.bundle.css' -> 输出到output.path的同级目录中\n\n'./../style.bundle.css' -> [output.path] + './../css/style.bundle.css' -> 输出到output.path的同级目录的css文件夹中\n```\n\n\n### The way to shim modules relying on `window`, `window.jQuery` and `document`\n\n### Webpack的异步require\n\n对于一个大型应用来说，将所有的代码打包到一个文件中是很低效的，特别是存在一些只在一些特殊情况下才需要的代码块。Webpack有一个特性，可以将一个大文件分割成一个个chunk，然后按需加载。这是一个可以选择性加入的特性。可以在代码中定义分割点。Webpack会处理好文件的依赖，文件输出和运行相关的事情。\n\n有一点要注意的是：代码分割（Code Splitting）不仅仅是抽出公共的代码到一个可共享的代码块。更值得注意的特点是，代码分割可以将代码分割成可以按需加载的chunk。这能够减小初次加载的下载量。\n\n#### 定义一个分割点\n\nAMD和CMD 定义了不同的按需加载方式。这两种都支持\n\n**CommonJs: require.ensure**\n\n```js\nrequire.ensure(dependencies, callback);\n```\n\n`require.ensure`方法确保每一个依赖在调用callback的时候都能被同步require。`require`函数将作为callback的参数。\n\n```js\nrequire.ensure(['module-a', 'module-2'], function(require){\n    var a = require('module-a');\n    // ...\n});\n```\n\nrequire.ensure 只加载，不执行\n\n**AMD: require**\n\nAMD规范定义了一个异步的require\n\n```js\nrequire(dependencies, callback);\n```\n\n调用的时候，所有的依赖都会被加载，回调函数的参数是所有的依赖exports出来的内容。\n\n```js\nrequire(['module-a', 'module-b'], function(a, b){\n    // ..\n});\n```\n\nrequire 加载并执行，执行顺序从左到右。同时，callback是可选的。\n\n\n好的接下来看一下到底如何 spliting the code。\n\n**Chunk 的内容**\n\n所有在分割点处的依赖都被塞到一个新的chunk，依赖也是递归地添加。\n\n如果你传递了一个函数表达式作为分割点的callback，Webpack会自动将callback中的依赖一起加入到chunk中。\n\n**Chunk 的优化**\n\n\n如果两个chunk包含相同的模块，他们会被合并成一个。这会导致chunk有多个父亲chunk。\n\n如果chunk中的一个模块在这个chunk所有的父chunk都能获取到，这个模块会从这个chunk中移除。\n\nIf a chunk contains all modules of another chunk, this is stored. It fulfills multiple chunks. 看不懂\n\n\n\n\n",
-			"settings":
-			{
-				"buffer_size": 2089,
+				"buffer_size": 213,
 				"line_ending": "Windows",
-				"name": "Evernote: Webpack记录：",
-				"scratch": true
-			}
-		},
-		{
-			"file": "app/components/task/taskModal.vue",
-			"settings":
-			{
-				"buffer_size": 1987,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/components/task/task.vue",
-			"settings":
-			{
-				"buffer_size": 1204,
-				"line_ending": "Windows"
+				"name": "\"op\": \"GetCardDetail\""
 			}
 		}
 	],
@@ -601,10 +568,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 180.0,
-		"last_filter": "install",
+		"height": 354.0,
+		"last_filter": "setting",
 		"selected_items":
 		[
+			[
+				"setting",
+				"Preferences: Settings - Default"
+			],
 			[
 				"install",
 				"Package Control: Install Package"
@@ -664,10 +635,6 @@
 			[
 				":we",
 				":w - Save"
-			],
-			[
-				"setting",
-				"Preferences: Settings - User"
 			],
 			[
 				"prett",
@@ -998,7 +965,7 @@
 				"Preferences: Settings - User"
 			]
 		],
-		"width": 494.0
+		"width": 382.0
 	},
 	"console":
 	{
@@ -1019,18 +986,21 @@
 	},
 	"expanded_folders":
 	[
-		"/E/Code/bluerobin",
-		"/E/Code/bluerobin/app",
-		"/E/Code/bluerobin/app/components",
-		"/E/Code/bluerobin/app/components/task",
-		"/E/Code/bluerobin/app/services"
+		"/E/Code/bluerobin"
 	],
 	"file_history":
 	[
-		"/E/Code/bluerobin/app/components/app.vue",
-		"/E/Code/bluerobin/app/services/upload.babel.js",
-		"/E/Code/bluerobin/app/index.bundle.js",
 		"/E/Code/bluerobin/app/components/task/task.vue",
+		"/E/Code/bluerobin/app/components/task/taskModal.vue",
+		"/E/Code/bluerobin/app/components/task/taskinputer.vue",
+		"/E/Code/bluerobin/app/components/task/taskList.vue",
+		"/E/Code/bluerobin/app/components/task/taskItem.vue",
+		"/C/Users/admin/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/admin/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/E/Code/bluerobin/app/services/upload.babel.js",
+		"/E/Code/bluerobin/app/components/app.vue",
+		"/E/Code/bluerobin/app/services/proxy.babel.js",
+		"/E/Code/bluerobin/app/index.bundle.js",
 		"/E/Code/bluerobin/app/public/stylesheets/base.scss",
 		"/E/Code/bluerobin/app/extension/contentscript.js",
 		"/D/Code/bluerobin/app/components/task/taskItem.vue",
@@ -1061,7 +1031,6 @@
 		"/D/Code/bluerobin/app/components/task/index.vue",
 		"/D/Code/dockersite/app/home/home.html",
 		"/D/Code/bluerobin/app/public/fonts/style.css",
-		"/C/Users/admin/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/D/Code/dockersite/app/blog/lib/qiniu.js",
 		"/D/Code/dockersite/app/blog/controllers/controller.js",
 		"/D/Code/bluerobin/app/services/upload.js",
@@ -1111,7 +1080,6 @@
 		"/D/MingDao/MDNode/MD.SecretaryWeb/src/js/common.js",
 		"/D/MingDao/MDNode/MD.SecretaryWeb/src/img/msg_tab_z25df2d.png",
 		"/D/MingDao/MDNode/MD.SecretaryWeb/gulpfile.js",
-		"/C/Users/admin/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/D/MingDao/MDNode/MD.SecretaryWeb/src/js/dist/secweb.js",
 		"/D/MingDao/MDNode/MD.SecretaryWeb/webpack.config.js",
 		"/D/MingDao/MDNode/MD.SecretaryWeb/src/js/dist/secweb.js.map",
@@ -1149,12 +1117,7 @@
 		"/D/Code/CodeJourney/todolist/build/index.html",
 		"/D/Code/CodeJourney/todolist/package.json",
 		"/D/Code/CodeJourney/todolist/app/components/task/task.vue",
-		"/D/Code/CodeJourney/todolist/build/main.html",
-		"/D/Code/CodeJourney/todolist/app/template/main.html",
-		"/D/Code/CodeJourney/todolist/app/main.scss",
-		"/D/Code/CodeJourney/todolist/app/variables.scss",
-		"/D/Code/CodeJourney/todolist/app/sub.js",
-		"/D/MingDao/MDNode/MD.SecretaryWeb/app/middlewares/handler.js"
+		"/D/Code/CodeJourney/todolist/build/main.html"
 	],
 	"find":
 	{
@@ -1176,6 +1139,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"newFile",
+			"upload",
 			"h1",
 			"qiniu/token",
 			"JS%20%E4%B8%AD%20%E7%9A%84Promise%20",
@@ -1301,9 +1266,7 @@
 			"getWordCollection",
 			"ce",
 			"getWordCollection",
-			"getYourResult",
-			"[^(0-9])]",
-			"'"
+			"getYourResult"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1321,254 +1284,71 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/components/task/taskList.vue",
+					"file": "package.json",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1418,
+						"buffer_size": 1021,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1235,
-								1235
+								1021,
+								1021
 							]
 						],
 						"settings":
 						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content"
-							],
-							"origin_encoding": "UTF-8",
-							"syntax": "Packages/Vue Syntax Highlight/vue.tmLanguage",
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1080.0,
+						"translation.y": 357.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "app/services/proxy.babel.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2743,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1868,
-								1868
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1380.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/components/task/taskItem.vue",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4816,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4669,
-								4669
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Vue Syntax Highlight/vue.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 4615.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
-					"buffer": 3,
+					"buffer": 1,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2089,
+						"buffer_size": 213,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1488,
-								1488
+								213,
+								213
 							]
 						],
 						"settings":
 						{
-							"$evernote": true,
-							"$evernote_guid": "51ff09da-466e-4157-ab22-be7494095579",
-							"$evernote_modified": 1,
-							"$evernote_title": "Webpack记录：",
-							"syntax": "Packages/Evernote/Evernote.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 1340.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "app/components/task/taskModal.vue",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1987,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1222,
-								1222
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Vue Syntax Highlight/vue.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1200.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "app/components/task/task.vue",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1204,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								281,
-								281
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Vue Syntax Highlight/vue.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"auto_name": "\"op\": \"GetCardDetail\"",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1638,6 +1418,14 @@
 		"selected_items":
 		[
 			[
+				"taskmo",
+				"bluerobin\\app\\components\\task\\taskModal.vue"
+			],
+			[
+				"taskin",
+				"bluerobin\\app\\components\\task\\taskinputer.vue"
+			],
+			[
 				"prxoy",
 				"bluerobin\\app\\services\\proxy.babel.js"
 			],
@@ -1692,10 +1480,6 @@
 			[
 				"basescss",
 				"bluerobin\\app\\public\\stylesheets\\base.scss"
-			],
-			[
-				"taskin",
-				"bluerobin\\app\\components\\task\\taskInputer.vue"
 			],
 			[
 				"api/",
