@@ -131,15 +131,18 @@ export default {
 		upload(e){
 			var _this = this;
 			var items = e.clipboardData && e.clipboardData.items;
-			if(items && items.length){
-				for(var i=0; i<items.length; i++){
-					var file = items[i].getAsFile && items[i].getAsFile();
-					if (file) {
-						file.name = guid() + '.' + file.type.replace(/^\w*\//ig, '');
-						_this.fileList.push(file);
-						_this.newFile = file;
-						_this.imageList.push(URL.createObjectURL(file));
-					}
+			if(!(items && items.length)){
+				return false;
+			}
+			for(var i=0; i<items.length; i++){
+				var file = items[i].getAsFile && items[i].getAsFile();
+				if (file) {
+					file.name = guid() + '.' + file.type.replace(/^\w*\//ig, '');
+					_this.fileList.push(file);
+					debugger;
+		      _this.uploader.addFile(file);
+					_this.newFile = file;
+					_this.imageList.push(URL.createObjectURL(file));
 				}
 			}
 

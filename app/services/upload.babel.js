@@ -22,6 +22,7 @@
       auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传,
       init: {
           'FilesAdded': function(up, files) {
+            console.log('from upload');
               console.log(files);
               plupload.each(files, function(file) {
                   // 文件添加进队列后,处理相关的事情
