@@ -1,6 +1,5 @@
-// var root = 'http://jsonplaceholder.typicode.com';
-// var root = 'http://localhost:1234/api';
-var root = 'http://zhanglun.daoapp.io/api';
+let $ajax = require('./ajax.babel.js');
+let root = 'http://zhanglun.daoapp.io/api';
 
 function JSON2FormData(json) {
 
@@ -138,5 +137,9 @@ proxy.Upload.getUptoken = function(){
     }
   });
 };
+
+window.$ajax = $ajax;
+window.$get = $ajax.get;
+
 
 export default proxy

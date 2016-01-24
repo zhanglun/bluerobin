@@ -1,10 +1,9 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-// var root = 'http://jsonplaceholder.typicode.com';
-// var root = 'http://localhost:1234/api';
+var $ajax = require('./ajax.babel.js');
 var root = 'http://zhanglun.daoapp.io/api';
 
 function JSON2FormData(json) {
@@ -130,6 +129,9 @@ proxy.Upload.getUptoken = function () {
     }
   });
 };
+
+window.$ajax = $ajax;
+window.$get = $ajax.get;
 
 exports.default = proxy;
 //# sourceMappingURL=proxy.babel.js.map
