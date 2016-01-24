@@ -12311,8 +12311,20 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var $ajax = __webpack_require__(9);
+	
+	var _ajaxBabel = __webpack_require__(9);
+	
+	var _ajaxBabel2 = _interopRequireDefault(_ajaxBabel);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	console.log(_ajaxBabel2.default);
 	var root = 'http://zhanglun.daoapp.io/api';
+	_ajaxBabel2.default.get({
+	  url: root + '/tasks'
+	}).then(function (res) {
+	  console.log(res);
+	});
 	
 	function JSON2FormData(json) {
 	
@@ -12438,8 +12450,8 @@
 	  });
 	};
 	
-	window.$ajax = $ajax;
-	window.$get = $ajax.get;
+	window.$ajax = _ajaxBabel2.default;
+	window.$get = _ajaxBabel2.default.get;
 	
 	exports.default = proxy;
 
@@ -12475,26 +12487,38 @@
 	  return new _promise2.default(function (resolve, reject) {
 	
 	    xhr.onreadystatechange = function () {
-	      if (xhr.readyState == 4) {
+	      if (xhr.readyState == 4 && xhr.status == 200) {
 	        // ready
-	        var statusCode = xhr.status;
-	        if (statusCode == 200) {
-	          resolve(JSON.parse(xhr.responseText));
+	        var result = xhr.responseText;
+	        if (dataType == 'json') {
+	
+	          resolve(JSON.parse(result));
 	        } else {
-	          reject(xhr);
+	          resolve(result);
 	        }
 	      } else {
 	        // not ready
 	      }
 	    };
-	    xhr.open(method, url, asnyc);
+	    xhr.onerror = function (e) {
+	      reject(xhr, e);
+	    };
+	    xhr.open(method.toLowerCase(), url, asnyc);
+	    if (method == "post") {
+	      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	    }
 	    xhr.send(params);
 	  });
 	};
 	
-	ajax({ url: 'http://zhanglun.daoapp.io/api/tasks' }).then(function (res) {
-	  console.log(res);
-	});
+	$ajax.post = function (conf) {
+	  confg.method = 'post';
+	  return ajax(conf);
+	};
+	
+	$ajax.get = function (conf) {
+	  return ajax(conf);
+	};
 	
 	exports.default = $ajax;
 

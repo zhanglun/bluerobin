@@ -1,5 +1,11 @@
-let $ajax = require('./ajax.babel.js');
+import $ajax from './ajax.babel.js';
+console.log($ajax);
 let root = 'http://zhanglun.daoapp.io/api';
+$ajax.get({
+  url: root + '/tasks'
+}).then(function(res){
+  console.log(res);
+});
 
 function JSON2FormData(json) {
 

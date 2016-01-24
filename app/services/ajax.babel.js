@@ -14,27 +14,40 @@ var ajax = function(setting) {
   return new Promise(function(resolve, reject) {
 
     xhr.onreadystatechange = function() {
-      if (xhr.readyState == 4) {
+      if (xhr.readyState == 4 && xhr.status == 200) {
         // ready
-        var statusCode = xhr.status;
-        if (statusCode == 200) {
-          resolve(JSON.parse(xhr.responseText));
+        let result = xhr.responseText;
+        if (dataType == 'json') {
+
+          resolve(JSON.parse(result));
         } else {
-          reject(xhr);
+          resolve(result);
         }
       } else {
         // not ready
       }
     };
-    xhr.open(method, url, asnyc);
+    xhr.onerror = function(e) {
+      reject(xhr, e);
+    }
+    xhr.open(method.toLowerCase(), url, asnyc);
+    if (method == "post") {
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    }
     xhr.send(params);
   });
 
 };
 
-ajax({url: 'http://zhanglun.daoapp.io/api/tasks'})
-.then(function(res){
-	console.log(res);
-});
+
+
+$ajax.post = function(conf) {
+  confg.method = 'post';
+  return ajax(conf);
+}
+
+$ajax.get = function(conf) {
+  return ajax(conf);
+}
 
 export default $ajax;
