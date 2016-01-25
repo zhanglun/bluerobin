@@ -1,11 +1,6 @@
 import $ajax from './ajax.babel.js';
-console.log($ajax);
+
 let root = 'http://zhanglun.daoapp.io/api';
-$ajax.get({
-  url: root + '/tasks'
-}).then(function(res){
-  console.log(res);
-});
 
 function JSON2FormData(json) {
 
@@ -25,21 +20,23 @@ proxy.Task = {};
 proxy.User = {};
 proxy.Upload = {};
 
+let CONFIG = {};
+CONFIG.API = {
+  TASKS: root + '/tasks',
+};
+
 /**
  * 获取task
  * @param  {[type]} params querystring
  * @return {[type]}        [description]
  */
 proxy.Task.get = function(params) {
-  return fetch(root + '/tasks', {
-      method: 'GET',
-      body: params
-    })
-    .then(function(res) {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+  return $ajax.get({
+    url: CONFIG.API.TASKS,
+    data: params
+  }).then(function(res){
+    return JSON.parse(res);
+  });
 }
 
 /**

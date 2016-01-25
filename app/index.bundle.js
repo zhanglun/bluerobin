@@ -12318,13 +12318,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	console.log(_ajaxBabel2.default);
 	var root = 'http://zhanglun.daoapp.io/api';
-	_ajaxBabel2.default.get({
-	  url: root + '/tasks'
-	}).then(function (res) {
-	  console.log(res);
-	});
 	
 	function JSON2FormData(json) {
 	
@@ -12343,19 +12337,22 @@
 	proxy.User = {};
 	proxy.Upload = {};
 	
+	var CONFIG = {};
+	CONFIG.API = {
+	  TASKS: root + '/tasks'
+	};
+	
 	/**
 	 * 获取task
 	 * @param  {[type]} params querystring
 	 * @return {[type]}        [description]
 	 */
 	proxy.Task.get = function (params) {
-	  return fetch(root + '/tasks', {
-	    method: 'GET',
-	    body: params
+	  return _ajaxBabel2.default.get({
+	    url: CONFIG.API.TASKS,
+	    data: params
 	  }).then(function (res) {
-	    if (res.ok) {
-	      return res.json();
-	    }
+	    return JSON.parse(res);
 	  });
 	};
 	
