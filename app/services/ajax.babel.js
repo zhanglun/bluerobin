@@ -1,6 +1,6 @@
 let $ajax = {};
 
-var ajax = function(setting) {
+let ajax = function(setting) {
   let method = setting.method || "get";
   let callback = setting.success || function() {};
   let params = setting.params || "";
@@ -10,7 +10,7 @@ var ajax = function(setting) {
   let error = setting.error || function() {};
   let url = setting.url || function() {};
 
-  var xhr = new XMLHttpRequest();
+  let xhr = new XMLHttpRequest();
   return new Promise(function(resolve, reject) {
 
     xhr.onreadystatechange = function() {
@@ -39,6 +39,12 @@ var ajax = function(setting) {
 
 };
 
+
+function json2data(obj){
+	for(var key in obj){
+		
+	}
+}
 
 
 $ajax.post = function(conf) {

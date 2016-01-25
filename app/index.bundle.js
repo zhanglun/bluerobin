@@ -58,7 +58,7 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _home = __webpack_require__(86);
+	var _home = __webpack_require__(88);
 	
 	var _home2 = _interopRequireDefault(_home);
 	
@@ -66,13 +66,13 @@
 	
 	var _task2 = _interopRequireDefault(_task);
 	
-	var _login = __webpack_require__(99);
+	var _login = __webpack_require__(101);
 	
 	var _login2 = _interopRequireDefault(_login);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(103);
+	__webpack_require__(105);
 	
 	_vue2.default.use(_vueRouter2.default);
 	
@@ -12185,7 +12185,7 @@
 	var __vue_script__, __vue_template__
 	__webpack_require__(5)
 	__vue_script__ = __webpack_require__(6)
-	__vue_template__ = __webpack_require__(98)
+	__vue_template__ = __webpack_require__(100)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -12229,15 +12229,15 @@
 	
 	var _task2 = _interopRequireDefault(_task);
 	
-	var _home = __webpack_require__(86);
+	var _home = __webpack_require__(88);
 	
 	var _home2 = _interopRequireDefault(_home);
 	
-	var _header = __webpack_require__(90);
+	var _header = __webpack_require__(92);
 	
 	var _header2 = _interopRequireDefault(_header);
 	
-	var _navbar = __webpack_require__(94);
+	var _navbar = __webpack_require__(96);
 	
 	var _navbar2 = _interopRequireDefault(_navbar);
 	
@@ -12318,7 +12318,8 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var root = 'http://zhanglun.daoapp.io/api';
+	// let root = 'http://zhanglun.daoapp.io/api';
+	var root = 'localhost:1234/api';
 	
 	function JSON2FormData(json) {
 	
@@ -12507,6 +12508,10 @@
 	    xhr.send(params);
 	  });
 	};
+	
+	function json2data(obj) {
+	  for (var key in obj) {}
+	}
 	
 	$ajax.post = function (conf) {
 	  confg.method = 'post';
@@ -13824,7 +13829,7 @@
 	var __vue_script__, __vue_template__
 	__webpack_require__(67)
 	__vue_script__ = __webpack_require__(68)
-	__vue_template__ = __webpack_require__(85)
+	__vue_template__ = __webpack_require__(87)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -13864,7 +13869,7 @@
 	
 	var _taskInputer2 = _interopRequireDefault(_taskInputer);
 	
-	var _taskModal = __webpack_require__(81);
+	var _taskModal = __webpack_require__(83);
 	
 	var _taskModal2 = _interopRequireDefault(_taskModal);
 	
@@ -14366,7 +14371,7 @@
 	var __vue_script__, __vue_template__
 	__webpack_require__(78)
 	__vue_script__ = __webpack_require__(79)
-	__vue_template__ = __webpack_require__(80)
+	__vue_template__ = __webpack_require__(82)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14397,6 +14402,10 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	
+	var _stringify = __webpack_require__(80);
+	
+	var _stringify2 = _interopRequireDefault(_stringify);
 	
 	var _uploadBabel = __webpack_require__(65);
 	
@@ -14522,7 +14531,7 @@
 				this.$dispatch('create task', {
 					title: this.newTaskTitle,
 					ctime: new Date(),
-					attachments: this.attachments
+					attachments: (0, _stringify2.default)(this.attachments)
 				});
 	
 				this.newTaskTitle = '';
@@ -14555,18 +14564,33 @@
 
 /***/ },
 /* 80 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "<div class=\"task-inputer\" id=\"taskWriter\">\n\t\t<textarea type=\"text\" v-model=\"newTaskTitle\" id=\"taskInputer\" v-on:keyup.enter=\"createTask\" placeholder=\"What is your focus today...\" v-on:paste=\"upload($event)\" ></textarea>\n\t\t<div class=\"task-inputer-bar\">\n\t\t\t<span id=\"browse\" class=\"icon-images\"></span>\n\t\t</div>\n\t</div>\n\t<div class=\"task-images\">\n\t\t<div v-for=\"imagesrc in imageList\">\n\t\t\t<span class=\"img-box\" v-bind:style=\"{backgroundImage: 'url('+ imagesrc + ')' }\"></span>\n\t\t\t<!-- <img v-bind:src=\"imagesrc | blob2src\" alt=\"\" > -->\n\t\t</div>\n\t</div>";
+	module.exports = { "default": __webpack_require__(81), __esModule: true };
 
 /***/ },
 /* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var core = __webpack_require__(21);
+	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+	  return (core.JSON && core.JSON.stringify || JSON.stringify).apply(JSON, arguments);
+	};
+
+/***/ },
+/* 82 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"task-inputer\" id=\"taskWriter\">\n\t\t<textarea type=\"text\" v-model=\"newTaskTitle\" id=\"taskInputer\" v-on:keyup.enter=\"createTask\" placeholder=\"What is your focus today...\" v-on:paste=\"upload($event)\" ></textarea>\n\t\t<div class=\"task-inputer-bar\">\n\t\t\t<span id=\"browse\" class=\"icon-images\"></span>\n\t\t</div>\n\t</div>\n\t<div class=\"task-images\">\n\t\t<div v-for=\"imagesrc in imageList\">\n\t\t\t<span class=\"img-box\" v-bind:style=\"{backgroundImage: 'url('+ imagesrc + ')' }\"></span>\n\t\t\t<!-- <img v-bind:src=\"imagesrc | blob2src\" alt=\"\" > -->\n\t\t</div>\n\t</div>";
+
+/***/ },
+/* 83 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var __vue_script__, __vue_template__
-	__webpack_require__(82)
-	__vue_script__ = __webpack_require__(83)
-	__vue_template__ = __webpack_require__(84)
+	__webpack_require__(84)
+	__vue_script__ = __webpack_require__(85)
+	__vue_template__ = __webpack_require__(86)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14583,13 +14607,13 @@
 	})()}
 
 /***/ },
-/* 82 */
+/* 84 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 83 */
+/* 85 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14701,25 +14725,25 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 84 */
+/* 86 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"modal-mask\" v-show=\"show\" transition=\"modal\">\n    <div class=\"modal-wrapper\">\n      <div class=\"modal-container\">\n\n        <div class=\"modal-header\">\n            <h1>{{task.title}}</h1>\n        </div>\n        \n        <div class=\"modal-body\">\n            default body\n        </div>\n\n        <div class=\"modal-footer\">\n            default footer\n            <button class=\"modal-default-button\"\n              @click=\"packupTask\">\n              OK\n            </button>\n        </div>\n      </div>\n    </div>\n  </div>";
 
 /***/ },
-/* 85 */
+/* 87 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"task-container\" transition=\"animate_routerview\">\n\t  <taskinputer></taskinputer>\n\t  <tasklist></tasklist>\n  </div>\n  <taskModal :task = \"taskOpened\"></taskModal>";
 
 /***/ },
-/* 86 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(87)
-	__vue_script__ = __webpack_require__(88)
-	__vue_template__ = __webpack_require__(89)
+	__webpack_require__(89)
+	__vue_script__ = __webpack_require__(90)
+	__vue_template__ = __webpack_require__(91)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14736,13 +14760,13 @@
 	})()}
 
 /***/ },
-/* 87 */
+/* 89 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 88 */
+/* 90 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14815,19 +14839,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 89 */
+/* 91 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"home\">\n\t\t\t<div class=\"clock\">\n\t\t\t\t<h1 class=\"time\" v-text=\"currentTime\">\n\t\t\t\t\t13:40\n\t\t\t\t</h1>\n\t\t</div>\n\t</div>";
 
 /***/ },
-/* 90 */
+/* 92 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(91)
-	__vue_script__ = __webpack_require__(92)
-	__vue_template__ = __webpack_require__(93)
+	__webpack_require__(93)
+	__vue_script__ = __webpack_require__(94)
+	__vue_template__ = __webpack_require__(95)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14844,13 +14868,13 @@
 	})()}
 
 /***/ },
-/* 91 */
+/* 93 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 92 */
+/* 94 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -14887,19 +14911,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 93 */
+/* 95 */
 /***/ function(module, exports) {
 
 	module.exports = "<header>\n<!--       <a v-link=\"'task'\">Task</a>\n      <a v-link=\"'login'\">UserLogin</a>\n -->    </header>";
 
 /***/ },
-/* 94 */
+/* 96 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(95)
-	__vue_script__ = __webpack_require__(96)
-	__vue_template__ = __webpack_require__(97)
+	__webpack_require__(97)
+	__vue_script__ = __webpack_require__(98)
+	__vue_template__ = __webpack_require__(99)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14916,13 +14940,13 @@
 	})()}
 
 /***/ },
-/* 95 */
+/* 97 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 96 */
+/* 98 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -14974,25 +14998,25 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 97 */
+/* 99 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"app-bar\">\n    <div class=\"app-bar-item\">\n      <a v-link=\"'home'\">Home</a>\n    </div>\n      <div class=\"app-bar-item\">\n        <a v-link=\"'task'\">Task</a>\n      </div>\n  </div>";
 
 /***/ },
-/* 98 */
+/* 100 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"app\">\n      <!-- <appHeader></appHeader> -->\n      <router-view ></router-view>\n      <!-- <bar></bar> -->\n  </div>";
 
 /***/ },
-/* 99 */
+/* 101 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(100)
-	__vue_script__ = __webpack_require__(101)
-	__vue_template__ = __webpack_require__(102)
+	__webpack_require__(102)
+	__vue_script__ = __webpack_require__(103)
+	__vue_template__ = __webpack_require__(104)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15009,13 +15033,13 @@
 	})()}
 
 /***/ },
-/* 100 */
+/* 102 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 101 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15076,13 +15100,13 @@
 	// <script>
 
 /***/ },
-/* 102 */
+/* 104 */
 /***/ function(module, exports) {
 
 	module.exports = "<div class=\"container\" transition=\"animate_routerview\">\n    <div class=\"login-form\">\n      <div class=\"login-flash\">What's your email address?</div>\n      <input type=\"text\" placeholder=\"Email\" v-model=\"user.username\"/>\n      <div class=\"login-flash\">What's your password</div>\n      <input type=\"password\" placeholder=\"Password\" v-model=\"user.password\"/>\n      <button type=\"button\" v-on:click=\"doLogin\">Go -></button>\n    </div>\n  </div>";
 
 /***/ },
-/* 103 */
+/* 105 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

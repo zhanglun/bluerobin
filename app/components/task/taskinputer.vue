@@ -121,7 +121,7 @@ export default {
 			this.$dispatch('create task', {
 				title: this.newTaskTitle,
 				ctime: new Date(),
-				attachments: this.attachments
+				attachments: JSON.stringify(this.attachments)
 				});
 
 			this.newTaskTitle = '';
