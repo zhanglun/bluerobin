@@ -1,10 +1,11 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 var $ajax = {};
 
 var ajax = function ajax(setting) {
-  var promise = new Promise();
-
   var method = setting.method || "get";
   var callback = setting.success || function () {};
   var params = setting.params || "";
@@ -15,30 +16,45 @@ var ajax = function ajax(setting) {
   var url = setting.url || function () {};
 
   var xhr = new XMLHttpRequest();
+  return new Promise(function (resolve, reject) {
 
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4) {
-      // ready
-      var statusCode = xhr.status;
-      if (statusCode == 200) {
-        promise.resolve(JSON.parse(xhr.responseText));
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        // ready
+        var result = xhr.responseText;
+        if (dataType == 'json') {
+
+          resolve(JSON.parse(result));
+        } else {
+          resolve(result);
+        }
       } else {
-        promise.reject(xhr);
+        // not ready
       }
-    } else {
-      // not ready
+    };
+    xhr.onerror = function (e) {
+      reject(xhr, e);
+    };
+    xhr.open(method.toLowerCase(), url, asnyc);
+    if (method == "post") {
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     }
-  };
-  xhr.open(method, url, asnyc);
-  xhr.send(params);
-  return promise;
+    xhr.send(params);
+  });
 };
 
-$ajax.get = ajax;
+function json2data(obj) {
+  for (var key in obj) {}
+}
 
-$ajax.get({
-  url: 'http://zhanglun.daoapp.io/api/tasks'
-});
+$ajax.post = function (conf) {
+  confg.method = 'post';
+  return ajax(conf);
+};
 
-module.exports = $ajax;
+$ajax.get = function (conf) {
+  return ajax(conf);
+};
+
+exports.default = $ajax;
 //# sourceMappingURL=ajax.babel.js.map

@@ -1,7 +1,7 @@
 import $ajax from './ajax.babel.js';
 
-// let root = 'http://zhanglun.daoapp.io/api';
-let root = 'localhost:1234/api';
+let root = 'http://zhanglun.daoapp.io/api';
+// let root = 'http://127.0.0.1:1234/api';
 
 function JSON2FormData(json) {
 

@@ -3,8 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var $ajax = require('./ajax.babel.js');
-var root = 'http://zhanglun.daoapp.io/api';
+
+var _ajaxBabel = require('./ajax.babel.js');
+
+var _ajaxBabel2 = _interopRequireDefault(_ajaxBabel);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// let root = 'http://zhanglun.daoapp.io/api';
+var root = 'http://localhost:1234/api';
 
 function JSON2FormData(json) {
 
@@ -23,19 +30,22 @@ proxy.Task = {};
 proxy.User = {};
 proxy.Upload = {};
 
+var CONFIG = {};
+CONFIG.API = {
+  TASKS: root + '/tasks'
+};
+
 /**
  * 获取task
  * @param  {[type]} params querystring
  * @return {[type]}        [description]
  */
 proxy.Task.get = function (params) {
-  return fetch(root + '/tasks', {
-    method: 'GET',
-    body: params
+  return _ajaxBabel2.default.get({
+    url: CONFIG.API.TASKS,
+    data: params
   }).then(function (res) {
-    if (res.ok) {
-      return res.json();
-    }
+    return JSON.parse(res);
   });
 };
 
@@ -130,8 +140,8 @@ proxy.Upload.getUptoken = function () {
   });
 };
 
-window.$ajax = $ajax;
-window.$get = $ajax.get;
+window.$ajax = _ajaxBabel2.default;
+window.$get = _ajaxBabel2.default.get;
 
 exports.default = proxy;
 //# sourceMappingURL=proxy.babel.js.map
