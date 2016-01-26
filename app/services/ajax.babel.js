@@ -3,7 +3,7 @@ let $ajax = {};
 let ajax = function(setting) {
   let method = setting.method || "get";
   let callback = setting.success || function() {};
-  let params = setting.params || "";
+  let params = setting.data || "";
   let dataType = setting.dataType || "";
   let beforeSend = setting.beforeSend || undefined;
   let asnyc = setting.asnyc || true;
@@ -32,23 +32,51 @@ let ajax = function(setting) {
     }
     xhr.open(method.toLowerCase(), url, asnyc);
     if (method == "post") {
-      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     }
-    xhr.send(params);
+    xhr.send(JSON.stringify(params));
   });
 
 };
 
 
-function json2data(obj){
-	for(var key in obj){
-		
-	}
+function obj2form(obj, form, namespace) {
+
+  let fd = form || new FormData();
+  let formKey;
+
+  for (let property in obj) {
+    if (obj.hasOwnProperty(property)) {
+
+      if (namespace) {
+        formKey = namespace + '[' + property + ']';
+      } else {
+        formKey = property;
+      }
+
+      // if the property is an object, but not a File,
+      // use recursivity.
+      if (typeof obj[property] === 'object' && !(obj[property] instanceof File)) {
+
+        objectToFormData(obj[property], fd, property);
+
+      } else {
+
+        // if it's a string or a File object
+        fd.append(formKey, obj[property]);
+      }
+
+    }
+  }
+
+  return fd;
+
 }
 
 
 $ajax.post = function(conf) {
-  confg.method = 'post';
+  conf.method = 'post';
   return ajax(conf);
 }
 
