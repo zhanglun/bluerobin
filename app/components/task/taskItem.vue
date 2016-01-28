@@ -252,9 +252,7 @@ module.exports = {
     }
   },
   events: {
-    'packup task'(task){
-      this.taskExpanding = null;
-    }
+
   }
 
 }

@@ -13,7 +13,6 @@
 	  <taskinputer></taskinputer>
 	  <tasklist></tasklist>
   </div>
-  <taskModal :task = "taskOpened"></taskModal>
 </template>
 
 <script>
@@ -21,7 +20,6 @@
 	import Vue from 'vue';
 	import TaskList from './taskList.vue';
 	import TaskInputer from './taskInputer.vue';
-	import TaskModal from './taskModal.vue';
 
 
 	module.exports = {
@@ -37,7 +35,6 @@
 	  components: {
 	    tasklist: TaskList,
 	    taskinputer: TaskInputer,
-	    taskmodal: TaskModal
 	  },
 
 	  ready: function(){
@@ -56,14 +53,6 @@
 	  	'edit task': function(task){
 	  		this.$broadcast('edit task', task);
 	  	},
-	  	'open task': function(task){
-        this.taskOpened = task;
-	  		// this.$broadcast('open task', task);
-	  	},
-	  	'packup task': function(task){
-        this.taskOpened = null;
-	  		// this.$broadcast('packup task', task);
-	  	}
 	  }
 	};
 
