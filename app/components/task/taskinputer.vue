@@ -1,3 +1,138 @@
+<template>
+	<div class="task-inputer" id="taskWriter">
+		<textarea type="text" v-model="newTask.title" id="taskInputer" placeholder="What is your focus today..." v-on:paste="uploadByPaste($event)" ></textarea>
+		<div class="task-inputer-bar">
+			<span id="browse" class="icon-images"></span>
+			<span v-on:click="createTask">确定</span>
+		</div>
+	</div>
+	<div class="task-images">
+		<div v-for="file in newTask.attachments">
+			<img v-bind:src="file.url" alt="" >
+		</div>
+	</div>
+</template>
+
+<script>
+import Uploader from '../../services/upload.babel.js';
+import Tool from '../../services/tool.babel.js';
+
+function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
+  }
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+    s4() + '-' + s4() + s4() + s4();
+}
+
+export default {
+	data(){
+		return {
+			title: 'task inputer',
+			newTask: {
+				title: '',
+				ctime: '',
+				attachments: []
+			},
+			imagePreviewList: [],
+			uploader: null,
+      newFile: null,
+      watchData: []
+		}
+	},
+	filters: {
+		blob2src: function(blob){
+			return URL.createObjectURL(blob);
+		}
+	},
+	watch: {
+		'newTask.title': function(val, oldval){
+			localStorage.newTask = JSON.stringify(this.newTask);		
+		},
+		'newTask.attachments': function(val, oldval){
+			localStorage.newTask = JSON.stringify(this.newTask);		
+		}
+	},
+	ready(){
+		this.watchData = [this.newTask.title, this.newTask.attachments];
+		localStorage.newTask ? this.newTask = JSON.parse(localStorage.newTask) : null;
+
+		this.init();
+	},
+
+	methods: {
+		// 初始化
+		init(){
+
+	    var _this = this;
+			this.$set('uploader', Uploader({
+				container: 'taskWriter'
+			}));
+	    
+	    this.uploader.bind('PostInit', function(){
+	      _this.uploader.addFile(_this.newFile);
+	    });
+
+	    this.uploader.bind('FileUploaded', function(up, file, res){
+	      _this.newTask.attachments.push({
+	        name: file.name,
+	        url: Tool.uploadImageSrc(file.name),
+	        size: file.size,
+	        width: file.width,
+	        height: file.height,
+	        type: file.type
+	      });
+
+
+	    });
+		},
+
+		// 创建任务
+		createTask(){
+
+			if(!this.newTask.title){
+				return false;
+			}
+
+			this.newTask.ctime = new Date();
+			this.$dispatch('create task', this.newTask);
+
+			this.newTask = {
+				title: '',
+				ctime: '',
+				attachments: []
+			};
+
+			this.imagePreviewList = [];
+		},
+
+		// 粘贴复制
+		uploadByPaste(e){
+			var _this = this;
+			var items = e.clipboardData && e.clipboardData.items;
+			if(!(items && items.length)){
+				return false;
+			}
+			for(var i=0; i<items.length; i++){
+				var file = items[i].getAsFile && items[i].getAsFile();
+				if (file) {
+					file.name = guid() + '.' + file.type.replace(/^\w*\//ig, '');
+		      _this.uploader.addFile(file);
+					_this.newFile = file;
+				}
+			}
+
+		}
+	}
+
+};
+
+</script>
+
+
+
 <style lang="sass">
 @import '../../public/stylesheets/variables';
 
@@ -27,6 +162,10 @@
 		  color: #6B6B6B;
 		  outline: none;
 		  resize:none;
+		  transition: all 0.3s ease-in-out 0;
+		  &::focus{
+		  	height: 50px;
+		  }
 		}
 	}
 	.task-images{
@@ -36,7 +175,7 @@
 	  box-sizing: border-box;
 		>div{
 			box-sizing: border-box;
-			width:20%;
+			width:2	0%;
 			padding:8px 4px;
 			height:140px;
 			display: inline-block;
@@ -47,108 +186,3 @@
 		}
 	}
 </style>
-
-<template>
-	<div class="task-inputer" id="taskWriter">
-		<textarea type="text" v-model="newTaskTitle" id="taskInputer" v-on:keyup.enter="createTask" placeholder="What is your focus today..." v-on:paste="upload($event)" ></textarea>
-		<div class="task-inputer-bar">
-			<span id="browse" class="icon-images"></span>
-		</div>
-	</div>
-	<div class="task-images">
-		<div v-for="imagesrc in imageList">
-			<span class="img-box" v-bind:style="{backgroundImage: 'url('+ imagesrc + ')' }"></span>
-			<!-- <img v-bind:src="imagesrc | blob2src" alt="" > -->
-		</div>
-	</div>
-</template>
-
-<script>
-import Uploader from '../../services/upload.babel.js';
-
-function guid() {
-  function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000)
-      .toString(16)
-      .substring(1);
-  }
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-    s4() + '-' + s4() + s4() + s4();
-}
-
-export default {
-	data(){
-		return {
-			title: 'task inputer',
-			newTaskTitle: '',
-			fileList: [],
-			imageList: [],
-			uploader: null,
-      newFile: null,
-			attachments: []
-		}
-	},
-	filters: {
-		blob2src: function(blob){
-			return URL.createObjectURL(blob);
-		}
-	},
-	ready(){
-    var _this = this;
-		this.$set('uploader', Uploader({
-			container: 'taskWriter'
-		}));
-    this.uploader.bind('PostInit', function(){
-      _this.uploader.addFile(_this.newFile);
-    });
-    this.uploader.bind('FileUploaded', function(up, file, res){
-      _this.attachments.push({
-        name: file.name,
-        url: file.key,
-        size: file.size,
-        width: file.width,
-        height: file.height,
-        type: file.type
-      });
-    });
-	},
-
-	methods: {
-		createTask(){
-			if(!this.newTaskTitle){
-				return false;
-			}
-			this.$dispatch('create task', {
-				title: this.newTaskTitle,
-				ctime: new Date(),
-				attachments: this.attachments
-				});
-
-			this.newTaskTitle = '';
-			this.attachments = [];
-		},
-
-		upload(e){
-			var _this = this;
-			var items = e.clipboardData && e.clipboardData.items;
-			if(!(items && items.length)){
-				return false;
-			}
-			for(var i=0; i<items.length; i++){
-				var file = items[i].getAsFile && items[i].getAsFile();
-				if (file) {
-					file.name = guid() + '.' + file.type.replace(/^\w*\//ig, '');
-					_this.fileList.push(file);
-					debugger;
-		      _this.uploader.addFile(file);
-					_this.newFile = file;
-					_this.imageList.push(URL.createObjectURL(file));
-				}
-			}
-
-		}
-	}
-
-};
-
-</script>

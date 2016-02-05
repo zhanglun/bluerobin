@@ -8,7 +8,7 @@ var $ajax = {};
 var ajax = function ajax(setting) {
   var method = setting.method || "get";
   var callback = setting.success || function () {};
-  var params = setting.params || "";
+  var params = setting.data || "";
   var dataType = setting.dataType || "";
   var beforeSend = setting.beforeSend || undefined;
   var asnyc = setting.asnyc || true;
@@ -37,18 +37,15 @@ var ajax = function ajax(setting) {
     };
     xhr.open(method.toLowerCase(), url, asnyc);
     if (method == "post") {
-      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     }
-    xhr.send(params);
+    xhr.send(JSON.stringify(params));
   });
 };
 
-function json2data(obj) {
-  for (var key in obj) {}
-}
-
 $ajax.post = function (conf) {
-  confg.method = 'post';
+  conf.method = 'post';
   return ajax(conf);
 };
 

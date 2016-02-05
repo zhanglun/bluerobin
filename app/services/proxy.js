@@ -11,7 +11,7 @@ var _ajaxBabel2 = _interopRequireDefault(_ajaxBabel);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // let root = 'http://zhanglun.daoapp.io/api';
-var root = 'http://localhost:1234/api';
+var root = 'http://127.0.0.1:1234/api';
 
 function JSON2FormData(json) {
 
@@ -55,17 +55,24 @@ proxy.Task.get = function (params) {
  * @return {[type]}      [description]
  */
 proxy.Task.create = function (task) {
-  return fetch(root + '/tasks', {
-    method: 'post',
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: JSON2FormData(task)
+  return _ajaxBabel2.default.post({
+    url: CONFIG.API.TASKS,
+    data: task
   }).then(function (res) {
-    if (res.ok) {
-      return res.json();
-    }
+    return JSON.parse(res);
   });
+  // return fetch(root + '/tasks', {
+  //     method: 'post',
+  //     headers: {
+  //       "Content-Type": "application/x-www-form-urlencoded"
+  //     },
+  //     body: JSON2FormData(task)
+  //   })
+  //   .then(function(res) {
+  //     if (res.ok) {
+  //       return res.json();
+  //     }
+  //   });
 };
 
 /**

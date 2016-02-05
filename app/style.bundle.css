@@ -208,7 +208,11 @@
     font-family: '\5FAE\8F6F\96C5\9ED1';
     color: #6B6B6B;
     outline: none;
-    resize: none; }
+    resize: none;
+    -webkit-transition: all 0.3s ease-in-out 0;
+    transition: all 0.3s ease-in-out 0; }
+    .task-inputer > textarea::focus {
+      height: 50px; }
 
 .task-images {
   padding: 0 4px;
@@ -217,7 +221,7 @@
   box-sizing: border-box; }
   .task-images > div {
     box-sizing: border-box;
-    width: 20%;
+    width: 2	0%;
     padding: 8px 4px;
     height: 140px;
     display: inline-block; }
@@ -1790,7 +1794,7 @@ body {
 body {
   min-height: 100%;
   font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', 宋体, 黑体, sans-serif;
-  background: #eee url(/build/images/6407249ad272a8878c2ea3517f16c060.jpg) fixed no-repeat center;
+  background: #eee url(/build/images/8cb48d21b4ec57d469d21a323703bdf5.jpg) fixed no-repeat center;
   background-size: cover; }
 
 h1,
