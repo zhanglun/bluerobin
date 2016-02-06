@@ -3,7 +3,7 @@
 		<textarea type="text" v-model="newTask.title" id="taskInputer" placeholder="What is your focus today..." v-on:paste="uploadByPaste($event)" ></textarea>
 		<div class="task-inputer-bar">
 			<span id="browse" class="icon-images"></span>
-			<span v-on:click="createTask">确定</span>
+			<button v-on:click="createTask">确定</button>
 		</div>
 	</div>
 	<div class="task-images">
@@ -84,7 +84,7 @@ export default {
 	        height: file.height,
 	        type: file.type
 	      });
-
+	      debugger;
 
 	    });
 		},
@@ -105,7 +105,6 @@ export default {
 				attachments: []
 			};
 
-			this.imagePreviewList = [];
 		},
 
 		// 粘贴复制
@@ -134,55 +133,62 @@ export default {
 
 
 <style lang="sass">
+
 @import '../../public/stylesheets/variables';
 
-	.task-inputer{
+.task-inputer{
+	box-sizing: border-box;
+	width:100%;
+	background: $white;
+	&-bar{
+		overflow: hidden;
+	  padding: 8px;
+	  border-top: 1px solid #E0E0E0;
+	  >[class^="icon"]{
+	  	display: inline-block;
+	  	width: 20px;
+	  	text-algin: center;
+	  	margin:0 6px;
+	  	font-size: 16px;
+	  }
+	}
+	>textarea{
+    width: 100%;
+    box-sizing: border-box;
+    display: block;
+    height: 40px;
+	  padding: 8px;
+    font-size: 14px;
+    outline: none;
+    border:none ;
+	  background: none;
+	  font-family: '微软雅黑';
+	  color: #6B6B6B;
+	  outline: none;
+	  resize:none;
+	  transition: all 0.3s ease-in;
+	  // &:focus{
+	  // 	height: 240px;
+	  // }
+	}
+}
+
+.task-images{
+	padding:0 4px;
+	width:100%;
+	background: $white;
+  box-sizing: border-box;
+	>div{
 		box-sizing: border-box;
-		width:100%;
-		background: $white;
-		&-bar{
-			overflow: hidden;
-		  padding: 8px;
-		  >.icon-*{
-		  	display: inline-block;
-		  	margin:0 6px;
-		  }
-		}
-		>textarea{
-	    width: 100%;
-	    box-sizing: border-box;
-	    display: block;
-	    height: 40px;
-		  padding: 8px;
-	    font-size: 14px;
-	    outline: none;
-	    border:none ;
-		  background: none;
-		  font-family: '微软雅黑';
-		  color: #6B6B6B;
-		  outline: none;
-		  resize:none;
-		  transition: all 0.3s ease-in-out 0;
-		  &::focus{
-		  	height: 50px;
-		  }
-		}
+		width:2	0%;
+		padding:8px 4px;
+		height:140px;
+		display: inline-block;
 	}
-	.task-images{
-		padding:0 4px;
-		width:100%;
-		background: $white;
-	  box-sizing: border-box;
-		>div{
-			box-sizing: border-box;
-			width:2	0%;
-			padding:8px 4px;
-			height:140px;
-			display: inline-block;
-		}
-		.img-box{
-			display: block;
-			height:100%;
-		}
+	.img-box{
+		display: block;
+		height:100%;
 	}
+}
+
 </style>
