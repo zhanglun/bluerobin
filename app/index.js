@@ -1,43 +1,21 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-
-import App from './components/app.vue';
-import HomeView from './components/home/home.vue';
-import TaskView from './components/task/task.vue';
-import UserLogin from './components/user/login.vue';
-
 require('./public/stylesheets/base.scss');
 
-Vue.use(Router);
+import router from './route/index.js';
+import App from './components/app.vue';
 
-// routing
-var router = new Router()
-
-router.map({
-  '/task': {
-    component: TaskView,
-    activeLinkClass: "asdfasdf"
-  },
-  '/login': {
-    component: UserLogin
-  },
-  '/home': {
-    component: HomeView
-  }
-})
 
 router.redirect({
   '*': '/task'
 })
 
 router.start(App, '#app')
-
 // 入口
-var BlueRobin = new Vue({
-  el: 'body',
-  ready(){
-  },
-  components: {
-    app: App
-  }
-});
+// var BlueRobin = new Vue({
+//   el: 'body',
+//   ready(){
+//   },
+//   components: {
+//     app: App
+//   }
+// });
+

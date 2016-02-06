@@ -18,11 +18,12 @@
 <script>
 
 	import Vue from 'vue';
+	import router from './../../route/index.js';
 	import TaskList from './taskList.vue';
 	import TaskInputer from './taskInputer.vue';
 
 
-	module.exports = {
+	export default {
 
 	  data: function(){
 	  	return {
@@ -38,6 +39,9 @@
 	  },
 
 	  ready: function(){
+	  	// check token
+	  	
+	  	router.go('/login');	
 	  },
 
 	  methods: {
