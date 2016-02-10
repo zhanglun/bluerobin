@@ -23,7 +23,7 @@
     },
     ready(){
       console.log('login');
-      doLogin();
+      // doLogin();
     },
     methods: {
       doLogin: function(){

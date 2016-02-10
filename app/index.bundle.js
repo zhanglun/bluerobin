@@ -12280,7 +12280,8 @@
 	  },
 	  ready: function ready() {
 	    // check token
-	    _index2.default.go('/task');
+	    // router.go('/task');
+	    _index2.default.go('/login');
 	  },
 	
 	  components: {
@@ -12435,26 +12436,12 @@
 	  });
 	};
 	
-	proxy.getBackgroundImage = function () {
-	  return fetch('http://ww1.sinaimg.cn/large/7e8b4ac8jw1ez8vuclmvcj21hc0xc7fn.jpg').then(function (res) {
-	    return res.blob();
-	  }).then(function (myBlob) {
-	    var objectURL = URL.createObjectURL(myBlob);
-	    return objectURL;
-	  });
-	};
-	
 	proxy.User.login = function (user) {
-	  return fetch(root + "/user/login", {
-	    method: 'post',
-	    headers: {
-	      "Content-Type": "application/x-www-form-urlencoded"
-	    },
-	    body: JSON2FormData(user)
+	  return _ajaxBabel2.default.post({
+	    url: root + '/user/login',
+	    data: user
 	  }).then(function (res) {
-	    if (res.ok) {
-	      return res.json();
-	    }
+	    return JSON.parse(res);
 	  });
 	};
 	
@@ -12508,6 +12495,8 @@
 	  var asnyc = setting.asnyc || true;
 	  // let error = setting.error || function() {};
 	  var url = setting.url || function () {};
+	  var header = setting.header || null;
+	  var token = setting.token || null;
 	
 	  var xhr = new XMLHttpRequest();
 	  return new _promise2.default(function (resolve, reject) {
@@ -12529,6 +12518,9 @@
 	    xhr.onerror = function (e) {
 	      reject(xhr, e);
 	    };
+	    if (header && header.token) {
+	      xhr.setRequestHeader('x-access-token', header.token);
+	    }
 	    xhr.open(method.toLowerCase(), url, asnyc);
 	    if (method === 'post' || method === 'put') {
 	      xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
@@ -15025,7 +15017,7 @@
 	  },
 	  ready: function ready() {
 	    console.log('login');
-	    doLogin();
+	    // doLogin();
 	  },
 	
 	  methods: {

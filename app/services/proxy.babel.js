@@ -89,31 +89,13 @@ proxy.Task.edit = function(task) {
 };
 
 
-proxy.getBackgroundImage = function() {
-  return fetch('http://ww1.sinaimg.cn/large/7e8b4ac8jw1ez8vuclmvcj21hc0xc7fn.jpg')
-    .then(function(res) {
-      return res.blob();
-    })
-    .then(function(myBlob) {
-      var objectURL = URL.createObjectURL(myBlob);
-      return objectURL;
-    });
-}
-
-
 proxy.User.login = function(user) {
-  return fetch(root + "/user/login", {
-      method: 'post',
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: JSON2FormData(user)
-    })
-    .then(function(res) {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+  return $ajax.post({
+    url: root + '/user/login',
+    data: user
+  }).then(function(res){
+    return JSON.parse(res);
+  });
 }
 
 

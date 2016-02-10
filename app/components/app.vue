@@ -47,7 +47,8 @@
     },
     ready(){
       // check token
-      router.go('/task');
+      // router.go('/task');
+      router.go('/login');
       
     },
     components: {

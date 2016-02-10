@@ -9,6 +9,8 @@ let ajax = function(setting) {
   let asnyc = setting.asnyc || true;
   // let error = setting.error || function() {};
   let url = setting.url || function() {};
+  let header  = setting.header || null;
+  let token = setting.token || null;
 
   let xhr = new XMLHttpRequest();
   return new Promise(function(resolve, reject) {
@@ -30,6 +32,9 @@ let ajax = function(setting) {
     xhr.onerror = function(e) {
       reject(xhr, e);
     };
+    if(header && header.token){
+      xhr.setRequestHeader('x-access-token', header.token);
+    }
     xhr.open(method.toLowerCase(), url, asnyc);
     if (method === 'post' || method === 'put') {
       xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
