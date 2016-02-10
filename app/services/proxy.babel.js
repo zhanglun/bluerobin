@@ -52,18 +52,6 @@ proxy.Task.create = function(task) {
   }).then(function(res){
     return JSON.parse(res);
   });
-  // return fetch(root + '/tasks', {
-  //     method: 'post',
-  //     headers: {
-  //       "Content-Type": "application/x-www-form-urlencoded"
-  //     },
-  //     body: JSON2FormData(task)
-  //   })
-  //   .then(function(res) {
-  //     if (res.ok) {
-  //       return res.json();
-  //     }
-  //   });
 
 }
 
@@ -73,15 +61,11 @@ proxy.Task.create = function(task) {
  * @return {[type]}      [description]
  */
 proxy.Task.delete = function(task) {
-  return fetch(root + '/tasks/' + task._id, {
-      method: 'delete',
-      body: task
-    })
-    .then(function(res) {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+  return $ajax.delete({
+    url: CONFIG.API.TASKS + '/' + task._id
+  }).then(function(res){
+    return JSON.parse(res);
+  });
 };
 
 /**

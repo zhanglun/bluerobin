@@ -1,23 +1,23 @@
 let $ajax = {};
 
 let ajax = function(setting) {
-  let method = setting.method || "get";
-  let callback = setting.success || function() {};
-  let params = setting.data || "";
-  let dataType = setting.dataType || "";
-  let beforeSend = setting.beforeSend || undefined;
+  let method = setting.method || 'get';
+  // let callback = setting.success || function() {};
+  let params = setting.data || '';
+  let dataType = setting.dataType || '';
+  // let beforeSend = setting.beforeSend || undefined;
   let asnyc = setting.asnyc || true;
-  let error = setting.error || function() {};
+  // let error = setting.error || function() {};
   let url = setting.url || function() {};
 
   let xhr = new XMLHttpRequest();
   return new Promise(function(resolve, reject) {
 
     xhr.onreadystatechange = function() {
-      if (xhr.readyState == 4 && xhr.status == 200) {
+      if (xhr.readyState === 4 && xhr.status === 200) {
         // ready
         let result = xhr.responseText;
-        if (dataType == 'json') {
+        if (dataType === 'json') {
 
           resolve(JSON.parse(result));
         } else {
@@ -29,13 +29,15 @@ let ajax = function(setting) {
     };
     xhr.onerror = function(e) {
       reject(xhr, e);
-    }
+    };
     xhr.open(method.toLowerCase(), url, asnyc);
-    if (method == "post") {
-      // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    if (method === 'post' || method === 'put') {
       xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+      xhr.send(JSON.stringify(params));
+    }else{
+      xhr.send();
     }
-    xhr.send(JSON.stringify(params));
+    
   });
 
 };
@@ -45,10 +47,20 @@ let ajax = function(setting) {
 $ajax.post = function(conf) {
   conf.method = 'post';
   return ajax(conf);
-}
+};
 
 $ajax.get = function(conf) {
   return ajax(conf);
-}
+};
+
+$ajax.delete = function(conf){
+  conf.method = 'delete';
+  return ajax(conf);
+};
+
+$ajax.put = function(conf){
+  conf.method = 'put';
+  return ajax(conf);
+};
 
 export default $ajax;

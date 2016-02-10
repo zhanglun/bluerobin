@@ -29,6 +29,7 @@
 
 
 <script>
+  import router from './../route/index.js';
   import Common from '../public/javascripts/common.babel.js';
   import Uploader from '../services/upload.babel.js';
   import TaskView from './task/task.vue';
@@ -45,6 +46,9 @@
       }
     },
     ready(){
+      // check token
+      router.go('/task');
+      
     },
     components: {
       task: TaskView,

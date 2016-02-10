@@ -1,12 +1,3 @@
-<style lang="sass">
- .login-form {
-  width:400px;
-  padding:14px;
-  box-sizing: box-sizing;
-  margin: 0 auto;
-  background: rgba(255,255,255,0.8);
- }
-</style>
 <template>
   <div class="container" transition="animate_routerview">
     <div class="login-form">
@@ -19,7 +10,7 @@
   </div>
 </template>
 <script>
-
+  import route from '../../route/index.js';
   import Proxy from '../../services/proxy.babel.js';
   export default {
     data(){
@@ -32,15 +23,24 @@
     },
     ready(){
       console.log('login');
+      doLogin();
     },
     methods: {
       doLogin: function(){
         Proxy.User.login(this.user)
         .then(function(res){
-          console.log(arguments);
-
+          route.go('/task');
         });
       }
     }      
   }
 </script>
+<style lang="sass">
+ .login-form {
+  width:400px;
+  padding:14px;
+  box-sizing: box-sizing;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.8);
+ }
+</style>

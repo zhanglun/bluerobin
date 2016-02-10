@@ -41,7 +41,7 @@
 	  ready: function(){
 	  	// check token
 	  	
-	  	router.go('/login');	
+	  	// router.go('/login');	
 	  },
 
 	  methods: {
