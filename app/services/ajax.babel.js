@@ -35,7 +35,7 @@ let ajax = function(setting) {
     if(header && header.token){
       xhr.setRequestHeader('x-access-token', header.token);
     }
-    xhr.open(method.toLowerCase(), url, asnyc);
+    xhr.open(method.toLowerCase(), url + '?stamp=' + new Date().getTime(), asnyc);
     if (method === 'post' || method === 'put') {
       xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
       xhr.send(JSON.stringify(params));

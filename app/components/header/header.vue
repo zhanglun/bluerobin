@@ -9,9 +9,10 @@
 <template>
 
     <header>
-<!--       <a v-link="'task'">Task</a>
+      <a v-link="'task'">Task</a>
       <a v-link="'login'">UserLogin</a>
- -->    </header>
+      <span v-on:click="logout">LogOut</span>
+    </header>
 
 </template>
 
@@ -22,6 +23,11 @@ export default {
     };
   },
   ready(){
+  },
+  methods: {
+    logout(){
+      
+    }
   }
 
 };

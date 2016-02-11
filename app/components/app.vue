@@ -21,7 +21,7 @@
 
 <template>
   <div class="app">
-      <!-- <appHeader></appHeader> -->
+      <appHeader></appHeader>
       <router-view ></router-view>
       <!-- <bar></bar> -->
   </div>
@@ -47,8 +47,8 @@
     },
     ready(){
       // check token
-      // router.go('/task');
-      router.go('/login');
+      router.go('/task');
+      // router.go('/login');
       
     },
     components: {

@@ -12280,8 +12280,8 @@
 	  },
 	  ready: function ready() {
 	    // check token
-	    // router.go('/task');
-	    _index2.default.go('/login');
+	    _index2.default.go('/task');
+	    // router.go('/login');
 	  },
 	
 	  components: {
@@ -12315,7 +12315,7 @@
 
 	// <template>
 	//   <div class="app">
-	//       <!-- <appHeader></appHeader> -->
+	//       <appHeader></appHeader>
 	//       <router-view ></router-view>
 	//       <!-- <bar></bar> -->
 	//   </div>
@@ -12356,15 +12356,15 @@
 	
 	function JSON2FormData(json) {
 	
-	  var str = "";
+	  var str = '';
 	  for (var key in json) {
-	    if (str != "") {
-	      str += "&";
+	    if (str !== '') {
+	      str += '&';
 	    }
-	    str += key + "=" + encodeURIComponent(json[key]);
+	    str += key + '=' + encodeURIComponent(json[key]);
 	  }
 	  return str;
-	};
+	}
 	
 	var proxy = {};
 	proxy.Task = {};
@@ -12426,9 +12426,9 @@
 	  return fetch(root + '/tasks/' + task._id, {
 	    method: 'put',
 	    headers: {
-	      "Content-Type": "application/x-www-form-urlencoded"
+	      'Content-Type': 'application/x-www-form-urlencoded'
 	    },
-	    body: JSON2FormData(task)
+	    body: new JSON2FormData(task)
 	  }).then(function (res) {
 	    if (res.ok) {
 	      return res.json();
@@ -12521,7 +12521,7 @@
 	    if (header && header.token) {
 	      xhr.setRequestHeader('x-access-token', header.token);
 	    }
-	    xhr.open(method.toLowerCase(), url, asnyc);
+	    xhr.open(method.toLowerCase(), url + '?stamp=' + new Date().getTime(), asnyc);
 	    if (method === 'post' || method === 'put') {
 	      xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 	      xhr.send((0, _stringify2.default)(params));
@@ -14829,9 +14829,10 @@
 	// <template>
 	
 	//     <header>
-	// <!--       <a v-link="'task'">Task</a>
+	//       <a v-link="'task'">Task</a>
 	//       <a v-link="'login'">UserLogin</a>
-	//  -->    </header>
+	//       <span v-on:click="logout">LogOut</span>
+	//     </header>
 	
 	// </template>
 	
@@ -14840,7 +14841,12 @@
 	  data: function data() {
 	    return {};
 	  },
-	  ready: function ready() {}
+	  ready: function ready() {},
+	
+	  methods: {
+	    logout: function logout() {}
+	  }
+	
 	};
 	
 	// </script>
@@ -14850,7 +14856,7 @@
 /* 93 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n<!--       <a v-link=\"'task'\">Task</a>\n      <a v-link=\"'login'\">UserLogin</a>\n -->    </header>";
+	module.exports = "<header>\n      <a v-link=\"'task'\">Task</a>\n      <a v-link=\"'login'\">UserLogin</a>\n      <span v-on:click=\"logout\">LogOut</span>\n    </header>";
 
 /***/ },
 /* 94 */
@@ -14943,7 +14949,7 @@
 /* 98 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"app\">\n      <!-- <appHeader></appHeader> -->\n      <router-view ></router-view>\n      <!-- <bar></bar> -->\n  </div>";
+	module.exports = "<div class=\"app\">\n      <appHeader></appHeader>\n      <router-view ></router-view>\n      <!-- <bar></bar> -->\n  </div>";
 
 /***/ },
 /* 99 */
