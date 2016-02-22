@@ -32,10 +32,13 @@ let ajax = function(setting) {
     xhr.onerror = function(e) {
       reject(xhr, e);
     };
-    if(header && header.token){
-      xhr.setRequestHeader('x-access-token', header.token);
-    }
+
     xhr.open(method.toLowerCase(), url + '?stamp=' + new Date().getTime(), asnyc);
+
+    if(token){
+      xhr.setRequestHeader('x-access-token', token);
+    }
+    
     if (method === 'post' || method === 'put') {
       xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
       xhr.send(JSON.stringify(params));
@@ -48,6 +51,9 @@ let ajax = function(setting) {
 };
 
 
+$ajax.set = function(){
+  
+};
 
 $ajax.post = function(conf) {
   conf.method = 'post';

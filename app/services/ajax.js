@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -6,23 +6,25 @@ Object.defineProperty(exports, "__esModule", {
 var $ajax = {};
 
 var ajax = function ajax(setting) {
-  var method = setting.method || "get";
-  var callback = setting.success || function () {};
-  var params = setting.data || "";
-  var dataType = setting.dataType || "";
-  var beforeSend = setting.beforeSend || undefined;
+  var method = setting.method || 'get';
+  // let callback = setting.success || function() {};
+  var params = setting.data || '';
+  var dataType = setting.dataType || '';
+  // let beforeSend = setting.beforeSend || undefined;
   var asnyc = setting.asnyc || true;
-  var error = setting.error || function () {};
+  // let error = setting.error || function() {};
   var url = setting.url || function () {};
+  var header = setting.header || null;
+  var token = setting.token || null;
 
   var xhr = new XMLHttpRequest();
   return new Promise(function (resolve, reject) {
 
     xhr.onreadystatechange = function () {
-      if (xhr.readyState == 4 && xhr.status == 200) {
+      if (xhr.readyState === 4 && xhr.status === 200) {
         // ready
         var result = xhr.responseText;
-        if (dataType == 'json') {
+        if (dataType === 'json') {
 
           resolve(JSON.parse(result));
         } else {
@@ -35,12 +37,16 @@ var ajax = function ajax(setting) {
     xhr.onerror = function (e) {
       reject(xhr, e);
     };
-    xhr.open(method.toLowerCase(), url, asnyc);
-    if (method == "post") {
-      // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-      xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+    if (header && header.token) {
+      xhr.setRequestHeader('x-access-token', header.token);
     }
-    xhr.send(JSON.stringify(params));
+    xhr.open(method.toLowerCase(), url + '?stamp=' + new Date().getTime(), asnyc);
+    if (method === 'post' || method === 'put') {
+      xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+      xhr.send(JSON.stringify(params));
+    } else {
+      xhr.send();
+    }
   });
 };
 
@@ -50,6 +56,16 @@ $ajax.post = function (conf) {
 };
 
 $ajax.get = function (conf) {
+  return ajax(conf);
+};
+
+$ajax.delete = function (conf) {
+  conf.method = 'delete';
+  return ajax(conf);
+};
+
+$ajax.put = function (conf) {
+  conf.method = 'put';
   return ajax(conf);
 };
 

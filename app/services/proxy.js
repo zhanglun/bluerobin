@@ -15,15 +15,15 @@ var root = 'http://127.0.0.1:1234/api';
 
 function JSON2FormData(json) {
 
-  var str = "";
+  var str = '';
   for (var key in json) {
-    if (str != "") {
-      str += "&";
+    if (str !== '') {
+      str += '&';
     }
-    str += key + "=" + encodeURIComponent(json[key]);
+    str += key + '=' + encodeURIComponent(json[key]);
   }
   return str;
-};
+}
 
 var proxy = {};
 proxy.Task = {};
@@ -61,18 +61,6 @@ proxy.Task.create = function (task) {
   }).then(function (res) {
     return JSON.parse(res);
   });
-  // return fetch(root + '/tasks', {
-  //     method: 'post',
-  //     headers: {
-  //       "Content-Type": "application/x-www-form-urlencoded"
-  //     },
-  //     body: JSON2FormData(task)
-  //   })
-  //   .then(function(res) {
-  //     if (res.ok) {
-  //       return res.json();
-  //     }
-  //   });
 };
 
 /**
@@ -81,13 +69,10 @@ proxy.Task.create = function (task) {
  * @return {[type]}      [description]
  */
 proxy.Task.delete = function (task) {
-  return fetch(root + '/tasks/' + task._id, {
-    method: 'delete',
-    body: task
+  return _ajaxBabel2.default.delete({
+    url: CONFIG.API.TASKS + '/' + task._id
   }).then(function (res) {
-    if (res.ok) {
-      return res.json();
-    }
+    return JSON.parse(res);
   });
 };
 
@@ -100,36 +85,22 @@ proxy.Task.edit = function (task) {
   return fetch(root + '/tasks/' + task._id, {
     method: 'put',
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
+      'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: JSON2FormData(task)
+    body: new JSON2FormData(task)
   }).then(function (res) {
     if (res.ok) {
       return res.json();
     }
-  });
-};
-
-proxy.getBackgroundImage = function () {
-  return fetch('http://ww1.sinaimg.cn/large/7e8b4ac8jw1ez8vuclmvcj21hc0xc7fn.jpg').then(function (res) {
-    return res.blob();
-  }).then(function (myBlob) {
-    var objectURL = URL.createObjectURL(myBlob);
-    return objectURL;
   });
 };
 
 proxy.User.login = function (user) {
-  return fetch(root + "/user/login", {
-    method: 'post',
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: JSON2FormData(user)
+  return _ajaxBabel2.default.post({
+    url: root + '/user/login',
+    data: user
   }).then(function (res) {
-    if (res.ok) {
-      return res.json();
-    }
+    return JSON.parse(res);
   });
 };
 

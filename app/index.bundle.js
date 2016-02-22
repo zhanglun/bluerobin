@@ -12384,7 +12384,8 @@
 	proxy.Task.get = function (params) {
 	  return _ajaxBabel2.default.get({
 	    url: CONFIG.API.TASKS,
-	    data: params
+	    data: params,
+	    token: localStorage.token
 	  }).then(function (res) {
 	    return JSON.parse(res);
 	  });
@@ -12398,7 +12399,8 @@
 	proxy.Task.create = function (task) {
 	  return _ajaxBabel2.default.post({
 	    url: CONFIG.API.TASKS,
-	    data: task
+	    data: task,
+	    token: localStorage.token
 	  }).then(function (res) {
 	    return JSON.parse(res);
 	  });
@@ -12518,10 +12520,13 @@
 	    xhr.onerror = function (e) {
 	      reject(xhr, e);
 	    };
-	    if (header && header.token) {
-	      xhr.setRequestHeader('x-access-token', header.token);
-	    }
+	
 	    xhr.open(method.toLowerCase(), url + '?stamp=' + new Date().getTime(), asnyc);
+	
+	    if (token) {
+	      xhr.setRequestHeader('x-access-token', token);
+	    }
+	
 	    if (method === 'post' || method === 'put') {
 	      xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
 	      xhr.send((0, _stringify2.default)(params));
@@ -12530,6 +12535,8 @@
 	    }
 	  });
 	};
+	
+	$ajax.set = function () {};
 	
 	$ajax.post = function (conf) {
 	  conf.method = 'post';
@@ -15029,6 +15036,7 @@
 	  methods: {
 	    doLogin: function doLogin() {
 	      _proxyBabel2.default.User.login(this.user).then(function (res) {
+	        localStorage.token = res.token;
 	        _index2.default.go('/task');
 	      });
 	    }

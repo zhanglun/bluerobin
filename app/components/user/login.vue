@@ -29,6 +29,7 @@
       doLogin: function(){
         Proxy.User.login(this.user)
         .then(function(res){
+          localStorage.token = res.token;
           route.go('/task');
         });
       }

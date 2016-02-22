@@ -34,7 +34,8 @@ CONFIG.API = {
 proxy.Task.get = function(params) {
   return $ajax.get({
     url: CONFIG.API.TASKS,
-    data: params
+    data: params,
+    token: localStorage.token
   }).then(function(res) {
     return JSON.parse(res);
   });
@@ -48,7 +49,8 @@ proxy.Task.get = function(params) {
 proxy.Task.create = function(task) {
   return $ajax.post({
     url: CONFIG.API.TASKS,
-    data: task
+    data: task,
+    token: localStorage.token
   }).then(function(res) {
     return JSON.parse(res);
   });
