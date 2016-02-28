@@ -3,7 +3,7 @@ let $ajax = {};
 let ajax = function(setting) {
   let method = setting.method || 'get';
   // let callback = setting.success || function() {};
-  let params = setting.data || '';
+  let params = setting.data || {};
   let dataType = setting.dataType || '';
   // let beforeSend = setting.beforeSend || undefined;
   let asnyc = setting.asnyc || true;
@@ -38,7 +38,7 @@ let ajax = function(setting) {
     if(token){
       xhr.setRequestHeader('x-access-token', token);
     }
-    
+
     if (method === 'post' || method === 'put') {
       xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
       xhr.send(JSON.stringify(params));

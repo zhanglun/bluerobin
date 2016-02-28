@@ -30,6 +30,7 @@
 
 <script>
   import router from './../route/index.js';
+  import Proxy from '../services/proxy.babel.js';
   import Common from '../public/javascripts/common.babel.js';
   import Uploader from '../services/upload.babel.js';
   import TaskView from './task/task.vue';
@@ -46,9 +47,15 @@
       }
     },
     ready(){
-      // check token
-      router.go('/task');
-      // router.go('/login');
+      Proxy.User.authenticate()
+      .then(function(res){
+        console.log(res);
+        if(res.success){
+          router.go('/task');
+        }else{
+          router.go('/login');
+        }
+      });
       
     },
     components: {

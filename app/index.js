@@ -5,7 +5,7 @@ import App from './components/app.vue';
 
 
 router.redirect({
-  '*': '/task'
+  '*': '/'
 })
 
 router.start(App, '#app')

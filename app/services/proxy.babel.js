@@ -102,14 +102,13 @@ proxy.User.login = function(user) {
 
 
 proxy.User.authenticate = function(user){
-  $ajax.post({
+  return $ajax.post({
     url: root + '/user/authenticate',
-    data: 
-  })
-  .done(function(token){
-
+    token: localStorage.token
+  }).then(function(token){
+    return JSON.parse(token);
   });
-}
+};
 
 /**
  * 获取上传token

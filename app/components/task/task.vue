@@ -16,7 +16,7 @@
 </template>
 
 <script>
-
+	import Proxy from '../../services/proxy.babel.js';
 	import Vue from 'vue';
 	import router from './../../route/index.js';
 	import TaskList from './taskList.vue';
@@ -39,10 +39,9 @@
 	  },
 
 	  ready: function(){
-	  	// check token
-	  	
 	  	
 	  	// router.go('/login');	
+
 	  },
 
 	  methods: {
