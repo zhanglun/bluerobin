@@ -10,8 +10,8 @@ var _ajaxBabel2 = _interopRequireDefault(_ajaxBabel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// let root = 'http://zhanglun.daoapp.io/api';
-var root = 'http://127.0.0.1:1234/api';
+var root = 'http://zhanglun.daoapp.io/api';
+// let root = 'http://127.0.0.1:1234/api';
 
 function JSON2FormData(json) {
 
@@ -43,7 +43,8 @@ CONFIG.API = {
 proxy.Task.get = function (params) {
   return _ajaxBabel2.default.get({
     url: CONFIG.API.TASKS,
-    data: params
+    data: params,
+    token: localStorage.token
   }).then(function (res) {
     return JSON.parse(res);
   });
@@ -57,7 +58,8 @@ proxy.Task.get = function (params) {
 proxy.Task.create = function (task) {
   return _ajaxBabel2.default.post({
     url: CONFIG.API.TASKS,
-    data: task
+    data: task,
+    token: localStorage.token
   }).then(function (res) {
     return JSON.parse(res);
   });
@@ -101,6 +103,15 @@ proxy.User.login = function (user) {
     data: user
   }).then(function (res) {
     return JSON.parse(res);
+  });
+};
+
+proxy.User.authenticate = function (user) {
+  return _ajaxBabel2.default.post({
+    url: root + '/user/authenticate',
+    token: localStorage.token
+  }).then(function (token) {
+    return JSON.parse(token);
   });
 };
 

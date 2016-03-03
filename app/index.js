@@ -5,7 +5,7 @@ import App from './components/app.vue';
 
 
 router.redirect({
-  '*': '/'
+  '*': '/login'
 })
 
 router.start(App, '#app')

@@ -8,7 +8,7 @@ var $ajax = {};
 var ajax = function ajax(setting) {
   var method = setting.method || 'get';
   // let callback = setting.success || function() {};
-  var params = setting.data || '';
+  var params = setting.data || {};
   var dataType = setting.dataType || '';
   // let beforeSend = setting.beforeSend || undefined;
   var asnyc = setting.asnyc || true;
@@ -37,10 +37,13 @@ var ajax = function ajax(setting) {
     xhr.onerror = function (e) {
       reject(xhr, e);
     };
-    if (header && header.token) {
-      xhr.setRequestHeader('x-access-token', header.token);
-    }
+
     xhr.open(method.toLowerCase(), url + '?stamp=' + new Date().getTime(), asnyc);
+
+    if (token) {
+      xhr.setRequestHeader('x-access-token', token);
+    }
+
     if (method === 'post' || method === 'put') {
       xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
       xhr.send(JSON.stringify(params));
@@ -49,6 +52,8 @@ var ajax = function ajax(setting) {
     }
   });
 };
+
+$ajax.set = function () {};
 
 $ajax.post = function (conf) {
   conf.method = 'post';
