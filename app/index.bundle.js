@@ -12301,6 +12301,11 @@
 	// <template>
 	//   <div class="app">
 	//       <appHeader></appHeader>
+	// <div class="mdl-grid">
+	//   <div class="mdl-cell mdl-cell--6-col">CS 6</div>
+	//   <div class="mdl-cell mdl-cell--4-col">CS 4</div>
+	//   <div class="mdl-cell mdl-cell--2-col">CS 2</div>
+	// </div>
 	//       <router-view ></router-view>
 	//       <!-- <bar></bar> -->
 	//   </div>
@@ -14859,7 +14864,7 @@
 	// <header class="mdl-layout__header">
 	//   <div class="mdl-layout__header-row">
 	//     <!-- Title -->
-	//     <span class="mdl-layout-title">Title</span>
+	//     <span class="mdl-layout-title">BlueRobin</span>
 	//     <!-- Add spacer, to align navigation to the right -->
 	//     <div class="mdl-layout-spacer"></div>
 	//     <!-- Navigation. We hide it in small screens. -->
@@ -14893,7 +14898,7 @@
 /* 93 */
 /***/ function(module, exports) {
 
-	module.exports = "<header class=\"mdl-layout__header\">\n  <div class=\"mdl-layout__header-row\">\n    <!-- Title -->\n    <span class=\"mdl-layout-title\">Title</span>\n    <!-- Add spacer, to align navigation to the right -->\n    <div class=\"mdl-layout-spacer\"></div>\n    <!-- Navigation. We hide it in small screens. -->\n    <nav class=\"mdl-navigation mdl-layout--large-screen-only\">\n      <a class=\"mdl-navigation__link\" href=\"\" v-link=\"'task'\">Task</a>\n      <a class=\"mdl-navigation__link\" href=\"\" v-link=\"'login'\">UserLogin</a>\n      <a class=\"mdl-navigation__link\" href=\"\" v-on:click=\"logout\">LogOut</a>\n    </nav>\n  </div>\n</header>";
+	module.exports = "<header class=\"mdl-layout__header\">\n  <div class=\"mdl-layout__header-row\">\n    <!-- Title -->\n    <span class=\"mdl-layout-title\">BlueRobin</span>\n    <!-- Add spacer, to align navigation to the right -->\n    <div class=\"mdl-layout-spacer\"></div>\n    <!-- Navigation. We hide it in small screens. -->\n    <nav class=\"mdl-navigation mdl-layout--large-screen-only\">\n      <a class=\"mdl-navigation__link\" href=\"\" v-link=\"'task'\">Task</a>\n      <a class=\"mdl-navigation__link\" href=\"\" v-link=\"'login'\">UserLogin</a>\n      <a class=\"mdl-navigation__link\" href=\"\" v-on:click=\"logout\">LogOut</a>\n    </nav>\n  </div>\n</header>";
 
 /***/ },
 /* 94 */
@@ -14986,7 +14991,7 @@
 /* 98 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"app\">\n      <appHeader></appHeader>\n      <router-view ></router-view>\n      <!-- <bar></bar> -->\n  </div>";
+	module.exports = "<div class=\"app\">\n      <appHeader></appHeader>\n<div class=\"mdl-grid\">\n  <div class=\"mdl-cell mdl-cell--6-col\">CS 6</div>\n  <div class=\"mdl-cell mdl-cell--4-col\">CS 4</div>\n  <div class=\"mdl-cell mdl-cell--2-col\">CS 2</div>\n</div> \n      <router-view ></router-view>\n      <!-- <bar></bar> -->\n  </div>";
 
 /***/ },
 /* 99 */
