@@ -24,9 +24,6 @@ gulp.task('babel', function(){
 var webpackConfigDev = Object.create(webpackConfig);
 webpackConfigDev.devtool = 'source-map';
 webpackConfigDev.debug = true;
-// webpackConfigDev.plugins.concat(
-//   new ExtractTextPlugin('style.bundle.css')
-// );
 
 // create a single instance of the compiler to allow caching
 var devCompiler = webpack(webpackConfigDev);
