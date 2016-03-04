@@ -63,6 +63,7 @@
 	});
 	
 	_index2.default.start(_app2.default, '#app');
+	
 	// 入口
 	// var BlueRobin = new Vue({
 	//   el: 'body',
@@ -12334,14 +12335,16 @@
 	    };
 	  },
 	  ready: function ready() {
-	    _proxyBabel2.default.User.authenticate().then(function (res) {
+	    /*Proxy.User.authenticate()
+	    .then(function(res){
 	      console.log(res);
-	      if (res.success) {
-	        _index2.default.go('/task');
-	      } else {
-	        _index2.default.go('/login');
+	      if(res.success){
+	        router.go('/task');
+	      }else{
+	        router.go('/login');
 	      }
-	    });
+	    });*/
+	
 	  },
 	
 	  components: {
@@ -12367,8 +12370,8 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var root = 'http://zhanglun.daoapp.io/api';
-	// let root = 'http://127.0.0.1:1234/api';
+	// let root = 'http://zhanglun.daoapp.io/api';
+	var root = 'http://127.0.0.1:1234/api';
 	
 	function JSON2FormData(json) {
 	
@@ -14677,7 +14680,13 @@
 	
 	// 			<span id="browse" class="icon-images"></span>
 	
-	// 			<button v-on:click="createTask">确定</button>
+	//       <!-- Raised button with ripple -->
+	
+	//       <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"  v-on:click="createTask">
+	
+	//         确定
+	
+	//       </button>
 	
 	// 		</div>
 	
@@ -14940,7 +14949,7 @@
 /* 84 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"task-inputer\" id=\"taskWriter\">\r\n\t\t<textarea type=\"text\" v-model=\"newTask.title\" id=\"taskInputer\" placeholder=\"What is your focus today...\" v-on:paste=\"uploadByPaste($event)\" ></textarea>\r\n\t\t<div class=\"task-inputer-bar\">\r\n\t\t\t<span id=\"browse\" class=\"icon-images\"></span>\r\n\t\t\t<button v-on:click=\"createTask\">确定</button>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"task-images\">\r\n\t\t<div v-for=\"file in newTask.attachments\">\r\n\t\t\t<img v-bind:src=\"file.url\" alt=\"\" >\r\n\t\t</div>\r\n\t</div>";
+	module.exports = "<div class=\"task-inputer\" id=\"taskWriter\">\r\n\t\t<textarea type=\"text\" v-model=\"newTask.title\" id=\"taskInputer\" placeholder=\"What is your focus today...\" v-on:paste=\"uploadByPaste($event)\" ></textarea>\r\n\t\t<div class=\"task-inputer-bar\">\r\n\t\t\t<span id=\"browse\" class=\"icon-images\"></span>\r\n      <!-- Raised button with ripple -->\r\n      <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect\"  v-on:click=\"createTask\">\r\n        确定\r\n      </button>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"task-images\">\r\n\t\t<div v-for=\"file in newTask.attachments\">\r\n\t\t\t<img v-bind:src=\"file.url\" alt=\"\" >\r\n\t\t</div>\r\n\t</div>";
 
 /***/ },
 /* 85 */
@@ -15123,29 +15132,37 @@
 	});
 	// <style>
 	
-	//  header{
-	
-	//   width: 100%;
-	
-	//   height:50px;
-	
-	//   background: rgba(255, 255, 255, 0.6);
-	
-	//  }
-	
 	// </style>
 	
 	// <template>
 	
-	//     <header>
+	// <header class="mdl-layout__header">
 	
-	//       <a v-link="'task'">Task</a>
+	//   <div class="mdl-layout__header-row">
 	
-	//       <a v-link="'login'">UserLogin</a>
+	//     <!-- Title -->
 	
-	//       <span v-on:click="logout">LogOut</span>
+	//     <span class="mdl-layout-title">Title</span>
 	
-	//     </header>
+	//     <!-- Add spacer, to align navigation to the right -->
+	
+	//     <div class="mdl-layout-spacer"></div>
+	
+	//     <!-- Navigation. We hide it in small screens. -->
+	
+	//     <nav class="mdl-navigation mdl-layout--large-screen-only">
+	
+	//       <a class="mdl-navigation__link" href="" v-link="'task'">Task</a>
+	
+	//       <a class="mdl-navigation__link" href="" v-link="'login'">UserLogin</a>
+	
+	//       <a class="mdl-navigation__link" href="" v-on:click="logout">LogOut</a>
+	
+	//     </nav>
+	
+	//   </div>
+	
+	// </header>
 	
 	// </template>
 	
@@ -15168,7 +15185,7 @@
 /* 93 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\r\n      <a v-link=\"'task'\">Task</a>\r\n      <a v-link=\"'login'\">UserLogin</a>\r\n      <span v-on:click=\"logout\">LogOut</span>\r\n    </header>";
+	module.exports = "<header class=\"mdl-layout__header\">\r\n  <div class=\"mdl-layout__header-row\">\r\n    <!-- Title -->\r\n    <span class=\"mdl-layout-title\">Title</span>\r\n    <!-- Add spacer, to align navigation to the right -->\r\n    <div class=\"mdl-layout-spacer\"></div>\r\n    <!-- Navigation. We hide it in small screens. -->\r\n    <nav class=\"mdl-navigation mdl-layout--large-screen-only\">\r\n      <a class=\"mdl-navigation__link\" href=\"\" v-link=\"'task'\">Task</a>\r\n      <a class=\"mdl-navigation__link\" href=\"\" v-link=\"'login'\">UserLogin</a>\r\n      <a class=\"mdl-navigation__link\" href=\"\" v-on:click=\"logout\">LogOut</a>\r\n    </nav>\r\n  </div>\r\n</header>";
 
 /***/ },
 /* 94 */
@@ -15349,13 +15366,35 @@
 	
 	//       <div class="login-flash">What's your email address?</div>
 	
-	//       <input type="text" placeholder="Email" v-model="user.username"/>
+	//         <div class="mdl-textfield mdl-js-textfield">
+	
+	//           <input class="mdl-textfield__input" type="text" v-model="user.username">
+	
+	//           <label class="mdl-textfield__label" for="sample1">Email</label>
+	
+	//         </div>
 	
 	//       <div class="login-flash">What's your password</div>
 	
-	//       <input type="password" placeholder="Password" v-model="user.password"/>
+	//       <div class="mdl-textfield mdl-js-textfield">
 	
-	//       <button type="button" v-on:click="doLogin">Go -></button>
+	//         <input class="mdl-textfield__input" type="text" v-model="user.password">
+	
+	//         <label class="mdl-textfield__label" for="sample1">Password</label>
+	
+	//       </div>
+	
+	//       <div>
+	
+	//         <!-- Accent-colored raised button with ripple -->
+	
+	//         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  v-on:click="doLogin">
+	
+	//         GO!
+	
+	//         </button>
+	
+	//       </div>
 	
 	//     </div>
 	
@@ -15411,7 +15450,7 @@
 /* 102 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container\" transition=\"animate_routerview\">\r\n    <div class=\"login-form\">\r\n      <div class=\"login-flash\">What's your email address?</div>\r\n      <input type=\"text\" placeholder=\"Email\" v-model=\"user.username\"/>\r\n      <div class=\"login-flash\">What's your password</div>\r\n      <input type=\"password\" placeholder=\"Password\" v-model=\"user.password\"/>\r\n      <button type=\"button\" v-on:click=\"doLogin\">Go -></button>\r\n    </div>\r\n  </div>";
+	module.exports = "<div class=\"container\" transition=\"animate_routerview\">\r\n    <div class=\"login-form\">\r\n      <div class=\"login-flash\">What's your email address?</div>\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"text\" v-model=\"user.username\">\r\n          <label class=\"mdl-textfield__label\" for=\"sample1\">Email</label>\r\n        </div>\r\n      <div class=\"login-flash\">What's your password</div>\r\n      <div class=\"mdl-textfield mdl-js-textfield\">\r\n        <input class=\"mdl-textfield__input\" type=\"text\" v-model=\"user.password\">\r\n        <label class=\"mdl-textfield__label\" for=\"sample1\">Password</label>\r\n      </div>\r\n      <div>\r\n        <!-- Accent-colored raised button with ripple -->\r\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">\r\n        GO!\r\n        </button>\r\n      </div>\r\n      \r\n      \r\n    </div>\r\n  </div>";
 
 /***/ },
 /* 103 */

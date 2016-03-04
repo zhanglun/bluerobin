@@ -3,7 +3,10 @@
 		<textarea type="text" v-model="newTask.title" id="taskInputer" placeholder="What is your focus today..." v-on:paste="uploadByPaste($event)" ></textarea>
 		<div class="task-inputer-bar">
 			<span id="browse" class="icon-images"></span>
-			<button v-on:click="createTask">确定</button>
+      <!-- Raised button with ripple -->
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"  v-on:click="createTask">
+        确定
+      </button>
 		</div>
 	</div>
 	<div class="task-images">
