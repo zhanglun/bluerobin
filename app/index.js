@@ -5,10 +5,12 @@ import App from './components/app.vue';
 
 
 router.redirect({
-  '*': '/'
+  '*': '/login'
 })
 
-router.start(App, '#app')
+router.start(App, '#app');
+
+
 // 入口
 // var BlueRobin = new Vue({
 //   el: 'body',

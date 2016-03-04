@@ -47,7 +47,7 @@
       }
     },
     ready(){
-      Proxy.User.authenticate()
+      /*Proxy.User.authenticate()
       .then(function(res){
         console.log(res);
         if(res.success){
@@ -55,7 +55,7 @@
         }else{
           router.go('/login');
         }
-      });
+      });*/
       
     },
     components: {
