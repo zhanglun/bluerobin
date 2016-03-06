@@ -10,8 +10,8 @@ var _ajaxBabel2 = _interopRequireDefault(_ajaxBabel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var root = 'http://zhanglun.daoapp.io/api';
-// let root = 'http://127.0.0.1:1234/api';
+// let root = 'http://zhanglun.daoapp.io/api';
+var root = 'http://127.0.0.1:1234/api';
 
 function JSON2FormData(json) {
 

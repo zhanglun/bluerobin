@@ -1,21 +1,22 @@
 <template>
   <div class="container" transition="animate_routerview">
     <div class="login-form">
-      <div class="login-flash">What's your email address?</div>
-        <div class="mdl-textfield mdl-js-textfield">
-          <input class="mdl-textfield__input" type="text" v-model="user.username">
-          <label class="mdl-textfield__label" for="sample1">Email</label>
+        <div class="row">
+        <div class="input-field col s12">
+          <input class="validate" type="text" id="email" v-model="user.username">
+          <label for="email">Email</label>
         </div>
-      <div class="login-flash">What's your password</div>
-      <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="text" v-model="user.password">
-        <label class="mdl-textfield__label" for="sample1">Password</label>
+        </div>
+        <div class="row">
+          
+      <div class="input-field col s12">
+        <input class="validate" type="password" id="password" v-model="user.password">
+        <label for="password">Password</label>
       </div>
-      <div>
-        <!-- Accent-colored raised button with ripple -->
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  v-on:click="doLogin">
-        GO!
-        </button>
+      <div class="row">
+        <div class="col ">
+        <button class="waves-effect waves-light btn"  v-on:click="doLogin">GO!</button>
+        </div>
       </div>
       
       

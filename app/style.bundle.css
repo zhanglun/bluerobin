@@ -18,7 +18,7 @@
 .task-container {
   max-width: 660px;
   min-width: 500px;
-  margin: 80px auto;
+  margin: 30px auto;
   height: 65%;
   box-sizing: border-box; }
 .task-list-container {
@@ -28,7 +28,6 @@
 .task-list {
   -webkit-transform: perspective(1000px);
           transform: perspective(1000px); }
-@charset "UTF-8";
 /* ====================================================== */
 /* Variables
 /* ====================================================== */
@@ -102,26 +101,6 @@
     visibility: hidden; }
   .task-item:hover .task-actions {
     display: block; }
-
-.task-checker > input[type=checkbox] + label {
-  display: none;
-  width: 14px;
-  height: 14px;
-  min-height: 14px;
-  padding: 0;
-  font-size: 14px;
-  text-align: center;
-  line-height: 14px;
-  border: 1px solid #d4d4d4; }
-
-.task-checker > input[type=checkbox] + label::before {
-  content: '\1F436';
-  display: block;
-  width: 100%;
-  height: 100%; }
-
-.task-checker > input[type=checkbox]:checked + label::before {
-  content: '\1F414'; }
 
 .task-content > input {
   border: 1px solid #d4d4d4;

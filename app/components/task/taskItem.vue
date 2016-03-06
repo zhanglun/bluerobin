@@ -85,30 +85,6 @@ $editbox-height: 34px;
 }
 
 .task-checker {
-  > input[type=checkbox] {
-    //display: none;
-    & + label {
-      display: none;
-      //display: block;
-      width: 14px;
-      height: 14px;
-      min-height: 14px;
-      padding: 0;
-      font-size: 14px;
-      text-align: center;
-      line-height: 14px;
-      border: 1px solid #d4d4d4;
-    }
-    & + label::before {
-      content: '🐶';
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-    &:checked + label::before {
-      content: '🐔';
-    }
-  }
 }
 
 .task-content {
@@ -179,7 +155,8 @@ $editbox-height: 34px;
 <template>
   <div class="task-item" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
   	<div class="task-checker">
-  		<input type="checkbox" v-on:change = "toggleTask(task)" :checked="task.completed">
+      <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
+      <label for="{{task._id}}"></label>
   	</div>
     <div class="task-content" v-on:dblclick="edit(task)">
       <div data-val="{{task.title}}">{{task.title}}</div>

@@ -22,11 +22,6 @@
 <template>
   <div class="app">
       <appHeader></appHeader>
-<div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--6-col">CS 6</div>
-  <div class="mdl-cell mdl-cell--4-col">CS 4</div>
-  <div class="mdl-cell mdl-cell--2-col">CS 2</div>
-</div> 
       <router-view ></router-view>
       <!-- <bar></bar> -->
   </div>
@@ -43,7 +38,7 @@
   import AppHeaderView from './header/header.vue';
   import BarView from './bar/navbar.vue';
 
-
+  // require('materialize-css');
 
   export default{
     data(){

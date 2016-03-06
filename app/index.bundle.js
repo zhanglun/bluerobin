@@ -12277,6 +12277,8 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	// require('materialize-css');
+	
 	// <style lang="sass">
 	
 	//  .app{
@@ -12301,11 +12303,6 @@
 	// <template>
 	//   <div class="app">
 	//       <appHeader></appHeader>
-	// <div class="mdl-grid">
-	//   <div class="mdl-cell mdl-cell--6-col">CS 6</div>
-	//   <div class="mdl-cell mdl-cell--4-col">CS 4</div>
-	//   <div class="mdl-cell mdl-cell--2-col">CS 2</div>
-	// </div>
 	//       <router-view ></router-view>
 	//       <!-- <bar></bar> -->
 	//   </div>
@@ -14001,7 +13998,7 @@
 	// 	.task-container{
 	// 		max-width:660px;
 	// 		min-width: 500px;
-	// 		margin: 80px auto;
+	// 		margin: 30px auto;
 	// 		height: 65%;
 	// 		box-sizing: border-box;
 	// 	}
@@ -14318,30 +14315,6 @@
 	// }
 	
 	// .task-checker {
-	//   > input[type=checkbox] {
-	//     //display: none;
-	//     & + label {
-	//       display: none;
-	//       //display: block;
-	//       width: 14px;
-	//       height: 14px;
-	//       min-height: 14px;
-	//       padding: 0;
-	//       font-size: 14px;
-	//       text-align: center;
-	//       line-height: 14px;
-	//       border: 1px solid #d4d4d4;
-	//     }
-	//     & + label::before {
-	//       content: '🐶';
-	//       display: block;
-	//       width: 100%;
-	//       height: 100%;
-	//     }
-	//     &:checked + label::before {
-	//       content: '🐔';
-	//     }
-	//   }
 	// }
 	
 	// .task-content {
@@ -14410,7 +14383,8 @@
 	// <template>
 	//   <div class="task-item" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
 	//   	<div class="task-checker">
-	//   		<input type="checkbox" v-on:change = "toggleTask(task)" :checked="task.completed">
+	//       <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
+	//       <label for="{{task._id}}"></label>
 	//   	</div>
 	//     <div class="task-content" v-on:dblclick="edit(task)">
 	//       <div data-val="{{task.title}}">{{task.title}}</div>
@@ -14429,7 +14403,7 @@
 /* 78 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"task-item\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}\" >\n  \t<div class=\"task-checker\">\n  \t\t<input type=\"checkbox\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n  \t</div>\n    <div class=\"task-content\" v-on:dblclick=\"edit(task)\">\n      <div data-val=\"{{task.title}}\">{{task.title}}</div>\n      <input type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n    </div>\n    <div class=\"task-actions\">\n      <span v-on:click=\"expandBroad(task)\" class=\"icon-grin\"></span>\n\t    <span v-on:click=\"deleteTask(task)\" class=\"icon-bin\"></span>\n  \t</div>\n  </div>";
+	module.exports = "<div class=\"task-item\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}\" >\n  \t<div class=\"task-checker\">\n      <input type=\"checkbox\" id=\"{{task._id}}\"  v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n      <label for=\"{{task._id}}\"></label>\n  \t</div>\n    <div class=\"task-content\" v-on:dblclick=\"edit(task)\">\n      <div data-val=\"{{task.title}}\">{{task.title}}</div>\n      <input type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n    </div>\n    <div class=\"task-actions\">\n      <span v-on:click=\"expandBroad(task)\" class=\"icon-grin\"></span>\n\t    <span v-on:click=\"deleteTask(task)\" class=\"icon-bin\"></span>\n  \t</div>\n  </div>";
 
 /***/ },
 /* 79 */
@@ -14491,6 +14465,17 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// <template>
+	//   <nav>
+	//     <div class="nav-wrapper">
+	//       <form>
+	//         <div class="input-field">
+	//           <input id="search" type="search" required>
+	//           <label for="search"><i class="material-icons">search</i></label>
+	//           <i class="material-icons">close</i>
+	//         </div>
+	//       </form>
+	//     </div>
+	//   </nav>
 	// 	<div class="task-inputer" id="taskWriter">
 	// 		<textarea type="text" v-model="newTask.title" id="taskInputer" placeholder="What is your focus today..." v-on:paste="uploadByPaste($event)" ></textarea>
 	// 		<div class="task-inputer-bar">
@@ -14703,7 +14688,7 @@
 /* 84 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"task-inputer\" id=\"taskWriter\">\n\t\t<textarea type=\"text\" v-model=\"newTask.title\" id=\"taskInputer\" placeholder=\"What is your focus today...\" v-on:paste=\"uploadByPaste($event)\" ></textarea>\n\t\t<div class=\"task-inputer-bar\">\n\t\t\t<span id=\"browse\" class=\"icon-images\"></span>\n      <!-- Raised button with ripple -->\n      <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect\"  v-on:click=\"createTask\">\n        确定\n      </button>\n\t\t</div>\n\t</div>\n\t<div class=\"task-images\">\n\t\t<div v-for=\"file in newTask.attachments\">\n\t\t\t<img v-bind:src=\"file.url\" alt=\"\" >\n\t\t</div>\n\t</div>";
+	module.exports = "<nav>\n    <div class=\"nav-wrapper\">\n      <form>\n        <div class=\"input-field\">\n          <input id=\"search\" type=\"search\" required>\n          <label for=\"search\"><i class=\"material-icons\">search</i></label>\n          <i class=\"material-icons\">close</i>\n        </div>\n      </form>\n    </div>\n  </nav>\n\t<div class=\"task-inputer\" id=\"taskWriter\">\n\t\t<textarea type=\"text\" v-model=\"newTask.title\" id=\"taskInputer\" placeholder=\"What is your focus today...\" v-on:paste=\"uploadByPaste($event)\" ></textarea>\n\t\t<div class=\"task-inputer-bar\">\n\t\t\t<span id=\"browse\" class=\"icon-images\"></span>\n      <!-- Raised button with ripple -->\n      <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect\"  v-on:click=\"createTask\">\n        确定\n      </button>\n\t\t</div>\n\t</div>\n\t<div class=\"task-images\">\n\t\t<div v-for=\"file in newTask.attachments\">\n\t\t\t<img v-bind:src=\"file.url\" alt=\"\" >\n\t\t</div>\n\t</div>";
 
 /***/ },
 /* 85 */
@@ -14861,19 +14846,19 @@
 	// </style>
 	
 	// <template>
-	// <header class="mdl-layout__header">
-	//   <div class="mdl-layout__header-row">
-	//     <!-- Title -->
-	//     <span class="mdl-layout-title">BlueRobin</span>
-	//     <!-- Add spacer, to align navigation to the right -->
-	//     <div class="mdl-layout-spacer"></div>
-	//     <!-- Navigation. We hide it in small screens. -->
-	//     <nav class="mdl-navigation mdl-layout--large-screen-only">
-	//       <a class="mdl-navigation__link" href="" v-link="'task'">Task</a>
-	//       <a class="mdl-navigation__link" href="" v-link="'login'">UserLogin</a>
-	//       <a class="mdl-navigation__link" href="" v-on:click="logout">LogOut</a>
+	// <header>
+	// <nav>
+	//   <div class="container">
+	//       <div class="nav-wrapper">
+	//         <a href="#" class="brand-logo">BlueRobin</a>
+	//         <ul id="nav-mobile" class="right hide-on-med-and-down">
+	//           <li><a class="mdl-navigation__link" href="" v-link="'task'">Task</a></li>
+	//           <li><a class="mdl-navigation__link" href="" v-link="'login'">UserLogin</a></li>
+	//           <li><a class="mdl-navigation__link" href="" v-on:click="logout">LogOut</a></li>
+	//         </ul>
+	//       </div>
+	//     </div>
 	//     </nav>
-	//   </div>
 	// </header>
 	
 	// </template>
@@ -14898,7 +14883,7 @@
 /* 93 */
 /***/ function(module, exports) {
 
-	module.exports = "<header class=\"mdl-layout__header\">\n  <div class=\"mdl-layout__header-row\">\n    <!-- Title -->\n    <span class=\"mdl-layout-title\">BlueRobin</span>\n    <!-- Add spacer, to align navigation to the right -->\n    <div class=\"mdl-layout-spacer\"></div>\n    <!-- Navigation. We hide it in small screens. -->\n    <nav class=\"mdl-navigation mdl-layout--large-screen-only\">\n      <a class=\"mdl-navigation__link\" href=\"\" v-link=\"'task'\">Task</a>\n      <a class=\"mdl-navigation__link\" href=\"\" v-link=\"'login'\">UserLogin</a>\n      <a class=\"mdl-navigation__link\" href=\"\" v-on:click=\"logout\">LogOut</a>\n    </nav>\n  </div>\n</header>";
+	module.exports = "<header>\n<nav>\n  <div class=\"container\">\n      <div class=\"nav-wrapper\">\n        <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\n        <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\n          <li><a class=\"mdl-navigation__link\" href=\"\" v-link=\"'task'\">Task</a></li>\n          <li><a class=\"mdl-navigation__link\" href=\"\" v-link=\"'login'\">UserLogin</a></li>\n          <li><a class=\"mdl-navigation__link\" href=\"\" v-on:click=\"logout\">LogOut</a></li>\n        </ul>\n      </div>\n    </div>\n    </nav>\n</header>";
 
 /***/ },
 /* 94 */
@@ -14991,7 +14976,7 @@
 /* 98 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"app\">\n      <appHeader></appHeader>\n<div class=\"mdl-grid\">\n  <div class=\"mdl-cell mdl-cell--6-col\">CS 6</div>\n  <div class=\"mdl-cell mdl-cell--4-col\">CS 4</div>\n  <div class=\"mdl-cell mdl-cell--2-col\">CS 2</div>\n</div> \n      <router-view ></router-view>\n      <!-- <bar></bar> -->\n  </div>";
+	module.exports = "<div class=\"app\">\n      <appHeader></appHeader>\n      <router-view ></router-view>\n      <!-- <bar></bar> -->\n  </div>";
 
 /***/ },
 /* 99 */
@@ -15045,21 +15030,22 @@
 	// <template>
 	//   <div class="container" transition="animate_routerview">
 	//     <div class="login-form">
-	//       <div class="login-flash">What's your email address?</div>
-	//         <div class="mdl-textfield mdl-js-textfield">
-	//           <input class="mdl-textfield__input" type="text" v-model="user.username">
-	//           <label class="mdl-textfield__label" for="sample1">Email</label>
+	//         <div class="row">
+	//         <div class="input-field col s12">
+	//           <input class="validate" type="text" id="email" v-model="user.username">
+	//           <label for="email">Email</label>
 	//         </div>
-	//       <div class="login-flash">What's your password</div>
-	//       <div class="mdl-textfield mdl-js-textfield">
-	//         <input class="mdl-textfield__input" type="text" v-model="user.password">
-	//         <label class="mdl-textfield__label" for="sample1">Password</label>
+	//         </div>
+	//         <div class="row">
+	
+	//       <div class="input-field col s12">
+	//         <input class="validate" type="password" id="password" v-model="user.password">
+	//         <label for="password">Password</label>
 	//       </div>
-	//       <div>
-	//         <!-- Accent-colored raised button with ripple -->
-	//         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  v-on:click="doLogin">
-	//         GO!
-	//         </button>
+	//       <div class="row">
+	//         <div class="col ">
+	//         <button class="waves-effect waves-light btn"  v-on:click="doLogin">GO!</button>
+	//         </div>
 	//       </div>
 	
 	//     </div>
@@ -15105,7 +15091,7 @@
 /* 102 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container\" transition=\"animate_routerview\">\n    <div class=\"login-form\">\n      <div class=\"login-flash\">What's your email address?</div>\n        <div class=\"mdl-textfield mdl-js-textfield\">\n          <input class=\"mdl-textfield__input\" type=\"text\" v-model=\"user.username\">\n          <label class=\"mdl-textfield__label\" for=\"sample1\">Email</label>\n        </div>\n      <div class=\"login-flash\">What's your password</div>\n      <div class=\"mdl-textfield mdl-js-textfield\">\n        <input class=\"mdl-textfield__input\" type=\"text\" v-model=\"user.password\">\n        <label class=\"mdl-textfield__label\" for=\"sample1\">Password</label>\n      </div>\n      <div>\n        <!-- Accent-colored raised button with ripple -->\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">\n        GO!\n        </button>\n      </div>\n      \n      \n    </div>\n  </div>";
+	module.exports = "<div class=\"container\" transition=\"animate_routerview\">\n    <div class=\"login-form\">\n        <div class=\"row\">\n        <div class=\"input-field col s12\">\n          <input class=\"validate\" type=\"text\" id=\"email\" v-model=\"user.username\">\n          <label for=\"email\">Email</label>\n        </div>\n        </div>\n        <div class=\"row\">\n          \n      <div class=\"input-field col s12\">\n        <input class=\"validate\" type=\"password\" id=\"password\" v-model=\"user.password\">\n        <label for=\"password\">Password</label>\n      </div>\n      <div class=\"row\">\n        <div class=\"col \">\n        <button class=\"waves-effect waves-light btn\"  v-on:click=\"doLogin\">GO!</button>\n        </div>\n      </div>\n      \n      \n    </div>\n  </div>\n</template>";
 
 /***/ },
 /* 103 */
