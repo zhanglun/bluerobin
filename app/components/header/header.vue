@@ -2,19 +2,20 @@
 </style>
 
 <template>
-<header class="mdl-layout__header">
-  <div class="mdl-layout__header-row">
-    <!-- Title -->
-    <span class="mdl-layout-title">BlueRobin</span>
-    <!-- Add spacer, to align navigation to the right -->
-    <div class="mdl-layout-spacer"></div>
-    <!-- Navigation. We hide it in small screens. -->
-    <nav class="mdl-navigation mdl-layout--large-screen-only">
-      <a class="mdl-navigation__link" href="" v-link="'task'">Task</a>
-      <a class="mdl-navigation__link" href="" v-link="'login'">UserLogin</a>
-      <a class="mdl-navigation__link" href="" v-on:click="logout">LogOut</a>
+<header>
+<nav>
+  <div class="container">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">BlueRobin</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a class="" href="" v-link="'task'">Task</a></li>
+          <li><a class="" href="" v-link="'login'">UserLogin</a></li>
+          <li><a class="" href="" v-link="'signup'">SignUp</a></li>
+          <li><a class="" href="" v-on:click="logout">LogOut</a></li>
+        </ul>
+      </div>
+    </div>
     </nav>
-  </div>
 </header>
 
 </template>

@@ -85,30 +85,6 @@ $editbox-height: 34px;
 }
 
 .task-checker {
-  > input[type=checkbox] {
-    //display: none;
-    & + label {
-      display: none;
-      //display: block;
-      width: 14px;
-      height: 14px;
-      min-height: 14px;
-      padding: 0;
-      font-size: 14px;
-      text-align: center;
-      line-height: 14px;
-      border: 1px solid #d4d4d4;
-    }
-    & + label::before {
-      content: '🐶';
-      display: block;
-      width: 100%;
-      height: 100%;
-    }
-    &:checked + label::before {
-      content: '🐔';
-    }
-  }
 }
 
 .task-content {
@@ -142,10 +118,10 @@ $editbox-height: 34px;
 }
 
 .task-actions {
-  width: 100px;
-  text-align: right;
-  overflow: hidden;
-  display: none;
+  // width: 100px;
+  // text-align: right;
+  // overflow: hidden;
+  // display: none;
 }
 
 #task-category {
@@ -177,17 +153,26 @@ $editbox-height: 34px;
 </style>
 
 <template>
+
   <div class="task-item" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
   	<div class="task-checker">
-  		<input type="checkbox" v-on:change = "toggleTask(task)" :checked="task.completed">
+      <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
+      <label for="{{task._id}}"></label>
   	</div>
     <div class="task-content" v-on:dblclick="edit(task)">
       <div data-val="{{task.title}}">{{task.title}}</div>
       <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
     </div>
     <div class="task-actions">
-      <span v-on:click="expandBroad(task)" class="icon-grin"></span>
-	    <span v-on:click="deleteTask(task)" class="icon-bin"></span>
+      <!-- Dropdown Trigger -->
+      <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>
+
+      <!-- Dropdown Structure -->
+      <ul id='dropdown-{{task._id}}' class='dropdown-content'>
+      <li><span v-on:click="expandBroad(task)" class="icon-grin"></span></li>
+        <li class="divider"></li>
+	    <li><span v-on:click="deleteTask(task)" class="icon-bin"></span></li>
+      </ul>
   	</div>
   </div>
 </template>
@@ -206,7 +191,8 @@ module.exports = {
   	}
   },
   ready: function(){
-
+    $('.dropdown-button').dropdown(
+    );
   },
 
   directives: {

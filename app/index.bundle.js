@@ -56,7 +56,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(103);
+	__webpack_require__(106);
 	
 	_index2.default.redirect({
 	  '*': '/login'
@@ -108,6 +108,10 @@
 	
 	var _login2 = _interopRequireDefault(_login);
 	
+	var _signup = __webpack_require__(103);
+	
+	var _signup2 = _interopRequireDefault(_signup);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	_vue2.default.use(_vueRouter2.default);
@@ -124,6 +128,9 @@
 	  },
 	  '/login': {
 	    component: _login2.default
+	  },
+	  '/signup': {
+	    component: _signup2.default
 	  },
 	  '/home': {
 	    component: _home2.default
@@ -12277,6 +12284,8 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	// require('materialize-css');
+	
 	// <style lang="sass">
 	
 	//  .app{
@@ -12301,11 +12310,6 @@
 	// <template>
 	//   <div class="app">
 	//       <appHeader></appHeader>
-	// <div class="mdl-grid">
-	//   <div class="mdl-cell mdl-cell--6-col">CS 6</div>
-	//   <div class="mdl-cell mdl-cell--4-col">CS 4</div>
-	//   <div class="mdl-cell mdl-cell--2-col">CS 2</div>
-	// </div>
 	//       <router-view ></router-view>
 	//       <!-- <bar></bar> -->
 	//   </div>
@@ -12319,16 +12323,14 @@
 	    };
 	  },
 	  ready: function ready() {
-	    /*Proxy.User.authenticate()
-	    .then(function(res){
+	    _proxyBabel2.default.User.authenticate().then(function (res) {
 	      console.log(res);
-	      if(res.success){
-	        router.go('/task');
-	      }else{
-	        router.go('/login');
+	      if (res.success) {
+	        _index2.default.go('/task');
+	      } else {
+	        _index2.default.go('/login');
 	      }
-	    });*/
-	
+	    });
 	  },
 	
 	  components: {
@@ -13960,7 +13962,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	exports.default = {
-	
 		data: function data() {
 			return {
 				value: '',
@@ -14001,7 +14002,7 @@
 	// 	.task-container{
 	// 		max-width:660px;
 	// 		min-width: 500px;
-	// 		margin: 80px auto;
+	// 		margin: 30px auto;
 	// 		height: 65%;
 	// 		box-sizing: border-box;
 	// 	}
@@ -14183,7 +14184,9 @@
 	      taskExpanding: null
 	    };
 	  },
-	  ready: function ready() {},
+	  ready: function ready() {
+	    $('.dropdown-button').dropdown();
+	  },
 	
 	  directives: {
 	    'task-autofocus': function taskAutofocus(value) {
@@ -14318,30 +14321,6 @@
 	// }
 	
 	// .task-checker {
-	//   > input[type=checkbox] {
-	//     //display: none;
-	//     & + label {
-	//       display: none;
-	//       //display: block;
-	//       width: 14px;
-	//       height: 14px;
-	//       min-height: 14px;
-	//       padding: 0;
-	//       font-size: 14px;
-	//       text-align: center;
-	//       line-height: 14px;
-	//       border: 1px solid #d4d4d4;
-	//     }
-	//     & + label::before {
-	//       content: '🐶';
-	//       display: block;
-	//       width: 100%;
-	//       height: 100%;
-	//     }
-	//     &:checked + label::before {
-	//       content: '🐔';
-	//     }
-	//   }
 	// }
 	
 	// .task-content {
@@ -14375,10 +14354,10 @@
 	// }
 	
 	// .task-actions {
-	//   width: 100px;
-	//   text-align: right;
-	//   overflow: hidden;
-	//   display: none;
+	//   // width: 100px;
+	//   // text-align: right;
+	//   // overflow: hidden;
+	//   // display: none;
 	// }
 	
 	// #task-category {
@@ -14408,17 +14387,26 @@
 	// </style>
 	
 	// <template>
+	
 	//   <div class="task-item" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
 	//   	<div class="task-checker">
-	//   		<input type="checkbox" v-on:change = "toggleTask(task)" :checked="task.completed">
+	//       <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
+	//       <label for="{{task._id}}"></label>
 	//   	</div>
 	//     <div class="task-content" v-on:dblclick="edit(task)">
 	//       <div data-val="{{task.title}}">{{task.title}}</div>
 	//       <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
 	//     </div>
 	//     <div class="task-actions">
-	//       <span v-on:click="expandBroad(task)" class="icon-grin"></span>
-	// 	    <span v-on:click="deleteTask(task)" class="icon-bin"></span>
+	//       <!-- Dropdown Trigger -->
+	//       <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>
+	
+	//       <!-- Dropdown Structure -->
+	//       <ul id='dropdown-{{task._id}}' class='dropdown-content'>
+	//       <li><span v-on:click="expandBroad(task)" class="icon-grin"></span></li>
+	//         <li class="divider"></li>
+	// 	    <li><span v-on:click="deleteTask(task)" class="icon-bin"></span></li>
+	//       </ul>
 	//   	</div>
 	//   </div>
 	// </template>
@@ -14429,7 +14417,7 @@
 /* 78 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"task-item\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}\" >\n  \t<div class=\"task-checker\">\n  \t\t<input type=\"checkbox\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n  \t</div>\n    <div class=\"task-content\" v-on:dblclick=\"edit(task)\">\n      <div data-val=\"{{task.title}}\">{{task.title}}</div>\n      <input type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n    </div>\n    <div class=\"task-actions\">\n      <span v-on:click=\"expandBroad(task)\" class=\"icon-grin\"></span>\n\t    <span v-on:click=\"deleteTask(task)\" class=\"icon-bin\"></span>\n  \t</div>\n  </div>";
+	module.exports = "<div class=\"task-item\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}\" >\n  \t<div class=\"task-checker\">\n      <input type=\"checkbox\" id=\"{{task._id}}\"  v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n      <label for=\"{{task._id}}\"></label>\n  \t</div>\n    <div class=\"task-content\" v-on:dblclick=\"edit(task)\">\n      <div data-val=\"{{task.title}}\">{{task.title}}</div>\n      <input type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n    </div>\n    <div class=\"task-actions\">\n      <!-- Dropdown Trigger -->\n      <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>\n\n      <!-- Dropdown Structure -->\n      <ul id='dropdown-{{task._id}}' class='dropdown-content'>\n      <li><span v-on:click=\"expandBroad(task)\" class=\"icon-grin\"></span></li>\n        <li class=\"divider\"></li>\n\t    <li><span v-on:click=\"deleteTask(task)\" class=\"icon-bin\"></span></li>\n      </ul>\n  \t</div>\n  </div>";
 
 /***/ },
 /* 79 */
@@ -14491,12 +14479,23 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// <template>
+	// <!--   <nav>
+	//     <div class="nav-wrapper">
+	//       <form>
+	//         <div class="input-field">
+	//           <input id="search" type="search" required>
+	//           <label for="search"><i class="material-icons">search</i></label>
+	//           <i class="material-icons">close</i>
+	//         </div>
+	//       </form>
+	//     </div>
+	//   </nav> -->
 	// 	<div class="task-inputer" id="taskWriter">
 	// 		<textarea type="text" v-model="newTask.title" id="taskInputer" placeholder="What is your focus today..." v-on:paste="uploadByPaste($event)" ></textarea>
 	// 		<div class="task-inputer-bar">
 	// 			<span id="browse" class="icon-images"></span>
 	//       <!-- Raised button with ripple -->
-	//       <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"  v-on:click="createTask">
+	//       <button class="waves-effect waves-light btn" v-on:click="createTask">
 	//         确定
 	//       </button>
 	// 		</div>
@@ -14703,7 +14702,7 @@
 /* 84 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"task-inputer\" id=\"taskWriter\">\n\t\t<textarea type=\"text\" v-model=\"newTask.title\" id=\"taskInputer\" placeholder=\"What is your focus today...\" v-on:paste=\"uploadByPaste($event)\" ></textarea>\n\t\t<div class=\"task-inputer-bar\">\n\t\t\t<span id=\"browse\" class=\"icon-images\"></span>\n      <!-- Raised button with ripple -->\n      <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect\"  v-on:click=\"createTask\">\n        确定\n      </button>\n\t\t</div>\n\t</div>\n\t<div class=\"task-images\">\n\t\t<div v-for=\"file in newTask.attachments\">\n\t\t\t<img v-bind:src=\"file.url\" alt=\"\" >\n\t\t</div>\n\t</div>";
+	module.exports = "<!--   <nav>\n    <div class=\"nav-wrapper\">\n      <form>\n        <div class=\"input-field\">\n          <input id=\"search\" type=\"search\" required>\n          <label for=\"search\"><i class=\"material-icons\">search</i></label>\n          <i class=\"material-icons\">close</i>\n        </div>\n      </form>\n    </div>\n  </nav> -->\n\t<div class=\"task-inputer\" id=\"taskWriter\">\n\t\t<textarea type=\"text\" v-model=\"newTask.title\" id=\"taskInputer\" placeholder=\"What is your focus today...\" v-on:paste=\"uploadByPaste($event)\" ></textarea>\n\t\t<div class=\"task-inputer-bar\">\n\t\t\t<span id=\"browse\" class=\"icon-images\"></span>\n      <!-- Raised button with ripple -->\n      <button class=\"waves-effect waves-light btn\" v-on:click=\"createTask\">\n        确定\n      </button>\n\t\t</div>\n\t</div>\n\t<div class=\"task-images\">\n\t\t<div v-for=\"file in newTask.attachments\">\n\t\t\t<img v-bind:src=\"file.url\" alt=\"\" >\n\t\t</div>\n\t</div>";
 
 /***/ },
 /* 85 */
@@ -14861,19 +14860,20 @@
 	// </style>
 	
 	// <template>
-	// <header class="mdl-layout__header">
-	//   <div class="mdl-layout__header-row">
-	//     <!-- Title -->
-	//     <span class="mdl-layout-title">BlueRobin</span>
-	//     <!-- Add spacer, to align navigation to the right -->
-	//     <div class="mdl-layout-spacer"></div>
-	//     <!-- Navigation. We hide it in small screens. -->
-	//     <nav class="mdl-navigation mdl-layout--large-screen-only">
-	//       <a class="mdl-navigation__link" href="" v-link="'task'">Task</a>
-	//       <a class="mdl-navigation__link" href="" v-link="'login'">UserLogin</a>
-	//       <a class="mdl-navigation__link" href="" v-on:click="logout">LogOut</a>
+	// <header>
+	// <nav>
+	//   <div class="container">
+	//       <div class="nav-wrapper">
+	//         <a href="#" class="brand-logo">BlueRobin</a>
+	//         <ul id="nav-mobile" class="right hide-on-med-and-down">
+	//           <li><a class="" href="" v-link="'task'">Task</a></li>
+	//           <li><a class="" href="" v-link="'login'">UserLogin</a></li>
+	//           <li><a class="" href="" v-link="'signup'">SignUp</a></li>
+	//           <li><a class="" href="" v-on:click="logout">LogOut</a></li>
+	//         </ul>
+	//       </div>
+	//     </div>
 	//     </nav>
-	//   </div>
 	// </header>
 	
 	// </template>
@@ -14898,7 +14898,7 @@
 /* 93 */
 /***/ function(module, exports) {
 
-	module.exports = "<header class=\"mdl-layout__header\">\n  <div class=\"mdl-layout__header-row\">\n    <!-- Title -->\n    <span class=\"mdl-layout-title\">BlueRobin</span>\n    <!-- Add spacer, to align navigation to the right -->\n    <div class=\"mdl-layout-spacer\"></div>\n    <!-- Navigation. We hide it in small screens. -->\n    <nav class=\"mdl-navigation mdl-layout--large-screen-only\">\n      <a class=\"mdl-navigation__link\" href=\"\" v-link=\"'task'\">Task</a>\n      <a class=\"mdl-navigation__link\" href=\"\" v-link=\"'login'\">UserLogin</a>\n      <a class=\"mdl-navigation__link\" href=\"\" v-on:click=\"logout\">LogOut</a>\n    </nav>\n  </div>\n</header>";
+	module.exports = "<header>\n<nav>\n  <div class=\"container\">\n      <div class=\"nav-wrapper\">\n        <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\n        <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\n          <li><a class=\"\" href=\"\" v-link=\"'task'\">Task</a></li>\n          <li><a class=\"\" href=\"\" v-link=\"'login'\">UserLogin</a></li>\n          <li><a class=\"\" href=\"\" v-link=\"'signup'\">SignUp</a></li>\n          <li><a class=\"\" href=\"\" v-on:click=\"logout\">LogOut</a></li>\n        </ul>\n      </div>\n    </div>\n    </nav>\n</header>";
 
 /***/ },
 /* 94 */
@@ -14991,7 +14991,7 @@
 /* 98 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"app\">\n      <appHeader></appHeader>\n<div class=\"mdl-grid\">\n  <div class=\"mdl-cell mdl-cell--6-col\">CS 6</div>\n  <div class=\"mdl-cell mdl-cell--4-col\">CS 4</div>\n  <div class=\"mdl-cell mdl-cell--2-col\">CS 2</div>\n</div> \n      <router-view ></router-view>\n      <!-- <bar></bar> -->\n  </div>";
+	module.exports = "<div class=\"app\">\n      <appHeader></appHeader>\n      <router-view ></router-view>\n      <!-- <bar></bar> -->\n  </div>";
 
 /***/ },
 /* 99 */
@@ -15045,21 +15045,22 @@
 	// <template>
 	//   <div class="container" transition="animate_routerview">
 	//     <div class="login-form">
-	//       <div class="login-flash">What's your email address?</div>
-	//         <div class="mdl-textfield mdl-js-textfield">
-	//           <input class="mdl-textfield__input" type="text" v-model="user.username">
-	//           <label class="mdl-textfield__label" for="sample1">Email</label>
+	//         <div class="row">
+	//         <div class="input-field col s12">
+	//           <input class="validate" type="text" id="email" v-model="user.username">
+	//           <label for="email">Email</label>
 	//         </div>
-	//       <div class="login-flash">What's your password</div>
-	//       <div class="mdl-textfield mdl-js-textfield">
-	//         <input class="mdl-textfield__input" type="text" v-model="user.password">
-	//         <label class="mdl-textfield__label" for="sample1">Password</label>
+	//         </div>
+	//         <div class="row">
+	
+	//       <div class="input-field col s12">
+	//         <input class="validate" type="password" id="password" v-model="user.password">
+	//         <label for="password">Password</label>
 	//       </div>
-	//       <div>
-	//         <!-- Accent-colored raised button with ripple -->
-	//         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  v-on:click="doLogin">
-	//         GO!
-	//         </button>
+	//       <div class="row">
+	//         <div class="col ">
+	//         <button class="waves-effect waves-light btn"  v-on:click="doLogin">GO!</button>
+	//         </div>
 	//       </div>
 	
 	//     </div>
@@ -15105,10 +15106,136 @@
 /* 102 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"container\" transition=\"animate_routerview\">\n    <div class=\"login-form\">\n      <div class=\"login-flash\">What's your email address?</div>\n        <div class=\"mdl-textfield mdl-js-textfield\">\n          <input class=\"mdl-textfield__input\" type=\"text\" v-model=\"user.username\">\n          <label class=\"mdl-textfield__label\" for=\"sample1\">Email</label>\n        </div>\n      <div class=\"login-flash\">What's your password</div>\n      <div class=\"mdl-textfield mdl-js-textfield\">\n        <input class=\"mdl-textfield__input\" type=\"text\" v-model=\"user.password\">\n        <label class=\"mdl-textfield__label\" for=\"sample1\">Password</label>\n      </div>\n      <div>\n        <!-- Accent-colored raised button with ripple -->\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">\n        GO!\n        </button>\n      </div>\n      \n      \n    </div>\n  </div>";
+	module.exports = "<div class=\"container\" transition=\"animate_routerview\">\n    <div class=\"login-form\">\n        <div class=\"row\">\n        <div class=\"input-field col s12\">\n          <input class=\"validate\" type=\"text\" id=\"email\" v-model=\"user.username\">\n          <label for=\"email\">Email</label>\n        </div>\n        </div>\n        <div class=\"row\">\n          \n      <div class=\"input-field col s12\">\n        <input class=\"validate\" type=\"password\" id=\"password\" v-model=\"user.password\">\n        <label for=\"password\">Password</label>\n      </div>\n      <div class=\"row\">\n        <div class=\"col \">\n        <button class=\"waves-effect waves-light btn\"  v-on:click=\"doLogin\">GO!</button>\n        </div>\n      </div>\n      \n      \n    </div>\n  </div>\n</template>";
 
 /***/ },
 /* 103 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__vue_script__ = __webpack_require__(104)
+	__vue_template__ = __webpack_require__(105)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/user/signup.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 104 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _proxyBabel = __webpack_require__(8);
+	
+	var _proxyBabel2 = _interopRequireDefault(_proxyBabel);
+	
+	var _vue = __webpack_require__(2);
+	
+	var _vue2 = _interopRequireDefault(_vue);
+	
+	var _index = __webpack_require__(1);
+	
+	var _index2 = _interopRequireDefault(_index);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = {
+		data: function data() {
+			return {
+				registerData: {
+					email: '',
+					password: ''
+				}
+			};
+		},
+		ready: function ready() {
+			console.log('sign up --->');
+		},
+	
+		methods: {
+			signUp: function signUp() {
+				var root = 'http://127.0.0.1:1234/api';
+				var _this = this;
+				console.log('go');
+				$.ajax({
+					type: 'post',
+					url: root + '/user/signup',
+					data: _this.$data.registerData,
+					dataType: 'json'
+				}).done(function (res) {
+					console.log(res);
+				});
+			}
+		}
+	
+	};
+	// </script>
+
+	/* generated by vue-loader */
+	// <template>
+
+	// <div class="container">
+	//     <div class="login-panle">
+	//         <div class="login-panle-header">
+	//             <h3>注册</h3>
+	//         </div>
+	//         <div class="login-panle-container">
+	// <!--             <div class="row">
+
+	//                 <div class="input-field col s12">
+	//                     <input class="pure-input-1-2" type="text" id="username" ng-model="registerData.username"/>
+	//                     <label for="username">用户名</label>
+	//                 </div>
+	//             </div> -->
+	//             <div class="row">
+
+	//                 <div class="input-field col s12">
+	//                     <input class="pure-input-1-2" type="text" id="email" v-model="registerData.email"/>
+	//                     <label for="email">邮箱</label>
+	//                 </div>
+	//             </div>
+	//             <div class="row">
+	//                 <div class="input-field col s12">
+	//                     <input class="pure-input-1-2" type="password" id="password" v-model="registerData.password"/>
+	//                     <label for="password">密码</label>
+	//                 </div>
+	//             </div>
+	//             <div class="row">
+	//                 <div class="input-field col s12">
+	//                     <button class="btn waves-effect waves-light" v-on:click="signUp()">注册</button>
+	//                     <a v-link="'login'" class="btn waves-effect waves-light">已有账号？直接登录</a>
+	//                 </div>
+	//             </div>
+	//         </div>
+	//     </div>
+	// </div>
+	// </template>
+
+	// <script>
+
+/***/ },
+/* 105 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"container\">\n    <div class=\"login-panle\">\n        <div class=\"login-panle-header\">\n            <h3>注册</h3>\n        </div>\n        <div class=\"login-panle-container\">\n<!--             <div class=\"row\">\n\n                <div class=\"input-field col s12\">\n                    <input class=\"pure-input-1-2\" type=\"text\" id=\"username\" ng-model=\"registerData.username\"/>\n                    <label for=\"username\">用户名</label>\n                </div>\n            </div> -->\n            <div class=\"row\">\n\n                <div class=\"input-field col s12\">\n                    <input class=\"pure-input-1-2\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\n                    <label for=\"email\">邮箱</label>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"input-field col s12\">\n                    <input class=\"pure-input-1-2\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\n                    <label for=\"password\">密码</label>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"input-field col s12\">\n                    <button class=\"btn waves-effect waves-light\" v-on:click=\"signUp()\">注册</button>\n                    <a v-link=\"'login'\" class=\"btn waves-effect waves-light\">已有账号？直接登录</a>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
+
+/***/ },
+/* 106 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
