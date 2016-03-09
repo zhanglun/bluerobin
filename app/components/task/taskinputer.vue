@@ -1,5 +1,6 @@
 <template>
 <!--   <nav>
+  <nav>
     <div class="nav-wrapper">
       <form>
         <div class="input-field">
@@ -10,6 +11,7 @@
       </form>
     </div>
   </nav> -->
+
 	<div class="task-inputer" id="taskWriter">
 		<textarea type="text" v-model="newTask.title" id="taskInputer" placeholder="What is your focus today..." v-on:paste="uploadByPaste($event)" ></textarea>
 		<div class="task-inputer-bar">

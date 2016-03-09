@@ -14480,6 +14480,7 @@
 	
 	// <template>
 	// <!--   <nav>
+	//   <nav>
 	//     <div class="nav-wrapper">
 	//       <form>
 	//         <div class="input-field">
@@ -14490,6 +14491,7 @@
 	//       </form>
 	//     </div>
 	//   </nav> -->
+	
 	// 	<div class="task-inputer" id="taskWriter">
 	// 		<textarea type="text" v-model="newTask.title" id="taskInputer" placeholder="What is your focus today..." v-on:paste="uploadByPaste($event)" ></textarea>
 	// 		<div class="task-inputer-bar">
@@ -14702,7 +14704,7 @@
 /* 84 */
 /***/ function(module, exports) {
 
-	module.exports = "<!--   <nav>\n    <div class=\"nav-wrapper\">\n      <form>\n        <div class=\"input-field\">\n          <input id=\"search\" type=\"search\" required>\n          <label for=\"search\"><i class=\"material-icons\">search</i></label>\n          <i class=\"material-icons\">close</i>\n        </div>\n      </form>\n    </div>\n  </nav> -->\n\t<div class=\"task-inputer\" id=\"taskWriter\">\n\t\t<textarea type=\"text\" v-model=\"newTask.title\" id=\"taskInputer\" placeholder=\"What is your focus today...\" v-on:paste=\"uploadByPaste($event)\" ></textarea>\n\t\t<div class=\"task-inputer-bar\">\n\t\t\t<span id=\"browse\" class=\"icon-images\"></span>\n      <!-- Raised button with ripple -->\n      <button class=\"waves-effect waves-light btn\" v-on:click=\"createTask\">\n        确定\n      </button>\n\t\t</div>\n\t</div>\n\t<div class=\"task-images\">\n\t\t<div v-for=\"file in newTask.attachments\">\n\t\t\t<img v-bind:src=\"file.url\" alt=\"\" >\n\t\t</div>\n\t</div>";
+	module.exports = "<!--   <nav>\n  <nav>\n    <div class=\"nav-wrapper\">\n      <form>\n        <div class=\"input-field\">\n          <input id=\"search\" type=\"search\" required>\n          <label for=\"search\"><i class=\"material-icons\">search</i></label>\n          <i class=\"material-icons\">close</i>\n        </div>\n      </form>\n    </div>\n  </nav> -->\n\n\t<div class=\"task-inputer\" id=\"taskWriter\">\n\t\t<textarea type=\"text\" v-model=\"newTask.title\" id=\"taskInputer\" placeholder=\"What is your focus today...\" v-on:paste=\"uploadByPaste($event)\" ></textarea>\n\t\t<div class=\"task-inputer-bar\">\n\t\t\t<span id=\"browse\" class=\"icon-images\"></span>\n      <!-- Raised button with ripple -->\n      <button class=\"waves-effect waves-light btn\" v-on:click=\"createTask\">\n        确定\n      </button>\n\t\t</div>\n\t</div>\n\t<div class=\"task-images\">\n\t\t<div v-for=\"file in newTask.attachments\">\n\t\t\t<img v-bind:src=\"file.url\" alt=\"\" >\n\t\t</div>\n\t</div>";
 
 /***/ },
 /* 85 */
