@@ -12377,8 +12377,12 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var root = 'http://zhanglun.daoapp.io/api';
-	// let root = 'http://127.0.0.1:1234/api';
+	window.CONFIG = {
+	  // APIROOT: 'http://127.0.0.1:1234/api'
+	  APIROOT: 'http://zhanglun.daoapp.io/api'
+	};
+	
+	var root = window.CONFIG.APIROOT;
 	
 	function JSON2FormData(json) {
 	
@@ -12397,8 +12401,7 @@
 	proxy.User = {};
 	proxy.Upload = {};
 	
-	var CONFIG = {};
-	CONFIG.API = {
+	window.CONFIG.API = {
 	  TASKS: root + '/tasks'
 	};
 	
@@ -13855,7 +13858,7 @@
 	    var uploader = Qiniu.uploader({
 	        runtimes: 'html5,flash,html4', //上传模式,依次退化
 	        browse_button: opt.browse_button || 'browse', //上传选择的点选按钮，**必需**
-	        uptoken_url: 'http://zhanglun.daoapp.io/api/qiniu/token',
+	        uptoken_url: CONFIG.APIROOT + '/qiniu/token',
 	        //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
 	        // uptoken : '<Your upload token>',
 	        //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
@@ -15511,8 +15514,7 @@
 	
 		methods: {
 			signUp: function signUp() {
-				// let root = 'http://127.0.0.1:1234/api';
-				var root = 'http://zhanglun.daoapp.io/api';
+				var root = CONFIG.APIPROOT;
 				var _this = this;
 				console.log('go');
 				$.ajax({

@@ -1,7 +1,11 @@
 import $ajax from './ajax.babel.js';
 
-let root = 'http://zhanglun.daoapp.io/api';
-// let root = 'http://127.0.0.1:1234/api';
+window.CONFIG = {
+    // APIROOT: 'http://127.0.0.1:1234/api'
+    APIROOT: 'http://zhanglun.daoapp.io/api'
+};
+
+let root = window.CONFIG.APIROOT;
 
 function JSON2FormData(json) {
 
@@ -21,8 +25,7 @@ proxy.Task = {};
 proxy.User = {};
 proxy.Upload = {};
 
-let CONFIG = {};
-CONFIG.API = {
+window.CONFIG.API = {
   TASKS: root + '/tasks',
 };
 
