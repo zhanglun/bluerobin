@@ -154,20 +154,20 @@ $editbox-height: 34px;
 
 <template>
 
-  <div class="task-item" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
-  	<div class="task-checker">
+  <div class="item" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
+  	<div class="checker">
       <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
       <label for="{{task._id}}"></label>
   	</div>
-    <div class="task-content" v-on:dblclick="edit(task)">
+    <div class="content" v-on:dblclick="edit(task)">
       <div data-val="{{task.title}}">{{task.title}}</div>
       <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
     </div>
-    <div class="task-actions">
+    <div class="actions">
       <!-- Dropdown Trigger -->
-      <span class='dropdown-button btn' data-activates='dropdown-1'>Drop Me!</span>
+      <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>
 
-      <ul id='dropdown-1' class='dropdown-content'>
+      <ul id='dropdown-{{task._id}}' class='dropdown-content'>
         <li><span v-on:click="expandBroad(task)" class="icon-grin"></span></li>
           <li class="divider"></li>
         <li><span v-on:click="deleteTask(task)" class="icon-bin"></span></li>
@@ -186,7 +186,7 @@ module.exports = {
   	return {
   		editing: false,
   		taskEditing: null,
-      taskExpanding: null
+        taskExpanding: null
   	}
   },
   ready: function(){
@@ -241,4 +241,3 @@ module.exports = {
 
 }
 </script>
-

@@ -55,8 +55,8 @@
         }else{
           router.go('/login');
         }
-      });
-      
+      })
+
     },
     components: {
       task: TaskView,

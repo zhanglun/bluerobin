@@ -4,9 +4,9 @@ import router from './route/index.js';
 import App from './components/app.vue';
 
 
-router.redirect({
-  '*': '/login'
-});
+// router.redirect({
+//   '*': '/login'
+// });
 
 
 router.start(App, '#app');

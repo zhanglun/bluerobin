@@ -10,8 +10,12 @@ var _ajaxBabel2 = _interopRequireDefault(_ajaxBabel);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var root = 'http://zhanglun.daoapp.io/api';
-// let root = 'http://127.0.0.1:1234/api';
+window.CONFIG = {
+  // APIROOT: 'http://127.0.0.1:1234/api'
+  APIROOT: 'http://zhanglun.daoapp.io/api'
+};
+
+var root = window.CONFIG.APIROOT;
 
 function JSON2FormData(json) {
 
@@ -30,8 +34,7 @@ proxy.Task = {};
 proxy.User = {};
 proxy.Upload = {};
 
-var CONFIG = {};
-CONFIG.API = {
+window.CONFIG.API = {
   TASKS: root + '/tasks'
 };
 

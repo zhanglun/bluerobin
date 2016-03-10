@@ -58,9 +58,9 @@
 	
 	__webpack_require__(106);
 	
-	_index2.default.redirect({
-	  '*': '/login'
-	});
+	// router.redirect({
+	//   '*': '/login'
+	// });
 	
 	_index2.default.start(_app2.default, '#app');
 	
@@ -14538,9 +14538,9 @@
 	
 	// <template>
 	
-	//   <div class="task-item" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
+	//   <div class="item" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
 	
-	//   	<div class="task-checker">
+	//   	<div class="checker">
 	
 	//       <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
 	
@@ -14548,7 +14548,7 @@
 	
 	//   	</div>
 	
-	//     <div class="task-content" v-on:dblclick="edit(task)">
+	//     <div class="content" v-on:dblclick="edit(task)">
 	
 	//       <div data-val="{{task.title}}">{{task.title}}</div>
 	
@@ -14556,13 +14556,13 @@
 	
 	//     </div>
 	
-	//     <div class="task-actions">
+	//     <div class="actions">
 	
 	//       <!-- Dropdown Trigger -->
 	
-	//       <span class='dropdown-button btn' data-activates='dropdown-1'>Drop Me!</span>
+	//       <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>
 	
-	//       <ul id='dropdown-1' class='dropdown-content'>
+	//       <ul id='dropdown-{{task._id}}' class='dropdown-content'>
 	
 	//         <li><span v-on:click="expandBroad(task)" class="icon-grin"></span></li>
 	
@@ -14584,7 +14584,7 @@
 /* 78 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"task-item\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}\" >\r\n  \t<div class=\"task-checker\">\r\n      <input type=\"checkbox\" id=\"{{task._id}}\"  v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n      <label for=\"{{task._id}}\"></label>\r\n  \t</div>\r\n    <div class=\"task-content\" v-on:dblclick=\"edit(task)\">\r\n      <div data-val=\"{{task.title}}\">{{task.title}}</div>\r\n      <input type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n    </div>\r\n    <div class=\"task-actions\">\r\n      <!-- Dropdown Trigger -->\r\n      <span class='dropdown-button btn' data-activates='dropdown-1'>Drop Me!</span>\r\n\r\n      <ul id='dropdown-1' class='dropdown-content'>\r\n        <li><span v-on:click=\"expandBroad(task)\" class=\"icon-grin\"></span></li>\r\n          <li class=\"divider\"></li>\r\n        <li><span v-on:click=\"deleteTask(task)\" class=\"icon-bin\"></span></li>\r\n      </ul>\r\n  \t</div>\r\n  </div>";
+	module.exports = "<div class=\"item\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}\" >\r\n  \t<div class=\"checker\">\r\n      <input type=\"checkbox\" id=\"{{task._id}}\"  v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n      <label for=\"{{task._id}}\"></label>\r\n  \t</div>\r\n    <div class=\"content\" v-on:dblclick=\"edit(task)\">\r\n      <div data-val=\"{{task.title}}\">{{task.title}}</div>\r\n      <input type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n    </div>\r\n    <div class=\"actions\">\r\n      <!-- Dropdown Trigger -->\r\n      <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>\r\n\r\n      <ul id='dropdown-{{task._id}}' class='dropdown-content'>\r\n        <li><span v-on:click=\"expandBroad(task)\" class=\"icon-grin\"></span></li>\r\n          <li class=\"divider\"></li>\r\n        <li><span v-on:click=\"deleteTask(task)\" class=\"icon-bin\"></span></li>\r\n      </ul>\r\n  \t</div>\r\n  </div>";
 
 /***/ },
 /* 79 */
