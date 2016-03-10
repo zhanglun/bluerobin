@@ -59,7 +59,8 @@
 
 		methods: {
 			signUp(){
-				let root = 'http://127.0.0.1:1234/api';
+				// let root = 'http://127.0.0.1:1234/api';
+        let root = 'http://zhanglun.daoapp.io/api';
 				let _this = this;
 				console.log('go');
 				$.ajax({

@@ -165,13 +165,12 @@ $editbox-height: 34px;
     </div>
     <div class="task-actions">
       <!-- Dropdown Trigger -->
-      <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>
+      <span class='dropdown-button btn' data-activates='dropdown-1'>Drop Me!</span>
 
-      <!-- Dropdown Structure -->
-      <ul id='dropdown-{{task._id}}' class='dropdown-content'>
-      <li><span v-on:click="expandBroad(task)" class="icon-grin"></span></li>
-        <li class="divider"></li>
-	    <li><span v-on:click="deleteTask(task)" class="icon-bin"></span></li>
+      <ul id='dropdown-1' class='dropdown-content'>
+        <li><span v-on:click="expandBroad(task)" class="icon-grin"></span></li>
+          <li class="divider"></li>
+        <li><span v-on:click="deleteTask(task)" class="icon-bin"></span></li>
       </ul>
   	</div>
   </div>
@@ -191,8 +190,7 @@ module.exports = {
   	}
   },
   ready: function(){
-    $('.dropdown-button').dropdown(
-    );
+    $('.dropdown-button').dropdown();
   },
 
   directives: {
