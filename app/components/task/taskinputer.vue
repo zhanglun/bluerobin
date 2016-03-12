@@ -91,6 +91,13 @@ export default {
 	      _this.uploader.addFile(_this.newFile);
 	    });
 
+	    this.uploader.bind('BeforeUpload', function(up, file){
+	    	console.log(file);
+	    	up.setOption('multipart_params', {
+          relativePath: 'test_prefixer_hahhah_______name_'
+        });
+	    });
+
 	    this.uploader.bind('FileUploaded', function(up, file, res){
 	      _this.newTask.attachments.push({
 	        name: file.name,
@@ -100,7 +107,6 @@ export default {
 	        height: file.height,
 	        type: file.type
 	      });
-	      debugger;
 
 	    });
 		},

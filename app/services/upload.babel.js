@@ -22,13 +22,14 @@
       auto_start: true,                 //选择文件后自动上传，若关闭需要自己绑定事件触发上传,
       init: {
           'FilesAdded': function(up, files) {
-            console.log('from upload');
-              console.log(files);
               plupload.each(files, function(file) {
                   // 文件添加进队列后,处理相关的事情
               });
           },
           'BeforeUpload': function(up, file) {
+              console.log(file);
+
+              debugger;
                  // 每个文件上传前,处理相关的事情
           },
           'UploadProgress': function(up, file) {
@@ -57,7 +58,7 @@
               // 该配置必须要在 unique_names: false , save_key: false 时才生效
               // var key = "";
               // do something with key here
-              return file.name;
+              return 'test_prefixer_hahhahah_______' + file.name;
           }
       }
     });
