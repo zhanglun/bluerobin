@@ -35,15 +35,18 @@ $editbox-height: 34px;
   @extend .flex-box;
   height: $editbox-height + 10;
   line-height: $editbox-height;
-	padding: 4px 10px;
   box-sizing: border-box;
   font-size: 14px;
   color: #343434;
   background: $white;
+  border-bottom: .1em solid #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0,0,0,.24);
+  line-height: 2em;
+  padding: .7em;
 
   /*transition: all 3.3s ease;*/
   & + &{
-    margin-top: 2px;
+    // margin-top: 1px;
   }
   .task-check, .task-actions{
     -webkit-flex: 0 1 auto;
@@ -85,6 +88,10 @@ $editbox-height: 34px;
 }
 
 .task-checker {
+    [type="checkbox"]+label{
+        padding:0;
+        width: 20px;
+    }
 }
 
 .task-content {
@@ -154,16 +161,16 @@ $editbox-height: 34px;
 
 <template>
 
-  <div class="item" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
-  	<div class="checker">
+  <div class="task-item" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
+  	<div class="task-checker">
       <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
       <label for="{{task._id}}"></label>
   	</div>
-    <div class="content" v-on:dblclick="edit(task)">
+    <div class="task-content" v-on:dblclick="edit(task)">
       <div data-val="{{task.title}}">{{task.title}}</div>
       <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
     </div>
-    <div class="actions">
+    <div class="task-actions">
       <!-- Dropdown Trigger -->
       <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>
 

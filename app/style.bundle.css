@@ -67,14 +67,15 @@
 .task-item {
   height: 44px;
   line-height: 34px;
-  padding: 4px 10px;
   box-sizing: border-box;
   font-size: 14px;
   color: #343434;
   background: #fff;
+  border-bottom: .1em solid #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24);
+  line-height: 2em;
+  padding: .7em;
   /*transition: all 3.3s ease;*/ }
-  .task-item + .task-item {
-    margin-top: 2px; }
   .task-item .task-check, .task-item .task-actions {
     -webkit-flex: 0 1 auto;
     -webkit-box-flex: 0;
@@ -101,6 +102,10 @@
     visibility: hidden; }
   .task-item:hover .task-actions {
     display: block; }
+
+.task-checker [type="checkbox"] + label {
+  padding: 0;
+  width: 20px; }
 
 .task-content > input {
   border: 1px solid #d4d4d4;
@@ -1765,7 +1770,7 @@ body {
 body {
   min-height: 100%;
   font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', 宋体, 黑体, sans-serif;
-  background-color: #F2F2F2;
+  background-color: #ECECEC;
   background-size: cover; }
 
 h1,
