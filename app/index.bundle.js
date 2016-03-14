@@ -12378,8 +12378,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	window.CONFIG = {
-	  // APIROOT: 'http://127.0.0.1:1234/api'
-	  APIROOT: 'http://zhanglun.daoapp.io/api'
+	  APIROOT: 'http://127.0.0.1:1234/api'
+	  // APIROOT: 'http://zhanglun.daoapp.io/api'
 	};
 	
 	var root = window.CONFIG.APIROOT;
@@ -13878,13 +13878,14 @@
 	        auto_start: true, //选择文件后自动上传，若关闭需要自己绑定事件触发上传,
 	        init: {
 	            'FilesAdded': function FilesAdded(up, files) {
-	                console.log('from upload');
-	                console.log(files);
 	                plupload.each(files, function (file) {
 	                    // 文件添加进队列后,处理相关的事情
 	                });
 	            },
 	            'BeforeUpload': function BeforeUpload(up, file) {
+	                console.log(file);
+	
+	                debugger;
 	                // 每个文件上传前,处理相关的事情
 	            },
 	            'UploadProgress': function UploadProgress(up, file) {
@@ -13913,7 +13914,7 @@
 	                // 该配置必须要在 unique_names: false , save_key: false 时才生效
 	                // var key = "";
 	                // do something with key here
-	                return file.name;
+	                return 'test_prefixer_hahhahah_______' + file.name;
 	            }
 	        }
 	    });
@@ -14776,6 +14777,13 @@
 					_this.uploader.addFile(_this.newFile);
 				});
 	
+				this.uploader.bind('BeforeUpload', function (up, file) {
+					console.log(file);
+					up.setOption('multipart_params', {
+						relativePath: 'test_prefixer_hahhah_______name_'
+					});
+				});
+	
 				this.uploader.bind('FileUploaded', function (up, file, res) {
 					_this.newTask.attachments.push({
 						name: file.name,
@@ -14785,7 +14793,6 @@
 						height: file.height,
 						type: file.type
 					});
-					debugger;
 				});
 			},
 	
