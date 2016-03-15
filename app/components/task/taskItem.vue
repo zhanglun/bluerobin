@@ -2,16 +2,9 @@
 
 @import '../../public/stylesheets/variables';
 
-.flex-box{
-  display: -webkit-flex;
-  display: flex;
-  >div{
-    -webkit-flex: 1 auto 1;
-    flex: 1 auto 1;
-  }
-}
 
 $editbox-height: 34px;
+
 .red {
   color: #f00;
 }
@@ -32,7 +25,6 @@ $editbox-height: 34px;
 }
 
 .task-item {
-  @extend .flex-box;
   height: $editbox-height + 10;
   line-height: $editbox-height;
   box-sizing: border-box;
@@ -49,12 +41,8 @@ $editbox-height: 34px;
     // margin-top: 1px;
   }
   .task-check, .task-actions{
-    -webkit-flex: 0 1 auto;
-    flex: 0 1 auto;
   }
   .task-content{
-    -webkit-flex: 1 1 auto;
-    flex: 1 1 auto;
       overflow: hidden;
   }
   &.finished {
@@ -88,6 +76,9 @@ $editbox-height: 34px;
 }
 
 .task-checker {
+  float:left;
+  width: 26px;
+  text-align: center;
     [type="checkbox"]+label{
         padding:0;
         width: 20px;
@@ -161,26 +152,30 @@ $editbox-height: 34px;
 
 <template>
 
-  <div class="task-item" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
-  	<div class="task-checker">
-      <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
-      <label for="{{task._id}}"></label>
-  	</div>
-    <div class="task-content" v-on:dblclick="edit(task)">
-      <div data-val="{{task.title}}">{{task.title}}</div>
-      <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
-    </div>
-    <div class="task-actions">
-      <!-- Dropdown Trigger -->
-      <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>
-
-      <ul id='dropdown-{{task._id}}' class='dropdown-content'>
-        <li><span v-on:click="expandBroad(task)" class="icon-grin"></span></li>
-          <li class="divider"></li>
-        <li><span v-on:click="deleteTask(task)" class="icon-bin"></span></li>
-      </ul>
-  	</div>
+  <div class="collapsible-header task-item " transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
+      <div class="task-checker">
+        <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
+        <label for="{{task._id}}"></label>
+      </div>
+      <div class="task-content" v-on:dblclick="edit(task)">
+        <div data-val="{{task.title}}">{{task.title}}</div>
+        <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
+      </div>
   </div>
+
+    <div class="collapsible-body">
+        <h3>This is body for detail</h3>
+         <!-- Dropdown Trigger -->
+        <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>
+
+        <ul id='dropdown-{{task._id}}' class='dropdown-content'>
+          <li><span v-on:click="expandBroad(task)" class="icon-grin"></span></li>
+            <li class="divider"></li>
+          <li><span v-on:click="deleteTask(task)" class="icon-bin"></span></li>
+        </ul>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente voluptatum adipisci esse, illo, sit labore animi maxime blanditiis eveniet obcaecati eius neque! Sed quas dolores amet, velit, nostrum asperiores ipsum!</p>
+    </div>
+
 </template>
 
 <script>

@@ -10,9 +10,11 @@
 
 <template>
 <div class="task-list-container">
-	<div class="task-list">
-		<taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
-	</div>
+	<ul class="task-list collapsible popout" data-collapsible="accordion">
+		<li v-for="task in tasklist">
+			<taskitem  :task="task" :index="$index"></taskitem>
+		</li>
+	</ul>
 </div>
 </template>
 

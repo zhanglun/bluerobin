@@ -37,17 +37,6 @@
 .gird-12 {
   width: 100%; }
 
-.flex-box, .task-item {
-  display: -webkit-flex;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex; }
-  .flex-box > div, .task-item > div {
-    -webkit-flex: 1 auto 1;
-    -webkit-box-flex: 1;
-        -ms-flex: 1 auto 1;
-            flex: 1 auto 1; }
-
 .red {
   color: #f00; }
 
@@ -76,16 +65,7 @@
   line-height: 2em;
   padding: .7em;
   /*transition: all 3.3s ease;*/ }
-  .task-item .task-check, .task-item .task-actions {
-    -webkit-flex: 0 1 auto;
-    -webkit-box-flex: 0;
-        -ms-flex: 0 1 auto;
-            flex: 0 1 auto; }
   .task-item .task-content {
-    -webkit-flex: 1 1 auto;
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 auto;
-            flex: 1 1 auto;
     overflow: hidden; }
   .task-item.finished .task-content {
     cursor: default;
@@ -103,9 +83,13 @@
   .task-item:hover .task-actions {
     display: block; }
 
-.task-checker [type="checkbox"] + label {
-  padding: 0;
-  width: 20px; }
+.task-checker {
+  float: left;
+  width: 26px;
+  text-align: center; }
+  .task-checker [type="checkbox"] + label {
+    padding: 0;
+    width: 20px; }
 
 .task-content > input {
   border: 1px solid #d4d4d4;
