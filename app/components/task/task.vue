@@ -54,8 +54,8 @@
 	  },
 
 	  ready(){
-	  	
-	  	// router.go('/login');	
+
+	  	// router.go('/login');
 
 	  },
 

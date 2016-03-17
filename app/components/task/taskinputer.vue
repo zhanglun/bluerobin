@@ -1,12 +1,15 @@
 <template>
-
+<!-- Modal Structure -->
+<div id="modalLayer-inputer" class="modal bottom-sheet">
+  <div class="modal-content">
+	<h4>Modal Header</h4>
 	<div class="task-inputer" id="taskWriter">
 		<textarea type="text" v-model="newTask.title" id="taskInputer" placeholder="What is your focus today..." v-on:paste="uploadByPaste($event)" ></textarea>
 		<div class="task-inputer-bar">
 			<span id="browse" class="icon-images"></span>
-      <button class="waves-effect waves-light btn" v-on:click="createTask">
-        确定
-      </button>
+			<button class="waves-effect waves-light btn" v-on:click="createTask">
+			确定
+			</button>
 		</div>
 	</div>
 	<div class="task-images">
@@ -14,19 +17,24 @@
 			<img v-bind:src="file.url" alt="" >
 		</div>
 	</div>
-
-		<!-- 底部按钮 -->
-	  <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red">
-      <i class="large material-icons">mode_edit</i>
-    </a>
-    <ul>
-      <!-- <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li> -->
-      <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-      <!-- <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li> -->
-      <!-- <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li> -->
-    </ul>
   </div>
+  <div class="modal-footer">
+	<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
+</div>
+
+	<!-- 底部按钮 -->
+	<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+		<a class="btn-floating btn-large red waves-effect waves-light btn">
+			<i class="large material-icons">mode_edit</i>
+		</a>
+		<ul>
+		<!-- <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li> -->
+		<li><a class="btn-floating yellow darken-1 modal-trigger" data-target="mofalLayer-inputer"><i class="material-icons">format_quote</i></a></li>
+		<!-- <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li> -->
+		<!-- <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li> -->
+		</ul>
+	</div>
 </template>
 
 <script>
@@ -65,10 +73,10 @@ export default {
 	},
 	watch: {
 		'newTask.title': function(val, oldval){
-			localStorage.newTask = JSON.stringify(this.newTask);		
+			localStorage.newTask = JSON.stringify(this.newTask);
 		},
 		'newTask.attachments': function(val, oldval){
-			localStorage.newTask = JSON.stringify(this.newTask);		
+			localStorage.newTask = JSON.stringify(this.newTask);
 		}
 	},
 	ready(){
@@ -76,6 +84,11 @@ export default {
 		localStorage.newTask ? this.newTask = JSON.parse(localStorage.newTask) : null;
 
 		this.init();
+
+		$('.modal-trigger').click(function(){
+          $('#modalLayer-inputer').openModal();
+        });
+
 	},
 
 	methods: {
@@ -86,7 +99,7 @@ export default {
 			this.$set('uploader', Uploader({
 				container: 'taskWriter'
 			}));
-	    
+
 	    this.uploader.bind('PostInit', function(){
 	      _this.uploader.addFile(_this.newFile);
 	    });

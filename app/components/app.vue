@@ -36,9 +36,6 @@
   import TaskView from './task/task.vue';
   import HomeView from './home/home.vue';
   import AppHeaderView from './header/header.vue';
-  import BarView from './bar/navbar.vue';
-
-  // require('materialize-css');
 
   export default{
     data(){
@@ -60,7 +57,6 @@
     },
     components: {
       task: TaskView,
-      appheader: AppHeaderView,
-      bar: BarView
+      appheader: AppHeaderView
     }
   }

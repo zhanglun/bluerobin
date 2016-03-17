@@ -64,9 +64,25 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24);
   line-height: 2em;
   padding: .7em;
-  /*transition: all 3.3s ease;*/ }
-  .task-item .task-content {
-    overflow: hidden; }
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row; }
+  .task-item.collapsible-header {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row; }
   .task-item.finished .task-content {
     cursor: default;
     text-decoration: line-through; }
@@ -84,25 +100,28 @@
     display: block; }
 
 .task-checker {
-  float: left;
-  width: 26px;
-  text-align: center; }
-  .task-checker [type="checkbox"] + label {
-    padding: 0;
-    width: 20px; }
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto; }
 
-.task-content > input {
-  border: 1px solid #d4d4d4;
-  display: none;
-  outline: none;
-  font-size: 14px; }
-
-.task-content > div {
-  padding: 0 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  -webkit-user-select: none; }
+.task-content {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  overflow: hidden; }
+  .task-content > input {
+    border: 1px solid #d4d4d4;
+    display: none;
+    outline: none;
+    font-size: 14px; }
+  .task-content > div {
+    padding: 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-user-select: none; }
 
 #task-completed {
   display: none; }
@@ -210,23 +229,6 @@
       font-weight: lighter;
       letter-spacing: -2px;
       line-height: 0; }
-.app-bar {
-  -webkit-user-select: none;
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-  text-align: center; }
-  .app-bar-item {
-    display: inline-block;
-    font-size: 2em;
-    padding: 8px;
-    margin: 0 10px; }
-    .app-bar-item > a {
-      color: #fff;
-      text-decoration: none; }
-      .app-bar-item > a:link {
-        color: #fff; }
 .login-form {
   width: 400px;
   padding: 14px;

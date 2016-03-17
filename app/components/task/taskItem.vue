@@ -35,16 +35,13 @@ $editbox-height: 34px;
   box-shadow: 0 2px 4px rgba(0,0,0,.24);
   line-height: 2em;
   padding: .7em;
+  &.collapsible-header{
+    display: flex;
+    flex-direction: row;
+  }
+  display: flex;
+  flex-direction: row;
 
-  /*transition: all 3.3s ease;*/
-  & + &{
-    // margin-top: 1px;
-  }
-  .task-check, .task-actions{
-  }
-  .task-content{
-      overflow: hidden;
-  }
   &.finished {
     .task-content {
     	cursor: default;
@@ -73,19 +70,20 @@ $editbox-height: 34px;
       display: block;
     }
   }
+
 }
 
 .task-checker {
-  float:left;
-  width: 26px;
-  text-align: center;
+    flex: 0 0 auto;
     [type="checkbox"]+label{
-        padding:0;
-        width: 20px;
+        // padding:0;
+        // width: 20px;
     }
 }
 
 .task-content {
+    flex: 1 1 auto;
+    overflow: hidden;
   > input {
     @extend .modify;
     border: 1px solid #d4d4d4;
@@ -157,7 +155,7 @@ $editbox-height: 34px;
         <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
         <label for="{{task._id}}"></label>
       </div>
-      <div class="task-content" v-on:dblclick="edit(task)">
+      <div class="task-content">
         <div data-val="{{task.title}}">{{task.title}}</div>
         <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
       </div>
@@ -208,7 +206,7 @@ module.exports = {
   },
   methods: {
   	toggleTask(task) {
-  		this.task.completed = !this.task.completed;
+      this.task.completed = !this.task.completed;
       this.$dispatch('edit task', task);
   	},
   	edit(task) {
