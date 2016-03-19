@@ -11,9 +11,9 @@
 <template>
 <div class="task-list-container">
 	<ul class="task-list collapsible popout" data-collapsible="accordion">
-		<li v-for="task in tasklist">
-			<taskitem  :task="task" :index="$index"></taskitem>
-		</li>
+	<li v-for="task in tasklist">
+		<taskitem  :task="task" :index="$index"></taskitem>
+	</li>
 	</ul>
 </div>
 </template>
@@ -32,11 +32,6 @@
 			taskitem: TaskItemView
 		},
 		ready() {
-			$(document).ready(function(){
-			  $('.collapsible').collapsible({
-				accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-			  });
-			});
 			this.getTaskList();
 		},
 		methods: {

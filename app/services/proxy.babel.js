@@ -1,8 +1,8 @@
 import $ajax from './ajax.babel.js';
 
 window.CONFIG = {
-    // APIROOT: 'http://127.0.0.1:1234/api'
-    APIROOT: 'http://zhanglun.daoapp.io/api'
+    APIROOT: 'http://127.0.0.1:1234/api'
+    // APIROOT: 'http://zhanglun.daoapp.io/api'
 };
 
 let root = window.CONFIG.APIROOT;
@@ -79,18 +79,18 @@ proxy.Task.delete = function(task) {
  * @return {[type]}      [description]
  */
 proxy.Task.edit = function(task) {
-  return fetch(root + '/tasks/' + task._id, {
-      method: 'put',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: new JSON2FormData(task)
-    })
-    .then(function(res) {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+  return $.ajax({
+    url: root + '/tasks/' + task._id,
+    method: 'put',
+    data: task,
+    dataType: 'json'
+  })
+  .done(function(res){
+    return res;
+  })
+  .fail(function(xhr){
+    return xhr;
+  });
 };
 
 
