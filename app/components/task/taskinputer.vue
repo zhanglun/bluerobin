@@ -105,9 +105,7 @@ export default {
 	    });
 
 	    this.uploader.bind('BeforeUpload', function(up, file){
-	    	// up.setOption('multipart_params', {
-      //     relativePath: 'test_prefixer_hahhah_______name_'
-      //   });
+
 	    });
 
 	    this.uploader.bind('FileUploaded', function(up, file, res){
@@ -195,7 +193,6 @@ export default {
     height: 100%;
     box-sizing: border-box;
     display: block;
-    height: 40px;
 	  padding: 8px;
     font-size: 14px;
     outline: none;

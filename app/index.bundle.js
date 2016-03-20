@@ -14410,6 +14410,15 @@
 	//       <div class="task-detail">
 	//         {{task.title}}       
 	//       </div>
+	//       <div class="task-attachments">
+	//         <ul>
+	//           <li v-for="attachment in task.attachments">
+	//             <a href="{{attachment.url}}" title="{{attachment.name}}">
+	//               <img src="{{attachment.url}}" alt="{{attachment.name}}"> 
+	//             </a>
+	//           </li>
+	//         </ul>
+	//       </div>
 	//       <div class="task-editbar">
 	//         <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>
 	
@@ -14429,7 +14438,7 @@
 /* 78 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"collapsible-header task-item \" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}\" >\n      <div class=\"task-checker\">\n        <input type=\"checkbox\" id=\"{{task._id}}\"  v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n        <label for=\"{{task._id}}\"></label>\n      </div>\n      <div class=\"task-content\">\n        <div data-val=\"{{task.title}}\">{{task.title}}</div>\n        <input type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n      </div>\n  </div>\n\n    <div class=\"collapsible-body\">\n      <div class=\"task-detail\">\n        {{task.title}}        \n      </div>\n      <div class=\"task-editbar\">\n        <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>\n\n        <ul id='dropdown-{{task._id}}' class='dropdown-content'>\n          <li><span v-on:click=\"expandBroad(task)\" class=\"icon-grin\"></span></li>\n            <li class=\"divider\"></li>\n          <li><span v-on:click=\"deleteTask(task)\" class=\"icon-bin\"></span></li>\n        </ul>\n      </div>\n    </div>";
+	module.exports = "<div class=\"collapsible-header task-item \" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}\" >\n      <div class=\"task-checker\">\n        <input type=\"checkbox\" id=\"{{task._id}}\"  v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n        <label for=\"{{task._id}}\"></label>\n      </div>\n      <div class=\"task-content\">\n        <div data-val=\"{{task.title}}\">{{task.title}}</div>\n        <input type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n      </div>\n  </div>\n\n    <div class=\"collapsible-body\">\n      <div class=\"task-detail\">\n        {{task.title}}        \n      </div>\n      <div class=\"task-attachments\">\n        <ul>\n          <li v-for=\"attachment in task.attachments\">\n            <a href=\"{{attachment.url}}\" title=\"{{attachment.name}}\">\n              <img src=\"{{attachment.url}}\" alt=\"{{attachment.name}}\">  \n            </a>\n          </li>\n        </ul>\n      </div>\n      <div class=\"task-editbar\">\n        <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>\n\n        <ul id='dropdown-{{task._id}}' class='dropdown-content'>\n          <li><span v-on:click=\"expandBroad(task)\" class=\"icon-grin\"></span></li>\n            <li class=\"divider\"></li>\n          <li><span v-on:click=\"deleteTask(task)\" class=\"icon-bin\"></span></li>\n        </ul>\n      </div>\n    </div>";
 
 /***/ },
 /* 79 */
@@ -14592,11 +14601,7 @@
 					_this.uploader.addFile(_this.newFile);
 				});
 	
-				this.uploader.bind('BeforeUpload', function (up, file) {
-					// up.setOption('multipart_params', {
-					//     relativePath: 'test_prefixer_hahhah_______name_'
-					//   });
-				});
+				this.uploader.bind('BeforeUpload', function (up, file) {});
 	
 				this.uploader.bind('FileUploaded', function (up, file, res) {
 					_this.newTask.attachments.push({
@@ -14678,7 +14683,6 @@
 	//     height: 100%;
 	//     box-sizing: border-box;
 	//     display: block;
-	//     height: 40px;
 	// 	  padding: 8px;
 	//     font-size: 14px;
 	//     outline: none;
@@ -14730,7 +14734,11 @@
 	
 	Tool.uploadImageSrc = function (filename, w, h) {
 		console.log(filename);
-		return 'http://7xnrrd.com1.z0.glb.clouddn.com/' + filename + '?imageView2/1/w/140/h/140';
+		var query = '';
+		if (w && h) {
+			query = '?imageView2/1/' + w + '/h/' + h;
+		}
+		return 'http://7xnrrd.com1.z0.glb.clouddn.com/' + filename + query;
 	};
 	
 	exports.default = Tool;
