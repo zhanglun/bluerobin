@@ -1,16 +1,11 @@
 <template>
 <!-- Modal Structure -->
-<div id="modalLayer-inputer" class="modal bottom-sheet">
+<!-- <div id="modalLayer-inputer" class="modal bottom-sheet"> -->
+<div id="modalLayer-inputer" class="modal modal-fixed-footer">
   <div class="modal-content">
-	<h4>Modal Header</h4>
+	<h5>创建新的记录</h5>
 	<div class="task-inputer" id="taskWriter">
 		<textarea type="text" v-model="newTask.title" id="taskInputer" placeholder="What is your focus today..." v-on:paste="uploadByPaste($event)" ></textarea>
-		<div class="task-inputer-bar">
-			<span id="browse" class="icon-images"></span>
-			<button class="waves-effect waves-light btn" v-on:click="createTask">
-			确定
-			</button>
-		</div>
 	</div>
 	<div class="task-images">
 		<div v-for="file in newTask.attachments">
@@ -19,7 +14,12 @@
 	</div>
   </div>
   <div class="modal-footer">
-	<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+		<div class="task-inputer-bar">
+			<span id="browse" class="icon-images"></span>
+			<button class=" modal-action modal-close waves-effect waves-green waves-light btn" v-on:click="createTask">
+			确定
+			</button>
+			</div>
   </div>
 </div>
 
@@ -105,10 +105,9 @@ export default {
 	    });
 
 	    this.uploader.bind('BeforeUpload', function(up, file){
-	    	console.log(file);
-	    	up.setOption('multipart_params', {
-          relativePath: 'test_prefixer_hahhah_______name_'
-        });
+	    	// up.setOption('multipart_params', {
+      //     relativePath: 'test_prefixer_hahhah_______name_'
+      //   });
 	    });
 
 	    this.uploader.bind('FileUploaded', function(up, file, res){
@@ -167,18 +166,22 @@ export default {
 
 
 
-<style lang="sass">
+<style lang="less">
 
 @import '../../public/stylesheets/variables';
 
+.modal.bottom-sheet{
+	max-height: 60%;
+}
 .task-inputer{
 	box-sizing: border-box;
 	width:100%;
-	background: $white;
+	height: 300px;
+	background: @white;
 	&-bar{
 		overflow: hidden;
-	  padding: 8px;
-	  border-top: 1px solid #E0E0E0;
+	  // padding: 8px;
+	  // border-top: 1px solid #E0E0E0;
 	  >[class^="icon"]{
 	  	display: inline-block;
 	  	width: 20px;
@@ -189,6 +192,7 @@ export default {
 	}
 	>textarea{
     width: 100%;
+    height: 100%;
     box-sizing: border-box;
     display: block;
     height: 40px;

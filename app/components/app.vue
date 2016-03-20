@@ -1,4 +1,4 @@
-<style lang="sass">
+<style lang="less">
 
  .app{
   height: 100%;

@@ -1,9 +1,8 @@
-<style lang="sass">
+<style lang="less">
 
 @import '../../public/stylesheets/variables';
 
-
-$editbox-height: 34px;
+@editbox-height: 34px;
 
 .red {
   color: #f00;
@@ -19,18 +18,18 @@ $editbox-height: 34px;
 .modify {
   width: 100%;
   box-sizing: border-box;
-  line-height: $editbox-height;
-  height: $editbox-height;
+  line-height: @editbox-height;
+  height: @editbox-height;
   padding: 0 4px;
 }
 
 .task-item {
-  height: $editbox-height + 10;
-  line-height: $editbox-height;
+  height: @editbox-height + 10;
+  line-height: @editbox-height;
   box-sizing: border-box;
   font-size: 14px;
   color: #343434;
-  background: $white;
+  background: @white;
   border-bottom: .1em solid #f5f5f5;
   box-shadow: 0 2px 4px rgba(0,0,0,.24);
   line-height: 2em;
@@ -162,8 +161,10 @@ $editbox-height: 34px;
   </div>
 
     <div class="collapsible-body">
-        <h3>This is body for detail</h3>
-         <!-- Dropdown Trigger -->
+      <div class="task-detail">
+        {{task.title}}        
+      </div>
+      <div class="task-editbar">
         <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>
 
         <ul id='dropdown-{{task._id}}' class='dropdown-content'>
@@ -171,7 +172,7 @@ $editbox-height: 34px;
             <li class="divider"></li>
           <li><span v-on:click="deleteTask(task)" class="icon-bin"></span></li>
         </ul>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente voluptatum adipisci esse, illo, sit labore animi maxime blanditiis eveniet obcaecati eius neque! Sed quas dolores amet, velit, nostrum asperiores ipsum!</p>
+      </div>
     </div>
 
 </template>

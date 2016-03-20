@@ -1,4 +1,4 @@
-<style lang="sass">
+<style lang="less">
 .task-list-container{
 	box-sizing: border-box;
 	margin-top: 15px;

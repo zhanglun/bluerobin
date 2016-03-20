@@ -38,16 +38,16 @@ module.exports = {
       },
       include: APP_PATH
     }, {
-      test: /\.css$|\.scss$/,
+      test: /\.css$|\.less$/,
       // loaders: ['style-loader', 'css-loader?sourceMap', 'sass-loader'],
-      loader: ExtractTextPlugin.extract(['css-loader?sourceMap', 'sass-loader']),
+      loader: ExtractTextPlugin.extract(['css-loader?sourceMap', 'less-loader']),
       include: APP_PATH
     }],
   },
   vue: {
     loaders: {
       css: ExtractTextPlugin.extract("css"),
-      sass: ExtractTextPlugin.extract("css!sass")
+      less: ExtractTextPlugin.extract("css!less")
     }
   },
   babel: {

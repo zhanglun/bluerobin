@@ -50,7 +50,7 @@
     }      
   }
 </script>
-<style lang="sass">
+<style lang="less">
  .login-form {
   width:400px;
   padding:14px;

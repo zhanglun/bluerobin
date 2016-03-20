@@ -1,4 +1,4 @@
-<style lang="sass">
+<style lang="less">
 	.task-container{
 		max-width:660px;
 		min-width: 500px;

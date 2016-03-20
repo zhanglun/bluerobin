@@ -1,4 +1,4 @@
-<style lang="sass">
+<style lang="less">
 	.home{
 		height:100%;
 		.clock{

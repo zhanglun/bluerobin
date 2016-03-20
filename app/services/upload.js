@@ -3,8 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-function uploadrInit(opt) {
-    var uploader = Qiniu.uploader({
+
+function uploadInit(opt) {
+    var uploader = new Qiniu.uploader({
         runtimes: 'html5,flash,html4', //上传模式,依次退化
         browse_button: opt.browse_button || 'browse', //上传选择的点选按钮，**必需**
         uptoken_url: CONFIG.APIROOT + '/qiniu/token',
@@ -33,8 +34,6 @@ function uploadrInit(opt) {
             },
             'BeforeUpload': function BeforeUpload(up, file) {
                 console.log(file);
-
-                debugger;
                 // 每个文件上传前,处理相关的事情
             },
             'UploadProgress': function UploadProgress(up, file) {
@@ -70,5 +69,5 @@ function uploadrInit(opt) {
     return uploader;
 }
 
-exports.default = uploadrInit;
+exports.default = uploadInit;
 //# sourceMappingURL=upload.babel.js.map
