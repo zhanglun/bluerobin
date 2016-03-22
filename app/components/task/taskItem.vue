@@ -162,13 +162,13 @@
 
     <div class="collapsible-body">
       <div class="task-detail">
-        {{task.title}}        
+        {{task.title}}
       </div>
       <div class="task-attachments">
         <ul>
           <li v-for="attachment in task.attachments">
             <a href="{{attachment.url}}" title="{{attachment.name}}">
-              <img src="{{attachment.url}}" alt="{{attachment.name}}">  
+              <img v-bind:src="attachment.url" alt="{{attachment.name}}">  
             </a>
           </li>
         </ul>

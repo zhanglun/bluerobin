@@ -11,8 +11,8 @@ var _ajaxBabel2 = _interopRequireDefault(_ajaxBabel);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 window.CONFIG = {
-  APIROOT: 'http://127.0.0.1:1234/api'
-  // APIROOT: 'http://zhanglun.daoapp.io/api'
+  // APIROOT: 'http://127.0.0.1:1234/api'
+  APIROOT: 'http://zhanglun.daoapp.io/api'
 };
 
 var root = window.CONFIG.APIROOT;
