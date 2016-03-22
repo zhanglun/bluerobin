@@ -23,7 +23,7 @@
       <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
     </li>
   </ul> -->
-
+	
   <div class="task-container" transition="animate_routerview">
 	  <tasklist></tasklist>
   </div>

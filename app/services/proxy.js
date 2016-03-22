@@ -11,8 +11,8 @@ var _ajaxBabel2 = _interopRequireDefault(_ajaxBabel);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 window.CONFIG = {
-  // APIROOT: 'http://127.0.0.1:1234/api'
-  APIROOT: 'http://zhanglun.daoapp.io/api'
+  APIROOT: 'http://127.0.0.1:1234/api'
+  // APIROOT: 'http://zhanglun.daoapp.io/api'
 };
 
 var root = window.CONFIG.APIROOT;
@@ -109,11 +109,13 @@ proxy.User.login = function (user) {
 };
 
 proxy.User.authenticate = function (user) {
-  return _ajaxBabel2.default.post({
+  return $.ajax({
+    method: 'post',
     url: root + '/user/authenticate',
-    token: localStorage.token
-  }).then(function (token) {
-    return JSON.parse(token);
+    dataType: 'json',
+    headers: {
+      'x-access-token': localStorage.token
+    }
   });
 };
 

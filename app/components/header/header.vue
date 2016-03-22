@@ -8,9 +8,9 @@
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">BlueRobin</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a class="" href="" v-link="'task'">Task</a></li>
-          <li><a class="" href="" v-link="'login'">UserLogin</a></li>
-          <li><a class="" href="" v-link="'signup'">SignUp</a></li>
+          <li v-link-active><a class="" href="" v-link="{path: '/task', exact: true}">Task</a></li>
+          <li v-link-active><a class="" href="" v-link="{path: '/login', exact: true}">UserLogin</a></li>
+          <li v-link-active><a class="" href="" v-link="{path: '/signup', exact: true}">SignUp</a></li>
           <li><a class="" href="" v-on:click="logout">LogOut</a></li>
         </ul>
       </div>

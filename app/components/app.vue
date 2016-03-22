@@ -40,19 +40,25 @@
   export default{
     data(){
       return {
-        msg: 'Hello from BlueRobin'
+        msg: 'Hello from BlueRobin',
+        CURRENT_USER: {}
       }
     },
     ready(){
+      var _this = this;
       Proxy.User.authenticate()
-      .then(function(res){
-        console.log(res);
+      .done(function(res){
         if(res.success){
+          _this.$data.CURRENT_USER = res.user;
+          window.current_user = res.user;
           router.go('/task');
         }else{
           router.go('/login');
         }
       })
+      .fail(function(){
+          router.go('/login');
+      });
 
     },
     components: {

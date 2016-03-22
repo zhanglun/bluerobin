@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"public/javascripts/common.babel.js","sourcesContent":[],"sourceRoot":"/source/"}
+{"version":3,"sources":["public/javascripts/common.babel.js"],"names":[],"mappings":";;AAIA","file":"public/javascripts/common.babel.js","sourcesContent":["/**\n * 基础js\n */\n\nimport Proxy from '../../services/proxy.babel.js';\n\n// Proxy.getBackgroundImage()\n// .then(function(blob){\n//   window.blob = blob;\n//   var url = URL.createObjectURL(blob);\n//   console.log(url);\n// });"],"sourceRoot":"/source/"}

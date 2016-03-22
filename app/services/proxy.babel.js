@@ -1,8 +1,8 @@
 import $ajax from './ajax.babel.js';
 
 window.CONFIG = {
-    // APIROOT: 'http://127.0.0.1:1234/api'
-    APIROOT: 'http://zhanglun.daoapp.io/api'
+    APIROOT: 'http://127.0.0.1:1234/api'
+    // APIROOT: 'http://zhanglun.daoapp.io/api'
 };
 
 let root = window.CONFIG.APIROOT;
@@ -105,12 +105,14 @@ proxy.User.login = function(user) {
 
 
 proxy.User.authenticate = function(user){
-  return $ajax.post({
+  return $.ajax({
+    method: 'post',
     url: root + '/user/authenticate',
-    token: localStorage.token
-  }).then(function(token){
-    return JSON.parse(token);
-  });
+    dataType: 'json',
+    headers: {
+      'x-access-token': localStorage.token
+    }
+  })
 };
 
 /**

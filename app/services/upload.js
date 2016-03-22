@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+
 function uploadInit(opt) {
     var uploader = new Qiniu.uploader({
         runtimes: 'html5,flash,html4', //上传模式,依次退化
@@ -62,7 +63,8 @@ function uploadInit(opt) {
                 // 该配置必须要在 unique_names: false , save_key: false 时才生效
                 // var key = "";
                 // do something with key here
-                return 'test_prefixer_hahhahah_______' + file.name;
+                //   return 'test_prefixer_hahhahah_______' + file.name;
+                return file.name;
             }
         }
     });

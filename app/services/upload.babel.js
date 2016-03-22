@@ -59,6 +59,7 @@
               // var key = "";
               // do something with key here
               //   return 'test_prefixer_hahhahah_______' + file.name;
+              return file.name;
           }
       }
     });
