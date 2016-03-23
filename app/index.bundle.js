@@ -100,7 +100,7 @@
 	
 	var _home2 = _interopRequireDefault(_home);
 	
-	var _task = __webpack_require__(69);
+	var _task = __webpack_require__(70);
 	
 	var _task2 = _interopRequireDefault(_task);
 	
@@ -12648,15 +12648,15 @@
 	
 	var _proxyBabel2 = _interopRequireDefault(_proxyBabel);
 	
-	var _commonBabel = __webpack_require__(67);
+	var _commonBabel = __webpack_require__(68);
 	
 	var _commonBabel2 = _interopRequireDefault(_commonBabel);
 	
-	var _uploadBabel = __webpack_require__(68);
+	var _uploadBabel = __webpack_require__(69);
 	
 	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
 	
-	var _task = __webpack_require__(69);
+	var _task = __webpack_require__(70);
 	
 	var _task2 = _interopRequireDefault(_task);
 	
@@ -12745,6 +12745,10 @@
 	
 	var _ajaxBabel2 = _interopRequireDefault(_ajaxBabel);
 	
+	var _toolBabel = __webpack_require__(67);
+	
+	var _toolBabel2 = _interopRequireDefault(_toolBabel);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	window.CONFIG = {
@@ -12781,12 +12785,20 @@
 	 * @return {[type]}        [description]
 	 */
 	proxy.Task.get = function (params) {
-	  return _ajaxBabel2.default.get({
+	  return $.ajax({
+	    method: 'get',
 	    url: CONFIG.API.TASKS,
 	    data: params,
 	    token: localStorage.token
 	  }).then(function (res) {
-	    return JSON.parse(res);
+	    console.log(res);
+	    res.map(function (task) {
+	      task.attachments.map(function (attachment) {
+	        attachment.previewUrl = _toolBabel2.default.createImagePreviewUrl(attachment.url, 160, 80);
+	      });
+	    });
+	    console.log(res);
+	    return res;
 	  });
 	};
 	
@@ -14206,6 +14218,34 @@
 
 /***/ },
 /* 67 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var Tool = {};
+	
+	Tool.uploadImageSrc = function (filename, w, h) {
+		console.log(filename);
+		var query = '';
+		if (w && h) {
+			query = '?imageView2/1/w/' + w + '/h/' + h;
+		}
+		return 'http://7xnrrd.com1.z0.glb.clouddn.com/' + filename + query;
+	};
+	
+	Tool.createImagePreviewUrl = function (origin, w, h) {
+		w = w || 40;
+		h = h || 40;
+		return origin + '?imageView2/1/w/' + w + '/h/' + h;
+	};
+	
+	exports.default = Tool;
+
+/***/ },
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14217,7 +14257,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ },
-/* 68 */
+/* 69 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14296,12 +14336,12 @@
 	exports.default = uploadInit;
 
 /***/ },
-/* 69 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(70)
-	__vue_script__ = __webpack_require__(71)
+	__webpack_require__(71)
+	__vue_script__ = __webpack_require__(72)
 	__vue_template__ = __webpack_require__(85)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -14319,13 +14359,13 @@
 	})()}
 
 /***/ },
-/* 70 */
+/* 71 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 71 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14346,11 +14386,11 @@
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _taskList = __webpack_require__(72);
+	var _taskList = __webpack_require__(73);
 	
 	var _taskList2 = _interopRequireDefault(_taskList);
 	
-	var _taskInputer = __webpack_require__(80);
+	var _taskInputer = __webpack_require__(81);
 	
 	var _taskInputer2 = _interopRequireDefault(_taskInputer);
 	
@@ -14409,7 +14449,7 @@
 	// </style>
 	//
 	// <template>
-	//  <ul class="collapsible popout" data-collapsible="accordion">
+	// <!--  <ul class="collapsible popout" data-collapsible="accordion">
 	//     <li>
 	//       <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
 	//       <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
@@ -14423,7 +14463,7 @@
 	//       <div class="collapsible-body"><p>Lorem ipsum dolor sit amet.</p></div>
 	//     </li>
 	//   </ul>
-	//
+	//  -->	
 	//   <div class="task-container" transition="animate_routerview">
 	// 	  <tasklist></tasklist>
 	//   </div>
@@ -14433,13 +14473,13 @@
 	// <script>
 
 /***/ },
-/* 72 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(73)
-	__vue_script__ = __webpack_require__(74)
-	__vue_template__ = __webpack_require__(79)
+	__webpack_require__(74)
+	__vue_script__ = __webpack_require__(75)
+	__vue_template__ = __webpack_require__(80)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14456,13 +14496,13 @@
 	})()}
 
 /***/ },
-/* 73 */
+/* 74 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 74 */
+/* 75 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14475,7 +14515,7 @@
 	
 	var _proxyBabel2 = _interopRequireDefault(_proxyBabel);
 	
-	var _taskItem = __webpack_require__(75);
+	var _taskItem = __webpack_require__(76);
 	
 	var _taskItem2 = _interopRequireDefault(_taskItem);
 	
@@ -14494,9 +14534,7 @@
 	// <template>
 	// <div class="task-list-container">
 	// 	<ul class="task-list collapsible popout" data-collapsible="accordion">
-	// 	<li v-for="task in tasklist">
-	// 		<taskitem  :task="task" :index="$index"></taskitem>
-	// 	</li>
+	// 		<taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
 	// 	</ul>
 	// </div>
 	// </template>
@@ -14552,13 +14590,13 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 75 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(76)
-	__vue_script__ = __webpack_require__(77)
-	__vue_template__ = __webpack_require__(78)
+	__webpack_require__(77)
+	__vue_script__ = __webpack_require__(78)
+	__vue_template__ = __webpack_require__(79)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14575,13 +14613,13 @@
 	})()}
 
 /***/ },
-/* 76 */
+/* 77 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 77 */
+/* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14676,23 +14714,35 @@
 	//   padding: 0 4px;
 	// }
 	//
-	// .task-item {
+	// .task-item{
+	//   &.active{
+	//     .task-header{
+	//       // box
+	//     }
+	//   }
+	//   .collapsible-body{
+	//     background: #fff;
+	//   }
+	// }
+	//
+	// .task-header {
 	//   height: @editbox-height + 10;
 	//   line-height: @editbox-height;
 	//   box-sizing: border-box;
-	//   font-size: 14px;
+	//   font-size: 1.4rem;
 	//   color: #343434;
 	//   background: @white;
-	//   border-bottom: .1em solid #f5f5f5;
 	//   box-shadow: 0 2px 4px rgba(0,0,0,.24);
 	//   line-height: 2em;
 	//   padding: .7em;
+	//   padding-right: 0;
+	//   display: flex;
+	//   flex-direction: row;
+	//
 	//   &.collapsible-header{
 	//     display: flex;
 	//     flex-direction: row;
 	//   }
-	//   display: flex;
-	//   flex-direction: row;
 	//
 	//   &.finished {
 	//     .task-content {
@@ -14724,6 +14774,12 @@
 	//   }
 	//
 	// }
+	//
+	// .task-body{
+	//   padding: 1em;
+	//   font-size: 1.6rem;
+	// }
+	//
 	//
 	// .task-checker {
 	//     flex: 0 0 auto;
@@ -14771,12 +14827,19 @@
 	//   // overflow: hidden;
 	//   // display: none;
 	// }
+	// .task-attachments{
+	//   >div{
+	//     img{
+	//     }
+	//   }
+	// }
 	//
 	// #task-category {
 	//   .list-group-item {
 	//     background: rgba(255, 255, 255, 0.8);
 	//   }
 	// }
+	//
 	//
 	//
 	//
@@ -14801,65 +14864,69 @@
 	// </style>
 	//
 	// <template>
+	//   <li class="task-item">
 	//
-	//   <div class="collapsible-header task-item " transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
-	//       <div class="task-checker">
-	//         <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
-	//         <label for="{{task._id}}"></label>
-	//       </div>
-	//       <div class="task-content">
-	//         <div data-val="{{task.title}}">{{task.title}}</div>
-	//         <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
-	//       </div>
-	//   </div>
-	//
-	//     <div class="collapsible-body">
-	//       <div class="task-detail">
-	//         {{task.title}}
-	//       </div>
-	//       <div class="task-attachments">
-	//         <ul>
-	//           <li v-for="attachment in task.attachments">
-	//             <a href="{{attachment.url}}" title="{{attachment.name}}">
-	//               <img v-bind:src="attachment.url" alt="{{attachment.name}}"> 
-	//             </a>
-	//           </li>
-	//         </ul>
-	//       </div>
-	//       <div class="task-editbar">
-	//         <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>
-	//
-	//         <ul id='dropdown-{{task._id}}' class='dropdown-content'>
-	//           <li><span v-on:click="expandBroad(task)" class="icon-grin"></span></li>
-	//             <li class="divider"></li>
-	//           <li><span v-on:click="deleteTask(task)" class="icon-bin"></span></li>
-	//         </ul>
-	//       </div>
+	//     <div class="collapsible-header task-header" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
+	//         <div class="task-checker">
+	//           <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
+	//           <label for="{{task._id}}"></label>
+	//         </div>
+	//         <div class="task-content">
+	//           <div data-val="{{task.title}}">{{task.title}}</div>
+	//           <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
+	//         </div>
+	//         <span>
+	//           <i class="material-icons">place</i>
+	//         </span>
 	//     </div>
+	//
+	//     <div class="collapsible-body task-body">
+	//         <div class="task-detail">
+	//           {{task.title}}
+	//         </div>
+	//         <div class="task-attachments">
+	//             <div v-for="attachment in task.attachments">
+	//               <a target="_blank" href="{{attachment.url}}" title="{{attachment.name}}">
+	//                 <img v-bind:src="attachment.previewUrl" alt="{{attachment.name}}"> 
+	//               </a>
+	//             </div>
+	//           </ul>
+	//         </div>
+	//         <div class="task-editbar">
+	//           <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>
+	//
+	//           <ul id='dropdown-{{task._id}}' class='dropdown-content'>
+	//             <li><span v-on:click="expandBroad(task)" class="icon-grin"></span></li>
+	//               <li class="divider"></li>
+	//             <li><span v-on:click="deleteTask(task)" class="icon-bin"></span></li>
+	//           </ul>
+	//         </div>
+	//     </div>
+	//   </li>
 	//
 	// </template>
 	//
 	// <script>
 
 /***/ },
-/* 78 */
-/***/ function(module, exports) {
-
-	module.exports = "\n\n  <div class=\"collapsible-header task-item \" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}\" >\n      <div class=\"task-checker\">\n        <input type=\"checkbox\" id=\"{{task._id}}\"  v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n        <label for=\"{{task._id}}\"></label>\n      </div>\n      <div class=\"task-content\">\n        <div data-val=\"{{task.title}}\">{{task.title}}</div>\n        <input type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n      </div>\n  </div>\n\n    <div class=\"collapsible-body\">\n      <div class=\"task-detail\">\n        {{task.title}}\n      </div>\n      <div class=\"task-attachments\">\n        <ul>\n          <li v-for=\"attachment in task.attachments\">\n            <a href=\"{{attachment.url}}\" title=\"{{attachment.name}}\">\n              <img v-bind:src=\"attachment.url\" alt=\"{{attachment.name}}\">  \n            </a>\n          </li>\n        </ul>\n      </div>\n      <div class=\"task-editbar\">\n        <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>\n\n        <ul id='dropdown-{{task._id}}' class='dropdown-content'>\n          <li><span v-on:click=\"expandBroad(task)\" class=\"icon-grin\"></span></li>\n            <li class=\"divider\"></li>\n          <li><span v-on:click=\"deleteTask(task)\" class=\"icon-bin\"></span></li>\n        </ul>\n      </div>\n    </div>\n\n";
-
-/***/ },
 /* 79 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"task-list-container\">\n\t<ul class=\"task-list collapsible popout\" data-collapsible=\"accordion\">\n\t<li v-for=\"task in tasklist\">\n\t\t<taskitem  :task=\"task\" :index=\"$index\"></taskitem>\n\t</li>\n\t</ul>\n</div>\n";
+	module.exports = "\n  <li class=\"task-item\">\n    \n    <div class=\"collapsible-header task-header\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}\" >\n        <div class=\"task-checker\">\n          <input type=\"checkbox\" id=\"{{task._id}}\"  v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n          <label for=\"{{task._id}}\"></label>\n        </div>\n        <div class=\"task-content\">\n          <div data-val=\"{{task.title}}\">{{task.title}}</div>\n          <input type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n        </div>\n        <span>\n          <i class=\"material-icons\">place</i>\n        </span>\n    </div>\n\n    <div class=\"collapsible-body task-body\">\n        <div class=\"task-detail\">\n          {{task.title}}\n        </div>\n        <div class=\"task-attachments\">\n            <div v-for=\"attachment in task.attachments\">\n              <a target=\"_blank\" href=\"{{attachment.url}}\" title=\"{{attachment.name}}\">\n                <img v-bind:src=\"attachment.previewUrl\" alt=\"{{attachment.name}}\">  \n              </a>\n            </div>\n          </ul>\n        </div>\n        <div class=\"task-editbar\">\n          <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>\n\n          <ul id='dropdown-{{task._id}}' class='dropdown-content'>\n            <li><span v-on:click=\"expandBroad(task)\" class=\"icon-grin\"></span></li>\n              <li class=\"divider\"></li>\n            <li><span v-on:click=\"deleteTask(task)\" class=\"icon-bin\"></span></li>\n          </ul>\n        </div>\n    </div>\n  </li>\n\n";
 
 /***/ },
 /* 80 */
+/***/ function(module, exports) {
+
+	module.exports = "\n<div class=\"task-list-container\">\n\t<ul class=\"task-list collapsible popout\" data-collapsible=\"accordion\">\n\t\t<taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></taskitem>\n\t</ul>\n</div>\n";
+
+/***/ },
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(81)
-	__vue_script__ = __webpack_require__(82)
+	__webpack_require__(82)
+	__vue_script__ = __webpack_require__(83)
 	__vue_template__ = __webpack_require__(84)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
@@ -14877,13 +14944,13 @@
 	})()}
 
 /***/ },
-/* 81 */
+/* 82 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 82 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14896,11 +14963,11 @@
 	
 	var _stringify2 = _interopRequireDefault(_stringify);
 	
-	var _uploadBabel = __webpack_require__(68);
+	var _uploadBabel = __webpack_require__(69);
 	
 	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
 	
-	var _toolBabel = __webpack_require__(83);
+	var _toolBabel = __webpack_require__(67);
 	
 	var _toolBabel2 = _interopRequireDefault(_toolBabel);
 	
@@ -15135,28 +15202,6 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 83 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	var Tool = {};
-	
-	Tool.uploadImageSrc = function (filename, w, h) {
-		console.log(filename);
-		var query = '';
-		if (w && h) {
-			query = '?imageView2/1/' + w + '/h/' + h;
-		}
-		return 'http://7xnrrd.com1.z0.glb.clouddn.com/' + filename + query;
-	};
-	
-	exports.default = Tool;
-
-/***/ },
 /* 84 */
 /***/ function(module, exports) {
 
@@ -15166,7 +15211,7 @@
 /* 85 */
 /***/ function(module, exports) {
 
-	module.exports = "\n <ul class=\"collapsible popout\" data-collapsible=\"accordion\">\n    <li>\n      <div class=\"collapsible-header\"><i class=\"material-icons\">filter_drama</i>First</div>\n      <div class=\"collapsible-body\"><p>Lorem ipsum dolor sit amet.</p></div>\n    </li>\n    <li>\n      <div class=\"collapsible-header\"><i class=\"material-icons\">place</i>Second</div>\n      <div class=\"collapsible-body\"><p>Lorem ipsum dolor sit amet.</p></div>\n    </li>\n    <li>\n      <div class=\"collapsible-header\"><i class=\"material-icons\">whatshot</i>Third</div>\n      <div class=\"collapsible-body\"><p>Lorem ipsum dolor sit amet.</p></div>\n    </li>\n  </ul>\n\t\n  <div class=\"task-container\" transition=\"animate_routerview\">\n\t  <tasklist></tasklist>\n  </div>\n \t<taskinputer></taskinputer>\n";
+	module.exports = "\n<!--  <ul class=\"collapsible popout\" data-collapsible=\"accordion\">\n    <li>\n      <div class=\"collapsible-header\"><i class=\"material-icons\">filter_drama</i>First</div>\n      <div class=\"collapsible-body\"><p>Lorem ipsum dolor sit amet.</p></div>\n    </li>\n    <li>\n      <div class=\"collapsible-header\"><i class=\"material-icons\">place</i>Second</div>\n      <div class=\"collapsible-body\"><p>Lorem ipsum dolor sit amet.</p></div>\n    </li>\n    <li>\n      <div class=\"collapsible-header\"><i class=\"material-icons\">whatshot</i>Third</div>\n      <div class=\"collapsible-body\"><p>Lorem ipsum dolor sit amet.</p></div>\n    </li>\n  </ul>\n -->\t\n  <div class=\"task-container\" transition=\"animate_routerview\">\n\t  <tasklist></tasklist>\n  </div>\n \t<taskinputer></taskinputer>\n";
 
 /***/ },
 /* 86 */

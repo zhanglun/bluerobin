@@ -23,23 +23,35 @@
   padding: 0 4px;
 }
 
-.task-item {
+.task-item{
+  &.active{
+    .task-header{
+      // box
+    }
+  }
+  .collapsible-body{
+    background: #fff;
+  }
+}
+
+.task-header {
   height: @editbox-height + 10;
   line-height: @editbox-height;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 1.4rem;
   color: #343434;
   background: @white;
-  border-bottom: .1em solid #f5f5f5;
   box-shadow: 0 2px 4px rgba(0,0,0,.24);
   line-height: 2em;
   padding: .7em;
+  padding-right: 0;
+  display: flex;
+  flex-direction: row;
+
   &.collapsible-header{
     display: flex;
     flex-direction: row;
   }
-  display: flex;
-  flex-direction: row;
 
   &.finished {
     .task-content {
@@ -71,6 +83,12 @@
   }
 
 }
+
+.task-body{
+  padding: 1em;
+  font-size: 1.6rem;
+}
+
 
 .task-checker {
     flex: 0 0 auto;
@@ -118,12 +136,19 @@
   // overflow: hidden;
   // display: none;
 }
+.task-attachments{
+  >div{
+    img{
+    }
+  }
+}
 
 #task-category {
   .list-group-item {
     background: rgba(255, 255, 255, 0.8);
   }
 }
+
 
 
 
@@ -148,41 +173,45 @@
 </style>
 
 <template>
-
-  <div class="collapsible-header task-item " transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
-      <div class="task-checker">
-        <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
-        <label for="{{task._id}}"></label>
-      </div>
-      <div class="task-content">
-        <div data-val="{{task.title}}">{{task.title}}</div>
-        <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
-      </div>
-  </div>
-
-    <div class="collapsible-body">
-      <div class="task-detail">
-        {{task.title}}
-      </div>
-      <div class="task-attachments">
-        <ul>
-          <li v-for="attachment in task.attachments">
-            <a href="{{attachment.url}}" title="{{attachment.name}}">
-              <img v-bind:src="attachment.url" alt="{{attachment.name}}">  
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="task-editbar">
-        <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>
-
-        <ul id='dropdown-{{task._id}}' class='dropdown-content'>
-          <li><span v-on:click="expandBroad(task)" class="icon-grin"></span></li>
-            <li class="divider"></li>
-          <li><span v-on:click="deleteTask(task)" class="icon-bin"></span></li>
-        </ul>
-      </div>
+  <li class="task-item">
+    
+    <div class="collapsible-header task-header" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
+        <div class="task-checker">
+          <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
+          <label for="{{task._id}}"></label>
+        </div>
+        <div class="task-content">
+          <div data-val="{{task.title}}">{{task.title}}</div>
+          <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
+        </div>
+        <span>
+          <i class="material-icons">place</i>
+        </span>
     </div>
+
+    <div class="collapsible-body task-body">
+        <div class="task-detail">
+          {{task.title}}
+        </div>
+        <div class="task-attachments">
+            <div v-for="attachment in task.attachments">
+              <a target="_blank" href="{{attachment.url}}" title="{{attachment.name}}">
+                <img v-bind:src="attachment.previewUrl" alt="{{attachment.name}}">  
+              </a>
+            </div>
+          </ul>
+        </div>
+        <div class="task-editbar">
+          <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>
+
+          <ul id='dropdown-{{task._id}}' class='dropdown-content'>
+            <li><span v-on:click="expandBroad(task)" class="icon-grin"></span></li>
+              <li class="divider"></li>
+            <li><span v-on:click="deleteTask(task)" class="icon-bin"></span></li>
+          </ul>
+        </div>
+    </div>
+  </li>
 
 </template>
 

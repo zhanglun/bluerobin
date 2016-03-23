@@ -1,4 +1,5 @@
 import $ajax from './ajax.babel.js';
+import Tool from './tool.babel.js';
 
 window.CONFIG = {
     APIROOT: 'http://127.0.0.1:1234/api'
@@ -35,12 +36,20 @@ window.CONFIG.API = {
  * @return {[type]}        [description]
  */
 proxy.Task.get = function(params) {
-  return $ajax.get({
+  return $.ajax({
+    method: 'get',
     url: CONFIG.API.TASKS,
     data: params,
     token: localStorage.token
   }).then(function(res) {
-    return JSON.parse(res);
+    console.log(res);
+    res.map(function(task){
+      task.attachments.map(function(attachment){
+        attachment.previewUrl = Tool.createImagePreviewUrl(attachment.url, 160, 80);
+      });
+    });
+    console.log(res);
+    return res;
   });
 };
 
