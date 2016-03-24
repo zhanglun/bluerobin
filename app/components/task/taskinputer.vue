@@ -15,7 +15,7 @@
   </div>
   <div class="modal-footer">
 		<div class="task-inputer-bar">
-			<span id="browse" class="icon-images"></span>
+			<span id="browse" class="material-icons">photo</span>
 			<button class=" modal-action modal-close waves-effect waves-green waves-light btn" v-on:click="createTask">
 			确定
 			</button>

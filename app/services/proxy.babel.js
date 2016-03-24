@@ -2,8 +2,8 @@ import $ajax from './ajax.babel.js';
 import Tool from './tool.babel.js';
 
 window.CONFIG = {
-    APIROOT: 'http://127.0.0.1:1234/api'
-    // APIROOT: 'http://zhanglun.daoapp.io/api'
+    // APIROOT: 'http://127.0.0.1:1234/api'
+    APIROOT: 'http://zhanglun.daoapp.io/api'
 };
 
 let root = window.CONFIG.APIROOT;

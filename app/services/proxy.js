@@ -8,11 +8,15 @@ var _ajaxBabel = require('./ajax.babel.js');
 
 var _ajaxBabel2 = _interopRequireDefault(_ajaxBabel);
 
+var _toolBabel = require('./tool.babel.js');
+
+var _toolBabel2 = _interopRequireDefault(_toolBabel);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 window.CONFIG = {
-  APIROOT: 'http://127.0.0.1:1234/api'
-  // APIROOT: 'http://zhanglun.daoapp.io/api'
+  // APIROOT: 'http://127.0.0.1:1234/api'
+  APIROOT: 'http://zhanglun.daoapp.io/api'
 };
 
 var root = window.CONFIG.APIROOT;
@@ -44,12 +48,20 @@ window.CONFIG.API = {
  * @return {[type]}        [description]
  */
 proxy.Task.get = function (params) {
-  return _ajaxBabel2.default.get({
+  return $.ajax({
+    method: 'get',
     url: CONFIG.API.TASKS,
     data: params,
     token: localStorage.token
   }).then(function (res) {
-    return JSON.parse(res);
+    console.log(res);
+    res.map(function (task) {
+      task.attachments.map(function (attachment) {
+        attachment.previewUrl = _toolBabel2.default.createImagePreviewUrl(attachment.url, 160, 80);
+      });
+    });
+    console.log(res);
+    return res;
   });
 };
 

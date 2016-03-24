@@ -174,7 +174,7 @@
 
 <template>
   <li class="task-item">
-    
+
     <div class="collapsible-header task-header" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
         <div class="task-checker">
           <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
@@ -185,7 +185,7 @@
           <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
         </div>
         <span>
-          <i class="material-icons">place</i>
+          <i class="material-icons">more_vert</i>
         </span>
     </div>
 
@@ -196,13 +196,13 @@
         <div class="task-attachments">
             <div v-for="attachment in task.attachments">
               <a target="_blank" href="{{attachment.url}}" title="{{attachment.name}}">
-                <img v-bind:src="attachment.previewUrl" alt="{{attachment.name}}">  
+                <img v-bind:src="attachment.previewUrl" alt="{{attachment.name}}">
               </a>
             </div>
           </ul>
         </div>
         <div class="task-editbar">
-          <span class='dropdown-button btn' data-activates='dropdown-{{task._id}}'>Drop Me!</span>
+          <span class='' data-activates='dropdown-{{task._id}}'><i class="material-icons">more_vert</i></span>
 
           <ul id='dropdown-{{task._id}}' class='dropdown-content'>
             <li><span v-on:click="expandBroad(task)" class="icon-grin"></span></li>
@@ -229,7 +229,7 @@ module.exports = {
   	}
   },
   ready: function(){
-    $('.dropdown-button').dropdown();
+    $('[data-activates]').dropdown();
   },
 
   directives: {
