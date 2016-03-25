@@ -3,9 +3,16 @@
 <!-- <div id="modalLayer-inputer" class="modal bottom-sheet"> -->
 <div id="modalLayer-inputer" class="modal modal-fixed-footer">
   <div class="modal-content">
-	<h5>创建新的记录</h5>
+	<h5>Create New</h5>
+    <div class="row">
+        <div class="input-field col s12">
+          <input class="validate" type="text" v-model="newTask.title">
+          <label for="email">Email</label>
+        </div>
+    </div>
+
 	<div class="task-inputer" id="taskWriter">
-		<textarea type="text" v-model="newTask.title" id="taskInputer" placeholder="What is your focus today..." v-on:paste="uploadByPaste($event)" ></textarea>
+		<textarea type="text" v-model="newTask.content" id="taskInputer" placeholder="What is your focus today..." v-on:paste="uploadByPaste($event)" ></textarea>
 	</div>
 	<div class="task-images">
 		<div v-for="file in newTask.attachments">

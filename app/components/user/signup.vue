@@ -59,18 +59,15 @@
 
 		methods: {
 			signUp(){
-				let root = CONFIG.APIPROOT;
-				let _this = this;
-				console.log('go');
-				$.ajax({
-					type: 'post',
-					url: root + '/user/signup',
-					data: _this.$data.registerData,
-					dataType: 'json'
-				})
-				.done(function(res){
-					console.log(res);
-				})
+                var data = this.$data.registerData;
+                Proxy.User.signUp(data)
+                .done(function(res){
+                    localStorage.token = res.token;
+                    router.go('/task');
+                })
+                .fail(function(xhr){
+                    console.log(xhr);
+                });
 			}
 		}
 

@@ -3,13 +3,24 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+var CONFIG = window.CONFIG;
+var plupload = window.plupload;
 
-
+/**
+ * 初始化上传组件
+ * @param  {Object} opt
+ * {
+ * 	browse_button: 'browse',
+ * 	drop_element: 'taskInputer',
+ * 	container: 'container'
+ * }
+ * @return {[type]}     [description]
+ */
 function uploadInit(opt) {
     var uploader = new Qiniu.uploader({
         runtimes: 'html5,flash,html4', //上传模式,依次退化
-        browse_button: opt.browse_button || 'browse', //上传选择的点选按钮，**必需**
-        uptoken_url: CONFIG.APIROOT + '/qiniu/token',
+        'browse_button': opt.browse_button || 'browse', //上传选择的点选按钮，**必需**
+        'uptoken_url': CONFIG.APIROOT + '/qiniu/token',
         //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
         // uptoken : '<Your upload token>',
         //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
@@ -20,17 +31,18 @@ function uploadInit(opt) {
         domain: 'http://7i7gl0.com1.z0.glb.clouddn.com/',
         //bucket 域名，下载资源时用到，**必需**
         container: opt.container || 'container', //上传区域DOM ID，默认是browser_button的父元素，
-        max_file_size: '100mb', //最大文件体积限制
-        flash_swf_url: 'vendor/plupload-2.1.8/js/Moxie.swf', //引入flash,相对路径
-        max_retries: 3, //上传失败最大重试次数
+        'max_file_size': '100mb', //最大文件体积限制
+        'flash_swf_url': 'vendor/plupload-2.1.8/js/Moxie.swf', //引入flash,相对路径
+        'max_retries': 3, //上传失败最大重试次数
         dragdrop: true, //开启可拖曳上传
-        drop_element: opt.drop_element || 'taskInputer', //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
-        chunk_size: '4mb', //分块上传时，每片的体积
-        auto_start: true, //选择文件后自动上传，若关闭需要自己绑定事件触发上传,
+        'drop_element': opt.drop_element || 'taskInputer', //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
+        'chunk_size': '4mb', //分块上传时，每片的体积
+        'auto_start': true, //选择文件后自动上传，若关闭需要自己绑定事件触发上传,
         init: {
             'FilesAdded': function FilesAdded(up, files) {
                 plupload.each(files, function (file) {
                     // 文件添加进队列后,处理相关的事情
+                    //   console.log(file);
                 });
             },
             'BeforeUpload': function BeforeUpload(up, file) {
@@ -64,7 +76,7 @@ function uploadInit(opt) {
                 // var key = "";
                 // do something with key here
                 //   return 'test_prefixer_hahhahah_______' + file.name;
-                return file.name;
+                return current_user.username + '/' + file.name;
             }
         }
     });

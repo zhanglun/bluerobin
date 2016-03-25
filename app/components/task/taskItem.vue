@@ -191,7 +191,7 @@
 
     <div class="collapsible-body task-body">
         <div class="task-detail">
-          {{task.title}}
+          {{task.content}}
         </div>
         <div class="task-attachments">
             <div v-for="attachment in task.attachments">
