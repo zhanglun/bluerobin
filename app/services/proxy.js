@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _ajaxBabel = require('./ajax.babel.js');
-
-var _ajaxBabel2 = _interopRequireDefault(_ajaxBabel);
-
 var _toolBabel = require('./tool.babel.js');
 
 var _toolBabel2 = _interopRequireDefault(_toolBabel);
@@ -15,32 +11,20 @@ var _toolBabel2 = _interopRequireDefault(_toolBabel);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 window.CONFIG = {
-  // APIROOT: 'http://127.0.0.1:1234/api'
-  APIROOT: 'http://zhanglun.daoapp.io/api'
+  APIROOT: 'http://localhost:1234/api'
+  // APIROOT: 'http://zhanglun.daoapp.io/api'
 };
 
-var root = window.CONFIG.APIROOT;
-
-function JSON2FormData(json) {
-
-  var str = '';
-  for (var key in json) {
-    if (str !== '') {
-      str += '&';
-    }
-    str += key + '=' + encodeURIComponent(json[key]);
-  }
-  return str;
-}
-
+var CONFIG = window.CONFIG;
+var root = CONFIG.APIROOT;
 var proxy = {};
+
+CONFIG.API = {
+  TASKS: root + '/tasks'
+};
 proxy.Task = {};
 proxy.User = {};
 proxy.Upload = {};
-
-window.CONFIG.API = {
-  TASKS: root + '/tasks'
-};
 
 /**
  * 获取task
@@ -52,15 +36,15 @@ proxy.Task.get = function (params) {
     method: 'get',
     url: CONFIG.API.TASKS,
     data: params,
-    token: localStorage.token
+    headers: {
+      'x-access-token': localStorage.token
+    }
   }).then(function (res) {
-    console.log(res);
     res.map(function (task) {
       task.attachments.map(function (attachment) {
         attachment.previewUrl = _toolBabel2.default.createImagePreviewUrl(attachment.url, 160, 80);
       });
     });
-    console.log(res);
     return res;
   });
 };
@@ -71,7 +55,8 @@ proxy.Task.get = function (params) {
  * @return {[type]}      [description]
  */
 proxy.Task.create = function (task) {
-  return _ajaxBabel2.default.post({
+  return $.ajax({
+    method: 'post',
     url: CONFIG.API.TASKS,
     data: task,
     token: localStorage.token
@@ -86,7 +71,8 @@ proxy.Task.create = function (task) {
  * @return {[type]}      [description]
  */
 proxy.Task.delete = function (task) {
-  return _ajaxBabel2.default.delete({
+  return $.ajax({
+    method: 'delete',
     url: CONFIG.API.TASKS + '/' + task._id
   }).then(function (res) {
     return JSON.parse(res);
@@ -112,15 +98,23 @@ proxy.Task.edit = function (task) {
 };
 
 proxy.User.login = function (user) {
-  return _ajaxBabel2.default.post({
+  return $.ajax({
+    method: 'post',
     url: root + '/user/login',
     data: user
-  }).then(function (res) {
-    return JSON.parse(res);
   });
 };
 
-proxy.User.authenticate = function (user) {
+proxy.User.signUp = function (user) {
+  return $.ajax({
+    type: 'post',
+    url: root + '/user/signup',
+    data: user,
+    dataType: 'json'
+  });
+};
+
+proxy.User.authenticate = function () {
   return $.ajax({
     method: 'post',
     url: root + '/user/authenticate',
@@ -136,17 +130,12 @@ proxy.User.authenticate = function (user) {
  * @return {[type]} [description]
  */
 proxy.Upload.getUptoken = function () {
-  return fetch(root + '/qiniu/token', {
+  return $.ajax({
     method: 'get'
-  }).then(function (res) {
-    if (res.ok) {
-      return res.json();
-    }
+  }).done(function (res) {
+    return res;
   });
 };
-
-window.$ajax = _ajaxBabel2.default;
-window.$get = _ajaxBabel2.default.get;
 
 exports.default = proxy;
 //# sourceMappingURL=proxy.babel.js.map

@@ -21,7 +21,7 @@
 
 <template>
   <div class="app">
-      <appHeader></appHeader>
+      <appHeader :user="current_user"></appHeader>
       <router-view ></router-view>
       <!-- <bar></bar> -->
   </div>
@@ -41,7 +41,7 @@
     data(){
       return {
         msg: 'Hello from BlueRobin',
-        CURRENT_USER: {}
+        current_user: {}
       }
     },
     ready(){
