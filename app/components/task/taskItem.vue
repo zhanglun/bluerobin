@@ -175,23 +175,23 @@
 <template>
   <li class="task-item">
 
-    <div class="collapsible-header task-header" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, visiable: task == taskExpanding}" >
+    <div class="collapsible-header task-header" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
         <div class="task-checker">
           <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
           <label for="{{task._id}}"></label>
         </div>
-        <div class="task-content">
+        <div class="task-content" v-on:click="getDetail(task._id)">
           <div data-val="{{task.title}}">{{task.title}}</div>
           <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
         </div>
-        <span>
+        <!-- <span>
           <i class="material-icons">more_vert</i>
-        </span>
+        </span> -->
     </div>
 
     <div class="collapsible-body task-body">
         <div class="task-detail">
-          {{task.content}}
+          {{taskDetail.content}}
         </div>
         <div class="task-attachments">
             <div v-for="attachment in task.attachments">
@@ -205,9 +205,11 @@
           <span class='' data-activates='dropdown-{{task._id}}'><i class="material-icons">more_vert</i></span>
 
           <ul id='dropdown-{{task._id}}' class='dropdown-content'>
-            <li><span v-on:click="expandBroad(task)" class="icon-grin"></span></li>
+            <li><span v-on:click="expandBroad(task)" class="material-icons">grin</span></li>
               <li class="divider"></li>
-            <li><span v-on:click="deleteTask(task)" class="icon-bin"></span></li>
+            <li  v-on:click="deleteTask(task)">
+                <span class="material-icons">delete删除</span>
+            </li>
           </ul>
         </div>
     </div>
@@ -225,7 +227,7 @@ module.exports = {
   	return {
   		editing: false,
   		taskEditing: null,
-        taskExpanding: null
+        taskDetail: {}
   	}
   },
   ready: function(){
@@ -244,6 +246,13 @@ module.exports = {
     }
   },
   methods: {
+    getDetail(id){
+        var _this = this;
+        Proxy.Task.get(id)
+        .then(function(res){
+            _this.taskDetail = res;
+        })
+    },
   	toggleTask(task) {
       this.task.completed = !this.task.completed;
       this.$dispatch('edit task', task);

@@ -59,9 +59,11 @@ proxy.Task.create = function (task) {
     method: 'post',
     url: CONFIG.API.TASKS,
     data: task,
-    token: localStorage.token
+    headers: {
+      'x-access-token': localStorage.token
+    }
   }).then(function (res) {
-    return JSON.parse(res);
+    return res;
   });
 };
 

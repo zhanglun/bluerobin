@@ -4,7 +4,7 @@
 	margin-top: 15px;
 }
 .task-list{
- 	transform: perspective(1000px);
+ 	/*transform: perspective(1000px);*/
 }
 </style>
 

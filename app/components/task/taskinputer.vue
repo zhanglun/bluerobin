@@ -7,7 +7,7 @@
     <div class="row">
         <div class="input-field col s12">
           <input class="validate" type="text" v-model="newTask.title">
-          <label for="email">Email</label>
+          <label for="">Title</label>
         </div>
     </div>
 

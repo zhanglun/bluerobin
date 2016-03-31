@@ -29,8 +29,7 @@
   margin-top: 15px;
 }
 .task-list {
-  -webkit-transform: perspective(1000px);
-          transform: perspective(1000px);
+  /*transform: perspective(1000px);*/
 }
 /* ====================================================== */
 /* Variables
