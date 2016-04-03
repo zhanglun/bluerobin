@@ -12616,7 +12616,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\components\\app.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/app.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -12674,15 +12674,19 @@
 	  data: function data() {
 	    return {
 	      msg: 'Hello from BlueRobin',
-	      current_user: {}
+	      account: {}
 	    };
 	  },
 	  ready: function ready() {
+	
+	    // Initialize collapse button
+	    $(".button-collapse").sideNav();
+	
 	    var _this = this;
 	    _proxyBabel2.default.User.authenticate().done(function (res) {
 	      if (res.success) {
-	        _this.$data.CURRENT_USER = res.user;
-	        window.current_user = res.user;
+	        _this.$data.account = res.user;
+	        window.account = res.user;
 	        _index2.default.go('/task');
 	      } else {
 	        _index2.default.go('/login');
@@ -12693,7 +12697,7 @@
 	  },
 	
 	  components: {
-	    task: _task2.default,
+	    // task: TaskView,
 	    appheader: _header2.default
 	  }
 	};
@@ -12722,7 +12726,7 @@
 	//
 	// <template>
 	//   <div class="app">
-	//       <appHeader :user="current_user"></appHeader>
+	//       <appHeader :account="account"></appHeader>
 	//       <router-view ></router-view>
 	//       <!-- <bar></bar> -->
 	//   </div>
@@ -13027,7 +13031,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\components\\task\\task.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/task.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13149,7 +13153,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\components\\task\\taskList.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/taskList.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13267,7 +13271,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\components\\task\\taskItem.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/taskItem.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13583,13 +13587,13 @@
 /* 21 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <li class=\"task-item\">\r\n\r\n    <div class=\"collapsible-header task-header\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n        <div class=\"task-checker\">\r\n          <input type=\"checkbox\" id=\"{{task._id}}\"  v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n          <label for=\"{{task._id}}\"></label>\r\n        </div>\r\n        <div class=\"task-content\" v-on:click=\"getDetail(task._id)\">\r\n          <div data-val=\"{{task.title}}\">{{task.title}}</div>\r\n          <input type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n        </div>\r\n        <!-- <span>\r\n          <i class=\"material-icons\">more_vert</i>\r\n        </span> -->\r\n    </div>\r\n\r\n    <div class=\"collapsible-body task-body\">\r\n        <div class=\"task-detail\">\r\n          {{taskDetail.content}}\r\n        </div>\r\n        <div class=\"task-attachments\">\r\n            <div v-for=\"attachment in task.attachments\">\r\n              <a target=\"_blank\" href=\"{{attachment.url}}\" title=\"{{attachment.name}}\">\r\n                <img v-bind:src=\"attachment.previewUrl\" alt=\"{{attachment.name}}\">\r\n              </a>\r\n            </div>\r\n          </ul>\r\n        </div>\r\n        <div class=\"task-editbar\">\r\n          <span class='' data-activates='dropdown-{{task._id}}'><i class=\"material-icons\">more_vert</i></span>\r\n\r\n          <ul id='dropdown-{{task._id}}' class='dropdown-content'>\r\n            <li><span v-on:click=\"expandBroad(task)\" class=\"material-icons\">grin</span></li>\r\n              <li class=\"divider\"></li>\r\n            <li  v-on:click=\"deleteTask(task)\">\r\n                <span class=\"material-icons\">delete删除</span>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n    </div>\r\n  </li>\r\n\r\n";
+	module.exports = "\n  <li class=\"task-item\">\n\n    <div class=\"collapsible-header task-header\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\n        <div class=\"task-checker\">\n          <input type=\"checkbox\" id=\"{{task._id}}\"  v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n          <label for=\"{{task._id}}\"></label>\n        </div>\n        <div class=\"task-content\" v-on:click=\"getDetail(task._id)\">\n          <div data-val=\"{{task.title}}\">{{task.title}}</div>\n          <input type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n        </div>\n        <!-- <span>\n          <i class=\"material-icons\">more_vert</i>\n        </span> -->\n    </div>\n\n    <div class=\"collapsible-body task-body\">\n        <div class=\"task-detail\">\n          {{taskDetail.content}}\n        </div>\n        <div class=\"task-attachments\">\n            <div v-for=\"attachment in task.attachments\">\n              <a target=\"_blank\" href=\"{{attachment.url}}\" title=\"{{attachment.name}}\">\n                <img v-bind:src=\"attachment.previewUrl\" alt=\"{{attachment.name}}\">\n              </a>\n            </div>\n          </ul>\n        </div>\n        <div class=\"task-editbar\">\n          <span class='' data-activates='dropdown-{{task._id}}'><i class=\"material-icons\">more_vert</i></span>\n\n          <ul id='dropdown-{{task._id}}' class='dropdown-content'>\n            <li><span v-on:click=\"expandBroad(task)\" class=\"material-icons\">grin</span></li>\n              <li class=\"divider\"></li>\n            <li  v-on:click=\"deleteTask(task)\">\n                <span class=\"material-icons\">delete删除</span>\n            </li>\n          </ul>\n        </div>\n    </div>\n  </li>\n\n";
 
 /***/ },
 /* 22 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n<div class=\"task-list-container\">\r\n\t<ul class=\"task-list collapsible popout\" data-collapsible=\"accordion\">\r\n\t\t<taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></taskitem>\r\n\t</ul>\r\n</div>\r\n";
+	module.exports = "\n<div class=\"task-list-container\">\n\t<ul class=\"task-list collapsible popout\" data-collapsible=\"accordion\">\n\t\t<taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></taskitem>\n\t</ul>\n</div>\n";
 
 /***/ },
 /* 23 */
@@ -13606,7 +13610,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\components\\task\\taskInputer.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/taskInputer.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -13905,13 +13909,13 @@
 /* 29 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n<!-- Modal Structure -->\r\n<!-- <div id=\"modalLayer-inputer\" class=\"modal bottom-sheet\"> -->\r\n<div id=\"modalLayer-inputer\" class=\"modal modal-fixed-footer\">\r\n  <div class=\"modal-content\">\r\n\t<h5>Create New</h5>\r\n    <div class=\"row\">\r\n        <div class=\"input-field col s12\">\r\n          <input class=\"validate\" type=\"text\" v-model=\"newTask.title\">\r\n          <label for=\"\">Title</label>\r\n        </div>\r\n    </div>\r\n\r\n\t<div class=\"task-inputer\" id=\"taskWriter\">\r\n\t\t<textarea type=\"text\" v-model=\"newTask.content\" id=\"taskInputer\" placeholder=\"What is your focus today...\" v-on:paste=\"uploadByPaste($event)\" ></textarea>\r\n\t</div>\r\n\t<div class=\"task-images\">\r\n\t\t<div v-for=\"file in newTask.attachments\">\r\n\t\t\t<img v-bind:src=\"file.url\" alt=\"\" >\r\n\t\t</div>\r\n\t</div>\r\n  </div>\r\n  <div class=\"modal-footer\">\r\n\t\t<div class=\"task-inputer-bar\">\r\n\t\t\t<span id=\"browse\" class=\"material-icons\">photo</span>\r\n\t\t\t<button class=\" modal-action modal-close waves-effect waves-green waves-light btn\" v-on:click=\"createTask\">\r\n\t\t\t确定\r\n\t\t\t</button>\r\n\t\t\t</div>\r\n  </div>\r\n</div>\r\n\r\n\t<!-- 底部按钮 -->\r\n\t<div class=\"fixed-action-btn horizontal\" style=\"bottom: 45px; right: 24px;\">\r\n\t\t<a class=\"btn-floating btn-large red waves-effect waves-light btn\">\r\n\t\t\t<i class=\"large material-icons\">mode_edit</i>\r\n\t\t</a>\r\n\t\t<ul>\r\n\t\t<!-- <li><a class=\"btn-floating red\"><i class=\"material-icons\">insert_chart</i></a></li> -->\r\n\t\t<li><a class=\"btn-floating yellow darken-1 modal-trigger\" data-target=\"mofalLayer-inputer\"><i class=\"material-icons\">format_quote</i></a></li>\r\n\t\t<!-- <li><a class=\"btn-floating green\"><i class=\"material-icons\">publish</i></a></li> -->\r\n\t\t<!-- <li><a class=\"btn-floating blue\"><i class=\"material-icons\">attach_file</i></a></li> -->\r\n\t\t</ul>\r\n\t</div>\r\n";
+	module.exports = "\n<!-- Modal Structure -->\n<!-- <div id=\"modalLayer-inputer\" class=\"modal bottom-sheet\"> -->\n<div id=\"modalLayer-inputer\" class=\"modal modal-fixed-footer\">\n  <div class=\"modal-content\">\n\t<h5>Create New</h5>\n    <div class=\"row\">\n        <div class=\"input-field col s12\">\n          <input class=\"validate\" type=\"text\" v-model=\"newTask.title\">\n          <label for=\"\">Title</label>\n        </div>\n    </div>\n\n\t<div class=\"task-inputer\" id=\"taskWriter\">\n\t\t<textarea type=\"text\" v-model=\"newTask.content\" id=\"taskInputer\" placeholder=\"What is your focus today...\" v-on:paste=\"uploadByPaste($event)\" ></textarea>\n\t</div>\n\t<div class=\"task-images\">\n\t\t<div v-for=\"file in newTask.attachments\">\n\t\t\t<img v-bind:src=\"file.url\" alt=\"\" >\n\t\t</div>\n\t</div>\n  </div>\n  <div class=\"modal-footer\">\n\t\t<div class=\"task-inputer-bar\">\n\t\t\t<span id=\"browse\" class=\"material-icons\">photo</span>\n\t\t\t<button class=\" modal-action modal-close waves-effect waves-green waves-light btn\" v-on:click=\"createTask\">\n\t\t\t确定\n\t\t\t</button>\n\t\t\t</div>\n  </div>\n</div>\n\n\t<!-- 底部按钮 -->\n\t<div class=\"fixed-action-btn horizontal\" style=\"bottom: 45px; right: 24px;\">\n\t\t<a class=\"btn-floating btn-large red waves-effect waves-light btn\">\n\t\t\t<i class=\"large material-icons\">mode_edit</i>\n\t\t</a>\n\t\t<ul>\n\t\t<!-- <li><a class=\"btn-floating red\"><i class=\"material-icons\">insert_chart</i></a></li> -->\n\t\t<li><a class=\"btn-floating yellow darken-1 modal-trigger\" data-target=\"mofalLayer-inputer\"><i class=\"material-icons\">format_quote</i></a></li>\n\t\t<!-- <li><a class=\"btn-floating green\"><i class=\"material-icons\">publish</i></a></li> -->\n\t\t<!-- <li><a class=\"btn-floating blue\"><i class=\"material-icons\">attach_file</i></a></li> -->\n\t\t</ul>\n\t</div>\n";
 
 /***/ },
 /* 30 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"task-container\" transition=\"animate_routerview\">\r\n\t  <tasklist></tasklist>\r\n  </div>\r\n \t<taskinputer></taskinputer>\r\n";
+	module.exports = "\n  <div class=\"task-container\" transition=\"animate_routerview\">\n\t  <tasklist></tasklist>\n  </div>\n \t<taskinputer></taskinputer>\n";
 
 /***/ },
 /* 31 */
@@ -13928,7 +13932,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\components\\home\\home.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/home/home.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14020,7 +14024,7 @@
 /* 34 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n\t<div class=\"home\">\r\n\t\t\t<div class=\"clock\">\r\n\t\t\t\t<h1 class=\"time\" v-text=\"currentTime\">\r\n\t\t\t\t\t13:40\r\n\t\t\t\t</h1>\r\n\t\t</div>\r\n\t</div>\r\n";
+	module.exports = "\n\t<div class=\"home\">\n\t\t\t<div class=\"clock\">\n\t\t\t\t<h1 class=\"time\" v-text=\"currentTime\">\n\t\t\t\t\t13:40\n\t\t\t\t</h1>\n\t\t</div>\n\t</div>\n";
 
 /***/ },
 /* 35 */
@@ -14037,7 +14041,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\components\\header\\header.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/header/header.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14065,15 +14069,25 @@
 	//
 	// <template>
 	// <header>
+	// <!-- Dropdown Structure -->
+	// <ul id="dropdown1" class="dropdown-content">
+	//   <li><a href="#!">asdf</a></li>
+	//   <li class="divider"></li>
+	//   <li><a href="#!" v-on:click="logout"> 退出登录</a></li>
+	// </ul>
 	// <nav>
 	//   <div class="container">
 	//       <div class="nav-wrapper">
 	//         <a href="#" class="brand-logo">BlueRobin</a>
 	//         <ul id="nav-mobile" class="right hide-on-med-and-down">
 	//           <li v-link-active><a class="" href="" v-link="{path: '/task', exact: true}">Task</a></li>
-	//           <li v-link-active><a class="" href="" v-link="{path: '/login', exact: true}">UserLogin</a></li>
-	//           <li v-link-active><a class="" href="" v-link="{path: '/signup', exact: true}">SignUp</a></li>
-	//           <!-- <li v-if="!user"><a class="" href="" v-on:click="logout">LogOut</a></li> -->
+	//           <li v-link-active><a class="" href="" v-link="{path: '/login', exact: true}">登录</a></li>
+	//           <li v-link-active><a class="" href="" v-link="{path: '/signup', exact: true}">注册</a></li>
+	//           <li v-if="account">
+	//             <a class="dropdown-button" href="#!" data-activates="dropdown1">{{account.email}}
+	//               <i class="material-icons right">arrow_drop_down</i>
+	//             </a>
+	//           </li>
 	//         </ul>
 	//       </div>
 	//     </div>
@@ -14084,7 +14098,7 @@
 	//
 	// <script>
 	exports.default = {
-	  prop: ['user'],
+	  props: ['account'],
 	  data: function data() {
 	    return {};
 	  },
@@ -14104,13 +14118,13 @@
 /* 38 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n<header>\r\n<nav>\r\n  <div class=\"container\">\r\n      <div class=\"nav-wrapper\">\r\n        <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\r\n        <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a></li>\r\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/login', exact: true}\">UserLogin</a></li>\r\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/signup', exact: true}\">SignUp</a></li>\r\n          <!-- <li v-if=\"!user\"><a class=\"\" href=\"\" v-on:click=\"logout\">LogOut</a></li> -->\r\n        </ul>\r\n      </div>\r\n    </div>\r\n    </nav>\r\n</header>\r\n\r\n";
+	module.exports = "\n<header>\n<!-- Dropdown Structure -->\n<ul id=\"dropdown1\" class=\"dropdown-content\">\n  <li><a href=\"#!\">asdf</a></li>\n  <li class=\"divider\"></li>\n  <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\n</ul>\n<nav>\n  <div class=\"container\">\n      <div class=\"nav-wrapper\">\n        <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\n        <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a></li>\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a></li>\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a></li>\n          <li v-if=\"account\">\n            <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\n              <i class=\"material-icons right\">arrow_drop_down</i>\n            </a>\n          </li>\n        </ul>\n      </div>\n    </div>\n    </nav>\n</header>\n\n";
 
 /***/ },
 /* 39 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"app\">\r\n      <appHeader :user=\"current_user\"></appHeader>\r\n      <router-view ></router-view>\r\n      <!-- <bar></bar> -->\r\n  </div>\r\n";
+	module.exports = "\n  <div class=\"app\">\n      <appHeader :account=\"account\"></appHeader>\n      <router-view ></router-view>\n      <!-- <bar></bar> -->\n  </div>\n";
 
 /***/ },
 /* 40 */
@@ -14127,7 +14141,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\components\\user\\login.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/user/login.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14224,7 +14238,7 @@
 /* 43 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"container\" transition=\"animate_routerview\">\r\n    <div class=\"login-form\">\r\n        <div class=\"row\">\r\n            <div class=\"input-field col s12\">\r\n              <input class=\"validate\" type=\"text\" id=\"email\" v-model=\"user.username\">\r\n              <label for=\"email\">Email</label>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"input-field col s12\">\r\n                <input class=\"validate\" type=\"password\" id=\"password\" v-model=\"user.password\">\r\n                <label for=\"password\">Password</label>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col \">\r\n                <button class=\"waves-effect waves-light btn\"  v-on:click=\"doLogin\">GO!</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n  </div>\r\n";
+	module.exports = "\n  <div class=\"container\" transition=\"animate_routerview\">\n    <div class=\"login-form\">\n        <div class=\"row\">\n            <div class=\"input-field col s12\">\n              <input class=\"validate\" type=\"text\" id=\"email\" v-model=\"user.username\">\n              <label for=\"email\">Email</label>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"input-field col s12\">\n                <input class=\"validate\" type=\"password\" id=\"password\" v-model=\"user.password\">\n                <label for=\"password\">Password</label>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col \">\n                <button class=\"waves-effect waves-light btn\"  v-on:click=\"doLogin\">GO!</button>\n            </div>\n        </div>\n    </div>\n  </div>\n";
 
 /***/ },
 /* 44 */
@@ -14240,7 +14254,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\components\\user\\signup.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/user/signup.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14348,7 +14362,7 @@
 /* 46 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n\r\n<div class=\"container\">\r\n    <div class=\"login-panle\">\r\n        <div class=\"login-panle-header\">\r\n            <h3>注册</h3>\r\n        </div>\r\n        <div class=\"login-panle-container\">\r\n<!--             <div class=\"row\">\r\n\r\n                <div class=\"input-field col s12\">\r\n                    <input class=\"pure-input-1-2\" type=\"text\" id=\"username\" ng-model=\"registerData.username\"/>\r\n                    <label for=\"username\">用户名</label>\r\n                </div>\r\n            </div> -->\r\n            <div class=\"row\">\r\n\r\n                <div class=\"input-field col s12\">\r\n                    <input class=\"pure-input-1-2\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\r\n                    <label for=\"email\">邮箱</label>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"input-field col s12\">\r\n                    <input class=\"pure-input-1-2\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\r\n                    <label for=\"password\">密码</label>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"input-field col s12\">\r\n                    <button class=\"btn waves-effect waves-light\" v-on:click=\"signUp()\">注册</button>\r\n                    <a v-link=\"'login'\" class=\"btn waves-effect waves-light\">已有账号？直接登录</a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+	module.exports = "\n\n<div class=\"container\">\n    <div class=\"login-panle\">\n        <div class=\"login-panle-header\">\n            <h3>注册</h3>\n        </div>\n        <div class=\"login-panle-container\">\n<!--             <div class=\"row\">\n\n                <div class=\"input-field col s12\">\n                    <input class=\"pure-input-1-2\" type=\"text\" id=\"username\" ng-model=\"registerData.username\"/>\n                    <label for=\"username\">用户名</label>\n                </div>\n            </div> -->\n            <div class=\"row\">\n\n                <div class=\"input-field col s12\">\n                    <input class=\"pure-input-1-2\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\n                    <label for=\"email\">邮箱</label>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"input-field col s12\">\n                    <input class=\"pure-input-1-2\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\n                    <label for=\"password\">密码</label>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"input-field col s12\">\n                    <button class=\"btn waves-effect waves-light\" v-on:click=\"signUp()\">注册</button>\n                    <a v-link=\"'login'\" class=\"btn waves-effect waves-light\">已有账号？直接登录</a>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
 /* 47 */

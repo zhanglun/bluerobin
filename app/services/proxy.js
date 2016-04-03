@@ -31,11 +31,14 @@ proxy.Upload = {};
  * @param  {[type]} params querystring
  * @return {[type]}        [description]
  */
-proxy.Task.get = function (params) {
+proxy.Task.get = function (id) {
+  var url = CONFIG.API.TASKS;
+  if (id) {
+    url = CONFIG.API.TASKS + '/' + id;
+  }
   return $.ajax({
     method: 'get',
-    url: CONFIG.API.TASKS,
-    data: params,
+    url: url,
     headers: {
       'x-access-token': localStorage.token
     }

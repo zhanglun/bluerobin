@@ -21,7 +21,7 @@
 
 <template>
   <div class="app">
-      <appHeader :user="current_user"></appHeader>
+      <appHeader :account="account"></appHeader>
       <router-view ></router-view>
       <!-- <bar></bar> -->
   </div>
@@ -41,16 +41,20 @@
     data(){
       return {
         msg: 'Hello from BlueRobin',
-        current_user: {}
+        account: {}
       }
     },
     ready(){
+
+      // Initialize collapse button
+      $(".button-collapse").sideNav();
+
       var _this = this;
       Proxy.User.authenticate()
       .done(function(res){
         if(res.success){
-          _this.$data.CURRENT_USER = res.user;
-          window.current_user = res.user;
+          _this.$data.account = res.user;
+          window.account = res.user;
           router.go('/task');
         }else{
           router.go('/login');
@@ -62,7 +66,7 @@
 
     },
     components: {
-      task: TaskView,
+      // task: TaskView,
       appheader: AppHeaderView
     }
   }
