@@ -46,16 +46,13 @@
     },
     ready(){
 
-      // Initialize collapse button
-      $(".button-collapse").sideNav();
-
       var _this = this;
       Proxy.User.authenticate()
       .done(function(res){
         if(res.success){
           _this.$data.account = res.user;
           window.account = res.user;
-          router.go('/task');
+          // router.go('/task');
         }else{
           router.go('/login');
         }

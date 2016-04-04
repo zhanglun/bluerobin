@@ -249,6 +249,12 @@
   line-height: 0;
 }
 
+
+
+	#uploadfile{
+		cursor: pointer;
+	}
+	
 .login-form {
   width: 400px;
   padding: 14px;

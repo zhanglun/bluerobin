@@ -14,6 +14,7 @@
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">BlueRobin</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li v-link-active><a class="" href="" v-link="{path: '/file', exact: true}">文件</a></li>
           <li v-link-active><a class="" href="" v-link="{path: '/task', exact: true}">Task</a></li>
           <li v-link-active><a class="" href="" v-link="{path: '/login', exact: true}">登录</a></li>
           <li v-link-active><a class="" href="" v-link="{path: '/signup', exact: true}">注册</a></li>

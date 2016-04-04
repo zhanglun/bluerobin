@@ -56,23 +56,9 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(47);
-	
-	// router.redirect({
-	//   '*': '/login'
-	// });
+	__webpack_require__(51);
 	
 	_index2.default.start(_app2.default, '#app');
-	
-	// 入口
-	// var BlueRobin = new Vue({
-	//   el: 'body',
-	//   ready(){
-	//   },
-	//   components: {
-	//     app: App
-	//   }
-	// });
 
 /***/ },
 /* 1 */
@@ -100,15 +86,19 @@
 	
 	var _home2 = _interopRequireDefault(_home);
 	
+	var _file = __webpack_require__(40);
+	
+	var _file2 = _interopRequireDefault(_file);
+	
 	var _task = __webpack_require__(12);
 	
 	var _task2 = _interopRequireDefault(_task);
 	
-	var _login = __webpack_require__(40);
+	var _login = __webpack_require__(44);
 	
 	var _login2 = _interopRequireDefault(_login);
 	
-	var _signup = __webpack_require__(44);
+	var _signup = __webpack_require__(48);
 	
 	var _signup2 = _interopRequireDefault(_signup);
 	
@@ -123,6 +113,9 @@
 	
 	
 	router.map({
+	  '/file': {
+	    component: _file2.default
+	  },
 	  '/task': {
 	    component: _task2.default
 	  },
@@ -12679,18 +12672,15 @@
 	  },
 	  ready: function ready() {
 	
-	    // Initialize collapse button
-	    $(".button-collapse").sideNav();
-	
 	    var _this = this;
 	    _proxyBabel2.default.User.authenticate().done(function (res) {
 	      if (res.success) {
 	        _this.$data.account = res.user;
 	        window.account = res.user;
-	        _index2.default.go('/task');
+	        // router.go('/task');
 	      } else {
-	        _index2.default.go('/login');
-	      }
+	          _index2.default.go('/login');
+	        }
 	    }).fail(function () {
 	      _index2.default.go('/login');
 	    });
@@ -13007,7 +12997,7 @@
 	                // var key = "";
 	                // do something with key here
 	                //   return 'test_prefixer_hahhahah_______' + file.name;
-	                return current_user.username + '/' + file.name;
+	                return window.account.username + '/' + file.name;
 	            }
 	        }
 	    });
@@ -14080,6 +14070,7 @@
 	//       <div class="nav-wrapper">
 	//         <a href="#" class="brand-logo">BlueRobin</a>
 	//         <ul id="nav-mobile" class="right hide-on-med-and-down">
+	//           <li v-link-active><a class="" href="" v-link="{path: '/file', exact: true}">文件</a></li>
 	//           <li v-link-active><a class="" href="" v-link="{path: '/task', exact: true}">Task</a></li>
 	//           <li v-link-active><a class="" href="" v-link="{path: '/login', exact: true}">登录</a></li>
 	//           <li v-link-active><a class="" href="" v-link="{path: '/signup', exact: true}">注册</a></li>
@@ -14118,7 +14109,7 @@
 /* 38 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<header>\n<!-- Dropdown Structure -->\n<ul id=\"dropdown1\" class=\"dropdown-content\">\n  <li><a href=\"#!\">asdf</a></li>\n  <li class=\"divider\"></li>\n  <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\n</ul>\n<nav>\n  <div class=\"container\">\n      <div class=\"nav-wrapper\">\n        <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\n        <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a></li>\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a></li>\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a></li>\n          <li v-if=\"account\">\n            <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\n              <i class=\"material-icons right\">arrow_drop_down</i>\n            </a>\n          </li>\n        </ul>\n      </div>\n    </div>\n    </nav>\n</header>\n\n";
+	module.exports = "\n<header>\n<!-- Dropdown Structure -->\n<ul id=\"dropdown1\" class=\"dropdown-content\">\n  <li><a href=\"#!\">asdf</a></li>\n  <li class=\"divider\"></li>\n  <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\n</ul>\n<nav>\n  <div class=\"container\">\n      <div class=\"nav-wrapper\">\n        <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\n        <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a></li>\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a></li>\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a></li>\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a></li>\n          <li v-if=\"account\">\n            <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\n              <i class=\"material-icons right\">arrow_drop_down</i>\n            </a>\n          </li>\n        </ul>\n      </div>\n    </div>\n    </nav>\n</header>\n\n";
 
 /***/ },
 /* 39 */
@@ -14141,7 +14132,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/user/login.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/file/file.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14157,6 +14148,127 @@
 
 /***/ },
 /* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _uploadBabel = __webpack_require__(11);
+	
+	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
+	
+	var _toolBabel = __webpack_require__(9);
+	
+	var _toolBabel2 = _interopRequireDefault(_toolBabel);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// <template>
+	// 	<div class="container">
+	//       <ul class="collection with-header" id="filelist">
+	//         <li class="collection-header" id="uploadcontainer">
+	//         	<h4>File List</h4>
+	// 					<span class="material-icons" id="uploadfile">cloud_upload</span>
+	// 							<!-- <span class="material-icons">file_upload</span> -->
+	//         	</li>
+	//         <li class="collection-item">Alvin</li>
+	//         <li class="collection-item">Alvin</li>
+	//         <li class="collection-item">Alvin</li>
+	//         <li class="collection-item">Alvin</li>
+	//       </ul>
+	// 	</div>
+	//
+	// </template>
+	// <script>
+	exports.default = {
+		data: function data() {
+			return {
+				uploader: {}
+	
+			};
+		},
+		ready: function ready() {
+			this.init();
+		},
+	
+		methods: {
+			init: function init() {
+				var _this = this;
+				this.$set('uploader', (0, _uploadBabel2.default)({
+					browse_button: 'uploadfile',
+					drop_element: 'filelist',
+					container: 'uploadcontainer'
+				}));
+	
+				this.uploader.bind('PostInit', function () {
+					_this.uploader.addFile(_this.newFile);
+				});
+	
+				this.uploader.bind('BeforeUpload', function (up, file) {});
+	
+				this.uploader.bind('FileUploaded', function (up, file, res) {
+					_this.newTask.attachments.push({
+						name: file.name,
+						url: _toolBabel2.default.uploadImageSrc(file.name),
+						size: file.size,
+						width: file.width,
+						height: file.height,
+						type: file.type
+					});
+				});
+			}
+		}
+	};
+	// </script>
+	// <style>
+	//
+	// 	#uploadfile{
+	// 		cursor: pointer;
+	// 	}
+	//
+	// </style>
+	/* generated by vue-loader */
+
+/***/ },
+/* 43 */
+/***/ function(module, exports) {
+
+	module.exports = "\n\t<div class=\"container\">\n      <ul class=\"collection with-header\" id=\"filelist\">\n        <li class=\"collection-header\" id=\"uploadcontainer\">\n        \t<h4>File List</h4>\n\t\t\t\t\t<span class=\"material-icons\" id=\"uploadfile\">cloud_upload</span>\n\t\t\t\t\t\t\t<!-- <span class=\"material-icons\">file_upload</span> -->\n        \t</li>\n        <li class=\"collection-item\">Alvin</li>\n        <li class=\"collection-item\">Alvin</li>\n        <li class=\"collection-item\">Alvin</li>\n        <li class=\"collection-item\">Alvin</li>\n      </ul>\n\t</div>\n\n";
+
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(45)
+	__vue_script__ = __webpack_require__(46)
+	__vue_template__ = __webpack_require__(47)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/user/login.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 45 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14235,18 +14347,18 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 43 */
+/* 47 */
 /***/ function(module, exports) {
 
 	module.exports = "\n  <div class=\"container\" transition=\"animate_routerview\">\n    <div class=\"login-form\">\n        <div class=\"row\">\n            <div class=\"input-field col s12\">\n              <input class=\"validate\" type=\"text\" id=\"email\" v-model=\"user.username\">\n              <label for=\"email\">Email</label>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"input-field col s12\">\n                <input class=\"validate\" type=\"password\" id=\"password\" v-model=\"user.password\">\n                <label for=\"password\">Password</label>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col \">\n                <button class=\"waves-effect waves-light btn\"  v-on:click=\"doLogin\">GO!</button>\n            </div>\n        </div>\n    </div>\n  </div>\n";
 
 /***/ },
-/* 44 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(45)
-	__vue_template__ = __webpack_require__(46)
+	__vue_script__ = __webpack_require__(49)
+	__vue_template__ = __webpack_require__(50)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14263,7 +14375,7 @@
 	})()}
 
 /***/ },
-/* 45 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14359,13 +14471,13 @@
 	// <script>
 
 /***/ },
-/* 46 */
+/* 50 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\n<div class=\"container\">\n    <div class=\"login-panle\">\n        <div class=\"login-panle-header\">\n            <h3>注册</h3>\n        </div>\n        <div class=\"login-panle-container\">\n<!--             <div class=\"row\">\n\n                <div class=\"input-field col s12\">\n                    <input class=\"pure-input-1-2\" type=\"text\" id=\"username\" ng-model=\"registerData.username\"/>\n                    <label for=\"username\">用户名</label>\n                </div>\n            </div> -->\n            <div class=\"row\">\n\n                <div class=\"input-field col s12\">\n                    <input class=\"pure-input-1-2\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\n                    <label for=\"email\">邮箱</label>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"input-field col s12\">\n                    <input class=\"pure-input-1-2\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\n                    <label for=\"password\">密码</label>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"input-field col s12\">\n                    <button class=\"btn waves-effect waves-light\" v-on:click=\"signUp()\">注册</button>\n                    <a v-link=\"'login'\" class=\"btn waves-effect waves-light\">已有账号？直接登录</a>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n";
 
 /***/ },
-/* 47 */
+/* 51 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
