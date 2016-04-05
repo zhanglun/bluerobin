@@ -6,10 +6,7 @@
 					<span class="material-icons" id="uploadfile">cloud_upload</span>
 							<!-- <span class="material-icons">file_upload</span> -->
         	</li>
-        <li class="collection-item">Alvin</li>
-        <li class="collection-item">Alvin</li>
-        <li class="collection-item">Alvin</li>
-        <li class="collection-item">Alvin</li>
+        	<li class="collection-item" v-for="file in filelist">{{file.path}}</li>
       </ul>
 	</div>
 
@@ -20,8 +17,8 @@
 	export default{
 		data(){
 			return {
-				uploader: {}
-
+				uploader: {},
+				filelist: []
 			}
 		},
 		ready(){
@@ -46,7 +43,7 @@
 		    });
 
 		    this.uploader.bind('FileUploaded', function(up, file, res){
-		      _this.newTask.attachments.push({
+		      _this.filelist.push({
 		        name: file.name,
 		        url: Tool.uploadImageSrc(file.name),
 		        size: file.size,
