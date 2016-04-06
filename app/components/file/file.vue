@@ -6,7 +6,7 @@
 					<span class="material-icons" id="uploadfile">cloud_upload</span>
 							<!-- <span class="material-icons">file_upload</span> -->
         	</li>
-        	<li class="collection-item" v-for="file in filelist">{{file.path}}</li>
+        	<li class="collection-item" v-for="file in filelist">id:{{file._id}} --- isFile:{{file.isfile}} ---- {{file.name}}</li>
       </ul>
 	</div>
 
@@ -23,7 +23,13 @@
 		},
 		ready(){
 			this.init();
-
+			var _this = this;
+			$.ajax({
+				url: CONFIG.APIROOT + '/file'
+			})
+			.then(function(files){
+				_this.filelist = files;
+			})
 		},
 		methods: {
 			init(){
@@ -62,5 +68,5 @@
 	#uploadfile{
 		cursor: pointer;
 	}
-	
+
 </style>

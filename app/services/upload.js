@@ -76,7 +76,7 @@ function uploadInit(opt) {
                 // var key = "";
                 // do something with key here
                 //   return 'test_prefixer_hahhahah_______' + file.name;
-                return current_user.username + '/' + file.name;
+                return window.account.username + '/' + file.name;
             }
         }
     });
