@@ -54,10 +54,14 @@
           window.account = res.user;
           // router.go('/task');
         }else{
+            window.account = false;
+            _this.$data.account = false;
+            console.log(res);
           router.go('/login');
         }
       })
       .fail(function(){
+          _this.$data.account = false;
           router.go('/login');
       });
 

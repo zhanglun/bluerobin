@@ -3,8 +3,7 @@
       <ul class="collection with-header" id="filelist">
         <li class="collection-header" id="uploadcontainer">
         	<h4>File List</h4>
-					<span class="material-icons" id="uploadfile">cloud_upload</span>
-							<!-- <span class="material-icons">file_upload</span> -->
+				<span class="material-icons" id="uploadfile">cloud_upload</span>
         	</li>
         	<li class="collection-item" v-for="file in filelist">id:{{file._id}} --- isFile:{{file.isfile}} ---- {{file.name}}</li>
       </ul>

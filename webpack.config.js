@@ -3,21 +3,21 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 //定义了一些文件夹的路径
 var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
-var BUILD_PATH = path.resolve(ROOT_PATH, 'build');
+var BUILD_PATH = path.resolve(APP_PATH, 'build');
 
 module.exports = {
   entry: {
     index: APP_PATH + '/index.js'
   },
   output: {
-    path: APP_PATH,
+    path: BUILD_PATH,
     // publicPath: '/build',
     filename: './[name].bundle.js'
   },
   module: {
     loaders: [{
       test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-      loader: 'file-loader?name=/build/fonts/[hash].[ext]'
+      loader: 'file-loader?name=fonts/[hash].[ext]'
     }, {
       test: /\.(jpe?g|png|gif|svg)$/i,
       loaders: [
