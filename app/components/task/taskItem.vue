@@ -177,10 +177,10 @@
 
     <div class="collapsible-header task-header" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
         <div class="task-checker">
-          <input type="checkbox" id="{{task._id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
-          <label for="{{task._id}}"></label>
+          <input type="checkbox" id="{{task.id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
+          <label for="{{task.id}}"></label>
         </div>
-        <div class="task-content" v-on:click="getDetail(task._id)">
+        <div class="task-content" v-on:click="getDetail(task.id)">
           <div data-val="{{task.title}}">{{task.title}}</div>
           <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
         </div>
@@ -202,9 +202,9 @@
           </ul>
         </div>
         <div class="task-editbar">
-          <span class='' data-activates='dropdown-{{task._id}}'><i class="material-icons">more_vert</i></span>
+          <span class='' data-activates='dropdown-{{task.id}}'><i class="material-icons">more_vert</i></span>
 
-          <ul id='dropdown-{{task._id}}' class='dropdown-content'>
+          <ul id='dropdown-{{task.id}}' class='dropdown-content'>
             <li><span v-on:click="expandBroad(task)" class="material-icons">grin</span></li>
               <li class="divider"></li>
             <li  v-on:click="deleteTask(task)">

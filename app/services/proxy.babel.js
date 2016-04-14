@@ -71,7 +71,7 @@ proxy.Task.create = function(task) {
 proxy.Task.delete = function(task) {
   return $.ajax({
     method: 'delete',
-    url: CONFIG.API.TASKS + '/' + task._id
+    url: CONFIG.API.TASKS + '/' + task.id
   }).then(function(res) {
     return JSON.parse(res);
   });
