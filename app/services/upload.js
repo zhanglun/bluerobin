@@ -16,7 +16,7 @@ var plupload = window.plupload;
  * }
  * @return {[type]}     [description]
  */
-function uploadInit(opt) {
+function uploadInit(opt, setkey) {
     var uploader = new Qiniu.uploader({
         runtimes: 'html5,flash,html4', //上传模式,依次退化
         'browse_button': opt.browse_button || 'browse', //上传选择的点选按钮，**必需**
@@ -76,7 +76,8 @@ function uploadInit(opt) {
                 // var key = "";
                 // do something with key here
                 //   return 'test_prefixer_hahhahah_______' + file.name;
-                return window.account.username + '/' + file.name;
+                // return window.account.username + '/' + file.name;
+                return setkey(up, file);
             }
         }
     });
