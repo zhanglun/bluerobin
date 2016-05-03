@@ -1,8 +1,8 @@
 import Tool from './tool.babel.js';
 
 window.CONFIG = {
-  // APIROOT: 'http://localhost:1234/api'
-    APIROOT: 'http://zhanglun.daoapp.io/api'
+  APIROOT: 'http://localhost:1234/api'
+    // APIROOT: 'http://zhanglun.daoapp.io/api'
 };
 
 let CONFIG = window.CONFIG;
@@ -84,7 +84,7 @@ proxy.Task.delete = function(task) {
  */
 proxy.Task.edit = function(task) {
   return $.ajax({
-      url: root + '/tasks/' + task._id,
+      url: root + '/tasks/' + task.id,
       method: 'put',
       data: task,
       dataType: 'json'

@@ -4,13 +4,13 @@
 	margin-top: 15px;
 }
 .task-list{
- 	/*transform: perspective(1000px);*/
+ 	transform: perspective(1000px);
 }
 </style>
 
 <template>
 <div class="task-list-container">
-	<ul class="task-list collapsible popout" data-collapsible="accordion">
+	<ul class="task-list">
 		<taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
 	</ul>
 </div>

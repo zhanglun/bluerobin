@@ -1,3 +1,121 @@
+<template>
+  <li class="task-item">
+    <div class="task-header" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
+        <div class="task-checker">
+          <input type="checkbox" id="{{task.id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
+          <label for="{{task.id}}"></label>
+        </div>
+        <!-- <div class="task-content" v-on:click="getDetail(task.id)"> -->
+        <div class="task-content">
+          <div data-val="{{task.title}}">{{task.title}}</div>
+          <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
+        </div>
+        <!-- <span>
+          <i class="material-icons">more_vert</i>
+        </span> -->
+    </div>
+
+<!--     <div class="collapsible-body task-body">
+        <div class="task-detail">
+          {{taskDetail.content}}
+        </div>
+        <div class="task-attachments">
+            <div v-for="attachment in task.attachments">
+              <a target="_blank" href="{{attachment.url}}" title="{{attachment.name}}">
+                <img v-bind:src="attachment.previewUrl" alt="{{attachment.name}}">
+              </a>
+            </div>
+          </ul>
+        </div>
+        <div class="task-editbar">
+          <span class='' data-activates='dropdown-{{task.id}}'><i class="material-icons">more_vert</i></span>
+
+          <ul id='dropdown-{{task.id}}' class='dropdown-content'>
+            <li><span v-on:click="expandBroad(task)" class="material-icons">grin</span></li>
+              <li class="divider"></li>
+            <li  v-on:click="deleteTask(task)">
+                <span class="material-icons">delete删除</span>
+            </li>
+          </ul>
+        </div>
+    </div> -->
+  </li>
+
+</template>
+
+<script>
+
+import Proxy from '../../services/proxy.babel.js';
+
+module.exports = {
+	props: ['task', 'index'],
+  data: function(){
+  	return {
+  		editing: false,
+  		taskEditing: null,
+        taskDetail: {}
+  	}
+  },
+  ready: function(){
+    $('[data-activates]').dropdown();
+  },
+
+  directives: {
+    'task-autofocus'(value) {
+      if (!value) {
+        return;
+      }
+      var el = this.el;
+      setTimeout(function () {
+        el.focus();
+      }, 0);
+    }
+  },
+  methods: {
+    getDetail(id){
+        var _this = this;
+        Proxy.Task.get(id)
+        .then(function(res){
+            _this.taskDetail = res;
+        })
+    },
+  	toggleTask(task) {
+      this.task.completed = !this.task.completed;
+      this.$dispatch('edit task', task);
+  	},
+  	edit(task) {
+  		if(task.completed){
+  			return false;
+  		}
+  		this.taskEditing = task;
+  	},
+  	deleteTask(task) {
+      this.$dispatch('delete task', task);
+  	},
+
+    doEdit(task) {
+      // 如果没有正在编辑的task说明目前并没有编辑操作
+      // 这里也解决了 一个问题：在 input上绑定了 blur 和 keyup两个事件
+      // 按下 enter 执行完成之后，会触发 blur，所以应该执行之后将 taskEditing 置为 null
+      if(!this.taskEditing){
+        return false;
+      }
+      this.taskEditing = null;
+      this.$dispatch('edit task', task);
+    },
+
+    expandBroad(task){
+      // this.taskExpanding = task;
+      this.$dispatch('open task', task);
+    }
+  },
+  events: {
+
+  }
+
+}
+</script>
+
 <style lang="less">
 
 @import '../../public/stylesheets/variables';
@@ -55,20 +173,20 @@
 
   &.finished {
     .task-content {
-    	cursor: default;
+      cursor: default;
       text-decoration: line-through;
     }
   }
   &.editing {
-  	.task-content{
-	    > div {
-	      display: none;
-	    }
-	    > input {
-	      display: inline-block;
+    .task-content{
+      > div {
+        display: none;
+      }
+      > input {
+        display: inline-block;
         vertical-align: middle;
-	    }
-  	}
+      }
+    }
   }
   &.expaned{
     transform: rotateX(100deg);
@@ -171,121 +289,3 @@
 }
 
 </style>
-
-<template>
-  <li class="task-item">
-
-    <div class="collapsible-header task-header" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
-        <div class="task-checker">
-          <input type="checkbox" id="{{task.id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
-          <label for="{{task.id}}"></label>
-        </div>
-        <div class="task-content" v-on:click="getDetail(task.id)">
-          <div data-val="{{task.title}}">{{task.title}}</div>
-          <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
-        </div>
-        <!-- <span>
-          <i class="material-icons">more_vert</i>
-        </span> -->
-    </div>
-
-    <div class="collapsible-body task-body">
-        <div class="task-detail">
-          {{taskDetail.content}}
-        </div>
-        <div class="task-attachments">
-            <div v-for="attachment in task.attachments">
-              <a target="_blank" href="{{attachment.url}}" title="{{attachment.name}}">
-                <img v-bind:src="attachment.previewUrl" alt="{{attachment.name}}">
-              </a>
-            </div>
-          </ul>
-        </div>
-        <div class="task-editbar">
-          <span class='' data-activates='dropdown-{{task.id}}'><i class="material-icons">more_vert</i></span>
-
-          <ul id='dropdown-{{task.id}}' class='dropdown-content'>
-            <li><span v-on:click="expandBroad(task)" class="material-icons">grin</span></li>
-              <li class="divider"></li>
-            <li  v-on:click="deleteTask(task)">
-                <span class="material-icons">delete删除</span>
-            </li>
-          </ul>
-        </div>
-    </div>
-  </li>
-
-</template>
-
-<script>
-
-import Proxy from '../../services/proxy.babel.js';
-
-module.exports = {
-	props: ['task', 'index'],
-  data: function(){
-  	return {
-  		editing: false,
-  		taskEditing: null,
-        taskDetail: {}
-  	}
-  },
-  ready: function(){
-    $('[data-activates]').dropdown();
-  },
-
-  directives: {
-    'task-autofocus'(value) {
-      if (!value) {
-        return;
-      }
-      var el = this.el;
-      setTimeout(function () {
-        el.focus();
-      }, 0);
-    }
-  },
-  methods: {
-    getDetail(id){
-        var _this = this;
-        Proxy.Task.get(id)
-        .then(function(res){
-            _this.taskDetail = res;
-        })
-    },
-  	toggleTask(task) {
-      this.task.completed = !this.task.completed;
-      this.$dispatch('edit task', task);
-  	},
-  	edit(task) {
-  		if(task.completed){
-  			return false;
-  		}
-  		this.taskEditing = task;
-  	},
-  	deleteTask(task) {
-      this.$dispatch('delete task', task);
-  	},
-
-    doEdit(task) {
-      // 如果没有正在编辑的task说明目前并没有编辑操作
-      // 这里也解决了 一个问题：在 input上绑定了 blur 和 keyup两个事件
-      // 按下 enter 执行完成之后，会触发 blur，所以应该执行之后将 taskEditing 置为 null
-      if(!this.taskEditing){
-        return false;
-      }
-      this.taskEditing = null;
-      this.$dispatch('edit task', task);
-    },
-
-    expandBroad(task){
-      // this.taskExpanding = task;
-      this.$dispatch('open task', task);
-    }
-  },
-  events: {
-
-  }
-
-}
-</script>
