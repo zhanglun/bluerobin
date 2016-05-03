@@ -11,8 +11,8 @@ var _toolBabel2 = _interopRequireDefault(_toolBabel);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 window.CONFIG = {
-  // APIROOT: 'http://localhost:1234/api'
-  APIROOT: 'http://zhanglun.daoapp.io/api'
+  APIROOT: 'http://localhost:1234/api'
+  // APIROOT: 'http://zhanglun.daoapp.io/api'
 };
 
 var CONFIG = window.CONFIG;
@@ -91,7 +91,7 @@ proxy.Task.delete = function (task) {
  */
 proxy.Task.edit = function (task) {
   return $.ajax({
-    url: root + '/tasks/' + task._id,
+    url: root + '/tasks/' + task.id,
     method: 'put',
     data: task,
     dataType: 'json'

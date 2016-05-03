@@ -2,18 +2,22 @@ require('./public/stylesheets/base.less');
 
 import Vue from 'vue';
 import Router from 'vue-router';
-import VuewResource from 'vue-resource';
+import VueResource from 'vue-resource';
 
-import App from './../components/app.vue';
-import HomeView from './../components/home/home.vue';
-import FileView from './../components/file/file.vue';
-import TaskView from './../components/task/task.vue';
-import UserLogin from './../components/user/login.vue';
-import UserSignUp from './../components/user/signup.vue';
+import App from './components/app.vue';
+import HomeView from './components/home/home.vue';
+import FileView from './components/file/file.vue';
+import TaskView from './components/task/task.vue';
+import UserLogin from './components/user/login.vue';
+import UserSignUp from './components/user/signup.vue';
 
 
 Vue.use(Router);
 Vue.use(VueResource);
+
+Vue.http.options.root = 'http://localhost:1234/api';
+Vue.http.headers.common['x-access-token'] = localStorage.token;
+
 // routing
 var router = new Router({ linkActiveClass: 'active' })
 

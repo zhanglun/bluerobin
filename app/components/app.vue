@@ -23,7 +23,6 @@
   <div class="app">
       <appHeader :account="account"></appHeader>
       <router-view ></router-view>
-      <!-- <bar></bar> -->
   </div>
 </template>
 
@@ -46,24 +45,32 @@
     },
     ready(){
 
-      var _this = this;
-      Proxy.User.authenticate()
-      .done(function(res){
-        if(res.success){
-          _this.$data.account = res.user;
-          window.account = res.user;
-          // router.go('/task');
-        }else{
-            window.account = false;
-            _this.$data.account = false;
-            console.log(res);
-          router.go('/login');
-        }
-      })
-      .fail(function(){
-          _this.$data.account = false;
-          router.go('/login');
-      });
+      var vm = this;
+      vm.$http.get('user/authenticate')
+        .then(function(res){
+          console.log(res);
+          vm.$data.account = res.user;
+        }, function(err){
+          vm.$data.account = false;
+          vm.$router.go('/login');
+        })
+      // Proxy.User.authenticate()
+      // .done(function(res){
+      //   if(res.success){
+      //     _this.$data.account = res.user;
+      //     window.account = res.user;
+      //     // router.go('/task');
+      //   }else{
+      //       window.account = false;
+      //       _this.$data.account = false;
+      //       console.log(res);
+      //     router.go('/login');
+      //   }
+      // })
+      // .fail(function(){
+      //     _this.$data.account = false;
+      //     router.go('/login');
+      // });
 
     },
     components: {

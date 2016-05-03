@@ -22,7 +22,6 @@
   </div>
 </template>
 <script>
-  import route from '../../route/index.js';
   import Proxy from '../../services/proxy.babel.js';
   export default {
     data(){
@@ -37,11 +36,12 @@
       console.log('login');
     },
     methods: {
-      doLogin: function(){
+      doLogin(){
+        var vm = this;
         Proxy.User.login(this.user)
         .done(function(res){
           localStorage.token = res.token;
-          route.go('/task');
+          vm.$router.go('/task');
         })
         .fail(function(){
 
