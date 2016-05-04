@@ -7,7 +7,7 @@
         </div>
         <!-- <div class="task-content" v-on:click="getDetail(task.id)"> -->
         <div class="task-content">
-          <div data-val="{{task.title}}">{{task.title}}</div>
+          <div data-val="{{task.title}}" @dblclick="edit(task)">{{task.title}}</div>
           <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
         </div>
         <!-- <span>
