@@ -1,45 +1,16 @@
 <template>
-  <li class="task-item">
-    <div class="task-header" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
-        <div class="task-checker">
-          <input type="checkbox" id="{{task.id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
-          <label for="{{task.id}}"></label>
-        </div>
-        <!-- <div class="task-content" v-on:click="getDetail(task.id)"> -->
-        <div class="task-content">
-          <div data-val="{{task.title}}" @dblclick="edit(task)">{{task.title}}</div>
-          <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
-        </div>
-        <!-- <span>
-          <i class="material-icons">more_vert</i>
-        </span> -->
+  <div class="task-item"  transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
+    <input type="checkbox" id="{{task.id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
+    <label for="{{task.id}}"></label>
+    <div class="task-content">
+      <div @dblclick="edit(task)">{{task.title}}</div>
+      <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
     </div>
+    <span class="task-controller">
+      <i class="material-icons" @click="deleteTask(task)">clear</i>
+    </span>
 
-<!--     <div class="collapsible-body task-body">
-        <div class="task-detail">
-          {{taskDetail.content}}
-        </div>
-        <div class="task-attachments">
-            <div v-for="attachment in task.attachments">
-              <a target="_blank" href="{{attachment.url}}" title="{{attachment.name}}">
-                <img v-bind:src="attachment.previewUrl" alt="{{attachment.name}}">
-              </a>
-            </div>
-          </ul>
-        </div>
-        <div class="task-editbar">
-          <span class='' data-activates='dropdown-{{task.id}}'><i class="material-icons">more_vert</i></span>
-
-          <ul id='dropdown-{{task.id}}' class='dropdown-content'>
-            <li><span v-on:click="expandBroad(task)" class="material-icons">grin</span></li>
-              <li class="divider"></li>
-            <li  v-on:click="deleteTask(task)">
-                <span class="material-icons">delete删除</span>
-            </li>
-          </ul>
-        </div>
-    </div> -->
-  </li>
+  </div>
 
 </template>
 
@@ -122,16 +93,6 @@ module.exports = {
 
 @editbox-height: 34px;
 
-.red {
-  color: #f00;
-}
-.dib {
-  display: inline-block;
-}
-
-.app-main {
-  box-sizing: border-box;
-}
 
 .modify {
   width: 100%;
@@ -147,20 +108,16 @@ module.exports = {
       // box
     }
   }
-  .collapsible-body{
-    background: #fff;
-  }
 }
 
-.task-header {
-  height: @editbox-height + 10;
-  line-height: @editbox-height;
+.task-item {
+  // height: @editbox-height + 10;
+  // line-height: @editbox-height;
   box-sizing: border-box;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: #343434;
   background: @white;
   box-shadow: 0 2px 4px rgba(0,0,0,.24);
-  line-height: 2em;
   padding: .7em;
   padding-right: 0;
   display: flex;
@@ -195,25 +152,11 @@ module.exports = {
     visibility: hidden;
   }
   &:hover {
-    .task-actions {
+    .task-controller {
       display: block;
     }
   }
 
-}
-
-.task-body{
-  padding: 1em;
-  font-size: 1.6rem;
-}
-
-
-.task-checker {
-    flex: 0 0 auto;
-    [type="checkbox"]+label{
-        // padding:0;
-        // width: 20px;
-    }
 }
 
 .task-content {
@@ -235,38 +178,10 @@ module.exports = {
   }
 }
 
-#task-completed {
+
+.task-controller {
   display: none;
 }
-
-.task-footer {
-  a {
-    display: inline-block;;
-  }
-  .todo-count {
-    display: inline-block;
-  }
-}
-
-.task-actions {
-  // width: 100px;
-  // text-align: right;
-  // overflow: hidden;
-  // display: none;
-}
-.task-attachments{
-  >div{
-    img{
-    }
-  }
-}
-
-#task-category {
-  .list-group-item {
-    background: rgba(255, 255, 255, 0.8);
-  }
-}
-
 
 
 

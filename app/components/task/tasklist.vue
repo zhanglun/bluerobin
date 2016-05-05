@@ -2,17 +2,13 @@
 .task-list-container{
 	box-sizing: border-box;
 	margin-top: 15px;
-}
-.task-list{
  	transform: perspective(1000px);
 }
 </style>
 
 <template>
 <div class="task-list-container">
-	<ul class="task-list">
 		<taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
-	</ul>
 </div>
 </template>
 
@@ -33,13 +29,18 @@
 			this.getTaskList();
 		},
 		methods: {
-			'getTaskList': function() {
-				var _this = this;
-				Proxy.Task.get()
-				.then(function(data){
-					_this.tasklist = data;
-					return data;
-				});
+			getTaskList() {
+				var vm = this;
+				vm.$http.get('tasks')
+					.then(function(res){
+						vm.tasklist = res.data;
+					});
+				// var _this = this;
+				// Proxy.Task.get()
+				// .then(function(data){
+				// 	_this.tasklist = data;
+				// 	return data;
+				// });
 			}
 		},
 		events: {
@@ -52,10 +53,10 @@
 				});
 			},
 			'delete task': function(task){
-				var _this = this;
-    		Proxy.Task.delete(task)
+				var vm = this;
+				vm.$http.delete('tasks/' +  task.id)
      		.then(function(){
-	     		_this.tasklist.$remove(task);
+	     		vm.tasklist.$remove(task);
      		});
 			},
 			'edit task': function(task){

@@ -1,7 +1,7 @@
 cd <style lang="less">
 	.task-container{
-		max-width:660px;
-		min-width: 500px;
+		max-width:860px;
+		min-width: 600px;
 		margin: 30px auto;
 		height: 65%;
 		box-sizing: border-box;
