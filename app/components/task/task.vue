@@ -39,13 +39,6 @@ cd <style lang="less">
 	  },
 
 	  ready(){
-
-	  	// router.go('/login');
-    $('.dropdown-button').dropdown();
-    $('.collapsible').collapsible({
-      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-    });
-
 	  },
 
 	  methods: {

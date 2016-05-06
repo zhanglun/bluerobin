@@ -40,14 +40,13 @@
   height: 34px;
   padding: 0 4px;
 }
-.task-item {
+.task {
   box-sizing: border-box;
   font-size: 1.6rem;
   color: #343434;
   background: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24);
-  padding: .7em;
-  padding-right: 0;
+  padding: 0 6rem 0 .7em;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -57,37 +56,29 @@
   -webkit-flex-direction: row;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
-.task-item.collapsible-header {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
-.task-item.finished .task-content {
+.task.finished .task-content {
   cursor: default;
   text-decoration: line-through;
 }
-.task-item.editing .task-content > div {
+.task.editing .task-content-box {
   display: none;
 }
-.task-item.editing .task-content > input {
-  display: inline-block;
-  vertical-align: middle;
+.task.editing .task-content-input {
+  display: block;
 }
-.task-item.expaned {
+.task.expaned {
   -webkit-transform: rotateX(100deg);
           transform: rotateX(100deg);
 }
-.task-item.visiable {
+.task.visiable {
   visibility: hidden;
 }
-.task-item:hover .task-controller {
+.task:hover .task-controller {
   display: block;
 }
 .task-content {
@@ -96,15 +87,16 @@
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   overflow: hidden;
+  padding: 1.2rem 0;
 }
-.task-content > input {
+.task-content .task-content-input {
+  font-size: 100%;
   @extend .modify;
-  border: 1px solid #d4d4d4;
   display: none;
-  outline: none;
-  font-size: 14px;
+  margin: 0 ;
 }
-.task-content > div {
+.task-content .task-content-box {
+  line-height: 31px;
   padding: 0 5px;
   white-space: nowrap;
   overflow: hidden;

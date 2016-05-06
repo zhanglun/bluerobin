@@ -1,10 +1,10 @@
 <template>
-  <div class="task-item"  transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
+  <div class="task"  transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
     <input type="checkbox" id="{{task.id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
     <label for="{{task.id}}"></label>
     <div class="task-content">
-      <div @dblclick="edit(task)">{{task.title}}</div>
-      <input type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
+      <div class="task-content-box" @dblclick="edit(task)">{{task.title}}</div>
+      <input class="task-content-input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
     </div>
     <span class="task-controller">
       <i class="material-icons" @click="deleteTask(task)">clear</i>
@@ -102,31 +102,16 @@ module.exports = {
   padding: 0 4px;
 }
 
-.task-item{
-  &.active{
-    .task-header{
-      // box
-    }
-  }
-}
-
-.task-item {
-  // height: @editbox-height + 10;
-  // line-height: @editbox-height;
+.task {
   box-sizing: border-box;
   font-size: 1.6rem;
   color: #343434;
   background: @white;
   box-shadow: 0 2px 4px rgba(0,0,0,.24);
-  padding: .7em;
-  padding-right: 0;
+  padding: 0 6rem 0 .7em;
   display: flex;
   flex-direction: row;
-
-  &.collapsible-header{
-    display: flex;
-    flex-direction: row;
-  }
+  align-items: center;
 
   &.finished {
     .task-content {
@@ -135,13 +120,12 @@ module.exports = {
     }
   }
   &.editing {
-    .task-content{
-      > div {
+    .task-content {
+      &-box {
         display: none;
       }
-      > input {
-        display: inline-block;
-        vertical-align: middle;
+      &-input {
+        display: block;
       }
     }
   }
@@ -162,20 +146,21 @@ module.exports = {
 .task-content {
     flex: 1 1 auto;
     overflow: hidden;
-  > input {
-    @extend .modify;
-    border: 1px solid #d4d4d4;
-    display: none;
-    outline: none;
-    font-size: 14px;
-  }
-  > div {
-    padding: 0 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -webkit-user-select: none;
-  }
+    padding: 1.2rem 0;
+    & &-input {
+      font-size: 100%;
+      @extend .modify;
+      display: none;
+      margin: 0 ;
+    } 
+    & &-box {
+      line-height: 31px;
+      padding: 0 5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-user-select: none;
+    }
 }
 
 
