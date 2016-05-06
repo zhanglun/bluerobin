@@ -17,16 +17,17 @@ Vue.use(VueResource);
 
 Vue.http.options.root = 'http://localhost:1234/api';
 Vue.http.headers.common['x-access-token'] = localStorage.token;
-Vue.http.interceptors.push({
-	request: function(request){
-		console.log(request);
-		return request
-	},
-	response: function(response){
-		console.log(response);
-		return response
-	}
-});
+
+// Vue.http.interceptors.push({
+// 	request: function(request){
+// 		console.log(request);
+// 		return request
+// 	},
+// 	response: function(response){
+// 		console.log(response);
+// 		return response
+// 	}
+// });
 
 // routing
 var router = new Router({ linkActiveClass: 'active' })
