@@ -35,25 +35,18 @@
 					.then(function(res){
 						vm.tasklist = res.data;
 					});
-				// var _this = this;
-				// Proxy.Task.get()
-				// .then(function(data){
-				// 	_this.tasklist = data;
-				// 	return data;
-				// });
 			}
 		},
 		events: {
 			'add task': function(task){
-				var _this = this;
-				console.log('Component: TaskList 收到了来自 App 的 new task');
-				Proxy.Task.create(task)
-				.then(function(res){
-					_this.tasklist.push(res);
-				});
+				let vm = this;
+        vm.$http.post('tasks', task)
+          .then(function(res){
+            vm.tasklist.unshift(res.data);
+          });
 			},
 			'delete task': function(task){
-				var vm = this;
+				let vm = this;
 				vm.$http.delete('tasks/' +  task.id)
      		.then(function(){
 	     		vm.tasklist.$remove(task);

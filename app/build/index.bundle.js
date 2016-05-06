@@ -62,11 +62,11 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _home = __webpack_require__(55);
+	var _home = __webpack_require__(56);
 	
 	var _home2 = _interopRequireDefault(_home);
 	
-	var _file = __webpack_require__(64);
+	var _file = __webpack_require__(65);
 	
 	var _file2 = _interopRequireDefault(_file);
 	
@@ -74,17 +74,17 @@
 	
 	var _task2 = _interopRequireDefault(_task);
 	
-	var _login = __webpack_require__(68);
+	var _login = __webpack_require__(69);
 	
 	var _login2 = _interopRequireDefault(_login);
 	
-	var _signup = __webpack_require__(72);
+	var _signup = __webpack_require__(73);
 	
 	var _signup2 = _interopRequireDefault(_signup);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(75);
+	__webpack_require__(76);
 	
 	_vue2.default.use(_vueRouter2.default);
 	_vue2.default.use(_vueResource2.default);
@@ -14500,7 +14500,7 @@
 	var __vue_script__, __vue_template__
 	__webpack_require__(29)
 	__vue_script__ = __webpack_require__(30)
-	__vue_template__ = __webpack_require__(63)
+	__vue_template__ = __webpack_require__(64)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14508,7 +14508,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/app.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\app.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14552,11 +14552,11 @@
 	
 	var _task2 = _interopRequireDefault(_task);
 	
-	var _home = __webpack_require__(55);
+	var _home = __webpack_require__(56);
 	
 	var _home2 = _interopRequireDefault(_home);
 	
-	var _header = __webpack_require__(59);
+	var _header = __webpack_require__(60);
 	
 	var _header2 = _interopRequireDefault(_header);
 	
@@ -14940,7 +14940,7 @@
 	var __vue_script__, __vue_template__
 	__webpack_require__(37)
 	__vue_script__ = __webpack_require__(38)
-	__vue_template__ = __webpack_require__(54)
+	__vue_template__ = __webpack_require__(55)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14948,7 +14948,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/task.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\task\\task.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14988,7 +14988,7 @@
 	
 	var _taskList2 = _interopRequireDefault(_taskList);
 	
-	var _taskInputer = __webpack_require__(47);
+	var _taskInputer = __webpack_require__(48);
 	
 	var _taskInputer2 = _interopRequireDefault(_taskInputer);
 	
@@ -15061,8 +15061,8 @@
 
 	var __vue_script__, __vue_template__
 	__webpack_require__(40)
-	__vue_script__ = __webpack_require__(41)
-	__vue_template__ = __webpack_require__(46)
+	__vue_script__ = __webpack_require__(42)
+	__vue_template__ = __webpack_require__(47)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15070,7 +15070,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/taskList.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\task\\taskList.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15085,7 +15085,8 @@
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 41 */
+/* 41 */,
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15098,7 +15099,7 @@
 	
 	var _proxyBabel2 = _interopRequireDefault(_proxyBabel);
 	
-	var _taskItem = __webpack_require__(42);
+	var _taskItem = __webpack_require__(43);
 	
 	var _taskItem2 = _interopRequireDefault(_taskItem);
 	
@@ -15139,20 +15140,13 @@
 				vm.$http.get('tasks').then(function (res) {
 					vm.tasklist = res.data;
 				});
-				// var _this = this;
-				// Proxy.Task.get()
-				// .then(function(data){
-				// 	_this.tasklist = data;
-				// 	return data;
-				// });
 			}
 		},
 		events: {
 			'add task': function addTask(task) {
-				var _this = this;
-				console.log('Component: TaskList 收到了来自 App 的 new task');
-				_proxyBabel2.default.Task.create(task).then(function (res) {
-					_this.tasklist.push(res);
+				var vm = this;
+				vm.$http.post('tasks', task).then(function (res) {
+					vm.tasklist.unshift(res.data);
 				});
 			},
 			'delete task': function deleteTask(task) {
@@ -15175,13 +15169,13 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(43)
-	__vue_script__ = __webpack_require__(44)
-	__vue_template__ = __webpack_require__(45)
+	__webpack_require__(44)
+	__vue_script__ = __webpack_require__(45)
+	__vue_template__ = __webpack_require__(46)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15189,7 +15183,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/taskItem.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\task\\taskItem.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15198,13 +15192,13 @@
 	})()}
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15417,25 +15411,25 @@
 	// <script>
 
 /***/ },
-/* 45 */
-/***/ function(module, exports) {
-
-	module.exports = "\n  <div class=\"task-item\"  transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\n    <input type=\"checkbox\" id=\"{{task.id}}\"  v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n    <label for=\"{{task.id}}\"></label>\n    <div class=\"task-content\">\n      <div @dblclick=\"edit(task)\">{{task.title}}</div>\n      <input type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n    </div>\n    <span class=\"task-controller\">\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\n    </span>\n\n  </div>\n\n";
-
-/***/ },
 /* 46 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"task-list-container\">\n\t\t<taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></taskitem>\n</div>\n";
+	module.exports = "\r\n  <div class=\"task-item\"  transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n    <input type=\"checkbox\" id=\"{{task.id}}\"  v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n    <label for=\"{{task.id}}\"></label>\r\n    <div class=\"task-content\">\r\n      <div @dblclick=\"edit(task)\">{{task.title}}</div>\r\n      <input type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n    </div>\r\n    <span class=\"task-controller\">\r\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\r\n    </span>\r\n\r\n  </div>\r\n\r\n";
 
 /***/ },
 /* 47 */
+/***/ function(module, exports) {
+
+	module.exports = "\r\n<div class=\"task-list-container\">\r\n\t\t<taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></taskitem>\r\n</div>\r\n";
+
+/***/ },
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(48)
-	__vue_script__ = __webpack_require__(49)
-	__vue_template__ = __webpack_require__(53)
+	__webpack_require__(49)
+	__vue_script__ = __webpack_require__(50)
+	__vue_template__ = __webpack_require__(54)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15443,7 +15437,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/taskInputer.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\task\\taskInputer.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15452,13 +15446,13 @@
 	})()}
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15467,7 +15461,7 @@
 		value: true
 	});
 	
-	var _stringify = __webpack_require__(50);
+	var _stringify = __webpack_require__(51);
 	
 	var _stringify2 = _interopRequireDefault(_stringify);
 	
@@ -15717,48 +15711,48 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 50 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(51), __esModule: true };
-
-/***/ },
 /* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var core  = __webpack_require__(52)
+	module.exports = { "default": __webpack_require__(52), __esModule: true };
+
+/***/ },
+/* 52 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(53)
 	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
 	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
 	  return $JSON.stringify.apply($JSON, arguments);
 	};
 
 /***/ },
-/* 52 */
+/* 53 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.3.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 53 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<!-- Modal Structure -->\n<!-- <div id=\"modalLayer-inputer\" class=\"modal bottom-sheet\"> -->\n<div id=\"modalLayer-inputer\" class=\"modal modal-fixed-footer\">\n  <div class=\"modal-content\">\n\t<h5>Create New</h5>\n    <div class=\"row\">\n        <div class=\"input-field col s12\">\n          <input class=\"validate\" type=\"text\" v-model=\"newTask.title\">\n          <label for=\"\">Title</label>\n        </div>\n    </div>\n\n\t<div class=\"task-inputer\" id=\"taskWriter\">\n\t\t<textarea type=\"text\" v-model=\"newTask.content\" id=\"taskInputer\" placeholder=\"What is your focus today...\" v-on:paste=\"uploadByPaste($event)\" ></textarea>\n\t</div>\n\t<div class=\"task-images\">\n\t\t<div v-for=\"file in newTask.attachments\">\n\t\t\t<img v-bind:src=\"file.url\" alt=\"\" >\n\t\t</div>\n\t</div>\n  </div>\n  <div class=\"modal-footer\">\n\t\t<div class=\"task-inputer-bar\">\n\t\t\t<span id=\"browse\" class=\"material-icons\">photo</span>\n\t\t\t<button class=\" modal-action modal-close waves-effect waves-green waves-light btn\" v-on:click=\"createTask\">\n\t\t\t确定\n\t\t\t</button>\n\t\t\t</div>\n  </div>\n</div>\n\n\t<!-- 底部按钮 -->\n\t<div class=\"fixed-action-btn horizontal\" style=\"bottom: 45px; right: 24px;\">\n\t\t<a class=\"btn-floating btn-large red waves-effect waves-light btn\">\n\t\t\t<i class=\"large material-icons\">mode_edit</i>\n\t\t</a>\n\t\t<ul>\n\t\t<!-- <li><a class=\"btn-floating red\"><i class=\"material-icons\">insert_chart</i></a></li> -->\n\t\t<li><a class=\"btn-floating yellow darken-1 modal-trigger\" data-target=\"mofalLayer-inputer\"><i class=\"material-icons\">format_quote</i></a></li>\n\t\t<!-- <li><a class=\"btn-floating green\"><i class=\"material-icons\">publish</i></a></li> -->\n\t\t<!-- <li><a class=\"btn-floating blue\"><i class=\"material-icons\">attach_file</i></a></li> -->\n\t\t</ul>\n\t</div>\n";
-
-/***/ },
 /* 54 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"task-container\" transition=\"animate_routerview\">\n\t  <tasklist></tasklist>\n  </div>\n \t<taskinputer></taskinputer>\n";
+	module.exports = "\r\n<!-- Modal Structure -->\r\n<!-- <div id=\"modalLayer-inputer\" class=\"modal bottom-sheet\"> -->\r\n<div id=\"modalLayer-inputer\" class=\"modal modal-fixed-footer\">\r\n  <div class=\"modal-content\">\r\n\t<h5>Create New</h5>\r\n    <div class=\"row\">\r\n        <div class=\"input-field col s12\">\r\n          <input class=\"validate\" type=\"text\" v-model=\"newTask.title\">\r\n          <label for=\"\">Title</label>\r\n        </div>\r\n    </div>\r\n\r\n\t<div class=\"task-inputer\" id=\"taskWriter\">\r\n\t\t<textarea type=\"text\" v-model=\"newTask.content\" id=\"taskInputer\" placeholder=\"What is your focus today...\" v-on:paste=\"uploadByPaste($event)\" ></textarea>\r\n\t</div>\r\n\t<div class=\"task-images\">\r\n\t\t<div v-for=\"file in newTask.attachments\">\r\n\t\t\t<img v-bind:src=\"file.url\" alt=\"\" >\r\n\t\t</div>\r\n\t</div>\r\n  </div>\r\n  <div class=\"modal-footer\">\r\n\t\t<div class=\"task-inputer-bar\">\r\n\t\t\t<span id=\"browse\" class=\"material-icons\">photo</span>\r\n\t\t\t<button class=\" modal-action modal-close waves-effect waves-green waves-light btn\" v-on:click=\"createTask\">\r\n\t\t\t确定\r\n\t\t\t</button>\r\n\t\t\t</div>\r\n  </div>\r\n</div>\r\n\r\n\t<!-- 底部按钮 -->\r\n\t<div class=\"fixed-action-btn horizontal\" style=\"bottom: 45px; right: 24px;\">\r\n\t\t<a class=\"btn-floating btn-large red waves-effect waves-light btn\">\r\n\t\t\t<i class=\"large material-icons\">mode_edit</i>\r\n\t\t</a>\r\n\t\t<ul>\r\n\t\t<!-- <li><a class=\"btn-floating red\"><i class=\"material-icons\">insert_chart</i></a></li> -->\r\n\t\t<li><a class=\"btn-floating yellow darken-1 modal-trigger\" data-target=\"mofalLayer-inputer\"><i class=\"material-icons\">format_quote</i></a></li>\r\n\t\t<!-- <li><a class=\"btn-floating green\"><i class=\"material-icons\">publish</i></a></li> -->\r\n\t\t<!-- <li><a class=\"btn-floating blue\"><i class=\"material-icons\">attach_file</i></a></li> -->\r\n\t\t</ul>\r\n\t</div>\r\n";
 
 /***/ },
 /* 55 */
+/***/ function(module, exports) {
+
+	module.exports = "\r\n  <div class=\"task-container\" transition=\"animate_routerview\">\r\n\t  <tasklist></tasklist>\r\n  </div>\r\n \t<taskinputer></taskinputer>\r\n";
+
+/***/ },
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(56)
-	__vue_script__ = __webpack_require__(57)
-	__vue_template__ = __webpack_require__(58)
+	__webpack_require__(57)
+	__vue_script__ = __webpack_require__(58)
+	__vue_template__ = __webpack_require__(59)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15766,7 +15760,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/home/home.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\home\\home.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15775,13 +15769,13 @@
 	})()}
 
 /***/ },
-/* 56 */
+/* 57 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 57 */
+/* 58 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -15855,19 +15849,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 58 */
+/* 59 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div class=\"home\">\n\t\t\t<div class=\"clock\">\n\t\t\t\t<h1 class=\"time\" v-text=\"currentTime\">\n\t\t\t\t\t13:40\n\t\t\t\t</h1>\n\t\t</div>\n\t</div>\n";
+	module.exports = "\r\n\t<div class=\"home\">\r\n\t\t\t<div class=\"clock\">\r\n\t\t\t\t<h1 class=\"time\" v-text=\"currentTime\">\r\n\t\t\t\t\t13:40\r\n\t\t\t\t</h1>\r\n\t\t</div>\r\n\t</div>\r\n";
 
 /***/ },
-/* 59 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(60)
-	__vue_script__ = __webpack_require__(61)
-	__vue_template__ = __webpack_require__(62)
+	__webpack_require__(61)
+	__vue_script__ = __webpack_require__(62)
+	__vue_template__ = __webpack_require__(63)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15875,7 +15869,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/header/header.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\header\\header.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15884,13 +15878,13 @@
 	})()}
 
 /***/ },
-/* 60 */
+/* 61 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 61 */
+/* 62 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -15950,25 +15944,25 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 62 */
-/***/ function(module, exports) {
-
-	module.exports = "\n<header>\n<!-- Dropdown Structure -->\n<ul id=\"dropdown1\" class=\"dropdown-content\">\n  <li><a href=\"#!\">asdf</a></li>\n  <li class=\"divider\"></li>\n  <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\n</ul>\n<nav>\n  <div class=\"container\">\n      <div class=\"nav-wrapper\">\n        <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\n        <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a></li>\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a></li>\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a></li>\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a></li>\n          <li v-if=\"account\">\n            <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\n              <i class=\"material-icons right\">arrow_drop_down</i>\n            </a>\n          </li>\n        </ul>\n      </div>\n    </div>\n    </nav>\n</header>\n\n";
-
-/***/ },
 /* 63 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"app\">\n      <appHeader :account=\"account\"></appHeader>\n      <router-view ></router-view>\n  </div>\n";
+	module.exports = "\r\n<header>\r\n<!-- Dropdown Structure -->\r\n<ul id=\"dropdown1\" class=\"dropdown-content\">\r\n  <li><a href=\"#!\">asdf</a></li>\r\n  <li class=\"divider\"></li>\r\n  <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\r\n</ul>\r\n<nav>\r\n  <div class=\"container\">\r\n      <div class=\"nav-wrapper\">\r\n        <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\r\n        <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a></li>\r\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a></li>\r\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a></li>\r\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a></li>\r\n          <li v-if=\"account\">\r\n            <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\r\n              <i class=\"material-icons right\">arrow_drop_down</i>\r\n            </a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n    </nav>\r\n</header>\r\n\r\n";
 
 /***/ },
 /* 64 */
+/***/ function(module, exports) {
+
+	module.exports = "\r\n  <div class=\"app\">\r\n      <appHeader :account=\"account\"></appHeader>\r\n      <router-view ></router-view>\r\n  </div>\r\n";
+
+/***/ },
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(65)
-	__vue_script__ = __webpack_require__(66)
-	__vue_template__ = __webpack_require__(67)
+	__webpack_require__(66)
+	__vue_script__ = __webpack_require__(67)
+	__vue_template__ = __webpack_require__(68)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15976,7 +15970,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/file/file.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\file\\file.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15985,13 +15979,13 @@
 	})()}
 
 /***/ },
-/* 65 */
+/* 66 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 66 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16145,19 +16139,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 67 */
+/* 68 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div class=\"container\">\n      <ul class=\"collection with-header\" id=\"filelist\">\n        <li class=\"collection-header\" id=\"uploadcontainer\">\n        \t<h4>File List</h4>\n\t\t\t\t<span class=\"material-icons\" id=\"uploadfile\">cloud_upload</span>\n        \t</li>\n        \t<li class=\"collection-item\" v-for=\"file in filelist\">id:{{file._id}} --- isFile:{{file.isfile}} ---- {{file.name}}</li>\n      </ul>\n      <ul id=\"filelist\"></ul>\n\t</div>\n\n";
+	module.exports = "\r\n\t<div class=\"container\">\r\n      <ul class=\"collection with-header\" id=\"filelist\">\r\n        <li class=\"collection-header\" id=\"uploadcontainer\">\r\n        \t<h4>File List</h4>\r\n\t\t\t\t<span class=\"material-icons\" id=\"uploadfile\">cloud_upload</span>\r\n        \t</li>\r\n        \t<li class=\"collection-item\" v-for=\"file in filelist\">id:{{file._id}} --- isFile:{{file.isfile}} ---- {{file.name}}</li>\r\n      </ul>\r\n      <ul id=\"filelist\"></ul>\r\n\t</div>\r\n\r\n";
 
 /***/ },
-/* 68 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(69)
-	__vue_script__ = __webpack_require__(70)
-	__vue_template__ = __webpack_require__(71)
+	__webpack_require__(70)
+	__vue_script__ = __webpack_require__(71)
+	__vue_template__ = __webpack_require__(72)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16165,7 +16159,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/user/login.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\user\\login.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16174,13 +16168,13 @@
 	})()}
 
 /***/ },
-/* 69 */
+/* 70 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 70 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16256,18 +16250,18 @@
 	// <script>
 
 /***/ },
-/* 71 */
+/* 72 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"container\" transition=\"animate_routerview\">\n    <div class=\"login-form\">\n        <div class=\"row\">\n            <div class=\"input-field col s12\">\n              <input class=\"validate\" type=\"text\" id=\"email\" v-model=\"user.username\">\n              <label for=\"email\">Email</label>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"input-field col s12\">\n                <input class=\"validate\" type=\"password\" id=\"password\" v-model=\"user.password\">\n                <label for=\"password\">Password</label>\n            </div>\n        </div>\n        <div class=\"row\">\n            <div class=\"col \">\n                <button class=\"waves-effect waves-light btn\"  v-on:click=\"doLogin\">GO!</button>\n            </div>\n        </div>\n    </div>\n  </div>\n";
+	module.exports = "\r\n  <div class=\"container\" transition=\"animate_routerview\">\r\n    <div class=\"login-form\">\r\n        <div class=\"row\">\r\n            <div class=\"input-field col s12\">\r\n              <input class=\"validate\" type=\"text\" id=\"email\" v-model=\"user.username\">\r\n              <label for=\"email\">Email</label>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"input-field col s12\">\r\n                <input class=\"validate\" type=\"password\" id=\"password\" v-model=\"user.password\">\r\n                <label for=\"password\">Password</label>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col \">\r\n                <button class=\"waves-effect waves-light btn\"  v-on:click=\"doLogin\">GO!</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
-/* 72 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(73)
-	__vue_template__ = __webpack_require__(74)
+	__vue_script__ = __webpack_require__(74)
+	__vue_template__ = __webpack_require__(75)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16275,7 +16269,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/user/signup.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\user\\signup.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16284,7 +16278,7 @@
 	})()}
 
 /***/ },
-/* 73 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16380,13 +16374,13 @@
 	// <script>
 
 /***/ },
-/* 74 */
+/* 75 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\n<div class=\"container\">\n    <div class=\"login-panle\">\n        <div class=\"login-panle-header\">\n            <h3>注册</h3>\n        </div>\n        <div class=\"login-panle-container\">\n<!--             <div class=\"row\">\n\n                <div class=\"input-field col s12\">\n                    <input class=\"pure-input-1-2\" type=\"text\" id=\"username\" ng-model=\"registerData.username\"/>\n                    <label for=\"username\">用户名</label>\n                </div>\n            </div> -->\n            <div class=\"row\">\n\n                <div class=\"input-field col s12\">\n                    <input class=\"pure-input-1-2\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\n                    <label for=\"email\">邮箱</label>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"input-field col s12\">\n                    <input class=\"pure-input-1-2\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\n                    <label for=\"password\">密码</label>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"input-field col s12\">\n                    <button class=\"btn waves-effect waves-light\" v-on:click=\"signUp()\">注册</button>\n                    <a v-link=\"'login'\" class=\"btn waves-effect waves-light\">已有账号？直接登录</a>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n";
+	module.exports = "\r\n\r\n<div class=\"container\">\r\n    <div class=\"login-panle\">\r\n        <div class=\"login-panle-header\">\r\n            <h3>注册</h3>\r\n        </div>\r\n        <div class=\"login-panle-container\">\r\n<!--             <div class=\"row\">\r\n\r\n                <div class=\"input-field col s12\">\r\n                    <input class=\"pure-input-1-2\" type=\"text\" id=\"username\" ng-model=\"registerData.username\"/>\r\n                    <label for=\"username\">用户名</label>\r\n                </div>\r\n            </div> -->\r\n            <div class=\"row\">\r\n\r\n                <div class=\"input-field col s12\">\r\n                    <input class=\"pure-input-1-2\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\r\n                    <label for=\"email\">邮箱</label>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"input-field col s12\">\r\n                    <input class=\"pure-input-1-2\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\r\n                    <label for=\"password\">密码</label>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"input-field col s12\">\r\n                    <button class=\"btn waves-effect waves-light\" v-on:click=\"signUp()\">注册</button>\r\n                    <a v-link=\"'login'\" class=\"btn waves-effect waves-light\">已有账号？直接登录</a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 
 /***/ },
-/* 75 */
+/* 76 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
