@@ -1,4 +1,4 @@
-cd <style lang="less">
+<style lang="less">
 	.task-container{
 		max-width:860px;
 		min-width: 600px;
@@ -53,7 +53,7 @@ cd <style lang="less">
 			}
 	  },
 	  events: {
-			'add task': function(task){
+			'create task': function(task){
 				let vm = this;
         vm.$http.post('tasks', task)
           .then(function(res){

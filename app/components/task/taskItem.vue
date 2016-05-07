@@ -74,11 +74,6 @@ module.exports = {
       this.taskEditing = null;
       this.$dispatch('edit task', task);
     },
-
-    expandBroad(task){
-      // this.taskExpanding = task;
-      this.$dispatch('open task', task);
-    }
   },
   events: {
 

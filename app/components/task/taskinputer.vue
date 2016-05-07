@@ -136,6 +136,7 @@ export default {
 			}
 
 			this.newTask.ctime = new Date();
+
 			this.$dispatch('create task', this.newTask);
 
 			this.newTask = {
@@ -161,7 +162,6 @@ export default {
 					_this.newFile = file;
 				}
 			}
-
 		}
 	}
 
@@ -210,9 +210,7 @@ export default {
 	  outline: none;
 	  resize:none;
 	  transition: all 0.3s ease-in;
-	  // &:focus{
-	  // 	height: 240px;
-	  // }
+
 	}
 }
 
