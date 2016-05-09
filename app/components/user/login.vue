@@ -37,15 +37,15 @@
     },
     methods: {
       doLogin(){
-        var vm = this;
-        Proxy.User.login(this.user)
-        .done(function(res){
-          localStorage.token = res.token;
+        let vm = this;
+        vm.$http.post('user/login', this.user)
+        .then(function(res){
+          console.log(res);
+          localStorage.token = res.data.token;
           vm.$router.go('/task');
-        })
-        .fail(function(){
+        }, function(){
 
-        });
+        })
       }
     }
   }

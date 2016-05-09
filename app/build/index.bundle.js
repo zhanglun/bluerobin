@@ -89,7 +89,7 @@
 	_vue2.default.use(_vueRouter2.default);
 	_vue2.default.use(_vueResource2.default);
 	
-	_vue2.default.http.options.root = 'http://localhost:1234/api';
+	_vue2.default.http.options.root = 'http://zhanglun.daoapp.io/api';
 	_vue2.default.http.headers.common['x-access-token'] = localStorage.token;
 	
 	// Vue.http.interceptors.push({
@@ -14643,8 +14643,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	window.CONFIG = {
-	  APIROOT: 'http://localhost:1234/api'
-	  // APIROOT: 'http://zhanglun.daoapp.io/api'
+	  // APIROOT: 'http://localhost:1234/api'
+	  APIROOT: 'http://zhanglun.daoapp.io/api'
 	};
 	
 	var CONFIG = window.CONFIG;
@@ -16205,10 +16205,11 @@
 	  methods: {
 	    doLogin: function doLogin() {
 	      var vm = this;
-	      _proxyBabel2.default.User.login(this.user).done(function (res) {
-	        localStorage.token = res.token;
+	      vm.$http.post('user/login', this.user).then(function (res) {
+	        console.log(res);
+	        localStorage.token = res.data.token;
 	        vm.$router.go('/task');
-	      }).fail(function () {});
+	      }, function () {});
 	    }
 	  }
 	};
