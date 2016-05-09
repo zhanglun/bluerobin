@@ -18,7 +18,6 @@
 </template>
 
 <script>
-	import Proxy from '../../services/proxy.babel.js';
 	import TaskItemView from './taskItem.vue';
 	import TaskInputer from './taskInputer.vue';
 
@@ -70,10 +69,10 @@
 			'edit task': function(task){
 				var _this = this;
 				console.log('Component: TaskList 收到了来自 App 的 edit task');
-				Proxy.Task.edit(task)
-				.then(function(res){
-					console.log('edit task success!');
-				})
+        vm.$http.put('task/' + task.id)
+				  .then(function(res){
+					 console.log('edit task success!');
+				  });
 			}
 	  }
 	};

@@ -22,7 +22,6 @@
   </div>
 </template>
 <script>
-  import Proxy from '../../services/proxy.babel.js';
   export default {
     data(){
       return {

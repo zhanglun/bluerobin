@@ -16,7 +16,6 @@
 
 <script>
 
-import Proxy from '../../services/proxy.babel.js';
 
 module.exports = {
 	props: ['task', 'index'],
@@ -43,13 +42,6 @@ module.exports = {
     }
   },
   methods: {
-    getDetail(id){
-        var _this = this;
-        Proxy.Task.get(id)
-        .then(function(res){
-            _this.taskDetail = res;
-        })
-    },
   	toggleTask(task) {
       this.task.completed = !this.task.completed;
       this.$dispatch('edit task', task);

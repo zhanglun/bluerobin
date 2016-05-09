@@ -6,13 +6,6 @@
             <h3>注册</h3>
         </div>
         <div class="login-panle-container">
-<!--             <div class="row">
-
-                <div class="input-field col s12">
-                    <input class="pure-input-1-2" type="text" id="username" ng-model="registerData.username"/>
-                    <label for="username">用户名</label>
-                </div>
-            </div> -->
             <div class="row">
 
                 <div class="input-field col s12">
@@ -59,15 +52,14 @@
 
 		methods: {
 			signUp(){
-                var data = this.$data.registerData;
-                Proxy.User.signUp(data)
-                .done(function(res){
-                    localStorage.token = res.token;
-                    router.go('/task');
-                })
-                .fail(function(xhr){
-                    console.log(xhr);
-                });
+        var data = this.$data.registerData;
+        vm.$http.post('user/signup', data)
+          .then(function(res){
+              localStorage.token = res.token;
+              router.go('/task');
+          }, function(err){
+              console.log(xhr);
+          });
 			}
 		}
 
