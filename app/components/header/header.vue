@@ -5,25 +5,25 @@
   <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
         <!-- Title -->
-        <span class="mdl-layout-title">Title</span>
+        <span class="mdl-layout-title">BlueRobin</span>
         <!-- Add spacer, to align navigation to the right -->
         <div class="mdl-layout-spacer"></div>
         <!-- Navigation -->
         <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
-          <a class="mdl-navigation__link" href="">Link</a>
+        <a class="mdl-navigation__link" href="" v-link="{path: '/file', exact: true}">文件</a>
+        <a class="mdl-navigation__link" href="" v-link="{path: '/task', exact: true}">Task</a>
+        <a class="mdl-navigation__link" href="" v-link="{path: '/login', exact: true}">登录</a>
+        <a class="mdl-navigation__link" href="" v-link="{path: '/signup', exact: true}">注册</a>
         </nav>
       </div>
     </header>
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Title</span>
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
+        <a class="mdl-navigation__link" href="" v-link="{path: '/file', exact: true}">文件</a>
+        <a class="mdl-navigation__link" href="" v-link="{path: '/task', exact: true}">Task</a>
+        <a class="mdl-navigation__link" href="" v-link="{path: '/login', exact: true}">登录</a>
+        <a class="mdl-navigation__link" href="" v-link="{path: '/signup', exact: true}">注册</a>
       </nav>
     </div>
   <header>
@@ -38,10 +38,6 @@
         <div class="nav-wrapper">
           <a href="#" class="brand-logo">BlueRobin</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li v-link-active><a class="" href="" v-link="{path: '/file', exact: true}">文件</a></li>
-            <li v-link-active><a class="" href="" v-link="{path: '/task', exact: true}">Task</a></li>
-            <li v-link-active><a class="" href="" v-link="{path: '/login', exact: true}">登录</a></li>
-            <li v-link-active><a class="" href="" v-link="{path: '/signup', exact: true}">注册</a></li>
             <li v-if="account">
               <a class="dropdown-button" href="#!" data-activates="dropdown1">{{account.email}}
                 <i class="material-icons right">arrow_drop_down</i>
@@ -62,6 +58,7 @@ export default {
     };
   },
   ready(){
+    console.log('header!!!!!');
   },
   methods: {
     logout(){
