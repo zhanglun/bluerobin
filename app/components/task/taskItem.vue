@@ -1,7 +1,9 @@
 <template>
   <div class="task"  transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
-    <input type="checkbox" id="{{task.id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
-    <label for="{{task.id}}"></label>
+    <label class="mdl-checkbox mdl-js-checkbox" for="{{task.id}}">
+      <input type="checkbox" id="{{task.id}}" class="mdl-checkbox__input">
+      <!-- <span class="mdl-checkbox__label">Married</span> -->
+    </label>
     <div class="task-content">
       <div class="task-content-box" @dblclick="edit(task)">{{task.title}}</div>
       <input class="task-content-input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
@@ -27,7 +29,6 @@ module.exports = {
   	}
   },
   ready: function(){
-    $('[data-activates]').dropdown();
   },
 
   directives: {
@@ -95,6 +96,7 @@ module.exports = {
   color: #343434;
   background: @white;
   box-shadow: 0 2px 4px rgba(0,0,0,.24);
+  border-bottom: 1px solid #DCDCDC;
   padding: 0 6rem 0 .7em;
   display: flex;
   flex-direction: row;
@@ -133,13 +135,13 @@ module.exports = {
 .task-content {
     flex: 1 1 auto;
     overflow: hidden;
-    padding: 1.2rem 0;
+    padding: 0.8rem 0;
     & &-input {
       font-size: 100%;
       @extend .modify;
       display: none;
       margin: 0 ;
-    } 
+    }
     & &-box {
       line-height: 31px;
       padding: 0 5px;

@@ -1,5 +1,5 @@
 <template>
-  <div class="container" transition="animate_routerview">
+  <div class="container mdl-layout__content" transition="animate_routerview">
     <div class="login-form">
         <div class="row">
             <div class="input-field col s12">

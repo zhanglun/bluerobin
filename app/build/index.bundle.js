@@ -62,29 +62,29 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _home = __webpack_require__(51);
+	var _home = __webpack_require__(48);
 	
 	var _home2 = _interopRequireDefault(_home);
 	
-	var _file = __webpack_require__(60);
+	var _file = __webpack_require__(57);
 	
 	var _file2 = _interopRequireDefault(_file);
 	
-	var _task = __webpack_require__(35);
+	var _task = __webpack_require__(32);
 	
 	var _task2 = _interopRequireDefault(_task);
 	
-	var _login = __webpack_require__(64);
+	var _login = __webpack_require__(61);
 	
 	var _login2 = _interopRequireDefault(_login);
 	
-	var _signup = __webpack_require__(68);
+	var _signup = __webpack_require__(65);
 	
 	var _signup2 = _interopRequireDefault(_signup);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(71);
+	__webpack_require__(68);
 	
 	_vue2.default.use(_vueRouter2.default);
 	_vue2.default.use(_vueResource2.default);
@@ -14502,7 +14502,7 @@
 	var __vue_script__, __vue_template__
 	__webpack_require__(29)
 	__vue_script__ = __webpack_require__(30)
-	__vue_template__ = __webpack_require__(59)
+	__vue_template__ = __webpack_require__(56)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14534,27 +14534,19 @@
 	  value: true
 	});
 	
-	var _index = __webpack_require__(31);
-	
-	var _index2 = _interopRequireDefault(_index);
-	
-	var _commonBabel = __webpack_require__(32);
-	
-	var _commonBabel2 = _interopRequireDefault(_commonBabel);
-	
-	var _uploadBabel = __webpack_require__(34);
+	var _uploadBabel = __webpack_require__(31);
 	
 	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
 	
-	var _task = __webpack_require__(35);
+	var _task = __webpack_require__(32);
 	
 	var _task2 = _interopRequireDefault(_task);
 	
-	var _home = __webpack_require__(51);
+	var _home = __webpack_require__(48);
 	
 	var _home2 = _interopRequireDefault(_home);
 	
-	var _header = __webpack_require__(55);
+	var _header = __webpack_require__(52);
 	
 	var _header2 = _interopRequireDefault(_header);
 	
@@ -14582,7 +14574,7 @@
 	// </style>
 	//
 	// <template>
-	//   <div class="app">
+	//   <div class="mdl-layout mdl-js-layout">
 	//       <appHeader :account="account"></appHeader>
 	//       <router-view ></router-view>
 	//   </div>
@@ -14619,25 +14611,6 @@
 
 /***/ },
 /* 31 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-/***/ },
-/* 32 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var _proxyBabel = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../services/proxy.babel.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	
-	var _proxyBabel2 = _interopRequireDefault(_proxyBabel);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ },
-/* 33 */,
-/* 34 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14733,13 +14706,13 @@
 	exports.default = uploadInit;
 
 /***/ },
-/* 35 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(36)
-	__vue_script__ = __webpack_require__(37)
-	__vue_template__ = __webpack_require__(50)
+	__webpack_require__(33)
+	__vue_script__ = __webpack_require__(34)
+	__vue_template__ = __webpack_require__(47)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14756,13 +14729,13 @@
 	})()}
 
 /***/ },
-/* 36 */
+/* 33 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 37 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14771,11 +14744,11 @@
 		value: true
 	});
 	
-	var _taskItem = __webpack_require__(38);
+	var _taskItem = __webpack_require__(35);
 	
 	var _taskItem2 = _interopRequireDefault(_taskItem);
 	
-	var _taskInputer = __webpack_require__(42);
+	var _taskInputer = __webpack_require__(39);
 	
 	var _taskInputer2 = _interopRequireDefault(_taskInputer);
 	
@@ -14792,15 +14765,16 @@
 	// </style>
 	//
 	// <template>
-	//   <div class="task-container" transition="animate_routerview">
+	//   <div class="task-container mdl-layout__content" transition="animate_routerview">
+	//     <taskinputer></taskinputer>
 	// 		<div class="task-list-container">
 	// 				<taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
 	// 		</div>
-	// 	 	<taskinputer></taskinputer>
 	//   </div>
 	// </template>
 	//
 	// <script>
+	
 	exports.default = {
 		data: function data() {
 			return {
@@ -14857,13 +14831,13 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 38 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(39)
-	__vue_script__ = __webpack_require__(40)
-	__vue_template__ = __webpack_require__(41)
+	__webpack_require__(36)
+	__vue_script__ = __webpack_require__(37)
+	__vue_template__ = __webpack_require__(38)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14880,21 +14854,23 @@
 	})()}
 
 /***/ },
-/* 39 */
+/* 36 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 40 */
+/* 37 */
 /***/ function(module, exports) {
 
 	'use strict';
 	
 	// <template>
 	//   <div class="task"  transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
-	//     <input type="checkbox" id="{{task.id}}"  v-on:change = "toggleTask(task)" :checked="task.completed">
-	//     <label for="{{task.id}}"></label>
+	//     <label class="mdl-checkbox mdl-js-checkbox" for="{{task.id}}">
+	//       <input type="checkbox" id="{{task.id}}" class="mdl-checkbox__input">
+	//       <!-- <span class="mdl-checkbox__label">Married</span> -->
+	//     </label>
 	//     <div class="task-content">
 	//       <div class="task-content-box" @dblclick="edit(task)">{{task.title}}</div>
 	//       <input class="task-content-input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
@@ -14918,9 +14894,7 @@
 	      taskDetail: {}
 	    };
 	  },
-	  ready: function ready() {
-	    $('[data-activates]').dropdown();
-	  },
+	  ready: function ready() {},
 	
 	  directives: {
 	    'task-autofocus': function taskAutofocus(value) {
@@ -14984,6 +14958,7 @@
 	//   color: #343434;
 	//   background: @white;
 	//   box-shadow: 0 2px 4px rgba(0,0,0,.24);
+	//   border-bottom: 1px solid #DCDCDC;
 	//   padding: 0 6rem 0 .7em;
 	//   display: flex;
 	//   flex-direction: row;
@@ -15022,7 +14997,7 @@
 	// .task-content {
 	//     flex: 1 1 auto;
 	//     overflow: hidden;
-	//     padding: 1.2rem 0;
+	//     padding: 0.8rem 0;
 	//     & &-input {
 	//       font-size: 100%;
 	//       @extend .modify;
@@ -15069,19 +15044,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 41 */
+/* 38 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"task\"  transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n    <input type=\"checkbox\" id=\"{{task.id}}\"  v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n    <label for=\"{{task.id}}\"></label>\r\n    <div class=\"task-content\">\r\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{task.title}}</div>\r\n      <input class=\"task-content-input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n    </div>\r\n    <span class=\"task-controller\">\r\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\r\n    </span>\r\n\r\n  </div>\r\n\r\n";
+	module.exports = "\r\n  <div class=\"task\"  transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n    <label class=\"mdl-checkbox mdl-js-checkbox\" for=\"{{task.id}}\">\r\n      <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\">\r\n      <!-- <span class=\"mdl-checkbox__label\">Married</span> -->\r\n    </label>\r\n    <div class=\"task-content\">\r\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{task.title}}</div>\r\n      <input class=\"task-content-input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n    </div>\r\n    <span class=\"task-controller\">\r\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\r\n    </span>\r\n\r\n  </div>\r\n\r\n";
 
 /***/ },
-/* 42 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(43)
-	__vue_script__ = __webpack_require__(44)
-	__vue_template__ = __webpack_require__(49)
+	__webpack_require__(40)
+	__vue_script__ = __webpack_require__(41)
+	__vue_template__ = __webpack_require__(46)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15098,13 +15073,13 @@
 	})()}
 
 /***/ },
-/* 43 */
+/* 40 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 44 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15113,64 +15088,27 @@
 		value: true
 	});
 	
-	var _stringify = __webpack_require__(45);
+	var _stringify = __webpack_require__(42);
 	
 	var _stringify2 = _interopRequireDefault(_stringify);
 	
-	var _uploadBabel = __webpack_require__(34);
+	var _uploadBabel = __webpack_require__(31);
 	
 	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
 	
-	var _toolBabel = __webpack_require__(48);
+	var _toolBabel = __webpack_require__(45);
 	
 	var _toolBabel2 = _interopRequireDefault(_toolBabel);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// <template>
-	// <!-- Modal Structure -->
-	// <!-- <div id="modalLayer-inputer" class="modal bottom-sheet"> -->
-	// <div id="modalLayer-inputer" class="modal modal-fixed-footer">
-	//   <div class="modal-content">
-	// 	<h5>Create New</h5>
-	//     <div class="row">
-	//         <div class="input-field col s12">
-	//           <input class="validate" type="text" v-model="newTask.title">
-	//           <label for="">Title</label>
-	//         </div>
+	// <div class="row">
+	//     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+	//       <input class="mdl-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask">
+	//       <label for="" class="mdl-textfield__label">Title</label>
 	//     </div>
-	//
-	// 	<div class="task-inputer" id="taskWriter">
-	// 		<textarea type="text" v-model="newTask.content" id="taskInputer" placeholder="What is your focus today..." v-on:paste="uploadByPaste($event)" ></textarea>
-	// 	</div>
-	// 	<div class="task-images">
-	// 		<div v-for="file in newTask.attachments">
-	// 			<img v-bind:src="file.url" alt="" >
-	// 		</div>
-	// 	</div>
-	//   </div>
-	//   <div class="modal-footer">
-	// 		<div class="task-inputer-bar">
-	// 			<span id="browse" class="material-icons">photo</span>
-	// 			<button class=" modal-action modal-close waves-effect waves-green waves-light btn" v-on:click="createTask">
-	// 			确定
-	// 			</button>
-	// 			</div>
-	//   </div>
 	// </div>
-	//
-	// 	<!-- 底部按钮 -->
-	// 	<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
-	// 		<a class="btn-floating btn-large red waves-effect waves-light btn">
-	// 			<i class="large material-icons">mode_edit</i>
-	// 		</a>
-	// 		<ul>
-	// 		<!-- <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li> -->
-	// 		<li><a class="btn-floating yellow darken-1 modal-trigger" data-target="mofalLayer-inputer"><i class="material-icons">format_quote</i></a></li>
-	// 		<!-- <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li> -->
-	// 		<!-- <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li> -->
-	// 		</ul>
-	// 	</div>
 	// </template>
 	//
 	// <script>
@@ -15362,30 +15300,30 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 45 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(46), __esModule: true };
+	module.exports = { "default": __webpack_require__(43), __esModule: true };
 
 /***/ },
-/* 46 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var core  = __webpack_require__(47)
+	var core  = __webpack_require__(44)
 	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
 	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
 	  return $JSON.stringify.apply($JSON, arguments);
 	};
 
 /***/ },
-/* 47 */
+/* 44 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.3.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 48 */
+/* 45 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -15439,25 +15377,25 @@
 	exports.default = Tool;
 
 /***/ },
-/* 49 */
+/* 46 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n<!-- Modal Structure -->\r\n<!-- <div id=\"modalLayer-inputer\" class=\"modal bottom-sheet\"> -->\r\n<div id=\"modalLayer-inputer\" class=\"modal modal-fixed-footer\">\r\n  <div class=\"modal-content\">\r\n\t<h5>Create New</h5>\r\n    <div class=\"row\">\r\n        <div class=\"input-field col s12\">\r\n          <input class=\"validate\" type=\"text\" v-model=\"newTask.title\">\r\n          <label for=\"\">Title</label>\r\n        </div>\r\n    </div>\r\n\r\n\t<div class=\"task-inputer\" id=\"taskWriter\">\r\n\t\t<textarea type=\"text\" v-model=\"newTask.content\" id=\"taskInputer\" placeholder=\"What is your focus today...\" v-on:paste=\"uploadByPaste($event)\" ></textarea>\r\n\t</div>\r\n\t<div class=\"task-images\">\r\n\t\t<div v-for=\"file in newTask.attachments\">\r\n\t\t\t<img v-bind:src=\"file.url\" alt=\"\" >\r\n\t\t</div>\r\n\t</div>\r\n  </div>\r\n  <div class=\"modal-footer\">\r\n\t\t<div class=\"task-inputer-bar\">\r\n\t\t\t<span id=\"browse\" class=\"material-icons\">photo</span>\r\n\t\t\t<button class=\" modal-action modal-close waves-effect waves-green waves-light btn\" v-on:click=\"createTask\">\r\n\t\t\t确定\r\n\t\t\t</button>\r\n\t\t\t</div>\r\n  </div>\r\n</div>\r\n\r\n\t<!-- 底部按钮 -->\r\n\t<div class=\"fixed-action-btn horizontal\" style=\"bottom: 45px; right: 24px;\">\r\n\t\t<a class=\"btn-floating btn-large red waves-effect waves-light btn\">\r\n\t\t\t<i class=\"large material-icons\">mode_edit</i>\r\n\t\t</a>\r\n\t\t<ul>\r\n\t\t<!-- <li><a class=\"btn-floating red\"><i class=\"material-icons\">insert_chart</i></a></li> -->\r\n\t\t<li><a class=\"btn-floating yellow darken-1 modal-trigger\" data-target=\"mofalLayer-inputer\"><i class=\"material-icons\">format_quote</i></a></li>\r\n\t\t<!-- <li><a class=\"btn-floating green\"><i class=\"material-icons\">publish</i></a></li> -->\r\n\t\t<!-- <li><a class=\"btn-floating blue\"><i class=\"material-icons\">attach_file</i></a></li> -->\r\n\t\t</ul>\r\n\t</div>\r\n";
+	module.exports = "\r\n<div class=\"row\">\r\n    <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\r\n      <input class=\"mdl-textfield__input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask\">\r\n      <label for=\"\" class=\"mdl-textfield__label\">Title</label>\r\n    </div>\r\n</div>\r\n";
 
 /***/ },
-/* 50 */
+/* 47 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"task-container\" transition=\"animate_routerview\">\r\n\t\t<div class=\"task-list-container\">\r\n\t\t\t\t<taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></taskitem>\r\n\t\t</div>\r\n\t \t<taskinputer></taskinputer>\r\n  </div>\r\n";
+	module.exports = "\r\n  <div class=\"task-container mdl-layout__content\" transition=\"animate_routerview\">\r\n    <taskinputer></taskinputer>\r\n\t\t<div class=\"task-list-container\">\r\n\t\t\t\t<taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></taskitem>\r\n\t\t</div>\r\n  </div>\r\n";
 
 /***/ },
-/* 51 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(52)
-	__vue_script__ = __webpack_require__(53)
-	__vue_template__ = __webpack_require__(54)
+	__webpack_require__(49)
+	__vue_script__ = __webpack_require__(50)
+	__vue_template__ = __webpack_require__(51)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15474,13 +15412,13 @@
 	})()}
 
 /***/ },
-/* 52 */
+/* 49 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 53 */
+/* 50 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -15554,19 +15492,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 54 */
+/* 51 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n\t<div class=\"home\">\r\n\t\t\t<div class=\"clock\">\r\n\t\t\t\t<h1 class=\"time\" v-text=\"currentTime\">\r\n\t\t\t\t\t13:40\r\n\t\t\t\t</h1>\r\n\t\t</div>\r\n\t</div>\r\n";
 
 /***/ },
-/* 55 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(56)
-	__vue_script__ = __webpack_require__(57)
-	__vue_template__ = __webpack_require__(58)
+	__webpack_require__(53)
+	__vue_script__ = __webpack_require__(54)
+	__vue_template__ = __webpack_require__(55)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15583,13 +15521,13 @@
 	})()}
 
 /***/ },
-/* 56 */
+/* 53 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 57 */
+/* 54 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -15601,33 +15539,56 @@
 	// </style>
 	//
 	// <template>
-	// <header>
-	// <!-- Dropdown Structure -->
-	// <ul id="dropdown1" class="dropdown-content">
-	//   <li><a href="#!">asdf</a></li>
-	//   <li class="divider"></li>
-	//   <li><a href="#!" v-on:click="logout"> 退出登录</a></li>
-	// </ul>
-	// <nav>
-	//   <div class="container">
-	//       <div class="nav-wrapper">
-	//         <a href="#" class="brand-logo">BlueRobin</a>
-	//         <ul id="nav-mobile" class="right hide-on-med-and-down">
-	//           <li v-link-active><a class="" href="" v-link="{path: '/file', exact: true}">文件</a></li>
-	//           <li v-link-active><a class="" href="" v-link="{path: '/task', exact: true}">Task</a></li>
-	//           <li v-link-active><a class="" href="" v-link="{path: '/login', exact: true}">登录</a></li>
-	//           <li v-link-active><a class="" href="" v-link="{path: '/signup', exact: true}">注册</a></li>
-	//           <li v-if="account">
-	//             <a class="dropdown-button" href="#!" data-activates="dropdown1">{{account.email}}
-	//               <i class="material-icons right">arrow_drop_down</i>
-	//             </a>
-	//           </li>
-	//         </ul>
+	//   <header class="mdl-layout__header">
+	//       <div class="mdl-layout__header-row">
+	//         <!-- Title -->
+	//         <span class="mdl-layout-title">Title</span>
+	//         <!-- Add spacer, to align navigation to the right -->
+	//         <div class="mdl-layout-spacer"></div>
+	//         <!-- Navigation -->
+	//         <nav class="mdl-navigation">
+	//           <a class="mdl-navigation__link" href="">Link</a>
+	//           <a class="mdl-navigation__link" href="">Link</a>
+	//           <a class="mdl-navigation__link" href="">Link</a>
+	//           <a class="mdl-navigation__link" href="">Link</a>
+	//         </nav>
 	//       </div>
+	//     </header>
+	//     <div class="mdl-layout__drawer">
+	//       <span class="mdl-layout-title">Title</span>
+	//       <nav class="mdl-navigation">
+	//         <a class="mdl-navigation__link" href="">Link</a>
+	//         <a class="mdl-navigation__link" href="">Link</a>
+	//         <a class="mdl-navigation__link" href="">Link</a>
+	//         <a class="mdl-navigation__link" href="">Link</a>
+	//       </nav>
 	//     </div>
-	//     </nav>
-	// </header>
-	//
+	//   <header>
+	//   <!-- Dropdown Structure -->
+	//   <!-- <ul id="dropdown1" class="dropdown-content">
+	//     <li><a href="#!">asdf</a></li>
+	//     <li class="divider"></li>
+	//     <li><a href="#!" v-on:click="logout"> 退出登录</a></li>
+	//   </ul>
+	//   <nav>
+	//     <div class="container">
+	//         <div class="nav-wrapper">
+	//           <a href="#" class="brand-logo">BlueRobin</a>
+	//           <ul id="nav-mobile" class="right hide-on-med-and-down">
+	//             <li v-link-active><a class="" href="" v-link="{path: '/file', exact: true}">文件</a></li>
+	//             <li v-link-active><a class="" href="" v-link="{path: '/task', exact: true}">Task</a></li>
+	//             <li v-link-active><a class="" href="" v-link="{path: '/login', exact: true}">登录</a></li>
+	//             <li v-link-active><a class="" href="" v-link="{path: '/signup', exact: true}">注册</a></li>
+	//             <li v-if="account">
+	//               <a class="dropdown-button" href="#!" data-activates="dropdown1">{{account.email}}
+	//                 <i class="material-icons right">arrow_drop_down</i>
+	//               </a>
+	//             </li>
+	//           </ul>
+	//         </div>
+	//       </div>
+	//       </nav> -->
+	//   </header>
 	// </template>
 	//
 	// <script>
@@ -15649,25 +15610,25 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 58 */
+/* 55 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n<header>\r\n<!-- Dropdown Structure -->\r\n<ul id=\"dropdown1\" class=\"dropdown-content\">\r\n  <li><a href=\"#!\">asdf</a></li>\r\n  <li class=\"divider\"></li>\r\n  <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\r\n</ul>\r\n<nav>\r\n  <div class=\"container\">\r\n      <div class=\"nav-wrapper\">\r\n        <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\r\n        <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a></li>\r\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a></li>\r\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a></li>\r\n          <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a></li>\r\n          <li v-if=\"account\">\r\n            <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\r\n              <i class=\"material-icons right\">arrow_drop_down</i>\r\n            </a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n    </nav>\r\n</header>\r\n\r\n";
+	module.exports = "\r\n  <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <!-- Title -->\r\n        <span class=\"mdl-layout-title\">Title</span>\r\n        <!-- Add spacer, to align navigation to the right -->\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <!-- Navigation -->\r\n        <nav class=\"mdl-navigation\">\r\n          <a class=\"mdl-navigation__link\" href=\"\">Link</a>\r\n          <a class=\"mdl-navigation__link\" href=\"\">Link</a>\r\n          <a class=\"mdl-navigation__link\" href=\"\">Link</a>\r\n          <a class=\"mdl-navigation__link\" href=\"\">Link</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer\">\r\n      <span class=\"mdl-layout-title\">Title</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\">Link</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\">Link</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\">Link</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\">Link</a>\r\n      </nav>\r\n    </div>\r\n  <header>\r\n  <!-- Dropdown Structure -->\r\n  <!-- <ul id=\"dropdown1\" class=\"dropdown-content\">\r\n    <li><a href=\"#!\">asdf</a></li>\r\n    <li class=\"divider\"></li>\r\n    <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\r\n  </ul>\r\n  <nav>\r\n    <div class=\"container\">\r\n        <div class=\"nav-wrapper\">\r\n          <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\r\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n            <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a></li>\r\n            <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a></li>\r\n            <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a></li>\r\n            <li v-link-active><a class=\"\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a></li>\r\n            <li v-if=\"account\">\r\n              <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\r\n                <i class=\"material-icons right\">arrow_drop_down</i>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      </nav> -->\r\n  </header>\r\n";
 
 /***/ },
-/* 59 */
+/* 56 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"app\">\r\n      <appHeader :account=\"account\"></appHeader>\r\n      <router-view ></router-view>\r\n  </div>\r\n";
+	module.exports = "\r\n  <div class=\"mdl-layout mdl-js-layout\">\r\n      <appHeader :account=\"account\"></appHeader>\r\n      <router-view ></router-view>\r\n  </div>\r\n";
 
 /***/ },
-/* 60 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(61)
-	__vue_script__ = __webpack_require__(62)
-	__vue_template__ = __webpack_require__(63)
+	__webpack_require__(58)
+	__vue_script__ = __webpack_require__(59)
+	__vue_template__ = __webpack_require__(60)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15684,13 +15645,13 @@
 	})()}
 
 /***/ },
-/* 61 */
+/* 58 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 62 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15699,11 +15660,11 @@
 		value: true
 	});
 	
-	var _uploadBabel = __webpack_require__(34);
+	var _uploadBabel = __webpack_require__(31);
 	
 	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
 	
-	var _toolBabel = __webpack_require__(48);
+	var _toolBabel = __webpack_require__(45);
 	
 	var _toolBabel2 = _interopRequireDefault(_toolBabel);
 	
@@ -15844,19 +15805,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 63 */
+/* 60 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n\t<div class=\"container\">\r\n      <ul class=\"collection with-header\" id=\"filelist\">\r\n        <li class=\"collection-header\" id=\"uploadcontainer\">\r\n        \t<h4>File List</h4>\r\n\t\t\t\t<span class=\"material-icons\" id=\"uploadfile\">cloud_upload</span>\r\n        \t</li>\r\n        \t<li class=\"collection-item\" v-for=\"file in filelist\">id:{{file._id}} --- isFile:{{file.isfile}} ---- {{file.name}}</li>\r\n      </ul>\r\n      <ul id=\"filelist\"></ul>\r\n\t</div>\r\n\r\n";
 
 /***/ },
-/* 64 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(65)
-	__vue_script__ = __webpack_require__(66)
-	__vue_template__ = __webpack_require__(67)
+	__webpack_require__(62)
+	__vue_script__ = __webpack_require__(63)
+	__vue_template__ = __webpack_require__(64)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15873,13 +15834,13 @@
 	})()}
 
 /***/ },
-/* 65 */
+/* 62 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 66 */
+/* 63 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -15888,7 +15849,7 @@
 	  value: true
 	});
 	// <template>
-	//   <div class="container" transition="animate_routerview">
+	//   <div class="container mdl-layout__content" transition="animate_routerview">
 	//     <div class="login-form">
 	//         <div class="row">
 	//             <div class="input-field col s12">
@@ -15949,18 +15910,18 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 67 */
+/* 64 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"container\" transition=\"animate_routerview\">\r\n    <div class=\"login-form\">\r\n        <div class=\"row\">\r\n            <div class=\"input-field col s12\">\r\n              <input class=\"validate\" type=\"text\" id=\"email\" v-model=\"user.username\">\r\n              <label for=\"email\">Email</label>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"input-field col s12\">\r\n                <input class=\"validate\" type=\"password\" id=\"password\" v-model=\"user.password\">\r\n                <label for=\"password\">Password</label>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col \">\r\n                <button class=\"waves-effect waves-light btn\"  v-on:click=\"doLogin\">GO!</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n  </div>\r\n";
+	module.exports = "\r\n  <div class=\"container mdl-layout__content\" transition=\"animate_routerview\">\r\n    <div class=\"login-form\">\r\n        <div class=\"row\">\r\n            <div class=\"input-field col s12\">\r\n              <input class=\"validate\" type=\"text\" id=\"email\" v-model=\"user.username\">\r\n              <label for=\"email\">Email</label>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"input-field col s12\">\r\n                <input class=\"validate\" type=\"password\" id=\"password\" v-model=\"user.password\">\r\n                <label for=\"password\">Password</label>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col \">\r\n                <button class=\"waves-effect waves-light btn\"  v-on:click=\"doLogin\">GO!</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
-/* 68 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(69)
-	__vue_template__ = __webpack_require__(70)
+	__vue_script__ = __webpack_require__(66)
+	__vue_template__ = __webpack_require__(67)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15977,59 +15938,14 @@
 	})()}
 
 /***/ },
-/* 69 */
-/***/ function(module, exports, __webpack_require__) {
+/* 66 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	
-	var _proxyBabel = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../../services/proxy.babel.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	
-	var _proxyBabel2 = _interopRequireDefault(_proxyBabel);
-	
-	var _vue = __webpack_require__(1);
-	
-	var _vue2 = _interopRequireDefault(_vue);
-	
-	var _index = __webpack_require__(31);
-	
-	var _index2 = _interopRequireDefault(_index);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	exports.default = {
-		data: function data() {
-			return {
-				registerData: {
-					email: '',
-					password: ''
-				}
-			};
-		},
-		ready: function ready() {
-			console.log('sign up --->');
-		},
-	
-	
-		methods: {
-			signUp: function signUp() {
-				var data = this.$data.registerData;
-				vm.$http.post('user/signup', data).then(function (res) {
-					localStorage.token = res.token;
-					_index2.default.go('/task');
-				}, function (err) {
-					console.log(xhr);
-				});
-			}
-		}
-	
-	};
-	// </script>
-	//
-	/* generated by vue-loader */
 	// <template>
 	//
 	// <div class="container">
@@ -16064,15 +15980,46 @@
 	//
 	//
 	// <script>
+	
+	exports.default = {
+		data: function data() {
+			return {
+				registerData: {
+					email: '',
+					password: ''
+				}
+			};
+		},
+		ready: function ready() {
+			console.log('sign up --->');
+		},
+	
+	
+		methods: {
+			signUp: function signUp() {
+				var data = this.$data.registerData;
+				vm.$http.post('user/signup', data).then(function (res) {
+					localStorage.token = res.token;
+					router.go('/task');
+				}, function (err) {
+					console.log(xhr);
+				});
+			}
+		}
+	
+	};
+	// </script>
+	//
+	/* generated by vue-loader */
 
 /***/ },
-/* 70 */
+/* 67 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n\r\n<div class=\"container\">\r\n    <div class=\"login-panle\">\r\n        <div class=\"login-panle-header\">\r\n            <h3>注册</h3>\r\n        </div>\r\n        <div class=\"login-panle-container\">\r\n            <div class=\"row\">\r\n\r\n                <div class=\"input-field col s12\">\r\n                    <input class=\"pure-input-1-2\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\r\n                    <label for=\"email\">邮箱</label>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"input-field col s12\">\r\n                    <input class=\"pure-input-1-2\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\r\n                    <label for=\"password\">密码</label>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"input-field col s12\">\r\n                    <button class=\"btn waves-effect waves-light\" v-on:click=\"signUp()\">注册</button>\r\n                    <a v-link=\"'login'\" class=\"btn waves-effect waves-light\">已有账号？直接登录</a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 
 /***/ },
-/* 71 */
+/* 68 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

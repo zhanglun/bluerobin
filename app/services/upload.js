@@ -3,8 +3,12 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var CONFIG = window.CONFIG;
 var plupload = window.plupload;
+
+window.CONFIG = {
+    APIROOT: 'http://localhost:1234/api'
+    // APIROOT: 'http://zhanglun.daoapp.io/api'
+};
 
 /**
  * 初始化上传组件

@@ -40,6 +40,7 @@
   color: #343434;
   background: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24);
+  border-bottom: 1px solid #DCDCDC;
   padding: 0 6rem 0 .7em;
   display: -webkit-box;
   display: -webkit-flex;
@@ -81,7 +82,7 @@
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   overflow: hidden;
-  padding: 1.2rem 0;
+  padding: 0.8rem 0;
 }
 .task-content .task-content-input {
   font-size: 100%;

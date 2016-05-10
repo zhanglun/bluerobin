@@ -20,7 +20,7 @@
 </style>
 
 <template>
-  <div class="app">
+  <div class="mdl-layout mdl-js-layout">
       <appHeader :account="account"></appHeader>
       <router-view ></router-view>
   </div>
@@ -28,8 +28,6 @@
 
 
 <script>
-  import router from './../route/index.js';
-  import Common from '../public/javascripts/common.babel.js';
   import Uploader from '../services/upload.babel.js';
   import TaskView from './task/task.vue';
   import HomeView from './home/home.vue';

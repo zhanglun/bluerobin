@@ -32,9 +32,6 @@
 
 
 <script>
-	import Proxy from '../../services/proxy.babel.js';
-	import Vue from 'vue';
-	import router from './../../route/index.js';
 
 	export default {
 		data() {

@@ -1,47 +1,10 @@
 <template>
-<!-- Modal Structure -->
-<!-- <div id="modalLayer-inputer" class="modal bottom-sheet"> -->
-<div id="modalLayer-inputer" class="modal modal-fixed-footer">
-  <div class="modal-content">
-	<h5>Create New</h5>
-    <div class="row">
-        <div class="input-field col s12">
-          <input class="validate" type="text" v-model="newTask.title">
-          <label for="">Title</label>
-        </div>
+<div class="row">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask">
+      <label for="" class="mdl-textfield__label">Title</label>
     </div>
-
-	<div class="task-inputer" id="taskWriter">
-		<textarea type="text" v-model="newTask.content" id="taskInputer" placeholder="What is your focus today..." v-on:paste="uploadByPaste($event)" ></textarea>
-	</div>
-	<div class="task-images">
-		<div v-for="file in newTask.attachments">
-			<img v-bind:src="file.url" alt="" >
-		</div>
-	</div>
-  </div>
-  <div class="modal-footer">
-		<div class="task-inputer-bar">
-			<span id="browse" class="material-icons">photo</span>
-			<button class=" modal-action modal-close waves-effect waves-green waves-light btn" v-on:click="createTask">
-			确定
-			</button>
-			</div>
-  </div>
 </div>
-
-	<!-- 底部按钮 -->
-	<div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
-		<a class="btn-floating btn-large red waves-effect waves-light btn">
-			<i class="large material-icons">mode_edit</i>
-		</a>
-		<ul>
-		<!-- <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li> -->
-		<li><a class="btn-floating yellow darken-1 modal-trigger" data-target="mofalLayer-inputer"><i class="material-icons">format_quote</i></a></li>
-		<!-- <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li> -->
-		<!-- <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li> -->
-		</ul>
-	</div>
 </template>
 
 <script>

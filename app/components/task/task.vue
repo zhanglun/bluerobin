@@ -9,18 +9,18 @@
 </style>
 
 <template>
-  <div class="task-container" transition="animate_routerview">
+  <div class="task-container mdl-layout__content" transition="animate_routerview">
+    <taskinputer></taskinputer>
 		<div class="task-list-container">
 				<taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
 		</div>
-	 	<taskinputer></taskinputer>
   </div>
 </template>
 
 <script>
+
 	import TaskItemView from './taskItem.vue';
 	import TaskInputer from './taskInputer.vue';
-
 
 	export default {
 
