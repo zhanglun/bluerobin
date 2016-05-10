@@ -15852,20 +15852,20 @@
 	//   <div class="container mdl-layout__content" transition="animate_routerview">
 	//     <div class="login-form">
 	//         <div class="row">
-	//             <div class="input-field col s12">
-	//               <input class="validate" type="text" id="email" v-model="user.username">
-	//               <label for="email">Email</label>
+	//             <div class="mdl-textfield mdl-js-textfield">
+	//               <input class="mdl-textfield__input" type="text" id="email" v-model="user.username">
+	//               <label class="mdl-textfield__label" for="email">Email</label>
 	//             </div>
 	//         </div>
 	//         <div class="row">
-	//             <div class="input-field col s12">
-	//                 <input class="validate" type="password" id="password" v-model="user.password">
-	//                 <label for="password">Password</label>
+	//             <div class="mdl-textfield mdl-js-textfield">
+	//                 <input class="mdl-textfield__input" type="password" id="password" v-model="user.password">
+	//                 <label class="mdl-textfield__label" for="password">Password</label>
 	//             </div>
 	//         </div>
 	//         <div class="row">
 	//             <div class="col ">
-	//                 <button class="waves-effect waves-light btn"  v-on:click="doLogin">GO!</button>
+	//                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  v-on:click="doLogin">GO!</button>
 	//             </div>
 	//         </div>
 	//     </div>
@@ -15913,7 +15913,7 @@
 /* 64 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"container mdl-layout__content\" transition=\"animate_routerview\">\r\n    <div class=\"login-form\">\r\n        <div class=\"row\">\r\n            <div class=\"input-field col s12\">\r\n              <input class=\"validate\" type=\"text\" id=\"email\" v-model=\"user.username\">\r\n              <label for=\"email\">Email</label>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"input-field col s12\">\r\n                <input class=\"validate\" type=\"password\" id=\"password\" v-model=\"user.password\">\r\n                <label for=\"password\">Password</label>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col \">\r\n                <button class=\"waves-effect waves-light btn\"  v-on:click=\"doLogin\">GO!</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n  </div>\r\n";
+	module.exports = "\r\n  <div class=\"container mdl-layout__content\" transition=\"animate_routerview\">\r\n    <div class=\"login-form\">\r\n        <div class=\"row\">\r\n            <div class=\"mdl-textfield mdl-js-textfield\">\r\n              <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"user.username\">\r\n              <label class=\"mdl-textfield__label\" for=\"email\">Email</label>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"mdl-textfield mdl-js-textfield\">\r\n                <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"user.password\">\r\n                <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col \">\r\n                <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">GO!</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
 /* 65 */
