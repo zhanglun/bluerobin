@@ -22,7 +22,11 @@
 <template>
   <div class="mdl-layout mdl-js-layout">
       <appHeader :account="account"></appHeader>
-      <router-view ></router-view>
+      <div class="mdl-layout__content">
+        <div class="page-content">
+          <router-view ></router-view>
+        </div>
+      </div>
   </div>
 </template>
 

@@ -1,11 +1,8 @@
 <template>
-<div class="row">
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <div class="mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <input class="mdl-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask">
       <label for="" class="mdl-textfield__label">Title</label>
     </div>
-
-</div>
 </template>
 
 <script>

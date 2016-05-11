@@ -89,8 +89,8 @@
 	_vue2.default.use(_vueRouter2.default);
 	_vue2.default.use(_vueResource2.default);
 	
-	_vue2.default.http.options.root = 'http://zhanglun.daoapp.io/api';
-	// Vue.http.options.root = 'http://localhost:1234/api';
+	// Vue.http.options.root = 'http://zhanglun.daoapp.io/api';
+	_vue2.default.http.options.root = 'http://localhost:1234/api';
 	_vue2.default.http.headers.common['x-access-token'] = localStorage.token;
 	
 	// Vue.http.interceptors.push({
@@ -14576,7 +14576,11 @@
 	// <template>
 	//   <div class="mdl-layout mdl-js-layout">
 	//       <appHeader :account="account"></appHeader>
-	//       <router-view ></router-view>
+	//       <div class="mdl-layout__content">
+	//         <div class="page-content">
+	//           <router-view ></router-view>
+	//         </div>
+	//       </div>
 	//   </div>
 	// </template>
 	//
@@ -14755,21 +14759,16 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// <style lang="less">
-	// 	.task-container{
-	// 		max-width:860px;
-	// 		min-width: 600px;
-	// 		margin: 30px auto;
-	// 		height: 65%;
-	// 		box-sizing: border-box;
-	// 	}
 	// </style>
 	//
 	// <template>
-	//   <div class="task-container mdl-layout__content" transition="animate_routerview">
+	//   <div class="custom-container" transition="animate_routerview">
+	//     <div class="mdl-grid">
 	//     <taskinputer></taskinputer>
-	// 		<div class="task-list-container">
-	// 				<taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
-	// 		</div>
+	//       <div class="mdl-cell mdl-cell--12-col">
+	//         <taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
+	//       </div>
+	//     </div>
 	//   </div>
 	// </template>
 	//
@@ -14820,9 +14819,8 @@
 							});
 					},
 					'edit task': function editTask(task) {
-							var _this = this;
-							console.log('Component: TaskList 收到了来自 App 的 edit task');
-							vm.$http.put('task/' + task.id).then(function (res) {
+							var vm = this;
+							vm.$http.put('tasks/' + task.id, task).then(function (res) {
 									console.log('edit task success!');
 							});
 					}
@@ -14869,16 +14867,18 @@
 	'use strict';
 	
 	// <template>
-	//   <div class="task"  transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
+	//   <div class="task" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
 	//     <div class="task-checkbox">
-	//       <label class="mdl-checkbox mdl-js-checkbox" for="{{task.id}}">
-	//         <input type="checkbox" id="{{task.id}}" class="mdl-checkbox__input">
+	//       <label class="mdl-checkbox mdl-js-checkbox" v-bind:class="{'is-checked': task.completed}" for="{{task.id}}">
+	//         <input type="checkbox" id="{{task.id}}" class="mdl-checkbox__input" v-on:change = "toggleTask(task)" :checked="task.completed">
 	//         <!-- <span class="mdl-checkbox__label">Married</span> -->
 	//       </label>
 	//     </div>
 	//     <div class="task-content">
 	//       <div class="task-content-box" @dblclick="edit(task)">{{task.title}}</div>
-	//       <input class="task-content-input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
+	//       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label task-content-input">
+	//         <input class="mdl-textfield__input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
+	//       </div>
 	//     </div>
 	//     <span class="task-controller">
 	//       <i class="material-icons" @click="deleteTask(task)">clear</i>
@@ -14918,6 +14918,7 @@
 	  },
 	  methods: {
 	    toggleTask: function toggleTask(task) {
+	      console.log('toggle !!~~~');
 	      this.task.completed = !this.task.completed;
 	      this.$dispatch('edit task', task);
 	    },
@@ -14968,11 +14969,11 @@
 	//   background: @white;
 	//   box-shadow: 0 2px 4px rgba(0,0,0,.24);
 	//   border-bottom: 1px solid #DCDCDC;
-	//   padding: 0 6rem 0 .7em;
+	//   padding: 0 0.7em;
 	//   display: flex;
 	//   flex-direction: row;
 	//   align-items: center;
-	//
+	//   position: relative;
 	//   &.finished {
 	//     .task-content {
 	//       cursor: default;
@@ -15007,6 +15008,7 @@
 	//     flex: 1 1 auto;
 	//     overflow: hidden;
 	//     padding: 0.8rem 0;
+	//     margin-right: 6rem;
 	//     & &-input {
 	//       font-size: 100%;
 	//       @extend .modify;
@@ -15016,6 +15018,7 @@
 	//     & &-box {
 	//       line-height: 31px;
 	//       padding: 0 5px;
+	//       margin-top: -3px;
 	//       white-space: nowrap;
 	//       overflow: hidden;
 	//       text-overflow: ellipsis;
@@ -15026,6 +15029,9 @@
 	//
 	// .task-controller {
 	//   display: none;
+	//   position: absolute;
+	//   right: 8px;
+	//   top: 30%;
 	// }
 	//
 	//
@@ -15056,7 +15062,7 @@
 /* 38 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"task\"  transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n    <div class=\"task-checkbox\">\r\n      <label class=\"mdl-checkbox mdl-js-checkbox\" for=\"{{task.id}}\">\r\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\">\r\n        <!-- <span class=\"mdl-checkbox__label\">Married</span> -->\r\n      </label>\r\n    </div>\r\n    <div class=\"task-content\">\r\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{task.title}}</div>\r\n      <input class=\"task-content-input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n    </div>\r\n    <span class=\"task-controller\">\r\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\r\n    </span>\r\n\r\n  </div>\r\n\r\n";
+	module.exports = "\r\n  <div class=\"task\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n    <div class=\"task-checkbox\">\r\n      <label class=\"mdl-checkbox mdl-js-checkbox\" v-bind:class=\"{'is-checked': task.completed}\" for=\"{{task.id}}\">\r\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n        <!-- <span class=\"mdl-checkbox__label\">Married</span> -->\r\n      </label>\r\n    </div>\r\n    <div class=\"task-content\">\r\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{task.title}}</div>\r\n      <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label task-content-input\">\r\n        <input class=\"mdl-textfield__input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n      </div>\r\n    </div>\r\n    <span class=\"task-controller\">\r\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\r\n    </span>\r\n\r\n  </div>\r\n\r\n";
 
 /***/ },
 /* 39 */
@@ -15112,13 +15118,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// <template>
-	// <div class="row">
-	//     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+	//     <div class="mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 	//       <input class="mdl-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask">
 	//       <label for="" class="mdl-textfield__label">Title</label>
 	//     </div>
-	//
-	// </div>
 	// </template>
 	//
 	// <script>
@@ -15390,13 +15393,13 @@
 /* 46 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n<div class=\"row\">\r\n    <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\r\n      <input class=\"mdl-textfield__input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask\">\r\n      <label for=\"\" class=\"mdl-textfield__label\">Title</label>\r\n    </div>\r\n\r\n</div>\r\n";
+	module.exports = "\r\n    <div class=\"mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\r\n      <input class=\"mdl-textfield__input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask\">\r\n      <label for=\"\" class=\"mdl-textfield__label\">Title</label>\r\n    </div>\r\n";
 
 /***/ },
 /* 47 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"task-container mdl-layout__content\" transition=\"animate_routerview\">\r\n    <taskinputer></taskinputer>\r\n\t\t<div class=\"task-list-container\">\r\n\t\t\t\t<taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></taskitem>\r\n\t\t</div>\r\n  </div>\r\n";
+	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n    <taskinputer></taskinputer>\r\n      <div class=\"mdl-cell mdl-cell--12-col\">\r\n        <taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></taskitem>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
 /* 48 */
@@ -15573,7 +15576,6 @@
 	//         <a class="mdl-navigation__link" href="" v-link="{path: '/signup', exact: true}">注册</a>
 	//       </nav>
 	//     </div>
-	//   <header>
 	//   <!-- Dropdown Structure -->
 	//   <!-- <ul id="dropdown1" class="dropdown-content">
 	//     <li><a href="#!">asdf</a></li>
@@ -15621,13 +15623,13 @@
 /* 55 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <!-- Title -->\r\n        <span class=\"mdl-layout-title\">BlueRobin</span>\r\n        <!-- Add spacer, to align navigation to the right -->\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <!-- Navigation -->\r\n        <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer\">\r\n      <span class=\"mdl-layout-title\">Title</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n      </nav>\r\n    </div>\r\n  <header>\r\n  <!-- Dropdown Structure -->\r\n  <!-- <ul id=\"dropdown1\" class=\"dropdown-content\">\r\n    <li><a href=\"#!\">asdf</a></li>\r\n    <li class=\"divider\"></li>\r\n    <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\r\n  </ul>\r\n  <nav>\r\n    <div class=\"container\">\r\n        <div class=\"nav-wrapper\">\r\n          <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\r\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n            <li v-if=\"account\">\r\n              <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\r\n                <i class=\"material-icons right\">arrow_drop_down</i>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      </nav> -->\r\n  </header>\r\n";
+	module.exports = "\r\n  <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <!-- Title -->\r\n        <span class=\"mdl-layout-title\">BlueRobin</span>\r\n        <!-- Add spacer, to align navigation to the right -->\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <!-- Navigation -->\r\n        <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer\">\r\n      <span class=\"mdl-layout-title\">Title</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n      </nav>\r\n    </div>\r\n  <!-- Dropdown Structure -->\r\n  <!-- <ul id=\"dropdown1\" class=\"dropdown-content\">\r\n    <li><a href=\"#!\">asdf</a></li>\r\n    <li class=\"divider\"></li>\r\n    <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\r\n  </ul>\r\n  <nav>\r\n    <div class=\"container\">\r\n        <div class=\"nav-wrapper\">\r\n          <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\r\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n            <li v-if=\"account\">\r\n              <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\r\n                <i class=\"material-icons right\">arrow_drop_down</i>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      </nav> -->\r\n  </header>\r\n";
 
 /***/ },
 /* 56 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"mdl-layout mdl-js-layout\">\r\n      <appHeader :account=\"account\"></appHeader>\r\n      <router-view ></router-view>\r\n  </div>\r\n";
+	module.exports = "\r\n  <div class=\"mdl-layout mdl-js-layout\">\r\n      <appHeader :account=\"account\"></appHeader>\r\n      <div class=\"mdl-layout__content\">\r\n        <div class=\"page-content\">\r\n          <router-view ></router-view>\r\n        </div>\r\n      </div>\r\n  </div>\r\n";
 
 /***/ },
 /* 57 */

@@ -15,8 +15,8 @@ import UserSignUp from './components/user/signup.vue';
 Vue.use(Router);
 Vue.use(VueResource);
 
-Vue.http.options.root = 'http://zhanglun.daoapp.io/api';
-// Vue.http.options.root = 'http://localhost:1234/api';
+// Vue.http.options.root = 'http://zhanglun.daoapp.io/api';
+Vue.http.options.root = 'http://localhost:1234/api';
 Vue.http.headers.common['x-access-token'] = localStorage.token;
 
 // Vue.http.interceptors.push({

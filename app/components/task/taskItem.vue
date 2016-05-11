@@ -1,14 +1,16 @@
 <template>
-  <div class="task"  transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
+  <div class="task" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
     <div class="task-checkbox">
-      <label class="mdl-checkbox mdl-js-checkbox" for="{{task.id}}">
-        <input type="checkbox" id="{{task.id}}" class="mdl-checkbox__input">
+      <label class="mdl-checkbox mdl-js-checkbox" v-bind:class="{'is-checked': task.completed}" for="{{task.id}}">
+        <input type="checkbox" id="{{task.id}}" class="mdl-checkbox__input" v-on:change = "toggleTask(task)" :checked="task.completed">
         <!-- <span class="mdl-checkbox__label">Married</span> -->
       </label>
     </div>
     <div class="task-content">
       <div class="task-content-box" @dblclick="edit(task)">{{task.title}}</div>
-      <input class="task-content-input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label task-content-input">
+        <input class="mdl-textfield__input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
+      </div>
     </div>
     <span class="task-controller">
       <i class="material-icons" @click="deleteTask(task)">clear</i>
@@ -49,6 +51,7 @@ module.exports = {
   },
   methods: {
   	toggleTask(task) {
+      console.log('toggle !!~~~');
       this.task.completed = !this.task.completed;
       this.$dispatch('edit task', task);
   	},
@@ -102,11 +105,11 @@ module.exports = {
   background: @white;
   box-shadow: 0 2px 4px rgba(0,0,0,.24);
   border-bottom: 1px solid #DCDCDC;
-  padding: 0 6rem 0 .7em;
+  padding: 0 0.7em;
   display: flex;
   flex-direction: row;
   align-items: center;
-
+  position: relative;
   &.finished {
     .task-content {
       cursor: default;
@@ -141,6 +144,7 @@ module.exports = {
     flex: 1 1 auto;
     overflow: hidden;
     padding: 0.8rem 0;
+    margin-right: 6rem;
     & &-input {
       font-size: 100%;
       @extend .modify;
@@ -150,6 +154,7 @@ module.exports = {
     & &-box {
       line-height: 31px;
       padding: 0 5px;
+      margin-top: -3px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -160,6 +165,9 @@ module.exports = {
 
 .task-controller {
   display: none;
+  position: absolute;
+  right: 8px;
+  top: 30%;
 }
 
 

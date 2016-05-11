@@ -17,13 +17,6 @@
   -webkit-transform: translate3d(20px, 0, 0);
           transform: translate3d(20px, 0, 0);
 }
-.task-container {
-  max-width: 860px;
-  min-width: 600px;
-  margin: 30px auto;
-  height: 65%;
-  box-sizing: border-box;
-}
 /* ====================================================== */
 /* Variables
 /* ====================================================== */
@@ -41,7 +34,7 @@
   background: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24);
   border-bottom: 1px solid #DCDCDC;
-  padding: 0 6rem 0 .7em;
+  padding: 0 0.7em;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -55,6 +48,7 @@
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
 }
 .task.finished .task-content {
   cursor: default;
@@ -83,6 +77,7 @@
           flex: 1 1 auto;
   overflow: hidden;
   padding: 0.8rem 0;
+  margin-right: 6rem;
 }
 .task-content .task-content-input {
   font-size: 100%;
@@ -93,6 +88,7 @@
 .task-content .task-content-box {
   line-height: 31px;
   padding: 0 5px;
+  margin-top: -3px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -100,6 +96,9 @@
 }
 .task-controller {
   display: none;
+  position: absolute;
+  right: 8px;
+  top: 30%;
 }
 /*
   Task item animation
@@ -284,18 +283,16 @@ input {
 .text-center {
   text-align: center;
 }
-.grid-12 {
-  width: 100%;
-}
-.grid-6 {
-  width: 50%;
-}
 .bg-layer {
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
+}
+.custom-container {
+  margin: 0 auto;
+  max-width: 1020px;
 }
 
 /*# sourceMappingURL=style.bundle.css.map*/

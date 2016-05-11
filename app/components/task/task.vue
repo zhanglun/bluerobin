@@ -1,19 +1,14 @@
 <style lang="less">
-	.task-container{
-		max-width:860px;
-		min-width: 600px;
-		margin: 30px auto;
-		height: 65%;
-		box-sizing: border-box;
-	}
 </style>
 
 <template>
-  <div class="task-container mdl-layout__content" transition="animate_routerview">
+  <div class="custom-container" transition="animate_routerview">
+    <div class="mdl-grid">
     <taskinputer></taskinputer>
-		<div class="task-list-container">
-				<taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
-		</div>
+      <div class="mdl-cell mdl-cell--12-col">
+        <taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -70,9 +65,8 @@
      		});
 			},
 			'edit task': function(task){
-				var _this = this;
-				console.log('Component: TaskList 收到了来自 App 的 edit task');
-        vm.$http.put('task/' + task.id)
+				let vm = this;
+        vm.$http.put('tasks/' + task.id, task)
 				  .then(function(res){
 					 console.log('edit task success!');
 				  });

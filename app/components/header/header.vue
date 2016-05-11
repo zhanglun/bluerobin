@@ -26,7 +26,6 @@
         <a class="mdl-navigation__link" href="" v-link="{path: '/signup', exact: true}">注册</a>
       </nav>
     </div>
-  <header>
   <!-- Dropdown Structure -->
   <!-- <ul id="dropdown1" class="dropdown-content">
     <li><a href="#!">asdf</a></li>
