@@ -1,23 +1,23 @@
 <template>
-  <div class="container mdl-layout__content" transition="animate_routerview">
-    <div class="login-form">
-        <div class="row">
-            <div class="mdl-textfield mdl-js-textfield">
-              <input class="mdl-textfield__input" type="text" id="email" v-model="user.username">
-              <label class="mdl-textfield__label" for="email">Email</label>
+  <div class="custom-container" transition="animate_routerview">
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell-6-col">
+          <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="email" v-model="user.username">
+            <label class="mdl-textfield__label" for="email">Email</label>
             </div>
         </div>
-        <div class="row">
-            <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="password" id="password" v-model="user.password">
-                <label class="mdl-textfield__label" for="password">Password</label>
-            </div>
+      </div>
+      <div class="mdl-cell mdl-cell-6-col">
+        <div class="mdl-textfield mdl-js-textfield">
+          <input class="mdl-textfield__input" type="password" id="password" v-model="user.password">
+          <label class="mdl-textfield__label" for="password">Password</label>
         </div>
-        <div class="row">
-            <div class="col ">
-                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  v-on:click="doLogin">GO!</button>
-            </div>
-        </div>
+      </div>
+      <div class="mdl-cell mdl-cell-6-col">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  v-on:click="doLogin">GO!</button>
+          <a class="mdl-navigation__link" href="" v-link="{path: '/login', exact: true}">登录</a>
+      </div>
     </div>
   </div>
 </template>

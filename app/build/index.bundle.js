@@ -15140,7 +15140,7 @@
 				title: 'task inputer',
 				newTask: {
 					title: '',
-					ctime: '',
+					create_time: '',
 					attachments: []
 				},
 				imagePreviewList: [],
@@ -15562,8 +15562,8 @@
 	//         <nav class="mdl-navigation">
 	//         <a class="mdl-navigation__link" href="" v-link="{path: '/file', exact: true}">文件</a>
 	//         <a class="mdl-navigation__link" href="" v-link="{path: '/task', exact: true}">Task</a>
-	//         <a class="mdl-navigation__link" href="" v-link="{path: '/login', exact: true}">登录</a>
 	//         <a class="mdl-navigation__link" href="" v-link="{path: '/signup', exact: true}">注册</a>
+	//         <a v-if="account">{{account.email}}</a>
 	//         </nav>
 	//       </div>
 	//     </header>
@@ -15623,7 +15623,7 @@
 /* 55 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <!-- Title -->\r\n        <span class=\"mdl-layout-title\">BlueRobin</span>\r\n        <!-- Add spacer, to align navigation to the right -->\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <!-- Navigation -->\r\n        <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer\">\r\n      <span class=\"mdl-layout-title\">Title</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n      </nav>\r\n    </div>\r\n  <!-- Dropdown Structure -->\r\n  <!-- <ul id=\"dropdown1\" class=\"dropdown-content\">\r\n    <li><a href=\"#!\">asdf</a></li>\r\n    <li class=\"divider\"></li>\r\n    <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\r\n  </ul>\r\n  <nav>\r\n    <div class=\"container\">\r\n        <div class=\"nav-wrapper\">\r\n          <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\r\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n            <li v-if=\"account\">\r\n              <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\r\n                <i class=\"material-icons right\">arrow_drop_down</i>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      </nav> -->\r\n  </header>\r\n";
+	module.exports = "\r\n  <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <!-- Title -->\r\n        <span class=\"mdl-layout-title\">BlueRobin</span>\r\n        <!-- Add spacer, to align navigation to the right -->\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <!-- Navigation -->\r\n        <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n        <a v-if=\"account\">{{account.email}}</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer\">\r\n      <span class=\"mdl-layout-title\">Title</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n      </nav>\r\n    </div>\r\n  <!-- Dropdown Structure -->\r\n  <!-- <ul id=\"dropdown1\" class=\"dropdown-content\">\r\n    <li><a href=\"#!\">asdf</a></li>\r\n    <li class=\"divider\"></li>\r\n    <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\r\n  </ul>\r\n  <nav>\r\n    <div class=\"container\">\r\n        <div class=\"nav-wrapper\">\r\n          <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\r\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n            <li v-if=\"account\">\r\n              <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\r\n                <i class=\"material-icons right\">arrow_drop_down</i>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      </nav> -->\r\n  </header>\r\n";
 
 /***/ },
 /* 56 */
@@ -15859,25 +15859,25 @@
 	  value: true
 	});
 	// <template>
-	//   <div class="container mdl-layout__content" transition="animate_routerview">
-	//     <div class="login-form">
-	//         <div class="row">
-	//             <div class="mdl-textfield mdl-js-textfield">
-	//               <input class="mdl-textfield__input" type="text" id="email" v-model="user.username">
-	//               <label class="mdl-textfield__label" for="email">Email</label>
+	//   <div class="custom-container" transition="animate_routerview">
+	//     <div class="mdl-grid">
+	//       <div class="mdl-cell mdl-cell-6-col">
+	//           <div class="mdl-textfield mdl-js-textfield">
+	//             <input class="mdl-textfield__input" type="text" id="email" v-model="user.username">
+	//             <label class="mdl-textfield__label" for="email">Email</label>
 	//             </div>
 	//         </div>
-	//         <div class="row">
-	//             <div class="mdl-textfield mdl-js-textfield">
-	//                 <input class="mdl-textfield__input" type="password" id="password" v-model="user.password">
-	//                 <label class="mdl-textfield__label" for="password">Password</label>
-	//             </div>
+	//       </div>
+	//       <div class="mdl-cell mdl-cell-6-col">
+	//         <div class="mdl-textfield mdl-js-textfield">
+	//           <input class="mdl-textfield__input" type="password" id="password" v-model="user.password">
+	//           <label class="mdl-textfield__label" for="password">Password</label>
 	//         </div>
-	//         <div class="row">
-	//             <div class="col ">
-	//                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  v-on:click="doLogin">GO!</button>
-	//             </div>
-	//         </div>
+	//       </div>
+	//       <div class="mdl-cell mdl-cell-6-col">
+	//         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  v-on:click="doLogin">GO!</button>
+	//           <a class="mdl-navigation__link" href="" v-link="{path: '/login', exact: true}">登录</a>
+	//       </div>
 	//     </div>
 	//   </div>
 	// </template>
@@ -15923,7 +15923,7 @@
 /* 64 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"container mdl-layout__content\" transition=\"animate_routerview\">\r\n    <div class=\"login-form\">\r\n        <div class=\"row\">\r\n            <div class=\"mdl-textfield mdl-js-textfield\">\r\n              <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"user.username\">\r\n              <label class=\"mdl-textfield__label\" for=\"email\">Email</label>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"mdl-textfield mdl-js-textfield\">\r\n                <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"user.password\">\r\n                <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col \">\r\n                <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">GO!</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n  </div>\r\n";
+	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n          <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"user.username\">\r\n            <label class=\"mdl-textfield__label\" for=\"email\">Email</label>\r\n            </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"user.password\">\r\n          <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\r\n        </div>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">GO!</button>\r\n          <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
 /* 65 */
@@ -15957,35 +15957,27 @@
 		value: true
 	});
 	// <template>
-	//
-	// <div class="container">
-	//     <div class="login-panle">
-	//         <div class="login-panle-header">
-	//             <h3>注册</h3>
+	//   <div class="custom-container" transition="animate_routerview">
+	//     <div class="mdl-grid">
+	//       <div class="mdl-cell mdl-cell-6-col">
+	//         <h3>注册</h3>
+	//       </div>
+	//       <div class="mdl-cell mdl-cell-6-col">
+	//         <div class="mdl-textfield mdl-js-textfield">
+	//             <input class="mdl-textfield__input" type="text" id="email" v-model="registerData.email"/>
+	//             <label class="mdl-textfield__label" for="email">邮箱</label>
+	//           </div>
+	//         <div class="mdl-textfield mdl-js-textfield">
+	//           <input class="mdl-textfield__input" type="password" id="password" v-model="registerData.password"/>
+	//           <label class="mdl-textfield__label" for="password">密码</label>
 	//         </div>
-	//         <div class="login-panle-container">
-	//             <div class="row">
-	//
-	//                 <div class="input-field col s12">
-	//                     <input class="pure-input-1-2" type="text" id="email" v-model="registerData.email"/>
-	//                     <label for="email">邮箱</label>
-	//                 </div>
-	//             </div>
-	//             <div class="row">
-	//                 <div class="input-field col s12">
-	//                     <input class="pure-input-1-2" type="password" id="password" v-model="registerData.password"/>
-	//                     <label for="password">密码</label>
-	//                 </div>
-	//             </div>
-	//             <div class="row">
-	//                 <div class="input-field col s12">
-	//                     <button class="btn waves-effect waves-light" v-on:click="signUp()">注册</button>
-	//                     <a v-link="'login'" class="btn waves-effect waves-light">已有账号？直接登录</a>
-	//                 </div>
-	//             </div>
+	//         <div class="input-field col s12">
+	//             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" v-on:click="signUp()">注册</button>
+	//             <a v-link="'login'" class="btn waves-effect waves-light">已有账号？直接登录</a>
 	//         </div>
+	//       </div>
 	//     </div>
-	// </div>
+	//   </div>
 	// </template>
 	//
 	//
@@ -16026,7 +16018,7 @@
 /* 67 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n\r\n<div class=\"container\">\r\n    <div class=\"login-panle\">\r\n        <div class=\"login-panle-header\">\r\n            <h3>注册</h3>\r\n        </div>\r\n        <div class=\"login-panle-container\">\r\n            <div class=\"row\">\r\n\r\n                <div class=\"input-field col s12\">\r\n                    <input class=\"pure-input-1-2\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\r\n                    <label for=\"email\">邮箱</label>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"input-field col s12\">\r\n                    <input class=\"pure-input-1-2\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\r\n                    <label for=\"password\">密码</label>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"input-field col s12\">\r\n                    <button class=\"btn waves-effect waves-light\" v-on:click=\"signUp()\">注册</button>\r\n                    <a v-link=\"'login'\" class=\"btn waves-effect waves-light\">已有账号？直接登录</a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <h3>注册</h3>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\r\n            <label class=\"mdl-textfield__label\" for=\"email\">邮箱</label>\r\n          </div>\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\r\n          <label class=\"mdl-textfield__label\" for=\"password\">密码</label>\r\n        </div>\r\n        <div class=\"input-field col s12\">\r\n            <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\" v-on:click=\"signUp()\">注册</button>\r\n            <a v-link=\"'login'\" class=\"btn waves-effect waves-light\">已有账号？直接登录</a>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
 /* 68 */

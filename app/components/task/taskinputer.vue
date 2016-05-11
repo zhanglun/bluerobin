@@ -25,7 +25,7 @@ export default {
 			title: 'task inputer',
 			newTask: {
 				title: '',
-				ctime: '',
+				create_time: '',
 				attachments: []
 			},
 			imagePreviewList: [],

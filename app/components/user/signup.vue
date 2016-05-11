@@ -1,33 +1,25 @@
 <template>
-
-<div class="container">
-    <div class="login-panle">
-        <div class="login-panle-header">
-            <h3>注册</h3>
+  <div class="custom-container" transition="animate_routerview">
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell-6-col">
+        <h3>注册</h3>
+      </div>
+      <div class="mdl-cell mdl-cell-6-col">
+        <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="email" v-model="registerData.email"/>
+            <label class="mdl-textfield__label" for="email">邮箱</label>
+          </div>
+        <div class="mdl-textfield mdl-js-textfield">
+          <input class="mdl-textfield__input" type="password" id="password" v-model="registerData.password"/>
+          <label class="mdl-textfield__label" for="password">密码</label>
         </div>
-        <div class="login-panle-container">
-            <div class="row">
-
-                <div class="input-field col s12">
-                    <input class="pure-input-1-2" type="text" id="email" v-model="registerData.email"/>
-                    <label for="email">邮箱</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input class="pure-input-1-2" type="password" id="password" v-model="registerData.password"/>
-                    <label for="password">密码</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <button class="btn waves-effect waves-light" v-on:click="signUp()">注册</button>
-                    <a v-link="'login'" class="btn waves-effect waves-light">已有账号？直接登录</a>
-                </div>
-            </div>
+        <div class="input-field col s12">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" v-on:click="signUp()">注册</button>
+            <a v-link="'login'" class="btn waves-effect waves-light">已有账号？直接登录</a>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 </template>
 
 

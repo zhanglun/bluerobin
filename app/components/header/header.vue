@@ -12,8 +12,8 @@
         <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="" v-link="{path: '/file', exact: true}">文件</a>
         <a class="mdl-navigation__link" href="" v-link="{path: '/task', exact: true}">Task</a>
-        <a class="mdl-navigation__link" href="" v-link="{path: '/login', exact: true}">登录</a>
         <a class="mdl-navigation__link" href="" v-link="{path: '/signup', exact: true}">注册</a>
+        <a v-if="account">{{account.email}}</a>
         </nav>
       </div>
     </header>
