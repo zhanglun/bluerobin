@@ -57,6 +57,9 @@
         vm.$http.post('tasks', task)
           .then(function(res){
             vm.tasklist.unshift(res.data);
+              setTimeout(function() {
+                componentHandler.upgradeDom('MaterialCheckbox');
+              }, 0);
           });
 			},
 			'delete task': function(task){

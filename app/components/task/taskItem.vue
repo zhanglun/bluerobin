@@ -1,9 +1,11 @@
 <template>
   <div class="task"  transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
-    <label class="mdl-checkbox mdl-js-checkbox" for="{{task.id}}">
-      <input type="checkbox" id="{{task.id}}" class="mdl-checkbox__input">
-      <!-- <span class="mdl-checkbox__label">Married</span> -->
-    </label>
+    <div class="task-checkbox">
+      <label class="mdl-checkbox mdl-js-checkbox" for="{{task.id}}">
+        <input type="checkbox" id="{{task.id}}" class="mdl-checkbox__input">
+        <!-- <span class="mdl-checkbox__label">Married</span> -->
+      </label>
+    </div>
     <div class="task-content">
       <div class="task-content-box" @dblclick="edit(task)">{{task.title}}</div>
       <input class="task-content-input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
@@ -29,6 +31,9 @@ module.exports = {
   	}
   },
   ready: function(){
+    setTimeout(function() {
+      componentHandler.upgradeDom('MaterialCheckbox');
+    }, 0);
   },
 
   directives: {
