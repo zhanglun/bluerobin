@@ -14595,6 +14595,8 @@
 	  },
 	  ready: function ready() {
 	
+	    componentHandler.upgradeDom();
+	
 	    var vm = this;
 	    vm.$http.get('user/authenticate').then(function (res) {
 	      console.log(res.data);
@@ -14875,7 +14877,7 @@
 	//       </label>
 	//     </div>
 	//     <div class="task-content">
-	//       <div class="task-content-box" @dblclick="edit(task)">{{task.title}}</div>
+	//       <div class="task-content-box" @dblclick="edit(task)">{{{titleAfterParse}}}</div>
 	//       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label task-content-input">
 	//         <input class="mdl-textfield__input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
 	//       </div>
@@ -14895,11 +14897,13 @@
 	  data: function data() {
 	    return {
 	      editing: false,
+	      titleAfterParse: '',
 	      taskEditing: null,
 	      taskDetail: {}
 	    };
 	  },
 	  ready: function ready() {
+	    this.titleAfterParse = twemoji.parse(this.task.title);
 	    setTimeout(function () {
 	      componentHandler.upgradeDom('MaterialCheckbox');
 	    }, 0);
@@ -14929,6 +14933,7 @@
 	      this.taskEditing = task;
 	    },
 	    deleteTask: function deleteTask(task) {
+	
 	      this.$dispatch('delete task', task);
 	    },
 	    doEdit: function doEdit(task) {
@@ -14939,6 +14944,8 @@
 	        return false;
 	      }
 	      this.taskEditing = null;
+	      task.title = task.title.replace(/</g, "&lt").replace(/>/g, "&gt;");
+	      this.titleAfterParse = twemoji.parse(task.title);
 	      this.$dispatch('edit task', task);
 	    }
 	  },
@@ -15062,7 +15069,7 @@
 /* 38 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"task\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n    <div class=\"task-checkbox\">\r\n      <label class=\"mdl-checkbox mdl-js-checkbox\" v-bind:class=\"{'is-checked': task.completed}\" for=\"{{task.id}}\">\r\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n        <!-- <span class=\"mdl-checkbox__label\">Married</span> -->\r\n      </label>\r\n    </div>\r\n    <div class=\"task-content\">\r\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{task.title}}</div>\r\n      <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label task-content-input\">\r\n        <input class=\"mdl-textfield__input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n      </div>\r\n    </div>\r\n    <span class=\"task-controller\">\r\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\r\n    </span>\r\n\r\n  </div>\r\n\r\n";
+	module.exports = "\r\n  <div class=\"task\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n    <div class=\"task-checkbox\">\r\n      <label class=\"mdl-checkbox mdl-js-checkbox\" v-bind:class=\"{'is-checked': task.completed}\" for=\"{{task.id}}\">\r\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n        <!-- <span class=\"mdl-checkbox__label\">Married</span> -->\r\n      </label>\r\n    </div>\r\n    <div class=\"task-content\">\r\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{{titleAfterParse}}}</div>\r\n      <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label task-content-input\">\r\n        <input class=\"mdl-textfield__input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n      </div>\r\n    </div>\r\n    <span class=\"task-controller\">\r\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\r\n    </span>\r\n\r\n  </div>\r\n\r\n";
 
 /***/ },
 /* 39 */
@@ -15168,10 +15175,6 @@
 			localStorage.newTask ? this.newTask = JSON.parse(localStorage.newTask) : null;
 	
 			this.init();
-	
-			$('.modal-trigger').click(function () {
-				$('#modalLayer-inputer').openModal();
-			});
 		},
 	
 	

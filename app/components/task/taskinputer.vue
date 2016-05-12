@@ -53,10 +53,6 @@ export default {
 
 		this.init();
 
-		$('.modal-trigger').click(function(){
-          $('#modalLayer-inputer').openModal();
-        });
-
 	},
 
 	methods: {

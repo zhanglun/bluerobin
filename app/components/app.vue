@@ -46,6 +46,8 @@
     },
     ready(){
 
+      componentHandler.upgradeDom();
+
       var vm = this;
       vm.$http.get('user/authenticate')
         .then(function(res){

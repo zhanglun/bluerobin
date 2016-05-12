@@ -7,7 +7,7 @@
       </label>
     </div>
     <div class="task-content">
-      <div class="task-content-box" @dblclick="edit(task)">{{task.title}}</div>
+      <div class="task-content-box" @dblclick="edit(task)">{{{titleAfterParse}}}</div>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label task-content-input">
         <input class="mdl-textfield__input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
       </div>
@@ -28,11 +28,13 @@ module.exports = {
   data: function(){
   	return {
   		editing: false,
+      titleAfterParse: '',
   		taskEditing: null,
         taskDetail: {}
   	}
   },
   ready: function(){
+    this.titleAfterParse = twemoji.parse(this.task.title);
     setTimeout(function() {
       componentHandler.upgradeDom('MaterialCheckbox');
     }, 0);
@@ -62,6 +64,7 @@ module.exports = {
   		this.taskEditing = task;
   	},
   	deleteTask(task) {
+
       this.$dispatch('delete task', task);
   	},
 
@@ -73,6 +76,8 @@ module.exports = {
         return false;
       }
       this.taskEditing = null;
+      task.title = task.title.replace(/</g, "&lt").replace(/>/g, "&gt;");
+      this.titleAfterParse = twemoji.parse(task.title);
       this.$dispatch('edit task', task);
     },
   },
