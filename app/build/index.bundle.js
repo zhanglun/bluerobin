@@ -14599,7 +14599,7 @@
 	    componentHandler.upgradeDom();
 	
 	    var vm = this;
-	    vm.$http.get('user/authenticate').then(function (res) {
+	    vm.$http.get('authenticate').then(function (res) {
 	      console.log(res.data);
 	      vm.$data.account = res.data.user;
 	    }, function (err) {
@@ -16009,10 +16009,11 @@
 	
 		methods: {
 			signUp: function signUp() {
+				var vm = this;
 				var data = this.$data.registerData;
 				vm.$http.post('user/signup', data).then(function (res) {
 					localStorage.token = res.token;
-					router.go('/task');
+					vm.$router.go('/task');
 				}, function (err) {
 					console.log(xhr);
 				});

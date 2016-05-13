@@ -41,11 +41,12 @@
 
 		methods: {
 			signUp(){
-        var data = this.$data.registerData;
+        let vm = this;
+        let data = this.$data.registerData;
         vm.$http.post('user/signup', data)
           .then(function(res){
               localStorage.token = res.token;
-              router.go('/task');
+              vm.$router.go('/task');
           }, function(err){
               console.log(xhr);
           });

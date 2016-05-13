@@ -49,7 +49,7 @@
       componentHandler.upgradeDom();
 
       var vm = this;
-      vm.$http.get('user/authenticate')
+      vm.$http.get('authenticate')
         .then(function(res){
           console.log(res.data);
           vm.$data.account = res.data.user;
