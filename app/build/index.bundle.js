@@ -91,18 +91,19 @@
 	
 	// Vue.http.options.root = 'http://zhanglun.daoapp.io/api';
 	_vue2.default.http.options.root = 'http://localhost:1234/api';
-	_vue2.default.http.headers.common['x-access-token'] = localStorage.token;
+	// Vue.http.headers.common['x-access-token'] = localStorage.token;
 	
-	// Vue.http.interceptors.push({
-	// 	request: function(request){
-	// 		console.log(request);
-	// 		return request
-	// 	},
-	// 	response: function(response){
-	// 		console.log(response);
-	// 		return response
-	// 	}
-	// });
+	_vue2.default.http.interceptors.push({
+	  request: function request(_request) {
+	    console.log(_request);
+	    _vue2.default.http.headers.common['x-access-token'] = localStorage.token;
+	    return _request;
+	  },
+	  response: function response(_response) {
+	    console.log(_response);
+	    return _response;
+	  }
+	});
 	
 	// routing
 	var router = new _vueRouter2.default({ linkActiveClass: 'active' });
@@ -15174,6 +15175,8 @@
 			this.watchData = [this.newTask.title, this.newTask.attachments];
 			localStorage.newTask ? this.newTask = JSON.parse(localStorage.newTask) : null;
 	
+			componentHandler.upgradeDom();
+	
 			this.init();
 		},
 	
@@ -15865,6 +15868,11 @@
 	//   <div class="custom-container" transition="animate_routerview">
 	//     <div class="mdl-grid">
 	//       <div class="mdl-cell mdl-cell-6-col">
+	//         <h3>登录</h3>
+	//       </div>
+	//     </div>
+	//     <div class="mdl-grid">
+	//       <div class="mdl-cell mdl-cell-6-col">
 	//           <div class="mdl-textfield mdl-js-textfield">
 	//             <input class="mdl-textfield__input" type="text" id="email" v-model="user.username">
 	//             <label class="mdl-textfield__label" for="email">Email</label>
@@ -15879,7 +15887,7 @@
 	//       </div>
 	//       <div class="mdl-cell mdl-cell-6-col">
 	//         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  v-on:click="doLogin">GO!</button>
-	//           <a class="mdl-navigation__link" href="" v-link="{path: '/login', exact: true}">登录</a>
+	//         <a v-link="{path: '/signup', exact: true}">还没有账号？立马注册</a>
 	//       </div>
 	//     </div>
 	//   </div>
@@ -15895,14 +15903,13 @@
 	    };
 	  },
 	  ready: function ready() {
-	    console.log('login');
+	    componentHandler.upgradeDom();
 	  },
 	
 	  methods: {
 	    doLogin: function doLogin() {
 	      var vm = this;
 	      vm.$http.post('user/login', this.user).then(function (res) {
-	        console.log(res);
 	        localStorage.token = res.data.token;
 	        vm.$router.go('/task');
 	      }, function () {});
@@ -15926,7 +15933,7 @@
 /* 64 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n          <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"user.username\">\r\n            <label class=\"mdl-textfield__label\" for=\"email\">Email</label>\r\n            </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"user.password\">\r\n          <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\r\n        </div>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">GO!</button>\r\n          <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
+	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <h3>登录</h3>\r\n      </div>\r\n    </div>\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n          <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"user.username\">\r\n            <label class=\"mdl-textfield__label\" for=\"email\">Email</label>\r\n            </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"user.password\">\r\n          <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\r\n        </div>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">GO!</button>\r\n        <a v-link=\"{path: '/signup', exact: true}\">还没有账号？立马注册</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
 /* 65 */
@@ -15976,7 +15983,7 @@
 	//         </div>
 	//         <div class="input-field col s12">
 	//             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" v-on:click="signUp()">注册</button>
-	//             <a v-link="'login'" class="btn waves-effect waves-light">已有账号？直接登录</a>
+	//             <a v-link="'login'">已有账号？直接登录</a>
 	//         </div>
 	//       </div>
 	//     </div>
@@ -16021,7 +16028,7 @@
 /* 67 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <h3>注册</h3>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\r\n            <label class=\"mdl-textfield__label\" for=\"email\">邮箱</label>\r\n          </div>\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\r\n          <label class=\"mdl-textfield__label\" for=\"password\">密码</label>\r\n        </div>\r\n        <div class=\"input-field col s12\">\r\n            <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\" v-on:click=\"signUp()\">注册</button>\r\n            <a v-link=\"'login'\" class=\"btn waves-effect waves-light\">已有账号？直接登录</a>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
+	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <h3>注册</h3>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\r\n            <label class=\"mdl-textfield__label\" for=\"email\">邮箱</label>\r\n          </div>\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\r\n          <label class=\"mdl-textfield__label\" for=\"password\">密码</label>\r\n        </div>\r\n        <div class=\"input-field col s12\">\r\n            <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\" v-on:click=\"signUp()\">注册</button>\r\n            <a v-link=\"'login'\">已有账号？直接登录</a>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
 /* 68 */

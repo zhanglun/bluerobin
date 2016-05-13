@@ -51,6 +51,8 @@ export default {
 		this.watchData = [this.newTask.title, this.newTask.attachments];
 		localStorage.newTask ? this.newTask = JSON.parse(localStorage.newTask) : null;
 
+    componentHandler.upgradeDom();
+
 		this.init();
 
 	},

@@ -2,6 +2,11 @@
   <div class="custom-container" transition="animate_routerview">
     <div class="mdl-grid">
       <div class="mdl-cell mdl-cell-6-col">
+        <h3>登录</h3>
+      </div>
+    </div>
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell-6-col">
           <div class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="text" id="email" v-model="user.username">
             <label class="mdl-textfield__label" for="email">Email</label>
@@ -16,7 +21,7 @@
       </div>
       <div class="mdl-cell mdl-cell-6-col">
         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  v-on:click="doLogin">GO!</button>
-          <a class="mdl-navigation__link" href="" v-link="{path: '/login', exact: true}">登录</a>
+        <a v-link="{path: '/signup', exact: true}">还没有账号？立马注册</a>
       </div>
     </div>
   </div>
@@ -32,14 +37,13 @@
       }
     },
     ready(){
-      console.log('login');
+      componentHandler.upgradeDom();
     },
     methods: {
       doLogin(){
         let vm = this;
         vm.$http.post('user/login', this.user)
         .then(function(res){
-          console.log(res);
           localStorage.token = res.data.token;
           vm.$router.go('/task');
         }, function(){

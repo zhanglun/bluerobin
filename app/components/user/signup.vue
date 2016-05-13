@@ -15,7 +15,7 @@
         </div>
         <div class="input-field col s12">
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" v-on:click="signUp()">注册</button>
-            <a v-link="'login'" class="btn waves-effect waves-light">已有账号？直接登录</a>
+            <a v-link="'login'">已有账号？直接登录</a>
         </div>
       </div>
     </div>
