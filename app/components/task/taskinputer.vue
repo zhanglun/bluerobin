@@ -1,6 +1,6 @@
 <template>
     <div class="mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask">
+      <input class="mdl-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask(category)">
       <label for="" class="mdl-textfield__label">Title</label>
     </div>
 </template>
@@ -20,6 +20,7 @@ function guid() {
 }
 
 export default {
+  props: ['category'],
 	data(){
 		return {
 			title: 'task inputer',
@@ -49,8 +50,8 @@ export default {
 	},
 	ready(){
 		this.watchData = [this.newTask.title, this.newTask.attachments];
-		localStorage.newTask ? this.newTask = JSON.parse(localStorage.newTask) : null;
 
+    localStorage.newTask ? this.newTask = JSON.parse(localStorage.newTask) : null;
     componentHandler.upgradeDom();
 
 		this.init();
@@ -61,7 +62,7 @@ export default {
 		// 初始化
 		init(){
 
-	    var _this = this;
+	    let _this = this;
 			this.$set('uploader', Uploader({
 				container: 'taskWriter'
 			}));
@@ -88,21 +89,22 @@ export default {
 		},
 
 		// 创建任务
-		createTask(){
+		createTask(category){
 
 			if(!this.newTask.title){
 				return false;
 			}
 
-			this.newTask.ctime = new Date();
+			this.$set('newTask.create_time', new Date());
+      this.$set('newTask.category', category);
 
 			this.$dispatch('create task', this.newTask);
 
-			this.newTask = {
+			this.$set('newTask', {
 				title: '',
-				ctime: '',
+				create_time: '',
 				attachments: []
-			};
+			});
 
 		},
 

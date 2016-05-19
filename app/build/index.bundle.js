@@ -89,9 +89,8 @@
 	_vue2.default.use(_vueRouter2.default);
 	_vue2.default.use(_vueResource2.default);
 	
-	_vue2.default.http.options.root = 'http://zhanglun.daoapp.io/api';
-	// Vue.http.options.root = 'http://localhost:1234/api';
-	// Vue.http.headers.common['x-access-token'] = localStorage.token;
+	// Vue.http.options.root = 'http://zhanglun.daoapp.io/api';
+	_vue2.default.http.options.root = 'http://localhost:1234/api';
 	
 	_vue2.default.http.interceptors.push({
 	  request: function request(_request) {
@@ -110,17 +109,8 @@
 	  '/file': {
 	    component: _file2.default
 	  },
-	  // '/task/': {
-	  //   component: TaskView
-	  // },
-	  // '/lists/:category': {
-	  // 	name: 'list',
-	  // 	component: TaskView
-	  // },
-	  '/today': {
-	    component: _task2.default
-	  },
-	  '/wrok': {
+	  '/lists/:category': {
+	    name: 'list',
 	    component: _task2.default
 	  },
 	  '/login': {
@@ -14755,7 +14745,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+			value: true
 	});
 	
 	var _taskItem = __webpack_require__(35);
@@ -14774,7 +14764,8 @@
 	// <template>
 	//   <div class="custom-container" transition="animate_routerview">
 	//     <div class="mdl-grid">
-	//     <taskinputer></taskinputer>
+	//       <h1>{{$route.params.category}}</h1>
+	//       <taskinputer :category="category"></taskinputer>
 	//       <div class="mdl-cell mdl-cell--12-col">
 	//         <taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
 	//       </div>
@@ -14785,80 +14776,88 @@
 	// <script>
 	
 	exports.default = {
-		data: function data() {
-			return {
-				value: '',
-				tasklist: [],
-				taskOpened: null
-			};
-		},
-	
-	
-		// route: {
-		//    data: function(transition){
-		//      console.log('data!!!!!------>');
-		//    },
-		//   activate: function (transition) {
-		//     console.log('hook-example activated!')
-		//     transition.next()
-		//   },
-		//   deactivate: function (transition) {
-		//     console.log('hook-example deactivated!')
-		//     transition.next()
-		//   },
-		//   canDeactivate: function(transitio){
-		//     console.log('can deactivated!');
-		//     // transition.next();
-		//     return true;
-		//   },
-		//   canReuse: function(transition){
-		//     console.log(transition);
-		//     return true;
-		//   }
-		// },
-	
-		components: {
-			taskitem: _taskItem2.default,
-			taskinputer: _taskInputer2.default
-		},
-	
-		ready: function ready() {
-			console.log(location.href);
-			this.getTaskList();
-		},
-	
-	
-		methods: {
-			getTaskList: function getTaskList() {
-				var vm = this;
-				vm.$http.get('tasks').then(function (res) {
-					vm.tasklist = res.data;
-				});
-			}
-		},
-		events: {
-			'create task': function createTask(task) {
-				var vm = this;
-				vm.$http.post('tasks', task).then(function (res) {
-					vm.tasklist.unshift(res.data);
-					setTimeout(function () {
-						componentHandler.upgradeDom('MaterialCheckbox');
-					}, 0);
-				});
+			data: function data() {
+					return {
+							value: '',
+							tasklist: [],
+							category: '',
+							taskOpened: null
+					};
 			},
-			'delete task': function deleteTask(task) {
-				var vm = this;
-				vm.$http.delete('tasks/' + task.id).then(function () {
-					vm.tasklist.$remove(task);
-				});
+	
+	
+			route: {
+					data: function data(transition) {
+	
+							console.log('data!!!!!------>', this.$route);
+							var param = null;
+							this.$data.category = this.$route.params.category;
+							param = {
+									category: this.$data.category
+							};
+	
+							return this.$http.get('tasks', param).then(function (res) {
+									return { tasklist: res.data };
+							});
+					},
+					activate: function activate(transition) {
+							// console.log('hook-example activated!')
+							transition.next();
+					},
+					deactivate: function deactivate(transition) {
+							// console.log('hook-example deactivated!')
+							transition.next();
+					},
+					canDeactivate: function canDeactivate(transitio) {
+							console.log('can deactivated!');
+							// transition.next();
+							return true;
+					},
+					canReuse: function canReuse(transition) {}
 			},
-			'edit task': function editTask(task) {
-				var vm = this;
-				vm.$http.put('tasks/' + task.id, task).then(function (res) {
-					console.log('edit task success!');
-				});
+	
+			components: {
+					taskitem: _taskItem2.default,
+					taskinputer: _taskInputer2.default
+			},
+	
+			ready: function ready() {
+					console.log(location.href);
+					// this.getTaskList();
+			},
+	
+	
+			methods: {
+					getTaskList: function getTaskList() {
+							var vm = this;
+							vm.$http.get('tasks', { category: this.$route.params.category }).then(function (res) {
+									vm.tasklist = res.data;
+							});
+					}
+			},
+			events: {
+					'create task': function createTask(task) {
+							var vm = this;
+							vm.$http.post('tasks', task).then(function (res) {
+									vm.tasklist.unshift(res.data);
+									setTimeout(function () {
+											componentHandler.upgradeDom('MaterialCheckbox');
+									}, 0);
+							});
+					},
+					'delete task': function deleteTask(task) {
+							var vm = this;
+							vm.$http.delete('tasks/' + task.id).then(function () {
+									vm.tasklist.$remove(task);
+							});
+					},
+					'edit task': function editTask(task) {
+							var vm = this;
+							vm.$http.put('tasks/' + task.id, task).then(function (res) {
+									console.log('edit task success!');
+							});
+					}
 			}
-		}
 	};
 	
 	// </script>
@@ -15158,7 +15157,7 @@
 	
 	// <template>
 	//     <div class="mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-	//       <input class="mdl-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask">
+	//       <input class="mdl-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask(category)">
 	//       <label for="" class="mdl-textfield__label">Title</label>
 	//     </div>
 	// </template>
@@ -15174,6 +15173,7 @@
 	}
 	
 	exports.default = {
+		props: ['category'],
 		data: function data() {
 			return {
 				title: 'task inputer',
@@ -15204,8 +15204,8 @@
 		},
 		ready: function ready() {
 			this.watchData = [this.newTask.title, this.newTask.attachments];
-			localStorage.newTask ? this.newTask = JSON.parse(localStorage.newTask) : null;
 	
+			localStorage.newTask ? this.newTask = JSON.parse(localStorage.newTask) : null;
 			componentHandler.upgradeDom();
 	
 			this.init();
@@ -15242,21 +15242,22 @@
 	
 	
 			// 创建任务
-			createTask: function createTask() {
+			createTask: function createTask(category) {
 	
 				if (!this.newTask.title) {
 					return false;
 				}
 	
-				this.newTask.ctime = new Date();
+				this.$set('newTask.create_time', new Date());
+				this.$set('newTask.category', category);
 	
 				this.$dispatch('create task', this.newTask);
 	
-				this.newTask = {
+				this.$set('newTask', {
 					title: '',
-					ctime: '',
+					create_time: '',
 					attachments: []
-				};
+				});
 			},
 	
 	
@@ -15430,13 +15431,13 @@
 /* 46 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n    <div class=\"mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\r\n      <input class=\"mdl-textfield__input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask\">\r\n      <label for=\"\" class=\"mdl-textfield__label\">Title</label>\r\n    </div>\r\n";
+	module.exports = "\r\n    <div class=\"mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\r\n      <input class=\"mdl-textfield__input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask(category)\">\r\n      <label for=\"\" class=\"mdl-textfield__label\">Title</label>\r\n    </div>\r\n";
 
 /***/ },
 /* 47 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n    <taskinputer></taskinputer>\r\n      <div class=\"mdl-cell mdl-cell--12-col\">\r\n        <taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></taskitem>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
+	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <h1>{{$route.params.category}}</h1>\r\n      <taskinputer :category=\"category\"></taskinputer>\r\n      <div class=\"mdl-cell mdl-cell--12-col\">\r\n        <taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></taskitem>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
 /* 48 */
@@ -15607,10 +15608,10 @@
 	//     <div class="mdl-layout__drawer">
 	//       <span class="mdl-layout-title">Title</span>
 	//       <nav class="mdl-navigation">
-	//         <!-- <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'today'}}">Today</a>
-	//         <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'work'}}">Wrok</a> -->
-	//         <a class="mdl-navigation__link" href="" v-link="{path: '/today', exact: true}">Today</a>
-	//         <a class="mdl-navigation__link" href="" v-link="{path: '/work', exact: true}">Work</a>
+	//         <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'today'}}">Today</a>
+	//         <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'work'}}">Wrok</a>
+	//         <!-- <a class="mdl-navigation__link" href="" v-link="{path: '/today', exact: true}">Today</a>
+	//         <a class="mdl-navigation__link" href="" v-link="{path: '/work', exact: true}">Work</a> -->
 	//         <!-- <a class="mdl-navigation__link" href="" v-link="{path: '/task/archive', exact: true}">Archive</a>
 	//         <a class="mdl-navigation__link" href="" v-link="{path: '/task/overdue', exact: true}">OverDue</a> -->
 	//       </nav>
@@ -15662,7 +15663,7 @@
 /* 55 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <!-- Title -->\r\n        <span class=\"mdl-layout-title\">BlueRobin</span>\r\n        <!-- Add spacer, to align navigation to the right -->\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <!-- Navigation -->\r\n        <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n        <a v-if=\"account\">{{account.email}}</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer\">\r\n      <span class=\"mdl-layout-title\">Title</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{name: 'list', params:{category: 'today'}}\">Today</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{name: 'list', params:{category: 'work'}}\">Wrok</a> -->\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/today', exact: true}\">Today</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/work', exact: true}\">Work</a>\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task/archive', exact: true}\">Archive</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task/overdue', exact: true}\">OverDue</a> -->\r\n      </nav>\r\n    </div>\r\n  <!-- Dropdown Structure -->\r\n  <!-- <ul id=\"dropdown1\" class=\"dropdown-content\">\r\n    <li><a href=\"#!\">asdf</a></li>\r\n    <li class=\"divider\"></li>\r\n    <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\r\n  </ul>\r\n  <nav>\r\n    <div class=\"container\">\r\n        <div class=\"nav-wrapper\">\r\n          <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\r\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n            <li v-if=\"account\">\r\n              <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\r\n                <i class=\"material-icons right\">arrow_drop_down</i>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      </nav> -->\r\n  </header>\r\n";
+	module.exports = "\r\n  <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <!-- Title -->\r\n        <span class=\"mdl-layout-title\">BlueRobin</span>\r\n        <!-- Add spacer, to align navigation to the right -->\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <!-- Navigation -->\r\n        <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n        <a v-if=\"account\">{{account.email}}</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer\">\r\n      <span class=\"mdl-layout-title\">Title</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{name: 'list', params:{category: 'today'}}\">Today</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{name: 'list', params:{category: 'work'}}\">Wrok</a>\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/today', exact: true}\">Today</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/work', exact: true}\">Work</a> -->\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task/archive', exact: true}\">Archive</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task/overdue', exact: true}\">OverDue</a> -->\r\n      </nav>\r\n    </div>\r\n  <!-- Dropdown Structure -->\r\n  <!-- <ul id=\"dropdown1\" class=\"dropdown-content\">\r\n    <li><a href=\"#!\">asdf</a></li>\r\n    <li class=\"divider\"></li>\r\n    <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\r\n  </ul>\r\n  <nav>\r\n    <div class=\"container\">\r\n        <div class=\"nav-wrapper\">\r\n          <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\r\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n            <li v-if=\"account\">\r\n              <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\r\n                <i class=\"material-icons right\">arrow_drop_down</i>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      </nav> -->\r\n  </header>\r\n";
 
 /***/ },
 /* 56 */

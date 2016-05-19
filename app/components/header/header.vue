@@ -20,10 +20,10 @@
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Title</span>
       <nav class="mdl-navigation">
-        <!-- <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'today'}}">Today</a>
-        <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'work'}}">Wrok</a> -->
-        <a class="mdl-navigation__link" href="" v-link="{path: '/today', exact: true}">Today</a>
-        <a class="mdl-navigation__link" href="" v-link="{path: '/work', exact: true}">Work</a>
+        <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'today'}}">Today</a>
+        <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'work'}}">Wrok</a>
+        <!-- <a class="mdl-navigation__link" href="" v-link="{path: '/today', exact: true}">Today</a>
+        <a class="mdl-navigation__link" href="" v-link="{path: '/work', exact: true}">Work</a> -->
         <!-- <a class="mdl-navigation__link" href="" v-link="{path: '/task/archive', exact: true}">Archive</a>
         <a class="mdl-navigation__link" href="" v-link="{path: '/task/overdue', exact: true}">OverDue</a> -->
       </nav>
