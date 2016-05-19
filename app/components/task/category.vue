@@ -1,30 +1,17 @@
 <template>
-  <div class="" >
-    <div class="mdl-grid">
-    	<taskmenu></taskmenu>
-    	<router-view></router-view>
-    	<!-- <category></category> -->
-    </div>
-  </div>
+	<div class="mdl-cell mdl-cell--9-col" transition="animate_routerview">
+	<h1>{{$route.params.category}}</h1>
+    <taskinputer :category="category"></taskinputer>		
+    <taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
+	</div>
 </template>
-
 <script>
+	
+	import TaskItemView from './taskItem.vue';
+	import TaskInputer from './taskInputer.vue';
 
-	import TaskMenuView from './taskmenu.vue';
-	import CategoryView from './category.vue';
-
-	export default {
-
-	  data(){
-	  	return {
-		  	value: '',
-		  	tasklist: [],
-        category: '',
-        taskOpened: null,
-	  	}
-	  },
-
-    route: {
+	export default{
+	 route: {
       data(transition){
 
         console.log('data!!!!!------>', this.$route);
@@ -56,27 +43,17 @@
       }
     },
 
-	  components: {
-			taskmenu: TaskMenuView,
-	    category: CategoryView,
-	  },
-
-	  ready(){
-      console.log(location.href);
-			// this.getTaskList();
-	  },
-
-	  methods: {
-			getTaskList() {
-				let vm = this;
-				vm.$http
-					.get('tasks', {category: this.$route.params.category})
-					.then(function(res){
-						vm.tasklist = res.data;
-					});
+		data(){
+			return {
+		  	tasklist: [],
+        category: '',
 			}
-	  },
-	  events: {
+		},
+		components: {
+			taskinputer: TaskInputer,
+			taskitem: TaskItemView,
+		},
+		events: {
 			'create task': function(task){
 				let vm = this;
         vm.$http.post('tasks', task)
@@ -102,8 +79,5 @@
 				  });
 			}
 	  }
-	};
-
+	}
 </script>
-<style lang="less">
-</style>

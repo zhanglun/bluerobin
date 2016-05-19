@@ -8,6 +8,7 @@ import App from './components/app.vue';
 import HomeView from './components/home/home.vue';
 import FileView from './components/file/file.vue';
 import TaskView from './components/task/task.vue';
+import CategoryView from './components/task/category.vue';
 import UserLogin from './components/user/login.vue';
 import UserSignUp from './components/user/signup.vue';
 
@@ -36,9 +37,14 @@ router.map({
   '/file': {
     component: FileView
   },
-  '/lists/:category': {
-		name: 'list',
-    component: TaskView
+  '/lists': {
+    component: TaskView,
+    subRoutes: {
+      '/:category': {
+        name: 'list',
+        component: CategoryView
+      }
+    }
   },
   '/login': {
     component: UserLogin
