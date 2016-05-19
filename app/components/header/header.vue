@@ -20,10 +20,12 @@
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">Title</span>
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="" v-link="{path: '/file', exact: true}">文件</a>
-        <a class="mdl-navigation__link" href="" v-link="{path: '/task', exact: true}">Task</a>
-        <a class="mdl-navigation__link" href="" v-link="{path: '/login', exact: true}">登录</a>
-        <a class="mdl-navigation__link" href="" v-link="{path: '/signup', exact: true}">注册</a>
+        <!-- <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'today'}}">Today</a>
+        <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'work'}}">Wrok</a> -->
+        <a class="mdl-navigation__link" href="" v-link="{path: '/today', exact: true}">Today</a>
+        <a class="mdl-navigation__link" href="" v-link="{path: '/work', exact: true}">Work</a>
+        <!-- <a class="mdl-navigation__link" href="" v-link="{path: '/task/archive', exact: true}">Archive</a>
+        <a class="mdl-navigation__link" href="" v-link="{path: '/task/overdue', exact: true}">OverDue</a> -->
       </nav>
     </div>
   <!-- Dropdown Structure -->

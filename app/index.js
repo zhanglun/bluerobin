@@ -15,33 +15,41 @@ import UserSignUp from './components/user/signup.vue';
 Vue.use(Router);
 Vue.use(VueResource);
 
-// Vue.http.options.root = 'http://zhanglun.daoapp.io/api';
-Vue.http.options.root = 'http://localhost:1234/api';
+Vue.http.options.root = 'http://zhanglun.daoapp.io/api';
+// Vue.http.options.root = 'http://localhost:1234/api';
 // Vue.http.headers.common['x-access-token'] = localStorage.token;
 
 Vue.http.interceptors.push({
 	request: function(request){
-		console.log(request);
     Vue.http.headers.common['x-access-token'] = localStorage.token;
-		return request
+		return request;
 	},
 	response: function(response){
-		console.log(response);
-		return response
+		return response;
 	}
 });
 
 // routing
-var router = new Router({ linkActiveClass: 'active' })
+var router = new Router({ linkActiveClass: 'active' });
 
 
 router.map({
   '/file': {
     component: FileView
   },
-  '/task': {
-    component: TaskView
-  },
+  // '/task/': {
+  //   component: TaskView
+  // },
+	// '/lists/:category': {
+	// 	name: 'list',
+	// 	component: TaskView
+	// },
+	'/today': {
+		component: TaskView
+	},
+	'/wrok': {
+		component: TaskView
+	},
   '/login': {
     component: UserLogin
   },
@@ -51,11 +59,11 @@ router.map({
   '/home': {
     component: HomeView
   }
-})
+});
 
 router.redirect({
-  '*': '/task'
-})
+  '*': '/lists/today'
+});
 
 
 router.start(App, '#app');

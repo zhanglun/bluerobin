@@ -27,12 +27,36 @@
 	  	}
 	  },
 
+    // route: {
+    //    data: function(transition){
+    //      console.log('data!!!!!------>');
+    //    },
+    //   activate: function (transition) {
+    //     console.log('hook-example activated!')
+    //     transition.next()
+    //   },
+    //   deactivate: function (transition) {
+    //     console.log('hook-example deactivated!')
+    //     transition.next()
+    //   },
+    //   canDeactivate: function(transitio){
+    //     console.log('can deactivated!');
+    //     // transition.next();
+    //     return true;
+    //   },
+    //   canReuse: function(transition){
+    //     console.log(transition);
+    //     return true;
+    //   }
+    // },
+
 	  components: {
 			taskitem: TaskItemView,
 	    taskinputer: TaskInputer,
 	  },
 
 	  ready(){
+      console.log(location.href);
 			this.getTaskList();
 	  },
 

@@ -89,18 +89,16 @@
 	_vue2.default.use(_vueRouter2.default);
 	_vue2.default.use(_vueResource2.default);
 	
-	// Vue.http.options.root = 'http://zhanglun.daoapp.io/api';
-	_vue2.default.http.options.root = 'http://localhost:1234/api';
+	_vue2.default.http.options.root = 'http://zhanglun.daoapp.io/api';
+	// Vue.http.options.root = 'http://localhost:1234/api';
 	// Vue.http.headers.common['x-access-token'] = localStorage.token;
 	
 	_vue2.default.http.interceptors.push({
 	  request: function request(_request) {
-	    console.log(_request);
 	    _vue2.default.http.headers.common['x-access-token'] = localStorage.token;
 	    return _request;
 	  },
 	  response: function response(_response) {
-	    console.log(_response);
 	    return _response;
 	  }
 	});
@@ -112,7 +110,17 @@
 	  '/file': {
 	    component: _file2.default
 	  },
-	  '/task': {
+	  // '/task/': {
+	  //   component: TaskView
+	  // },
+	  // '/lists/:category': {
+	  // 	name: 'list',
+	  // 	component: TaskView
+	  // },
+	  '/today': {
+	    component: _task2.default
+	  },
+	  '/wrok': {
 	    component: _task2.default
 	  },
 	  '/login': {
@@ -127,7 +135,7 @@
 	});
 	
 	router.redirect({
-	  '*': '/task'
+	  '*': '/lists/today'
 	});
 	
 	router.start(_app2.default, '#app');
@@ -14554,7 +14562,6 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// <style lang="less">
-	//
 	//  .app{
 	//   height: 100%;
 	//   position: absolute;
@@ -14748,7 +14755,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-			value: true
+		value: true
 	});
 	
 	var _taskItem = __webpack_require__(35);
@@ -14778,56 +14785,80 @@
 	// <script>
 	
 	exports.default = {
-			data: function data() {
-					return {
-							value: '',
-							tasklist: [],
-							taskOpened: null
-					};
-			},
+		data: function data() {
+			return {
+				value: '',
+				tasklist: [],
+				taskOpened: null
+			};
+		},
 	
 	
-			components: {
-					taskitem: _taskItem2.default,
-					taskinputer: _taskInputer2.default
-			},
+		// route: {
+		//    data: function(transition){
+		//      console.log('data!!!!!------>');
+		//    },
+		//   activate: function (transition) {
+		//     console.log('hook-example activated!')
+		//     transition.next()
+		//   },
+		//   deactivate: function (transition) {
+		//     console.log('hook-example deactivated!')
+		//     transition.next()
+		//   },
+		//   canDeactivate: function(transitio){
+		//     console.log('can deactivated!');
+		//     // transition.next();
+		//     return true;
+		//   },
+		//   canReuse: function(transition){
+		//     console.log(transition);
+		//     return true;
+		//   }
+		// },
 	
-			ready: function ready() {
-					this.getTaskList();
-			},
+		components: {
+			taskitem: _taskItem2.default,
+			taskinputer: _taskInputer2.default
+		},
+	
+		ready: function ready() {
+			console.log(location.href);
+			this.getTaskList();
+		},
 	
 	
-			methods: {
-					getTaskList: function getTaskList() {
-							var vm = this;
-							vm.$http.get('tasks').then(function (res) {
-									vm.tasklist = res.data;
-							});
-					}
-			},
-			events: {
-					'create task': function createTask(task) {
-							var vm = this;
-							vm.$http.post('tasks', task).then(function (res) {
-									vm.tasklist.unshift(res.data);
-									setTimeout(function () {
-											componentHandler.upgradeDom('MaterialCheckbox');
-									}, 0);
-							});
-					},
-					'delete task': function deleteTask(task) {
-							var vm = this;
-							vm.$http.delete('tasks/' + task.id).then(function () {
-									vm.tasklist.$remove(task);
-							});
-					},
-					'edit task': function editTask(task) {
-							var vm = this;
-							vm.$http.put('tasks/' + task.id, task).then(function (res) {
-									console.log('edit task success!');
-							});
-					}
+		methods: {
+			getTaskList: function getTaskList() {
+				var vm = this;
+				vm.$http.get('tasks').then(function (res) {
+					vm.tasklist = res.data;
+				});
 			}
+		},
+		events: {
+			'create task': function createTask(task) {
+				var vm = this;
+				vm.$http.post('tasks', task).then(function (res) {
+					vm.tasklist.unshift(res.data);
+					setTimeout(function () {
+						componentHandler.upgradeDom('MaterialCheckbox');
+					}, 0);
+				});
+			},
+			'delete task': function deleteTask(task) {
+				var vm = this;
+				vm.$http.delete('tasks/' + task.id).then(function () {
+					vm.tasklist.$remove(task);
+				});
+			},
+			'edit task': function editTask(task) {
+				var vm = this;
+				vm.$http.put('tasks/' + task.id, task).then(function (res) {
+					console.log('edit task success!');
+				});
+			}
+		}
 	};
 	
 	// </script>
@@ -15576,10 +15607,12 @@
 	//     <div class="mdl-layout__drawer">
 	//       <span class="mdl-layout-title">Title</span>
 	//       <nav class="mdl-navigation">
-	//         <a class="mdl-navigation__link" href="" v-link="{path: '/file', exact: true}">文件</a>
-	//         <a class="mdl-navigation__link" href="" v-link="{path: '/task', exact: true}">Task</a>
-	//         <a class="mdl-navigation__link" href="" v-link="{path: '/login', exact: true}">登录</a>
-	//         <a class="mdl-navigation__link" href="" v-link="{path: '/signup', exact: true}">注册</a>
+	//         <!-- <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'today'}}">Today</a>
+	//         <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'work'}}">Wrok</a> -->
+	//         <a class="mdl-navigation__link" href="" v-link="{path: '/today', exact: true}">Today</a>
+	//         <a class="mdl-navigation__link" href="" v-link="{path: '/work', exact: true}">Work</a>
+	//         <!-- <a class="mdl-navigation__link" href="" v-link="{path: '/task/archive', exact: true}">Archive</a>
+	//         <a class="mdl-navigation__link" href="" v-link="{path: '/task/overdue', exact: true}">OverDue</a> -->
 	//       </nav>
 	//     </div>
 	//   <!-- Dropdown Structure -->
@@ -15629,7 +15662,7 @@
 /* 55 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <!-- Title -->\r\n        <span class=\"mdl-layout-title\">BlueRobin</span>\r\n        <!-- Add spacer, to align navigation to the right -->\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <!-- Navigation -->\r\n        <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n        <a v-if=\"account\">{{account.email}}</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer\">\r\n      <span class=\"mdl-layout-title\">Title</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/login', exact: true}\">登录</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n      </nav>\r\n    </div>\r\n  <!-- Dropdown Structure -->\r\n  <!-- <ul id=\"dropdown1\" class=\"dropdown-content\">\r\n    <li><a href=\"#!\">asdf</a></li>\r\n    <li class=\"divider\"></li>\r\n    <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\r\n  </ul>\r\n  <nav>\r\n    <div class=\"container\">\r\n        <div class=\"nav-wrapper\">\r\n          <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\r\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n            <li v-if=\"account\">\r\n              <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\r\n                <i class=\"material-icons right\">arrow_drop_down</i>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      </nav> -->\r\n  </header>\r\n";
+	module.exports = "\r\n  <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <!-- Title -->\r\n        <span class=\"mdl-layout-title\">BlueRobin</span>\r\n        <!-- Add spacer, to align navigation to the right -->\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <!-- Navigation -->\r\n        <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n        <a v-if=\"account\">{{account.email}}</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer\">\r\n      <span class=\"mdl-layout-title\">Title</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{name: 'list', params:{category: 'today'}}\">Today</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{name: 'list', params:{category: 'work'}}\">Wrok</a> -->\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/today', exact: true}\">Today</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/work', exact: true}\">Work</a>\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task/archive', exact: true}\">Archive</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task/overdue', exact: true}\">OverDue</a> -->\r\n      </nav>\r\n    </div>\r\n  <!-- Dropdown Structure -->\r\n  <!-- <ul id=\"dropdown1\" class=\"dropdown-content\">\r\n    <li><a href=\"#!\">asdf</a></li>\r\n    <li class=\"divider\"></li>\r\n    <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\r\n  </ul>\r\n  <nav>\r\n    <div class=\"container\">\r\n        <div class=\"nav-wrapper\">\r\n          <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\r\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n            <li v-if=\"account\">\r\n              <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\r\n                <i class=\"material-icons right\">arrow_drop_down</i>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      </nav> -->\r\n  </header>\r\n";
 
 /***/ },
 /* 56 */
