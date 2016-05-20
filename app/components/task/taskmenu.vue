@@ -122,18 +122,18 @@
 	    </ul>
 	    <!-- Sidebar divider -->
 	    <!-- <div class="sidebar-divider"></div> -->
-	    
+
 	    <!-- Sidebar text -->
 	    <!--  <div class="sidebar-text">Text</div> -->
 	</aside>
 </div>
 </template>
 <script>
-	
+
 </script>
 
 <style lang="less">
-	
+
 .sidebar-overlay {
   visibility: hidden;
   position: fixed;
@@ -144,7 +144,7 @@
   opacity: 0;
   background: #000;
   z-index: @zindex-sidebar-fixed - 1;
-  
+
   -webkit-transition: visibility 0 linear .4s,opacity .4s cubic-bezier(.4,0,.2,1);
   -moz-transition: visibility 0 linear .4s,opacity .4s cubic-bezier(.4,0,.2,1);
   transition: visibility 0 linear .4s,opacity .4s cubic-bezier(.4,0,.2,1);
@@ -222,7 +222,7 @@
 }
 @media (max-width: @screen-tablet) {
   .sidebar-stacked.open + .wrapper .constructor{
-    margin-left: @sidebar-width; 
+    margin-left: @sidebar-width;
   }
 }
 
