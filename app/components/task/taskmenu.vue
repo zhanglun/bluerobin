@@ -2,7 +2,7 @@
     <div class="sidebar">
       <ul class="side-menu">
         <li>
-          <a href="" class="side-menu__item" v-link="{name: 'list', params:{category: 'today'}}">
+          <a href="" class="side-menu__item" v-link="{name: 'list', params:{category: 'inbox'}}">
             <span class="material-icons">inbox</span>
             <span class="side-menu__item-content">Inbox</span>
           </a>

@@ -134,7 +134,7 @@
 	});
 	
 	router.redirect({
-	  '*': '/lists/today'
+	  '*': '/lists/inbox'
 	});
 	
 	router.start(_app2.default, '#app');
@@ -14903,7 +14903,7 @@
 	//     <div class="sidebar">
 	//       <ul class="side-menu">
 	//         <li>
-	//           <a href="" class="side-menu__item" v-link="{name: 'list', params:{category: 'today'}}">
+	//           <a href="" class="side-menu__item" v-link="{name: 'list', params:{category: 'inbox'}}">
 	//             <span class="material-icons">inbox</span>
 	//             <span class="side-menu__item-content">Inbox</span>
 	//           </a>
@@ -14959,7 +14959,7 @@
 /* 38 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div class=\"sidebar\">\n      <ul class=\"side-menu\">\n        <li>\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'today'}}\">\n            <span class=\"material-icons\">inbox</span>\n            <span class=\"side-menu__item-content\">Inbox</span>\n          </a>\n        </li>\n        <li>\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'work'}}\">\n            <span class=\"material-icons\">work</span>\n            <span class=\"side-menu__item-content\">Work</span>\n          </a>\n        </li>\n      </ul>\n    </div>\n";
+	module.exports = "\n    <div class=\"sidebar\">\n      <ul class=\"side-menu\">\n        <li>\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'inbox'}}\">\n            <span class=\"material-icons\">inbox</span>\n            <span class=\"side-menu__item-content\">Inbox</span>\n          </a>\n        </li>\n        <li>\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'work'}}\">\n            <span class=\"material-icons\">work</span>\n            <span class=\"side-menu__item-content\">Work</span>\n          </a>\n        </li>\n      </ul>\n    </div>\n";
 
 /***/ },
 /* 39 */

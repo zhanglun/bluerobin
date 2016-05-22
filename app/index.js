@@ -58,7 +58,7 @@ router.map({
 });
 
 router.redirect({
-  '*': '/lists/today'
+  '*': '/lists/inbox',
 });
 
 
