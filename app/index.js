@@ -30,7 +30,7 @@ Vue.http.interceptors.push({
 });
 
 // routing
-var router = new Router({ linkActiveClass: 'active' });
+var router = new Router({ linkActiveClass: 'side-menu__item--active' });
 
 
 router.map({
