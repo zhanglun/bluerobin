@@ -5,12 +5,12 @@
   <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
         <!-- Title -->
-        <span class="mdl-layout-title">BlueRobin</span>
+        <span class="mdl-layout-title">{{$route.params.category}}</span>
         <!-- Add spacer, to align navigation to the right -->
         <div class="mdl-layout-spacer"></div>
         <!-- Navigation -->
         <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="" v-link="{path: '/file', exact: true}">文件</a>
+        <!-- <a class="mdl-navigation__link" href="" v-link="{path: '/file', exact: true}">文件</a> -->
         <a class="mdl-navigation__link" href="" v-link="{path: '/task', exact: true}">Task</a>
         <a class="mdl-navigation__link" href="" v-link="{path: '/signup', exact: true}">注册</a>
         <a v-if="account">{{account.email}}</a>

@@ -1,10 +1,7 @@
 <template>
   <div class="" >
-    <div class="mdl-grid">
     	<taskmenu></taskmenu>
     	<router-view></router-view>
-    	<!-- <category></category> -->
-    </div>
   </div>
 </template>
 

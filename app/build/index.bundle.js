@@ -62,11 +62,11 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _home = __webpack_require__(55);
+	var _home = __webpack_require__(56);
 	
 	var _home2 = _interopRequireDefault(_home);
 	
-	var _file = __webpack_require__(64);
+	var _file = __webpack_require__(65);
 	
 	var _file2 = _interopRequireDefault(_file);
 	
@@ -78,17 +78,17 @@
 	
 	var _category2 = _interopRequireDefault(_category);
 	
-	var _login = __webpack_require__(68);
+	var _login = __webpack_require__(69);
 	
 	var _login2 = _interopRequireDefault(_login);
 	
-	var _signup = __webpack_require__(72);
+	var _signup = __webpack_require__(73);
 	
 	var _signup2 = _interopRequireDefault(_signup);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(75);
+	__webpack_require__(76);
 	
 	_vue2.default.use(_vueRouter2.default);
 	_vue2.default.use(_vueResource2.default);
@@ -107,7 +107,7 @@
 	});
 	
 	// routing
-	var router = new _vueRouter2.default({ linkActiveClass: 'active' });
+	var router = new _vueRouter2.default({ linkActiveClass: 'side-menu__item--active' });
 	
 	router.map({
 	  '/file': {
@@ -134,7 +134,7 @@
 	});
 	
 	router.redirect({
-	  '*': '/lists/today'
+	  '*': '/lists/inbox'
 	});
 	
 	router.start(_app2.default, '#app');
@@ -14510,7 +14510,7 @@
 	var __vue_script__, __vue_template__
 	__webpack_require__(29)
 	__vue_script__ = __webpack_require__(30)
-	__vue_template__ = __webpack_require__(63)
+	__vue_template__ = __webpack_require__(64)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14550,11 +14550,11 @@
 	
 	var _task2 = _interopRequireDefault(_task);
 	
-	var _home = __webpack_require__(55);
+	var _home = __webpack_require__(56);
 	
 	var _home2 = _interopRequireDefault(_home);
 	
-	var _header = __webpack_require__(59);
+	var _header = __webpack_require__(60);
 	
 	var _header2 = _interopRequireDefault(_header);
 	
@@ -14725,7 +14725,7 @@
 	var __vue_script__, __vue_template__
 	__webpack_require__(33)
 	__vue_script__ = __webpack_require__(34)
-	__vue_template__ = __webpack_require__(54)
+	__vue_template__ = __webpack_require__(55)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14769,11 +14769,8 @@
 	
 	// <template>
 	//   <div class="" >
-	//     <div class="mdl-grid">
 	//     	<taskmenu></taskmenu>
 	//     	<router-view></router-view>
-	//     	<!-- <category></category> -->
-	//     </div>
 	//   </div>
 	// </template>
 	//
@@ -14903,885 +14900,56 @@
 /***/ function(module, exports) {
 
 	// <template>
-	// <div class="mdl-cell mdl-cell--3-col">
-	//     <!-- Overlay for fixed sidebar -->
-	// 	<div class="sidebar-overlay"></div>
-	//
-	// 	<!-- Material sidebar -->
-	// 	<aside id="sidebar" class="sidebar sidebar-default open" role="navigation">
-	// 	    <!-- Sidebar header -->
-	// 	    <div class="sidebar-header header-cover" style="background-image: url(http://2.bp.blogspot.com/-2RewSLZUzRg/U-9o6SD4M6I/AAAAAAAADIE/voax99AbRx0/s1600/14%2B-%2B1%2B%281%29.jpg);">
-	// 	        <!-- Top bar -->
-	// 	        <div class="top-bar"></div>
-	// 	        <!-- Sidebar toggle button -->
-	// 	        <button type="button" class="sidebar-toggle">
-	// 	            <i class="icon-material-sidebar-arrow"></i>
-	// 	        </button>
-	// 	        <!-- Sidebar brand image -->
-	// 	        <div class="sidebar-image">
-	// 	            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53474/atom_profile_01.jpg">
-	// 	        </div>
-	// 	        <!-- Sidebar brand name -->
-	// 	        <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
-	// 	            john.doe@gmail.com
-	// 	            <b class="caret"></b>
-	// 	        </a>
-	// 	    </div>
-	//
-	// 	    <!-- Sidebar navigation -->
-	// 	    <ul class="nav sidebar-nav">
-	// 	        <li class="dropdown">
-	// 	            <ul id="settings-dropdown" class="dropdown-menu">
-	// 	                <li>
-	// 	                    <a href="#" tabindex="-1">
-	// 	                        Profile
-	// 	                    </a>
-	// 	                </li>
-	// 	                <li>
-	// 	                    <a href="#" tabindex="-1">
-	// 	                        Settings
-	// 	                    </a>
-	// 	                </li>
-	// 	                <li>
-	// 	                    <a href="#" tabindex="-1">
-	// 	                        Help
-	// 	                    </a>
-	// 	                </li>
-	// 	                <li>
-	// 	                    <a href="#" tabindex="-1">
-	// 	                        Exit
-	// 	                    </a>
-	// 	                </li>
-	// 	            </ul>
-	// 	        </li>
-	// 	        <li>
-	//                   <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'today'}}">Today</a>
-	//                   </li>
-	//                   <li>
-	//         <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'work'}}">Wrok</a>
+	//     <div class="sidebar">
+	//       <ul class="side-menu">
+	//         <li>
+	//           <a href="" class="side-menu__item" v-link="{name: 'list', params:{category: 'inbox'}}">
+	//             <span class="material-icons">inbox</span>
+	//             <span class="side-menu__item-content">Inbox</span>
+	//           </a>
 	//         </li>
-	//        <!--  <li>
-	// 	            <a href="#">
-	// 	                <i class="sidebar-icon md-inbox"></i>
-	// 	                Inbox
-	// 	            </a>
-	// 	        </li>
-	// 	        <li>
-	// 	            <a href="#">
-	// 	                <i class="sidebar-icon md-star"></i>
-	// 	                Starred
-	// 	            </a>
-	// 	        </li>
-	// 	        <li>
-	// 	            <a href="#">
-	// 	                <i class="sidebar-icon md-send"></i>
-	// 	                Sent Mail
-	// 	            </a>
-	// 	        </li>
-	// 	        <li>
-	// 	            <a href="#">
-	// 	                <i class="sidebar-icon md-drafts"></i>
-	// 	                Drafts
-	// 	            </a>
-	// 	        </li> -->
-	// 	        <li class="divider"></li>
-	// 	        <li class="dropdown">
-	// 	            <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
-	// 	                All Mail
-	// 	                <b class="caret"></b>
-	// 	            </a>
-	// 	            <ul class="dropdown-menu">
-	// 	                <li>
-	// 	                    <a href="#" tabindex="-1">
-	// 	                        Social
-	// 	                        <span class="sidebar-badge">12</span>
-	// 	                    </a>
-	// 	                </li>
-	// 	                <li>
-	// 	                    <a href="#" tabindex="-1">
-	// 	                        Promo
-	// 	                        <span class="sidebar-badge">0</span>
-	// 	                    </a>
-	// 	                </li>
-	// 	            </ul>
-	// 	        </li>
-	// 	        <li>
-	// 	            <a href="#">
-	// 	                Trash
-	// 	                <span class="sidebar-badge">3</span>
-	// 	            </a>
-	// 	        </li>
-	// 	        <li>
-	// 	            <a href="#">
-	// 	                Spam
-	// 	                <span class="sidebar-badge">456</span>
-	// 	            </a>
-	// 	        </li>
-	// 	        <li>
-	// 	            <a href="#">
-	// 	                Follow Up
-	// 	                <span class="sidebar-badge badge-circle">i</span>
-	// 	            </a>
-	// 	        </li>
-	// 	    </ul>
-	// 	    <!-- Sidebar divider -->
-	// 	    <!-- <div class="sidebar-divider"></div> -->
-	//
-	// 	    <!-- Sidebar text -->
-	// 	    <!--  <div class="sidebar-text">Text</div> -->
-	// 	</aside>
-	// </div>
+	//         <li>
+	//           <a href="" class="side-menu__item" v-link="{name: 'list', params:{category: 'work'}}">
+	//             <span class="material-icons">work</span>
+	//             <span class="side-menu__item-content">Work</span>
+	//           </a>
+	//         </li>
+	//       </ul>
+	//     </div>
 	// </template>
 	// <script>
 
 	// </script>
 	//
 	// <style lang="less">
-	//
-	// .sidebar-overlay {
-	//   visibility: hidden;
-	//   position: fixed;
-	//   top: 0;
-	//   left: 0;
-	//   right: 0;
-	//   bottom: 0;
-	//   opacity: 0;
-	//   background: #000;
-	//   z-index: @zindex-sidebar-fixed - 1;
-	//
-	//   -webkit-transition: visibility 0 linear .4s,opacity .4s cubic-bezier(.4,0,.2,1);
-	//   -moz-transition: visibility 0 linear .4s,opacity .4s cubic-bezier(.4,0,.2,1);
-	//   transition: visibility 0 linear .4s,opacity .4s cubic-bezier(.4,0,.2,1);
-	//   -webkit-transform: translateZ(0);
-	//   -moz-transform: translateZ(0);
-	//   -ms-transform: translateZ(0);
-	//   -o-transform: translateZ(0);
-	//   transform: translateZ(0);
+	// @import '../../public/stylesheets/variables';
+	// .sidebar{
+	//   float:left;
+	//   width: @sideMenuWidth;
+	//   padding: 20px 30px;
+	//   box-sizing: border-box;
 	// }
-	//
-	// .sidebar-overlay.active {
-	//   opacity: 0.5;
-	//   visibility: visible;
-	//   -webkit-transition-delay: 0;
-	//   -moz-transition-delay: 0;
-	//   transition-delay: 0;
-	// }
-	//
-	// .top-bar {
-	//   height: 25px;
-	//   background: rgba(0, 0, 0, 0.1);
-	// }
-	//
-	// /* -- Google typography ------------------------------- */
-	// .headline {
-	//   font-size: 24px;
-	//   font-weight: 300;
-	//   line-height: 1.1;
-	//   color: #212121;
-	//   text-transform: inherit;
-	//   letter-spacing: inherit;
-	// }
-	// .subhead {
-	//   font-size: 16px;
-	//   font-weight: 300;
-	//   line-height: 1.1;
-	//   color: #212121;
-	//   text-transform: inherit;
-	//   letter-spacing: inherit;
-	// }
-	//
-	// /* -- Bootstrap-like style ------------------------------- */
-	// .caret {
-	//   display: inline-block;
-	//   width: 0;
-	//   height: 0;
-	//   margin-left: 2px;
-	//   vertical-align: middle;
-	//   border-top: 4px solid;
-	//   border-right: 4px solid transparent;
-	//   border-left: 4px solid transparent;
-	// }
-	//
-	// .dropdown-menu {
-	//   display: none;
-	// }
-	//
-	// /* -- Constructor style ------------------------------- */
-	// .constructor {
-	//   position: relative;
-	//   margin: 0;
-	//   padding: 0 50px;
-	//   .transition(all 0.5s cubic-bezier(0.55, 0, 0.1, 1));
-	// }
-	//
-	// // Positioning layout: default
-	// .sidebar, .wrapper {
-	//   display: table-cell;
-	//   vertical-align: top;
-	// }
-	//
-	// // Positioning layout: stacked
-	// .sidebar-stacked.open + .wrapper .constructor{
-	//   margin-left: @sidebar-desktop-width;
-	// }
-	// @media (max-width: @screen-tablet) {
-	//   .sidebar-stacked.open + .wrapper .constructor{
-	//     margin-left: @sidebar-width;
-	//   }
-	// }
-	//
-	//
-	// // Base variables
-	// // --------------------------------------------------
-	// @screen-tablet:          768px;
-	//
-	// @gray-darker:            #212121; // #212121 - text
-	// @gray-dark:              #757575; // #757575 - secondary text, icons
-	// @gray:                   #bdbdbd; // #bdbdbd - hint text
-	// @gray-light:             #e0e0e0; // #e0e0e0 - divider
-	// @gray-lighter:           #f5f5f5; // #f5f5f5 - background
-	//
-	// // Pink Material Colors
-	// @pink-50:   #fce4ec;
-	// @pink-100:  #f8bbd0;
-	// @pink-200:  #f48fb1;
-	// @pink-300:  #f06292;
-	// @pink-400:  #ec407a;
-	// @pink-500:  #e91e63;
-	// @pink-600:  #d81b60;
-	// @pink-700:  #c2185b;
-	// @pink-800:  #ad1457;
-	// @pink-900:  #880e4f;
-	// @pink-A100: #ff80ab;
-	// @pink-A200: #ff4081;
-	// @pink-A400: #f50057;
-	// @pink-A700: #c51162;
-	//
-	// // Base mixins
-	// // --------------------------------------------------
-	// .clearfix() {
-	//   &:before,
-	//   &:after {
-	//     content: " "; // 1
-	//     display: table; // 2
-	//   }
-	//   &:after {
-	//     clear: both;
-	//   }
-	// }
-	//
-	// .text-overflow() {
-	//   overflow: hidden;
-	//   -o-text-overflow: ellipsis;
-	//   text-overflow: ellipsis;
-	//   white-space: nowrap;
-	// }
-	//
-	// .translate3d(@x; @y; @z) {
-	//   -webkit-transform: translate3d(@x, @y, @z);
-	//   transform: translate3d(@x, @y, @z);
-	// }
-	// .transition(@transition) {
-	//   -webkit-transition: @transition;
-	//   -o-transition: @transition;
-	//   transition: @transition;
-	// }
-	// .box-shadow(@shadow) {
-	//   -webkit-box-shadow: @shadow; // iOS <4.3 & Android <4.1
-	//   box-shadow: @shadow;
-	// }
-	// .background-size(@background-size) {
-	//   -webkit-background-size: @background-size;
-	//   -moz-background-size: @background-size;
-	//   -o-background-size: @background-size;
-	//   background-size: @background-size;
-	// }
-	//
-	// /* -- Sidebar style ------------------------------- */
-	//
-	// // Sidebar variables
-	// // --------------------------------------------------
-	// @zindex-sidebar-fixed: 1035;
-	//
-	// @sidebar-desktop-width: 280px;
-	// @sidebar-width: 240px;
-	//
-	//
-	// @sidebar-padding: 16px;
-	// @sidebar-divider: @sidebar-padding/2;
-	//
-	// @sidebar-nav-height: 48px;
-	//
-	// @sidebar-icon-width: 40px;
-	// @sidebar-icon-size: 20px;
-	//
-	// @sidebar-badge-size: @sidebar-nav-height/2;
-	// @sidebar-badge-font-size: 10px;
-	//
-	// @sidebar-brand-color: @gray-dark;
-	// @sidebar-icon-color: @gray-dark;
-	// @sidebar-menu-color: @gray-darker;
-	//
-	//
-	// @sidebar-font-weight: 500;
-	//
-	// // Sidebar mixins
-	// // --------------------------------------------------
-	//
-	// // Sidebar horizontal block
-	// //
-	// // This settings will extended by .sidebar-text, .sidebar-brand and .sidebar-nav>li>a
-	// .sidebar-block() {
-	//   display: block;
-	//   height: @sidebar-nav-height;
-	//   line-height: @sidebar-nav-height;
+	// .side-menu{
 	//   padding: 0;
-	//   padding-left: @sidebar-padding;
-	//   padding-right: (@sidebar-padding + @sidebar-badge-size) + @sidebar-padding;
-	//   text-decoration: none;
-	//   clear: both;
-	//   font-weight: @sidebar-font-weight;
-	//   .text-overflow();
-	//   .transition(all .2s ease-in-out);
-	//
-	//   &:hover, &:focus {
-	//     .box-shadow(none);
-	//     outline: none;
-	//   }
-	//
-	//   // positioning caret in sidebar block
-	//   .caret {
-	//     position: absolute;
-	//     right: @sidebar-padding + @sidebar-badge-size/2 - 4px; // caret centered by badge position; 4px - caret width
-	//     top: @sidebar-nav-height/2;
-	//   }
-	//   // positioning badge in sidebar block
-	//   .sidebar-badge {
-	//     position: absolute;
-	//     right: @sidebar-padding;
-	//     top: (@sidebar-nav-height - @sidebar-badge-size)/2 ;
-	//   }
-	// }
-	//
-	// // Sidebar design template
-	// //
-	// // You can make own sidebar style with this template
-	// .sidebar-template(
-	//   @color,
-	//   @bg,
-	//   @header-bg,
-	//   @brand-color,
-	//   @brand-bg,
-	//   @brand-hover-color,
-	//   @brand-hover-bg,
-	//   @divider,
-	//   @badge-color,
-	//   @badge-bg,
-	//   @icon-color,
-	//   @icon-hover-color,
-	//   @link-color,
-	//   @link-bg,
-	//   @link-hover-color,
-	//   @link-hover-bg,
-	//   @link-active-color,
-	//   @link-active-bg,
-	//   @link-disabled-color,
-	//   @link-disabled-bg
-	// ) {
-	//
-	//   background-color: @bg;
-	//
-	//   .sidebar-header {
-	//     background-color: @header-bg;
-	//   }
-	//
-	//   .sidebar-toggle {
-	//     color: @brand-hover-color;
-	//     background-color: transparent;
-	//   }
-	//
-	//   .sidebar-brand {
-	//     color: @brand-color;
-	//     background-color: @brand-bg;
-	//     &:hover,
-	//     &:focus {
-	//       color: @brand-hover-color;
-	//       background-color: @brand-hover-bg;
-	//     }
-	//   }
-	//
-	//   .sidebar-badge {
-	//     color: @badge-color;
-	//     background-color: @badge-bg;
-	//   }
-	//
-	//   .sidebar-divider, .sidebar-nav .divider {
-	//     background-color: @divider;
-	//   }
-	//
-	//   .sidebar-text {
-	//     color: @color;
-	//   }
-	//
-	//   .sidebar-nav {
-	//     li > a {
-	//       color: @link-color;
-	//       background-color: @link-bg;
-	//
-	//       i {
-	//         color: @icon-color;
-	//       }
-	//     }
-	//     li:hover > a, li > a:hover {
-	//       color: @link-hover-color;
-	//       background-color: @link-hover-bg;
-	//
-	//       i {
-	//         color: @icon-hover-color;
-	//       }
-	//     }
-	//     li:focus > a, li > a:focus {
-	//       color: @link-color;
-	//       background-color: @link-bg;
-	//
-	//       i {
-	//         color: @icon-hover-color;
-	//       }
-	//     }
-	//
-	//     > .open > a {
-	//       &,
-	//       &:hover,
-	//       &:focus {
-	//         color: @link-hover-color;
-	//         background-color: @link-hover-bg;
-	//       }
-	//     }
-	//
-	//     > .active > a {
-	//       &,
-	//       &:hover,
-	//       &:focus {
-	//         color: @link-active-color;
-	//         background-color: @link-active-bg;
-	//       }
-	//     }
-	//     > .disabled > a {
-	//       &,
-	//       &:hover,
-	//       &:focus {
-	//         color: @link-disabled-color;
-	//         background-color: @link-disabled-bg;
-	//       }
-	//     }
-	//     > li > .ink {
-	//       //background: #80d8ff;
-	//       //opacity: 0.5;
-	//     }
-	//
-	//     // Dropdown menu items
-	//     > .dropdown {
-	//       // Remove background color from open dropdown
-	//       > .dropdown-menu {
-	//
-	//         background-color: @link-hover-bg;
-	//
-	//         > li > a {
-	//           &:focus {
-	//             background-color: @link-hover-bg;
-	//             color: @link-hover-color;
-	//           }
-	//           &:hover {
-	//             background-color: darken(@link-hover-bg, 7%);
-	//             color: @link-hover-color;
-	//           }
-	//         }
-	//
-	//         > .active > a {
-	//           &,
-	//           &:hover,
-	//           &:focus {
-	//             color: @link-active-color;
-	//             background-color: @link-active-bg;
-	//           }
-	//         }
-	//       }
-	//     }
-	//   }
-	// }
-	//
-	// //
-	// // Sidebars
-	// // --------------------------------------------------
-	//
-	// // Wrapper and base class
-	// //
-	// // Provide a static sidebar from which we expand to create other sidebar variations.
-	// .sidebar {
-	//   position: relative;
-	//   display: block;
-	//   min-height: 100%;
-	//   overflow-y: auto;
-	//   overflow-x: hidden;
-	//   border: none;
-	//   .transition(all 0.5s cubic-bezier(0.55, 0, 0.1, 1));
-	//
-	//
-	//   // Prevent floats from breaking the sidebar
-	//   // &:extend(.clearfix all);
-	//   .clearfix();
-	//
-	//   // Scrollbar style for webkit browsers
-	//   &::-webkit-scrollbar-track {
+	//   margin: 0;
+	//   &__item{
+	//     box-sizing: border-box;
 	//     border-radius: 2px;
-	//   }
-	//
-	//   &::-webkit-scrollbar {
-	//     width: 5px;
-	//     background-color: #F7F7F7;
-	//   }
-	//
-	//   &::-webkit-scrollbar-thumb {
-	//     border-radius: 10px;
-	//     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	//     background-color: #BFBFBF;
-	//   }
-	// }
-	//
-	// // Sidebar Elements
-	// //
-	// // Basic style of sidebar elements
-	// .sidebar {
-	//
-	//   //** Sidebar heading
-	//   //----------------
-	//   .sidebar-header {
-	//     position: relative;
-	//     height: @sidebar-desktop-width * 9/16; // 16:9 header dimension
-	//     margin-bottom: @sidebar-divider;
-	//     .transition(all .2s ease-in-out);
-	//
-	//     // Brand/project cover
-	//     // Addition class for sidebar header
-	//     &.header-cover {
-	//       background-repeat: no-repeat;
-	//       background-position: center center;
-	//       .background-size(cover);
+	//     padding: 10px 0 10px 22px;
+	//     color: #000;
+	//     text-decoration: none;
+	//     display: flex;
+	//     &:hover{
+	//       background: rgba(0,0,0,.03);
 	//     }
-	//
-	//     &:hover {
-	//       .sidebar-toggle {
-	//         opacity: 1;
-	//       }
+	//     &--active{
+	//       background: #e0e0e0;
+	//     }
+	//     &-content{
+	//       margin-left: 10px;
 	//     }
 	//   }
 	//
-	//   //** Sidebar toggle
-	//   //
-	//   // You can bind click on this button and toggle sidebar via javascript
-	//   .sidebar-toggle {
-	//     position: relative;
-	//     float: right;
-	//     margin: @sidebar-padding;
-	//     padding: 0;
-	//     background-image: none; // Reset unusual Firefox-on-Android default style;
-	//     border: none;
-	//     height: @sidebar-icon-width;
-	//     width: @sidebar-icon-width;
-	//     font-size: @sidebar-icon-size;
-	//     opacity: 0.7;
-	//     .transition(all .2s ease-in-out);
-	//     .clearfix();
-	//   }
-	//
-	//   //** Sidebar arrow
-	//   //----------------
-	//   .icon-material-sidebar-arrow:before {
-	//     content: "\e610"; // icon-material-arrow-back
-	//   }
-	//
-	//   //** Brand/project image
-	//   //
-	//   // In google guideline used for user profile image
-	//   .sidebar-image {
-	//     img {
-	//       width: @sidebar-desktop-width/4 - @sidebar-padding;
-	//       height: @sidebar-desktop-width/4 - @sidebar-padding;
-	//       margin: @sidebar-padding;
-	//       border-radius: 50%;
-	//       .transition(all .2s ease-in-out);
-	//     }
-	//   }
-	//
-	//   //** Brand/project name
-	//   //
-	//   // In google guideline used for email dropdown
-	//   .sidebar-brand {
-	//     position: absolute;
-	//     bottom: 0;
-	//     left: 0;
-	//     right: 0;
-	//     .sidebar-block();
-	//
-	//     &:hover,
-	//     &:focus {
-	//       text-decoration: none;
-	//     }
-	//   }
-	//
-	//   //** Sidebar badge
-	//   //----------------
-	//   .sidebar-badge {
-	//     display: inline-block;
-	//     min-width: @sidebar-badge-size;
-	//     height: @sidebar-badge-size;
-	//     line-height: @sidebar-badge-size;
-	//     padding: 0 3px;
-	//     font-size: @sidebar-badge-font-size;
-	//     text-align: center;
-	//     white-space: nowrap;
-	//     vertical-align: baseline;
-	//     &.badge-circle {
-	//       border-radius: 50%;
-	//     }
-	//   }
-	//
-	//   //** Sidebar divider
-	//   //----------------
-	//   .sidebar-divider, .sidebar-nav .divider {
-	//     position: relative;
-	//     display: block;
-	//     height: 1px;
-	//     margin: @sidebar-divider 0;
-	//     padding: 0;
-	//     overflow: hidden;
-	//   }
-	//
-	//   //** Sidebar text
-	//   //----------------
-	//   .sidebar-text {
-	//     .sidebar-block();
-	//   }
-	//
-	//   //** Sidebar icons
-	//   //----------------
-	//   .sidebar-icon {
-	//     display: inline-block;
-	//     margin-right: @sidebar-padding;
-	//     min-width: @sidebar-icon-width;
-	//     width: @sidebar-icon-width;
-	//     text-align: left;
-	//     font-size: @sidebar-icon-size;
-	//
-	//     &:before, &:after {
-	//       vertical-align: middle;
-	//     }
-	//   }
-	// }
-	//
-	//
-	//
-	// // Sidebar navigation class
-	// // ------------------------
-	// .sidebar .sidebar-nav {
-	//   margin: 0;
-	//   padding: 0;
-	//
-	//   //** Links
-	//   //----------------
-	//   li {
-	//     position: relative;
-	//     list-style-type: none;
-	//
-	//     a {
-	//       position: relative;
-	//       cursor: pointer;
-	//       user-select: none;
-	//       .sidebar-block();
-	//
-	//       &:hover {
-	//         background: transparent;
-	//       }
-	//     }
-	//   }
-	//
-	//   //** Dropdown menu
-	//   //----------------
-	//   .dropdown-menu {
-	//     position: relative;
-	//     width: 100%;
-	//     margin: 0;
-	//     padding: 0;
-	//     border: none;
-	//     border-radius: 0;
-	//     .box-shadow(none);
-	//   }
-	// }
-	//
-	// // Sidebar color theme variations
-	// //
-	// // ------------------------
-	// .sidebar-default {
-	//   .sidebar-template(
-	//   @color: @gray-darker,
-	//   @bg: #fff,
-	//   @header-bg: #eceff1,
-	//   @brand-color: @gray-dark,
-	//   @brand-bg: transparent,
-	//   @brand-hover-color: @gray-darker,
-	//   @brand-hover-bg: rgba(0, 0, 0, 0.10),
-	//   @divider: @gray,
-	//   @badge-color: #fff,
-	//   @badge-bg: @gray,
-	//   @icon-color: @gray-dark,
-	//   @icon-hover-color: @gray-dark,
-	//   @link-color: @gray-darker,
-	//   @link-bg: transparent,
-	//   @link-hover-color: @gray-darker,
-	//   @link-hover-bg: @gray-light,
-	//   @link-active-color: @gray-darker,
-	//   @link-active-bg: @gray-light,
-	//   @link-disabled-color: @gray-light,
-	//   @link-disabled-bg: transparent
-	//   );
-	// }
-	// .sidebar-inverse {
-	//   .sidebar-template(
-	//   @color: @gray-lighter,
-	//   @bg: @gray-darker,
-	//   @header-bg: #eceff1,
-	//   @brand-color: @gray-dark,
-	//   @brand-bg: transparent,
-	//   @brand-hover-color: @gray-darker,
-	//   @brand-hover-bg: rgba(0, 0, 0, 0.10),
-	//   @divider: @gray,
-	//   @badge-color: @gray-darker,
-	//   @badge-bg: @gray-light,
-	//   @icon-color: @gray,
-	//   @icon-hover-color: @gray,
-	//   @link-color: @gray-lighter,
-	//   @link-bg: transparent,
-	//   @link-hover-color: @gray,
-	//   @link-hover-bg: #000,
-	//   @link-active-color: @gray-lighter,
-	//   @link-active-bg: #000,
-	//   @link-disabled-color: @gray-dark,
-	//   @link-disabled-bg: transparent
-	//   );
-	// }
-	// .sidebar-colored {
-	//   .sidebar-template(
-	//   @color: @gray-darker,
-	//   @bg: #fff,
-	//   @header-bg: @pink-500,
-	//   @brand-color: @gray-light,
-	//   @brand-bg: transparent,
-	//   @brand-hover-color: @gray-lighter,
-	//   @brand-hover-bg: rgba(0, 0, 0, 0.10),
-	//   @divider: @gray,
-	//   @badge-color: #fff,
-	//   @badge-bg: @pink-400,
-	//   @icon-color: @gray-dark,
-	//   @icon-hover-color: @pink-300,
-	//   @link-color: @gray-darker,
-	//   @link-bg: transparent,
-	//   @link-hover-color: @pink-500,
-	//   @link-hover-bg: @gray-light,
-	//   @link-active-color: @gray-darker,
-	//   @link-active-bg: @gray-lighter,
-	//   @link-disabled-color: @gray-light,
-	//   @link-disabled-bg: transparent
-	//   );
-	// }
-	// .sidebar-colored-inverse {
-	//   .sidebar-template(
-	//   @color: @gray-light,
-	//   @bg: @pink-500,
-	//   @header-bg: #eceff1,
-	//   @brand-color: @gray-dark,
-	//   @brand-bg: transparent,
-	//   @brand-hover-color: @gray-darker,
-	//   @brand-hover-bg: rgba(0, 0, 0, 0.10),
-	//   @divider: @gray,
-	//   @badge-color: @gray-darker,
-	//   @badge-bg: @gray-light,
-	//   @icon-color: @gray-light,
-	//   @icon-hover-color: @gray-lighter,
-	//   @link-color: @gray-lighter,
-	//   @link-bg: transparent,
-	//   @link-hover-color: @gray-lighter,
-	//   @link-hover-bg: rgba(0, 0, 0, 0.10),
-	//   @link-active-color: @gray-lighter,
-	//   @link-active-bg: rgba(0, 0, 0, 0.20),
-	//   @link-disabled-color: @gray,
-	//   @link-disabled-bg: transparent
-	//   );
-	// }
-	//
-	// // Sidebar toggling
-	// //
-	// // Hide sidebar
-	// .sidebar {
-	//   width: 0;
-	//   .translate3d(-@sidebar-desktop-width, 0, 0);
-	//
-	//   &.open {
-	//     min-width: @sidebar-desktop-width;
-	//     width: @sidebar-desktop-width;
-	//     .translate3d(0, 0, 0);
-	//   }
-	// }
-	//
-	// // Sidebar positions: fix the left/right sidebars
-	// .sidebar-fixed-left,
-	// .sidebar-fixed-right,
-	// .sidebar-stacked {
-	//   position: fixed;
-	//   top: 0;
-	//   bottom: 0;
-	//   z-index: @zindex-sidebar-fixed;
-	// }
-	// .sidebar-stacked {
-	//   left: 0;
-	// }
-	// .sidebar-fixed-left {
-	//   left: 0;
-	//   box-shadow: 2px 0px 15px rgba(0,0,0,0.35);
-	//   -webkit-box-shadow: 2px 0px 15px rgba(0,0,0,0.35);
-	// }
-	// .sidebar-fixed-right {
-	//   right: 0;
-	//   box-shadow: 0px 2px 15px rgba(0,0,0,0.35);
-	//   -webkit-box-shadow: 0px 2px 15px rgba(0,0,0,0.35);
-	//
-	//   .translate3d(@sidebar-desktop-width, 0, 0);
-	//   &.open {
-	//     .translate3d(0, 0, 0);
-	//   }
-	//   .icon-material-sidebar-arrow:before {
-	//     content: "\e614"; // icon-material-arrow-forward
-	//   }
-	// }
-	//
-	// // Sidebar size
-	// //
-	// // Change size of sidebar and sidebar elements on small screens
-	// @media (max-width: @screen-tablet) {
-	//   .sidebar.open {
-	//     min-width: @sidebar-width;
-	//     width: @sidebar-width;
-	//   }
-	//
-	//   .sidebar .sidebar-header {
-	//     height: @sidebar-width * 9/16; // 16:9 header dimension
-	//   }
-	//
-	//   .sidebar .sidebar-image {
-	//     img {
-	//       width: @sidebar-width/4 - @sidebar-padding;
-	//       height: @sidebar-width/4 - @sidebar-padding;
-	//     }
-	//   }
 	// }
 	//
 	// </style>
@@ -15793,15 +14961,16 @@
 /* 38 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n<div class=\"mdl-cell mdl-cell--3-col\">\r\n    <!-- Overlay for fixed sidebar -->\r\n\t<div class=\"sidebar-overlay\"></div>\r\n\r\n\t<!-- Material sidebar -->\r\n\t<aside id=\"sidebar\" class=\"sidebar sidebar-default open\" role=\"navigation\">\r\n\t    <!-- Sidebar header -->\r\n\t    <div class=\"sidebar-header header-cover\" style=\"background-image: url(http://2.bp.blogspot.com/-2RewSLZUzRg/U-9o6SD4M6I/AAAAAAAADIE/voax99AbRx0/s1600/14%2B-%2B1%2B%281%29.jpg);\">\r\n\t        <!-- Top bar -->\r\n\t        <div class=\"top-bar\"></div>\r\n\t        <!-- Sidebar toggle button -->\r\n\t        <button type=\"button\" class=\"sidebar-toggle\">\r\n\t            <i class=\"icon-material-sidebar-arrow\"></i>\r\n\t        </button>\r\n\t        <!-- Sidebar brand image -->\r\n\t        <div class=\"sidebar-image\">\r\n\t            <img src=\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/53474/atom_profile_01.jpg\">\r\n\t        </div>\r\n\t        <!-- Sidebar brand name -->\r\n\t        <a data-toggle=\"dropdown\" class=\"sidebar-brand\" href=\"#settings-dropdown\">\r\n\t            john.doe@gmail.com\r\n\t            <b class=\"caret\"></b>\r\n\t        </a>\r\n\t    </div>\r\n\r\n\t    <!-- Sidebar navigation -->\r\n\t    <ul class=\"nav sidebar-nav\">\r\n\t        <li class=\"dropdown\">\r\n\t            <ul id=\"settings-dropdown\" class=\"dropdown-menu\">\r\n\t                <li>\r\n\t                    <a href=\"#\" tabindex=\"-1\">\r\n\t                        Profile\r\n\t                    </a>\r\n\t                </li>\r\n\t                <li>\r\n\t                    <a href=\"#\" tabindex=\"-1\">\r\n\t                        Settings\r\n\t                    </a>\r\n\t                </li>\r\n\t                <li>\r\n\t                    <a href=\"#\" tabindex=\"-1\">\r\n\t                        Help\r\n\t                    </a>\r\n\t                </li>\r\n\t                <li>\r\n\t                    <a href=\"#\" tabindex=\"-1\">\r\n\t                        Exit\r\n\t                    </a>\r\n\t                </li>\r\n\t            </ul>\r\n\t        </li>\r\n\t        <li>\r\n                  <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{name: 'list', params:{category: 'today'}}\">Today</a>\r\n                  </li>\r\n                  <li>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{name: 'list', params:{category: 'work'}}\">Wrok</a>\r\n        </li>\r\n       <!--  <li>\r\n\t            <a href=\"#\">\r\n\t                <i class=\"sidebar-icon md-inbox\"></i>\r\n\t                Inbox\r\n\t            </a>\r\n\t        </li>\r\n\t        <li>\r\n\t            <a href=\"#\">\r\n\t                <i class=\"sidebar-icon md-star\"></i>\r\n\t                Starred\r\n\t            </a>\r\n\t        </li>\r\n\t        <li>\r\n\t            <a href=\"#\">\r\n\t                <i class=\"sidebar-icon md-send\"></i>\r\n\t                Sent Mail\r\n\t            </a>\r\n\t        </li>\r\n\t        <li>\r\n\t            <a href=\"#\">\r\n\t                <i class=\"sidebar-icon md-drafts\"></i>\r\n\t                Drafts\r\n\t            </a>\r\n\t        </li> -->\r\n\t        <li class=\"divider\"></li>\r\n\t        <li class=\"dropdown\">\r\n\t            <a class=\"ripple-effect dropdown-toggle\" href=\"#\" data-toggle=\"dropdown\">\r\n\t                All Mail\r\n\t                <b class=\"caret\"></b>\r\n\t            </a>\r\n\t            <ul class=\"dropdown-menu\">\r\n\t                <li>\r\n\t                    <a href=\"#\" tabindex=\"-1\">\r\n\t                        Social\r\n\t                        <span class=\"sidebar-badge\">12</span>\r\n\t                    </a>\r\n\t                </li>\r\n\t                <li>\r\n\t                    <a href=\"#\" tabindex=\"-1\">\r\n\t                        Promo\r\n\t                        <span class=\"sidebar-badge\">0</span>\r\n\t                    </a>\r\n\t                </li>\r\n\t            </ul>\r\n\t        </li>\r\n\t        <li>\r\n\t            <a href=\"#\">\r\n\t                Trash\r\n\t                <span class=\"sidebar-badge\">3</span>\r\n\t            </a>\r\n\t        </li>\r\n\t        <li>\r\n\t            <a href=\"#\">\r\n\t                Spam\r\n\t                <span class=\"sidebar-badge\">456</span>\r\n\t            </a>\r\n\t        </li>\r\n\t        <li>\r\n\t            <a href=\"#\">\r\n\t                Follow Up\r\n\t                <span class=\"sidebar-badge badge-circle\">i</span>\r\n\t            </a>\r\n\t        </li>\r\n\t    </ul>\r\n\t    <!-- Sidebar divider -->\r\n\t    <!-- <div class=\"sidebar-divider\"></div> -->\r\n\r\n\t    <!-- Sidebar text -->\r\n\t    <!--  <div class=\"sidebar-text\">Text</div> -->\r\n\t</aside>\r\n</div>\r\n";
+	module.exports = "\r\n    <div class=\"sidebar\">\r\n      <ul class=\"side-menu\">\r\n        <li>\r\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'inbox'}}\">\r\n            <span class=\"material-icons\">inbox</span>\r\n            <span class=\"side-menu__item-content\">Inbox</span>\r\n          </a>\r\n        </li>\r\n        <li>\r\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'work'}}\">\r\n            <span class=\"material-icons\">work</span>\r\n            <span class=\"side-menu__item-content\">Work</span>\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n";
 
 /***/ },
 /* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(40)
-	__vue_template__ = __webpack_require__(53)
+	__webpack_require__(40)
+	__vue_script__ = __webpack_require__(41)
+	__vue_template__ = __webpack_require__(54)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15819,6 +14988,12 @@
 
 /***/ },
 /* 40 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15827,19 +15002,18 @@
 	  value: true
 	});
 	
-	var _taskItem = __webpack_require__(41);
+	var _taskItem = __webpack_require__(42);
 	
 	var _taskItem2 = _interopRequireDefault(_taskItem);
 	
-	var _taskInputer = __webpack_require__(45);
+	var _taskInputer = __webpack_require__(46);
 	
 	var _taskInputer2 = _interopRequireDefault(_taskInputer);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// <template>
-	// 	<div class="mdl-cell mdl-cell--9-col" transition="animate_routerview">
-	// 	<h1>{{$route.params.category}}</h1>
+	// 	<div class="mdl-grid main" transition="animate_routerview">
 	//     <taskinputer :category="category"></taskinputer>		
 	//     <taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
 	// 	</div>
@@ -15913,16 +15087,23 @@
 	  }
 	};
 	// </script>
+	// <style lang="less">
+	// 	@import '../../public/stylesheets/variables';
+	// 	.main{
+	// 		margin-left: @sideMenuWidth;
+	// 		max-width: 800px;
+	// 	}	
+	// </style>
 	/* generated by vue-loader */
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(42)
-	__vue_script__ = __webpack_require__(43)
-	__vue_template__ = __webpack_require__(44)
+	__webpack_require__(43)
+	__vue_script__ = __webpack_require__(44)
+	__vue_template__ = __webpack_require__(45)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15939,13 +15120,13 @@
 	})()}
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16052,6 +15233,7 @@
 	// }
 	//
 	// .task {
+	//   width: 100%;
 	//   box-sizing: border-box;
 	//   font-size: 1.6rem;
 	//   color: #343434;
@@ -16148,19 +15330,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n  <div class=\"task\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n    <div class=\"task-checkbox\">\r\n      <label class=\"mdl-checkbox mdl-js-checkbox\" v-bind:class=\"{'is-checked': task.completed}\" for=\"{{task.id}}\">\r\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n        <!-- <span class=\"mdl-checkbox__label\">Married</span> -->\r\n      </label>\r\n    </div>\r\n    <div class=\"task-content\">\r\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{{titleAfterParse}}}</div>\r\n      <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label task-content-input\">\r\n        <input class=\"mdl-textfield__input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n      </div>\r\n    </div>\r\n    <span class=\"task-controller\">\r\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\r\n    </span>\r\n\r\n  </div>\r\n\r\n";
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(46)
-	__vue_script__ = __webpack_require__(47)
-	__vue_template__ = __webpack_require__(52)
+	__webpack_require__(47)
+	__vue_script__ = __webpack_require__(48)
+	__vue_template__ = __webpack_require__(53)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16177,13 +15359,13 @@
 	})()}
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16192,7 +15374,7 @@
 		value: true
 	});
 	
-	var _stringify = __webpack_require__(48);
+	var _stringify = __webpack_require__(49);
 	
 	var _stringify2 = _interopRequireDefault(_stringify);
 	
@@ -16200,7 +15382,7 @@
 	
 	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
 	
-	var _toolBabel = __webpack_require__(51);
+	var _toolBabel = __webpack_require__(52);
 	
 	var _toolBabel2 = _interopRequireDefault(_toolBabel);
 	
@@ -16402,30 +15584,30 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 48 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(49), __esModule: true };
-
-/***/ },
 /* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var core  = __webpack_require__(50)
+	module.exports = { "default": __webpack_require__(50), __esModule: true };
+
+/***/ },
+/* 50 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(51)
 	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
 	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
 	  return $JSON.stringify.apply($JSON, arguments);
 	};
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.3.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16479,31 +15661,31 @@
 	exports.default = Tool;
 
 /***/ },
-/* 52 */
+/* 53 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n    <div class=\"mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\r\n      <input class=\"mdl-textfield__input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask(category)\">\r\n      <label for=\"\" class=\"mdl-textfield__label\">Title</label>\r\n    </div>\r\n";
 
 /***/ },
-/* 53 */
-/***/ function(module, exports) {
-
-	module.exports = "\r\n\t<div class=\"mdl-cell mdl-cell--9-col\" transition=\"animate_routerview\">\r\n\t<h1>{{$route.params.category}}</h1>\r\n    <taskinputer :category=\"category\"></taskinputer>\t\t\r\n    <taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></taskitem>\r\n\t</div>\r\n";
-
-/***/ },
 /* 54 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"\" >\r\n    <div class=\"mdl-grid\">\r\n    \t<taskmenu></taskmenu>\r\n    \t<router-view></router-view>\r\n    \t<!-- <category></category> -->\r\n    </div>\r\n  </div>\r\n";
+	module.exports = "\r\n\t<div class=\"mdl-grid main\" transition=\"animate_routerview\">\r\n    <taskinputer :category=\"category\"></taskinputer>\t\t\r\n    <taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></taskitem>\r\n\t</div>\r\n";
 
 /***/ },
 /* 55 */
+/***/ function(module, exports) {
+
+	module.exports = "\r\n  <div class=\"\" >\r\n    \t<taskmenu></taskmenu>\r\n    \t<router-view></router-view>\r\n  </div>\r\n";
+
+/***/ },
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(56)
-	__vue_script__ = __webpack_require__(57)
-	__vue_template__ = __webpack_require__(58)
+	__webpack_require__(57)
+	__vue_script__ = __webpack_require__(58)
+	__vue_template__ = __webpack_require__(59)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16520,13 +15702,13 @@
 	})()}
 
 /***/ },
-/* 56 */
+/* 57 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 57 */
+/* 58 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16600,19 +15782,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 58 */
+/* 59 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n\t<div class=\"home\">\r\n\t\t\t<div class=\"clock\">\r\n\t\t\t\t<h1 class=\"time\" v-text=\"currentTime\">\r\n\t\t\t\t\t13:40\r\n\t\t\t\t</h1>\r\n\t\t</div>\r\n\t</div>\r\n";
 
 /***/ },
-/* 59 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(60)
-	__vue_script__ = __webpack_require__(61)
-	__vue_template__ = __webpack_require__(62)
+	__webpack_require__(61)
+	__vue_script__ = __webpack_require__(62)
+	__vue_template__ = __webpack_require__(63)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16629,13 +15811,13 @@
 	})()}
 
 /***/ },
-/* 60 */
+/* 61 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 61 */
+/* 62 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16650,12 +15832,12 @@
 	//   <header class="mdl-layout__header">
 	//       <div class="mdl-layout__header-row">
 	//         <!-- Title -->
-	//         <span class="mdl-layout-title">BlueRobin</span>
+	//         <span class="mdl-layout-title">{{$route.params.category}}</span>
 	//         <!-- Add spacer, to align navigation to the right -->
 	//         <div class="mdl-layout-spacer"></div>
 	//         <!-- Navigation -->
 	//         <nav class="mdl-navigation">
-	//         <a class="mdl-navigation__link" href="" v-link="{path: '/file', exact: true}">文件</a>
+	//         <!-- <a class="mdl-navigation__link" href="" v-link="{path: '/file', exact: true}">文件</a> -->
 	//         <a class="mdl-navigation__link" href="" v-link="{path: '/task', exact: true}">Task</a>
 	//         <a class="mdl-navigation__link" href="" v-link="{path: '/signup', exact: true}">注册</a>
 	//         <a v-if="account">{{account.email}}</a>
@@ -16717,25 +15899,25 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 62 */
+/* 63 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <!-- Title -->\r\n        <span class=\"mdl-layout-title\">BlueRobin</span>\r\n        <!-- Add spacer, to align navigation to the right -->\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <!-- Navigation -->\r\n        <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n        <a v-if=\"account\">{{account.email}}</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer\">\r\n      <span class=\"mdl-layout-title\">Title</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{name: 'list', params:{category: 'today'}}\">Today</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{name: 'list', params:{category: 'work'}}\">Wrok</a>\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/today', exact: true}\">Today</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/work', exact: true}\">Work</a> -->\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task/archive', exact: true}\">Archive</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task/overdue', exact: true}\">OverDue</a> -->\r\n      </nav>\r\n    </div>\r\n  <!-- Dropdown Structure -->\r\n  <!-- <ul id=\"dropdown1\" class=\"dropdown-content\">\r\n    <li><a href=\"#!\">asdf</a></li>\r\n    <li class=\"divider\"></li>\r\n    <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\r\n  </ul>\r\n  <nav>\r\n    <div class=\"container\">\r\n        <div class=\"nav-wrapper\">\r\n          <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\r\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n            <li v-if=\"account\">\r\n              <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\r\n                <i class=\"material-icons right\">arrow_drop_down</i>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      </nav> -->\r\n  </header>\r\n";
+	module.exports = "\r\n  <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <!-- Title -->\r\n        <span class=\"mdl-layout-title\">{{$route.params.category}}</span>\r\n        <!-- Add spacer, to align navigation to the right -->\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <!-- Navigation -->\r\n        <nav class=\"mdl-navigation\">\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a> -->\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n        <a v-if=\"account\">{{account.email}}</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer\">\r\n      <span class=\"mdl-layout-title\">Title</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{name: 'list', params:{category: 'today'}}\">Today</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{name: 'list', params:{category: 'work'}}\">Wrok</a>\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/today', exact: true}\">Today</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/work', exact: true}\">Work</a> -->\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task/archive', exact: true}\">Archive</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task/overdue', exact: true}\">OverDue</a> -->\r\n      </nav>\r\n    </div>\r\n  <!-- Dropdown Structure -->\r\n  <!-- <ul id=\"dropdown1\" class=\"dropdown-content\">\r\n    <li><a href=\"#!\">asdf</a></li>\r\n    <li class=\"divider\"></li>\r\n    <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\r\n  </ul>\r\n  <nav>\r\n    <div class=\"container\">\r\n        <div class=\"nav-wrapper\">\r\n          <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\r\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n            <li v-if=\"account\">\r\n              <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\r\n                <i class=\"material-icons right\">arrow_drop_down</i>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      </nav> -->\r\n  </header>\r\n";
 
 /***/ },
-/* 63 */
+/* 64 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n  <div class=\"mdl-layout mdl-js-layout\">\r\n      <appHeader :account=\"account\"></appHeader>\r\n      <div class=\"mdl-layout__content\">\r\n        <div class=\"page-content\">\r\n          <router-view ></router-view>\r\n        </div>\r\n      </div>\r\n  </div>\r\n";
 
 /***/ },
-/* 64 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(65)
-	__vue_script__ = __webpack_require__(66)
-	__vue_template__ = __webpack_require__(67)
+	__webpack_require__(66)
+	__vue_script__ = __webpack_require__(67)
+	__vue_template__ = __webpack_require__(68)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16752,13 +15934,13 @@
 	})()}
 
 /***/ },
-/* 65 */
+/* 66 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 66 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16771,7 +15953,7 @@
 	
 	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
 	
-	var _toolBabel = __webpack_require__(51);
+	var _toolBabel = __webpack_require__(52);
 	
 	var _toolBabel2 = _interopRequireDefault(_toolBabel);
 	
@@ -16912,19 +16094,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 67 */
+/* 68 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n\t<div class=\"container\">\r\n      <ul class=\"collection with-header\" id=\"filelist\">\r\n        <li class=\"collection-header\" id=\"uploadcontainer\">\r\n        \t<h4>File List</h4>\r\n\t\t\t\t<span class=\"material-icons\" id=\"uploadfile\">cloud_upload</span>\r\n        \t</li>\r\n        \t<li class=\"collection-item\" v-for=\"file in filelist\">id:{{file._id}} --- isFile:{{file.isfile}} ---- {{file.name}}</li>\r\n      </ul>\r\n      <ul id=\"filelist\"></ul>\r\n\t</div>\r\n\r\n";
 
 /***/ },
-/* 68 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(69)
-	__vue_script__ = __webpack_require__(70)
-	__vue_template__ = __webpack_require__(71)
+	__webpack_require__(70)
+	__vue_script__ = __webpack_require__(71)
+	__vue_template__ = __webpack_require__(72)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16941,13 +16123,13 @@
 	})()}
 
 /***/ },
-/* 69 */
+/* 70 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 70 */
+/* 71 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17021,18 +16203,18 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 71 */
+/* 72 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <h3>登录</h3>\r\n      </div>\r\n    </div>\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n          <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"user.username\">\r\n            <label class=\"mdl-textfield__label\" for=\"email\">Email</label>\r\n            </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"user.password\">\r\n          <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\r\n        </div>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">GO!</button>\r\n        <a v-link=\"{path: '/signup', exact: true}\">还没有账号？立马注册</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
-/* 72 */
+/* 73 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(73)
-	__vue_template__ = __webpack_require__(74)
+	__vue_script__ = __webpack_require__(74)
+	__vue_template__ = __webpack_require__(75)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -17049,7 +16231,7 @@
 	})()}
 
 /***/ },
-/* 73 */
+/* 74 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17117,13 +16299,13 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 74 */
+/* 75 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <h3>注册</h3>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\r\n            <label class=\"mdl-textfield__label\" for=\"email\">邮箱</label>\r\n          </div>\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\r\n          <label class=\"mdl-textfield__label\" for=\"password\">密码</label>\r\n        </div>\r\n        <div class=\"input-field col s12\">\r\n            <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\" v-on:click=\"signUp()\">注册</button>\r\n            <a v-link=\"'login'\">已有账号？直接登录</a>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
-/* 75 */
+/* 76 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

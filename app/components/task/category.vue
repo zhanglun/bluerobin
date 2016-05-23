@@ -1,6 +1,5 @@
 <template>
-	<div class="mdl-cell mdl-cell--9-col" transition="animate_routerview">
-	<h1>{{$route.params.category}}</h1>
+	<div class="mdl-grid main" transition="animate_routerview">
     <taskinputer :category="category"></taskinputer>		
     <taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
 	</div>
@@ -81,3 +80,10 @@
 	  }
 	}
 </script>
+<style lang="less">
+	@import '../../public/stylesheets/variables';
+	.main{
+		margin-left: @sideMenuWidth;
+		max-width: 800px;
+	}	
+</style>
