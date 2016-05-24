@@ -14902,10 +14902,17 @@
 	// <template>
 	//     <div class="sidebar">
 	//       <ul class="side-menu">
+	//
 	//         <li>
 	//           <a href="" class="side-menu__item" v-link="{name: 'list', params:{category: 'inbox'}}">
 	//             <span class="material-icons">inbox</span>
 	//             <span class="side-menu__item-content">Inbox</span>
+	//           </a>
+	//         </li>
+	//                 <li>
+	//           <a href="" class="side-menu__item" v-link="{name: 'list', params:{category: 'today'}}">
+	//             <span class="material-icons">today</span>
+	//             <span class="side-menu__item-content">Today</span>
 	//           </a>
 	//         </li>
 	//         <li>
@@ -14950,7 +14957,7 @@
 	//     }
 	//   }
 	//
-	// }
+	//  }
 	//
 	// </style>
 	//
@@ -14961,7 +14968,7 @@
 /* 38 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n    <div class=\"sidebar\">\r\n      <ul class=\"side-menu\">\r\n        <li>\r\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'inbox'}}\">\r\n            <span class=\"material-icons\">inbox</span>\r\n            <span class=\"side-menu__item-content\">Inbox</span>\r\n          </a>\r\n        </li>\r\n        <li>\r\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'work'}}\">\r\n            <span class=\"material-icons\">work</span>\r\n            <span class=\"side-menu__item-content\">Work</span>\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n";
+	module.exports = "\r\n    <div class=\"sidebar\">\r\n      <ul class=\"side-menu\">\r\n\r\n        <li>\r\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'inbox'}}\">\r\n            <span class=\"material-icons\">inbox</span>\r\n            <span class=\"side-menu__item-content\">Inbox</span>\r\n          </a>\r\n        </li>\r\n                <li>\r\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'today'}}\">\r\n            <span class=\"material-icons\">today</span>\r\n            <span class=\"side-menu__item-content\">Today</span>\r\n          </a>\r\n        </li>\r\n        <li>\r\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'work'}}\">\r\n            <span class=\"material-icons\">work</span>\r\n            <span class=\"side-menu__item-content\">Work</span>\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n";
 
 /***/ },
 /* 39 */
@@ -15141,7 +15148,7 @@
 	//     </div>
 	//     <div class="task-content">
 	//       <div class="task-content-box" @dblclick="edit(task)">{{{titleAfterParse}}}</div>
-	//       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label task-content-input">
+	//       <div class="mdl-textfield mdl-js-textfield task-content-input">
 	//         <input class="mdl-textfield__input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
 	//       </div>
 	//     </div>
@@ -15168,7 +15175,7 @@
 	  ready: function ready() {
 	    this.titleAfterParse = twemoji.parse(this.task.title);
 	    setTimeout(function () {
-	      componentHandler.upgradeDom('MaterialCheckbox');
+	      componentHandler.upgradeDom();
 	    }, 0);
 	  },
 	
@@ -15239,16 +15246,19 @@
 	//   color: #343434;
 	//   background: @white;
 	//   box-shadow: 0 2px 4px rgba(0,0,0,.24);
-	//   border-bottom: 1px solid #DCDCDC;
+	//   // border-bottom: 1px solid #DCDCDC;
 	//   padding: 0 0.7em;
 	//   display: flex;
 	//   flex-direction: row;
 	//   align-items: center;
 	//   position: relative;
+	//   height: 54px;
+	//   margin: 2px 0 ;
 	//   &.finished {
 	//     .task-content {
 	//       cursor: default;
 	//       text-decoration: line-through;
+	//       color: lighten(#343434, 40%)
 	//     }
 	//   }
 	//   &.editing {
@@ -15260,12 +15270,6 @@
 	//         display: block;
 	//       }
 	//     }
-	//   }
-	//   &.expaned{
-	//     transform: rotateX(100deg);
-	//   }
-	//   &.visiable{
-	//     visibility: hidden;
 	//   }
 	//   &:hover {
 	//     .task-controller {
@@ -15280,13 +15284,12 @@
 	//     overflow: hidden;
 	//     padding: 0.8rem 0;
 	//     margin-right: 6rem;
-	//     & &-input {
-	//       font-size: 100%;
-	//       @extend .modify;
+	//     &-input {
 	//       display: none;
-	//       margin: 0 ;
+	//       width: 100%;
+	//       padding: 0 5px;
 	//     }
-	//     & &-box {
+	//     &-box {
 	//       line-height: 31px;
 	//       padding: 0 5px;
 	//       margin-top: -3px;
@@ -15333,7 +15336,7 @@
 /* 45 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"task\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n    <div class=\"task-checkbox\">\r\n      <label class=\"mdl-checkbox mdl-js-checkbox\" v-bind:class=\"{'is-checked': task.completed}\" for=\"{{task.id}}\">\r\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n        <!-- <span class=\"mdl-checkbox__label\">Married</span> -->\r\n      </label>\r\n    </div>\r\n    <div class=\"task-content\">\r\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{{titleAfterParse}}}</div>\r\n      <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label task-content-input\">\r\n        <input class=\"mdl-textfield__input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n      </div>\r\n    </div>\r\n    <span class=\"task-controller\">\r\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\r\n    </span>\r\n\r\n  </div>\r\n\r\n";
+	module.exports = "\r\n  <div class=\"task\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n    <div class=\"task-checkbox\">\r\n      <label class=\"mdl-checkbox mdl-js-checkbox\" v-bind:class=\"{'is-checked': task.completed}\" for=\"{{task.id}}\">\r\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n        <!-- <span class=\"mdl-checkbox__label\">Married</span> -->\r\n      </label>\r\n    </div>\r\n    <div class=\"task-content\">\r\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{{titleAfterParse}}}</div>\r\n      <div class=\"mdl-textfield mdl-js-textfield task-content-input\">\r\n        <input class=\"mdl-textfield__input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n      </div>\r\n    </div>\r\n    <span class=\"task-controller\">\r\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\r\n    </span>\r\n\r\n  </div>\r\n\r\n";
 
 /***/ },
 /* 46 */

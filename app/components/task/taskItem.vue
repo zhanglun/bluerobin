@@ -8,7 +8,7 @@
     </div>
     <div class="task-content">
       <div class="task-content-box" @dblclick="edit(task)">{{{titleAfterParse}}}</div>
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label task-content-input">
+      <div class="mdl-textfield mdl-js-textfield task-content-input">
         <input class="mdl-textfield__input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
       </div>
     </div>
@@ -36,7 +36,7 @@ module.exports = {
   ready: function(){
     this.titleAfterParse = twemoji.parse(this.task.title);
     setTimeout(function() {
-      componentHandler.upgradeDom('MaterialCheckbox');
+      componentHandler.upgradeDom();
     }, 0);
   },
 
@@ -110,16 +110,19 @@ module.exports = {
   color: #343434;
   background: @white;
   box-shadow: 0 2px 4px rgba(0,0,0,.24);
-  border-bottom: 1px solid #DCDCDC;
+  // border-bottom: 1px solid #DCDCDC;
   padding: 0 0.7em;
   display: flex;
   flex-direction: row;
   align-items: center;
   position: relative;
+  height: 54px;
+  margin: 2px 0 ;
   &.finished {
     .task-content {
       cursor: default;
       text-decoration: line-through;
+      color: lighten(#343434, 40%)
     }
   }
   &.editing {
@@ -131,12 +134,6 @@ module.exports = {
         display: block;
       }
     }
-  }
-  &.expaned{
-    transform: rotateX(100deg);
-  }
-  &.visiable{
-    visibility: hidden;
   }
   &:hover {
     .task-controller {
@@ -151,13 +148,12 @@ module.exports = {
     overflow: hidden;
     padding: 0.8rem 0;
     margin-right: 6rem;
-    & &-input {
-      font-size: 100%;
-      @extend .modify;
+    &-input {
       display: none;
-      margin: 0 ;
+      width: 100%;
+      padding: 0 5px;
     }
-    & &-box {
+    &-box {
       line-height: 31px;
       padding: 0 5px;
       margin-top: -3px;

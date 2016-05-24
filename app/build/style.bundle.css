@@ -74,7 +74,6 @@
   color: #343434;
   background: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24);
-  border-bottom: 1px solid #DCDCDC;
   padding: 0 0.7em;
   display: -webkit-box;
   display: -webkit-flex;
@@ -90,23 +89,19 @@
       -ms-flex-align: center;
           align-items: center;
   position: relative;
+  height: 54px;
+  margin: 2px 0 ;
 }
 .task.finished .task-content {
   cursor: default;
   text-decoration: line-through;
+  color: #9a9a9a;
 }
 .task.editing .task-content-box {
   display: none;
 }
 .task.editing .task-content-input {
   display: block;
-}
-.task.expaned {
-  -webkit-transform: rotateX(100deg);
-          transform: rotateX(100deg);
-}
-.task.visiable {
-  visibility: hidden;
 }
 .task:hover .task-controller {
   display: block;
@@ -120,13 +115,12 @@
   padding: 0.8rem 0;
   margin-right: 6rem;
 }
-.task-content .task-content-input {
-  font-size: 100%;
-  @extend .modify;
+.task-content-input {
   display: none;
-  margin: 0 ;
+  width: 100%;
+  padding: 0 5px;
 }
-.task-content .task-content-box {
+.task-content-box {
   line-height: 31px;
   padding: 0 5px;
   margin-top: -3px;
