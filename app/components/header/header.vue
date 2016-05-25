@@ -13,12 +13,13 @@
         <!-- <a class="mdl-navigation__link" href="" v-link="{path: '/file', exact: true}">文件</a> -->
         <a class="mdl-navigation__link" href="" v-link="{path: '/task', exact: true}">Task</a>
         <a class="mdl-navigation__link" href="" v-link="{path: '/signup', exact: true}">注册</a>
-        <a v-if="account">{{account.email}}</a>
+        <span v-if="account">
+          <img v-bind:src="account.avatar" alt=""></span>
         </nav>
       </div>
     </header>
     <div class="mdl-layout__drawer">
-      <span class="mdl-layout-title">Title</span>
+      <span class="mdl-layout-title">BlueRobin</span>
       <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'today'}}">Today</a>
         <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'work'}}">Wrok</a>

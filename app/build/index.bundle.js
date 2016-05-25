@@ -14902,7 +14902,6 @@
 	// <template>
 	//     <div class="sidebar">
 	//       <ul class="side-menu">
-	//
 	//         <li>
 	//           <a href="" class="side-menu__item" v-link="{name: 'list', params:{category: 'inbox'}}">
 	//             <span class="material-icons">inbox</span>
@@ -14922,6 +14921,9 @@
 	//           </a>
 	//         </li>
 	//       </ul>
+	//       <div class="side-actions">
+	//         <a href="">新建分类</a>
+	//       </div>
 	//     </div>
 	// </template>
 	// <script>
@@ -14968,7 +14970,7 @@
 /* 38 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n    <div class=\"sidebar\">\r\n      <ul class=\"side-menu\">\r\n\r\n        <li>\r\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'inbox'}}\">\r\n            <span class=\"material-icons\">inbox</span>\r\n            <span class=\"side-menu__item-content\">Inbox</span>\r\n          </a>\r\n        </li>\r\n                <li>\r\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'today'}}\">\r\n            <span class=\"material-icons\">today</span>\r\n            <span class=\"side-menu__item-content\">Today</span>\r\n          </a>\r\n        </li>\r\n        <li>\r\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'work'}}\">\r\n            <span class=\"material-icons\">work</span>\r\n            <span class=\"side-menu__item-content\">Work</span>\r\n          </a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n";
+	module.exports = "\r\n    <div class=\"sidebar\">\r\n      <ul class=\"side-menu\">\r\n        <li>\r\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'inbox'}}\">\r\n            <span class=\"material-icons\">inbox</span>\r\n            <span class=\"side-menu__item-content\">Inbox</span>\r\n          </a>\r\n        </li>\r\n                <li>\r\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'today'}}\">\r\n            <span class=\"material-icons\">today</span>\r\n            <span class=\"side-menu__item-content\">Today</span>\r\n          </a>\r\n        </li>\r\n        <li>\r\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'work'}}\">\r\n            <span class=\"material-icons\">work</span>\r\n            <span class=\"side-menu__item-content\">Work</span>\r\n          </a>\r\n        </li>\r\n      </ul>\r\n      <div class=\"side-actions\">\r\n        <a href=\"\">新建分类</a>\r\n      </div>\r\n    </div>\r\n";
 
 /***/ },
 /* 39 */
@@ -15843,12 +15845,13 @@
 	//         <!-- <a class="mdl-navigation__link" href="" v-link="{path: '/file', exact: true}">文件</a> -->
 	//         <a class="mdl-navigation__link" href="" v-link="{path: '/task', exact: true}">Task</a>
 	//         <a class="mdl-navigation__link" href="" v-link="{path: '/signup', exact: true}">注册</a>
-	//         <a v-if="account">{{account.email}}</a>
+	//         <span v-if="account">
+	//           <img v-bind:src="account.avatar" alt=""></span>
 	//         </nav>
 	//       </div>
 	//     </header>
 	//     <div class="mdl-layout__drawer">
-	//       <span class="mdl-layout-title">Title</span>
+	//       <span class="mdl-layout-title">BlueRobin</span>
 	//       <nav class="mdl-navigation">
 	//         <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'today'}}">Today</a>
 	//         <a class="mdl-navigation__link" href="" v-link="{name: 'list', params:{category: 'work'}}">Wrok</a>
@@ -15905,7 +15908,7 @@
 /* 63 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <!-- Title -->\r\n        <span class=\"mdl-layout-title\">{{$route.params.category}}</span>\r\n        <!-- Add spacer, to align navigation to the right -->\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <!-- Navigation -->\r\n        <nav class=\"mdl-navigation\">\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a> -->\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n        <a v-if=\"account\">{{account.email}}</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer\">\r\n      <span class=\"mdl-layout-title\">Title</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{name: 'list', params:{category: 'today'}}\">Today</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{name: 'list', params:{category: 'work'}}\">Wrok</a>\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/today', exact: true}\">Today</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/work', exact: true}\">Work</a> -->\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task/archive', exact: true}\">Archive</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task/overdue', exact: true}\">OverDue</a> -->\r\n      </nav>\r\n    </div>\r\n  <!-- Dropdown Structure -->\r\n  <!-- <ul id=\"dropdown1\" class=\"dropdown-content\">\r\n    <li><a href=\"#!\">asdf</a></li>\r\n    <li class=\"divider\"></li>\r\n    <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\r\n  </ul>\r\n  <nav>\r\n    <div class=\"container\">\r\n        <div class=\"nav-wrapper\">\r\n          <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\r\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n            <li v-if=\"account\">\r\n              <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\r\n                <i class=\"material-icons right\">arrow_drop_down</i>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      </nav> -->\r\n  </header>\r\n";
+	module.exports = "\r\n  <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <!-- Title -->\r\n        <span class=\"mdl-layout-title\">{{$route.params.category}}</span>\r\n        <!-- Add spacer, to align navigation to the right -->\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <!-- Navigation -->\r\n        <nav class=\"mdl-navigation\">\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/file', exact: true}\">文件</a> -->\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n        <span v-if=\"account\">\r\n          <img v-bind:src=\"account.avatar\" alt=\"\"></span>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer\">\r\n      <span class=\"mdl-layout-title\">BlueRobin</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{name: 'list', params:{category: 'today'}}\">Today</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{name: 'list', params:{category: 'work'}}\">Wrok</a>\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/today', exact: true}\">Today</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/work', exact: true}\">Work</a> -->\r\n        <!-- <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task/archive', exact: true}\">Archive</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task/overdue', exact: true}\">OverDue</a> -->\r\n      </nav>\r\n    </div>\r\n  <!-- Dropdown Structure -->\r\n  <!-- <ul id=\"dropdown1\" class=\"dropdown-content\">\r\n    <li><a href=\"#!\">asdf</a></li>\r\n    <li class=\"divider\"></li>\r\n    <li><a href=\"#!\" v-on:click=\"logout\"> 退出登录</a></li>\r\n  </ul>\r\n  <nav>\r\n    <div class=\"container\">\r\n        <div class=\"nav-wrapper\">\r\n          <a href=\"#\" class=\"brand-logo\">BlueRobin</a>\r\n          <ul id=\"nav-mobile\" class=\"right hide-on-med-and-down\">\r\n            <li v-if=\"account\">\r\n              <a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">{{account.email}}\r\n                <i class=\"material-icons right\">arrow_drop_down</i>\r\n              </a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n      </nav> -->\r\n  </header>\r\n";
 
 /***/ },
 /* 64 */
