@@ -11,6 +11,9 @@
       <div class="mdl-textfield mdl-js-textfield task-content-input">
         <input class="mdl-textfield__input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
       </div>
+      <div class="" v-if="task.completed">
+        {{task.update_time}}
+      </div>
     </div>
     <span class="task-controller">
       <i class="material-icons" @click="deleteTask(task)">clear</i>

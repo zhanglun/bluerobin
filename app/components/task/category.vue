@@ -1,11 +1,19 @@
 <template>
 	<div class="mdl-grid main" transition="animate_routerview">
-    <taskinputer :category="category"></taskinputer>		
-    <taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
+    <taskinputer :category="category"></taskinputer>
+    <!-- <div class="tasklist"> -->
+			<taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
+    <!-- </div> -->
+		<div class="" @click="toggleShowCompletedTask">
+			{显示已完成的任务}
+		</div>
+		<div class="tasklist--finished" v-show="completedShow">
+			<taskitem v-for="task in completedTasklist" :task="task" :index="$index"></taskitem>
+		</div>
 	</div>
 </template>
 <script>
-	
+
 	import TaskItemView from './taskItem.vue';
 	import TaskInputer from './taskInputer.vue';
 
@@ -13,11 +21,11 @@
 	 route: {
       data(transition){
 
-        console.log('data!!!!!------>', this.$route);
-          var param = null;
+          let param = null;
           this.$data.category = this.$route.params.category;
           param = {
-            category: this.$data.category
+            category: this.$data.category,
+						completed: false,
           };
 
           return this.$http.get('tasks', param)
@@ -26,16 +34,12 @@
           });
        },
       activate(transition) {
-        // console.log('hook-example activated!')
         transition.next()
       },
       deactivate(transition) {
-        // console.log('hook-example deactivated!')
         transition.next()
       },
       canDeactivate(transitio){
-        console.log('can deactivated!');
-        // transition.next();
         return true;
       },
       canReuse(transition){
@@ -46,14 +50,39 @@
 			return {
 		  	tasklist: [],
         category: '',
+				completedTasklist: [],
+				completedShow: false,
 			}
 		},
 		components: {
 			taskinputer: TaskInputer,
 			taskitem: TaskItemView,
 		},
+		methods: {
+			'loadCompletedTask'(){
+          let param = {
+						category: this.$data.category,
+						completed: true,
+					};
+					let vm = this;
+					this.$http.get('tasks', param)
+					.then(function(res){
+						vm.$data.completedTasklist = res.data;
+					}, function(err){
+
+					});
+			},
+			'toggleShowCompletedTask'(){
+
+				if(this.$data.completedShow){
+				}else{
+					this.loadCompletedTask();
+				}
+				this.$data.completedShow = !this.$data.completedShow;
+			}
+		},
 		events: {
-			'create task': function(task){
+			'create task'(task){
 				let vm = this;
         vm.$http.post('tasks', task)
           .then(function(res){
@@ -63,18 +92,21 @@
               }, 0);
           });
 			},
-			'delete task': function(task){
+			'delete task'(task){
 				let vm = this;
 				vm.$http.delete('tasks/' +  task.id)
      		.then(function(){
 	     		vm.tasklist.$remove(task);
      		});
 			},
-			'edit task': function(task){
+			'edit task'(task){
 				let vm = this;
         vm.$http.put('tasks/' + task.id, task)
 				  .then(function(res){
 					 console.log('edit task success!');
+					 if(res.data.completed){
+						 vm.tasklist.$remove(res,data.task.id);
+					 }
 				  });
 			}
 	  }
@@ -85,5 +117,5 @@
 	.main{
 		margin-left: @sideMenuWidth;
 		max-width: 800px;
-	}	
+	}
 </style>

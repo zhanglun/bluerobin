@@ -15008,7 +15008,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 	
 	var _taskItem = __webpack_require__(42);
@@ -15023,77 +15023,105 @@
 	
 	// <template>
 	// 	<div class="mdl-grid main" transition="animate_routerview">
-	//     <taskinputer :category="category"></taskinputer>		
-	//     <taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
+	//     <taskinputer :category="category"></taskinputer>
+	//     <!-- <div class="tasklist"> -->
+	// 			<taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
+	//     <!-- </div> -->
+	// 		<div class="" @click="toggleShowCompletedTask">
+	// 			{显示已完成的任务}
+	// 		</div>
+	// 		<div class="tasklist--finished" v-show="completedShow">
+	// 			<taskitem v-for="task in completedTasklist" :task="task" :index="$index"></taskitem>
+	// 		</div>
 	// 	</div>
 	// </template>
 	// <script>
 	
 	exports.default = {
-	  route: {
-	    data: function data(transition) {
+		route: {
+			data: function data(transition) {
 	
-	      console.log('data!!!!!------>', this.$route);
-	      var param = null;
-	      this.$data.category = this.$route.params.category;
-	      param = {
-	        category: this.$data.category
-	      };
+				var param = null;
+				this.$data.category = this.$route.params.category;
+				param = {
+					category: this.$data.category,
+					completed: false
+				};
 	
-	      return this.$http.get('tasks', param).then(function (res) {
-	        return { tasklist: res.data };
-	      });
-	    },
-	    activate: function activate(transition) {
-	      // console.log('hook-example activated!')
-	      transition.next();
-	    },
-	    deactivate: function deactivate(transition) {
-	      // console.log('hook-example deactivated!')
-	      transition.next();
-	    },
-	    canDeactivate: function canDeactivate(transitio) {
-	      console.log('can deactivated!');
-	      // transition.next();
-	      return true;
-	    },
-	    canReuse: function canReuse(transition) {}
-	  },
+				return this.$http.get('tasks', param).then(function (res) {
+					return { tasklist: res.data };
+				});
+			},
+			activate: function activate(transition) {
+				transition.next();
+			},
+			deactivate: function deactivate(transition) {
+				transition.next();
+			},
+			canDeactivate: function canDeactivate(transitio) {
+				return true;
+			},
+			canReuse: function canReuse(transition) {}
+		},
 	
-	  data: function data() {
-	    return {
-	      tasklist: [],
-	      category: ''
-	    };
-	  },
+		data: function data() {
+			return {
+				tasklist: [],
+				category: '',
+				completedTasklist: [],
+				completedShow: false
+			};
+		},
 	
-	  components: {
-	    taskinputer: _taskInputer2.default,
-	    taskitem: _taskItem2.default
-	  },
-	  events: {
-	    'create task': function createTask(task) {
-	      var vm = this;
-	      vm.$http.post('tasks', task).then(function (res) {
-	        vm.tasklist.unshift(res.data);
-	        setTimeout(function () {
-	          componentHandler.upgradeDom('MaterialCheckbox');
-	        }, 0);
-	      });
-	    },
-	    'delete task': function deleteTask(task) {
-	      var vm = this;
-	      vm.$http.delete('tasks/' + task.id).then(function () {
-	        vm.tasklist.$remove(task);
-	      });
-	    },
-	    'edit task': function editTask(task) {
-	      var vm = this;
-	      vm.$http.put('tasks/' + task.id, task).then(function (res) {
-	        console.log('edit task success!');
-	      });
-	    }
-	  }
+		components: {
+			taskinputer: _taskInputer2.default,
+			taskitem: _taskItem2.default
+		},
+		methods: {
+			'loadCompletedTask': function loadCompletedTask() {
+				var param = {
+					category: this.$data.category,
+					completed: true
+				};
+				var vm = this;
+				this.$http.get('tasks', param).then(function (res) {
+					vm.$data.completedTasklist = res.data;
+				}, function (err) {});
+			},
+			'toggleShowCompletedTask': function toggleShowCompletedTask() {
+	
+				if (this.$data.completedShow) {} else {
+					this.loadCompletedTask();
+				}
+				this.$data.completedShow = !this.$data.completedShow;
+			}
+		},
+		events: {
+			'create task': function createTask(task) {
+				var vm = this;
+				vm.$http.post('tasks', task).then(function (res) {
+					vm.tasklist.unshift(res.data);
+					setTimeout(function () {
+						componentHandler.upgradeDom('MaterialCheckbox');
+					}, 0);
+				});
+			},
+			'delete task': function deleteTask(task) {
+				var vm = this;
+				vm.$http.delete('tasks/' + task.id).then(function () {
+					vm.tasklist.$remove(task);
+				});
+			},
+			'edit task': function editTask(task) {
+				var vm = this;
+				vm.$http.put('tasks/' + task.id, task).then(function (res) {
+					console.log('edit task success!');
+					if (res.data.completed) {
+						vm.tasklist.$remove(res, data.task.id);
+					}
+				});
+			}
+		}
 	};
 	// </script>
 	// <style lang="less">
@@ -15101,8 +15129,9 @@
 	// 	.main{
 	// 		margin-left: @sideMenuWidth;
 	// 		max-width: 800px;
-	// 	}	
+	// 	}
 	// </style>
+	//
 	/* generated by vue-loader */
 
 /***/ },
@@ -15152,6 +15181,9 @@
 	//       <div class="task-content-box" @dblclick="edit(task)">{{{titleAfterParse}}}</div>
 	//       <div class="mdl-textfield mdl-js-textfield task-content-input">
 	//         <input class="mdl-textfield__input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
+	//       </div>
+	//       <div class="" v-if="task.completed">
+	//         {{task.update_time}}
 	//       </div>
 	//     </div>
 	//     <span class="task-controller">
@@ -15338,7 +15370,7 @@
 /* 45 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"task\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n    <div class=\"task-checkbox\">\r\n      <label class=\"mdl-checkbox mdl-js-checkbox\" v-bind:class=\"{'is-checked': task.completed}\" for=\"{{task.id}}\">\r\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n        <!-- <span class=\"mdl-checkbox__label\">Married</span> -->\r\n      </label>\r\n    </div>\r\n    <div class=\"task-content\">\r\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{{titleAfterParse}}}</div>\r\n      <div class=\"mdl-textfield mdl-js-textfield task-content-input\">\r\n        <input class=\"mdl-textfield__input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n      </div>\r\n    </div>\r\n    <span class=\"task-controller\">\r\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\r\n    </span>\r\n\r\n  </div>\r\n\r\n";
+	module.exports = "\r\n  <div class=\"task\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n    <div class=\"task-checkbox\">\r\n      <label class=\"mdl-checkbox mdl-js-checkbox\" v-bind:class=\"{'is-checked': task.completed}\" for=\"{{task.id}}\">\r\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n        <!-- <span class=\"mdl-checkbox__label\">Married</span> -->\r\n      </label>\r\n    </div>\r\n    <div class=\"task-content\">\r\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{{titleAfterParse}}}</div>\r\n      <div class=\"mdl-textfield mdl-js-textfield task-content-input\">\r\n        <input class=\"mdl-textfield__input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n      </div>\r\n      <div class=\"\" v-if=\"task.completed\">\r\n        {{task.update_time}}\r\n      </div>\r\n    </div>\r\n    <span class=\"task-controller\">\r\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\r\n    </span>\r\n\r\n  </div>\r\n\r\n";
 
 /***/ },
 /* 46 */
@@ -15675,7 +15707,7 @@
 /* 54 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n\t<div class=\"mdl-grid main\" transition=\"animate_routerview\">\r\n    <taskinputer :category=\"category\"></taskinputer>\t\t\r\n    <taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></taskitem>\r\n\t</div>\r\n";
+	module.exports = "\r\n\t<div class=\"mdl-grid main\" transition=\"animate_routerview\">\r\n    <taskinputer :category=\"category\"></taskinputer>\r\n    <!-- <div class=\"tasklist\"> -->\r\n\t\t\t<taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></taskitem>\r\n    <!-- </div> -->\r\n\t\t<div class=\"\" @click=\"toggleShowCompletedTask\">\r\n\t\t\t{显示已完成的任务}\r\n\t\t</div>\r\n\t\t<div class=\"tasklist--finished\" v-show=\"completedShow\">\r\n\t\t\t<taskitem v-for=\"task in completedTasklist\" :task=\"task\" :index=\"$index\"></taskitem>\r\n\t\t</div>\r\n\t</div>\r\n";
 
 /***/ },
 /* 55 */
