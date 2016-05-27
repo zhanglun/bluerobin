@@ -104,8 +104,12 @@
         vm.$http.put('tasks/' + task.id, task)
 				  .then(function(res){
 					 console.log('edit task success!');
-					 if(res.data.completed){
-						 vm.tasklist.$remove(res,data.task.id);
+					 if(task.completed){
+						 vm.tasklist.$remove(task);
+						 vm.completedTasklist.unshift(task);
+					 }else{
+						 vm.completedTasklist.$remove(task);
+						 vm.tasklist.unshift(task);
 					 }
 				  });
 			}

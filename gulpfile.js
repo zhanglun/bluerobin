@@ -1,9 +1,9 @@
 var gulp = require('gulp');
 var sourcemaps = require('gulp-sourcemaps');
 var babel = require('gulp-babel');
-var gutil = require("gulp-util");
-var rename = require("gulp-rename");
-var webpack = require("webpack");
+var gutil = require('gulp-util');
+var rename = require('gulp-rename');
+var webpack = require('webpack');
 var webpackConfig = require('./webpack.config.js');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -15,7 +15,7 @@ gulp.task('babel', function(){
 	}))
 	.pipe(sourcemaps.write('.'))
   .pipe(rename(function(path){
-    path.basename = path.basename.replace(/.babel/ig,'')
+    path.basename = path.basename.replace(/.babel/ig,'');
   }))
 	.pipe(gulp.dest('./app'));
 });
@@ -30,8 +30,10 @@ var devCompiler = webpack(webpackConfigDev);
 
 gulp.task('webpack:build-dev', function() {
   devCompiler.run(function(err, status) {
-    if (err) throw new gutil.PluginError("webpack:build-dev", err);
-    gutil.log("[webpack:build-dev]", status.toString({
+    if (err){
+			throw new gutil.PluginError('webpack:build-dev', err);
+		}
+    gutil.log('[webpack:build-dev]', status.toString({
       colors: true
     }));
   });
@@ -43,9 +45,9 @@ gulp.task('webpack:build', function(){
   var myConfig = Object.create(webpackConfig);
   myConfig.plugins = myConfig.plugins.concat(
     new webpack.DefinePlugin({
-      "process.env": {
+      'process.env': {
         // This has effect on the react lib size
-        "NODE_ENV": JSON.stringify("production")
+        'NODE_ENV': JSON.stringify('production')
       }
     }),
     new webpack.optimize.DedupePlugin(),
@@ -54,9 +56,11 @@ gulp.task('webpack:build', function(){
   );
 
   // run webpack
-  webpack(myConfig, function(err, stats) {
-    if(err) throw new gutil.PluginError("webpack:build", err);
-    gutil.log("[webpack:build]", stats.toString({
+  webpack(myConfig, function(err, stats, callback) {
+    if(err){
+			throw new gutil.PluginError('webpack:build', err);
+		}
+    gutil.log('[webpack:build]', stats.toString({
       colors: true
     }));
     callback();
@@ -64,8 +68,8 @@ gulp.task('webpack:build', function(){
 });
 
 gulp.task('watch', function(){
-  gulp.watch(['./app/**/*.js', './app/components/*.vue', './app/components/**/*.vue', './app/**/*.scss'], ['webpack:build-dev']);
-})
+  gulp.watch(['./app/**/*.js', './app/components/*.vue', './app/components/**/*.vue', './app/**/*.less'], ['webpack:build-dev']);
+});
 
 
 gulp.task('default', [

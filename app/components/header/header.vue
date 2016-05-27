@@ -13,7 +13,7 @@
         <!-- <a class="mdl-navigation__link" href="" v-link="{path: '/file', exact: true}">文件</a> -->
         <a class="mdl-navigation__link" href="" v-link="{path: '/task', exact: true}">Task</a>
         <a class="mdl-navigation__link" href="" v-link="{path: '/signup', exact: true}">注册</a>
-        <span v-if="account">
+        <span v-if="account" class="navigation-account">
           <img v-bind:src="account.avatar" alt=""></span>
         </nav>
       </div>
@@ -71,3 +71,12 @@ export default {
 };
 
 </script>
+<style lang="less">
+.navigation-account{
+  img{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+  }
+}
+</style>

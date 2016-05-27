@@ -143,7 +143,6 @@ module.exports = {
       display: block;
     }
   }
-
 }
 
 .task-content {
