@@ -17,6 +17,9 @@
   -webkit-transform: translate3d(20px, 0, 0);
           transform: translate3d(20px, 0, 0);
 }
+.page-content {
+  padding-top: 80px;
+}
 /* ====================================================== */
 /* Variables
 /* ====================================================== */
@@ -57,6 +60,15 @@
   margin-left: 280px;
   max-width: 800px;
 }
+.label-trigger {
+  margin: 6px 0;
+  padding: 6px 12px;
+  background: rgba(216, 216, 216, 0.8);
+  cursor: pointer;
+}
+.label-trigger:hover {
+  background: #d8d8d8;
+}
 /* ====================================================== */
 /* Variables
 /* ====================================================== */
@@ -74,7 +86,7 @@
   color: #343434;
   background: rgba(255, 255, 255, 0.85);
   border-bottom: 1px solid #DCDCDC;
-  padding: 0 0.7em;
+  padding: 0 0.6em;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -89,7 +101,7 @@
       -ms-flex-align: center;
           align-items: center;
   position: relative;
-  height: 54px;
+  height: 50px;
 }
 .task.finished .task-content {
   cursor: default;
@@ -111,7 +123,6 @@
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   overflow: hidden;
-  padding: 0.8rem 0;
   margin-right: 6rem;
 }
 .task-content-input {
@@ -241,7 +252,10 @@
 }
 .header {
   height: 50px;
+  width: 100%;
   background: rgba(255, 255, 255, 0.85);
+  position: fixed;
+  z-index: 100;
 }
 
 

@@ -1,11 +1,11 @@
 <template>
-	<div class="mdl-grid main" transition="animate_routerview">
+	<div class="main" transition="animate_routerview">
     <taskinputer :category="category"></taskinputer>
-    <!-- <div class="tasklist"> -->
+    <div class="tasklist">
 			<taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
-    <!-- </div> -->
-		<div class="" @click="toggleShowCompletedTask">
-			{显示已完成的任务}
+    </div>
+		<div class="label-trigger" @click="toggleShowCompletedTask">
+			显示已完成的task
 		</div>
 		<div class="tasklist--finished" v-show="completedShow">
 			<taskitem v-for="task in completedTasklist" :task="task" :index="$index"></taskitem>
@@ -17,21 +17,21 @@
 	import TaskItemView from './taskItem.vue';
 	import TaskInputer from './taskInputer.vue';
 
-	export default{
-	 route: {
+	export default {
+		route: {
       data(transition){
 
-          let param = null;
-          this.$data.category = this.$route.params.category;
-          param = {
-            category: this.$data.category,
-						completed: false,
-          };
+        let param = null;
+        this.$data.category = this.$route.params.category;
+        param = {
+          category: this.$data.category,
+					completed: false,
+        };
 
-          return this.$http.get('tasks', param)
-            .then(function(res){
-              return {tasklist: res.data}
-          });
+        return this.$http.get('tasks', param)
+          .then(function(res){
+            return {tasklist: res.data}
+        });
        },
       activate(transition) {
         transition.next()
@@ -118,8 +118,21 @@
 </script>
 <style lang="less">
 	@import '../../public/stylesheets/variables';
+
+	@labelTriggerBg: #d8d8d8;
+
 	.main{
 		margin-left: @sideMenuWidth;
 		max-width: 800px;
+	}
+	.label-trigger{
+		// display: inline-block;
+		margin: 6px 0;
+		padding: 6px 12px;
+		background: fade(@labelTriggerBg, 80%);
+		cursor: pointer;
+		&:hover{
+			background: @labelTriggerBg;
+		}
 	}
 </style>

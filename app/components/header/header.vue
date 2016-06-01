@@ -50,6 +50,9 @@ export default {
 }
 .header{
   height: 50px;
+  width: 100%;
   background: fade(#fff, 85%);
+  position: fixed;
+  z-index: 100;
 }
 </style>

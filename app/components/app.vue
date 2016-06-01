@@ -19,12 +19,10 @@
 </style>
 
 <template>
-  <div class="mdl-layout mdl-js-layout">
+  <div class="">
       <appHeader :account="account"></appHeader>
-      <div class="mdl-layout__content">
-        <div class="page-content">
-          <router-view ></router-view>
-        </div>
+      <div class="page-content">
+        <router-view ></router-view>
       </div>
   </div>
 </template>
@@ -64,3 +62,10 @@
       appheader: AppHeaderView
     }
   }
+</script>
+
+<style lang="less">
+  .page-content{
+    padding-top: 80px;
+  }
+</style>

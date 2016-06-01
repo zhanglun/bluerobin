@@ -12,7 +12,7 @@
         <input class="mdl-textfield__input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
       </div>
       <div class="" v-if="task.completed">
-        {{task.update_time}}
+        {{task.create_time}}
       </div>
     </div>
     <span class="task-controller">
@@ -114,12 +114,12 @@ module.exports = {
   background: fade(@white, 85%);
   // box-shadow: 0 2px 4px rgba(0,0,0,.24);
   border-bottom: 1px solid #DCDCDC;
-  padding: 0 0.7em;
+  padding: 0 0.6em;
   display: flex;
   flex-direction: row;
   align-items: center;
   position: relative;
-  height: 54px;
+  height: 50px;
   // margin: 2px 0 ;
   &.finished {
     .task-content {
@@ -148,7 +148,6 @@ module.exports = {
 .task-content {
     flex: 1 1 auto;
     overflow: hidden;
-    padding: 0.8rem 0;
     margin-right: 6rem;
     &-input {
       display: none;
