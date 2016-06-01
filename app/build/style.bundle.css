@@ -72,8 +72,8 @@
   box-sizing: border-box;
   font-size: 1.6rem;
   color: #343434;
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24);
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid #DCDCDC;
   padding: 0 0.7em;
   display: -webkit-box;
   display: -webkit-flex;
@@ -90,7 +90,6 @@
           align-items: center;
   position: relative;
   height: 54px;
-  margin: 2px 0 ;
 }
 .task.finished .task-content {
   cursor: default;
@@ -239,6 +238,10 @@
   width: 40px;
   height: 40px;
   border-radius: 100%;
+}
+.header {
+  height: 50px;
+  background: rgba(255, 255, 255, 0.85);
 }
 
 

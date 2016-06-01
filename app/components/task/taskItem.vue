@@ -111,16 +111,16 @@ module.exports = {
   box-sizing: border-box;
   font-size: 1.6rem;
   color: #343434;
-  background: @white;
-  box-shadow: 0 2px 4px rgba(0,0,0,.24);
-  // border-bottom: 1px solid #DCDCDC;
+  background: fade(@white, 85%);
+  // box-shadow: 0 2px 4px rgba(0,0,0,.24);
+  border-bottom: 1px solid #DCDCDC;
   padding: 0 0.7em;
   display: flex;
   flex-direction: row;
   align-items: center;
   position: relative;
   height: 54px;
-  margin: 2px 0 ;
+  // margin: 2px 0 ;
   &.finished {
     .task-content {
       cursor: default;
