@@ -1,7 +1,7 @@
 <template>
-    <div class="mdl-cell mdl-cell--12-col mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask(category)">
-      <label for="" class="mdl-textfield__label">Title</label>
+    <div class="task-textfield">
+      <input class="task-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask(category)">
+      <!-- <label for="" class="task-textfield__label">Title</label> -->
     </div>
 </template>
 
@@ -138,6 +138,18 @@ export default {
 
 .modal.bottom-sheet{
 	max-height: 60%;
+}
+.task-textfield{
+  width: 100%;
+  background: #fff;
+  margin-bottom: 20px;
+  padding: 6px;
+  box-sizing: border-box;
+  &__input{
+  	border: none;
+  	outline: none;
+
+  }
 }
 .task-inputer{
 	box-sizing: border-box;
