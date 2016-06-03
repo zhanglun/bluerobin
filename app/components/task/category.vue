@@ -2,13 +2,13 @@
 	<div class="main" transition="animate_routerview">
     <taskinputer :category="category"></taskinputer>
     <div class="tasklist">
-			<taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
+			<taskitem v-for="task in tasklist" :task="task" :index="$index" track-by="$index"></taskitem>
     </div>
 		<div class="label-trigger" @click="toggleShowCompletedTask">
 			显示已完成的task
 		</div>
 		<div class="tasklist--finished" v-show="completedShow">
-			<taskitem v-for="task in completedTasklist" :task="task" :index="$index"></taskitem>
+			<taskitem v-for="task in completedTasklist" :task="task" :index="$index" track-by="$index"></taskitem>
 		</div>
 	</div>
 </template>
@@ -122,8 +122,11 @@
 	@labelTriggerBg: #d8d8d8;
 
 	.main{
-		margin-left: @sideMenuWidth;
-		max-width: 800px;
+		padding-left: @sideMenuWidth;
+		padding-right: 100px;
+		width: 100%;
+		box-sizing: border-box;
+		// margin: 0 auto;
 	}
 	.label-trigger{
 		// display: inline-block;

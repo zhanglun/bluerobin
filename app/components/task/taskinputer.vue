@@ -139,70 +139,24 @@ export default {
 .modal.bottom-sheet{
 	max-height: 60%;
 }
+
 .task-textfield{
   width: 100%;
   background: #fff;
   margin-bottom: 20px;
-  padding: 6px;
   box-sizing: border-box;
   &__input{
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    padding: 6px 10px;
+    box-sizing: border-box;
   	border: none;
   	outline: none;
-
+    &:focus{
+      box-shadow: 0 0 5px #ABABAB;
+    }
   }
-}
-.task-inputer{
-	box-sizing: border-box;
-	width:100%;
-	height: 300px;
-	background: @white;
-	&-bar{
-		overflow: hidden;
-	  // padding: 8px;
-	  // border-top: 1px solid #E0E0E0;
-	  >[class^="icon"]{
-	  	display: inline-block;
-	  	width: 20px;
-	  	text-algin: center;
-	  	margin:0 6px;
-	  	font-size: 16px;
-	  }
-	}
-	>textarea{
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    display: block;
-	  padding: 8px;
-    font-size: 14px;
-    outline: none;
-    border:none ;
-	  background: none;
-	  font-family: '微软雅黑';
-	  color: #6B6B6B;
-	  outline: none;
-	  resize:none;
-	  transition: all 0.3s ease-in;
-
-	}
-}
-
-.task-images{
-	padding:0 4px;
-	width:100%;
-	background: $white;
-  box-sizing: border-box;
-	>div{
-		box-sizing: border-box;
-		width:2	0%;
-		padding:8px 4px;
-		height:140px;
-		display: inline-block;
-	}
-	.img-box{
-		display: block;
-		height:100%;
-	}
 }
 
 </style>

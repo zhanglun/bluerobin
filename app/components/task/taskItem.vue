@@ -3,7 +3,6 @@
     <div class="task-checkbox">
       <label class="mdl-checkbox mdl-js-checkbox" v-bind:class="{'is-checked': task.completed}" for="{{task.id}}">
         <input type="checkbox" id="{{task.id}}" class="mdl-checkbox__input" v-on:change = "toggleTask(task)" :checked="task.completed">
-        <!-- <span class="mdl-checkbox__label">Married</span> -->
       </label>
     </div>
     <div class="task-content">
@@ -18,7 +17,6 @@
     <span class="task-controller">
       <i class="material-icons" @click="deleteTask(task)">clear</i>
     </span>
-
   </div>
 
 </template>
@@ -26,7 +24,7 @@
 <script>
 
 
-module.exports = {
+export default {
 	props: ['task', 'index'],
   data: function(){
   	return {
@@ -67,7 +65,6 @@ module.exports = {
   		this.taskEditing = task;
   	},
   	deleteTask(task) {
-
       this.$dispatch('delete task', task);
   	},
 

@@ -58,37 +58,39 @@
 	
 	var _vueResource2 = _interopRequireDefault(_vueResource);
 	
-	var _app = __webpack_require__(28);
+	var _redux = __webpack_require__(28);
+	
+	var _app = __webpack_require__(41);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _home = __webpack_require__(57);
+	var _home = __webpack_require__(70);
 	
 	var _home2 = _interopRequireDefault(_home);
 	
-	var _file = __webpack_require__(67);
+	var _file = __webpack_require__(80);
 	
 	var _file2 = _interopRequireDefault(_file);
 	
-	var _task = __webpack_require__(33);
+	var _task = __webpack_require__(46);
 	
 	var _task2 = _interopRequireDefault(_task);
 	
-	var _category = __webpack_require__(40);
+	var _category = __webpack_require__(53);
 	
 	var _category2 = _interopRequireDefault(_category);
 	
-	var _login = __webpack_require__(71);
+	var _login = __webpack_require__(84);
 	
 	var _login2 = _interopRequireDefault(_login);
 	
-	var _signup = __webpack_require__(75);
+	var _signup = __webpack_require__(88);
 	
 	var _signup2 = _interopRequireDefault(_signup);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(78);
+	__webpack_require__(91);
 	
 	_vue2.default.use(_vueRouter2.default);
 	_vue2.default.use(_vueResource2.default);
@@ -138,6 +140,35 @@
 	});
 	
 	router.start(_app2.default, '#app');
+	
+	function counter() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case 'INCREMENT':
+	      return state + 1;
+	    case 'DECREMENT':
+	      return state - 1;
+	    default:
+	      return state;
+	  }
+	}
+	
+	var store = (0, _redux.createStore)(counter);
+	
+	store.subscribe(function () {
+	  return console.log(store.getState());
+	});
+	
+	// The only way to mutate the internal state is to dispatch an action.
+	// The actions can be serialized, logged or stored and later replayed.
+	store.dispatch({ type: 'INCREMENT' });
+	// 1
+	store.dispatch({ type: 'INCREMENT' });
+	// 2
+	store.dispatch({ type: 'DECREMENT' });
+	// 1
 
 /***/ },
 /* 1 */
@@ -14507,11 +14538,851 @@
 /* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	
+	exports.__esModule = true;
+	exports.compose = exports.applyMiddleware = exports.bindActionCreators = exports.combineReducers = exports.createStore = undefined;
+	
+	var _createStore = __webpack_require__(29);
+	
+	var _createStore2 = _interopRequireDefault(_createStore);
+	
+	var _combineReducers = __webpack_require__(36);
+	
+	var _combineReducers2 = _interopRequireDefault(_combineReducers);
+	
+	var _bindActionCreators = __webpack_require__(38);
+	
+	var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
+	
+	var _applyMiddleware = __webpack_require__(39);
+	
+	var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
+	
+	var _compose = __webpack_require__(40);
+	
+	var _compose2 = _interopRequireDefault(_compose);
+	
+	var _warning = __webpack_require__(37);
+	
+	var _warning2 = _interopRequireDefault(_warning);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	/*
+	* This is a dummy function to check if the function name has been altered by minification.
+	* If the function has been minified and NODE_ENV !== 'production', warn the user.
+	*/
+	function isCrushed() {}
+	
+	if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' && isCrushed.name !== 'isCrushed') {
+	  (0, _warning2["default"])('You are currently using minified code outside of NODE_ENV === \'production\'. ' + 'This means that you are running a slower development build of Redux. ' + 'You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify ' + 'or DefinePlugin for webpack (http://stackoverflow.com/questions/30030031) ' + 'to ensure you have the correct code for your production build.');
+	}
+	
+	exports.createStore = _createStore2["default"];
+	exports.combineReducers = _combineReducers2["default"];
+	exports.bindActionCreators = _bindActionCreators2["default"];
+	exports.applyMiddleware = _applyMiddleware2["default"];
+	exports.compose = _compose2["default"];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports.ActionTypes = undefined;
+	exports["default"] = createStore;
+	
+	var _isPlainObject = __webpack_require__(30);
+	
+	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
+	
+	var _symbolObservable = __webpack_require__(34);
+	
+	var _symbolObservable2 = _interopRequireDefault(_symbolObservable);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	/**
+	 * These are private action types reserved by Redux.
+	 * For any unknown actions, you must return the current state.
+	 * If the current state is undefined, you must return the initial state.
+	 * Do not reference these action types directly in your code.
+	 */
+	var ActionTypes = exports.ActionTypes = {
+	  INIT: '@@redux/INIT'
+	};
+	
+	/**
+	 * Creates a Redux store that holds the state tree.
+	 * The only way to change the data in the store is to call `dispatch()` on it.
+	 *
+	 * There should only be a single store in your app. To specify how different
+	 * parts of the state tree respond to actions, you may combine several reducers
+	 * into a single reducer function by using `combineReducers`.
+	 *
+	 * @param {Function} reducer A function that returns the next state tree, given
+	 * the current state tree and the action to handle.
+	 *
+	 * @param {any} [initialState] The initial state. You may optionally specify it
+	 * to hydrate the state from the server in universal apps, or to restore a
+	 * previously serialized user session.
+	 * If you use `combineReducers` to produce the root reducer function, this must be
+	 * an object with the same shape as `combineReducers` keys.
+	 *
+	 * @param {Function} enhancer The store enhancer. You may optionally specify it
+	 * to enhance the store with third-party capabilities such as middleware,
+	 * time travel, persistence, etc. The only store enhancer that ships with Redux
+	 * is `applyMiddleware()`.
+	 *
+	 * @returns {Store} A Redux store that lets you read the state, dispatch actions
+	 * and subscribe to changes.
+	 */
+	function createStore(reducer, initialState, enhancer) {
+	  var _ref2;
+	
+	  if (typeof initialState === 'function' && typeof enhancer === 'undefined') {
+	    enhancer = initialState;
+	    initialState = undefined;
+	  }
+	
+	  if (typeof enhancer !== 'undefined') {
+	    if (typeof enhancer !== 'function') {
+	      throw new Error('Expected the enhancer to be a function.');
+	    }
+	
+	    return enhancer(createStore)(reducer, initialState);
+	  }
+	
+	  if (typeof reducer !== 'function') {
+	    throw new Error('Expected the reducer to be a function.');
+	  }
+	
+	  var currentReducer = reducer;
+	  var currentState = initialState;
+	  var currentListeners = [];
+	  var nextListeners = currentListeners;
+	  var isDispatching = false;
+	
+	  function ensureCanMutateNextListeners() {
+	    if (nextListeners === currentListeners) {
+	      nextListeners = currentListeners.slice();
+	    }
+	  }
+	
+	  /**
+	   * Reads the state tree managed by the store.
+	   *
+	   * @returns {any} The current state tree of your application.
+	   */
+	  function getState() {
+	    return currentState;
+	  }
+	
+	  /**
+	   * Adds a change listener. It will be called any time an action is dispatched,
+	   * and some part of the state tree may potentially have changed. You may then
+	   * call `getState()` to read the current state tree inside the callback.
+	   *
+	   * You may call `dispatch()` from a change listener, with the following
+	   * caveats:
+	   *
+	   * 1. The subscriptions are snapshotted just before every `dispatch()` call.
+	   * If you subscribe or unsubscribe while the listeners are being invoked, this
+	   * will not have any effect on the `dispatch()` that is currently in progress.
+	   * However, the next `dispatch()` call, whether nested or not, will use a more
+	   * recent snapshot of the subscription list.
+	   *
+	   * 2. The listener should not expect to see all state changes, as the state
+	   * might have been updated multiple times during a nested `dispatch()` before
+	   * the listener is called. It is, however, guaranteed that all subscribers
+	   * registered before the `dispatch()` started will be called with the latest
+	   * state by the time it exits.
+	   *
+	   * @param {Function} listener A callback to be invoked on every dispatch.
+	   * @returns {Function} A function to remove this change listener.
+	   */
+	  function subscribe(listener) {
+	    if (typeof listener !== 'function') {
+	      throw new Error('Expected listener to be a function.');
+	    }
+	
+	    var isSubscribed = true;
+	
+	    ensureCanMutateNextListeners();
+	    nextListeners.push(listener);
+	
+	    return function unsubscribe() {
+	      if (!isSubscribed) {
+	        return;
+	      }
+	
+	      isSubscribed = false;
+	
+	      ensureCanMutateNextListeners();
+	      var index = nextListeners.indexOf(listener);
+	      nextListeners.splice(index, 1);
+	    };
+	  }
+	
+	  /**
+	   * Dispatches an action. It is the only way to trigger a state change.
+	   *
+	   * The `reducer` function, used to create the store, will be called with the
+	   * current state tree and the given `action`. Its return value will
+	   * be considered the **next** state of the tree, and the change listeners
+	   * will be notified.
+	   *
+	   * The base implementation only supports plain object actions. If you want to
+	   * dispatch a Promise, an Observable, a thunk, or something else, you need to
+	   * wrap your store creating function into the corresponding middleware. For
+	   * example, see the documentation for the `redux-thunk` package. Even the
+	   * middleware will eventually dispatch plain object actions using this method.
+	   *
+	   * @param {Object} action A plain object representing “what changed”. It is
+	   * a good idea to keep actions serializable so you can record and replay user
+	   * sessions, or use the time travelling `redux-devtools`. An action must have
+	   * a `type` property which may not be `undefined`. It is a good idea to use
+	   * string constants for action types.
+	   *
+	   * @returns {Object} For convenience, the same action object you dispatched.
+	   *
+	   * Note that, if you use a custom middleware, it may wrap `dispatch()` to
+	   * return something else (for example, a Promise you can await).
+	   */
+	  function dispatch(action) {
+	    if (!(0, _isPlainObject2["default"])(action)) {
+	      throw new Error('Actions must be plain objects. ' + 'Use custom middleware for async actions.');
+	    }
+	
+	    if (typeof action.type === 'undefined') {
+	      throw new Error('Actions may not have an undefined "type" property. ' + 'Have you misspelled a constant?');
+	    }
+	
+	    if (isDispatching) {
+	      throw new Error('Reducers may not dispatch actions.');
+	    }
+	
+	    try {
+	      isDispatching = true;
+	      currentState = currentReducer(currentState, action);
+	    } finally {
+	      isDispatching = false;
+	    }
+	
+	    var listeners = currentListeners = nextListeners;
+	    for (var i = 0; i < listeners.length; i++) {
+	      listeners[i]();
+	    }
+	
+	    return action;
+	  }
+	
+	  /**
+	   * Replaces the reducer currently used by the store to calculate the state.
+	   *
+	   * You might need this if your app implements code splitting and you want to
+	   * load some of the reducers dynamically. You might also need this if you
+	   * implement a hot reloading mechanism for Redux.
+	   *
+	   * @param {Function} nextReducer The reducer for the store to use instead.
+	   * @returns {void}
+	   */
+	  function replaceReducer(nextReducer) {
+	    if (typeof nextReducer !== 'function') {
+	      throw new Error('Expected the nextReducer to be a function.');
+	    }
+	
+	    currentReducer = nextReducer;
+	    dispatch({ type: ActionTypes.INIT });
+	  }
+	
+	  /**
+	   * Interoperability point for observable/reactive libraries.
+	   * @returns {observable} A minimal observable of state changes.
+	   * For more information, see the observable proposal:
+	   * https://github.com/zenparsing/es-observable
+	   */
+	  function observable() {
+	    var _ref;
+	
+	    var outerSubscribe = subscribe;
+	    return _ref = {
+	      /**
+	       * The minimal observable subscription method.
+	       * @param {Object} observer Any object that can be used as an observer.
+	       * The observer object should have a `next` method.
+	       * @returns {subscription} An object with an `unsubscribe` method that can
+	       * be used to unsubscribe the observable from the store, and prevent further
+	       * emission of values from the observable.
+	       */
+	
+	      subscribe: function subscribe(observer) {
+	        if (typeof observer !== 'object') {
+	          throw new TypeError('Expected the observer to be an object.');
+	        }
+	
+	        function observeState() {
+	          if (observer.next) {
+	            observer.next(getState());
+	          }
+	        }
+	
+	        observeState();
+	        var unsubscribe = outerSubscribe(observeState);
+	        return { unsubscribe: unsubscribe };
+	      }
+	    }, _ref[_symbolObservable2["default"]] = function () {
+	      return this;
+	    }, _ref;
+	  }
+	
+	  // When a store is created, an "INIT" action is dispatched so that every
+	  // reducer returns their initial state. This effectively populates
+	  // the initial state tree.
+	  dispatch({ type: ActionTypes.INIT });
+	
+	  return _ref2 = {
+	    dispatch: dispatch,
+	    subscribe: subscribe,
+	    getState: getState,
+	    replaceReducer: replaceReducer
+	  }, _ref2[_symbolObservable2["default"]] = observable, _ref2;
+	}
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var getPrototype = __webpack_require__(31),
+	    isHostObject = __webpack_require__(32),
+	    isObjectLike = __webpack_require__(33);
+	
+	/** `Object#toString` result references. */
+	var objectTag = '[object Object]';
+	
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+	
+	/** Used to resolve the decompiled source of functions. */
+	var funcToString = Function.prototype.toString;
+	
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+	
+	/** Used to infer the `Object` constructor. */
+	var objectCtorString = funcToString.call(Object);
+	
+	/**
+	 * Used to resolve the
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objectToString = objectProto.toString;
+	
+	/**
+	 * Checks if `value` is a plain object, that is, an object created by the
+	 * `Object` constructor or one with a `[[Prototype]]` of `null`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.8.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a plain object,
+	 *  else `false`.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 * }
+	 *
+	 * _.isPlainObject(new Foo);
+	 * // => false
+	 *
+	 * _.isPlainObject([1, 2, 3]);
+	 * // => false
+	 *
+	 * _.isPlainObject({ 'x': 0, 'y': 0 });
+	 * // => true
+	 *
+	 * _.isPlainObject(Object.create(null));
+	 * // => true
+	 */
+	function isPlainObject(value) {
+	  if (!isObjectLike(value) ||
+	      objectToString.call(value) != objectTag || isHostObject(value)) {
+	    return false;
+	  }
+	  var proto = getPrototype(value);
+	  if (proto === null) {
+	    return true;
+	  }
+	  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
+	  return (typeof Ctor == 'function' &&
+	    Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString);
+	}
+	
+	module.exports = isPlainObject;
+
+
+/***/ },
+/* 31 */
+/***/ function(module, exports) {
+
+	/* Built-in method references for those with the same name as other `lodash` methods. */
+	var nativeGetPrototype = Object.getPrototypeOf;
+	
+	/**
+	 * Gets the `[[Prototype]]` of `value`.
+	 *
+	 * @private
+	 * @param {*} value The value to query.
+	 * @returns {null|Object} Returns the `[[Prototype]]`.
+	 */
+	function getPrototype(value) {
+	  return nativeGetPrototype(Object(value));
+	}
+	
+	module.exports = getPrototype;
+
+
+/***/ },
+/* 32 */
+/***/ function(module, exports) {
+
+	/**
+	 * Checks if `value` is a host object in IE < 9.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
+	 */
+	function isHostObject(value) {
+	  // Many host objects are `Object` objects that can coerce to strings
+	  // despite having improperly defined `toString` methods.
+	  var result = false;
+	  if (value != null && typeof value.toString != 'function') {
+	    try {
+	      result = !!(value + '');
+	    } catch (e) {}
+	  }
+	  return result;
+	}
+	
+	module.exports = isHostObject;
+
+
+/***/ },
+/* 33 */
+/***/ function(module, exports) {
+
+	/**
+	 * Checks if `value` is object-like. A value is object-like if it's not `null`
+	 * and has a `typeof` result of "object".
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 * @example
+	 *
+	 * _.isObjectLike({});
+	 * // => true
+	 *
+	 * _.isObjectLike([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObjectLike(_.noop);
+	 * // => false
+	 *
+	 * _.isObjectLike(null);
+	 * // => false
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+	
+	module.exports = isObjectLike;
+
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
+	'use strict';
+	
+	module.exports = __webpack_require__(35)(global || window || this);
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 35 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	module.exports = function symbolObservablePonyfill(root) {
+		var result;
+		var Symbol = root.Symbol;
+	
+		if (typeof Symbol === 'function') {
+			if (Symbol.observable) {
+				result = Symbol.observable;
+			} else {
+				result = Symbol('observable');
+				Symbol.observable = result;
+			}
+		} else {
+			result = '@@observable';
+		}
+	
+		return result;
+	};
+
+
+/***/ },
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	
+	exports.__esModule = true;
+	exports["default"] = combineReducers;
+	
+	var _createStore = __webpack_require__(29);
+	
+	var _isPlainObject = __webpack_require__(30);
+	
+	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
+	
+	var _warning = __webpack_require__(37);
+	
+	var _warning2 = _interopRequireDefault(_warning);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function getUndefinedStateErrorMessage(key, action) {
+	  var actionType = action && action.type;
+	  var actionName = actionType && '"' + actionType.toString() + '"' || 'an action';
+	
+	  return 'Given action ' + actionName + ', reducer "' + key + '" returned undefined. ' + 'To ignore an action, you must explicitly return the previous state.';
+	}
+	
+	function getUnexpectedStateShapeWarningMessage(inputState, reducers, action) {
+	  var reducerKeys = Object.keys(reducers);
+	  var argumentName = action && action.type === _createStore.ActionTypes.INIT ? 'initialState argument passed to createStore' : 'previous state received by the reducer';
+	
+	  if (reducerKeys.length === 0) {
+	    return 'Store does not have a valid reducer. Make sure the argument passed ' + 'to combineReducers is an object whose values are reducers.';
+	  }
+	
+	  if (!(0, _isPlainObject2["default"])(inputState)) {
+	    return 'The ' + argumentName + ' has unexpected type of "' + {}.toString.call(inputState).match(/\s([a-z|A-Z]+)/)[1] + '". Expected argument to be an object with the following ' + ('keys: "' + reducerKeys.join('", "') + '"');
+	  }
+	
+	  var unexpectedKeys = Object.keys(inputState).filter(function (key) {
+	    return !reducers.hasOwnProperty(key);
+	  });
+	
+	  if (unexpectedKeys.length > 0) {
+	    return 'Unexpected ' + (unexpectedKeys.length > 1 ? 'keys' : 'key') + ' ' + ('"' + unexpectedKeys.join('", "') + '" found in ' + argumentName + '. ') + 'Expected to find one of the known reducer keys instead: ' + ('"' + reducerKeys.join('", "') + '". Unexpected keys will be ignored.');
+	  }
+	}
+	
+	function assertReducerSanity(reducers) {
+	  Object.keys(reducers).forEach(function (key) {
+	    var reducer = reducers[key];
+	    var initialState = reducer(undefined, { type: _createStore.ActionTypes.INIT });
+	
+	    if (typeof initialState === 'undefined') {
+	      throw new Error('Reducer "' + key + '" returned undefined during initialization. ' + 'If the state passed to the reducer is undefined, you must ' + 'explicitly return the initial state. The initial state may ' + 'not be undefined.');
+	    }
+	
+	    var type = '@@redux/PROBE_UNKNOWN_ACTION_' + Math.random().toString(36).substring(7).split('').join('.');
+	    if (typeof reducer(undefined, { type: type }) === 'undefined') {
+	      throw new Error('Reducer "' + key + '" returned undefined when probed with a random type. ' + ('Don\'t try to handle ' + _createStore.ActionTypes.INIT + ' or other actions in "redux/*" ') + 'namespace. They are considered private. Instead, you must return the ' + 'current state for any unknown actions, unless it is undefined, ' + 'in which case you must return the initial state, regardless of the ' + 'action type. The initial state may not be undefined.');
+	    }
+	  });
+	}
+	
+	/**
+	 * Turns an object whose values are different reducer functions, into a single
+	 * reducer function. It will call every child reducer, and gather their results
+	 * into a single state object, whose keys correspond to the keys of the passed
+	 * reducer functions.
+	 *
+	 * @param {Object} reducers An object whose values correspond to different
+	 * reducer functions that need to be combined into one. One handy way to obtain
+	 * it is to use ES6 `import * as reducers` syntax. The reducers may never return
+	 * undefined for any action. Instead, they should return their initial state
+	 * if the state passed to them was undefined, and the current state for any
+	 * unrecognized action.
+	 *
+	 * @returns {Function} A reducer function that invokes every reducer inside the
+	 * passed object, and builds a state object with the same shape.
+	 */
+	function combineReducers(reducers) {
+	  var reducerKeys = Object.keys(reducers);
+	  var finalReducers = {};
+	  for (var i = 0; i < reducerKeys.length; i++) {
+	    var key = reducerKeys[i];
+	    if (typeof reducers[key] === 'function') {
+	      finalReducers[key] = reducers[key];
+	    }
+	  }
+	  var finalReducerKeys = Object.keys(finalReducers);
+	
+	  var sanityError;
+	  try {
+	    assertReducerSanity(finalReducers);
+	  } catch (e) {
+	    sanityError = e;
+	  }
+	
+	  return function combination() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    var action = arguments[1];
+	
+	    if (sanityError) {
+	      throw sanityError;
+	    }
+	
+	    if (process.env.NODE_ENV !== 'production') {
+	      var warningMessage = getUnexpectedStateShapeWarningMessage(state, finalReducers, action);
+	      if (warningMessage) {
+	        (0, _warning2["default"])(warningMessage);
+	      }
+	    }
+	
+	    var hasChanged = false;
+	    var nextState = {};
+	    for (var i = 0; i < finalReducerKeys.length; i++) {
+	      var key = finalReducerKeys[i];
+	      var reducer = finalReducers[key];
+	      var previousStateForKey = state[key];
+	      var nextStateForKey = reducer(previousStateForKey, action);
+	      if (typeof nextStateForKey === 'undefined') {
+	        var errorMessage = getUndefinedStateErrorMessage(key, action);
+	        throw new Error(errorMessage);
+	      }
+	      nextState[key] = nextStateForKey;
+	      hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
+	    }
+	    return hasChanged ? nextState : state;
+	  };
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 37 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports["default"] = warning;
+	/**
+	 * Prints a warning in the console if it exists.
+	 *
+	 * @param {String} message The warning message.
+	 * @returns {void}
+	 */
+	function warning(message) {
+	  /* eslint-disable no-console */
+	  if (typeof console !== 'undefined' && typeof console.error === 'function') {
+	    console.error(message);
+	  }
+	  /* eslint-enable no-console */
+	  try {
+	    // This error was thrown as a convenience so that if you enable
+	    // "break on all exceptions" in your console,
+	    // it would pause the execution at this line.
+	    throw new Error(message);
+	    /* eslint-disable no-empty */
+	  } catch (e) {}
+	  /* eslint-enable no-empty */
+	}
+
+/***/ },
+/* 38 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports["default"] = bindActionCreators;
+	function bindActionCreator(actionCreator, dispatch) {
+	  return function () {
+	    return dispatch(actionCreator.apply(undefined, arguments));
+	  };
+	}
+	
+	/**
+	 * Turns an object whose values are action creators, into an object with the
+	 * same keys, but with every function wrapped into a `dispatch` call so they
+	 * may be invoked directly. This is just a convenience method, as you can call
+	 * `store.dispatch(MyActionCreators.doSomething())` yourself just fine.
+	 *
+	 * For convenience, you can also pass a single function as the first argument,
+	 * and get a function in return.
+	 *
+	 * @param {Function|Object} actionCreators An object whose values are action
+	 * creator functions. One handy way to obtain it is to use ES6 `import * as`
+	 * syntax. You may also pass a single function.
+	 *
+	 * @param {Function} dispatch The `dispatch` function available on your Redux
+	 * store.
+	 *
+	 * @returns {Function|Object} The object mimicking the original object, but with
+	 * every action creator wrapped into the `dispatch` call. If you passed a
+	 * function as `actionCreators`, the return value will also be a single
+	 * function.
+	 */
+	function bindActionCreators(actionCreators, dispatch) {
+	  if (typeof actionCreators === 'function') {
+	    return bindActionCreator(actionCreators, dispatch);
+	  }
+	
+	  if (typeof actionCreators !== 'object' || actionCreators === null) {
+	    throw new Error('bindActionCreators expected an object or a function, instead received ' + (actionCreators === null ? 'null' : typeof actionCreators) + '. ' + 'Did you write "import ActionCreators from" instead of "import * as ActionCreators from"?');
+	  }
+	
+	  var keys = Object.keys(actionCreators);
+	  var boundActionCreators = {};
+	  for (var i = 0; i < keys.length; i++) {
+	    var key = keys[i];
+	    var actionCreator = actionCreators[key];
+	    if (typeof actionCreator === 'function') {
+	      boundActionCreators[key] = bindActionCreator(actionCreator, dispatch);
+	    }
+	  }
+	  return boundActionCreators;
+	}
+
+/***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	exports["default"] = applyMiddleware;
+	
+	var _compose = __webpack_require__(40);
+	
+	var _compose2 = _interopRequireDefault(_compose);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	/**
+	 * Creates a store enhancer that applies middleware to the dispatch method
+	 * of the Redux store. This is handy for a variety of tasks, such as expressing
+	 * asynchronous actions in a concise manner, or logging every action payload.
+	 *
+	 * See `redux-thunk` package as an example of the Redux middleware.
+	 *
+	 * Because middleware is potentially asynchronous, this should be the first
+	 * store enhancer in the composition chain.
+	 *
+	 * Note that each middleware will be given the `dispatch` and `getState` functions
+	 * as named arguments.
+	 *
+	 * @param {...Function} middlewares The middleware chain to be applied.
+	 * @returns {Function} A store enhancer applying the middleware.
+	 */
+	function applyMiddleware() {
+	  for (var _len = arguments.length, middlewares = Array(_len), _key = 0; _key < _len; _key++) {
+	    middlewares[_key] = arguments[_key];
+	  }
+	
+	  return function (createStore) {
+	    return function (reducer, initialState, enhancer) {
+	      var store = createStore(reducer, initialState, enhancer);
+	      var _dispatch = store.dispatch;
+	      var chain = [];
+	
+	      var middlewareAPI = {
+	        getState: store.getState,
+	        dispatch: function dispatch(action) {
+	          return _dispatch(action);
+	        }
+	      };
+	      chain = middlewares.map(function (middleware) {
+	        return middleware(middlewareAPI);
+	      });
+	      _dispatch = _compose2["default"].apply(undefined, chain)(store.dispatch);
+	
+	      return _extends({}, store, {
+	        dispatch: _dispatch
+	      });
+	    };
+	  };
+	}
+
+/***/ },
+/* 40 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	exports.__esModule = true;
+	exports["default"] = compose;
+	/**
+	 * Composes single-argument functions from right to left. The rightmost
+	 * function can take multiple arguments as it provides the signature for
+	 * the resulting composite function.
+	 *
+	 * @param {...Function} funcs The functions to compose.
+	 * @returns {Function} A function obtained by composing the argument functions
+	 * from right to left. For example, compose(f, g, h) is identical to doing
+	 * (...args) => f(g(h(...args))).
+	 */
+	
+	function compose() {
+	  for (var _len = arguments.length, funcs = Array(_len), _key = 0; _key < _len; _key++) {
+	    funcs[_key] = arguments[_key];
+	  }
+	
+	  if (funcs.length === 0) {
+	    return function (arg) {
+	      return arg;
+	    };
+	  } else {
+	    var _ret = function () {
+	      var last = funcs[funcs.length - 1];
+	      var rest = funcs.slice(0, -1);
+	      return {
+	        v: function v() {
+	          return rest.reduceRight(function (composed, f) {
+	            return f(composed);
+	          }, last.apply(undefined, arguments));
+	        }
+	      };
+	    }();
+	
+	    if (typeof _ret === "object") return _ret.v;
+	  }
+	}
+
+/***/ },
+/* 41 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var __vue_script__, __vue_template__
-	__webpack_require__(29)
-	__webpack_require__(30)
-	__vue_script__ = __webpack_require__(31)
-	__vue_template__ = __webpack_require__(66)
+	__webpack_require__(42)
+	__webpack_require__(43)
+	__vue_script__ = __webpack_require__(44)
+	__vue_template__ = __webpack_require__(79)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14519,7 +15390,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/app.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\app.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14528,19 +15399,19 @@
 	})()}
 
 /***/ },
-/* 29 */
+/* 42 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 30 */
+/* 43 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 31 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14549,19 +15420,19 @@
 	  value: true
 	});
 	
-	var _uploadBabel = __webpack_require__(32);
+	var _uploadBabel = __webpack_require__(45);
 	
 	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
 	
-	var _task = __webpack_require__(33);
+	var _task = __webpack_require__(46);
 	
 	var _task2 = _interopRequireDefault(_task);
 	
-	var _home = __webpack_require__(57);
+	var _home = __webpack_require__(70);
 	
 	var _home2 = _interopRequireDefault(_home);
 	
-	var _header = __webpack_require__(61);
+	var _header = __webpack_require__(74);
 	
 	var _header2 = _interopRequireDefault(_header);
 	
@@ -14635,7 +15506,7 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 32 */
+/* 45 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14731,13 +15602,13 @@
 	exports.default = uploadInit;
 
 /***/ },
-/* 33 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(34)
-	__vue_script__ = __webpack_require__(35)
-	__vue_template__ = __webpack_require__(56)
+	__webpack_require__(47)
+	__vue_script__ = __webpack_require__(48)
+	__vue_template__ = __webpack_require__(69)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14745,7 +15616,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/task.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\task\\task.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14754,13 +15625,13 @@
 	})()}
 
 /***/ },
-/* 34 */
+/* 47 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 35 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14769,11 +15640,11 @@
 			value: true
 	});
 	
-	var _taskmenu = __webpack_require__(36);
+	var _taskmenu = __webpack_require__(49);
 	
 	var _taskmenu2 = _interopRequireDefault(_taskmenu);
 	
-	var _category = __webpack_require__(40);
+	var _category = __webpack_require__(53);
 	
 	var _category2 = _interopRequireDefault(_category);
 	
@@ -14879,13 +15750,13 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 36 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(37)
-	__vue_script__ = __webpack_require__(38)
-	__vue_template__ = __webpack_require__(39)
+	__webpack_require__(50)
+	__vue_script__ = __webpack_require__(51)
+	__vue_template__ = __webpack_require__(52)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14893,7 +15764,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/taskmenu.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\task\\taskmenu.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14902,13 +15773,13 @@
 	})()}
 
 /***/ },
-/* 37 */
+/* 50 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 38 */
+/* 51 */
 /***/ function(module, exports) {
 
 	// <template>
@@ -14979,19 +15850,19 @@
 	"use strict";
 
 /***/ },
-/* 39 */
+/* 52 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div class=\"sidebar\">\n      <ul class=\"side-menu\">\n        <li>\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'inbox'}}\">\n            <span class=\"material-icons\">inbox</span>\n            <span class=\"side-menu__item-content\">Inbox</span>\n          </a>\n        </li>\n                <li>\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'today'}}\">\n            <span class=\"material-icons\">today</span>\n            <span class=\"side-menu__item-content\">Today</span>\n          </a>\n        </li>\n        <li>\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'work'}}\">\n            <span class=\"material-icons\">work</span>\n            <span class=\"side-menu__item-content\">Work</span>\n          </a>\n        </li>\n      </ul>\n      <div class=\"side-actions\">\n        <a href=\"\">新建分类</a>\n      </div>\n    </div>\n";
+	module.exports = "\r\n    <div class=\"sidebar\">\r\n      <ul class=\"side-menu\">\r\n        <li>\r\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'inbox'}}\">\r\n            <span class=\"material-icons\">inbox</span>\r\n            <span class=\"side-menu__item-content\">Inbox</span>\r\n          </a>\r\n        </li>\r\n                <li>\r\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'today'}}\">\r\n            <span class=\"material-icons\">today</span>\r\n            <span class=\"side-menu__item-content\">Today</span>\r\n          </a>\r\n        </li>\r\n        <li>\r\n          <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'work'}}\">\r\n            <span class=\"material-icons\">work</span>\r\n            <span class=\"side-menu__item-content\">Work</span>\r\n          </a>\r\n        </li>\r\n      </ul>\r\n      <div class=\"side-actions\">\r\n        <a href=\"\">新建分类</a>\r\n      </div>\r\n    </div>\r\n";
 
 /***/ },
-/* 40 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(41)
-	__vue_script__ = __webpack_require__(42)
-	__vue_template__ = __webpack_require__(55)
+	__webpack_require__(54)
+	__vue_script__ = __webpack_require__(55)
+	__vue_template__ = __webpack_require__(68)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14999,7 +15870,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/category.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\task\\category.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15008,13 +15879,13 @@
 	})()}
 
 /***/ },
-/* 41 */
+/* 54 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 42 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15023,11 +15894,11 @@
 		value: true
 	});
 	
-	var _taskItem = __webpack_require__(43);
+	var _taskItem = __webpack_require__(56);
 	
 	var _taskItem2 = _interopRequireDefault(_taskItem);
 	
-	var _taskInputer = __webpack_require__(47);
+	var _taskInputer = __webpack_require__(60);
 	
 	var _taskInputer2 = _interopRequireDefault(_taskInputer);
 	
@@ -15037,13 +15908,13 @@
 	// 	<div class="main" transition="animate_routerview">
 	//     <taskinputer :category="category"></taskinputer>
 	//     <div class="tasklist">
-	// 			<taskitem v-for="task in tasklist" :task="task" :index="$index"></taskitem>
+	// 			<taskitem v-for="task in tasklist" :task="task" :index="$index" track-by="$index"></taskitem>
 	//     </div>
 	// 		<div class="label-trigger" @click="toggleShowCompletedTask">
 	// 			显示已完成的task
 	// 		</div>
 	// 		<div class="tasklist--finished" v-show="completedShow">
-	// 			<taskitem v-for="task in completedTasklist" :task="task" :index="$index"></taskitem>
+	// 			<taskitem v-for="task in completedTasklist" :task="task" :index="$index" track-by="$index"></taskitem>
 	// 		</div>
 	// 	</div>
 	// </template>
@@ -15146,8 +16017,11 @@
 	// 	@labelTriggerBg: #d8d8d8;
 	//
 	// 	.main{
-	// 		margin-left: @sideMenuWidth;
-	// 		max-width: 800px;
+	// 		padding-left: @sideMenuWidth;
+	// 		padding-right: 100px;
+	// 		width: 100%;
+	// 		box-sizing: border-box;
+	// 		// margin: 0 auto;
 	// 	}
 	// 	.label-trigger{
 	// 		// display: inline-block;
@@ -15164,13 +16038,13 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 43 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(44)
-	__vue_script__ = __webpack_require__(45)
-	__vue_template__ = __webpack_require__(46)
+	__webpack_require__(57)
+	__vue_script__ = __webpack_require__(58)
+	__vue_template__ = __webpack_require__(59)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15178,7 +16052,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/taskItem.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\task\\taskItem.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15187,23 +16061,25 @@
 	})()}
 
 /***/ },
-/* 44 */
+/* 57 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 45 */
+/* 58 */
 /***/ function(module, exports) {
 
 	'use strict';
 	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	// <template>
 	//   <div class="task" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
 	//     <div class="task-checkbox">
 	//       <label class="mdl-checkbox mdl-js-checkbox" v-bind:class="{'is-checked': task.completed}" for="{{task.id}}">
 	//         <input type="checkbox" id="{{task.id}}" class="mdl-checkbox__input" v-on:change = "toggleTask(task)" :checked="task.completed">
-	//         <!-- <span class="mdl-checkbox__label">Married</span> -->
 	//       </label>
 	//     </div>
 	//     <div class="task-content">
@@ -15218,14 +16094,13 @@
 	//     <span class="task-controller">
 	//       <i class="material-icons" @click="deleteTask(task)">clear</i>
 	//     </span>
-	//
 	//   </div>
 	//
 	// </template>
 	//
 	// <script>
 	
-	module.exports = {
+	exports.default = {
 	  props: ['task', 'index'],
 	  data: function data() {
 	    return {
@@ -15266,7 +16141,6 @@
 	      this.taskEditing = task;
 	    },
 	    deleteTask: function deleteTask(task) {
-	
 	      this.$dispatch('delete task', task);
 	    },
 	    doEdit: function doEdit(task) {
@@ -15394,19 +16268,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 46 */
+/* 59 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"task\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\n    <div class=\"task-checkbox\">\n      <label class=\"mdl-checkbox mdl-js-checkbox\" v-bind:class=\"{'is-checked': task.completed}\" for=\"{{task.id}}\">\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n        <!-- <span class=\"mdl-checkbox__label\">Married</span> -->\n      </label>\n    </div>\n    <div class=\"task-content\">\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{{titleAfterParse}}}</div>\n      <div class=\"mdl-textfield mdl-js-textfield task-content-input\">\n        <input class=\"mdl-textfield__input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n      </div>\n      <div class=\"\" v-if=\"task.completed\">\n        {{task.create_time}}\n      </div>\n    </div>\n    <span class=\"task-controller\">\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\n    </span>\n\n  </div>\n\n";
+	module.exports = "\r\n  <div class=\"task\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n    <div class=\"task-checkbox\">\r\n      <label class=\"mdl-checkbox mdl-js-checkbox\" v-bind:class=\"{'is-checked': task.completed}\" for=\"{{task.id}}\">\r\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n      </label>\r\n    </div>\r\n    <div class=\"task-content\">\r\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{{titleAfterParse}}}</div>\r\n      <div class=\"mdl-textfield mdl-js-textfield task-content-input\">\r\n        <input class=\"mdl-textfield__input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n      </div>\r\n      <div class=\"\" v-if=\"task.completed\">\r\n        {{task.create_time}}\r\n      </div>\r\n    </div>\r\n    <span class=\"task-controller\">\r\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\r\n    </span>\r\n  </div>\r\n\r\n";
 
 /***/ },
-/* 47 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(48)
-	__vue_script__ = __webpack_require__(49)
-	__vue_template__ = __webpack_require__(54)
+	__webpack_require__(61)
+	__vue_script__ = __webpack_require__(62)
+	__vue_template__ = __webpack_require__(67)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15414,7 +16288,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/task/taskInputer.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\task\\taskInputer.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15423,13 +16297,13 @@
 	})()}
 
 /***/ },
-/* 48 */
+/* 61 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 49 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15438,15 +16312,15 @@
 		value: true
 	});
 	
-	var _stringify = __webpack_require__(50);
+	var _stringify = __webpack_require__(63);
 	
 	var _stringify2 = _interopRequireDefault(_stringify);
 	
-	var _uploadBabel = __webpack_require__(32);
+	var _uploadBabel = __webpack_require__(45);
 	
 	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
 	
-	var _toolBabel = __webpack_require__(53);
+	var _toolBabel = __webpack_require__(66);
 	
 	var _toolBabel2 = _interopRequireDefault(_toolBabel);
 	
@@ -15589,70 +16463,24 @@
 	// .modal.bottom-sheet{
 	// 	max-height: 60%;
 	// }
+	//
 	// .task-textfield{
 	//   width: 100%;
 	//   background: #fff;
 	//   margin-bottom: 20px;
-	//   padding: 6px;
 	//   box-sizing: border-box;
 	//   &__input{
+	//     width: 100%;
+	//     height: 50px;
+	//     font-size: 20px;
+	//     padding: 6px 10px;
+	//     box-sizing: border-box;
 	//   	border: none;
 	//   	outline: none;
-	//
+	//     &:focus{
+	//       box-shadow: 0 0 5px #ABABAB;
+	//     }
 	//   }
-	// }
-	// .task-inputer{
-	// 	box-sizing: border-box;
-	// 	width:100%;
-	// 	height: 300px;
-	// 	background: @white;
-	// 	&-bar{
-	// 		overflow: hidden;
-	// 	  // padding: 8px;
-	// 	  // border-top: 1px solid #E0E0E0;
-	// 	  >[class^="icon"]{
-	// 	  	display: inline-block;
-	// 	  	width: 20px;
-	// 	  	text-algin: center;
-	// 	  	margin:0 6px;
-	// 	  	font-size: 16px;
-	// 	  }
-	// 	}
-	// 	>textarea{
-	//     width: 100%;
-	//     height: 100%;
-	//     box-sizing: border-box;
-	//     display: block;
-	// 	  padding: 8px;
-	//     font-size: 14px;
-	//     outline: none;
-	//     border:none ;
-	// 	  background: none;
-	// 	  font-family: '微软雅黑';
-	// 	  color: #6B6B6B;
-	// 	  outline: none;
-	// 	  resize:none;
-	// 	  transition: all 0.3s ease-in;
-	//
-	// 	}
-	// }
-	//
-	// .task-images{
-	// 	padding:0 4px;
-	// 	width:100%;
-	// 	background: $white;
-	//   box-sizing: border-box;
-	// 	>div{
-	// 		box-sizing: border-box;
-	// 		width:2	0%;
-	// 		padding:8px 4px;
-	// 		height:140px;
-	// 		display: inline-block;
-	// 	}
-	// 	.img-box{
-	// 		display: block;
-	// 		height:100%;
-	// 	}
 	// }
 	//
 	// </style>
@@ -15660,30 +16488,30 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 50 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(51), __esModule: true };
+	module.exports = { "default": __webpack_require__(64), __esModule: true };
 
 /***/ },
-/* 51 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var core  = __webpack_require__(52)
+	var core  = __webpack_require__(65)
 	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
 	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
 	  return $JSON.stringify.apply($JSON, arguments);
 	};
 
 /***/ },
-/* 52 */
+/* 65 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.3.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 53 */
+/* 66 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -15737,31 +16565,31 @@
 	exports.default = Tool;
 
 /***/ },
-/* 54 */
+/* 67 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div class=\"task-textfield\">\n      <input class=\"task-textfield__input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask(category)\">\n      <!-- <label for=\"\" class=\"task-textfield__label\">Title</label> -->\n    </div>\n";
+	module.exports = "\r\n    <div class=\"task-textfield\">\r\n      <input class=\"task-textfield__input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask(category)\">\r\n      <!-- <label for=\"\" class=\"task-textfield__label\">Title</label> -->\r\n    </div>\r\n";
 
 /***/ },
-/* 55 */
+/* 68 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div class=\"main\" transition=\"animate_routerview\">\n    <taskinputer :category=\"category\"></taskinputer>\n    <div class=\"tasklist\">\n\t\t\t<taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\"></taskitem>\n    </div>\n\t\t<div class=\"label-trigger\" @click=\"toggleShowCompletedTask\">\n\t\t\t显示已完成的task\n\t\t</div>\n\t\t<div class=\"tasklist--finished\" v-show=\"completedShow\">\n\t\t\t<taskitem v-for=\"task in completedTasklist\" :task=\"task\" :index=\"$index\"></taskitem>\n\t\t</div>\n\t</div>\n";
+	module.exports = "\r\n\t<div class=\"main\" transition=\"animate_routerview\">\r\n    <taskinputer :category=\"category\"></taskinputer>\r\n    <div class=\"tasklist\">\r\n\t\t\t<taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"$index\"></taskitem>\r\n    </div>\r\n\t\t<div class=\"label-trigger\" @click=\"toggleShowCompletedTask\">\r\n\t\t\t显示已完成的task\r\n\t\t</div>\r\n\t\t<div class=\"tasklist--finished\" v-show=\"completedShow\">\r\n\t\t\t<taskitem v-for=\"task in completedTasklist\" :task=\"task\" :index=\"$index\" track-by=\"$index\"></taskitem>\r\n\t\t</div>\r\n\t</div>\r\n";
 
 /***/ },
-/* 56 */
+/* 69 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"\" >\n    \t<taskmenu></taskmenu>\n    \t<router-view></router-view>\n  </div>\n";
+	module.exports = "\r\n  <div class=\"\" >\r\n    \t<taskmenu></taskmenu>\r\n    \t<router-view></router-view>\r\n  </div>\r\n";
 
 /***/ },
-/* 57 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(58)
-	__vue_script__ = __webpack_require__(59)
-	__vue_template__ = __webpack_require__(60)
+	__webpack_require__(71)
+	__vue_script__ = __webpack_require__(72)
+	__vue_template__ = __webpack_require__(73)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15769,7 +16597,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/home/home.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\home\\home.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15778,13 +16606,13 @@
 	})()}
 
 /***/ },
-/* 58 */
+/* 71 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 59 */
+/* 72 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -15858,20 +16686,20 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 60 */
+/* 73 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div class=\"home\">\n\t\t\t<div class=\"clock\">\n\t\t\t\t<h1 class=\"time\" v-text=\"currentTime\">\n\t\t\t\t\t13:40\n\t\t\t\t</h1>\n\t\t</div>\n\t</div>\n";
+	module.exports = "\r\n\t<div class=\"home\">\r\n\t\t\t<div class=\"clock\">\r\n\t\t\t\t<h1 class=\"time\" v-text=\"currentTime\">\r\n\t\t\t\t\t13:40\r\n\t\t\t\t</h1>\r\n\t\t</div>\r\n\t</div>\r\n";
 
 /***/ },
-/* 61 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(62)
-	__webpack_require__(63)
-	__vue_script__ = __webpack_require__(64)
-	__vue_template__ = __webpack_require__(65)
+	__webpack_require__(75)
+	__webpack_require__(76)
+	__vue_script__ = __webpack_require__(77)
+	__vue_template__ = __webpack_require__(78)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15879,7 +16707,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/header/header.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\header\\header.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15888,19 +16716,19 @@
 	})()}
 
 /***/ },
-/* 62 */
+/* 75 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 63 */
+/* 76 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 64 */
+/* 77 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -15968,25 +16796,25 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 65 */
+/* 78 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <!-- <header class=\"mdl-layout__header\">\n      <div class=\"mdl-layout__header-row\">\n        <span class=\"mdl-layout-title\">{{$route.params.category}}</span>\n        <div class=\"mdl-layout-spacer\"></div>\n        <nav class=\"mdl-navigation\">\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\n        <span v-if=\"account\" class=\"navigation-account\">\n          <img v-bind:src=\"account.avatar\" alt=\"\"></span>\n        </nav>\n      </div>\n    </header>\n    </div>\n  </header> -->\n  <header class=\"header\">\n\n  </header>\n";
+	module.exports = "\r\n  <!-- <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <span class=\"mdl-layout-title\">{{$route.params.category}}</span>\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n        <span v-if=\"account\" class=\"navigation-account\">\r\n          <img v-bind:src=\"account.avatar\" alt=\"\"></span>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    </div>\r\n  </header> -->\r\n  <header class=\"header\">\r\n\r\n  </header>\r\n";
 
 /***/ },
-/* 66 */
+/* 79 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"\">\n      <appHeader :account=\"account\"></appHeader>\n      <div class=\"page-content\">\n        <router-view ></router-view>\n      </div>\n  </div>\n";
+	module.exports = "\r\n  <div class=\"\">\r\n      <appHeader :account=\"account\"></appHeader>\r\n      <div class=\"page-content\">\r\n        <router-view ></router-view>\r\n      </div>\r\n  </div>\r\n";
 
 /***/ },
-/* 67 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(68)
-	__vue_script__ = __webpack_require__(69)
-	__vue_template__ = __webpack_require__(70)
+	__webpack_require__(81)
+	__vue_script__ = __webpack_require__(82)
+	__vue_template__ = __webpack_require__(83)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15994,7 +16822,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/file/file.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\file\\file.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16003,13 +16831,13 @@
 	})()}
 
 /***/ },
-/* 68 */
+/* 81 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 69 */
+/* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16018,11 +16846,11 @@
 		value: true
 	});
 	
-	var _uploadBabel = __webpack_require__(32);
+	var _uploadBabel = __webpack_require__(45);
 	
 	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
 	
-	var _toolBabel = __webpack_require__(53);
+	var _toolBabel = __webpack_require__(66);
 	
 	var _toolBabel2 = _interopRequireDefault(_toolBabel);
 	
@@ -16163,19 +16991,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 70 */
+/* 83 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div class=\"container\">\n      <ul class=\"collection with-header\" id=\"filelist\">\n        <li class=\"collection-header\" id=\"uploadcontainer\">\n        \t<h4>File List</h4>\n\t\t\t\t<span class=\"material-icons\" id=\"uploadfile\">cloud_upload</span>\n        \t</li>\n        \t<li class=\"collection-item\" v-for=\"file in filelist\">id:{{file._id}} --- isFile:{{file.isfile}} ---- {{file.name}}</li>\n      </ul>\n      <ul id=\"filelist\"></ul>\n\t</div>\n\n";
+	module.exports = "\r\n\t<div class=\"container\">\r\n      <ul class=\"collection with-header\" id=\"filelist\">\r\n        <li class=\"collection-header\" id=\"uploadcontainer\">\r\n        \t<h4>File List</h4>\r\n\t\t\t\t<span class=\"material-icons\" id=\"uploadfile\">cloud_upload</span>\r\n        \t</li>\r\n        \t<li class=\"collection-item\" v-for=\"file in filelist\">id:{{file._id}} --- isFile:{{file.isfile}} ---- {{file.name}}</li>\r\n      </ul>\r\n      <ul id=\"filelist\"></ul>\r\n\t</div>\r\n\r\n";
 
 /***/ },
-/* 71 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(72)
-	__vue_script__ = __webpack_require__(73)
-	__vue_template__ = __webpack_require__(74)
+	__webpack_require__(85)
+	__vue_script__ = __webpack_require__(86)
+	__vue_template__ = __webpack_require__(87)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16183,7 +17011,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/user/login.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\user\\login.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16192,13 +17020,13 @@
 	})()}
 
 /***/ },
-/* 72 */
+/* 85 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 73 */
+/* 86 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16272,18 +17100,18 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 74 */
+/* 87 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"custom-container\" transition=\"animate_routerview\">\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <h3>登录</h3>\n      </div>\n    </div>\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n          <div class=\"mdl-textfield mdl-js-textfield\">\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"user.username\">\n            <label class=\"mdl-textfield__label\" for=\"email\">Email</label>\n            </div>\n        </div>\n      </div>\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <div class=\"mdl-textfield mdl-js-textfield\">\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"user.password\">\n          <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\n        </div>\n      </div>\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">GO!</button>\n        <a v-link=\"{path: '/signup', exact: true}\">还没有账号？立马注册</a>\n      </div>\n    </div>\n  </div>\n";
+	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <h3>登录</h3>\r\n      </div>\r\n    </div>\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n          <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"user.username\">\r\n            <label class=\"mdl-textfield__label\" for=\"email\">Email</label>\r\n            </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"user.password\">\r\n          <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\r\n        </div>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">GO!</button>\r\n        <a v-link=\"{path: '/signup', exact: true}\">还没有账号？立马注册</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
-/* 75 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(76)
-	__vue_template__ = __webpack_require__(77)
+	__vue_script__ = __webpack_require__(89)
+	__vue_template__ = __webpack_require__(90)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16291,7 +17119,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/user/signup.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\components\\user\\signup.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16300,7 +17128,7 @@
 	})()}
 
 /***/ },
-/* 76 */
+/* 89 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16368,13 +17196,13 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 77 */
+/* 90 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"custom-container\" transition=\"animate_routerview\">\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <h3>注册</h3>\n      </div>\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <div class=\"mdl-textfield mdl-js-textfield\">\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\n            <label class=\"mdl-textfield__label\" for=\"email\">邮箱</label>\n          </div>\n        <div class=\"mdl-textfield mdl-js-textfield\">\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\n          <label class=\"mdl-textfield__label\" for=\"password\">密码</label>\n        </div>\n        <div class=\"input-field col s12\">\n            <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\" v-on:click=\"signUp()\">注册</button>\n            <a v-link=\"'login'\">已有账号？直接登录</a>\n        </div>\n      </div>\n    </div>\n  </div>\n";
+	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <h3>注册</h3>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\r\n            <label class=\"mdl-textfield__label\" for=\"email\">邮箱</label>\r\n          </div>\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\r\n          <label class=\"mdl-textfield__label\" for=\"password\">密码</label>\r\n        </div>\r\n        <div class=\"input-field col s12\">\r\n            <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\" v-on:click=\"signUp()\">注册</button>\r\n            <a v-link=\"'login'\">已有账号？直接登录</a>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
-/* 78 */
+/* 91 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

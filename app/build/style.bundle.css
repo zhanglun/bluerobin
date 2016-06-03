@@ -57,8 +57,10 @@
 /* Variables
 /* ====================================================== */
 .main {
-  margin-left: 280px;
-  max-width: 800px;
+  padding-left: 280px;
+  padding-right: 100px;
+  width: 100%;
+  box-sizing: border-box;
 }
 .label-trigger {
   margin: 6px 0;
@@ -178,61 +180,19 @@
   width: 100%;
   background: #fff;
   margin-bottom: 20px;
-  padding: 6px;
   box-sizing: border-box;
 }
 .task-textfield__input {
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  padding: 6px 10px;
+  box-sizing: border-box;
   border: none;
   outline: none;
 }
-.task-inputer {
-  box-sizing: border-box;
-  width: 100%;
-  height: 300px;
-  background: #fff;
-}
-.task-inputer-bar {
-  overflow: hidden;
-}
-.task-inputer-bar > [class^="icon"] {
-  display: inline-block;
-  width: 20px;
-  text-algin: center;
-  margin: 0 6px;
-  font-size: 16px;
-}
-.task-inputer > textarea {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  display: block;
-  padding: 8px;
-  font-size: 14px;
-  border: none ;
-  background: none;
-  font-family: '\5FAE\8F6F\96C5\9ED1';
-  color: #6B6B6B;
-  outline: none;
-  resize: none;
-  -webkit-transition: all 0.3s ease-in;
-  transition: all 0.3s ease-in;
-}
-.task-images {
-  padding: 0 4px;
-  width: 100%;
-  background: $white;
-  box-sizing: border-box;
-}
-.task-images > div {
-  box-sizing: border-box;
-  width: 2	0%;
-  padding: 8px 4px;
-  height: 140px;
-  display: inline-block;
-}
-.task-images .img-box {
-  display: block;
-  height: 100%;
+.task-textfield__input:focus {
+  box-shadow: 0 0 5px #ABABAB;
 }
 .home {
   height: 100%;
