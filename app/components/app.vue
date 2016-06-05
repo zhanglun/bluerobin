@@ -20,19 +20,58 @@
 
 <template>
   <div class="">
-      <appHeader :account="account"></appHeader>
-      <div class="page-content">
-        <router-view ></router-view>
+    <appHeader :account="account"></appHeader>
+    <div class="page-content">
+      <router-view ></router-view>
+    </div>
+    <script type="x-template" id="modal-template">
+      <div class="modal-mask" v-show="show" transition="modal">
+        <div class="modal-wrapper">
+          <div class="modal-container">
+
+            <div class="modal-header">
+              <slot name="header">
+                default header
+              </slot>
+            </div>
+
+            <div class="modal-body">
+              <slot name="body">
+                default body
+              </slot>
+            </div>
+
+            <div class="modal-footer">
+              <slot name="footer">
+                default footer
+                <button class="modal-default-button"
+                  @click="show = false">
+                  OK
+                </button>
+              </slot>
+            </div>
+          </div>
+        </div>
       </div>
+    </script>
   </div>
+
 </template>
 
 
 <script>
+  import Vue from 'vue';
   import Uploader from '../services/upload.babel.js';
   import TaskView from './task/task.vue';
   import HomeView from './home/home.vue';
   import AppHeaderView from './header/header.vue';
+
+  // 创建 modal 组件
+  Vue.component('modal', {
+    template: "#modal-template",
+    props: ['show'],
+  });
+
 
   export default{
     data(){

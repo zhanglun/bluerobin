@@ -9,6 +9,6 @@ package
 scripts/*.js
 scripts/*.map
 
-
+.idea
 
 dump.rdb

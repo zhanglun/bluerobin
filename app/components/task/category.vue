@@ -22,7 +22,7 @@
       data(transition){
 
         let param = null;
-        this.$data.category = this.$route.params.category;
+        this.$data.listId = this.$route.params.listid;
         param = {
           category: this.$data.category,
 					completed: false,

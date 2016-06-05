@@ -41,7 +41,7 @@ router.map({
   '/lists': {
     component: TaskView,
     subRoutes: {
-      '/:category': {
+      '/:id': {
         name: 'list',
         component: CategoryView
       }
