@@ -61,7 +61,7 @@
 		methods: {
 			'loadCompletedTask'(){
           let param = {
-						listid: this.$data.listid,
+						list_id: this.$data.list_id,
 						completed: true,
 					};
 					this.$http.get('tasks', param)

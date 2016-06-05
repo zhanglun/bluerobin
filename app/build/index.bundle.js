@@ -16101,7 +16101,7 @@
 				var _this = this;
 	
 				var param = {
-					listid: this.$data.listid,
+					list_id: this.$data.list_id,
 					completed: true
 				};
 				this.$http.get('tasks', param).then(function (res) {
