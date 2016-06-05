@@ -16063,7 +16063,7 @@
 				var param = null;
 				this.$data.listId = this.$route.params.id;
 				param = {
-					listid: this.$route.params.id,
+					list_id: this.$route.params.id,
 					completed: false
 				};
 	
