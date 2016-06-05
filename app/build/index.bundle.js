@@ -64,33 +64,33 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _home = __webpack_require__(70);
+	var _home = __webpack_require__(75);
 	
 	var _home2 = _interopRequireDefault(_home);
 	
-	var _file = __webpack_require__(80);
+	var _file = __webpack_require__(79);
 	
 	var _file2 = _interopRequireDefault(_file);
 	
-	var _task = __webpack_require__(46);
+	var _task = __webpack_require__(45);
 	
 	var _task2 = _interopRequireDefault(_task);
 	
-	var _category = __webpack_require__(53);
+	var _category = __webpack_require__(52);
 	
 	var _category2 = _interopRequireDefault(_category);
 	
-	var _login = __webpack_require__(84);
+	var _login = __webpack_require__(83);
 	
 	var _login2 = _interopRequireDefault(_login);
 	
-	var _signup = __webpack_require__(88);
+	var _signup = __webpack_require__(87);
 	
 	var _signup2 = _interopRequireDefault(_signup);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(91);
+	__webpack_require__(90);
 	
 	_vue2.default.use(_vueRouter2.default);
 	_vue2.default.use(_vueResource2.default);
@@ -112,9 +112,9 @@
 	var router = new _vueRouter2.default({ linkActiveClass: 'side-menu__item--active' });
 	
 	router.map({
-	  '/file': {
-	    component: _file2.default
-	  },
+	  // '/file': {
+	  //   component: FileView
+	  // },
 	  '/lists': {
 	    component: _task2.default,
 	    subRoutes: {
@@ -129,12 +129,12 @@
 	  },
 	  '/signup': {
 	    component: _signup2.default
-	  },
-	  '/home': {
-	    component: _home2.default
 	  }
 	});
 	
+	// '/home': {
+	//   component: HomeView
+	// }
 	router.redirect({
 	  '*': '/lists/inbox'
 	});
@@ -163,11 +163,11 @@
 	
 	// The only way to mutate the internal state is to dispatch an action.
 	// The actions can be serialized, logged or stored and later replayed.
-	store.dispatch({ type: 'INCREMENT' });
-	// 1
-	store.dispatch({ type: 'INCREMENT' });
-	// 2
-	store.dispatch({ type: 'DECREMENT' });
+	// store.dispatch({ type: 'INCREMENT' });
+	// // 1
+	// store.dispatch({ type: 'INCREMENT' });
+	// // 2
+	// store.dispatch({ type: 'DECREMENT' });
 	// 1
 
 /***/ },
@@ -15380,9 +15380,8 @@
 
 	var __vue_script__, __vue_template__
 	__webpack_require__(42)
-	__webpack_require__(43)
-	__vue_script__ = __webpack_require__(44)
-	__vue_template__ = __webpack_require__(79)
+	__vue_script__ = __webpack_require__(43)
+	__vue_template__ = __webpack_require__(74)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15406,12 +15405,6 @@
 
 /***/ },
 /* 43 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15424,19 +15417,19 @@
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _uploadBabel = __webpack_require__(45);
+	var _uploadBabel = __webpack_require__(44);
 	
 	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
 	
-	var _task = __webpack_require__(46);
+	var _task = __webpack_require__(45);
 	
 	var _task2 = _interopRequireDefault(_task);
 	
-	var _home = __webpack_require__(70);
+	var _taskmenu = __webpack_require__(48);
 	
-	var _home2 = _interopRequireDefault(_home);
+	var _taskmenu2 = _interopRequireDefault(_taskmenu);
 	
-	var _header = __webpack_require__(74);
+	var _header = __webpack_require__(69);
 	
 	var _header2 = _interopRequireDefault(_header);
 	
@@ -15446,29 +15439,11 @@
 	_vue2.default.component('modal', {
 	  template: "#modal-template",
 	  props: ['show']
-	}); // <style lang="less">
-	//  .app{
-	//   height: 100%;
-	//   position: absolute;
-	//   left: 0;
-	//   right: 0;
-	//   bottom: 0;
-	//   top: 0;
-	//  }
-	//  .animate_routerview-transition{
-	//   transition: all 0.4s ease;
-	//  }
-	//  .animate_routerview-enter, .animate_routerview-leave{
-	//   opacity: 0;
-	//   height:0;
-	//   transform: translate3d(20px, 0, 0);
-	//  }
-	//
-	// </style>
-	//
+	});
+	// import HomeView from './home/home.vue';
 	// <template>
 	//   <div class="">
-	//     <appHeader :account="account"></appHeader>
+	//     <appheader :account="account"></appheader>
 	//     <div class="page-content">
 	//       <router-view ></router-view>
 	//     </div>
@@ -15503,37 +15478,34 @@
 	//       </div>
 	//     </script>
 	//   </div>
-	//
 	// </template>
 	//
-	//
 	// <script>
-	
 	
 	exports.default = {
 	  data: function data() {
 	    return {
 	      msg: 'Hello from BlueRobin',
-	      account: {}
+	      account: {},
+	      lists: []
 	    };
 	  },
 	  ready: function ready() {
+	    var _this = this;
 	
 	    componentHandler.upgradeDom();
 	
-	    var vm = this;
-	    vm.$http.get('authenticate').then(function (res) {
-	      console.log(res.data);
-	      vm.$data.account = res.data.user;
+	    this.$http.get('authenticate').then(function (res) {
+	      _this.$data.account = res.data.user;
 	    }, function (err) {
-	      vm.$data.account = false;
-	      vm.$router.go('/login');
+	      _this.$data.account = false;
+	      _this.$router.go('/login');
 	    });
 	  },
 	
 	  components: {
-	    // task: TaskView,
-	    appheader: _header2.default
+	    appheader: _header2.default,
+	    taskmenu: _taskmenu2.default
 	  }
 	};
 	// </script>
@@ -15542,12 +15514,28 @@
 	//   .page-content{
 	//     padding-top: 80px;
 	//   }
+	//   .app{
+	//     height: 100%;
+	//     position: absolute;
+	//     left: 0;
+	//     right: 0;
+	//     bottom: 0;
+	//     top: 0;
+	//   }
+	//   .animate_routerview-transition{
+	//     transition: all 0.4s ease;
+	//   }
+	//   .animate_routerview-enter, .animate_routerview-leave{
+	//     opacity: 0;
+	//     height:0;
+	//     transform: translate3d(20px, 0, 0);
+	//   }
 	// </style>
 	//
 	/* generated by vue-loader */
 
 /***/ },
-/* 45 */
+/* 44 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -15643,13 +15631,13 @@
 	exports.default = uploadInit;
 
 /***/ },
-/* 46 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(47)
-	__vue_script__ = __webpack_require__(48)
-	__vue_template__ = __webpack_require__(69)
+	__webpack_require__(46)
+	__vue_script__ = __webpack_require__(47)
+	__vue_template__ = __webpack_require__(68)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15666,34 +15654,34 @@
 	})()}
 
 /***/ },
-/* 47 */
+/* 46 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 48 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-			value: true
+	  value: true
 	});
 	
-	var _taskmenu = __webpack_require__(49);
+	var _taskmenu = __webpack_require__(48);
 	
 	var _taskmenu2 = _interopRequireDefault(_taskmenu);
 	
-	var _category = __webpack_require__(53);
+	var _category = __webpack_require__(52);
 	
 	var _category2 = _interopRequireDefault(_category);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	// <template>
-	//   <div class="" >
-	//     	<taskmenu></taskmenu>
+	//   <div class="">
+	//     	<taskmenu :lists="lists"></taskmenu>
 	//     	<router-view></router-view>
 	//   </div>
 	// </template>
@@ -15701,103 +15689,94 @@
 	// <script>
 	
 	exports.default = {
-			data: function data() {
-					return {
-							value: '',
-							tasklist: [],
-							category: '',
-							taskOpened: null
-					};
-			},
+	  data: function data() {
+	    return {
+	      value: '',
+	      lists: [],
+	      category: '',
+	      taskOpened: null
+	    };
+	  },
 	
 	
-			route: {
-					data: function data(transition) {
+	  route: {
+	    data: function data(transition) {
+	      // console.log('data!!!!!------>', this.$route);
+	      transition.next();
+	    },
+	    activate: function activate(transition) {
+	      // console.log('hook-example activated!')
+	      transition.next();
+	    },
+	    deactivate: function deactivate(transition) {
+	      // console.log('hook-example deactivated!')
+	      transition.next();
+	    },
+	    canDeactivate: function canDeactivate(transitio) {
+	      console.log('can deactivated!');
+	      // transition.next();
+	      return true;
+	    },
+	    canReuse: function canReuse(transition) {
+	      return true;
+	    }
+	  },
 	
-							console.log('data!!!!!------>', this.$route);
-							var param = null;
-							this.$data.category = this.$route.params.category;
-							param = {
-									category: this.$data.category
-							};
+	  components: {
+	    taskmenu: _taskmenu2.default,
+	    category: _category2.default
+	  },
 	
-							return this.$http.get('tasks', param).then(function (res) {
-									return { tasklist: res.data };
-							});
-					},
-					activate: function activate(transition) {
-							// console.log('hook-example activated!')
-							transition.next();
-					},
-					deactivate: function deactivate(transition) {
-							// console.log('hook-example deactivated!')
-							transition.next();
-					},
-					canDeactivate: function canDeactivate(transitio) {
-							console.log('can deactivated!');
-							// transition.next();
-							return true;
-					},
-					canReuse: function canReuse(transition) {}
-			},
+	  ready: function ready() {
+	    var _this = this;
 	
-			components: {
-					taskmenu: _taskmenu2.default,
-					category: _category2.default
-			},
-	
-			ready: function ready() {
-					console.log(location.href);
-					// this.getTaskList();
-			},
+	    console.log(location.href);
+	    this.$http.get('lists').then(function (res) {
+	      _this.lists = res.data;
+	    });
+	  },
 	
 	
-			methods: {
-					getTaskList: function getTaskList() {
-							var vm = this;
-							vm.$http.get('tasks', { category: this.$route.params.category }).then(function (res) {
-									vm.tasklist = res.data;
-							});
-					}
-			},
-			events: {
-					'create task': function createTask(task) {
-							var vm = this;
-							vm.$http.post('tasks', task).then(function (res) {
-									vm.tasklist.unshift(res.data);
-									setTimeout(function () {
-											componentHandler.upgradeDom('MaterialCheckbox');
-									}, 0);
-							});
-					},
-					'delete task': function deleteTask(task) {
-							var vm = this;
-							vm.$http.delete('tasks/' + task.id).then(function () {
-									vm.tasklist.$remove(task);
-							});
-					},
-					'edit task': function editTask(task) {
-							var vm = this;
-							vm.$http.put('tasks/' + task.id, task).then(function (res) {
-									console.log('edit task success!');
-							});
-					}
-			}
+	  methods: {},
+	  events: {
+	    'create task': function createTask(task) {
+	      var vm = this;
+	      vm.$http.post('tasks', task).then(function (res) {
+	        vm.tasklist.unshift(res.data);
+	        setTimeout(function () {
+	          componentHandler.upgradeDom('MaterialCheckbox');
+	        }, 0);
+	      });
+	    },
+	    'delete task': function deleteTask(task) {
+	      var vm = this;
+	      vm.$http.delete('tasks/' + task.id).then(function () {
+	        vm.tasklist.$remove(task);
+	      });
+	    },
+	    'edit task': function editTask(task) {
+	      var vm = this;
+	      vm.$http.put('tasks/' + task.id, task).then(function (res) {
+	        console.log('edit task success!');
+	      });
+	    }
+	  }
 	};
 	
 	// </script>
 	// <style lang="less">
 	// </style>
+	//
 	/* generated by vue-loader */
 
 /***/ },
-/* 49 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(50)
-	__vue_script__ = __webpack_require__(51)
-	__vue_template__ = __webpack_require__(52)
+	__webpack_require__(49)
+	__vue_script__ = __webpack_require__(50)
+	__vue_template__ = __webpack_require__(51)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15814,13 +15793,13 @@
 	})()}
 
 /***/ },
-/* 50 */
+/* 49 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 51 */
+/* 50 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -15832,24 +15811,24 @@
 	//   <div class="sidebar">
 	//     <ul class="side-menu">
 	//       <li v-for="list in lists">
-	//         <a href="" class="side-menu__item" v-link="{name: 'list', params: {id: list.id}}">
+	//         <a class="side-menu__item" v-link="{name: 'list', params: {id: list.id}}">
 	//           <span class="side-menu__item-content">{{list.name}}</span>
 	//         </a>
 	//       </li>
 	//       <!-- <li>
-	//         <a href="" class="side-menu__item" v-link="{name: 'list', params:{category: 'inbox'}}">
+	//         <a class="side-menu__item" v-link="{name: 'list', params: {id: 'inbox'}}">
 	//           <span class="material-icons">inbox</span>
 	//           <span class="side-menu__item-content">Inbox</span>
 	//         </a>
 	//       </li>
-	//               <li>
-	//         <a href="" class="side-menu__item" v-link="{name: 'list', params:{category: 'today'}}">
+	//       <li>
+	//         <a href="" class="side-menu__item" v-link="{name: 'list', params: {id: 'today'}}">
 	//           <span class="material-icons">today</span>
 	//           <span class="side-menu__item-content">Today</span>
 	//         </a>
 	//       </li>
 	//       <li>
-	//         <a href="" class="side-menu__item" v-link="{name: 'list', params:{category: 'work'}}">
+	//         <a href="" class="side-menu__item" v-link="{name: 'list', params:{id: 'work'}}">
 	//           <span class="material-icons">work</span>
 	//           <span class="side-menu__item-content">Work</span>
 	//         </a>
@@ -15876,24 +15855,19 @@
 	// <script>
 	
 	exports.default = {
+	  props: ['lists'],
 	  data: function data() {
 	    return {
 	      showModal: false,
 	      newList: {
 	        name: ''
-	      },
-	      lists: []
+	      }
 	    };
 	  },
 	  ready: function ready() {
 	    var _this = this;
 	
-	    // 获取 list 列表
-	    this.$http.get('lists').then(function (res) {
-	      _this.lists = res.data;
-	    });
 	    document.addEventListener('keyup', function (e) {
-	
 	      if (e.keyCode == 27) {
 	        _this.showModal = false;
 	      }
@@ -16012,19 +15986,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 52 */
+/* 51 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"sidebar\">\n    <ul class=\"side-menu\">\n      <li v-for=\"list in lists\">\n        <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: list.id}}\">\n          <span class=\"side-menu__item-content\">{{list.name}}</span>\n        </a>\n      </li>\n      <!-- <li>\n        <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'inbox'}}\">\n          <span class=\"material-icons\">inbox</span>\n          <span class=\"side-menu__item-content\">Inbox</span>\n        </a>\n      </li>\n              <li>\n        <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'today'}}\">\n          <span class=\"material-icons\">today</span>\n          <span class=\"side-menu__item-content\">Today</span>\n        </a>\n      </li>\n      <li>\n        <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{category: 'work'}}\">\n          <span class=\"material-icons\">work</span>\n          <span class=\"side-menu__item-content\">Work</span>\n        </a>\n      </li> -->\n    </ul>\n    <div class=\"side-actions\">\n      <span @click=\"showModal = true\">新建分类</span>\n    </div>\n\n    <modal :show=\"showModal\">\n      <h3 slot=\"header\">创建新的任务清单</h3>\n      <div slot=\"body\">\n        这里是 body\n        <input type=\"text\" class=\"text\" v-model=\"newList.name\"/>\n      </div>\n      <div slot=\"footer\">\n        这里是 footer\n        <button @click=\"createNewList\">创建</button>\n      </div>\n    </modal>\n\n  </div>\n";
+	module.exports = "\n  <div class=\"sidebar\">\n    <ul class=\"side-menu\">\n      <li v-for=\"list in lists\">\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: list.id}}\">\n          <span class=\"side-menu__item-content\">{{list.name}}</span>\n        </a>\n      </li>\n      <!-- <li>\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: 'inbox'}}\">\n          <span class=\"material-icons\">inbox</span>\n          <span class=\"side-menu__item-content\">Inbox</span>\n        </a>\n      </li>\n      <li>\n        <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: 'today'}}\">\n          <span class=\"material-icons\">today</span>\n          <span class=\"side-menu__item-content\">Today</span>\n        </a>\n      </li>\n      <li>\n        <a href=\"\" class=\"side-menu__item\" v-link=\"{name: 'list', params:{id: 'work'}}\">\n          <span class=\"material-icons\">work</span>\n          <span class=\"side-menu__item-content\">Work</span>\n        </a>\n      </li> -->\n    </ul>\n    <div class=\"side-actions\">\n      <span @click=\"showModal = true\">新建分类</span>\n    </div>\n\n    <modal :show=\"showModal\">\n      <h3 slot=\"header\">创建新的任务清单</h3>\n      <div slot=\"body\">\n        这里是 body\n        <input type=\"text\" class=\"text\" v-model=\"newList.name\"/>\n      </div>\n      <div slot=\"footer\">\n        这里是 footer\n        <button @click=\"createNewList\">创建</button>\n      </div>\n    </modal>\n\n  </div>\n";
 
 /***/ },
-/* 53 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(54)
-	__vue_script__ = __webpack_require__(55)
-	__vue_template__ = __webpack_require__(68)
+	__webpack_require__(53)
+	__vue_script__ = __webpack_require__(54)
+	__vue_template__ = __webpack_require__(67)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16041,13 +16015,13 @@
 	})()}
 
 /***/ },
-/* 54 */
+/* 53 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 55 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16056,11 +16030,11 @@
 		value: true
 	});
 	
-	var _taskItem = __webpack_require__(56);
+	var _taskItem = __webpack_require__(55);
 	
 	var _taskItem2 = _interopRequireDefault(_taskItem);
 	
-	var _taskInputer = __webpack_require__(60);
+	var _taskInputer = __webpack_require__(59);
 	
 	var _taskInputer2 = _interopRequireDefault(_taskInputer);
 	
@@ -16068,7 +16042,7 @@
 	
 	// <template>
 	// 	<div class="main" transition="animate_routerview">
-	//     <taskinputer :category="category"></taskinputer>
+	//     <taskinputer :listid="listId"></taskinputer>
 	//     <div class="tasklist">
 	// 			<taskitem v-for="task in tasklist" :task="task" :index="$index" track-by="$index"></taskitem>
 	//     </div>
@@ -16087,9 +16061,9 @@
 			data: function data(transition) {
 	
 				var param = null;
-				this.$data.listId = this.$route.params.listid;
+				this.$data.listId = this.$route.params.id;
 				param = {
-					category: this.$data.category,
+					listid: this.$route.params.id,
 					completed: false
 				};
 	
@@ -16112,7 +16086,7 @@
 		data: function data() {
 			return {
 				tasklist: [],
-				category: '',
+				listid: '',
 				completedTasklist: [],
 				completedShow: false
 			};
@@ -16124,13 +16098,14 @@
 		},
 		methods: {
 			'loadCompletedTask': function loadCompletedTask() {
+				var _this = this;
+	
 				var param = {
-					category: this.$data.category,
+					listid: this.$data.listid,
 					completed: true
 				};
-				var vm = this;
 				this.$http.get('tasks', param).then(function (res) {
-					vm.$data.completedTasklist = res.data;
+					_this.$data.completedTasklist = res.data;
 				}, function (err) {});
 			},
 			'toggleShowCompletedTask': function toggleShowCompletedTask() {
@@ -16200,13 +16175,13 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 56 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(57)
-	__vue_script__ = __webpack_require__(58)
-	__vue_template__ = __webpack_require__(59)
+	__webpack_require__(56)
+	__vue_script__ = __webpack_require__(57)
+	__vue_template__ = __webpack_require__(58)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16223,13 +16198,13 @@
 	})()}
 
 /***/ },
-/* 57 */
+/* 56 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 58 */
+/* 57 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16430,19 +16405,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 59 */
+/* 58 */
 /***/ function(module, exports) {
 
 	module.exports = "\n  <div class=\"task\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\n    <div class=\"task-checkbox\">\n      <label class=\"mdl-checkbox mdl-js-checkbox\" v-bind:class=\"{'is-checked': task.completed}\" for=\"{{task.id}}\">\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n      </label>\n    </div>\n    <div class=\"task-content\">\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{{titleAfterParse}}}</div>\n      <div class=\"mdl-textfield mdl-js-textfield task-content-input\">\n        <input class=\"mdl-textfield__input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n      </div>\n      <div class=\"\" v-if=\"task.completed\">\n        {{task.create_time}}\n      </div>\n    </div>\n    <span class=\"task-controller\">\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\n    </span>\n  </div>\n\n";
 
 /***/ },
-/* 60 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(61)
-	__vue_script__ = __webpack_require__(62)
-	__vue_template__ = __webpack_require__(67)
+	__webpack_require__(60)
+	__vue_script__ = __webpack_require__(61)
+	__vue_template__ = __webpack_require__(66)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16459,13 +16434,13 @@
 	})()}
 
 /***/ },
-/* 61 */
+/* 60 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 62 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16474,15 +16449,15 @@
 		value: true
 	});
 	
-	var _stringify = __webpack_require__(63);
+	var _stringify = __webpack_require__(62);
 	
 	var _stringify2 = _interopRequireDefault(_stringify);
 	
-	var _uploadBabel = __webpack_require__(45);
+	var _uploadBabel = __webpack_require__(44);
 	
 	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
 	
-	var _toolBabel = __webpack_require__(66);
+	var _toolBabel = __webpack_require__(65);
 	
 	var _toolBabel2 = _interopRequireDefault(_toolBabel);
 	
@@ -16490,7 +16465,8 @@
 	
 	// <template>
 	//     <div class="task-textfield">
-	//       <input class="task-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask(category)">
+	//       {{listid}}
+	//       <input class="task-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask(list_id)">
 	//       <!-- <label for="" class="task-textfield__label">Title</label> -->
 	//     </div>
 	// </template>
@@ -16506,12 +16482,15 @@
 	}
 	
 	exports.default = {
-		props: ['category'],
+		// props: ['listid'],
+	
 		data: function data() {
 			return {
 				title: 'task inputer',
+				list_id: '',
 				newTask: {
 					title: '',
+					list_id: '',
 					create_time: '',
 					attachments: []
 				},
@@ -16536,6 +16515,7 @@
 			}
 		},
 		ready: function ready() {
+			this.list_id = this.$route.params.id;
 			this.watchData = [this.newTask.title, this.newTask.attachments];
 	
 			localStorage.newTask ? this.newTask = JSON.parse(localStorage.newTask) : null;
@@ -16575,14 +16555,14 @@
 	
 	
 			// 创建任务
-			createTask: function createTask(category) {
+			createTask: function createTask(listid) {
 	
 				if (!this.newTask.title) {
 					return false;
 				}
 	
 				this.$set('newTask.create_time', new Date());
-				this.$set('newTask.category', category);
+				this.$set('newTask.list_id', listid);
 	
 				this.$dispatch('create task', this.newTask);
 	
@@ -16650,30 +16630,30 @@
 	/* generated by vue-loader */
 
 /***/ },
+/* 62 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(63), __esModule: true };
+
+/***/ },
 /* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(64), __esModule: true };
-
-/***/ },
-/* 64 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var core  = __webpack_require__(65)
+	var core  = __webpack_require__(64)
 	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
 	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
 	  return $JSON.stringify.apply($JSON, arguments);
 	};
 
 /***/ },
-/* 65 */
+/* 64 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.3.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 66 */
+/* 65 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16727,31 +16707,147 @@
 	exports.default = Tool;
 
 /***/ },
+/* 66 */
+/***/ function(module, exports) {
+
+	module.exports = "\n    <div class=\"task-textfield\">\n      {{listid}}\n      <input class=\"task-textfield__input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask(list_id)\">\n      <!-- <label for=\"\" class=\"task-textfield__label\">Title</label> -->\n    </div>\n";
+
+/***/ },
 /* 67 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div class=\"task-textfield\">\n      <input class=\"task-textfield__input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask(category)\">\n      <!-- <label for=\"\" class=\"task-textfield__label\">Title</label> -->\n    </div>\n";
+	module.exports = "\n\t<div class=\"main\" transition=\"animate_routerview\">\n    <taskinputer :listid=\"listId\"></taskinputer>\n    <div class=\"tasklist\">\n\t\t\t<taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"$index\"></taskitem>\n    </div>\n\t\t<div class=\"label-trigger\" @click=\"toggleShowCompletedTask\">\n\t\t\t显示已完成的task\n\t\t</div>\n\t\t<div class=\"tasklist--finished\" v-show=\"completedShow\">\n\t\t\t<taskitem v-for=\"task in completedTasklist\" :task=\"task\" :index=\"$index\" track-by=\"$index\"></taskitem>\n\t\t</div>\n\t</div>\n";
 
 /***/ },
 /* 68 */
 /***/ function(module, exports) {
 
-	module.exports = "\n\t<div class=\"main\" transition=\"animate_routerview\">\n    <taskinputer :category=\"category\"></taskinputer>\n    <div class=\"tasklist\">\n\t\t\t<taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"$index\"></taskitem>\n    </div>\n\t\t<div class=\"label-trigger\" @click=\"toggleShowCompletedTask\">\n\t\t\t显示已完成的task\n\t\t</div>\n\t\t<div class=\"tasklist--finished\" v-show=\"completedShow\">\n\t\t\t<taskitem v-for=\"task in completedTasklist\" :task=\"task\" :index=\"$index\" track-by=\"$index\"></taskitem>\n\t\t</div>\n\t</div>\n";
+	module.exports = "\n  <div class=\"\">\n    \t<taskmenu :lists=\"lists\"></taskmenu>\n    \t<router-view></router-view>\n  </div>\n";
 
 /***/ },
 /* 69 */
-/***/ function(module, exports) {
-
-	module.exports = "\n  <div class=\"\" >\n    \t<taskmenu></taskmenu>\n    \t<router-view></router-view>\n  </div>\n";
-
-/***/ },
-/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	__webpack_require__(70)
 	__webpack_require__(71)
 	__vue_script__ = __webpack_require__(72)
 	__vue_template__ = __webpack_require__(73)
+	module.exports = __vue_script__ || {}
+	if (module.exports.__esModule) module.exports = module.exports.default
+	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
+	if (false) {(function () {  module.hot.accept()
+	  var hotAPI = require("vue-hot-reload-api")
+	  hotAPI.install(require("vue"), true)
+	  if (!hotAPI.compatible) return
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/header/header.vue"
+	  if (!module.hot.data) {
+	    hotAPI.createRecord(id, module.exports)
+	  } else {
+	    hotAPI.update(id, module.exports, __vue_template__)
+	  }
+	})()}
+
+/***/ },
+/* 70 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 71 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 72 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	// <style>
+	// </style>
+	//
+	// <template>
+	//   <!-- <header class="mdl-layout__header">
+	//       <div class="mdl-layout__header-row">
+	//         <span class="mdl-layout-title">{{$route.params.category}}</span>
+	//         <div class="mdl-layout-spacer"></div>
+	//         <nav class="mdl-navigation">
+	//         <a class="mdl-navigation__link" href="" v-link="{path: '/task', exact: true}">Task</a>
+	//         <a class="mdl-navigation__link" href="" v-link="{path: '/signup', exact: true}">注册</a>
+	//         <span v-if="account" class="navigation-account">
+	//           <img v-bind:src="account.avatar" alt=""></span>
+	//         </nav>
+	//       </div>
+	//     </header>
+	//     </div>
+	//   </header> -->
+	//   <header class="header">
+	//
+	//   </header>
+	// </template>
+	//
+	// <script>
+	exports.default = {
+	  props: ['account'],
+	  data: function data() {
+	    return {};
+	  },
+	  ready: function ready() {
+	    console.log('header!!!!!');
+	  },
+	
+	  methods: {
+	    logout: function logout() {}
+	  }
+	
+	};
+	
+	// </script>
+	// <style lang="less">
+	// .navigation-account{
+	//   img{
+	//     width: 40px;
+	//     height: 40px;
+	//     border-radius: 100%;
+	//   }
+	// }
+	// .header{
+	//   height: 50px;
+	//   width: 100%;
+	//   background: fade(#fff, 85%);
+	//   position: fixed;
+	//   z-index: 100;
+	// }
+	// </style>
+	//
+	/* generated by vue-loader */
+
+/***/ },
+/* 73 */
+/***/ function(module, exports) {
+
+	module.exports = "\n  <!-- <header class=\"mdl-layout__header\">\n      <div class=\"mdl-layout__header-row\">\n        <span class=\"mdl-layout-title\">{{$route.params.category}}</span>\n        <div class=\"mdl-layout-spacer\"></div>\n        <nav class=\"mdl-navigation\">\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\n        <span v-if=\"account\" class=\"navigation-account\">\n          <img v-bind:src=\"account.avatar\" alt=\"\"></span>\n        </nav>\n      </div>\n    </header>\n    </div>\n  </header> -->\n  <header class=\"header\">\n\n  </header>\n";
+
+/***/ },
+/* 74 */
+/***/ function(module, exports) {
+
+	module.exports = "\n  <div class=\"\">\n    <appheader :account=\"account\"></appheader>\n    <div class=\"page-content\">\n      <router-view ></router-view>\n    </div>\n    <script type=\"x-template\" id=\"modal-template\">\n      <div class=\"modal-mask\" v-show=\"show\" transition=\"modal\">\n        <div class=\"modal-wrapper\">\n          <div class=\"modal-container\">\n\n            <div class=\"modal-header\">\n              <slot name=\"header\">\n                default header\n              </slot>\n            </div>\n\n            <div class=\"modal-body\">\n              <slot name=\"body\">\n                default body\n              </slot>\n            </div>\n\n            <div class=\"modal-footer\">\n              <slot name=\"footer\">\n                default footer\n                <button class=\"modal-default-button\"\n                  @click=\"show = false\">\n                  OK\n                </button>\n              </slot>\n            </div>\n          </div>\n        </div>\n      </div>\n    </script>\n  </div>\n";
+
+/***/ },
+/* 75 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __vue_script__, __vue_template__
+	__webpack_require__(76)
+	__vue_script__ = __webpack_require__(77)
+	__vue_template__ = __webpack_require__(78)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16768,13 +16864,13 @@
 	})()}
 
 /***/ },
-/* 71 */
+/* 76 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 72 */
+/* 77 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16848,135 +16944,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 73 */
+/* 78 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\t<div class=\"home\">\n\t\t\t<div class=\"clock\">\n\t\t\t\t<h1 class=\"time\" v-text=\"currentTime\">\n\t\t\t\t\t13:40\n\t\t\t\t</h1>\n\t\t</div>\n\t</div>\n";
 
 /***/ },
-/* 74 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__webpack_require__(75)
-	__webpack_require__(76)
-	__vue_script__ = __webpack_require__(77)
-	__vue_template__ = __webpack_require__(78)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), true)
-	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/components/header/header.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 75 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 76 */
-/***/ function(module, exports) {
-
-	// removed by extract-text-webpack-plugin
-
-/***/ },
-/* 77 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	// <style>
-	// </style>
-	//
-	// <template>
-	//   <!-- <header class="mdl-layout__header">
-	//       <div class="mdl-layout__header-row">
-	//         <span class="mdl-layout-title">{{$route.params.category}}</span>
-	//         <div class="mdl-layout-spacer"></div>
-	//         <nav class="mdl-navigation">
-	//         <a class="mdl-navigation__link" href="" v-link="{path: '/task', exact: true}">Task</a>
-	//         <a class="mdl-navigation__link" href="" v-link="{path: '/signup', exact: true}">注册</a>
-	//         <span v-if="account" class="navigation-account">
-	//           <img v-bind:src="account.avatar" alt=""></span>
-	//         </nav>
-	//       </div>
-	//     </header>
-	//     </div>
-	//   </header> -->
-	//   <header class="header">
-	//
-	//   </header>
-	// </template>
-	//
-	// <script>
-	exports.default = {
-	  props: ['account'],
-	  data: function data() {
-	    return {};
-	  },
-	  ready: function ready() {
-	    console.log('header!!!!!');
-	  },
-	
-	  methods: {
-	    logout: function logout() {}
-	  }
-	
-	};
-	
-	// </script>
-	// <style lang="less">
-	// .navigation-account{
-	//   img{
-	//     width: 40px;
-	//     height: 40px;
-	//     border-radius: 100%;
-	//   }
-	// }
-	// .header{
-	//   height: 50px;
-	//   width: 100%;
-	//   background: fade(#fff, 85%);
-	//   position: fixed;
-	//   z-index: 100;
-	// }
-	// </style>
-	//
-	/* generated by vue-loader */
-
-/***/ },
-/* 78 */
-/***/ function(module, exports) {
-
-	module.exports = "\n  <!-- <header class=\"mdl-layout__header\">\n      <div class=\"mdl-layout__header-row\">\n        <span class=\"mdl-layout-title\">{{$route.params.category}}</span>\n        <div class=\"mdl-layout-spacer\"></div>\n        <nav class=\"mdl-navigation\">\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\n        <span v-if=\"account\" class=\"navigation-account\">\n          <img v-bind:src=\"account.avatar\" alt=\"\"></span>\n        </nav>\n      </div>\n    </header>\n    </div>\n  </header> -->\n  <header class=\"header\">\n\n  </header>\n";
-
-/***/ },
 /* 79 */
-/***/ function(module, exports) {
-
-	module.exports = "\n  <div class=\"\">\n    <appHeader :account=\"account\"></appHeader>\n    <div class=\"page-content\">\n      <router-view ></router-view>\n    </div>\n    <script type=\"x-template\" id=\"modal-template\">\n      <div class=\"modal-mask\" v-show=\"show\" transition=\"modal\">\n        <div class=\"modal-wrapper\">\n          <div class=\"modal-container\">\n\n            <div class=\"modal-header\">\n              <slot name=\"header\">\n                default header\n              </slot>\n            </div>\n\n            <div class=\"modal-body\">\n              <slot name=\"body\">\n                default body\n              </slot>\n            </div>\n\n            <div class=\"modal-footer\">\n              <slot name=\"footer\">\n                default footer\n                <button class=\"modal-default-button\"\n                  @click=\"show = false\">\n                  OK\n                </button>\n              </slot>\n            </div>\n          </div>\n        </div>\n      </div>\n    </script>\n  </div>\n\n";
-
-/***/ },
-/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(81)
-	__vue_script__ = __webpack_require__(82)
-	__vue_template__ = __webpack_require__(83)
+	__webpack_require__(80)
+	__vue_script__ = __webpack_require__(81)
+	__vue_template__ = __webpack_require__(82)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16993,13 +16973,13 @@
 	})()}
 
 /***/ },
-/* 81 */
+/* 80 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 82 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -17008,11 +16988,11 @@
 		value: true
 	});
 	
-	var _uploadBabel = __webpack_require__(45);
+	var _uploadBabel = __webpack_require__(44);
 	
 	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
 	
-	var _toolBabel = __webpack_require__(66);
+	var _toolBabel = __webpack_require__(65);
 	
 	var _toolBabel2 = _interopRequireDefault(_toolBabel);
 	
@@ -17153,19 +17133,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 83 */
+/* 82 */
 /***/ function(module, exports) {
 
 	module.exports = "\n\t<div class=\"container\">\n      <ul class=\"collection with-header\" id=\"filelist\">\n        <li class=\"collection-header\" id=\"uploadcontainer\">\n        \t<h4>File List</h4>\n\t\t\t\t<span class=\"material-icons\" id=\"uploadfile\">cloud_upload</span>\n        \t</li>\n        \t<li class=\"collection-item\" v-for=\"file in filelist\">id:{{file._id}} --- isFile:{{file.isfile}} ---- {{file.name}}</li>\n      </ul>\n      <ul id=\"filelist\"></ul>\n\t</div>\n\n";
 
 /***/ },
-/* 84 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(85)
-	__vue_script__ = __webpack_require__(86)
-	__vue_template__ = __webpack_require__(87)
+	__webpack_require__(84)
+	__vue_script__ = __webpack_require__(85)
+	__vue_template__ = __webpack_require__(86)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -17182,13 +17162,13 @@
 	})()}
 
 /***/ },
-/* 85 */
+/* 84 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 86 */
+/* 85 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17262,18 +17242,18 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 87 */
+/* 86 */
 /***/ function(module, exports) {
 
 	module.exports = "\n  <div class=\"custom-container\" transition=\"animate_routerview\">\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <h3>登录</h3>\n      </div>\n    </div>\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n          <div class=\"mdl-textfield mdl-js-textfield\">\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"user.username\">\n            <label class=\"mdl-textfield__label\" for=\"email\">Email</label>\n            </div>\n        </div>\n      </div>\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <div class=\"mdl-textfield mdl-js-textfield\">\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"user.password\">\n          <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\n        </div>\n      </div>\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">GO!</button>\n        <a v-link=\"{path: '/signup', exact: true}\">还没有账号？立马注册</a>\n      </div>\n    </div>\n  </div>\n";
 
 /***/ },
-/* 88 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(89)
-	__vue_template__ = __webpack_require__(90)
+	__vue_script__ = __webpack_require__(88)
+	__vue_template__ = __webpack_require__(89)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -17290,7 +17270,7 @@
 	})()}
 
 /***/ },
-/* 89 */
+/* 88 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17358,13 +17338,13 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 90 */
+/* 89 */
 /***/ function(module, exports) {
 
 	module.exports = "\n  <div class=\"custom-container\" transition=\"animate_routerview\">\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <h3>注册</h3>\n      </div>\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <div class=\"mdl-textfield mdl-js-textfield\">\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\n            <label class=\"mdl-textfield__label\" for=\"email\">邮箱</label>\n          </div>\n        <div class=\"mdl-textfield mdl-js-textfield\">\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\n          <label class=\"mdl-textfield__label\" for=\"password\">密码</label>\n        </div>\n        <div class=\"input-field col s12\">\n            <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\" v-on:click=\"signUp()\">注册</button>\n            <a v-link=\"'login'\">已有账号？直接登录</a>\n        </div>\n      </div>\n    </div>\n  </div>\n";
 
 /***/ },
-/* 91 */
+/* 90 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin

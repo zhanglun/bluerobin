@@ -1,6 +1,7 @@
 <template>
     <div class="task-textfield">
-      <input class="task-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask(category)">
+      {{listid}}
+      <input class="task-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask(list_id)">
       <!-- <label for="" class="task-textfield__label">Title</label> -->
     </div>
 </template>
@@ -20,12 +21,14 @@ function guid() {
 }
 
 export default {
-  props: ['category'],
+  // props: ['listid'],
 	data(){
 		return {
 			title: 'task inputer',
+      list_id: '',
 			newTask: {
 				title: '',
+        list_id: '',
 				create_time: '',
 				attachments: []
 			},
@@ -49,6 +52,7 @@ export default {
 		}
 	},
 	ready(){
+    this.list_id = this.$route.params.id;
 		this.watchData = [this.newTask.title, this.newTask.attachments];
 
     localStorage.newTask ? this.newTask = JSON.parse(localStorage.newTask) : null;
@@ -89,14 +93,14 @@ export default {
 		},
 
 		// 创建任务
-		createTask(category){
+		createTask(listid){
 
 			if(!this.newTask.title){
 				return false;
 			}
 
 			this.$set('newTask.create_time', new Date());
-      this.$set('newTask.category', category);
+      this.$set('newTask.list_id', listid);
 
 			this.$dispatch('create task', this.newTask);
 

@@ -35,9 +35,9 @@ var router = new Router({ linkActiveClass: 'side-menu__item--active' });
 
 
 router.map({
-  '/file': {
-    component: FileView
-  },
+  // '/file': {
+  //   component: FileView
+  // },
   '/lists': {
     component: TaskView,
     subRoutes: {
@@ -53,9 +53,9 @@ router.map({
   '/signup': {
     component: UserSignUp
   },
-  '/home': {
-    component: HomeView
-  }
+  // '/home': {
+  //   component: HomeView
+  // }
 });
 
 router.redirect({
@@ -84,9 +84,9 @@ store.subscribe(() =>
 
 // The only way to mutate the internal state is to dispatch an action.
 // The actions can be serialized, logged or stored and later replayed.
-store.dispatch({ type: 'INCREMENT' });
-// 1
-store.dispatch({ type: 'INCREMENT' });
-// 2
-store.dispatch({ type: 'DECREMENT' });
+// store.dispatch({ type: 'INCREMENT' });
+// // 1
+// store.dispatch({ type: 'INCREMENT' });
+// // 2
+// store.dispatch({ type: 'DECREMENT' });
 // 1

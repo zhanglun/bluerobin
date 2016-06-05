@@ -1,6 +1,6 @@
 <template>
 	<div class="main" transition="animate_routerview">
-    <taskinputer :category="category"></taskinputer>
+    <taskinputer :listid="listId"></taskinputer>
     <div class="tasklist">
 			<taskitem v-for="task in tasklist" :task="task" :index="$index" track-by="$index"></taskitem>
     </div>
@@ -22,9 +22,9 @@
       data(transition){
 
         let param = null;
-        this.$data.listId = this.$route.params.listid;
+        this.$data.listId = this.$route.params.id;
         param = {
-          category: this.$data.category,
+          listid: this.$route.params.id,
 					completed: false,
         };
 
@@ -49,7 +49,7 @@
 		data(){
 			return {
 		  	tasklist: [],
-        category: '',
+        listid: '',
 				completedTasklist: [],
 				completedShow: false,
 			}
@@ -61,13 +61,12 @@
 		methods: {
 			'loadCompletedTask'(){
           let param = {
-						category: this.$data.category,
+						listid: this.$data.listid,
 						completed: true,
 					};
-					let vm = this;
 					this.$http.get('tasks', param)
-					.then(function(res){
-						vm.$data.completedTasklist = res.data;
+					.then(res => {
+						this.$data.completedTasklist = res.data;
 					}, function(err){
 
 					});

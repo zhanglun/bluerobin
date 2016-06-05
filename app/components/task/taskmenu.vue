@@ -2,24 +2,24 @@
   <div class="sidebar">
     <ul class="side-menu">
       <li v-for="list in lists">
-        <a href="" class="side-menu__item" v-link="{name: 'list', params: {id: list.id}}">
+        <a class="side-menu__item" v-link="{name: 'list', params: {id: list.id}}">
           <span class="side-menu__item-content">{{list.name}}</span>
         </a>
       </li>
       <!-- <li>
-        <a href="" class="side-menu__item" v-link="{name: 'list', params:{category: 'inbox'}}">
+        <a class="side-menu__item" v-link="{name: 'list', params: {id: 'inbox'}}">
           <span class="material-icons">inbox</span>
           <span class="side-menu__item-content">Inbox</span>
         </a>
       </li>
-              <li>
-        <a href="" class="side-menu__item" v-link="{name: 'list', params:{category: 'today'}}">
+      <li>
+        <a href="" class="side-menu__item" v-link="{name: 'list', params: {id: 'today'}}">
           <span class="material-icons">today</span>
           <span class="side-menu__item-content">Today</span>
         </a>
       </li>
       <li>
-        <a href="" class="side-menu__item" v-link="{name: 'list', params:{category: 'work'}}">
+        <a href="" class="side-menu__item" v-link="{name: 'list', params:{id: 'work'}}">
           <span class="material-icons">work</span>
           <span class="side-menu__item-content">Work</span>
         </a>
@@ -46,23 +46,17 @@
 <script>
 
   export default {
+    props: ['lists'],
     data(){
       return {
         showModal: false,
         newList: {
           name: '',
         },
-        lists: [],
       }
     },
     ready(){
-      // 获取 list 列表
-      this.$http.get('lists')
-        .then(res=>{
-          this.lists = res.data;
-        })
       document.addEventListener('keyup', e => {
-
         if(e.keyCode == 27){
           this.showModal = false;
         }

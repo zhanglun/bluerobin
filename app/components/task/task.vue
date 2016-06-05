@@ -1,6 +1,6 @@
 <template>
-  <div class="" >
-    	<taskmenu></taskmenu>
+  <div class="">
+    	<taskmenu :lists="lists"></taskmenu>
     	<router-view></router-view>
   </div>
 </template>
@@ -15,7 +15,7 @@
 	  data(){
 	  	return {
 		  	value: '',
-		  	tasklist: [],
+		  	lists: [],
         category: '',
         taskOpened: null,
 	  	}
@@ -23,18 +23,8 @@
 
     route: {
       data(transition){
-
-        console.log('data!!!!!------>', this.$route);
-          var param = null;
-          this.$data.category = this.$route.params.category;
-          param = {
-            category: this.$data.category
-          };
-
-          return this.$http.get('tasks', param)
-            .then(function(res){
-              return {tasklist: res.data}
-          });
+        // console.log('data!!!!!------>', this.$route);
+          transition.next();
        },
       activate(transition) {
         // console.log('hook-example activated!')
@@ -50,7 +40,9 @@
         return true;
       },
       canReuse(transition){
+        return true;
       }
+
     },
 
 	  components: {
@@ -60,18 +52,13 @@
 
 	  ready(){
       console.log(location.href);
-			// this.getTaskList();
+			this.$http.get('lists')
+        .then(res => {
+          this.lists =  res.data;
+      });
 	  },
 
 	  methods: {
-			getTaskList() {
-				let vm = this;
-				vm.$http
-					.get('tasks', {category: this.$route.params.category})
-					.then(function(res){
-						vm.tasklist = res.data;
-					});
-			}
 	  },
 	  events: {
 			'create task': function(task){
