@@ -6,24 +6,6 @@
           <span class="side-menu__item-content">{{list.name}}</span>
         </a>
       </li>
-      <!-- <li>
-        <a class="side-menu__item" v-link="{name: 'list', params: {id: 'inbox'}}">
-          <span class="material-icons">inbox</span>
-          <span class="side-menu__item-content">Inbox</span>
-        </a>
-      </li>
-      <li>
-        <a href="" class="side-menu__item" v-link="{name: 'list', params: {id: 'today'}}">
-          <span class="material-icons">today</span>
-          <span class="side-menu__item-content">Today</span>
-        </a>
-      </li>
-      <li>
-        <a href="" class="side-menu__item" v-link="{name: 'list', params:{id: 'work'}}">
-          <span class="material-icons">work</span>
-          <span class="side-menu__item-content">Work</span>
-        </a>
-      </li> -->
     </ul>
     <div class="side-actions">
       <span @click="showModal = true">新建分类</span>

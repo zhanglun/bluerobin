@@ -21,37 +21,33 @@
     </div>
   </div>
 </template>
-
-
 <script>
+  export default {
+    data() {
+      return {
+        registerData: {
+          email: '',
+          password: '',
+        },
+      };
+    },
 
-	export default {
-		data() {
-			return {
-				registerData: {
-					email: '',
-					password: '',
-				}
-			}
-		},
+    ready() {
+      console.log('sign up --->');
+    },
 
-		ready(){
-			console.log('sign up --->');
-		},
-
-		methods: {
-			signUp(){
+    methods: {
+      signUp() {
         let vm = this;
         let data = this.$data.registerData;
         vm.$http.post('user/signup', data)
-          .then(function(res){
-              localStorage.token = res.token;
-              vm.$router.go('/task');
-          }, function(err){
-              console.log(xhr);
+          .then(res => {
+            localStorage.token = res.token;
+            vm.$router.go('/task');
+          }, err => {
+            console.log(err);
           });
-			}
-		}
-
-	}
+      },
+    },
+  };
 </script>

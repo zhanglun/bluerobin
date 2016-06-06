@@ -261,33 +261,6 @@
   position: fixed;
   z-index: 100;
 }
-.home {
-  height: 100%;
-}
-.home .clock {
-  -webkit-user-select: none;
-  color: rgba(255, 255, 255, 0.8);
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-}
-.home .clock > h1 {
-  display: inline-block;
-  font-size: 15em;
-  font-weight: lighter;
-  letter-spacing: -2px;
-  line-height: 0;
-}
-
-
-	#uploadfile{
-		cursor: pointer;
-	}
-
 .login-form {
   width: 400px;
   padding: 14px;

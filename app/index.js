@@ -1,18 +1,16 @@
 require('./public/stylesheets/base.less');
-
 import Vue from 'vue';
 import Router from 'vue-router';
 import VueResource from 'vue-resource';
-import {createStore} from 'redux';
+// import {createStore} from 'redux';
 
 import App from './components/app.vue';
-import HomeView from './components/home/home.vue';
-import FileView from './components/file/file.vue';
+// // import HomeView from './components/home/home.vue';
+// import FileView from './components/file/file.vue';
 import TaskView from './components/task/task.vue';
 import CategoryView from './components/task/category.vue';
 import UserLogin from './components/user/login.vue';
 import UserSignUp from './components/user/signup.vue';
-
 
 Vue.use(Router);
 Vue.use(VueResource);
@@ -21,18 +19,19 @@ Vue.use(VueResource);
 Vue.http.options.root = 'http://localhost:1234/api';
 
 Vue.http.interceptors.push({
-	request: function(request){
-    Vue.http.headers.common['x-access-token'] = localStorage.token;
-		return request;
-	},
-	response: function(response){
-		return response;
-	}
+  request: function(request) {
+    Vue.http.headers.common['x-access-token'] = window.localStorage.token;
+    return request;
+  },
+  response: function(response) {
+    return response;
+  },
 });
 
 // routing
-var router = new Router({ linkActiveClass: 'side-menu__item--active' });
-
+var router = new Router({
+  linkActiveClass: 'side-menu__item--active',
+});
 
 router.map({
   // '/file': {
@@ -43,15 +42,15 @@ router.map({
     subRoutes: {
       '/:id': {
         name: 'list',
-        component: CategoryView
-      }
-    }
+        component: CategoryView,
+      },
+    },
   },
   '/login': {
-    component: UserLogin
+    component: UserLogin,
   },
   '/signup': {
-    component: UserSignUp
+    component: UserSignUp,
   },
   // '/home': {
   //   component: HomeView
@@ -62,25 +61,24 @@ router.redirect({
   '*': '/lists/inbox',
 });
 
-
 router.start(App, '#app');
 
-function counter(state = 0, action) {
-  switch (action.type) {
-  case 'INCREMENT':
-    return state + 1;
-  case 'DECREMENT':
-    return state - 1;
-  default:
-    return state;
-  }
-}
+// function counter(state = 0, action) {
+//   switch (action.type) {
+//   case 'INCREMENT':
+//     return state + 1;
+//   case 'DECREMENT':
+//     return state - 1;
+//   default:
+//     return state;
+//   }
+// }
 
-let store = createStore(counter);
+// let store = createStore(counter);
 
-store.subscribe(() =>
-  console.log(store.getState())
-);
+// store.subscribe(() =>
+//   console.log(store.getState())
+// );
 
 // The only way to mutate the internal state is to dispatch an action.
 // The actions can be serialized, logged or stored and later replayed.
