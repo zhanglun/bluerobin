@@ -50,7 +50,7 @@
     data() {
       return {
         tasklist: [],
-        listid: '',
+        listId: '',
         completedTasklist: [],
         completedShow: false,
       };
@@ -62,7 +62,7 @@
     methods: {
       'loadCompletedTask'() {
         let param = {
-          list_id: this.$data.list_id,
+          list_id: this.$data.listId,
           completed: true,
         };
         this.$http.get('tasks', param)

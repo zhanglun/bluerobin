@@ -23,19 +23,21 @@
 
 <script>
 export default {
-  props: ['account'],
-  data(){
+  props: [
+    'account',
+  ],
+  data() {
     return {
     };
   },
-  ready(){
+  ready() {
     console.log('header!!!!!');
   },
   methods: {
-    logout(){
+    logout() {
 
-    }
-  }
+    },
+  },
 
 };
 
