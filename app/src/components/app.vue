@@ -72,11 +72,12 @@
     },
     created() {
       this.store.subscribe(() => {
-        console.log(this.store.getState().tasks.currentState);
+        console.log(this.store.getState().tasks);
         this.currentState = this.store.getState().tasks.currentState;
       });
     },
     ready() {
+      console.log(this.store.getState().tasks);
       this.currentState = this.store.getState().tasks.currentState;
       this.$http.get('authenticate')
         .then((res) => {

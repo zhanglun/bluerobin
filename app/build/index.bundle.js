@@ -15498,13 +15498,14 @@
 	    var _this = this;
 	
 	    this.store.subscribe(function () {
-	      console.log(_this.store.getState().tasks.currentState);
+	      console.log(_this.store.getState().tasks);
 	      _this.currentState = _this.store.getState().tasks.currentState;
 	    });
 	  },
 	  ready: function ready() {
 	    var _this2 = this;
 	
+	    console.log(this.store.getState().tasks);
 	    this.currentState = this.store.getState().tasks.currentState;
 	    this.$http.get('authenticate').then(function (res) {
 	      _this2.$data.account = res.data.user;
@@ -15662,11 +15663,9 @@
 	  var action = arguments[1];
 	
 	  switch (action.type) {
-	    case 'ADD_TASK':
-	      return {};
 	    case _actionType.CHANGE_STATE:
 	      return {
-	        currentState: state
+	        currentState: state.nextState
 	      };
 	    default:
 	      return state;
