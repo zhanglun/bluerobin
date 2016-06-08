@@ -20,39 +20,6 @@
   -webkit-transform: translate3d(20px, 0, 0);
           transform: translate3d(20px, 0, 0);
 }
-/* ====================================================== */
-/* Variables
-/* ====================================================== */
-.sidebar {
-  float: left;
-  width: 280px;
-  padding: 20px 30px;
-  box-sizing: border-box;
-}
-.side-menu {
-  padding: 0;
-  margin: 0;
-}
-.side-menu__item {
-  box-sizing: border-box;
-  border-radius: 2px;
-  padding: 10px 0 10px 22px;
-  color: #000;
-  text-decoration: none;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-.side-menu__item:hover {
-  background: rgba(0, 0, 0, 0.03);
-}
-.side-menu__item--active {
-  background: #e0e0e0;
-}
-.side-menu__item-content {
-  margin-left: 10px;
-}
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -91,13 +58,13 @@
   float: right;
 }
 /*
- * the following styles are auto-applied to elements with
- * v-transition="modal" when their visiblity is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
+  * the following styles are auto-applied to elements with
+  * v-transition="modal" when their visiblity is toggled
+  * by Vue.js.
+  *
+  * You can easily play with the modal transition by editing
+  * these styles.
+  */
 .modal-enter,
 .modal-leave {
   opacity: 0;
@@ -106,6 +73,66 @@
 .modal-leave .modal-container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+/* ====================================================== */
+/* Variables
+/* ====================================================== */
+.sidebar {
+  float: left;
+  width: 280px;
+  padding: 20px 30px;
+  box-sizing: border-box;
+}
+.side-menu {
+  padding: 0;
+  margin: 0;
+}
+.side-menu__item {
+  box-sizing: border-box;
+  border-radius: 2px;
+  padding: 10px 10px 10px 22px;
+  color: #000;
+  text-decoration: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.side-menu__item .edit {
+  display: none;
+}
+.side-menu__item:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+.side-menu__item--active {
+  background: #e0e0e0;
+}
+.side-menu__item--active .edit {
+  float: right;
+  display: block;
+}
+.side-menu__item-content {
+  margin-left: 10px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+}
+.side-actions {
+  font-size: 14px;
+}
+
+.navigation-account img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+.header {
+  height: 50px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  position: fixed;
+  z-index: 100;
 }
 /* ====================================================== */
 /* Variables
@@ -247,19 +274,6 @@
 }
 .task-textfield__input:focus {
   box-shadow: 0 0 5px #ABABAB;
-}
-
-.navigation-account img {
-  width: 40px;
-  height: 40px;
-  border-radius: 100%;
-}
-.header {
-  height: 50px;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.85);
-  position: fixed;
-  z-index: 100;
 }
 .login-form {
   width: 400px;

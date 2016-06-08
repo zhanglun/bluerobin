@@ -32,7 +32,7 @@
   ],
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "chrome_url_overrides": {
-    "newtab": "index.html"
+    "newtab": "build/index.html"
   },
   "options_ui": {
     "page": "extension/options/options.html",
