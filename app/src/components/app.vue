@@ -2,6 +2,10 @@
   <div class="">
     <appheader :account="account"></appheader>
     <div class="page-content">
+      <p>
+        {{currentState}}
+      </p>
+      <button type="button" name="button" @click="changeState">test</button>
       <router-view ></router-view>
     </div>
     <script type="x-template" id="modal-template">
@@ -39,6 +43,12 @@
 
 <script>
   import Vue from 'vue';
+
+  import { createStore } from 'redux';
+  import reducers from '../reducers';
+  import { changeMyState } from '../actions';
+  console.log(changeMyState);
+
   import TaskMenu from './task/taskmenu.vue';
   import HeaderView from './header/header.vue';
 
@@ -56,18 +66,31 @@
         msg: 'Hello from BlueRobin',
         account: {},
         lists: [],
+        store: createStore(reducers),
+        currentState: '',
       };
     },
+    created() {
+      this.store.subscribe(() => {
+        console.log(this.store.getState().tasks.currentState);
+        this.currentState = this.store.getState().tasks.currentState;
+      });
+    },
     ready() {
-      componentHandler.upgradeDom();
-
+      this.currentState = this.store.getState().tasks.currentState;
       this.$http.get('authenticate')
-        .then(res => {
+        .then((res) => {
           this.$data.account = res.data.user;
         }, () => {
           this.$data.account = false;
           this.$router.go('/login');
         });
+    },
+    methods: {
+      changeState() {
+        const nextState = '新しい状態';
+        this.store.dispatch(changeMyState(nextState));
+      }
     },
     components: {
       appheader: HeaderView,

@@ -7,17 +7,17 @@ var webpack = require('webpack');
 var webpackConfig = require('./webpack.config.js');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-gulp.task('babel', function(){
-	return gulp.src(['./app/**/*.babel.js'])
-	.pipe(sourcemaps.init())
-	.pipe(babel({
-		presets: ['es2015']
-	}))
-	.pipe(sourcemaps.write('.'))
-  .pipe(rename(function(path){
-    path.basename = path.basename.replace(/.babel/ig,'');
+gulp.task('babel', function() {
+  return gulp.src(['./app/**/*.babel.js'])
+  .pipe(sourcemaps.init())
+  .pipe(babel({
+    presets: ['es2015']
   }))
-	.pipe(gulp.dest('./app'));
+  .pipe(sourcemaps.write('.'))
+  .pipe(rename(function(path) {
+    path.basename = path.basename.replace(/.babel/ig, '');
+  }))
+  .pipe(gulp.dest('./app'));
 });
 
 // 开发
@@ -30,17 +30,16 @@ var devCompiler = webpack(webpackConfigDev);
 
 gulp.task('webpack:build-dev', function() {
   devCompiler.run(function(err, status) {
-    if (err){
-			throw new gutil.PluginError('webpack:build-dev', err);
-		}
+    if (err) {
+      throw new gutil.PluginError('webpack:build-dev', err);
+    }
     gutil.log('[webpack:build-dev]', status.toString({
       colors: true
     }));
   });
 });
 
-
-gulp.task('webpack:build', function(){
+gulp.task('webpack:build', function() {
     // modify some webpack config options
   var myConfig = Object.create(webpackConfig);
   myConfig.plugins = myConfig.plugins.concat(
@@ -57,9 +56,9 @@ gulp.task('webpack:build', function(){
 
   // run webpack
   webpack(myConfig, function(err, stats, callback) {
-    if(err){
-			throw new gutil.PluginError('webpack:build', err);
-		}
+    if (err) {
+      throw new gutil.PluginError('webpack:build', err);
+    }
     gutil.log('[webpack:build]', stats.toString({
       colors: true
     }));
@@ -67,10 +66,9 @@ gulp.task('webpack:build', function(){
   });
 });
 
-gulp.task('watch', function(){
-  gulp.watch(['./app/**/*.js', './app/components/*.vue', './app/components/**/*.vue', './app/**/*.less'], ['webpack:build-dev']);
+gulp.task('watch', function() {
+  gulp.watch(['./app/**/*.js', './app/src/components/*.vue', './app/src/components/**/*.vue', './app/**/*.less'], ['webpack:build-dev']);
 });
-
 
 gulp.task('default', [
   'webpack:build-dev',

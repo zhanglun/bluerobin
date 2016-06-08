@@ -58,31 +58,31 @@
 	
 	var _vueResource2 = _interopRequireDefault(_vueResource);
 	
-	var _app = __webpack_require__(28);
+	var _redux = __webpack_require__(28);
+	
+	var _app = __webpack_require__(41);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _task = __webpack_require__(41);
+	var _task = __webpack_require__(58);
 	
 	var _task2 = _interopRequireDefault(_task);
 	
-	var _category = __webpack_require__(44);
+	var _category = __webpack_require__(61);
 	
 	var _category2 = _interopRequireDefault(_category);
 	
-	var _login = __webpack_require__(62);
+	var _login = __webpack_require__(79);
 	
 	var _login2 = _interopRequireDefault(_login);
 	
-	var _signup = __webpack_require__(66);
+	var _signup = __webpack_require__(83);
 	
 	var _signup2 = _interopRequireDefault(_signup);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(69);
-	// import {createStore} from 'redux';
-	
+	__webpack_require__(86);
 	// // import HomeView from './components/home/home.vue';
 	// import FileView from './components/file/file.vue';
 	
@@ -137,30 +137,33 @@
 	
 	router.start(_app2.default, '#app');
 	
-	// function counter(state = 0, action) {
-	//   switch (action.type) {
-	//   case 'INCREMENT':
-	//     return state + 1;
-	//   case 'DECREMENT':
-	//     return state - 1;
-	//   default:
-	//     return state;
-	//   }
-	// }
-
-	// let store = createStore(counter);
-
-	// store.subscribe(() =>
-	//   console.log(store.getState())
-	// );
-
+	function counter() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case 'INCREMENT':
+	      return state + 1;
+	    case 'DECREMENT':
+	      return state - 1;
+	    default:
+	      return state;
+	  }
+	}
+	
+	var store = (0, _redux.createStore)(counter);
+	
+	store.subscribe(function () {
+	  return console.log(store.getState());
+	});
+	
 	// The only way to mutate the internal state is to dispatch an action.
 	// The actions can be serialized, logged or stored and later replayed.
-	// store.dispatch({ type: 'INCREMENT' });
-	// // 1
-	// store.dispatch({ type: 'INCREMENT' });
-	// // 2
-	// store.dispatch({ type: 'DECREMENT' });
+	store.dispatch({ type: 'INCREMENT' });
+	// 1
+	store.dispatch({ type: 'INCREMENT' });
+	// 2
+	store.dispatch({ type: 'DECREMENT' });
 	// 1
 
 /***/ },
@@ -14531,10 +14534,850 @@
 /* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	
+	exports.__esModule = true;
+	exports.compose = exports.applyMiddleware = exports.bindActionCreators = exports.combineReducers = exports.createStore = undefined;
+	
+	var _createStore = __webpack_require__(29);
+	
+	var _createStore2 = _interopRequireDefault(_createStore);
+	
+	var _combineReducers = __webpack_require__(36);
+	
+	var _combineReducers2 = _interopRequireDefault(_combineReducers);
+	
+	var _bindActionCreators = __webpack_require__(38);
+	
+	var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
+	
+	var _applyMiddleware = __webpack_require__(39);
+	
+	var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
+	
+	var _compose = __webpack_require__(40);
+	
+	var _compose2 = _interopRequireDefault(_compose);
+	
+	var _warning = __webpack_require__(37);
+	
+	var _warning2 = _interopRequireDefault(_warning);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	/*
+	* This is a dummy function to check if the function name has been altered by minification.
+	* If the function has been minified and NODE_ENV !== 'production', warn the user.
+	*/
+	function isCrushed() {}
+	
+	if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' && isCrushed.name !== 'isCrushed') {
+	  (0, _warning2["default"])('You are currently using minified code outside of NODE_ENV === \'production\'. ' + 'This means that you are running a slower development build of Redux. ' + 'You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify ' + 'or DefinePlugin for webpack (http://stackoverflow.com/questions/30030031) ' + 'to ensure you have the correct code for your production build.');
+	}
+	
+	exports.createStore = _createStore2["default"];
+	exports.combineReducers = _combineReducers2["default"];
+	exports.bindActionCreators = _bindActionCreators2["default"];
+	exports.applyMiddleware = _applyMiddleware2["default"];
+	exports.compose = _compose2["default"];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports.ActionTypes = undefined;
+	exports["default"] = createStore;
+	
+	var _isPlainObject = __webpack_require__(30);
+	
+	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
+	
+	var _symbolObservable = __webpack_require__(34);
+	
+	var _symbolObservable2 = _interopRequireDefault(_symbolObservable);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	/**
+	 * These are private action types reserved by Redux.
+	 * For any unknown actions, you must return the current state.
+	 * If the current state is undefined, you must return the initial state.
+	 * Do not reference these action types directly in your code.
+	 */
+	var ActionTypes = exports.ActionTypes = {
+	  INIT: '@@redux/INIT'
+	};
+	
+	/**
+	 * Creates a Redux store that holds the state tree.
+	 * The only way to change the data in the store is to call `dispatch()` on it.
+	 *
+	 * There should only be a single store in your app. To specify how different
+	 * parts of the state tree respond to actions, you may combine several reducers
+	 * into a single reducer function by using `combineReducers`.
+	 *
+	 * @param {Function} reducer A function that returns the next state tree, given
+	 * the current state tree and the action to handle.
+	 *
+	 * @param {any} [initialState] The initial state. You may optionally specify it
+	 * to hydrate the state from the server in universal apps, or to restore a
+	 * previously serialized user session.
+	 * If you use `combineReducers` to produce the root reducer function, this must be
+	 * an object with the same shape as `combineReducers` keys.
+	 *
+	 * @param {Function} enhancer The store enhancer. You may optionally specify it
+	 * to enhance the store with third-party capabilities such as middleware,
+	 * time travel, persistence, etc. The only store enhancer that ships with Redux
+	 * is `applyMiddleware()`.
+	 *
+	 * @returns {Store} A Redux store that lets you read the state, dispatch actions
+	 * and subscribe to changes.
+	 */
+	function createStore(reducer, initialState, enhancer) {
+	  var _ref2;
+	
+	  if (typeof initialState === 'function' && typeof enhancer === 'undefined') {
+	    enhancer = initialState;
+	    initialState = undefined;
+	  }
+	
+	  if (typeof enhancer !== 'undefined') {
+	    if (typeof enhancer !== 'function') {
+	      throw new Error('Expected the enhancer to be a function.');
+	    }
+	
+	    return enhancer(createStore)(reducer, initialState);
+	  }
+	
+	  if (typeof reducer !== 'function') {
+	    throw new Error('Expected the reducer to be a function.');
+	  }
+	
+	  var currentReducer = reducer;
+	  var currentState = initialState;
+	  var currentListeners = [];
+	  var nextListeners = currentListeners;
+	  var isDispatching = false;
+	
+	  function ensureCanMutateNextListeners() {
+	    if (nextListeners === currentListeners) {
+	      nextListeners = currentListeners.slice();
+	    }
+	  }
+	
+	  /**
+	   * Reads the state tree managed by the store.
+	   *
+	   * @returns {any} The current state tree of your application.
+	   */
+	  function getState() {
+	    return currentState;
+	  }
+	
+	  /**
+	   * Adds a change listener. It will be called any time an action is dispatched,
+	   * and some part of the state tree may potentially have changed. You may then
+	   * call `getState()` to read the current state tree inside the callback.
+	   *
+	   * You may call `dispatch()` from a change listener, with the following
+	   * caveats:
+	   *
+	   * 1. The subscriptions are snapshotted just before every `dispatch()` call.
+	   * If you subscribe or unsubscribe while the listeners are being invoked, this
+	   * will not have any effect on the `dispatch()` that is currently in progress.
+	   * However, the next `dispatch()` call, whether nested or not, will use a more
+	   * recent snapshot of the subscription list.
+	   *
+	   * 2. The listener should not expect to see all state changes, as the state
+	   * might have been updated multiple times during a nested `dispatch()` before
+	   * the listener is called. It is, however, guaranteed that all subscribers
+	   * registered before the `dispatch()` started will be called with the latest
+	   * state by the time it exits.
+	   *
+	   * @param {Function} listener A callback to be invoked on every dispatch.
+	   * @returns {Function} A function to remove this change listener.
+	   */
+	  function subscribe(listener) {
+	    if (typeof listener !== 'function') {
+	      throw new Error('Expected listener to be a function.');
+	    }
+	
+	    var isSubscribed = true;
+	
+	    ensureCanMutateNextListeners();
+	    nextListeners.push(listener);
+	
+	    return function unsubscribe() {
+	      if (!isSubscribed) {
+	        return;
+	      }
+	
+	      isSubscribed = false;
+	
+	      ensureCanMutateNextListeners();
+	      var index = nextListeners.indexOf(listener);
+	      nextListeners.splice(index, 1);
+	    };
+	  }
+	
+	  /**
+	   * Dispatches an action. It is the only way to trigger a state change.
+	   *
+	   * The `reducer` function, used to create the store, will be called with the
+	   * current state tree and the given `action`. Its return value will
+	   * be considered the **next** state of the tree, and the change listeners
+	   * will be notified.
+	   *
+	   * The base implementation only supports plain object actions. If you want to
+	   * dispatch a Promise, an Observable, a thunk, or something else, you need to
+	   * wrap your store creating function into the corresponding middleware. For
+	   * example, see the documentation for the `redux-thunk` package. Even the
+	   * middleware will eventually dispatch plain object actions using this method.
+	   *
+	   * @param {Object} action A plain object representing “what changed”. It is
+	   * a good idea to keep actions serializable so you can record and replay user
+	   * sessions, or use the time travelling `redux-devtools`. An action must have
+	   * a `type` property which may not be `undefined`. It is a good idea to use
+	   * string constants for action types.
+	   *
+	   * @returns {Object} For convenience, the same action object you dispatched.
+	   *
+	   * Note that, if you use a custom middleware, it may wrap `dispatch()` to
+	   * return something else (for example, a Promise you can await).
+	   */
+	  function dispatch(action) {
+	    if (!(0, _isPlainObject2["default"])(action)) {
+	      throw new Error('Actions must be plain objects. ' + 'Use custom middleware for async actions.');
+	    }
+	
+	    if (typeof action.type === 'undefined') {
+	      throw new Error('Actions may not have an undefined "type" property. ' + 'Have you misspelled a constant?');
+	    }
+	
+	    if (isDispatching) {
+	      throw new Error('Reducers may not dispatch actions.');
+	    }
+	
+	    try {
+	      isDispatching = true;
+	      currentState = currentReducer(currentState, action);
+	    } finally {
+	      isDispatching = false;
+	    }
+	
+	    var listeners = currentListeners = nextListeners;
+	    for (var i = 0; i < listeners.length; i++) {
+	      listeners[i]();
+	    }
+	
+	    return action;
+	  }
+	
+	  /**
+	   * Replaces the reducer currently used by the store to calculate the state.
+	   *
+	   * You might need this if your app implements code splitting and you want to
+	   * load some of the reducers dynamically. You might also need this if you
+	   * implement a hot reloading mechanism for Redux.
+	   *
+	   * @param {Function} nextReducer The reducer for the store to use instead.
+	   * @returns {void}
+	   */
+	  function replaceReducer(nextReducer) {
+	    if (typeof nextReducer !== 'function') {
+	      throw new Error('Expected the nextReducer to be a function.');
+	    }
+	
+	    currentReducer = nextReducer;
+	    dispatch({ type: ActionTypes.INIT });
+	  }
+	
+	  /**
+	   * Interoperability point for observable/reactive libraries.
+	   * @returns {observable} A minimal observable of state changes.
+	   * For more information, see the observable proposal:
+	   * https://github.com/zenparsing/es-observable
+	   */
+	  function observable() {
+	    var _ref;
+	
+	    var outerSubscribe = subscribe;
+	    return _ref = {
+	      /**
+	       * The minimal observable subscription method.
+	       * @param {Object} observer Any object that can be used as an observer.
+	       * The observer object should have a `next` method.
+	       * @returns {subscription} An object with an `unsubscribe` method that can
+	       * be used to unsubscribe the observable from the store, and prevent further
+	       * emission of values from the observable.
+	       */
+	
+	      subscribe: function subscribe(observer) {
+	        if (typeof observer !== 'object') {
+	          throw new TypeError('Expected the observer to be an object.');
+	        }
+	
+	        function observeState() {
+	          if (observer.next) {
+	            observer.next(getState());
+	          }
+	        }
+	
+	        observeState();
+	        var unsubscribe = outerSubscribe(observeState);
+	        return { unsubscribe: unsubscribe };
+	      }
+	    }, _ref[_symbolObservable2["default"]] = function () {
+	      return this;
+	    }, _ref;
+	  }
+	
+	  // When a store is created, an "INIT" action is dispatched so that every
+	  // reducer returns their initial state. This effectively populates
+	  // the initial state tree.
+	  dispatch({ type: ActionTypes.INIT });
+	
+	  return _ref2 = {
+	    dispatch: dispatch,
+	    subscribe: subscribe,
+	    getState: getState,
+	    replaceReducer: replaceReducer
+	  }, _ref2[_symbolObservable2["default"]] = observable, _ref2;
+	}
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var getPrototype = __webpack_require__(31),
+	    isHostObject = __webpack_require__(32),
+	    isObjectLike = __webpack_require__(33);
+	
+	/** `Object#toString` result references. */
+	var objectTag = '[object Object]';
+	
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+	
+	/** Used to resolve the decompiled source of functions. */
+	var funcToString = Function.prototype.toString;
+	
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+	
+	/** Used to infer the `Object` constructor. */
+	var objectCtorString = funcToString.call(Object);
+	
+	/**
+	 * Used to resolve the
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objectToString = objectProto.toString;
+	
+	/**
+	 * Checks if `value` is a plain object, that is, an object created by the
+	 * `Object` constructor or one with a `[[Prototype]]` of `null`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.8.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a plain object,
+	 *  else `false`.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 * }
+	 *
+	 * _.isPlainObject(new Foo);
+	 * // => false
+	 *
+	 * _.isPlainObject([1, 2, 3]);
+	 * // => false
+	 *
+	 * _.isPlainObject({ 'x': 0, 'y': 0 });
+	 * // => true
+	 *
+	 * _.isPlainObject(Object.create(null));
+	 * // => true
+	 */
+	function isPlainObject(value) {
+	  if (!isObjectLike(value) ||
+	      objectToString.call(value) != objectTag || isHostObject(value)) {
+	    return false;
+	  }
+	  var proto = getPrototype(value);
+	  if (proto === null) {
+	    return true;
+	  }
+	  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
+	  return (typeof Ctor == 'function' &&
+	    Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString);
+	}
+	
+	module.exports = isPlainObject;
+
+
+/***/ },
+/* 31 */
+/***/ function(module, exports) {
+
+	/* Built-in method references for those with the same name as other `lodash` methods. */
+	var nativeGetPrototype = Object.getPrototypeOf;
+	
+	/**
+	 * Gets the `[[Prototype]]` of `value`.
+	 *
+	 * @private
+	 * @param {*} value The value to query.
+	 * @returns {null|Object} Returns the `[[Prototype]]`.
+	 */
+	function getPrototype(value) {
+	  return nativeGetPrototype(Object(value));
+	}
+	
+	module.exports = getPrototype;
+
+
+/***/ },
+/* 32 */
+/***/ function(module, exports) {
+
+	/**
+	 * Checks if `value` is a host object in IE < 9.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
+	 */
+	function isHostObject(value) {
+	  // Many host objects are `Object` objects that can coerce to strings
+	  // despite having improperly defined `toString` methods.
+	  var result = false;
+	  if (value != null && typeof value.toString != 'function') {
+	    try {
+	      result = !!(value + '');
+	    } catch (e) {}
+	  }
+	  return result;
+	}
+	
+	module.exports = isHostObject;
+
+
+/***/ },
+/* 33 */
+/***/ function(module, exports) {
+
+	/**
+	 * Checks if `value` is object-like. A value is object-like if it's not `null`
+	 * and has a `typeof` result of "object".
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 * @example
+	 *
+	 * _.isObjectLike({});
+	 * // => true
+	 *
+	 * _.isObjectLike([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObjectLike(_.noop);
+	 * // => false
+	 *
+	 * _.isObjectLike(null);
+	 * // => false
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+	
+	module.exports = isObjectLike;
+
+
+/***/ },
+/* 34 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
+	'use strict';
+	
+	module.exports = __webpack_require__(35)(global || window || this);
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 35 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	module.exports = function symbolObservablePonyfill(root) {
+		var result;
+		var Symbol = root.Symbol;
+	
+		if (typeof Symbol === 'function') {
+			if (Symbol.observable) {
+				result = Symbol.observable;
+			} else {
+				result = Symbol('observable');
+				Symbol.observable = result;
+			}
+		} else {
+			result = '@@observable';
+		}
+	
+		return result;
+	};
+
+
+/***/ },
+/* 36 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	
+	exports.__esModule = true;
+	exports["default"] = combineReducers;
+	
+	var _createStore = __webpack_require__(29);
+	
+	var _isPlainObject = __webpack_require__(30);
+	
+	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
+	
+	var _warning = __webpack_require__(37);
+	
+	var _warning2 = _interopRequireDefault(_warning);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function getUndefinedStateErrorMessage(key, action) {
+	  var actionType = action && action.type;
+	  var actionName = actionType && '"' + actionType.toString() + '"' || 'an action';
+	
+	  return 'Given action ' + actionName + ', reducer "' + key + '" returned undefined. ' + 'To ignore an action, you must explicitly return the previous state.';
+	}
+	
+	function getUnexpectedStateShapeWarningMessage(inputState, reducers, action) {
+	  var reducerKeys = Object.keys(reducers);
+	  var argumentName = action && action.type === _createStore.ActionTypes.INIT ? 'initialState argument passed to createStore' : 'previous state received by the reducer';
+	
+	  if (reducerKeys.length === 0) {
+	    return 'Store does not have a valid reducer. Make sure the argument passed ' + 'to combineReducers is an object whose values are reducers.';
+	  }
+	
+	  if (!(0, _isPlainObject2["default"])(inputState)) {
+	    return 'The ' + argumentName + ' has unexpected type of "' + {}.toString.call(inputState).match(/\s([a-z|A-Z]+)/)[1] + '". Expected argument to be an object with the following ' + ('keys: "' + reducerKeys.join('", "') + '"');
+	  }
+	
+	  var unexpectedKeys = Object.keys(inputState).filter(function (key) {
+	    return !reducers.hasOwnProperty(key);
+	  });
+	
+	  if (unexpectedKeys.length > 0) {
+	    return 'Unexpected ' + (unexpectedKeys.length > 1 ? 'keys' : 'key') + ' ' + ('"' + unexpectedKeys.join('", "') + '" found in ' + argumentName + '. ') + 'Expected to find one of the known reducer keys instead: ' + ('"' + reducerKeys.join('", "') + '". Unexpected keys will be ignored.');
+	  }
+	}
+	
+	function assertReducerSanity(reducers) {
+	  Object.keys(reducers).forEach(function (key) {
+	    var reducer = reducers[key];
+	    var initialState = reducer(undefined, { type: _createStore.ActionTypes.INIT });
+	
+	    if (typeof initialState === 'undefined') {
+	      throw new Error('Reducer "' + key + '" returned undefined during initialization. ' + 'If the state passed to the reducer is undefined, you must ' + 'explicitly return the initial state. The initial state may ' + 'not be undefined.');
+	    }
+	
+	    var type = '@@redux/PROBE_UNKNOWN_ACTION_' + Math.random().toString(36).substring(7).split('').join('.');
+	    if (typeof reducer(undefined, { type: type }) === 'undefined') {
+	      throw new Error('Reducer "' + key + '" returned undefined when probed with a random type. ' + ('Don\'t try to handle ' + _createStore.ActionTypes.INIT + ' or other actions in "redux/*" ') + 'namespace. They are considered private. Instead, you must return the ' + 'current state for any unknown actions, unless it is undefined, ' + 'in which case you must return the initial state, regardless of the ' + 'action type. The initial state may not be undefined.');
+	    }
+	  });
+	}
+	
+	/**
+	 * Turns an object whose values are different reducer functions, into a single
+	 * reducer function. It will call every child reducer, and gather their results
+	 * into a single state object, whose keys correspond to the keys of the passed
+	 * reducer functions.
+	 *
+	 * @param {Object} reducers An object whose values correspond to different
+	 * reducer functions that need to be combined into one. One handy way to obtain
+	 * it is to use ES6 `import * as reducers` syntax. The reducers may never return
+	 * undefined for any action. Instead, they should return their initial state
+	 * if the state passed to them was undefined, and the current state for any
+	 * unrecognized action.
+	 *
+	 * @returns {Function} A reducer function that invokes every reducer inside the
+	 * passed object, and builds a state object with the same shape.
+	 */
+	function combineReducers(reducers) {
+	  var reducerKeys = Object.keys(reducers);
+	  var finalReducers = {};
+	  for (var i = 0; i < reducerKeys.length; i++) {
+	    var key = reducerKeys[i];
+	    if (typeof reducers[key] === 'function') {
+	      finalReducers[key] = reducers[key];
+	    }
+	  }
+	  var finalReducerKeys = Object.keys(finalReducers);
+	
+	  var sanityError;
+	  try {
+	    assertReducerSanity(finalReducers);
+	  } catch (e) {
+	    sanityError = e;
+	  }
+	
+	  return function combination() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    var action = arguments[1];
+	
+	    if (sanityError) {
+	      throw sanityError;
+	    }
+	
+	    if (process.env.NODE_ENV !== 'production') {
+	      var warningMessage = getUnexpectedStateShapeWarningMessage(state, finalReducers, action);
+	      if (warningMessage) {
+	        (0, _warning2["default"])(warningMessage);
+	      }
+	    }
+	
+	    var hasChanged = false;
+	    var nextState = {};
+	    for (var i = 0; i < finalReducerKeys.length; i++) {
+	      var key = finalReducerKeys[i];
+	      var reducer = finalReducers[key];
+	      var previousStateForKey = state[key];
+	      var nextStateForKey = reducer(previousStateForKey, action);
+	      if (typeof nextStateForKey === 'undefined') {
+	        var errorMessage = getUndefinedStateErrorMessage(key, action);
+	        throw new Error(errorMessage);
+	      }
+	      nextState[key] = nextStateForKey;
+	      hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
+	    }
+	    return hasChanged ? nextState : state;
+	  };
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ },
+/* 37 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports["default"] = warning;
+	/**
+	 * Prints a warning in the console if it exists.
+	 *
+	 * @param {String} message The warning message.
+	 * @returns {void}
+	 */
+	function warning(message) {
+	  /* eslint-disable no-console */
+	  if (typeof console !== 'undefined' && typeof console.error === 'function') {
+	    console.error(message);
+	  }
+	  /* eslint-enable no-console */
+	  try {
+	    // This error was thrown as a convenience so that if you enable
+	    // "break on all exceptions" in your console,
+	    // it would pause the execution at this line.
+	    throw new Error(message);
+	    /* eslint-disable no-empty */
+	  } catch (e) {}
+	  /* eslint-enable no-empty */
+	}
+
+/***/ },
+/* 38 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	exports["default"] = bindActionCreators;
+	function bindActionCreator(actionCreator, dispatch) {
+	  return function () {
+	    return dispatch(actionCreator.apply(undefined, arguments));
+	  };
+	}
+	
+	/**
+	 * Turns an object whose values are action creators, into an object with the
+	 * same keys, but with every function wrapped into a `dispatch` call so they
+	 * may be invoked directly. This is just a convenience method, as you can call
+	 * `store.dispatch(MyActionCreators.doSomething())` yourself just fine.
+	 *
+	 * For convenience, you can also pass a single function as the first argument,
+	 * and get a function in return.
+	 *
+	 * @param {Function|Object} actionCreators An object whose values are action
+	 * creator functions. One handy way to obtain it is to use ES6 `import * as`
+	 * syntax. You may also pass a single function.
+	 *
+	 * @param {Function} dispatch The `dispatch` function available on your Redux
+	 * store.
+	 *
+	 * @returns {Function|Object} The object mimicking the original object, but with
+	 * every action creator wrapped into the `dispatch` call. If you passed a
+	 * function as `actionCreators`, the return value will also be a single
+	 * function.
+	 */
+	function bindActionCreators(actionCreators, dispatch) {
+	  if (typeof actionCreators === 'function') {
+	    return bindActionCreator(actionCreators, dispatch);
+	  }
+	
+	  if (typeof actionCreators !== 'object' || actionCreators === null) {
+	    throw new Error('bindActionCreators expected an object or a function, instead received ' + (actionCreators === null ? 'null' : typeof actionCreators) + '. ' + 'Did you write "import ActionCreators from" instead of "import * as ActionCreators from"?');
+	  }
+	
+	  var keys = Object.keys(actionCreators);
+	  var boundActionCreators = {};
+	  for (var i = 0; i < keys.length; i++) {
+	    var key = keys[i];
+	    var actionCreator = actionCreators[key];
+	    if (typeof actionCreator === 'function') {
+	      boundActionCreators[key] = bindActionCreator(actionCreator, dispatch);
+	    }
+	  }
+	  return boundActionCreators;
+	}
+
+/***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	exports.__esModule = true;
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	exports["default"] = applyMiddleware;
+	
+	var _compose = __webpack_require__(40);
+	
+	var _compose2 = _interopRequireDefault(_compose);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	/**
+	 * Creates a store enhancer that applies middleware to the dispatch method
+	 * of the Redux store. This is handy for a variety of tasks, such as expressing
+	 * asynchronous actions in a concise manner, or logging every action payload.
+	 *
+	 * See `redux-thunk` package as an example of the Redux middleware.
+	 *
+	 * Because middleware is potentially asynchronous, this should be the first
+	 * store enhancer in the composition chain.
+	 *
+	 * Note that each middleware will be given the `dispatch` and `getState` functions
+	 * as named arguments.
+	 *
+	 * @param {...Function} middlewares The middleware chain to be applied.
+	 * @returns {Function} A store enhancer applying the middleware.
+	 */
+	function applyMiddleware() {
+	  for (var _len = arguments.length, middlewares = Array(_len), _key = 0; _key < _len; _key++) {
+	    middlewares[_key] = arguments[_key];
+	  }
+	
+	  return function (createStore) {
+	    return function (reducer, initialState, enhancer) {
+	      var store = createStore(reducer, initialState, enhancer);
+	      var _dispatch = store.dispatch;
+	      var chain = [];
+	
+	      var middlewareAPI = {
+	        getState: store.getState,
+	        dispatch: function dispatch(action) {
+	          return _dispatch(action);
+	        }
+	      };
+	      chain = middlewares.map(function (middleware) {
+	        return middleware(middlewareAPI);
+	      });
+	      _dispatch = _compose2["default"].apply(undefined, chain)(store.dispatch);
+	
+	      return _extends({}, store, {
+	        dispatch: _dispatch
+	      });
+	    };
+	  };
+	}
+
+/***/ },
+/* 40 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	exports.__esModule = true;
+	exports["default"] = compose;
+	/**
+	 * Composes single-argument functions from right to left. The rightmost
+	 * function can take multiple arguments as it provides the signature for
+	 * the resulting composite function.
+	 *
+	 * @param {...Function} funcs The functions to compose.
+	 * @returns {Function} A function obtained by composing the argument functions
+	 * from right to left. For example, compose(f, g, h) is identical to doing
+	 * (...args) => f(g(h(...args))).
+	 */
+	
+	function compose() {
+	  for (var _len = arguments.length, funcs = Array(_len), _key = 0; _key < _len; _key++) {
+	    funcs[_key] = arguments[_key];
+	  }
+	
+	  if (funcs.length === 0) {
+	    return function (arg) {
+	      return arg;
+	    };
+	  } else {
+	    var _ret = function () {
+	      var last = funcs[funcs.length - 1];
+	      var rest = funcs.slice(0, -1);
+	      return {
+	        v: function v() {
+	          return rest.reduceRight(function (composed, f) {
+	            return f(composed);
+	          }, last.apply(undefined, arguments));
+	        }
+	      };
+	    }();
+	
+	    if (typeof _ret === "object") return _ret.v;
+	  }
+	}
+
+/***/ },
+/* 41 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var __vue_script__, __vue_template__
-	__webpack_require__(29)
-	__vue_script__ = __webpack_require__(30)
-	__vue_template__ = __webpack_require__(40)
+	__webpack_require__(42)
+	__vue_script__ = __webpack_require__(43)
+	__vue_template__ = __webpack_require__(57)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14551,13 +15394,13 @@
 	})()}
 
 /***/ },
-/* 29 */
+/* 42 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 30 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14570,24 +15413,32 @@
 	
 	var _vue2 = _interopRequireDefault(_vue);
 	
-	var _taskmenu = __webpack_require__(31);
+	var _redux = __webpack_require__(28);
+	
+	var _reducers = __webpack_require__(44);
+	
+	var _reducers2 = _interopRequireDefault(_reducers);
+	
+	var _actions = __webpack_require__(47);
+	
+	var _taskmenu = __webpack_require__(48);
 	
 	var _taskmenu2 = _interopRequireDefault(_taskmenu);
 	
-	var _header = __webpack_require__(35);
+	var _header = __webpack_require__(52);
 	
 	var _header2 = _interopRequireDefault(_header);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// 创建 modal 组件
-	_vue2.default.component('modal', {
-	  template: "#modal-template",
-	  props: ['show']
-	}); // <template>
+	// <template>
 	//   <div class="">
 	//     <appheader :account="account"></appheader>
 	//     <div class="page-content">
+	//       <p>
+	//         {{currentState}}
+	//       </p>
+	//       <button type="button" name="button" @click="changeState">test</button>
 	//       <router-view ></router-view>
 	//     </div>
 	//     <script type="x-template" id="modal-template">
@@ -14625,28 +15476,50 @@
 	//
 	// <script>
 	
+	console.log(_actions.changeMyState);
+	
+	// 创建 modal 组件
+	_vue2.default.component('modal', {
+	  template: "#modal-template",
+	  props: ['show']
+	});
 	
 	exports.default = {
 	  data: function data() {
 	    return {
 	      msg: 'Hello from BlueRobin',
 	      account: {},
-	      lists: []
+	      lists: [],
+	      store: (0, _redux.createStore)(_reducers2.default),
+	      currentState: ''
 	    };
 	  },
-	  ready: function ready() {
+	  created: function created() {
 	    var _this = this;
 	
-	    componentHandler.upgradeDom();
+	    this.store.subscribe(function () {
+	      console.log(_this.store.getState().tasks.currentState);
+	      _this.currentState = _this.store.getState().tasks.currentState;
+	    });
+	  },
+	  ready: function ready() {
+	    var _this2 = this;
 	
+	    this.currentState = this.store.getState().tasks.currentState;
 	    this.$http.get('authenticate').then(function (res) {
-	      _this.$data.account = res.data.user;
+	      _this2.$data.account = res.data.user;
 	    }, function () {
-	      _this.$data.account = false;
-	      _this.$router.go('/login');
+	      _this2.$data.account = false;
+	      _this2.$router.go('/login');
 	    });
 	  },
 	
+	  methods: {
+	    changeState: function changeState() {
+	      var nextState = '新しい状態';
+	      this.store.dispatch((0, _actions.changeMyState)(nextState));
+	    }
+	  },
 	  components: {
 	    appheader: _header2.default,
 	    taskmenu: _taskmenu2.default
@@ -14739,13 +15612,117 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 31 */
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _redux = __webpack_require__(28);
+	
+	var _tasks = __webpack_require__(45);
+	
+	var _tasks2 = _interopRequireDefault(_tasks);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var taskReducer = (0, _redux.combineReducers)({
+	  tasks: _tasks2.default
+	});
+	
+	exports.default = taskReducer;
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = tasks;
+	
+	var _actionType = __webpack_require__(46);
+	
+	var initialState = {
+	  currentState: '最初の状態'
+	};
+	/**
+	 * tasks reducers
+	 * @param  {Object} state  [description]
+	 * @param  {Object} action [description]
+	 * @return {Obejct}        [description]
+	 */
+	function tasks() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case 'ADD_TASK':
+	      return {};
+	    case _actionType.CHANGE_STATE:
+	      return {
+	        currentState: state
+	      };
+	    default:
+	      return state;
+	  }
+	}
+
+/***/ },
+/* 46 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var ADD_TODO = exports.ADD_TODO = 'ADD_TODO';
+	var DELETE_TODO = exports.DELETE_TODO = 'DELETE_TODO';
+	var EDIT_TODO = exports.EDIT_TODO = 'EDIT_TODO';
+	var COMPLETE_TODO = exports.COMPLETE_TODO = 'COMPLETE_TODO';
+	var COMPLETE_ALL = exports.COMPLETE_ALL = 'COMPLETE_ALL';
+	var CLEAR_COMPLETED = exports.CLEAR_COMPLETED = 'CLEAR_COMPLETED';
+	
+	var CHANGE_STATE = exports.CHANGE_STATE = 'CHANGE_STATE';
+
+/***/ },
+/* 47 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var addTask = exports.addTask = function addTask(text) {
+	  return {
+	    type: 'ADD_TASK',
+	    id: '11111111111',
+	    text: text
+	  };
+	};
+	
+	var changeMyState = exports.changeMyState = function changeMyState(nextState) {
+	  return {
+	    type: 'CHANGE_STATE',
+	    nextState: nextState
+	  };
+	};
+
+/***/ },
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(32)
-	__vue_script__ = __webpack_require__(33)
-	__vue_template__ = __webpack_require__(34)
+	__webpack_require__(49)
+	__vue_script__ = __webpack_require__(50)
+	__vue_template__ = __webpack_require__(51)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14762,13 +15739,13 @@
 	})()}
 
 /***/ },
-/* 32 */
+/* 49 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 33 */
+/* 50 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -14908,20 +15885,20 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 34 */
+/* 51 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n  <div class=\"sidebar\">\r\n    <ul class=\"side-menu\">\r\n      <li v-for=\"list in lists\">\r\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: list.id}}\">\r\n          <span class=\"material-icons\">list</span>\r\n          <span class=\"side-menu__item-content\">{{list.name}}</span>\r\n          <span class=\"material-icons edit\" @click=\"editList(e, list)\">edit</span>\r\n        </a>\r\n      </li>\r\n    </ul>\r\n    <div class=\"side-actions\">\r\n      <span class=\"side-menu__item\" @click=\"showModal = true\">\r\n        <span class=\"material-icons\">add</span>\r\n        <span class=\"side-menu__item-content\">新建分类</span>\r\n      </span>\r\n    </div>\r\n\r\n    <modal :show=\"showModal\">\r\n      <h3 slot=\"header\">创建新的任务清单</h3>\r\n      <div slot=\"body\">\r\n        <input type=\"text\" class=\"text\" v-model=\"newList.name\"/>\r\n      </div>\r\n      <div slot=\"footer\">\r\n        <button @click=\"createNewList\">创建</button>\r\n      </div>\r\n    </modal>\r\n    <modal :show=\"showCurrentList\">\r\n      <h3 slot=\"header\">{{currentList.name}}</h3>\r\n      <div slot=\"body\">\r\n        <input type=\"text\" class=\"text\" v-model=\"currentList.name\"/>\r\n      </div>\r\n      <div slot=\"footer\">\r\n        <button @click=\"createNewList\">确定</button>\r\n      </div>\r\n    </modal>\r\n\r\n  </div>\r\n";
 
 /***/ },
-/* 35 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(36)
-	__webpack_require__(37)
-	__vue_script__ = __webpack_require__(38)
-	__vue_template__ = __webpack_require__(39)
+	__webpack_require__(53)
+	__webpack_require__(54)
+	__vue_script__ = __webpack_require__(55)
+	__vue_template__ = __webpack_require__(56)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14938,19 +15915,19 @@
 	})()}
 
 /***/ },
-/* 36 */
+/* 53 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 37 */
+/* 54 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 38 */
+/* 55 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -15018,25 +15995,25 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 39 */
+/* 56 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n  <!-- <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <span class=\"mdl-layout-title\">{{$route.params.category}}</span>\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n        <span v-if=\"account\" class=\"navigation-account\">\r\n          <img v-bind:src=\"account.avatar\" alt=\"\"></span>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    </div>\r\n  </header> -->\r\n  <header class=\"header\">\r\n\r\n  </header>\r\n";
 
 /***/ },
-/* 40 */
+/* 57 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"\">\r\n    <appheader :account=\"account\"></appheader>\r\n    <div class=\"page-content\">\r\n      <router-view ></router-view>\r\n    </div>\r\n    <script type=\"x-template\" id=\"modal-template\">\r\n      <div class=\"modal-mask\" v-if=\"show\" transition=\"modal\">\r\n        <div class=\"modal-wrapper\">\r\n          <div class=\"modal-container\">\r\n\r\n            <div class=\"modal-header\">\r\n              <slot name=\"header\">\r\n                default header\r\n              </slot>\r\n            </div>\r\n\r\n            <div class=\"modal-body\">\r\n              <slot name=\"body\">\r\n                default body\r\n              </slot>\r\n            </div>\r\n\r\n            <div class=\"modal-footer\">\r\n              <slot name=\"footer\">\r\n                default footer\r\n                <button class=\"modal-default-button\"\r\n                  @click=\"show = false\">\r\n                  OK\r\n                </button>\r\n              </slot>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </script>\r\n  </div>\r\n";
+	module.exports = "\r\n  <div class=\"\">\r\n    <appheader :account=\"account\"></appheader>\r\n    <div class=\"page-content\">\r\n      <p>\r\n        {{currentState}}\r\n      </p>\r\n      <button type=\"button\" name=\"button\" @click=\"changeState\">test</button>\r\n      <router-view ></router-view>\r\n    </div>\r\n    <script type=\"x-template\" id=\"modal-template\">\r\n      <div class=\"modal-mask\" v-if=\"show\" transition=\"modal\">\r\n        <div class=\"modal-wrapper\">\r\n          <div class=\"modal-container\">\r\n\r\n            <div class=\"modal-header\">\r\n              <slot name=\"header\">\r\n                default header\r\n              </slot>\r\n            </div>\r\n\r\n            <div class=\"modal-body\">\r\n              <slot name=\"body\">\r\n                default body\r\n              </slot>\r\n            </div>\r\n\r\n            <div class=\"modal-footer\">\r\n              <slot name=\"footer\">\r\n                default footer\r\n                <button class=\"modal-default-button\"\r\n                  @click=\"show = false\">\r\n                  OK\r\n                </button>\r\n              </slot>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </script>\r\n  </div>\r\n";
 
 /***/ },
-/* 41 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(42)
-	__vue_script__ = __webpack_require__(43)
-	__vue_template__ = __webpack_require__(61)
+	__webpack_require__(59)
+	__vue_script__ = __webpack_require__(60)
+	__vue_template__ = __webpack_require__(78)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15053,13 +16030,13 @@
 	})()}
 
 /***/ },
-/* 42 */
+/* 59 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 43 */
+/* 60 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15068,11 +16045,11 @@
 	  value: true
 	});
 	
-	var _taskmenu = __webpack_require__(31);
+	var _taskmenu = __webpack_require__(48);
 	
 	var _taskmenu2 = _interopRequireDefault(_taskmenu);
 	
-	var _category = __webpack_require__(44);
+	var _category = __webpack_require__(61);
 	
 	var _category2 = _interopRequireDefault(_category);
 	
@@ -15145,13 +16122,13 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 44 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(45)
-	__vue_script__ = __webpack_require__(46)
-	__vue_template__ = __webpack_require__(60)
+	__webpack_require__(62)
+	__vue_script__ = __webpack_require__(63)
+	__vue_template__ = __webpack_require__(77)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15168,13 +16145,13 @@
 	})()}
 
 /***/ },
-/* 45 */
+/* 62 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 46 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15183,11 +16160,11 @@
 	  value: true
 	});
 	
-	var _taskItem = __webpack_require__(47);
+	var _taskItem = __webpack_require__(64);
 	
 	var _taskItem2 = _interopRequireDefault(_taskItem);
 	
-	var _taskInputer = __webpack_require__(51);
+	var _taskInputer = __webpack_require__(68);
 	
 	var _taskInputer2 = _interopRequireDefault(_taskInputer);
 	
@@ -15330,13 +16307,13 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 47 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(48)
-	__vue_script__ = __webpack_require__(49)
-	__vue_template__ = __webpack_require__(50)
+	__webpack_require__(65)
+	__vue_script__ = __webpack_require__(66)
+	__vue_template__ = __webpack_require__(67)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15353,13 +16330,13 @@
 	})()}
 
 /***/ },
-/* 48 */
+/* 65 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 49 */
+/* 66 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -15560,19 +16537,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 50 */
+/* 67 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n  <div class=\"task\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n    <div class=\"task-checkbox\">\r\n      <label class=\"mdl-checkbox mdl-js-checkbox\" v-bind:class=\"{'is-checked': task.completed}\" for=\"{{task.id}}\">\r\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n      </label>\r\n    </div>\r\n    <div class=\"task-content\">\r\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{{titleAfterParse}}}</div>\r\n      <div class=\"mdl-textfield mdl-js-textfield task-content-input\">\r\n        <input class=\"mdl-textfield__input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n      </div>\r\n      <div class=\"\" v-if=\"task.completed\">\r\n        {{task.create_time}}\r\n      </div>\r\n    </div>\r\n    <span class=\"task-controller\">\r\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\r\n    </span>\r\n  </div>\r\n\r\n";
 
 /***/ },
-/* 51 */
+/* 68 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(52)
-	__vue_script__ = __webpack_require__(53)
-	__vue_template__ = __webpack_require__(59)
+	__webpack_require__(69)
+	__vue_script__ = __webpack_require__(70)
+	__vue_template__ = __webpack_require__(76)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15589,13 +16566,13 @@
 	})()}
 
 /***/ },
-/* 52 */
+/* 69 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 53 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15604,15 +16581,15 @@
 	  value: true
 	});
 	
-	var _stringify = __webpack_require__(54);
+	var _stringify = __webpack_require__(71);
 	
 	var _stringify2 = _interopRequireDefault(_stringify);
 	
-	var _uploadBabel = __webpack_require__(57);
+	var _uploadBabel = __webpack_require__(74);
 	
 	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
 	
-	var _toolBabel = __webpack_require__(58);
+	var _toolBabel = __webpack_require__(75);
 	
 	var _toolBabel2 = _interopRequireDefault(_toolBabel);
 	
@@ -15784,204 +16761,177 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 54 */
+/* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(55), __esModule: true };
+	module.exports = { "default": __webpack_require__(72), __esModule: true };
 
 /***/ },
-/* 55 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var core  = __webpack_require__(56)
+	var core  = __webpack_require__(73)
 	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
 	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
 	  return $JSON.stringify.apply($JSON, arguments);
 	};
 
 /***/ },
-/* 56 */
+/* 73 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.3.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 57 */
+/* 74 */
 /***/ function(module, exports) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	var plupload = window.plupload;
 	
 	window.CONFIG = {
-	    APIROOT: 'http://localhost:1234/api'
-	    // APIROOT: 'http://zhanglun.daoapp.io/api'
+	  APIROOT: 'http://localhost:1234/api'
 	};
 	
 	/**
 	 * 初始化上传组件
 	 * @param  {Object} opt
 	 * {
-	 * 	browse_button: 'browse',
-	 * 	drop_element: 'taskInputer',
-	 * 	container: 'container'
+	 *   browse_button: 'browse',
+	 *   drop_element: 'taskInputer',
+	 *   container: 'container'
 	 * }
 	 * @return {[type]}     [description]
 	 */
+	// APIROOT: 'http://zhanglun.daoapp.io/api'
 	function uploadInit(opt, setkey) {
-	    var uploader = new Qiniu.uploader({
-	        runtimes: 'html5,flash,html4', //上传模式,依次退化
-	        'browse_button': opt.browse_button || 'browse', //上传选择的点选按钮，**必需**
-	        'uptoken_url': CONFIG.APIROOT + '/qiniu/token',
-	        //Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
-	        // uptoken : '<Your upload token>',
-	        //若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
-	        // unique_names: true,
-	        // 默认 false，key为文件名。若开启该选项，SDK会为每个文件自动生成key（文件名）
-	        // save_key: true,
-	        // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK在前端将不对key进行任何处理
-	        domain: 'http://7i7gl0.com1.z0.glb.clouddn.com/',
-	        //bucket 域名，下载资源时用到，**必需**
-	        container: opt.container || 'container', //上传区域DOM ID，默认是browser_button的父元素，
-	        'max_file_size': '100mb', //最大文件体积限制
-	        'flash_swf_url': 'vendor/plupload-2.1.8/js/Moxie.swf', //引入flash,相对路径
-	        'max_retries': 3, //上传失败最大重试次数
-	        dragdrop: true, //开启可拖曳上传
-	        'drop_element': opt.drop_element || 'taskInputer', //拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
-	        'chunk_size': '4mb', //分块上传时，每片的体积
-	        'auto_start': true, //选择文件后自动上传，若关闭需要自己绑定事件触发上传,
-	        init: {
-	            'FilesAdded': function FilesAdded(up, files) {
-	                plupload.each(files, function (file) {
-	                    // 文件添加进队列后,处理相关的事情
-	                    //   console.log(file);
-	                });
-	            },
-	            'BeforeUpload': function BeforeUpload(up, file) {
-	                console.log(file);
-	                // 每个文件上传前,处理相关的事情
-	            },
-	            'UploadProgress': function UploadProgress(up, file) {
-	                // 每个文件上传时,处理相关的事情
-	            },
-	            'FileUploaded': function FileUploaded(up, file, info) {
-	                // 每个文件上传成功后,处理相关的事情
-	                // 其中 info 是文件上传成功后，服务端返回的json，形式如
-	                // {
-	                //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
-	                //    "key": "gogopher.jpg"
-	                //  }
-	                // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
-	                // var domain = up.getOption('domain');
-	                // var res = parseJSON(info);
-	                // var sourceLink = domain + res.key; 获取上传成功后的文件的Url
-	            },
-	            'Error': function Error(up, err, errTip) {
-	                //上传出错时,处理相关的事情
-	            },
-	            'UploadComplete': function UploadComplete() {
-	                //队列文件处理完毕后,处理相关的事情
-	            },
-	            'Key': function Key(up, file) {
-	                // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
-	                // 该配置必须要在 unique_names: false , save_key: false 时才生效
-	                // var key = "";
-	                // do something with key here
-	                //   return 'test_prefixer_hahhahah_______' + file.name;
-	                // return window.account.username + '/' + file.name;
-	                return setkey(up, file);
-	            }
-	        }
-	    });
-	    return uploader;
+	  var Uploader = new Qiniu.uploader({
+	    runtimes: 'html5,flash,html4', // 上传模式,依次退化
+	    'browse_button': opt.browse_button || 'browse', // 上传选择的点选按钮，**必需**
+	    'uptoken_url': CONFIG.APIROOT + '/qiniu/token',
+	    // Ajax请求upToken的Url，**强烈建议设置**（服务端提供）
+	    // uptoken : '<Your upload token>',
+	    // 若未指定uptoken_url,则必须指定 uptoken ,uptoken由其他程序生成
+	    // unique_names: true,
+	    // 默认 false，key为文件名。若开启该选项，SDK会为每个文件自动生成key（文件名）
+	    // save_key: true,
+	    // 默认 false。若在服务端生成uptoken的上传策略中指定了 `sava_key`，则开启，SDK在前端将不对key进行任何处理
+	    domain: 'http://7i7gl0.com1.z0.glb.clouddn.com/',
+	    // bucket 域名，下载资源时用到，**必需**
+	    container: opt.container || 'container', // 上传区域DOM ID，默认是browser_button的父元素，
+	    'max_file_size': '100mb', // 最大文件体积限制
+	    'flash_swf_url': 'vendor/plupload-2.1.8/js/Moxie.swf', // 引入flash,相对路径
+	    'max_retries': 3, // 上传失败最大重试次数
+	    dragdrop: true, // 开启可拖曳上传
+	    'drop_element': opt.drop_element || 'taskInputer', // 拖曳上传区域元素的ID，拖曳文件或文件夹后可触发上传
+	    'chunk_size': '4mb', // 分块上传时，每片的体积
+	    'auto_start': true, // 选择文件后自动上传，若关闭需要自己绑定事件触发上传,
+	    init: {
+	      FilesAdded: function FilesAdded(up, files) {
+	        plupload.each(files, function (file) {
+	          // 文件添加进队列后,处理相关的事情
+	          //   console.log(file);
+	        });
+	      },
+	      'BeforeUpload': function BeforeUpload(up, file) {
+	        console.log(file);
+	        // 每个文件上传前,处理相关的事情
+	      },
+	      'UploadProgress': function UploadProgress(up, file) {
+	        // 每个文件上传时,处理相关的事情
+	      },
+	      'FileUploaded': function FileUploaded(up, file, info) {
+	        // 每个文件上传成功后,处理相关的事情
+	        // 其中 info 是文件上传成功后，服务端返回的json，形式如
+	        // {
+	        //    "hash": "Fh8xVqod2MQ1mocfI4S4KpRL6D98",
+	        //    "key": "gogopher.jpg"
+	        //  }
+	        // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
+	        // var domain = up.getOption('domain');
+	        // var res = parseJSON(info);
+	        // var sourceLink = domain + res.key; 获取上传成功后的文件的Url
+	      },
+	      'Error': function Error(up, err, errTip) {
+	        // 上传出错时,处理相关的事情
+	      },
+	      'UploadComplete': function UploadComplete() {
+	        // 队列文件处理完毕后,处理相关的事情
+	      },
+	      'Key': function Key(up, file) {
+	        // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
+	        // 该配置必须要在 unique_names: false , save_key: false 时才生效
+	        // var key = "";
+	        // do something with key here
+	        //   return 'test_prefixer_hahhahah_______' + file.name;
+	        // return window.account.username + '/' + file.name;
+	        return setkey(up, file);
+	      }
+	    }
+	  });
+	  return Uploader;
 	}
 	
 	exports.default = uploadInit;
 
 /***/ },
-/* 58 */
+/* 75 */
 /***/ function(module, exports) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
 	var Tool = {};
 	
 	Tool.uploadImageSrc = function (filename, w, h) {
-		console.log(filename);
-		var query = '';
-		if (w && h) {
-			query = '?imageView2/1/w/' + w + '/h/' + h;
-		}
-		return 'http://7xnrrd.com1.z0.glb.clouddn.com/' + filename + query;
+	  var query = '';
+	  if (w && h) {
+	    query = '?imageView2/1/w/' + w + '/h/' + h;
+	  }
+	  return 'http://7xnrrd.com1.z0.glb.clouddn.com/' + filename + query;
 	};
 	
 	Tool.createImagePreviewUrl = function (origin, w, h) {
-		w = w || 40;
-		h = h || 40;
-		return origin + '?imageView2/1/w/' + w + '/h/' + h;
-	};
-	
-	Tool.traverseFileTree = function (items) {
-		if (!map) {
-			var map = {};
-		}
-		console.log(map);
-		var dirReader = null;
-		path = path || '';
-		if (item.isFile) {
-			item.file(function (file) {
-				if (map[file.name] === undefined) {
-					map[file.name] = [];
-				}
-				map[file.name].push(path);
-			});
-		} else if (item.isDirectory) {
-			dirReader = item.createReader();
-			dirReader.readEntries(function (entries) {
-				var n = 0;
-				for (n = 0; n < entries.length; n++) {
-					argument.callee(entries[n], path + item.name + "/");
-				}
-				return map;
-			});
-		}
+	  w = w || 40;
+	  h = h || 40;
+	  return origin + '?imageView2/1/w/' + w + '/h/' + h;
 	};
 	
 	exports.default = Tool;
 
 /***/ },
-/* 59 */
+/* 76 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n    <div class=\"task-textfield\">\r\n      {{listid}}\r\n      <input class=\"task-textfield__input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask(list_id)\">\r\n      <!-- <label for=\"\" class=\"task-textfield__label\">Title</label> -->\r\n    </div>\r\n";
 
 /***/ },
-/* 60 */
+/* 77 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n  <div class=\"main\" transition=\"animate_routerview\">\r\n    <taskinputer :listid=\"listId\"></taskinputer>\r\n    <div class=\"tasklist\">\r\n      <taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\"></taskitem>\r\n    </div>\r\n    <div class=\"label-trigger\" @click=\"toggleShowCompletedTask\">\r\n      显示已完成的task\r\n    </div>\r\n    <div class=\"tasklist--finished\" v-show=\"completedShow\">\r\n      <taskitem v-for=\"task in completedTasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\"></taskitem>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
-/* 61 */
+/* 78 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n  <div class=\"\">\r\n      <taskmenu :lists=\"lists\"></taskmenu>\r\n      <router-view></router-view>\r\n  </div>\r\n";
 
 /***/ },
-/* 62 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(63)
-	__vue_script__ = __webpack_require__(64)
-	__vue_template__ = __webpack_require__(65)
+	__webpack_require__(80)
+	__vue_script__ = __webpack_require__(81)
+	__vue_template__ = __webpack_require__(82)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15998,13 +16948,13 @@
 	})()}
 
 /***/ },
-/* 63 */
+/* 80 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 64 */
+/* 81 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16078,18 +17028,18 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 65 */
+/* 82 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <h3>登录</h3>\r\n      </div>\r\n    </div>\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n          <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"user.username\">\r\n            <label class=\"mdl-textfield__label\" for=\"email\">Email</label>\r\n            </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"user.password\">\r\n          <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\r\n        </div>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">GO!</button>\r\n        <a v-link=\"{path: '/signup', exact: true}\">还没有账号？立马注册</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
-/* 66 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(67)
-	__vue_template__ = __webpack_require__(68)
+	__vue_script__ = __webpack_require__(84)
+	__vue_template__ = __webpack_require__(85)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16106,7 +17056,7 @@
 	})()}
 
 /***/ },
-/* 67 */
+/* 84 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16170,13 +17120,13 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 68 */
+/* 85 */
 /***/ function(module, exports) {
 
 	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <h3>注册</h3>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\r\n            <label class=\"mdl-textfield__label\" for=\"email\">邮箱</label>\r\n          </div>\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\r\n          <label class=\"mdl-textfield__label\" for=\"password\">密码</label>\r\n        </div>\r\n        <div class=\"input-field col s12\">\r\n            <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\" v-on:click=\"signUp()\">注册</button>\r\n            <a v-link=\"'login'\">已有账号？直接登录</a>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
-/* 69 */
+/* 86 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
