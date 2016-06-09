@@ -47,7 +47,6 @@
   import { createStore } from 'redux';
   import reducers from '../reducers';
   import { changeMyState } from '../actions';
-  console.log(changeMyState);
 
   import TaskMenu from './task/taskmenu.vue';
   import HeaderView from './header/header.vue';
@@ -72,13 +71,13 @@
     },
     created() {
       this.store.subscribe(() => {
-        console.log(this.store.getState().tasks);
-        this.currentState = this.store.getState().tasks.currentState;
+        console.log(this.store.getState());
+        this.currentState = this.store.getState().tasks.text;
       });
     },
     ready() {
       console.log(this.store.getState().tasks);
-      this.currentState = this.store.getState().tasks.currentState;
+      this.currentState = this.store.getState().tasks.text;
       this.$http.get('authenticate')
         .then((res) => {
           this.$data.account = res.data.user;
@@ -89,7 +88,7 @@
     },
     methods: {
       changeState() {
-        const nextState = '新しい状態';
+        const nextState = '新しい状態' + new Date();
         this.store.dispatch(changeMyState(nextState));
       }
     },

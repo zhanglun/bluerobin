@@ -1,7 +1,7 @@
 import { CHANGE_STATE } from '../constants/actionType';
 
 const initialState = {
-  currentState: '最初の状態',
+  text: '最初の状態',
 };
 /**
  * tasks reducers
@@ -10,10 +10,11 @@ const initialState = {
  * @return {Obejct}        [description]
  */
 export default function tasks(state = initialState, action) {
+  console.log(action);
   switch (action.type) {
   case CHANGE_STATE:
     return {
-      currentState: state.nextState,
+      text: action.text,
     };
   default:
     return state;

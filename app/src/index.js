@@ -2,11 +2,8 @@ require('./public/stylesheets/base.less');
 import Vue from 'vue';
 import Router from 'vue-router';
 import VueResource from 'vue-resource';
-import {createStore} from 'redux';
 
 import App from './components/app.vue';
-// // import HomeView from './components/home/home.vue';
-// import FileView from './components/file/file.vue';
 import TaskView from './components/task/task.vue';
 import CategoryView from './components/task/category.vue';
 import UserLogin from './components/user/login.vue';
@@ -62,29 +59,3 @@ router.redirect({
 });
 
 router.start(App, '#app');
-
-function counter(state = 0, action) {
-  switch (action.type) {
-  case 'INCREMENT':
-    return state + 1;
-  case 'DECREMENT':
-    return state - 1;
-  default:
-    return state;
-  }
-}
-
-let store = createStore(counter);
-
-store.subscribe(() =>
-  console.log(store.getState())
-);
-
-// The only way to mutate the internal state is to dispatch an action.
-// The actions can be serialized, logged or stored and later replayed.
-store.dispatch({ type: 'INCREMENT' });
-// 1
-store.dispatch({ type: 'INCREMENT' });
-// 2
-store.dispatch({ type: 'DECREMENT' });
-// 1
