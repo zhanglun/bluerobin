@@ -6,7 +6,7 @@
         {{currentState}}
       </p>
       <button type="button" name="button" @click="changeState">test</button>
-      <router-view ></router-view>
+      <router-view :store="store"></router-view>
     </div>
     <script type="x-template" id="modal-template">
       <div class="modal-mask" v-if="show" transition="modal">
@@ -160,14 +160,6 @@
   .modal-default-button {
     float: right;
   }
-  /*
-  * the following styles are auto-applied to elements with
-  * v-transition="modal" when their visiblity is toggled
-  * by Vue.js.
-  *
-  * You can easily play with the modal transition by editing
-  * these styles.
-  */
 
   .modal-enter, .modal-leave {
   opacity: 0;

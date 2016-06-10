@@ -57,14 +57,6 @@
 .modal-default-button {
   float: right;
 }
-/*
-  * the following styles are auto-applied to elements with
-  * v-transition="modal" when their visiblity is toggled
-  * by Vue.js.
-  *
-  * You can easily play with the modal transition by editing
-  * these styles.
-  */
 .modal-enter,
 .modal-leave {
   opacity: 0;

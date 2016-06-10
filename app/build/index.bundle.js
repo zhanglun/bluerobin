@@ -14568,7 +14568,7 @@
 	//         {{currentState}}
 	//       </p>
 	//       <button type="button" name="button" @click="changeState">test</button>
-	//       <router-view ></router-view>
+	//       <router-view :store="store"></router-view>
 	//     </div>
 	//     <script type="x-template" id="modal-template">
 	//       <div class="modal-mask" v-if="show" transition="modal">
@@ -14714,14 +14714,6 @@
 	//   .modal-default-button {
 	//     float: right;
 	//   }
-	//   /*
-	//   * the following styles are auto-applied to elements with
-	//   * v-transition="modal" when their visiblity is toggled
-	//   * by Vue.js.
-	//   *
-	//   * You can easily play with the modal transition by editing
-	//   * these styles.
-	//   */
 	//
 	//   .modal-enter, .modal-leave {
 	//   opacity: 0;
@@ -15961,7 +15953,7 @@
 /* 57 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"\">\n    <appheader :account=\"account\"></appheader>\n    <div class=\"page-content\">\n      <p>\n        {{currentState}}\n      </p>\n      <button type=\"button\" name=\"button\" @click=\"changeState\">test</button>\n      <router-view ></router-view>\n    </div>\n    <script type=\"x-template\" id=\"modal-template\">\n      <div class=\"modal-mask\" v-if=\"show\" transition=\"modal\">\n        <div class=\"modal-wrapper\">\n          <div class=\"modal-container\">\n\n            <div class=\"modal-header\">\n              <slot name=\"header\">\n                default header\n              </slot>\n            </div>\n\n            <div class=\"modal-body\">\n              <slot name=\"body\">\n                default body\n              </slot>\n            </div>\n\n            <div class=\"modal-footer\">\n              <slot name=\"footer\">\n                default footer\n                <button class=\"modal-default-button\"\n                  @click=\"show = false\">\n                  OK\n                </button>\n              </slot>\n            </div>\n          </div>\n        </div>\n      </div>\n    </script>\n  </div>\n";
+	module.exports = "\n  <div class=\"\">\n    <appheader :account=\"account\"></appheader>\n    <div class=\"page-content\">\n      <p>\n        {{currentState}}\n      </p>\n      <button type=\"button\" name=\"button\" @click=\"changeState\">test</button>\n      <router-view :store=\"store\"></router-view>\n    </div>\n    <script type=\"x-template\" id=\"modal-template\">\n      <div class=\"modal-mask\" v-if=\"show\" transition=\"modal\">\n        <div class=\"modal-wrapper\">\n          <div class=\"modal-container\">\n\n            <div class=\"modal-header\">\n              <slot name=\"header\">\n                default header\n              </slot>\n            </div>\n\n            <div class=\"modal-body\">\n              <slot name=\"body\">\n                default body\n              </slot>\n            </div>\n\n            <div class=\"modal-footer\">\n              <slot name=\"footer\">\n                default footer\n                <button class=\"modal-default-button\"\n                  @click=\"show = false\">\n                  OK\n                </button>\n              </slot>\n            </div>\n          </div>\n        </div>\n      </div>\n    </script>\n  </div>\n";
 
 /***/ },
 /* 58 */
@@ -16014,6 +16006,7 @@
 	
 	// <template>
 	//   <div class="">
+	//       {{text}}
 	//       <taskmenu :lists="lists"></taskmenu>
 	//       <router-view></router-view>
 	//   </div>
@@ -16021,12 +16014,14 @@
 	//
 	// <script>
 	exports.default = {
+	  props: ['store'],
 	  data: function data() {
 	    return {
 	      value: '',
 	      lists: [],
 	      category: '',
-	      taskOpened: null
+	      taskOpened: null,
+	      text: ''
 	    };
 	  },
 	
@@ -16062,6 +16057,10 @@
 	  ready: function ready() {
 	    var _this = this;
 	
+	    this.store.subscribe(function () {
+	      console.log('hahahah');
+	      _this.text = _this.store.getState().tasks.text;
+	    });
 	    console.log(location.href);
 	    this.$http.get('lists').then(function (res) {
 	      _this.lists = res.data;
@@ -16070,6 +16069,7 @@
 	
 	
 	  methods: {}
+	
 	};
 	
 	// </script>
@@ -16879,7 +16879,7 @@
 /* 78 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"\">\n      <taskmenu :lists=\"lists\"></taskmenu>\n      <router-view></router-view>\n  </div>\n";
+	module.exports = "\n  <div class=\"\">\n      {{text}}\n      <taskmenu :lists=\"lists\"></taskmenu>\n      <router-view></router-view>\n  </div>\n";
 
 /***/ },
 /* 79 */

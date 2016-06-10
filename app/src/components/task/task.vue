@@ -1,5 +1,6 @@
 <template>
   <div class="">
+      {{text}}
       <taskmenu :lists="lists"></taskmenu>
       <router-view></router-view>
   </div>
@@ -10,13 +11,14 @@
   import CategoryView from './category.vue';
 
   export default {
-
+    props: ['store'],
     data() {
       return {
         value: '',
         lists: [],
         category: '',
         taskOpened: null,
+        text: '',
       };
     },
 
@@ -50,6 +52,10 @@
     },
 
     ready() {
+      this.store.subscribe(() => {
+        console.log('hahahah');
+        this.text = this.store.getState().tasks.text;
+      });
       console.log(location.href);
       this.$http.get('lists')
         .then(res => {
@@ -59,32 +65,7 @@
 
     methods: {
     },
-    // events: {
-    //   'create task': function(task){
-    //     let vm = this;
-    //     vm.$http.post('tasks', task)
-    //       .then(function(res){
-    //         vm.tasklist.unshift(res.data);
-    //           setTimeout(function() {
-    //             componentHandler.upgradeDom('MaterialCheckbox');
-    //           }, 0);
-    //       });
-    //   },
-    //   'delete task': function(task){
-    //     let vm = this;
-    //     vm.$http.delete('tasks/' +  task.id)
-    //      .then(function(){
-    //        vm.tasklist.$remove(task);
-    //      });
-    //   },
-    //   'edit task': function(task){
-    //     let vm = this;
-    //     vm.$http.put('tasks/' + task.id, task)
-    //       .then(function(res){
-    //        console.log('edit task success!');
-    //       });
-    //   }
-    // }
+  
   };
 
 </script>
