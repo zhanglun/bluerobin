@@ -44,8 +44,7 @@
 <script>
   import Vue from 'vue';
 
-  import { createStore } from 'redux';
-  import reducers from '../reducers';
+  import configureStore from '../store/configureStore';
   import { changeMyState } from '../actions';
 
   import TaskMenu from './task/taskmenu.vue';
@@ -65,7 +64,7 @@
         msg: 'Hello from BlueRobin',
         account: {},
         lists: [],
-        store: createStore(reducers),
+        store: configureStore(),
         currentState: '',
       };
     },
