@@ -86,8 +86,8 @@
 	_vue2.default.use(_vueRouter2.default);
 	_vue2.default.use(_vueResource2.default);
 	
-	// Vue.http.options.root = 'http://zhanglun.daoapp.io/api';
-	_vue2.default.http.options.root = 'http://localhost:1234/api';
+	_vue2.default.http.options.root = 'http://zhanglun.daoapp.io/api';
+	// Vue.http.options.root = 'http://localhost:1234/api';
 	
 	_vue2.default.http.interceptors.push({
 	  request: function request(_request) {
@@ -14513,7 +14513,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/app.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\app.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15708,7 +15708,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/task/taskmenu.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\task\\taskmenu.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15866,7 +15866,7 @@
 /* 52 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"sidebar\">\n    <ul class=\"side-menu\">\n      <li v-for=\"list in lists\">\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: list.id}}\">\n          <span class=\"material-icons\">list</span>\n          <span class=\"side-menu__item-content\">{{list.name}}</span>\n          <span class=\"material-icons edit\" @click=\"editList(e, list)\">edit</span>\n        </a>\n      </li>\n    </ul>\n    <div class=\"side-actions\">\n      <span class=\"side-menu__item\" @click=\"showModal = true\">\n        <span class=\"material-icons\">add</span>\n        <span class=\"side-menu__item-content\">新建分类</span>\n      </span>\n    </div>\n\n    <modal :show=\"showModal\">\n      <h3 slot=\"header\">创建新的任务清单</h3>\n      <div slot=\"body\">\n        <input type=\"text\" class=\"text\" v-model=\"newList.name\"/>\n      </div>\n      <div slot=\"footer\">\n        <button @click=\"createNewList\">创建</button>\n      </div>\n    </modal>\n    <modal :show=\"showCurrentList\">\n      <h3 slot=\"header\">{{currentList.name}}</h3>\n      <div slot=\"body\">\n        <input type=\"text\" class=\"text\" v-model=\"currentList.name\"/>\n      </div>\n      <div slot=\"footer\">\n        <button @click=\"createNewList\">确定</button>\n      </div>\n    </modal>\n\n  </div>\n";
+	module.exports = "\r\n  <div class=\"sidebar\">\r\n    <ul class=\"side-menu\">\r\n      <li v-for=\"list in lists\">\r\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: list.id}}\">\r\n          <span class=\"material-icons\">list</span>\r\n          <span class=\"side-menu__item-content\">{{list.name}}</span>\r\n          <span class=\"material-icons edit\" @click=\"editList(e, list)\">edit</span>\r\n        </a>\r\n      </li>\r\n    </ul>\r\n    <div class=\"side-actions\">\r\n      <span class=\"side-menu__item\" @click=\"showModal = true\">\r\n        <span class=\"material-icons\">add</span>\r\n        <span class=\"side-menu__item-content\">新建分类</span>\r\n      </span>\r\n    </div>\r\n\r\n    <modal :show=\"showModal\">\r\n      <h3 slot=\"header\">创建新的任务清单</h3>\r\n      <div slot=\"body\">\r\n        <input type=\"text\" class=\"text\" v-model=\"newList.name\"/>\r\n      </div>\r\n      <div slot=\"footer\">\r\n        <button @click=\"createNewList\">创建</button>\r\n      </div>\r\n    </modal>\r\n    <modal :show=\"showCurrentList\">\r\n      <h3 slot=\"header\">{{currentList.name}}</h3>\r\n      <div slot=\"body\">\r\n        <input type=\"text\" class=\"text\" v-model=\"currentList.name\"/>\r\n      </div>\r\n      <div slot=\"footer\">\r\n        <button @click=\"createNewList\">确定</button>\r\n      </div>\r\n    </modal>\r\n\r\n  </div>\r\n";
 
 /***/ },
 /* 53 */
@@ -15884,7 +15884,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/header/header.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\header\\header.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15976,13 +15976,13 @@
 /* 57 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <!-- <header class=\"mdl-layout__header\">\n      <div class=\"mdl-layout__header-row\">\n        <span class=\"mdl-layout-title\">{{$route.params.category}}</span>\n        <div class=\"mdl-layout-spacer\"></div>\n        <nav class=\"mdl-navigation\">\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\n        <span v-if=\"account\" class=\"navigation-account\">\n          <img v-bind:src=\"account.avatar\" alt=\"\"></span>\n        </nav>\n      </div>\n    </header>\n    </div>\n  </header> -->\n  <header class=\"header\">\n\n  </header>\n";
+	module.exports = "\r\n  <!-- <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <span class=\"mdl-layout-title\">{{$route.params.category}}</span>\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n        <span v-if=\"account\" class=\"navigation-account\">\r\n          <img v-bind:src=\"account.avatar\" alt=\"\"></span>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    </div>\r\n  </header> -->\r\n  <header class=\"header\">\r\n\r\n  </header>\r\n";
 
 /***/ },
 /* 58 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"\">\n    <appheader :account=\"account\"></appheader>\n    <div class=\"page-content\">\n      <p>\n        {{currentState}}\n      </p>\n      <button type=\"button\" name=\"button\" @click=\"changeState\">test</button>\n      <router-view :store=\"store\"></router-view>\n    </div>\n    <script type=\"x-template\" id=\"modal-template\">\n      <div class=\"modal-mask\" v-if=\"show\" transition=\"modal\">\n        <div class=\"modal-wrapper\">\n          <div class=\"modal-container\">\n\n            <div class=\"modal-header\">\n              <slot name=\"header\">\n                default header\n              </slot>\n            </div>\n\n            <div class=\"modal-body\">\n              <slot name=\"body\">\n                default body\n              </slot>\n            </div>\n\n            <div class=\"modal-footer\">\n              <slot name=\"footer\">\n                default footer\n                <button class=\"modal-default-button\"\n                  @click=\"show = false\">\n                  OK\n                </button>\n              </slot>\n            </div>\n          </div>\n        </div>\n      </div>\n    </script>\n  </div>\n";
+	module.exports = "\r\n  <div class=\"\">\r\n    <appheader :account=\"account\"></appheader>\r\n    <div class=\"page-content\">\r\n      <p>\r\n        {{currentState}}\r\n      </p>\r\n      <button type=\"button\" name=\"button\" @click=\"changeState\">test</button>\r\n      <router-view :store=\"store\"></router-view>\r\n    </div>\r\n    <script type=\"x-template\" id=\"modal-template\">\r\n      <div class=\"modal-mask\" v-if=\"show\" transition=\"modal\">\r\n        <div class=\"modal-wrapper\">\r\n          <div class=\"modal-container\">\r\n\r\n            <div class=\"modal-header\">\r\n              <slot name=\"header\">\r\n                default header\r\n              </slot>\r\n            </div>\r\n\r\n            <div class=\"modal-body\">\r\n              <slot name=\"body\">\r\n                default body\r\n              </slot>\r\n            </div>\r\n\r\n            <div class=\"modal-footer\">\r\n              <slot name=\"footer\">\r\n                default footer\r\n                <button class=\"modal-default-button\"\r\n                  @click=\"show = false\">\r\n                  OK\r\n                </button>\r\n              </slot>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </script>\r\n  </div>\r\n";
 
 /***/ },
 /* 59 */
@@ -15999,7 +15999,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/task/task.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\task\\task.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16122,7 +16122,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/task/category.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\task\\category.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16307,7 +16307,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/task/taskItem.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\task\\taskItem.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16526,7 +16526,7 @@
 /* 68 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"task\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\n    <div class=\"task-checkbox\">\n      <label class=\"mdl-checkbox mdl-js-checkbox\" v-bind:class=\"{'is-checked': task.completed}\" for=\"{{task.id}}\">\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n      </label>\n    </div>\n    <div class=\"task-content\">\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{{titleAfterParse}}}</div>\n      <div class=\"mdl-textfield mdl-js-textfield task-content-input\">\n        <input class=\"mdl-textfield__input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n      </div>\n      <div class=\"\" v-if=\"task.completed\">\n        {{task.create_time}}\n      </div>\n    </div>\n    <span class=\"task-controller\">\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\n    </span>\n  </div>\n\n";
+	module.exports = "\r\n  <div class=\"task\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n    <div class=\"task-checkbox\">\r\n      <label class=\"mdl-checkbox mdl-js-checkbox\" v-bind:class=\"{'is-checked': task.completed}\" for=\"{{task.id}}\">\r\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n      </label>\r\n    </div>\r\n    <div class=\"task-content\">\r\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{{titleAfterParse}}}</div>\r\n      <div class=\"mdl-textfield mdl-js-textfield task-content-input\">\r\n        <input class=\"mdl-textfield__input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n      </div>\r\n      <div class=\"\" v-if=\"task.completed\">\r\n        {{task.create_time}}\r\n      </div>\r\n    </div>\r\n    <span class=\"task-controller\">\r\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\r\n    </span>\r\n  </div>\r\n\r\n";
 
 /***/ },
 /* 69 */
@@ -16543,7 +16543,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/task/taskInputer.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\task\\taskInputer.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16896,19 +16896,19 @@
 /* 77 */
 /***/ function(module, exports) {
 
-	module.exports = "\n    <div class=\"task-textfield\">\n      {{listid}}\n      <input class=\"task-textfield__input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask(list_id)\">\n      <!-- <label for=\"\" class=\"task-textfield__label\">Title</label> -->\n    </div>\n";
+	module.exports = "\r\n    <div class=\"task-textfield\">\r\n      {{listid}}\r\n      <input class=\"task-textfield__input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask(list_id)\">\r\n      <!-- <label for=\"\" class=\"task-textfield__label\">Title</label> -->\r\n    </div>\r\n";
 
 /***/ },
 /* 78 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"main\" transition=\"animate_routerview\">\n    <taskinputer :listid=\"listId\"></taskinputer>\n    <div class=\"tasklist\">\n      <taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\"></taskitem>\n    </div>\n    <div class=\"label-trigger\" @click=\"toggleShowCompletedTask\">\n      显示已完成的task\n    </div>\n    <div class=\"tasklist--finished\" v-show=\"completedShow\">\n      <taskitem v-for=\"task in completedTasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\"></taskitem>\n    </div>\n  </div>\n";
+	module.exports = "\r\n  <div class=\"main\" transition=\"animate_routerview\">\r\n    <taskinputer :listid=\"listId\"></taskinputer>\r\n    <div class=\"tasklist\">\r\n      <taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\"></taskitem>\r\n    </div>\r\n    <div class=\"label-trigger\" @click=\"toggleShowCompletedTask\">\r\n      显示已完成的task\r\n    </div>\r\n    <div class=\"tasklist--finished\" v-show=\"completedShow\">\r\n      <taskitem v-for=\"task in completedTasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\"></taskitem>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
 /* 79 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"\">\n      {{text}}\n      <taskmenu :lists=\"lists\"></taskmenu>\n      <router-view></router-view>\n  </div>\n";
+	module.exports = "\r\n  <div class=\"\">\r\n      {{text}}\r\n      <taskmenu :lists=\"lists\"></taskmenu>\r\n      <router-view></router-view>\r\n  </div>\r\n";
 
 /***/ },
 /* 80 */
@@ -16925,7 +16925,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/user/login.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\user\\login.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -17017,7 +17017,7 @@
 /* 83 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"custom-container\" transition=\"animate_routerview\">\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <h3>登录</h3>\n      </div>\n    </div>\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n          <div class=\"mdl-textfield mdl-js-textfield\">\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"user.username\">\n            <label class=\"mdl-textfield__label\" for=\"email\">Email</label>\n            </div>\n        </div>\n      </div>\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <div class=\"mdl-textfield mdl-js-textfield\">\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"user.password\">\n          <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\n        </div>\n      </div>\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">GO!</button>\n        <a v-link=\"{path: '/signup', exact: true}\">还没有账号？立马注册</a>\n      </div>\n    </div>\n  </div>\n";
+	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <h3>登录</h3>\r\n      </div>\r\n    </div>\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n          <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"user.username\">\r\n            <label class=\"mdl-textfield__label\" for=\"email\">Email</label>\r\n            </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"user.password\">\r\n          <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\r\n        </div>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">GO!</button>\r\n        <a v-link=\"{path: '/signup', exact: true}\">还没有账号？立马注册</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
 /* 84 */
@@ -17033,7 +17033,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/user/signup.vue"
+	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\user\\signup.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -17109,7 +17109,7 @@
 /* 86 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"custom-container\" transition=\"animate_routerview\">\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <h3>注册</h3>\n      </div>\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <div class=\"mdl-textfield mdl-js-textfield\">\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\n            <label class=\"mdl-textfield__label\" for=\"email\">邮箱</label>\n          </div>\n        <div class=\"mdl-textfield mdl-js-textfield\">\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\n          <label class=\"mdl-textfield__label\" for=\"password\">密码</label>\n        </div>\n        <div class=\"input-field col s12\">\n            <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\" v-on:click=\"signUp()\">注册</button>\n            <a v-link=\"'login'\">已有账号？直接登录</a>\n        </div>\n      </div>\n    </div>\n  </div>\n";
+	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <h3>注册</h3>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\r\n            <label class=\"mdl-textfield__label\" for=\"email\">邮箱</label>\r\n          </div>\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\r\n          <label class=\"mdl-textfield__label\" for=\"password\">密码</label>\r\n        </div>\r\n        <div class=\"input-field col s12\">\r\n            <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\" v-on:click=\"signUp()\">注册</button>\r\n            <a v-link=\"'login'\">已有账号？直接登录</a>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
 
 /***/ },
 /* 87 */
