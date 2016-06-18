@@ -52,6 +52,14 @@
         showCurrentList: false,
       };
     },
+    watch: {
+      // 监控左侧 list 列表，默认选中第一个
+      'lists': function (val, oldVal){
+        if(this.lists.length){
+          this.$router.go({name: 'list', params: {id: this.lists[0].id}});
+        }
+      }
+    },
     ready() {
       document.addEventListener('keyup', e => {
         if (e.keyCode === 27) {
