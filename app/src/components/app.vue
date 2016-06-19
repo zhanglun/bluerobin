@@ -2,9 +2,9 @@
   <div class="">
     <appheader :account="account"></appheader>
     <div class="page-content">
-      <p>
+      <!-- <p>
         {{currentState}}
-      </p>
+      </p> -->
       <button type="button" name="button" @click="changeState">test</button>
       <router-view :store="store"></router-view>
     </div>
@@ -70,12 +70,10 @@
     },
     created() {
       this.store.subscribe(() => {
-        console.log(this.store.getState());
         this.currentState = this.store.getState().tasks.text;
       });
     },
     ready() {
-      console.log(this.store.getState().tasks);
       this.currentState = this.store.getState().tasks.text;
       this.$http.get('authenticate')
         .then((res) => {

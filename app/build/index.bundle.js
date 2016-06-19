@@ -14565,9 +14565,9 @@
 	//   <div class="">
 	//     <appheader :account="account"></appheader>
 	//     <div class="page-content">
-	//       <p>
+	//       <!-- <p>
 	//         {{currentState}}
-	//       </p>
+	//       </p> -->
 	//       <button type="button" name="button" @click="changeState">test</button>
 	//       <router-view :store="store"></router-view>
 	//     </div>
@@ -14621,14 +14621,12 @@
 	    var _this = this;
 	
 	    this.store.subscribe(function () {
-	      console.log(_this.store.getState());
 	      _this.currentState = _this.store.getState().tasks.text;
 	    });
 	  },
 	  ready: function ready() {
 	    var _this2 = this;
 	
-	    console.log(this.store.getState().tasks);
 	    this.currentState = this.store.getState().tasks.text;
 	    this.$http.get('authenticate').then(function (res) {
 	      _this2.$data.account = res.data.user;
@@ -14754,7 +14752,6 @@
 	      store.replaceReducer(nextReducer);
 	    });
 	  }
-	  console.log(store);
 	  return store;
 	}
 
@@ -15620,12 +15617,12 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var taskReducer = (0, _redux.combineReducers)({
+	var reducers = (0, _redux.combineReducers)({
 	  tasks: _tasks2.default,
 	  lists: _lists2.default
 	});
 	
-	exports.default = taskReducer;
+	exports.default = reducers;
 
 /***/ },
 /* 46 */
@@ -15682,6 +15679,7 @@
 	
 	var CHANGE_STATE = exports.CHANGE_STATE = 'CHANGE_STATE';
 	
+	var LOAD_LISTS = exports.LOAD_LISTS = 'LOAD_LISTS';
 	var ADD_LIST = exports.ADD_LIST = 'ADD_LIST';
 	var EDIT_LIST = exports.EDIT_LIST = 'EDIT_LIST';
 	var DELETE_LIST = exports.DELETE_LIST = 'DELETE_LIST';
@@ -15700,28 +15698,58 @@
 	var _actionType = __webpack_require__(47);
 	
 	function lists(state, action) {
-	  console.log(action);
 	  switch (action.type) {
-	    case '':
-	      break;
+	    case _actionType.LOAD_LISTS:
+	      console.log(_actionType.LOAD_LISTS);
+	      return {
+	        lists: action.lists
+	      };
+	    case _actionType.ADD_LIST:
+	      console.log(_actionType.ADD_LIST);
+	      return {
+	        list: action.list
+	      };
+	    case _actionType.DELETE_LIST:
+	      console.log(_actionType.DELETE_LIST);
+	      return {
+	        list: action.list
+	      };
+	    case _actionType.EDIT_LIST:
+	      console.log(_actionType.EDIT_LIST);
+	      return {
+	        list: action.list
+	      };
 	    default:
-	      break;
+	      return {
+	        list: action.list
+	      };
 	  }
 	}
 
 /***/ },
 /* 49 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.loadLists = exports.changeMyState = undefined;
+	
+	var _actionType = __webpack_require__(47);
+	
 	var changeMyState = exports.changeMyState = function changeMyState(text) {
 	  return {
 	    type: 'CHANGE_STATE',
 	    text: text
+	  };
+	};
+	
+	var loadLists = exports.loadLists = function loadLists(lists) {
+	  return {
+	    type: _actionType.LOAD_LISTS,
+	    lists: lists
 	  };
 	};
 
@@ -16023,7 +16051,7 @@
 /* 59 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div class=\"\">\n    <appheader :account=\"account\"></appheader>\n    <div class=\"page-content\">\n      <p>\n        {{currentState}}\n      </p>\n      <button type=\"button\" name=\"button\" @click=\"changeState\">test</button>\n      <router-view :store=\"store\"></router-view>\n    </div>\n    <script type=\"x-template\" id=\"modal-template\">\n      <div class=\"modal-mask\" v-if=\"show\" transition=\"modal\">\n        <div class=\"modal-wrapper\">\n          <div class=\"modal-container\">\n\n            <div class=\"modal-header\">\n              <slot name=\"header\">\n                default header\n              </slot>\n            </div>\n\n            <div class=\"modal-body\">\n              <slot name=\"body\">\n                default body\n              </slot>\n            </div>\n\n            <div class=\"modal-footer\">\n              <slot name=\"footer\">\n                default footer\n                <button class=\"modal-default-button\"\n                  @click=\"show = false\">\n                  OK\n                </button>\n              </slot>\n            </div>\n          </div>\n        </div>\n      </div>\n    </script>\n  </div>\n";
+	module.exports = "\n  <div class=\"\">\n    <appheader :account=\"account\"></appheader>\n    <div class=\"page-content\">\n      <!-- <p>\n        {{currentState}}\n      </p> -->\n      <button type=\"button\" name=\"button\" @click=\"changeState\">test</button>\n      <router-view :store=\"store\"></router-view>\n    </div>\n    <script type=\"x-template\" id=\"modal-template\">\n      <div class=\"modal-mask\" v-if=\"show\" transition=\"modal\">\n        <div class=\"modal-wrapper\">\n          <div class=\"modal-container\">\n\n            <div class=\"modal-header\">\n              <slot name=\"header\">\n                default header\n              </slot>\n            </div>\n\n            <div class=\"modal-body\">\n              <slot name=\"body\">\n                default body\n              </slot>\n            </div>\n\n            <div class=\"modal-footer\">\n              <slot name=\"footer\">\n                default footer\n                <button class=\"modal-default-button\"\n                  @click=\"show = false\">\n                  OK\n                </button>\n              </slot>\n            </div>\n          </div>\n        </div>\n      </div>\n    </script>\n  </div>\n";
 
 /***/ },
 /* 60 */
@@ -16072,17 +16100,10 @@
 	
 	var _category2 = _interopRequireDefault(_category);
 	
+	var _actions = __webpack_require__(49);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	// <template>
-	//   <div class="">
-	//       {{text}}
-	//       <taskmenu :lists="lists"></taskmenu>
-	//       <router-view></router-view>
-	//   </div>
-	// </template>
-	//
-	// <script>
 	exports.default = {
 	  props: ['store'],
 	  data: function data() {
@@ -16128,12 +16149,11 @@
 	    var _this = this;
 	
 	    this.store.subscribe(function () {
-	      console.log('hahahah');
 	      _this.text = _this.store.getState().tasks.text;
 	    });
-	    console.log(location.href);
 	    this.$http.get('lists').then(function (res) {
 	      _this.lists = res.data;
+	      _this.store.dispatch((0, _actions.loadLists)(res.data));
 	    });
 	  },
 	
@@ -16147,6 +16167,15 @@
 	// </style>
 	//
 	/* generated by vue-loader */
+	// <template>
+	//   <div class="">
+	//       {{text}}
+	//       <taskmenu :lists="lists"></taskmenu>
+	//       <router-view></router-view>
+	//   </div>
+	// </template>
+	//
+	// <script>
 
 /***/ },
 /* 63 */

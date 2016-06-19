@@ -10,6 +10,8 @@
   import TaskMenuView from './taskmenu.vue';
   import CategoryView from './category.vue';
 
+  import { loadLists } from '../../actions';
+
   export default {
     props: ['store'],
     data() {
@@ -53,19 +55,18 @@
 
     ready() {
       this.store.subscribe(() => {
-        console.log('hahahah');
         this.text = this.store.getState().tasks.text;
       });
-      console.log(location.href);
       this.$http.get('lists')
         .then(res => {
           this.lists = res.data;
+          this.store.dispatch(loadLists(res.data));
         });
     },
 
     methods: {
     },
-  
+
   };
 
 </script>

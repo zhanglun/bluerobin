@@ -7,6 +7,7 @@ export const CLEAR_COMPLETED = 'CLEAR_COMPLETED';
 
 export const CHANGE_STATE = 'CHANGE_STATE';
 
+export const LOAD_LISTS = 'LOAD_LISTS';
 export const ADD_LIST = 'ADD_LIST';
 export const EDIT_LIST = 'EDIT_LIST';
 export const DELETE_LIST = 'DELETE_LIST';
