@@ -1,4 +1,5 @@
 import { LOAD_LISTS, ADD_LIST, DELETE_LIST, EDIT_LIST } from '../constants/actionType';
+
 export default function lists(state, action) {
   switch (action.type) {
   case LOAD_LISTS:

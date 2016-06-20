@@ -28,10 +28,10 @@
     <modal :show="showCurrentList">
       <h3 slot="header" class="center">编辑清单</h3>
       <div slot="body">
-        <input type="text" class="text" v-model="currentList.name"/>
+        <input type="text" class="text" v-model="currentListCopy.name"/>
       </div>
       <div slot="footer">
-        <button @click="doEditList">确定</button>
+        <button @click="doEditList(currentList)">确定</button>
       </div>
     </modal>
 
@@ -49,6 +49,7 @@
           name: '',
         },
         currentList: null,
+        currentListCopy: null,
         showCurrentList: false,
       };
     },
@@ -83,13 +84,16 @@
       },
       showCurrent(e, list) {
         this.currentList = list;
+        this.currentListCopy = Object.assign({}, list);
         this.showCurrentList = true;
       },
-      doEditList(list) {
-        debugger;
-        this.$http.put('lists/' + list.id, list)
-          .then(() => {
-            console.log(arguments);
+      doEditList(currentlist) {
+        let param = {};
+        param.name = this.currentListCopy.name;
+        this.$http.put('lists/' + this.currentListCopy.id, param)
+          .then((res) => {
+            console.log(res.data);
+            currentlist = res.data;
           }, function() {
 
           });

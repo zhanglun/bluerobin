@@ -62,25 +62,25 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _task = __webpack_require__(60);
+	var _task = __webpack_require__(97);
 	
 	var _task2 = _interopRequireDefault(_task);
 	
-	var _category = __webpack_require__(63);
+	var _category = __webpack_require__(100);
 	
 	var _category2 = _interopRequireDefault(_category);
 	
-	var _login = __webpack_require__(81);
+	var _login = __webpack_require__(117);
 	
 	var _login2 = _interopRequireDefault(_login);
 	
-	var _signup = __webpack_require__(85);
+	var _signup = __webpack_require__(121);
 	
 	var _signup2 = _interopRequireDefault(_signup);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	__webpack_require__(88);
+	__webpack_require__(124);
 	
 	
 	_vue2.default.use(_vueRouter2.default);
@@ -14505,7 +14505,7 @@
 	var __vue_script__, __vue_template__
 	__webpack_require__(29)
 	__vue_script__ = __webpack_require__(30)
-	__vue_template__ = __webpack_require__(59)
+	__vue_template__ = __webpack_require__(96)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -14513,7 +14513,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\app.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/app.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -14551,7 +14551,7 @@
 	
 	var _taskmenu2 = _interopRequireDefault(_taskmenu);
 	
-	var _header = __webpack_require__(54);
+	var _header = __webpack_require__(91);
 	
 	var _header2 = _interopRequireDefault(_header);
 	
@@ -15760,7 +15760,7 @@
 	var __vue_script__, __vue_template__
 	__webpack_require__(51)
 	__vue_script__ = __webpack_require__(52)
-	__vue_template__ = __webpack_require__(53)
+	__vue_template__ = __webpack_require__(90)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15768,7 +15768,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\task\\taskmenu.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/task/taskmenu.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15784,13 +15784,20 @@
 
 /***/ },
 /* 52 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	
+	var _assign = __webpack_require__(53);
+	
+	var _assign2 = _interopRequireDefault(_assign);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
 	// <template>
 	//   <div class="sidebar">
 	//     <ul class="side-menu">
@@ -15821,10 +15828,10 @@
 	//     <modal :show="showCurrentList">
 	//       <h3 slot="header" class="center">编辑清单</h3>
 	//       <div slot="body">
-	//         <input type="text" class="text" v-model="currentList.name"/>
+	//         <input type="text" class="text" v-model="currentListCopy.name"/>
 	//       </div>
 	//       <div slot="footer">
-	//         <button @click="doEditList">确定</button>
+	//         <button @click="doEditList(currentList)">确定</button>
 	//       </div>
 	//     </modal>
 	//
@@ -15840,6 +15847,7 @@
 	        name: ''
 	      },
 	      currentList: null,
+	      currentListCopy: null,
 	      showCurrentList: false
 	    };
 	  },
@@ -15880,14 +15888,15 @@
 	    },
 	    showCurrent: function showCurrent(e, list) {
 	      this.currentList = list;
+	      this.currentListCopy = (0, _assign2.default)({}, list);
 	      this.showCurrentList = true;
 	    },
-	    doEditList: function doEditList(list) {
-	      var _arguments = arguments;
-	
-	      debugger;
-	      this.$http.put('lists/' + list.id, list).then(function () {
-	        console.log(_arguments);
+	    doEditList: function doEditList(currentlist) {
+	      var param = {};
+	      param.name = this.currentListCopy.name;
+	      this.$http.put('lists/' + this.currentListCopy.id, param).then(function (res) {
+	        console.log(res.data);
+	        currentlist = res.data;
 	      }, function () {});
 	    }
 	  }
@@ -15945,19 +15954,524 @@
 
 /***/ },
 /* 53 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = "\r\n  <div class=\"sidebar\">\r\n    <ul class=\"side-menu\">\r\n      <li v-for=\"list in lists\">\r\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: list.id}}\">\r\n          <span class=\"material-icons\">list</span>\r\n          <span class=\"side-menu__item-content\">{{list.name}}</span>\r\n          <span class=\"material-icons edit\" @click=\"showCurrent(e, list)\">edit</span>\r\n        </a>\r\n      </li>\r\n    </ul>\r\n    <div class=\"side-actions\">\r\n      <span class=\"side-menu__item\" @click=\"showModal = true\">\r\n        <span class=\"material-icons\">add</span>\r\n        <span class=\"side-menu__item-content\">新建分类</span>\r\n      </span>\r\n    </div>\r\n\r\n    <modal :show=\"showModal\">\r\n      <h3 slot=\"header\">创建新的任务清单</h3>\r\n      <div slot=\"body\">\r\n        <input type=\"text\" class=\"text\" v-model=\"newList.name\"/>\r\n      </div>\r\n      <div slot=\"footer\">\r\n        <button @click=\"createNewList\">创建</button>\r\n      </div>\r\n    </modal>\r\n    <modal :show=\"showCurrentList\">\r\n      <h3 slot=\"header\" class=\"center\">编辑清单</h3>\r\n      <div slot=\"body\">\r\n        <input type=\"text\" class=\"text\" v-model=\"currentList.name\"/>\r\n      </div>\r\n      <div slot=\"footer\">\r\n        <button @click=\"doEditList\">确定</button>\r\n      </div>\r\n    </modal>\r\n\r\n  </div>\r\n";
+	module.exports = { "default": __webpack_require__(54), __esModule: true };
 
 /***/ },
 /* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
+	__webpack_require__(55);
+	module.exports = __webpack_require__(58).Object.assign;
+
+/***/ },
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.3.1 Object.assign(target, source)
+	var $export = __webpack_require__(56);
+	
+	$export($export.S + $export.F, 'Object', {assign: __webpack_require__(71)});
+
+/***/ },
+/* 56 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global    = __webpack_require__(57)
+	  , core      = __webpack_require__(58)
+	  , ctx       = __webpack_require__(59)
+	  , hide      = __webpack_require__(61)
+	  , PROTOTYPE = 'prototype';
+	
+	var $export = function(type, name, source){
+	  var IS_FORCED = type & $export.F
+	    , IS_GLOBAL = type & $export.G
+	    , IS_STATIC = type & $export.S
+	    , IS_PROTO  = type & $export.P
+	    , IS_BIND   = type & $export.B
+	    , IS_WRAP   = type & $export.W
+	    , exports   = IS_GLOBAL ? core : core[name] || (core[name] = {})
+	    , expProto  = exports[PROTOTYPE]
+	    , target    = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE]
+	    , key, own, out;
+	  if(IS_GLOBAL)source = name;
+	  for(key in source){
+	    // contains in native
+	    own = !IS_FORCED && target && target[key] !== undefined;
+	    if(own && key in exports)continue;
+	    // export native or passed
+	    out = own ? target[key] : source[key];
+	    // prevent global pollution for namespaces
+	    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+	    // bind timers to global for call from export context
+	    : IS_BIND && own ? ctx(out, global)
+	    // wrap global constructors for prevent change them in library
+	    : IS_WRAP && target[key] == out ? (function(C){
+	      var F = function(a, b, c){
+	        if(this instanceof C){
+	          switch(arguments.length){
+	            case 0: return new C;
+	            case 1: return new C(a);
+	            case 2: return new C(a, b);
+	          } return new C(a, b, c);
+	        } return C.apply(this, arguments);
+	      };
+	      F[PROTOTYPE] = C[PROTOTYPE];
+	      return F;
+	    // make static versions for prototype methods
+	    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+	    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
+	    if(IS_PROTO){
+	      (exports.virtual || (exports.virtual = {}))[key] = out;
+	      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
+	      if(type & $export.R && expProto && !expProto[key])hide(expProto, key, out);
+	    }
+	  }
+	};
+	// type bitmap
+	$export.F = 1;   // forced
+	$export.G = 2;   // global
+	$export.S = 4;   // static
+	$export.P = 8;   // proto
+	$export.B = 16;  // bind
+	$export.W = 32;  // wrap
+	$export.U = 64;  // safe
+	$export.R = 128; // real proto method for `library` 
+	module.exports = $export;
+
+/***/ },
+/* 57 */
+/***/ function(module, exports) {
+
+	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+	var global = module.exports = typeof window != 'undefined' && window.Math == Math
+	  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
+	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
+
+/***/ },
+/* 58 */
+/***/ function(module, exports) {
+
+	var core = module.exports = {version: '2.3.0'};
+	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
+
+/***/ },
+/* 59 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// optional / simple context binding
+	var aFunction = __webpack_require__(60);
+	module.exports = function(fn, that, length){
+	  aFunction(fn);
+	  if(that === undefined)return fn;
+	  switch(length){
+	    case 1: return function(a){
+	      return fn.call(that, a);
+	    };
+	    case 2: return function(a, b){
+	      return fn.call(that, a, b);
+	    };
+	    case 3: return function(a, b, c){
+	      return fn.call(that, a, b, c);
+	    };
+	  }
+	  return function(/* ...args */){
+	    return fn.apply(that, arguments);
+	  };
+	};
+
+/***/ },
+/* 60 */
+/***/ function(module, exports) {
+
+	module.exports = function(it){
+	  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
+	  return it;
+	};
+
+/***/ },
+/* 61 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var dP         = __webpack_require__(62)
+	  , createDesc = __webpack_require__(70);
+	module.exports = __webpack_require__(66) ? function(object, key, value){
+	  return dP.f(object, key, createDesc(1, value));
+	} : function(object, key, value){
+	  object[key] = value;
+	  return object;
+	};
+
+/***/ },
+/* 62 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var anObject       = __webpack_require__(63)
+	  , IE8_DOM_DEFINE = __webpack_require__(65)
+	  , toPrimitive    = __webpack_require__(69)
+	  , dP             = Object.defineProperty;
+	
+	exports.f = __webpack_require__(66) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+	  anObject(O);
+	  P = toPrimitive(P, true);
+	  anObject(Attributes);
+	  if(IE8_DOM_DEFINE)try {
+	    return dP(O, P, Attributes);
+	  } catch(e){ /* empty */ }
+	  if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');
+	  if('value' in Attributes)O[P] = Attributes.value;
+	  return O;
+	};
+
+/***/ },
+/* 63 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(64);
+	module.exports = function(it){
+	  if(!isObject(it))throw TypeError(it + ' is not an object!');
+	  return it;
+	};
+
+/***/ },
+/* 64 */
+/***/ function(module, exports) {
+
+	module.exports = function(it){
+	  return typeof it === 'object' ? it !== null : typeof it === 'function';
+	};
+
+/***/ },
+/* 65 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = !__webpack_require__(66) && !__webpack_require__(67)(function(){
+	  return Object.defineProperty(__webpack_require__(68)('div'), 'a', {get: function(){ return 7; }}).a != 7;
+	});
+
+/***/ },
+/* 66 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Thank's IE8 for his funny defineProperty
+	module.exports = !__webpack_require__(67)(function(){
+	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
+	});
+
+/***/ },
+/* 67 */
+/***/ function(module, exports) {
+
+	module.exports = function(exec){
+	  try {
+	    return !!exec();
+	  } catch(e){
+	    return true;
+	  }
+	};
+
+/***/ },
+/* 68 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var isObject = __webpack_require__(64)
+	  , document = __webpack_require__(57).document
+	  // in old IE typeof document.createElement is 'object'
+	  , is = isObject(document) && isObject(document.createElement);
+	module.exports = function(it){
+	  return is ? document.createElement(it) : {};
+	};
+
+/***/ },
+/* 69 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.1 ToPrimitive(input [, PreferredType])
+	var isObject = __webpack_require__(64);
+	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+	// and the second argument - flag - preferred type is a string
+	module.exports = function(it, S){
+	  if(!isObject(it))return it;
+	  var fn, val;
+	  if(S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
+	  if(typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it)))return val;
+	  if(!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
+	  throw TypeError("Can't convert object to primitive value");
+	};
+
+/***/ },
+/* 70 */
+/***/ function(module, exports) {
+
+	module.exports = function(bitmap, value){
+	  return {
+	    enumerable  : !(bitmap & 1),
+	    configurable: !(bitmap & 2),
+	    writable    : !(bitmap & 4),
+	    value       : value
+	  };
+	};
+
+/***/ },
+/* 71 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	// 19.1.2.1 Object.assign(target, source, ...)
+	var getKeys  = __webpack_require__(72)
+	  , gOPS     = __webpack_require__(87)
+	  , pIE      = __webpack_require__(88)
+	  , toObject = __webpack_require__(89)
+	  , IObject  = __webpack_require__(76)
+	  , $assign  = Object.assign;
+	
+	// should work with symbols and should have deterministic property order (V8 bug)
+	module.exports = !$assign || __webpack_require__(67)(function(){
+	  var A = {}
+	    , B = {}
+	    , S = Symbol()
+	    , K = 'abcdefghijklmnopqrst';
+	  A[S] = 7;
+	  K.split('').forEach(function(k){ B[k] = k; });
+	  return $assign({}, A)[S] != 7 || Object.keys($assign({}, B)).join('') != K;
+	}) ? function assign(target, source){ // eslint-disable-line no-unused-vars
+	  var T     = toObject(target)
+	    , aLen  = arguments.length
+	    , index = 1
+	    , getSymbols = gOPS.f
+	    , isEnum     = pIE.f;
+	  while(aLen > index){
+	    var S      = IObject(arguments[index++])
+	      , keys   = getSymbols ? getKeys(S).concat(getSymbols(S)) : getKeys(S)
+	      , length = keys.length
+	      , j      = 0
+	      , key;
+	    while(length > j)if(isEnum.call(S, key = keys[j++]))T[key] = S[key];
+	  } return T;
+	} : $assign;
+
+/***/ },
+/* 72 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+	var $keys       = __webpack_require__(73)
+	  , enumBugKeys = __webpack_require__(86);
+	
+	module.exports = Object.keys || function keys(O){
+	  return $keys(O, enumBugKeys);
+	};
+
+/***/ },
+/* 73 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var has          = __webpack_require__(74)
+	  , toIObject    = __webpack_require__(75)
+	  , arrayIndexOf = __webpack_require__(79)(false)
+	  , IE_PROTO     = __webpack_require__(83)('IE_PROTO');
+	
+	module.exports = function(object, names){
+	  var O      = toIObject(object)
+	    , i      = 0
+	    , result = []
+	    , key;
+	  for(key in O)if(key != IE_PROTO)has(O, key) && result.push(key);
+	  // Don't enum bug & hidden keys
+	  while(names.length > i)if(has(O, key = names[i++])){
+	    ~arrayIndexOf(result, key) || result.push(key);
+	  }
+	  return result;
+	};
+
+/***/ },
+/* 74 */
+/***/ function(module, exports) {
+
+	var hasOwnProperty = {}.hasOwnProperty;
+	module.exports = function(it, key){
+	  return hasOwnProperty.call(it, key);
+	};
+
+/***/ },
+/* 75 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// to indexed object, toObject with fallback for non-array-like ES3 strings
+	var IObject = __webpack_require__(76)
+	  , defined = __webpack_require__(78);
+	module.exports = function(it){
+	  return IObject(defined(it));
+	};
+
+/***/ },
+/* 76 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// fallback for non-array-like ES3 and non-enumerable old V8 strings
+	var cof = __webpack_require__(77);
+	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
+	  return cof(it) == 'String' ? it.split('') : Object(it);
+	};
+
+/***/ },
+/* 77 */
+/***/ function(module, exports) {
+
+	var toString = {}.toString;
+	
+	module.exports = function(it){
+	  return toString.call(it).slice(8, -1);
+	};
+
+/***/ },
+/* 78 */
+/***/ function(module, exports) {
+
+	// 7.2.1 RequireObjectCoercible(argument)
+	module.exports = function(it){
+	  if(it == undefined)throw TypeError("Can't call method on  " + it);
+	  return it;
+	};
+
+/***/ },
+/* 79 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// false -> Array#indexOf
+	// true  -> Array#includes
+	var toIObject = __webpack_require__(75)
+	  , toLength  = __webpack_require__(80)
+	  , toIndex   = __webpack_require__(82);
+	module.exports = function(IS_INCLUDES){
+	  return function($this, el, fromIndex){
+	    var O      = toIObject($this)
+	      , length = toLength(O.length)
+	      , index  = toIndex(fromIndex, length)
+	      , value;
+	    // Array#includes uses SameValueZero equality algorithm
+	    if(IS_INCLUDES && el != el)while(length > index){
+	      value = O[index++];
+	      if(value != value)return true;
+	    // Array#toIndex ignores holes, Array#includes - not
+	    } else for(;length > index; index++)if(IS_INCLUDES || index in O){
+	      if(O[index] === el)return IS_INCLUDES || index || 0;
+	    } return !IS_INCLUDES && -1;
+	  };
+	};
+
+/***/ },
+/* 80 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.15 ToLength
+	var toInteger = __webpack_require__(81)
+	  , min       = Math.min;
+	module.exports = function(it){
+	  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+	};
+
+/***/ },
+/* 81 */
+/***/ function(module, exports) {
+
+	// 7.1.4 ToInteger
+	var ceil  = Math.ceil
+	  , floor = Math.floor;
+	module.exports = function(it){
+	  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+	};
+
+/***/ },
+/* 82 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var toInteger = __webpack_require__(81)
+	  , max       = Math.max
+	  , min       = Math.min;
+	module.exports = function(index, length){
+	  index = toInteger(index);
+	  return index < 0 ? max(index + length, 0) : min(index, length);
+	};
+
+/***/ },
+/* 83 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var shared = __webpack_require__(84)('keys')
+	  , uid    = __webpack_require__(85);
+	module.exports = function(key){
+	  return shared[key] || (shared[key] = uid(key));
+	};
+
+/***/ },
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var global = __webpack_require__(57)
+	  , SHARED = '__core-js_shared__'
+	  , store  = global[SHARED] || (global[SHARED] = {});
+	module.exports = function(key){
+	  return store[key] || (store[key] = {});
+	};
+
+/***/ },
+/* 85 */
+/***/ function(module, exports) {
+
+	var id = 0
+	  , px = Math.random();
+	module.exports = function(key){
+	  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+	};
+
+/***/ },
+/* 86 */
+/***/ function(module, exports) {
+
+	// IE 8- don't enum bug keys
+	module.exports = (
+	  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
+	).split(',');
+
+/***/ },
+/* 87 */
+/***/ function(module, exports) {
+
+	exports.f = Object.getOwnPropertySymbols;
+
+/***/ },
+/* 88 */
+/***/ function(module, exports) {
+
+	exports.f = {}.propertyIsEnumerable;
+
+/***/ },
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// 7.1.13 ToObject(argument)
+	var defined = __webpack_require__(78);
+	module.exports = function(it){
+	  return Object(defined(it));
+	};
+
+/***/ },
+/* 90 */
+/***/ function(module, exports) {
+
+	module.exports = "\n  <div class=\"sidebar\">\n    <ul class=\"side-menu\">\n      <li v-for=\"list in lists\">\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: list.id}}\">\n          <span class=\"material-icons\">list</span>\n          <span class=\"side-menu__item-content\">{{list.name}}</span>\n          <span class=\"material-icons edit\" @click=\"showCurrent(e, list)\">edit</span>\n        </a>\n      </li>\n    </ul>\n    <div class=\"side-actions\">\n      <span class=\"side-menu__item\" @click=\"showModal = true\">\n        <span class=\"material-icons\">add</span>\n        <span class=\"side-menu__item-content\">新建分类</span>\n      </span>\n    </div>\n\n    <modal :show=\"showModal\">\n      <h3 slot=\"header\">创建新的任务清单</h3>\n      <div slot=\"body\">\n        <input type=\"text\" class=\"text\" v-model=\"newList.name\"/>\n      </div>\n      <div slot=\"footer\">\n        <button @click=\"createNewList\">创建</button>\n      </div>\n    </modal>\n    <modal :show=\"showCurrentList\">\n      <h3 slot=\"header\" class=\"center\">编辑清单</h3>\n      <div slot=\"body\">\n        <input type=\"text\" class=\"text\" v-model=\"currentListCopy.name\"/>\n      </div>\n      <div slot=\"footer\">\n        <button @click=\"doEditList(currentList)\">确定</button>\n      </div>\n    </modal>\n\n  </div>\n";
+
+/***/ },
+/* 91 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var __vue_script__, __vue_template__
-	__webpack_require__(55)
-	__webpack_require__(56)
-	__vue_script__ = __webpack_require__(57)
-	__vue_template__ = __webpack_require__(58)
+	__webpack_require__(92)
+	__webpack_require__(93)
+	__vue_script__ = __webpack_require__(94)
+	__vue_template__ = __webpack_require__(95)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -15965,7 +16479,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\header\\header.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/header/header.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -15974,19 +16488,19 @@
 	})()}
 
 /***/ },
-/* 55 */
+/* 92 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 56 */
+/* 93 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 57 */
+/* 94 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16056,25 +16570,25 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 58 */
+/* 95 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <!-- <header class=\"mdl-layout__header\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <span class=\"mdl-layout-title\">{{$route.params.category}}</span>\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\r\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\r\n        <span v-if=\"account\" class=\"navigation-account\">\r\n          <img v-bind:src=\"account.avatar\" alt=\"\"></span>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    </div>\r\n  </header> -->\r\n  <header class=\"header\">\r\n\r\n  </header>\r\n";
+	module.exports = "\n  <!-- <header class=\"mdl-layout__header\">\n      <div class=\"mdl-layout__header-row\">\n        <span class=\"mdl-layout-title\">{{$route.params.category}}</span>\n        <div class=\"mdl-layout-spacer\"></div>\n        <nav class=\"mdl-navigation\">\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/task', exact: true}\">Task</a>\n        <a class=\"mdl-navigation__link\" href=\"\" v-link=\"{path: '/signup', exact: true}\">注册</a>\n        <span v-if=\"account\" class=\"navigation-account\">\n          <img v-bind:src=\"account.avatar\" alt=\"\"></span>\n        </nav>\n      </div>\n    </header>\n    </div>\n  </header> -->\n  <header class=\"header\">\n\n  </header>\n";
 
 /***/ },
-/* 59 */
+/* 96 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"\">\r\n    <appheader :account=\"account\"></appheader>\r\n    <div class=\"page-content\">\r\n      <!-- <p>\r\n        {{currentState}}\r\n      </p> -->\r\n      <button type=\"button\" name=\"button\" @click=\"changeState\">test</button>\r\n      <router-view :store=\"store\"></router-view>\r\n    </div>\r\n    <script type=\"x-template\" id=\"modal-template\">\r\n      <div class=\"modal-mask\" v-if=\"show\" transition=\"modal\">\r\n        <div class=\"modal-wrapper\">\r\n          <div class=\"modal-container\">\r\n\r\n            <div class=\"modal-header\">\r\n              <slot name=\"header\">\r\n                default header\r\n              </slot>\r\n            </div>\r\n\r\n            <div class=\"modal-body\">\r\n              <slot name=\"body\">\r\n                default body\r\n              </slot>\r\n            </div>\r\n\r\n            <div class=\"modal-footer\">\r\n              <slot name=\"footer\">\r\n                default footer\r\n                <button class=\"modal-default-button\"\r\n                  @click=\"show = false\">\r\n                  OK\r\n                </button>\r\n              </slot>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </script>\r\n  </div>\r\n";
+	module.exports = "\n  <div class=\"\">\n    <appheader :account=\"account\"></appheader>\n    <div class=\"page-content\">\n      <!-- <p>\n        {{currentState}}\n      </p> -->\n      <button type=\"button\" name=\"button\" @click=\"changeState\">test</button>\n      <router-view :store=\"store\"></router-view>\n    </div>\n    <script type=\"x-template\" id=\"modal-template\">\n      <div class=\"modal-mask\" v-if=\"show\" transition=\"modal\">\n        <div class=\"modal-wrapper\">\n          <div class=\"modal-container\">\n\n            <div class=\"modal-header\">\n              <slot name=\"header\">\n                default header\n              </slot>\n            </div>\n\n            <div class=\"modal-body\">\n              <slot name=\"body\">\n                default body\n              </slot>\n            </div>\n\n            <div class=\"modal-footer\">\n              <slot name=\"footer\">\n                default footer\n                <button class=\"modal-default-button\"\n                  @click=\"show = false\">\n                  OK\n                </button>\n              </slot>\n            </div>\n          </div>\n        </div>\n      </div>\n    </script>\n  </div>\n";
 
 /***/ },
-/* 60 */
+/* 97 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(61)
-	__vue_script__ = __webpack_require__(62)
-	__vue_template__ = __webpack_require__(80)
+	__webpack_require__(98)
+	__vue_script__ = __webpack_require__(99)
+	__vue_template__ = __webpack_require__(116)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16082,7 +16596,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\task\\task.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/task/task.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16091,13 +16605,13 @@
 	})()}
 
 /***/ },
-/* 61 */
+/* 98 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 62 */
+/* 99 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16110,7 +16624,7 @@
 	
 	var _taskmenu2 = _interopRequireDefault(_taskmenu);
 	
-	var _category = __webpack_require__(63);
+	var _category = __webpack_require__(100);
 	
 	var _category2 = _interopRequireDefault(_category);
 	
@@ -16192,13 +16706,13 @@
 	// <script>
 
 /***/ },
-/* 63 */
+/* 100 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(64)
-	__vue_script__ = __webpack_require__(65)
-	__vue_template__ = __webpack_require__(79)
+	__webpack_require__(101)
+	__vue_script__ = __webpack_require__(102)
+	__vue_template__ = __webpack_require__(115)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16206,7 +16720,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\task\\category.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/task/category.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16215,13 +16729,13 @@
 	})()}
 
 /***/ },
-/* 64 */
+/* 101 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 65 */
+/* 102 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16230,11 +16744,11 @@
 	  value: true
 	});
 	
-	var _taskItem = __webpack_require__(66);
+	var _taskItem = __webpack_require__(103);
 	
 	var _taskItem2 = _interopRequireDefault(_taskItem);
 	
-	var _taskInputer = __webpack_require__(70);
+	var _taskInputer = __webpack_require__(107);
 	
 	var _taskInputer2 = _interopRequireDefault(_taskInputer);
 	
@@ -16377,13 +16891,13 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 66 */
+/* 103 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(67)
-	__vue_script__ = __webpack_require__(68)
-	__vue_template__ = __webpack_require__(69)
+	__webpack_require__(104)
+	__vue_script__ = __webpack_require__(105)
+	__vue_template__ = __webpack_require__(106)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16391,7 +16905,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\task\\taskItem.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/task/taskItem.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16400,13 +16914,13 @@
 	})()}
 
 /***/ },
-/* 67 */
+/* 104 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 68 */
+/* 105 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16607,19 +17121,19 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 69 */
+/* 106 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"task\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\r\n    <div class=\"task-checkbox\">\r\n      <label class=\"mdl-checkbox mdl-js-checkbox\" v-bind:class=\"{'is-checked': task.completed}\" for=\"{{task.id}}\">\r\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\r\n      </label>\r\n    </div>\r\n    <div class=\"task-content\">\r\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{{titleAfterParse}}}</div>\r\n      <div class=\"mdl-textfield mdl-js-textfield task-content-input\">\r\n        <input class=\"mdl-textfield__input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\r\n      </div>\r\n      <div class=\"\" v-if=\"task.completed\">\r\n        {{task.create_time}}\r\n      </div>\r\n    </div>\r\n    <span class=\"task-controller\">\r\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\r\n    </span>\r\n  </div>\r\n\r\n";
+	module.exports = "\n  <div class=\"task\" transition=\"animation_showtask\" v-bind:class=\"{finished: task.completed, editing: task == taskEditing}\" >\n    <div class=\"task-checkbox\">\n      <label class=\"mdl-checkbox mdl-js-checkbox\" v-bind:class=\"{'is-checked': task.completed}\" for=\"{{task.id}}\">\n        <input type=\"checkbox\" id=\"{{task.id}}\" class=\"mdl-checkbox__input\" v-on:change = \"toggleTask(task)\" :checked=\"task.completed\">\n      </label>\n    </div>\n    <div class=\"task-content\">\n      <div class=\"task-content-box\" @dblclick=\"edit(task)\">{{{titleAfterParse}}}</div>\n      <div class=\"mdl-textfield mdl-js-textfield task-content-input\">\n        <input class=\"mdl-textfield__input\" type=\"text\" v-task-autofocus=\"task == taskEditing\" v-model=\"task.title\" class=\"edit\" v-on:blur=\"doEdit(task)\" v-on:keyup.enter=\"doEdit(task, $event)\" />\n      </div>\n      <div class=\"\" v-if=\"task.completed\">\n        {{task.create_time}}\n      </div>\n    </div>\n    <span class=\"task-controller\">\n      <i class=\"material-icons\" @click=\"deleteTask(task)\">clear</i>\n    </span>\n  </div>\n\n";
 
 /***/ },
-/* 70 */
+/* 107 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(71)
-	__vue_script__ = __webpack_require__(72)
-	__vue_template__ = __webpack_require__(78)
+	__webpack_require__(108)
+	__vue_script__ = __webpack_require__(109)
+	__vue_template__ = __webpack_require__(114)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -16627,7 +17141,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\task\\taskInputer.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/task/taskInputer.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -16636,13 +17150,13 @@
 	})()}
 
 /***/ },
-/* 71 */
+/* 108 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 72 */
+/* 109 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16651,15 +17165,15 @@
 	  value: true
 	});
 	
-	var _stringify = __webpack_require__(73);
+	var _stringify = __webpack_require__(110);
 	
 	var _stringify2 = _interopRequireDefault(_stringify);
 	
-	var _uploadBabel = __webpack_require__(76);
+	var _uploadBabel = __webpack_require__(112);
 	
 	var _uploadBabel2 = _interopRequireDefault(_uploadBabel);
 	
-	var _toolBabel = __webpack_require__(77);
+	var _toolBabel = __webpack_require__(113);
 	
 	var _toolBabel2 = _interopRequireDefault(_toolBabel);
 	
@@ -16831,30 +17345,23 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 73 */
+/* 110 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(74), __esModule: true };
+	module.exports = { "default": __webpack_require__(111), __esModule: true };
 
 /***/ },
-/* 74 */
+/* 111 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var core  = __webpack_require__(75)
+	var core  = __webpack_require__(58)
 	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
 	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
 	  return $JSON.stringify.apply($JSON, arguments);
 	};
 
 /***/ },
-/* 75 */
-/***/ function(module, exports) {
-
-	var core = module.exports = {version: '2.3.0'};
-	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
-
-/***/ },
-/* 76 */
+/* 112 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16950,7 +17457,7 @@
 	exports.default = uploadInit;
 
 /***/ },
-/* 77 */
+/* 113 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -16977,31 +17484,31 @@
 	exports.default = Tool;
 
 /***/ },
-/* 78 */
+/* 114 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n    <div class=\"task-textfield\">\r\n      {{listid}}\r\n      <input class=\"task-textfield__input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask(list_id)\">\r\n      <!-- <label for=\"\" class=\"task-textfield__label\">Title</label> -->\r\n    </div>\r\n";
+	module.exports = "\n    <div class=\"task-textfield\">\n      {{listid}}\n      <input class=\"task-textfield__input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask(list_id)\">\n      <!-- <label for=\"\" class=\"task-textfield__label\">Title</label> -->\n    </div>\n";
 
 /***/ },
-/* 79 */
+/* 115 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"main\" transition=\"animate_routerview\">\r\n    <taskinputer :listid=\"listId\"></taskinputer>\r\n    <div class=\"tasklist\">\r\n      <taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\"></taskitem>\r\n    </div>\r\n    <div class=\"label-trigger\" @click=\"toggleShowCompletedTask\">\r\n      显示已完成的task\r\n    </div>\r\n    <div class=\"tasklist--finished\" v-show=\"completedShow\">\r\n      <taskitem v-for=\"task in completedTasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\"></taskitem>\r\n    </div>\r\n  </div>\r\n";
+	module.exports = "\n  <div class=\"main\" transition=\"animate_routerview\">\n    <taskinputer :listid=\"listId\"></taskinputer>\n    <div class=\"tasklist\">\n      <taskitem v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\"></taskitem>\n    </div>\n    <div class=\"label-trigger\" @click=\"toggleShowCompletedTask\">\n      显示已完成的task\n    </div>\n    <div class=\"tasklist--finished\" v-show=\"completedShow\">\n      <taskitem v-for=\"task in completedTasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\"></taskitem>\n    </div>\n  </div>\n";
 
 /***/ },
-/* 80 */
+/* 116 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"\">\r\n      {{text}}\r\n      <taskmenu :lists=\"lists\"></taskmenu>\r\n      <router-view></router-view>\r\n  </div>\r\n";
+	module.exports = "\n  <div class=\"\">\n      {{text}}\n      <taskmenu :lists=\"lists\"></taskmenu>\n      <router-view></router-view>\n  </div>\n";
 
 /***/ },
-/* 81 */
+/* 117 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__webpack_require__(82)
-	__vue_script__ = __webpack_require__(83)
-	__vue_template__ = __webpack_require__(84)
+	__webpack_require__(118)
+	__vue_script__ = __webpack_require__(119)
+	__vue_template__ = __webpack_require__(120)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -17009,7 +17516,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\user\\login.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/user/login.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -17018,13 +17525,13 @@
 	})()}
 
 /***/ },
-/* 82 */
+/* 118 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 83 */
+/* 119 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17098,18 +17605,18 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 84 */
+/* 120 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <h3>登录</h3>\r\n      </div>\r\n    </div>\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n          <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"user.username\">\r\n            <label class=\"mdl-textfield__label\" for=\"email\">Email</label>\r\n            </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"user.password\">\r\n          <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\r\n        </div>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">GO!</button>\r\n        <a v-link=\"{path: '/signup', exact: true}\">还没有账号？立马注册</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
+	module.exports = "\n  <div class=\"custom-container\" transition=\"animate_routerview\">\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <h3>登录</h3>\n      </div>\n    </div>\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n          <div class=\"mdl-textfield mdl-js-textfield\">\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"user.username\">\n            <label class=\"mdl-textfield__label\" for=\"email\">Email</label>\n            </div>\n        </div>\n      </div>\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <div class=\"mdl-textfield mdl-js-textfield\">\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"user.password\">\n          <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\n        </div>\n      </div>\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\"  v-on:click=\"doLogin\">GO!</button>\n        <a v-link=\"{path: '/signup', exact: true}\">还没有账号？立马注册</a>\n      </div>\n    </div>\n  </div>\n";
 
 /***/ },
-/* 85 */
+/* 121 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(86)
-	__vue_template__ = __webpack_require__(87)
+	__vue_script__ = __webpack_require__(122)
+	__vue_template__ = __webpack_require__(123)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	if (__vue_template__) { (typeof module.exports === "function" ? module.exports.options : module.exports).template = __vue_template__ }
@@ -17117,7 +17624,7 @@
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), true)
 	  if (!hotAPI.compatible) return
-	  var id = "E:\\Code\\bluerobin\\app\\src\\components\\user\\signup.vue"
+	  var id = "/Users/zhanglun/Documents/Github/bluerobin/app/src/components/user/signup.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -17126,7 +17633,7 @@
 	})()}
 
 /***/ },
-/* 86 */
+/* 122 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -17190,13 +17697,13 @@
 	/* generated by vue-loader */
 
 /***/ },
-/* 87 */
+/* 123 */
 /***/ function(module, exports) {
 
-	module.exports = "\r\n  <div class=\"custom-container\" transition=\"animate_routerview\">\r\n    <div class=\"mdl-grid\">\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <h3>注册</h3>\r\n      </div>\r\n      <div class=\"mdl-cell mdl-cell-6-col\">\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\r\n            <label class=\"mdl-textfield__label\" for=\"email\">邮箱</label>\r\n          </div>\r\n        <div class=\"mdl-textfield mdl-js-textfield\">\r\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\r\n          <label class=\"mdl-textfield__label\" for=\"password\">密码</label>\r\n        </div>\r\n        <div class=\"input-field col s12\">\r\n            <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\" v-on:click=\"signUp()\">注册</button>\r\n            <a v-link=\"'login'\">已有账号？直接登录</a>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n";
+	module.exports = "\n  <div class=\"custom-container\" transition=\"animate_routerview\">\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <h3>注册</h3>\n      </div>\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <div class=\"mdl-textfield mdl-js-textfield\">\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\n            <label class=\"mdl-textfield__label\" for=\"email\">邮箱</label>\n          </div>\n        <div class=\"mdl-textfield mdl-js-textfield\">\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\n          <label class=\"mdl-textfield__label\" for=\"password\">密码</label>\n        </div>\n        <div class=\"input-field col s12\">\n            <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent\" v-on:click=\"signUp()\">注册</button>\n            <a v-link=\"'login'\">已有账号？直接登录</a>\n        </div>\n      </div>\n    </div>\n  </div>\n";
 
 /***/ },
-/* 88 */
+/* 124 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
