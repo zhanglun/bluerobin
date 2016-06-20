@@ -51,9 +51,11 @@ export default {
   }
 }
 .header{
-  height: 50px;
+  display: flex;
+  height: 60px;
   width: 100%;
   background: fade(#fff, 85%);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   position: fixed;
   z-index: 100;
 }

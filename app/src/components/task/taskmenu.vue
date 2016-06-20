@@ -5,7 +5,7 @@
         <a class="side-menu__item" v-link="{name: 'list', params: {id: list.id}}">
           <span class="material-icons">list</span>
           <span class="side-menu__item-content">{{list.name}}</span>
-          <span class="material-icons edit" @click="editList(e, list)">edit</span>
+          <span class="material-icons edit" @click="showCurrent(e, list)">edit</span>
         </a>
       </li>
     </ul>
@@ -26,12 +26,12 @@
       </div>
     </modal>
     <modal :show="showCurrentList">
-      <h3 slot="header">{{currentList.name}}</h3>
+      <h3 slot="header" class="center">编辑清单</h3>
       <div slot="body">
         <input type="text" class="text" v-model="currentList.name"/>
       </div>
       <div slot="footer">
-        <button @click="createNewList">确定</button>
+        <button @click="doEditList">确定</button>
       </div>
     </modal>
 
@@ -54,14 +54,14 @@
     },
     watch: {
       // 监控左侧 list 列表，默认选中第一个
-      'lists': function (val, oldVal){
-        if(this.lists.length){
+      lists(val, oldVal) {
+        if (this.lists.length) {
           this.$router.go({name: 'list', params: {id: this.lists[0].id}});
         }
-      }
+      },
     },
     ready() {
-      document.addEventListener('keyup', e => {
+      document.addEventListener('keyup', (e) => {
         if (e.keyCode === 27) {
           this.showModal = false;
           this.showCurrentList = false;
@@ -76,17 +76,24 @@
         this.$http
           .post('lists', {
             name: this.newList.name,
-          }).then(list => {
+          }).then((list) => {
             this.showModal = false;
             this.lists.push(list);
-          }, function() {
-
           });
       },
-      editList(e, list) {
+      showCurrent(e, list) {
         this.currentList = list;
         this.showCurrentList = true;
       },
+      doEditList(list) {
+        debugger;
+        this.$http.put('lists/' + list.id, list)
+          .then(() => {
+            console.log(arguments);
+          }, function() {
+
+          });
+      }
     },
   };
 </script>
@@ -131,6 +138,9 @@
    }
    .side-actions{
      font-size: 14px;
+   }
+   .center{
+     text-align: center;
    }
 
 </style>
