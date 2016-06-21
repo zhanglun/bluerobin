@@ -22,7 +22,7 @@ gulp.task('babel', function() {
 
 // 开发
 var webpackConfigDev = Object.create(webpackConfig);
-webpackConfigDev.devtool = 'source-map';
+webpackConfigDev.devtool = 'eval-source-map';
 webpackConfigDev.debug = true;
 
 // create a single instance of the compiler to allow caching

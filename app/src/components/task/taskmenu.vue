@@ -28,7 +28,7 @@
     <modal :show="showCurrentList">
       <h3 slot="header" class="center">编辑清单</h3>
       <div slot="body">
-        <input type="text" class="text" v-model="currentListCopy.name"/>
+        <input type="text" class="text" v-model="currentList.name"/>
       </div>
       <div slot="footer">
         <button @click="doEditList(currentList)">确定</button>
@@ -89,11 +89,11 @@
       },
       doEditList(currentlist) {
         let param = {};
-        param.name = this.currentListCopy.name;
-        this.$http.put('lists/' + this.currentListCopy.id, param)
+        param.name = this.currentList.name;
+        this.$http.put('lists/' + this.currentList.id, param)
           .then((res) => {
-            console.log(res.data);
             currentlist = res.data;
+            this.showCurrentList = false;
           }, function() {
 
           });
