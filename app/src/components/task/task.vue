@@ -10,7 +10,7 @@
   import TaskMenuView from './taskmenu.vue';
   import CategoryView from './category.vue';
 
-  import { loadLists } from '../../actions';
+  // import { loadLists } from '../../actions';
 
   export default {
     props: ['store'],
@@ -60,7 +60,7 @@
       this.$http.get('lists')
         .then(res => {
           this.lists = res.data;
-          this.store.dispatch(loadLists(res.data));
+          // this.store.dispatch(fet(res.data));
         });
     },
 

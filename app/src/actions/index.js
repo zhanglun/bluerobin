@@ -1,4 +1,4 @@
-import { LOAD_LISTS, ADD_LIST, DELETE_LIST, EDIT_LIST } from '../constants/actionType';
+import { FETCH_LISTS, ADD_LIST, DELETE_LIST, EDIT_LIST } from '../constants/actionType';
 
 export const changeMyState = (text) => {
   return {
@@ -7,9 +7,9 @@ export const changeMyState = (text) => {
   };
 };
 
-export const loadLists = (lists) => {
+export const fetchLists = (lists) => {
   return {
-    type: LOAD_LISTS,
+    type: FETCH_LISTS,
     lists,
   };
 };

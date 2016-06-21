@@ -5,7 +5,7 @@
       <!-- <p>
         {{currentState}}
       </p> -->
-      <button type="button" name="button" @click="changeState">test</button>
+      <!-- <button type="button" name="button" @click="changeState">test</button> -->
       <router-view :store="store"></router-view>
     </div>
     <script type="x-template" id="modal-template">
