@@ -10,7 +10,7 @@
   import TaskMenuView from './taskmenu.vue';
   import CategoryView from './category.vue';
 
-  // import { loadLists } from '../../actions';
+  import { fetchLists } from '../../actions/lists';
 
   export default {
     props: ['store'],
@@ -57,11 +57,15 @@
       this.store.subscribe(() => {
         this.text = this.store.getState().tasks.text;
       });
-      this.$http.get('lists')
-        .then(res => {
-          this.lists = res.data;
-          // this.store.dispatch(fet(res.data));
-        });
+      // this.$http.get('lists')
+      //   .then(res => {
+      //     this.lists = res.data;
+      //     // this.store.dispatch(fet(res.data));
+      //   });
+      this.store.dispatch(fetchLists());
+      this.store.subscribe(() => {
+        this.lists = this.store.getState().lists.lists;
+      });
     },
 
     methods: {

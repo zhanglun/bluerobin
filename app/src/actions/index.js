@@ -6,10 +6,3 @@ export const changeMyState = (text) => {
     text,
   };
 };
-
-export const fetchLists = (lists) => {
-  return {
-    type: FETCH_LISTS,
-    lists,
-  };
-};
