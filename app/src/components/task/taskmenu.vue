@@ -46,7 +46,7 @@
   </div>
 </template>
 <script>
-  import { addList, deleteList } from '../../actions/lists';
+  import { addList, deleteList, editList } from '../../actions/lists';
 
   export default {
     props: [
@@ -64,11 +64,11 @@
     },
     watch: {
       // 监控左侧 list 列表，默认选中第一个
-      // lists(val, oldVal) {
-      //   if (this.lists.length) {
-      //     this.$router.go({name: 'list', params: {id: this.lists[0].id}});
-      //   }
-      // },
+      lists(val, oldVal) {
+        if (this.lists.length) {
+          this.$router.go({name: 'list', params: {id: this.lists[0].id}});
+        }
+      },
     },
     ready() {
       document.addEventListener('keyup', (e) => {
@@ -100,13 +100,7 @@
       doEditList() {
         let param = {};
         param.name = this.currentList.name;
-        this.$http.put('lists/' + this.currentList.id, param)
-          .then((res) => {
-            this.currentList = res.data;
-            this.showCurrentList = false;
-          }, function() {
-
-          });
+        this.$root.store.dispatch(editList(this.currentList.id, param));
       },
       deleteList() {
         var param = {
@@ -153,7 +147,8 @@
       }
       &-content{
         margin-left: 10px;
-        flex: 1 0 auto;
+        flex: 0 0 68%;
+        .text-overflow();
       }
     }
    }

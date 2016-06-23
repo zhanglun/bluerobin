@@ -13,8 +13,6 @@ export default function lists(state = [], action) {
       showModal: false,
     };
   case DELETE_LIST:
-    console.log(DELETE_LIST);
-
     return {
       lists: state.lists.filter((list) => {
         return list.id !== action.list.id;
@@ -22,9 +20,14 @@ export default function lists(state = [], action) {
       showCurrentList: false,
     };
   case EDIT_LIST:
-    console.log(EDIT_LIST);
     return {
-      list: action.list,
+      lists: state.lists.map((list) => {
+        if (list.id === action.list.id) {
+          return action.list;
+        }
+        return list;
+      }),
+      showCurrentList: false,
     };
   default:
     return {

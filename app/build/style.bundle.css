@@ -23,6 +23,11 @@
 /* ====================================================== */
 /* Variables
 /* ====================================================== */
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .sidebar {
   float: left;
   width: 280px;
@@ -60,10 +65,13 @@
 }
 .side-menu__item-content {
   margin-left: 10px;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1 0 auto;
-      -ms-flex: 1 0 auto;
-          flex: 1 0 auto;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 68%;
+      -ms-flex: 0 0 68%;
+          flex: 0 0 68%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .side-actions {
   font-size: 14px;
@@ -92,6 +100,11 @@
 /* ====================================================== */
 /* Variables
 /* ====================================================== */
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .main {
   padding-left: 280px;
   padding-right: 100px;
@@ -110,6 +123,11 @@
 /* ====================================================== */
 /* Variables
 /* ====================================================== */
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .modify {
   width: 100%;
   box-sizing: border-box;
@@ -209,6 +227,11 @@
 /* ====================================================== */
 /* Variables
 /* ====================================================== */
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .modal.bottom-sheet {
   max-height: 60%;
 }
@@ -269,6 +292,11 @@
 /* ====================================================== */
 /* Variables
 /* ====================================================== */
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 html,
 body {
   font-size: 10px;

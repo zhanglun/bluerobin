@@ -3,8 +3,12 @@ import agentPrefix from 'superagent-prefix';
 import {
   FETCH_LISTS,
   FETCH_LISTS_ERROR,
+
   ADD_LIST,
   ADD_LIST_ERROR,
+
+  EDIT_LIST,
+  EDIT_LIST_ERROR,
 
   DELETE_LIST,
   DELETE_LIST_ERROR,
@@ -64,10 +68,10 @@ export const deleteList = (param) => {
   return (dispatch) => {
     request
       .delete('/lists/' + param.id)
-      .set('x-access-token', window.localStorage.token)
       .send(param)
+      .set('x-access-token', window.localStorage.token)
       .use(baseURL)
-      .then((res) => {
+      .then(() => {
         dispatch({
           type: DELETE_LIST,
           list: {
@@ -82,3 +86,24 @@ export const deleteList = (param) => {
       });
   };
 };
+
+export const editList = (id, param) => {
+  return (dispatch) => {
+    request
+      .put('/lists/' + id)
+      .send(param)
+      .set('x-access-token', window.localStorage.token)
+      .use(baseURL)
+      .then((res) => {
+        dispatch({
+          type: EDIT_LIST,
+          list: res.body,
+        }, (err) => {
+          dispatch({
+            type: EDIT_LIST_ERROR,
+            error: err,
+          });
+        });
+      });
+  };
+}
