@@ -70,6 +70,59 @@ li {
   // max-width: 1020px;
 }
 
+//  modal
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  width: 300px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-header h3 {
+  margin-top: 0;
+  color: #42b983;
+}
+
+.modal-body {
+  margin: 20px 0;
+}
+
+.modal-default-button {
+  float: right;
+}
+
+.modal-enter,
+.modal-leave {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
 
 /* Let's get this party started */
 
@@ -96,10 +149,8 @@ li {
   background: rgba(255, 0, 0, 0.4);
 }
 
-
 @input-height: 40px;
 @input-border: #c3c7d2;
-
 .robin {
   &-input {
     width: 100%;
@@ -111,13 +162,13 @@ li {
     border-radius: 3px;
     outline: none;
     &__default {
-      :focus{
+      :focus {
         box-shadow: 0 2px 2px 3px red;
       }
     }
   }
-  &-btn{
-    min-width: 100px;
+  &-btn {
+    min-width: 90px;
     height: 40px;
     padding: 8px;
     border: none;
