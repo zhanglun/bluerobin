@@ -59,7 +59,7 @@
         msg: 'Hello from BlueRobin',
         account: {},
         lists: [],
-        store: configureStore(),
+        // store: configureStore(),
       };
     },
     created() {
@@ -73,7 +73,8 @@
     },
     ready() {
       console.log('App ready');
-      this.store.dispatch(fetchLists());
+      this.$root.store = configureStore();
+      this.$root.store.dispatch(fetchLists());
     },
     methods: {
     },

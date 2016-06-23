@@ -39,13 +39,15 @@
         </div>
       </div>
       <div slot="footer">
-        <button class="robin-btn robin-btn__default" @click="doEditList(currentList)">确定</button>
+        <span class="material-icons" @click="deleteList">delete</span>
+        <button class="robin-btn robin-btn__default" @click="doEditList">确定</button>
       </div>
     </modal>
-
   </div>
 </template>
 <script>
+  import { addList, deleteList } from '../../actions/lists';
+
   export default {
     props: [
       'lists',
@@ -57,17 +59,16 @@
           name: '',
         },
         currentList: null,
-        currentListCopy: null,
         showCurrentList: false,
       };
     },
     watch: {
       // 监控左侧 list 列表，默认选中第一个
-      lists(val, oldVal) {
-        if (this.lists.length) {
-          this.$router.go({name: 'list', params: {id: this.lists[0].id}});
-        }
-      },
+      // lists(val, oldVal) {
+      //   if (this.lists.length) {
+      //     this.$router.go({name: 'list', params: {id: this.lists[0].id}});
+      //   }
+      // },
     },
     ready() {
       document.addEventListener('keyup', (e) => {
@@ -76,36 +77,43 @@
           this.showCurrentList = false;
         }
       });
+
+      this.$root.store.subscribe(() => {
+        this.showModal = this.$root.store.getState().lists.showModal;
+        this.showCurrentList = this.$root.store.getState().lists.showCurrentList;
+      });
     },
     methods: {
       createNewList() {
         if (!this.newList.name) {
           return false;
         }
-        this.$http
-          .post('lists', {
-            name: this.newList.name,
-          }).then((list) => {
-            this.showModal = false;
-            this.lists.push(list);
-          });
+        var param = {
+          name: this.newList.name,
+        };
+        this.$root.store.dispatch(addList(param));
       },
       showCurrent(e, list) {
         this.currentList = list;
-        this.currentListCopy = Object.assign({}, list);
         this.showCurrentList = true;
       },
-      doEditList(currentlist) {
+      doEditList() {
         let param = {};
         param.name = this.currentList.name;
         this.$http.put('lists/' + this.currentList.id, param)
           .then((res) => {
-            currentlist = res.data;
+            this.currentList = res.data;
             this.showCurrentList = false;
           }, function() {
 
           });
-      }
+      },
+      deleteList() {
+        var param = {
+          id: this.currentList.id,
+        };
+        this.$root.store.dispatch(deleteList(param));
+      },
     },
   };
 </script>
@@ -129,6 +137,7 @@
       color: #000;
       text-decoration: none;
       display: flex;
+      cursor: pointer;
       .edit{
         display: none;
       }

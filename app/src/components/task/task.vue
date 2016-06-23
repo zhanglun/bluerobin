@@ -21,29 +21,24 @@
       };
     },
 
-    route: {
-      data(transition) {
-        // console.log('data!!!!!------>', this.$route);
-        transition.next();
-      },
-      activate(transition) {
-        // console.log('hook-example activated!')
-        transition.next();
-      },
-      deactivate(transition) {
-        // console.log('hook-example deactivated!')
-        transition.next();
-      },
-      canDeactivate() {
-        console.log('can deactivated!');
-        // transition.next();
-        return true;
-      },
-      canReuse() {
-        return true;
-      },
+    // route: {
+    //   data(transition) {
+    //     transition.next();
+    //   },
+    //   activate(transition) {
+    //     transition.next();
+    //   },
+    //   deactivate(transition) {
+    //     transition.next();
+    //   },
+    //   canDeactivate() {
+    //     return true;
+    //   },
+    //   canReuse() {
+    //     return true;
+    //   },
 
-    },
+    // },
 
     components: {
       taskmenu: TaskMenuView,
@@ -51,7 +46,7 @@
     },
 
     ready() {
-      this.store.subscribe(() => {
+      this.$root.store.subscribe(() => {
         this.lists = this.store.getState().lists.lists;
       });
     },

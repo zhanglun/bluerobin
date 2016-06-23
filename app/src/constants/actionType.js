@@ -7,7 +7,11 @@ export const CLEAR_COMPLETED = 'CLEAR_COMPLETED';
 
 export const CHANGE_STATE = 'CHANGE_STATE';
 
+// list 相关
 export const FETCH_LISTS = 'FETCH_LISTS';
+export const FETCH_LISTS_ERROR = 'FETCH_LISTS_ERROR';
 export const ADD_LIST = 'ADD_LIST';
+export const ADD_LIST_ERROR = 'ADD_LIST_ERROR';
 export const EDIT_LIST = 'EDIT_LIST';
 export const DELETE_LIST = 'DELETE_LIST';
+export const DELETE_LIST_ERROR = 'DELETE_LIST_ERROR';

@@ -43,6 +43,7 @@
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  cursor: pointer;
 }
 .side-menu__item .edit {
   display: none;
