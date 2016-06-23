@@ -31,9 +31,6 @@ var router = new Router({
 });
 
 router.map({
-  // '/file': {
-  //   component: FileView
-  // },
   '/lists': {
     component: TaskView,
     subRoutes: {
@@ -49,13 +46,10 @@ router.map({
   '/signup': {
     component: UserSignUp,
   },
-  // '/home': {
-  //   component: HomeView
-  // }
 });
 
 router.redirect({
-  '*': '/lists/inbox',
+  '*': '/lists',
 });
 
 router.start(App, '#app');

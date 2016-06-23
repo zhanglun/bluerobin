@@ -6,18 +6,29 @@ import {
 
 let baseURL = agentPrefix('http://localhost:1234/api');
 
+/**
+ * 获取list列表
+ * @return {Function} dispatch
+ */
 export const fetchLists = () => {
   return (dispatch) => {
     // get lists
     request
-    .get('/lists')
-    .set('x-access-token', window.localStorage.token)
-    .use(baseURL)
-    .end(function(err, res) {
-      dispatch({
-        type: FETCH_LISTS,
-        lists: res.body,
+      .get('/lists')
+      .set('x-access-token', window.localStorage.token)
+      .use(baseURL)
+      .then((res) => {
+        console.log(res);
+        dispatch({
+          type: FETCH_LISTS,
+          lists: res.body,
+        }, (err) => {
+          dispatch({
+            type: 'FETCH_LISTS_ERROR',
+            error: err,
+          });
+        });
       });
-    });
   };
 };
+

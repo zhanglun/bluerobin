@@ -367,3 +367,47 @@ li {
 .custom-container {
   margin: 0 auto;
 }
+/* Let's get this party started */
+::-webkit-scrollbar {
+  width: 4px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgba(31, 27, 27, 0.8);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(255, 0, 0, 0.4);
+}
+.robin-input {
+  width: 100%;
+  height: 40px;
+  padding: 0 13px;
+  font-size: 15px;
+  box-sizing: border-box;
+  border: 1px solid #c3c7d2;
+  border-radius: 3px;
+  outline: none;
+}
+.robin-input__default :focus {
+  box-shadow: 0 2px 2px 3px red;
+}
+.robin-btn {
+  min-width: 100px;
+  height: 40px;
+  padding: 8px;
+  border: none;
+  text-align: center;
+  box-sizing: border-box;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 14px;
+}
+.robin-btn__default {
+  background: #00a9e8;
+  border: 1px solid #009ed7;
+}

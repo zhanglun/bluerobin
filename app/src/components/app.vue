@@ -2,10 +2,6 @@
   <div class="">
     <appheader :account="account"></appheader>
     <div class="page-content">
-      <!-- <p>
-        {{currentState}}
-      </p> -->
-      <!-- <button type="button" name="button" @click="changeState">test</button> -->
       <router-view :store="store"></router-view>
     </div>
     <script type="x-template" id="modal-template">
@@ -43,12 +39,11 @@
 
 <script>
   import Vue from 'vue';
-
   import configureStore from '../store/configureStore';
-  import { changeMyState } from '../actions';
-
   import TaskMenu from './task/taskmenu.vue';
   import HeaderView from './header/header.vue';
+
+  import { fetchLists } from '../actions/lists';
 
   // 创建 modal 组件
   Vue.component('modal', {
@@ -65,16 +60,9 @@
         account: {},
         lists: [],
         store: configureStore(),
-        currentState: '',
       };
     },
     created() {
-      this.store.subscribe(() => {
-        this.currentState = this.store.getState().tasks.text;
-      });
-    },
-    ready() {
-      this.currentState = this.store.getState().tasks.text;
       this.$http.get('authenticate')
         .then((res) => {
           this.$data.account = res.data.user;
@@ -83,11 +71,11 @@
           this.$router.go('/login');
         });
     },
+    ready() {
+      console.log('App ready');
+      this.store.dispatch(fetchLists());
+    },
     methods: {
-      changeState() {
-        const nextState = '新しい状態' + new Date();
-        this.store.dispatch(changeMyState(nextState));
-      }
     },
     components: {
       appheader: HeaderView,

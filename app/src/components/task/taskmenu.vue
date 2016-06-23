@@ -17,21 +17,29 @@
     </div>
 
     <modal :show="showModal">
-      <h3 slot="header">创建新的任务清单</h3>
+      <div slot="header">
+        <h3 class="text-center">创建新的清单</h3>
+      </div>
       <div slot="body">
-        <input type="text" class="text" v-model="newList.name"/>
+        <div class="robin-textfield">
+          <input type="text" class="robin-input robin-input__default" v-model="newList.name"/>
+        </div>
       </div>
       <div slot="footer">
-        <button @click="createNewList">创建</button>
+        <button class="robin-btn robin-btn__default" @click="createNewList">创建</button>
       </div>
     </modal>
     <modal :show="showCurrentList">
-      <h3 slot="header" class="center">编辑清单</h3>
+      <div slot="header" class="center">
+        <h3>编辑清单</h3>
+      </div>
       <div slot="body">
-        <input type="text" class="text" v-model="currentList.name"/>
+        <div class="robin-textfield">
+          <input type="text" class="robin-input robin-input__default" v-model="currentList.name"/>
+        </div>
       </div>
       <div slot="footer">
-        <button @click="doEditList(currentList)">确定</button>
+        <button class="robin-btn robin-btn__default" @click="doEditList(currentList)">确定</button>
       </div>
     </modal>
 

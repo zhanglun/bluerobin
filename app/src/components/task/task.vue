@@ -1,6 +1,5 @@
 <template>
   <div class="">
-      {{text}}
       <taskmenu :lists="lists"></taskmenu>
       <router-view></router-view>
   </div>
@@ -9,8 +8,6 @@
 <script>
   import TaskMenuView from './taskmenu.vue';
   import CategoryView from './category.vue';
-
-  import { fetchLists } from '../../actions/lists';
 
   export default {
     props: ['store'],
@@ -54,15 +51,6 @@
     },
 
     ready() {
-      this.store.subscribe(() => {
-        this.text = this.store.getState().tasks.text;
-      });
-      // this.$http.get('lists')
-      //   .then(res => {
-      //     this.lists = res.data;
-      //     // this.store.dispatch(fet(res.data));
-      //   });
-      this.store.dispatch(fetchLists());
       this.store.subscribe(() => {
         this.lists = this.store.getState().lists.lists;
       });
