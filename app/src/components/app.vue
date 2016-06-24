@@ -43,6 +43,7 @@
   import TaskMenu from './task/taskmenu.vue';
   import HeaderView from './header/header.vue';
 
+  import { authenticate } from '../actions/user';
   import { fetchLists } from '../actions/lists';
 
   // 创建 modal 组件
@@ -63,17 +64,18 @@
       };
     },
     created() {
-      this.$http.get('authenticate')
-        .then((res) => {
-          this.$data.account = res.data.user;
-        }, () => {
-          this.$data.account = false;
-          this.$router.go('/login');
-        });
+      console.log('get auth');
     },
     ready() {
-      console.log('App ready');
+      // this.$http.get('authenticate')
+      //   .then((res) => {
+      //     this.$data.account = res.data.user;
+      //   }, () => {
+      //     this.$data.account = false;
+      //     this.$router.go('/login');
+      //   });
       this.$root.store = configureStore();
+      this.$root.store.dispatch(authenticate());
       this.$root.store.dispatch(fetchLists());
     },
     methods: {

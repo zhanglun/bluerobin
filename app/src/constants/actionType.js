@@ -1,11 +1,9 @@
-export const ADD_TODO = 'ADD_TODO';
-export const DELETE_TODO = 'DELETE_TODO';
-export const EDIT_TODO = 'EDIT_TODO';
-export const COMPLETE_TODO = 'COMPLETE_TODO';
-export const COMPLETE_ALL = 'COMPLETE_ALL';
-export const CLEAR_COMPLETED = 'CLEAR_COMPLETED';
+export const AUTHENTICATE = 'AUTHENTICATE';
 
-export const CHANGE_STATE = 'CHANGE_STATE';
+export const ADD_TASK = 'ADD_TASK';
+export const DELETE_TASK = 'DELETE_TASK';
+export const EDIT_TASK = 'EDIT_TASK';
+export const COMPLETE_TASK = 'COMPLETE_TASK';
 
 // list 相关
 export const FETCH_LISTS = 'FETCH_LISTS';

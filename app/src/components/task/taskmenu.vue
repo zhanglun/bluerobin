@@ -66,7 +66,7 @@
     watch: {
       // 监控左侧 list 列表，默认选中第一个
       lists(val, oldVal) {
-        if (this.lists.length) {
+        if (this.lists && this.lists.length) {
           this.$router.go({name: 'list', params: {id: this.lists[0].id}});
         }
       },
