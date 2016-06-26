@@ -2,7 +2,6 @@
     <div class="task-textfield">
       {{listid}}
       <input class="task-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask(list_id)">
-      <!-- <label for="" class="task-textfield__label">Title</label> -->
     </div>
 </template>
 
@@ -21,7 +20,6 @@ function guid() {
 }
 
 export default {
-  // props: ['listid'],
   data(){
     return {
       title: 'task inputer',
