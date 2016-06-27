@@ -1,27 +1,32 @@
 import { FETCH_LISTS, ADD_LIST, DELETE_LIST, EDIT_LIST } from '../constants/actionType';
 
-export default function lists(state = [], action) {
+const initState = {
+  data: [],
+};
+
+export default function lists(state = initState, action) {
+  console.log(state);
   switch (action.type) {
   case FETCH_LISTS:
     console.log(FETCH_LISTS);
     return {
-      lists: action.lists,
+      data: action.lists,
     };
   case ADD_LIST:
     return {
-      lists: state.lists.concat([action.list]),
+      data: state.data.concat([action.list]),
       showModal: false,
     };
   case DELETE_LIST:
     return {
-      lists: state.lists.filter((list) => {
+      data: state.data.filter((list) => {
         return list.id !== action.list.id;
       }),
       showCurrentList: false,
     };
   case EDIT_LIST:
     return {
-      lists: state.lists.map((list) => {
+      data: state.data.map((list) => {
         if (list.id === action.list.id) {
           return action.list;
         }
@@ -31,7 +36,7 @@ export default function lists(state = [], action) {
     };
   default:
     return {
-      lists: state.lists
+      data: state.data
     };
   }
 }

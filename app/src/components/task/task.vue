@@ -47,7 +47,7 @@
 
     ready() {
       this.$root.store.subscribe(() => {
-        this.lists = this.store.getState().lists.lists;
+        this.lists = this.store.getState().lists.data;
       });
     },
 

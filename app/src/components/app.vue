@@ -67,13 +67,6 @@
       console.log('get auth');
     },
     ready() {
-      // this.$http.get('authenticate')
-      //   .then((res) => {
-      //     this.$data.account = res.data.user;
-      //   }, () => {
-      //     this.$data.account = false;
-      //     this.$router.go('/login');
-      //   });
       this.$root.store = configureStore();
       this.$root.store.dispatch(authenticate());
       this.$root.store.dispatch(fetchLists());

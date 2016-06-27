@@ -1,15 +1,10 @@
 import { AUTHENTICATE } from '../constants/actionType';
 
-export default function lists(state = [], action) {
+export default function lists(state = {}, action) {
   switch (action.type) {
   case AUTHENTICATE:
-    console.log(AUTHENTICATE);
-    return {
-      user: action.user,
-    };
+    return action.user;
   default:
-    return {
-      user: state.user
-    };
+    return state.user || {};
   }
 }
