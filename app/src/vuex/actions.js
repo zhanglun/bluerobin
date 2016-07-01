@@ -4,3 +4,7 @@
 export const incrementCounter = function ({ dispatch, state }) {
   dispatch('INCREMENT', 1);
 };
+
+// actions.js
+export const increment = ({ dispatch }) => dispatch('INCREMENT');
+export const decrement = ({ dispatch }) => dispatch('DECREMENT');

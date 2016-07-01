@@ -1,6 +1,11 @@
 <template>
   <div class="">
     <appheader :account="account"></appheader>
+    <div>
+      Clicked: {{ count }} times
+      <button v-on:click="increment">+</button>
+      <button v-on:click="decrement">-</button>
+    </div>
     <div class="page-content">
       <router-view :store="store"></router-view>
     </div>
