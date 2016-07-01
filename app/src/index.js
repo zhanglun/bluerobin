@@ -3,7 +3,6 @@ require('./public/stylesheets/base.less');
 import Vue from 'vue';
 import Router from 'vue-router';
 import VueResource from 'vue-resource';
-import Vuex from 'vuex';
 
 import App from './components/app.vue';
 import TaskView from './components/task/task.vue';

@@ -58,7 +58,7 @@
   export default {
     vuex: {
       actions: {
-        increment: incrementCounter
+        incrementCounter: incrementCounter,
       }
     },
     data() {
@@ -72,8 +72,7 @@
       console.log('get auth');
     },
     ready() {
-      this.authenticate();
-      this.test();
+      this.increment();
       this.$http.get('authenticate')
         .then((res) => {
           this.$data.account = res.data.user;
@@ -83,11 +82,9 @@
         });
     },
     methods: {
-      authenticate() {
+      increment() {
+        console.log('increment');
       },
-      test(){
-        console.log('vuex: authenticate!!');
-      }
     },
     components: {
       appheader: HeaderView,
