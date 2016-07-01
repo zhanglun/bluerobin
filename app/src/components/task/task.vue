@@ -1,6 +1,6 @@
 <template>
   <div class="">
-      <taskmenu :lists="lists"></taskmenu>
+      <taskmenu></taskmenu>
       <router-view></router-view>
   </div>
 </template>
@@ -14,7 +14,7 @@
     data() {
       return {
         value: '',
-        lists: [],
+        // lists: [],
         category: '',
         taskOpened: null,
         text: '',
@@ -46,9 +46,6 @@
     },
 
     ready() {
-      this.$root.store.subscribe(() => {
-        this.lists = this.store.getState().lists.data;
-      });
     },
 
     methods: {

@@ -39,12 +39,13 @@
 
 <script>
   import Vue from 'vue';
-  import configureStore from '../store/configureStore';
   import TaskMenu from './task/taskmenu.vue';
   import HeaderView from './header/header.vue';
+  import store from '../vuex/store';
 
-  import { authenticate } from '../actions/user';
-  import { fetchLists } from '../actions/lists';
+  import { incrementCounter } from '../vuex/actions';
+  console.log(incrementCounter);
+  // import { fetchLists } from '../actions/lists';
 
   // 创建 modal 组件
   Vue.component('modal', {
@@ -55,28 +56,44 @@
   });
 
   export default {
+    vuex: {
+      actions: {
+        increment: incrementCounter
+      }
+    },
     data() {
       return {
         msg: 'Hello from BlueRobin',
         account: {},
         lists: [],
-        // store: configureStore(),
       };
     },
     created() {
       console.log('get auth');
     },
     ready() {
-      this.$root.store = configureStore();
-      this.$root.store.dispatch(authenticate());
-      this.$root.store.dispatch(fetchLists());
+      this.authenticate();
+      this.test();
+      this.$http.get('authenticate')
+        .then((res) => {
+          this.$data.account = res.data.user;
+        }, () => {
+          this.$data.account = false;
+          this.$router.go('/login');
+        });
     },
     methods: {
+      authenticate() {
+      },
+      test(){
+        console.log('vuex: authenticate!!');
+      }
     },
     components: {
       appheader: HeaderView,
       taskmenu: TaskMenu,
     },
+    store: store,
   };
 </script>
 

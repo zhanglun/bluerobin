@@ -1,7 +1,9 @@
 require('./public/stylesheets/base.less');
+
 import Vue from 'vue';
 import Router from 'vue-router';
 import VueResource from 'vue-resource';
+import Vuex from 'vuex';
 
 import App from './components/app.vue';
 import TaskView from './components/task/task.vue';
@@ -11,6 +13,7 @@ import UserSignUp from './components/user/signup.vue';
 
 Vue.use(Router);
 Vue.use(VueResource);
+Vue.config.devtools = true;
 
 // Vue.http.options.root = 'http://zhanglun.daoapp.io/api';
 Vue.http.options.root = 'http://localhost:1234/api';

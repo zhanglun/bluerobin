@@ -5,7 +5,6 @@ const initState = {
 };
 
 export default function lists(state = initState, action) {
-  console.log(state);
   switch (action.type) {
   case FETCH_LISTS:
     console.log(FETCH_LISTS);

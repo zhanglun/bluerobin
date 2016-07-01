@@ -47,12 +47,12 @@
   </div>
 </template>
 <script>
-  import { addList, deleteList, editList } from '../../actions/lists';
+  import { fetchLists, addList, deleteList, editList } from '../../actions/lists';
 
   export default {
-    props: [
-      'lists',
-    ],
+    // props: [
+    //   'lists',
+    // ],
     data() {
       return {
         showModal: false,
@@ -61,6 +61,7 @@
         },
         currentList: null,
         showCurrentList: false,
+        lists: [],
       };
     },
     watch: {
@@ -79,10 +80,14 @@
         }
       });
 
-      this.$root.store.subscribe(() => {
-        this.showModal = this.$root.store.getState().lists.showModal;
-        this.showCurrentList = this.$root.store.getState().lists.showCurrentList;
-      });
+      // this.$root.store.dispatch(fetchLists());
+
+      // this.$root.store.subscribe(() => {
+      //   this.lists = this.$root.store.getState().lists.data;
+
+      //   this.showModal = this.$root.store.getState().lists.showModal;
+      //   this.showCurrentList = this.$root.store.getState().lists.showCurrentList;
+      // });
     },
     methods: {
       createNewList() {
