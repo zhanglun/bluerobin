@@ -12,7 +12,7 @@ import {
 
   DELETE_LIST,
   DELETE_LIST_ERROR,
-} from '../constants/actionType';
+} from '../constants/mutationType';
 
 let baseURL = agentPrefix('http://localhost:1234/api');
 
