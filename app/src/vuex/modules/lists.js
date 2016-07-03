@@ -22,9 +22,13 @@ const state = {
 const mutations = {
   // TODO: 放置我们的状态变更函数
   FETCH_LISTS(state, lists) {
-    console.log('mutations: FETCH_LISTS');
     state.all = lists;
   },
+
+  ADD_LIST(state, list) {
+    console.log('mutations: ADD_LIST');
+    state.all = state.all.unshift(list);
+  }
 };
 
 export default {

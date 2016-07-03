@@ -65,6 +65,7 @@
     vuex: {
       actions: {
         fetchLists: actions.fetchLists,
+        addList: actions.addList,
       },
       getters: {
         lists: getters.getLists,
@@ -95,7 +96,7 @@
         var param = {
           name: this.newList.name,
         };
-        this.$root.store.dispatch(addList(param));
+        this.addList(param);
       },
       showCurrent(e, list) {
         this.currentList = list;

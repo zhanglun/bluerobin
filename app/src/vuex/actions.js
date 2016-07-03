@@ -26,17 +26,16 @@ export const fetchLists = function({ dispatch }) {
     }, (err) => {});
 };
 
-export const addList = function({ dispatch }) {
-request
-      .post('/lists')
-      .set('x-access-token', window.localStorage.token)
-      .send(param)
-      .use(baseURL)
-      .then((res) => {
-        console.log(res);
-        dispatch(mutationType.ADD_LIST, res.body)
-      }, (err) => {
-        dispatch(mutationType.ADD_LIST_ERROR, err);
-        });
-      });
+export const addList = function({ dispatch }, param) {
+  request
+    .post('/lists')
+    .set('x-access-token', window.localStorage.token)
+    .send(param)
+    .use(baseURL)
+    .then((res) => {
+      console.log(res);
+      dispatch(mutationType.ADD_LIST, res.body)
+    }, (err) => {
+      dispatch(mutationType.ADD_LIST_ERROR, err);
+    });
 }
