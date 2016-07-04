@@ -43,7 +43,7 @@
   import HeaderView from './header/header.vue';
   import store from '../vuex/store';
 
-  import * as actions  from '../vuex/actions';
+  import * as actions from '../vuex/actions';
   import * as getters from '../vuex/getter';
 
   // 创建 modal 组件
@@ -69,7 +69,7 @@
       };
     },
     watch: {
-      account : function(newVal, old) {
+      account: function(newVal, old) {
         if(!newVal) {
           this.$router.go('/login');
         }

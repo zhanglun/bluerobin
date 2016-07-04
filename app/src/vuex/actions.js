@@ -12,11 +12,11 @@ export const authenticate = function({ dispatch, state }) {
     .then((res) => {
       dispatch(mutationType.AUTHENTICATE, res.body);
     }, (err) => {
-    	dispatch(mutationType.AUTHENTICATE_ERROR, err);
+      dispatch(mutationType.AUTHENTICATE_ERROR, err);
     });
 };
 
-export const fetchLists = function({ dispatch, state }) {
+export const fetchLists = function({ dispatch }) {
   request
     .get('/lists')
     .set('x-access-token', window.localStorage.token)
@@ -25,3 +25,18 @@ export const fetchLists = function({ dispatch, state }) {
       dispatch(mutationType.FETCH_LISTS, res.body);
     }, (err) => {});
 };
+
+export const addList = function({ dispatch }) {
+request
+      .post('/lists')
+      .set('x-access-token', window.localStorage.token)
+      .send(param)
+      .use(baseURL)
+      .then((res) => {
+        console.log(res);
+        dispatch(mutationType.ADD_LIST, res.body)
+      }, (err) => {
+        dispatch(mutationType.ADD_LIST_ERROR, err);
+        });
+      });
+}
