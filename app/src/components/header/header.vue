@@ -2,41 +2,35 @@
 </style>
 
 <template>
-  <!-- <header class="mdl-layout__header">
-      <div class="mdl-layout__header-row">
-        <span class="mdl-layout-title">{{$route.params.category}}</span>
-        <div class="mdl-layout-spacer"></div>
-        <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="" v-link="{path: '/task', exact: true}">Task</a>
-        <a class="mdl-navigation__link" href="" v-link="{path: '/signup', exact: true}">注册</a>
-        <span v-if="account" class="navigation-account">
-          <img v-bind:src="account.avatar" alt=""></span>
-        </nav>
-      </div>
-    </header>
-    </div>
-  </header> -->
   <header class="header">
-
+  <span v-if="account" class="navigation-account">
+    <img v-bind:src="account.avatar" alt="">
+    {{account.username}}
+  </span>
   </header>
 </template>
 
 <script>
+import * as actions  from '../../vuex/actions';
+import * as getters from '../../vuex/getter';
+
 export default {
-  props: [
-    'account',
-  ],
   data() {
     return {
     };
+  },
+  vuex: {
+    actions: {
+      authenticate: actions.authenticate,
+    },
+    getters: {
+      account: getters.getAccountInfo,
+    },
   },
   ready() {
     console.log('header!!!!!');
   },
   methods: {
-    logout() {
-
-    },
   },
 
 };

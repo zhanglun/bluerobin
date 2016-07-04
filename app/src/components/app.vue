@@ -1,11 +1,6 @@
 <template>
   <div class="">
-    <appheader :account="account"></appheader>
-    <div>
-      Clicked: {{ count }} times
-      <button v-on:click="increment">+</button>
-      <button v-on:click="decrement">-</button>
-    </div>
+    <appheader></appheader>
     <div class="page-content">
       <router-view :store="store"></router-view>
     </div>
@@ -48,9 +43,8 @@
   import HeaderView from './header/header.vue';
   import store from '../vuex/store';
 
-  import { incrementCounter } from '../vuex/actions';
-  console.log(incrementCounter);
-  // import { fetchLists } from '../actions/lists';
+  import * as actions from '../vuex/actions';
+  import * as getters from '../vuex/getter';
 
   // 创建 modal 组件
   Vue.component('modal', {
@@ -63,33 +57,30 @@
   export default {
     vuex: {
       actions: {
-        incrementCounter: incrementCounter,
+        authenticate: actions.authenticate,
+      },
+      getters: {
+        account: getters.getAccountInfo,
       }
     },
     data() {
       return {
         msg: 'Hello from BlueRobin',
-        account: {},
-        lists: [],
       };
     },
+    watch: {
+      account: function(newVal, old) {
+        if(!newVal) {
+          this.$router.go('/login');
+        }
+      }
+    },
     created() {
-      console.log('get auth');
+      this.authenticate();
     },
     ready() {
-      this.increment();
-      this.$http.get('authenticate')
-        .then((res) => {
-          this.$data.account = res.data.user;
-        }, () => {
-          this.$data.account = false;
-          this.$router.go('/login');
-        });
     },
     methods: {
-      increment() {
-        console.log('increment');
-      },
     },
     components: {
       appheader: HeaderView,

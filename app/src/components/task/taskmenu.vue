@@ -47,12 +47,11 @@
   </div>
 </template>
 <script>
-  import { fetchLists, addList, deleteList, editList } from '../../actions/lists';
+
+  import * as actions  from '../../vuex/actions';
+  import * as getters from '../../vuex/getter';
 
   export default {
-    // props: [
-    //   'lists',
-    // ],
     data() {
       return {
         showModal: false,
@@ -61,8 +60,15 @@
         },
         currentList: null,
         showCurrentList: false,
-        lists: [],
       };
+    },
+    vuex: {
+      actions: {
+        fetchLists: actions.fetchLists,
+      },
+      getters: {
+        lists: getters.getLists,
+      }
     },
     watch: {
       // 监控左侧 list 列表，默认选中第一个
@@ -73,21 +79,13 @@
       },
     },
     ready() {
+      this.fetchLists();
       document.addEventListener('keyup', (e) => {
         if (e.keyCode === 27) {
           this.showModal = false;
           this.showCurrentList = false;
         }
       });
-
-      // this.$root.store.dispatch(fetchLists());
-
-      // this.$root.store.subscribe(() => {
-      //   this.lists = this.$root.store.getState().lists.data;
-
-      //   this.showModal = this.$root.store.getState().lists.showModal;
-      //   this.showCurrentList = this.$root.store.getState().lists.showCurrentList;
-      // });
     },
     methods: {
       createNewList() {
