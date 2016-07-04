@@ -1,8 +1,8 @@
 export function getAccountInfo(state) {
 	console.log('getAccountInfo');
-	return state.account.user;
+	return state.user.data;
 }
 
 export function getLists(state) {
-	return state.lists;
+	return state.lists.all;
 }
