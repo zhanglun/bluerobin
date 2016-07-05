@@ -1,4 +1,5 @@
 var path = require('path');
+var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -52,8 +53,7 @@ module.exports = {
         'less-loader',
       ]),
       include: SRC_PATH,
-    },
-    ],
+    }],
   },
   vue: {
     loaders: {
@@ -70,14 +70,19 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"development"'
+      }
+    }),
     new ExtractTextPlugin('style.bundle.css'),
     new HtmlWebpackPlugin({
       template: SRC_PATH + '/index.html',
       filename: 'index.html',
     }),
     new CopyWebpackPlugin([{
-      from: SRC_PATH + '/vendor', to: BUILD_PATH + '/vendor',
-    },
-  ]),
+      from: SRC_PATH + '/vendor',
+      to: BUILD_PATH + '/vendor',
+    }]),
   ],
 };

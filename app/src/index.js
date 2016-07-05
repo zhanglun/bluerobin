@@ -13,6 +13,7 @@ import UserSignUp from './components/user/signup.vue';
 Vue.use(Router);
 Vue.use(VueResource);
 Vue.config.devtools = true;
+Vue.config.debug = true;
 
 // Vue.http.options.root = 'http://zhanglun.daoapp.io/api';
 Vue.http.options.root = 'http://localhost:1234/api';
