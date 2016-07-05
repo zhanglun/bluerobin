@@ -43,9 +43,8 @@
   import HeaderView from './header/header.vue';
   import store from '../vuex/store';
 
-  import * as actions from '../vuex/actions';
+  import actions from '../vuex/actions';
   import * as getters from '../vuex/getter';
-
   // 创建 modal 组件
   Vue.component('modal', {
     template: "#modal-template",

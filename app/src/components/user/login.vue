@@ -27,7 +27,7 @@
   </div>
 </template>
 <script>
-  import * as actions from '../../vuex/actions';
+  import actions from '../../vuex/actions/index';
   import * as getters from '../../vuex/getter';
   export default {
     data(){
