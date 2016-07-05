@@ -8,16 +8,19 @@ const state = {
 }
 
 const mutations = {
-  AUTHENTICATE(state, account) {
+  AUTHENTICATE(state, user) {
     console.log('mutations: AUTHENTICATE');
-    console.log(account);
-    state.data = account.user;
+    state.data = user;
   },
 
-  AUTHENTICATE_ERROR(state, account) {
+  AUTHENTICATE_ERROR(state, user) {
     console.log('mutations: AUTHENTICATE_ERROR');
     state.data = null;
   },
+  LOGIN(state, user) {
+    console.log('mutations: LOGIN');
+    state.data = user;
+  }
 };
 
 export default {

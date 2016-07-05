@@ -6,7 +6,7 @@ let baseURL = agentPrefix('http://localhost:1234/api');
 
 export const authenticate = function({ dispatch, state }) {
   request
-    .get('/authenticate')
+    .get('/user/authenticate')
     .set('x-access-token', window.localStorage.token)
     .use(baseURL)
     .then((res) => {
@@ -15,6 +15,17 @@ export const authenticate = function({ dispatch, state }) {
       dispatch(mutationType.AUTHENTICATE_ERROR, err);
     });
 };
+
+export const login = function({ dispatch, state }) {
+  request
+    .get('/user/login')
+    // .set('x-access-token', window.localStorage.token)
+    .use(baseURL)
+    .then((res) => {
+      dispatch(mutationType.LOGIN, res.body);
+    }, (err) => {});
+
+}
 
 export const fetchLists = function({ dispatch }) {
   request

@@ -1,5 +1,5 @@
-export function getAccountInfo(state) {
-	console.log('getAccountInfo');
+export function getUserInfo(state) {
+	console.log('getUserInfo');
 	return state.user.data;
 }
 

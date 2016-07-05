@@ -27,6 +27,8 @@
   </div>
 </template>
 <script>
+  import * as actions from '../../vuex/actions';
+  import * as getters from '../../vuex/getter';
   export default {
     data(){
       return {
@@ -36,20 +38,38 @@
         }
       }
     },
+    vuex: {
+      actions: {
+        login: actions.login,
+      },
+      getters: {
+        user: getters.getUserInfo
+      }
+    },
     ready(){
       componentHandler.upgradeDom();
     },
-    methods: {
-      doLogin(){
-        let vm = this;
-        vm.$http.post('user/login', this.user)
-        .then(function(res){
-          localStorage.token = res.data.token;
-          vm.$router.go('/task');
-        }, function(){
-
-        })
+    watch: {
+      user: function(newVal, old) {
+        if(!newVal) {
+          this.$router.go('login');
+        }
+        if(newVal && newVal.username){
+          this.$router.go('/task');
+        }
       }
+    },
+    methods: {
+      // doLogin(){
+      //   let vm = this;
+      //   vm.$http.post('user/login', this.user)
+      //   .then(function(res){
+      //     localStorage.token = res.data.token;
+      //     vm.$router.go('/task');
+      //   }, function(){
+
+      //   })
+      // }
     }
   }
 </script>

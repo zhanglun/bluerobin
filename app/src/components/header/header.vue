@@ -3,9 +3,9 @@
 
 <template>
   <header class="header">
-  <span v-if="account" class="navigation-account">
-    <img v-bind:src="account.avatar" alt="">
-    {{account.username}}
+  <span v-if="user" class="navigation-account">
+    <img v-bind:src="user.avatar" alt="">
+    {{user.username}}
   </span>
   </header>
 </template>
@@ -24,7 +24,7 @@ export default {
       authenticate: actions.authenticate,
     },
     getters: {
-      account: getters.getAccountInfo,
+      user: getters.getUserInfo,
     },
   },
   ready() {

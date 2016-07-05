@@ -60,7 +60,7 @@
         authenticate: actions.authenticate,
       },
       getters: {
-        account: getters.getAccountInfo,
+        user: getters.getUserInfo,
       }
     },
     data() {
@@ -69,9 +69,9 @@
       };
     },
     watch: {
-      account: function(newVal, old) {
+      user: function(newVal, old) {
         if(!newVal) {
-          this.$router.go('/login');
+          this.$router.go('login');
         }
       }
     },

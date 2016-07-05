@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+Vue.config.devtools = true;
 
 import user from './modules/user';
 import lists from './modules/lists';
@@ -12,5 +13,5 @@ export default new Vuex.Store({
   modules: {
     user,
     lists
-  }
+  },
 });
