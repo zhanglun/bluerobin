@@ -2,13 +2,12 @@ import request from 'superagent';
 import * as mutationType from '../mutationType';
 import baseURL from './base';
 
-
 /**
  * 用户认证
  */
 export const authenticate = function({ dispatch, state }) {
   request
-    .get('/user/authenticate')
+    .get('/authenticate')
     .set('x-access-token', window.localStorage.token)
     .use(baseURL)
     .then((res) => {
@@ -21,12 +20,13 @@ export const authenticate = function({ dispatch, state }) {
 /**
  * 用户登录
  */
-export const login = function({ dispatch, state }) {
+export const login = function({ dispatch, state }, param) {
   request
-    .get('/user/login')
+    .post('/user/login')
     .use(baseURL)
+    .send(param)
     .then((res) => {
+      window.localStorage.token = res.body.token;
       dispatch(mutationType.LOGIN, res.body);
     }, (err) => {});
-
 };

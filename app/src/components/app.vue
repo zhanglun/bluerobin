@@ -43,8 +43,9 @@
   import HeaderView from './header/header.vue';
   import store from '../vuex/store';
 
-  import actions from '../vuex/actions';
+  import * as userActions from '../vuex/actions/user';
   import * as getters from '../vuex/getter';
+
   // 创建 modal 组件
   Vue.component('modal', {
     template: "#modal-template",
@@ -56,7 +57,7 @@
   export default {
     vuex: {
       actions: {
-        authenticate: actions.authenticate,
+        auth: userActions.authenticate,
       },
       getters: {
         user: getters.getUserInfo,
@@ -68,14 +69,17 @@
       };
     },
     watch: {
-      user: function(newVal, old) {
-        if(!newVal) {
-          this.$router.go('login');
-        }
-      }
+      // user: function(newVal, old) {
+      //   if (!newVal) {
+      //     debugger;
+      //     this.$router.go({ path:'/login' });
+      //   } else {
+      //     this.$router.go('task');
+      //   }
+      // }
     },
     created() {
-      this.authenticate();
+      this.auth();
     },
     ready() {
     },
