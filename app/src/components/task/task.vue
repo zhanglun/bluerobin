@@ -10,14 +10,8 @@
   import CategoryView from './category.vue';
 
   export default {
-    props: ['store'],
     data() {
       return {
-        value: '',
-        // lists: [],
-        category: '',
-        taskOpened: null,
-        text: '',
       };
     },
 

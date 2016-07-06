@@ -15,23 +15,12 @@
 <script>
   import TaskItemView from './taskItem.vue';
   import TaskInputer from './taskInputer.vue';
+  import * as tasksActions from '../../vuex/actions/tasks';
+  import * as getters from '../../vuex/getter';
 
   export default {
     route: {
       data() {
-        let param = null;
-        this.$data.listId = this.$route.params.id;
-        param = {
-          list_id: this.$route.params.id,
-          completed: false,
-        };
-
-        return this.$http.get('tasks', param)
-          .then(res => {
-            return {
-              tasklist: res.data,
-            };
-          });
       },
       activate(transition) {
         transition.next();
@@ -43,17 +32,38 @@
         return true;
       },
       canReuse() {
-        return;
+        return true;
       },
     },
-
+    vuex: {
+      actions: {
+        fetchTasks: tasksActions.fetchTasks,
+      },
+      getters: {
+        tasks: getters.getTasks,
+      }
+    },
+    computed: {
+      tasklist() {
+        return this.tasks.filter((item) => {
+          return item.list_id === this.list_id;
+        });
+      },
+    },
     data() {
       return {
-        tasklist: [],
-        listId: '',
+        list_id: '',
         completedTasklist: [],
         completedShow: false,
       };
+    },
+    ready() {
+      this.list_id = this.$route.params.id;
+      var query = {
+        list_id: this.list_id,
+        completed: false,
+      };
+      this.fetchTasks(query);
     },
     components: {
       taskinputer: TaskInputer,
@@ -66,7 +76,7 @@
           completed: true,
         };
         this.$http.get('tasks', param)
-          .then(res => {
+          .then((res) => {
             this.$data.completedTasklist = res.data;
           });
       },
@@ -80,7 +90,7 @@
     events: {
       'create task'(task) {
         this.$http.post('tasks', task)
-          .then(res => {
+          .then((res) => {
             this.tasklist.unshift(res.data);
             setTimeout(function() {
               componentHandler.upgradeDom('MaterialCheckbox');

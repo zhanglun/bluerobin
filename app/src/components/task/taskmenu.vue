@@ -47,8 +47,7 @@
   </div>
 </template>
 <script>
-
-  import actions from '../../vuex/actions';
+  import * as listsActions from '../../vuex/actions/lists';
   import * as getters from '../../vuex/getter';
 
   export default {
@@ -64,8 +63,8 @@
     },
     vuex: {
       actions: {
-        fetchLists: actions.fetchLists,
-        addList: actions.addList,
+        fetchLists: listsActions.fetchLists,
+        addList: listsActions.addList,
       },
       getters: {
         lists: getters.getLists,
