@@ -8,14 +8,14 @@
     <div class="mdl-grid">
       <div class="mdl-cell mdl-cell-6-col">
           <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" id="email" v-model="user.username">
+            <input class="mdl-textfield__input" type="text" id="email" v-model="account.username">
             <label class="mdl-textfield__label" for="email">Email</label>
             </div>
         </div>
       </div>
       <div class="mdl-cell mdl-cell-6-col">
         <div class="mdl-textfield mdl-js-textfield">
-          <input class="mdl-textfield__input" type="password" id="password" v-model="user.password">
+          <input class="mdl-textfield__input" type="password" id="password" v-model="account.password">
           <label class="mdl-textfield__label" for="password">Password</label>
         </div>
       </div>
@@ -27,51 +27,45 @@
   </div>
 </template>
 <script>
-  import actions from '../../vuex/actions/index';
+  import * as userActions from '../../vuex/actions/user';
   import * as getters from '../../vuex/getter';
   export default {
-    data(){
+    data() {
       return {
-        user: {
+        account: {
           username: '',
           password: '',
         }
-      }
+      };
     },
     vuex: {
       actions: {
-        login: actions.login,
+        login: userActions.login,
       },
       getters: {
         user: getters.getUserInfo
       }
     },
-    ready(){
+    ready() {
       componentHandler.upgradeDom();
     },
     watch: {
       user: function(newVal, old) {
-        if(!newVal) {
+        if (!newVal) {
           this.$router.go('login');
         }
-        if(newVal && newVal.username){
-          this.$router.go('/task');
+        if (newVal && newVal.username) {
+          this.$router.go('task');
         }
       }
     },
     methods: {
-      // doLogin(){
-      //   let vm = this;
-      //   vm.$http.post('user/login', this.user)
-      //   .then(function(res){
-      //     localStorage.token = res.data.token;
-      //     vm.$router.go('/task');
-      //   }, function(){
-
-      //   })
-      // }
+      doLogin() {
+        console.log(this.account);
+        this.login(this.account);
+      }
     }
-  }
+  };
 </script>
 <style lang="less">
  .login-form {
