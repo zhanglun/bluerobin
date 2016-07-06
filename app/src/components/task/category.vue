@@ -20,11 +20,20 @@
 
   export default {
     route: {
-      activate: function (transition) {
+      data(transition) {
+        this.list_id = this.$route.params.id;
+        var query = {
+          list_id: this.list_id,
+          completed: false,
+        };
+        this.fetchTasks(query);
+        transition.next();
+      },
+      activate(transition) {
         console.log('hook-example activated!');
         transition.next();
       },
-      deactivate: function (transition) {
+      deactivate(transition) {
         console.log('hook-example deactivated!');
         transition.next();
       },
@@ -32,7 +41,7 @@
         return true;
       },
       canReuse() {
-        return true;
+        return false;
       },
     },
     vuex: {
@@ -58,12 +67,7 @@
       };
     },
     ready() {
-      this.list_id = this.$route.params.id;
-      var query = {
-        list_id: this.list_id,
-        completed: false,
-      };
-      this.fetchTasks(query);
+      
     },
     components: {
       taskinputer: TaskInputer,

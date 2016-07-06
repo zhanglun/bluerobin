@@ -15,25 +15,6 @@
       };
     },
 
-    // route: {
-    //   data(transition) {
-    //     transition.next();
-    //   },
-    //   activate(transition) {
-    //     transition.next();
-    //   },
-    //   deactivate(transition) {
-    //     transition.next();
-    //   },
-    //   canDeactivate() {
-    //     return true;
-    //   },
-    //   canReuse() {
-    //     return true;
-    //   },
-
-    // },
-
     components: {
       taskmenu: TaskMenuView,
       category: CategoryView,

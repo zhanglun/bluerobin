@@ -2,7 +2,7 @@
   <div class="">
     <appheader></appheader>
     <div class="page-content">
-      <router-view :store="store"></router-view>
+      <router-view></router-view>
     </div>
     <script type="x-template" id="modal-template">
       <div class="modal-mask" v-if="show" transition="modal">
@@ -75,11 +75,10 @@
     },
     watch: {
       isAuthed(val, old) {
-        console.log(arguments);
         if (val) {
-          this.$router.go('/lists');
+          this.$router.go('lists');
         } else {
-          this.$router.go('/login');
+          this.$router.go('login');
         }
       }
     },
