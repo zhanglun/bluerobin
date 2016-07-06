@@ -1,7 +1,10 @@
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const AUTHENTICATE_ERROR = 'AUTHENTICATE_ERROR';
 export const LOGIN = 'LOGIN';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
 
+export const FETCH_TASKS = 'FETCH_TASKS';
+export const FETCH_TASKS_ERROR = 'FETCH_TASKS_ERROR';
 export const ADD_TASK = 'ADD_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const EDIT_TASK = 'EDIT_TASK';

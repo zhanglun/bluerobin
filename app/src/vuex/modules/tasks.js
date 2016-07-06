@@ -6,10 +6,11 @@ const state = {
 
 const mutations = {
   [mutationType.FETCH_TASKS](state, tasks) {
+    console.log('mutations: FETCH_TASKS');
+    // state.all = state.all.concat(tasks);
     state.all = tasks;
   }
 };
-console.log(mutations);
 
 export default {
   state,
