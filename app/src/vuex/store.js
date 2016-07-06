@@ -4,6 +4,7 @@ Vue.config.devtools = true;
 
 import user from './modules/user';
 import lists from './modules/lists';
+import tasks from './modules/tasks';
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
     user,
-    lists
+    lists,
+    tasks,
   },
 });

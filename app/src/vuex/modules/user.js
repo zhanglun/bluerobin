@@ -5,7 +5,7 @@ import {
 
 const state = {
   data: {},
-}
+};
 
 const mutations = {
   AUTHENTICATE(state, user) {
@@ -26,4 +26,4 @@ const mutations = {
 export default {
   state,
   mutations
-}
+};
