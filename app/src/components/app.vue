@@ -68,15 +68,20 @@
         msg: 'Hello from BlueRobin',
       };
     },
+    computed: {
+      isAuthed() {
+        return this.user ? true : false;
+      },
+    },
     watch: {
-      // user: function(newVal, old) {
-      //   if (!newVal) {
-      //     debugger;
-      //     this.$router.go({ path:'/login' });
-      //   } else {
-      //     this.$router.go('task');
-      //   }
-      // }
+      isAuthed(val, old) {
+        console.log(arguments);
+        if (val) {
+          this.$router.go('/lists');
+        } else {
+          this.$router.go('/login');
+        }
+      }
     },
     created() {
       this.auth();

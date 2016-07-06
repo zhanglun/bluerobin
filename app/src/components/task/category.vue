@@ -20,12 +20,12 @@
 
   export default {
     route: {
-      data() {
-      },
-      activate(transition) {
+      activate: function (transition) {
+        console.log('hook-example activated!');
         transition.next();
       },
-      deactivate(transition) {
+      deactivate: function (transition) {
+        console.log('hook-example deactivated!');
         transition.next();
       },
       canDeactivate() {
