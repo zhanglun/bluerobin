@@ -30,11 +30,9 @@
         transition.next();
       },
       activate(transition) {
-        console.log('hook-example activated!');
         transition.next();
       },
       deactivate(transition) {
-        console.log('hook-example deactivated!');
         transition.next();
       },
       canDeactivate() {

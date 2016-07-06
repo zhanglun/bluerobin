@@ -14,7 +14,7 @@ export const fetchLists = function({ dispatch }) {
     });
 };
 
-export const addList = function({ dispatch }, param) {
+export const addList = ({ dispatch }, param) => {
   request
     .post('/lists')
     .set('x-access-token', window.localStorage.token)
@@ -28,20 +28,20 @@ export const addList = function({ dispatch }, param) {
     });
 };
 
-export const deleteList = (param) => {
+export const deleteList = ({ dispatch }, param) => {
   request
     .delete('/lists/' + param.id)
     .send(param)
     .set('x-access-token', window.localStorage.token)
     .use(baseURL)
     .then((res) => {
-      dispatch(mutationType.DELETE_LIST, res.body);
+      dispatch(mutationType.DELETE_LIST, param.id);
     }, (err) => {
       dispatch(mutationType.DELETE_LIST_ERROR, err);
     });
 };
 
-export const editList = (id, param) => {
+export const editList = ({ dispatch }, id, param) => {
   request
     .put('/lists/' + id)
     .send(param)

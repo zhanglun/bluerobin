@@ -40,7 +40,7 @@
         </div>
       </div>
       <div slot="footer">
-        <span class="material-icons" @click="deleteList">delete</span>
+        <span class="material-icons" @click="deleteList(this.currentList)">delete</span>
         <button class="robin-btn robin-btn__default" @click="doEditList">确定</button>
       </div>
     </modal>
@@ -65,6 +65,7 @@
       actions: {
         fetchLists: listsActions.fetchLists,
         addList: listsActions.addList,
+        deleteList: listsActions.deleteList,
       },
       getters: {
         lists: getters.getLists,
@@ -105,12 +106,6 @@
         let param = {};
         param.name = this.currentList.name;
         this.$root.store.dispatch(editList(this.currentList.id, param));
-      },
-      deleteList() {
-        var param = {
-          id: this.currentList.id,
-        };
-        this.$root.store.dispatch(deleteList(param));
       },
     },
   };

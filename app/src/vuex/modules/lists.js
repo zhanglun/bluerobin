@@ -12,8 +12,16 @@ const mutations = {
 
   [mutationType.ADD_LIST](state, list) {
     console.log('mutations: ADD_LIST');
-    state.all = state.all.unshift(list);
+    console.log(list);
+    state.all = state.all.concat(list);
+  },
+
+  [mutationType.DELETE_LIST](state, listid) {
+    state.all = state.all.filter((item) => {
+      return item.id !== listid;
+    });
   }
+
 };
 
 export default {
