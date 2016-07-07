@@ -56,6 +56,9 @@
           return item.list_id === this.list_id;
         });
       },
+      completedTasklist() {
+        // return this.tasks.
+      },
     },
     data() {
       return {
@@ -65,7 +68,6 @@
       };
     },
     ready() {
-      
     },
     components: {
       taskinputer: TaskInputer,
@@ -77,10 +79,11 @@
           list_id: this.$data.listId,
           completed: true,
         };
-        this.$http.get('tasks', param)
-          .then((res) => {
-            this.$data.completedTasklist = res.data;
-          });
+        this.fetchTasks(param);
+        // this.$http.get('tasks', param)
+        //   .then((res) => {
+        //     this.$data.completedTasklist = res.data;
+        //   });
       },
       'toggleShowCompletedTask'() {
         if (!this.$data.completedShow) {

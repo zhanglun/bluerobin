@@ -21,6 +21,16 @@ import tasks from './modules/tasks';
 //   }
 // });
 
+const logger = {
+  onInit(state) {
+    console.log('----?logger');
+    console.log(state);
+  },
+  onMutation(mutation, state) {
+    console.log(mutation);
+  }
+};
+
 Vue.use(Vuex);
 
 // 整合初始状态和变更函数，我们就得到了我们所需的 store
@@ -31,5 +41,5 @@ export default new Vuex.Store({
     lists,
     tasks,
   },
-  // middlewares: [logger],
+  middlewares: [logger],
 });

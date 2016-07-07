@@ -56,5 +56,13 @@ router.redirect({
   '*': '/lists',
 });
 
+router.beforeEach((transition) => {
+  console.log('--->');
+  if (transition.to.path === '/forbidden') {
+    transition.abort();
+  } else {
+    transition.next();
+  }
+})
 
 router.start(App, '#app');

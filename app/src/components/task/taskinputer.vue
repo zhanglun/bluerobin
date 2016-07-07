@@ -1,6 +1,5 @@
 <template>
     <div class="task-textfield">
-      {{listid}}
       <input class="task-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask(list_id)">
     </div>
 </template>
@@ -8,6 +7,9 @@
 <script>
 import Uploader from '../../services/upload.babel.js';
 import Tool from '../../services/tool.babel.js';
+
+import * as taskActions from '../../vuex/actions/tasks';
+import * as getters from '../../vuex/getter';
 
 function guid() {
   function s4() {
@@ -20,9 +22,8 @@ function guid() {
 }
 
 export default {
-  data(){
+  data() {
     return {
-      title: 'task inputer',
       list_id: '',
       newTask: {
         title: '',
@@ -34,50 +35,53 @@ export default {
       uploader: null,
       newFile: null,
       watchData: []
-    }
+    };
+  },
+  vuex: {
+    actions: {
+      addTask: taskActions.addTask,
+    },
   },
   filters: {
-    blob2src: function(blob){
+    blob2src: function(blob) {
       return URL.createObjectURL(blob);
     }
   },
   watch: {
-    'newTask.title': function(val, oldval){
+    'newTask.title': function(val, oldval) {
       localStorage.newTask = JSON.stringify(this.newTask);
     },
-    'newTask.attachments': function(val, oldval){
+    'newTask.attachments': function(val, oldval) {
       localStorage.newTask = JSON.stringify(this.newTask);
     }
   },
-  ready(){
+  ready() {
     this.list_id = this.$route.params.id;
     this.watchData = [this.newTask.title, this.newTask.attachments];
 
-    localStorage.newTask ? this.newTask = JSON.parse(localStorage.newTask) : null;
+    this.newTask = window.localStorage.newTask ? JSON.parse(localStorage.newTask) : {};
     componentHandler.upgradeDom();
 
     this.init();
-
   },
 
   methods: {
     // 初始化
-    init(){
-
+    init() {
       let _this = this;
       this.$set('uploader', Uploader({
         container: 'taskWriter'
       }));
 
-      this.uploader.bind('PostInit', function(){
+      this.uploader.bind('PostInit', function() {
         _this.uploader.addFile(_this.newFile);
       });
 
-      this.uploader.bind('BeforeUpload', function(up, file){
+      this.uploader.bind('BeforeUpload', function(up, file) {
 
       });
 
-      this.uploader.bind('FileUploaded', function(up, file, res){
+      this.uploader.bind('FileUploaded', function(up, file, res) {
         _this.newTask.attachments.push({
           name: file.name,
           url: Tool.uploadImageSrc(file.name),
@@ -86,37 +90,35 @@ export default {
           height: file.height,
           type: file.type
         });
-
       });
     },
 
     // 创建任务
-    createTask(listid){
-
-      if(!this.newTask.title){
+    createTask(listid) {
+      if (!this.newTask.title) {
         return false;
       }
 
       this.$set('newTask.create_time', new Date());
       this.$set('newTask.list_id', listid);
 
-      this.$dispatch('create task', this.newTask);
+      this.addTask(this.newTask);
+
       this.$set('newTask', {
         title: '',
         create_time: '',
         attachments: []
       });
-
     },
 
     // 粘贴复制
-    uploadByPaste(e){
+    uploadByPaste(e) {
       var _this = this;
       var items = e.clipboardData && e.clipboardData.items;
-      if(!(items && items.length)){
+      if (!(items && items.length)) {
         return false;
       }
-      for(var i=0; i<items.length; i++){
+      for (var i = 0; i < items.length; i++) {
         var file = items[i].getAsFile && items[i].getAsFile();
         if (file) {
           file.name = guid() + '.' + file.type.replace(/^\w*\//ig, '');

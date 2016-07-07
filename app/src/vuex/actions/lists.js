@@ -34,7 +34,7 @@ export const deleteList = ({ dispatch }, param) => {
     .send(param)
     .set('x-access-token', window.localStorage.token)
     .use(baseURL)
-    .then((res) => {
+    .then(() => {
       dispatch(mutationType.DELETE_LIST, param.id);
     }, (err) => {
       dispatch(mutationType.DELETE_LIST_ERROR, err);

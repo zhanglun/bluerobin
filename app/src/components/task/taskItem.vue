@@ -18,23 +18,30 @@
       <i class="material-icons" @click="deleteTask(task)">clear</i>
     </span>
   </div>
-
 </template>
-
 <script>
 
+import * as tasksActions from '../../vuex/actions/tasks';
 
 export default {
-	props: ['task', 'index'],
-  data: function(){
-  	return {
-  		editing: false,
+  props: ['task', 'index'],
+  data: function() {
+    return {
+      editing: false,
       titleAfterParse: '',
-  		taskEditing: null,
-        taskDetail: {}
-  	}
+      taskEditing: null,
+      taskDetail: {}
+    };
   },
-  ready: function(){
+  vuex: {
+    actions: {
+      toggle: tasksActions.toggleTask,
+    },
+    getters: {
+
+    }
+  },
+  ready: function() {
     this.titleAfterParse = twemoji.parse(this.task.title);
     setTimeout(function() {
       componentHandler.upgradeDom();
@@ -47,32 +54,31 @@ export default {
         return;
       }
       var el = this.el;
-      setTimeout(function () {
+      setTimeout(() => {
         el.focus();
       }, 0);
     }
   },
   methods: {
-  	toggleTask(task) {
-      console.log('toggle !!~~~');
+    toggleTask(task) {
       this.task.completed = !this.task.completed;
-      this.$dispatch('edit task', task);
-  	},
-  	edit(task) {
-  		if(task.completed){
-  			return false;
-  		}
-  		this.taskEditing = task;
-  	},
-  	deleteTask(task) {
+      this.toggle(this.task.id, {completed: this.task.completed});
+    },
+    edit(task) {
+      if (task.completed) {
+        return false;
+      }
+      this.taskEditing = task;
+    },
+    deleteTask(task) {
       this.$dispatch('delete task', task);
-  	},
+    },
 
     doEdit(task) {
       // 如果没有正在编辑的task说明目前并没有编辑操作
       // 这里也解决了 一个问题：在 input上绑定了 blur 和 keyup两个事件
       // 按下 enter 执行完成之后，会触发 blur，所以应该执行之后将 taskEditing 置为 null
-      if(!this.taskEditing){
+      if (!this.taskEditing) {
         return false;
       }
       this.taskEditing = null;
@@ -81,11 +87,7 @@ export default {
       this.$dispatch('edit task', task);
     },
   },
-  events: {
-
-  }
-
-}
+};
 </script>
 
 <style lang="less">
@@ -93,7 +95,6 @@ export default {
 @import '../../public/stylesheets/variables';
 
 @editbox-height: 34px;
-
 
 .modify {
   width: 100%;

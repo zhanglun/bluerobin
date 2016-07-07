@@ -75,17 +75,17 @@
     },
     watch: {
       isAuthed(val, old) {
-        if (val) {
+        if (!val) {
           this.$router.go('lists');
         } else {
-          this.$router.go('login');
+          this.$router.go('/login');
         }
       }
     },
     created() {
-      this.auth();
     },
     ready() {
+      this.auth();
     },
     methods: {
     },

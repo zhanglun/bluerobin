@@ -66,6 +66,7 @@
         fetchLists: listsActions.fetchLists,
         addList: listsActions.addList,
         deleteList: listsActions.deleteList,
+        editList: listsActions.editList,
       },
       getters: {
         lists: getters.getLists,
@@ -77,6 +78,8 @@
         if (this.lists && this.lists.length) {
           this.$router.go({name: 'list', params: {id: this.lists[0].id}});
         }
+        this.showModal = false;
+        this.showCurrentList = false;
       },
     },
     ready() {
@@ -105,7 +108,7 @@
       doEditList() {
         let param = {};
         param.name = this.currentList.name;
-        this.$root.store.dispatch(editList(this.currentList.id, param));
+        this.editList(this.currentList.id, param);
       },
     },
   };

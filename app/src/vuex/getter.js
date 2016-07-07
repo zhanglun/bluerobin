@@ -7,6 +7,5 @@ export function getLists(state) {
 }
 
 export function getTasks(state) {
-  console.log(state);
-  return state.tasks.all;
+  return state.tasks.active;
 }

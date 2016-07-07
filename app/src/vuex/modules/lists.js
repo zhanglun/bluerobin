@@ -20,6 +20,32 @@ const mutations = {
     state.all = state.all.filter((item) => {
       return item.id !== listid;
     });
+  },
+
+  [mutationType.EDIT_LIST](state, list) {
+    state.all.map((item) => {
+      if (item.id === list.id) {
+        return list;
+      }
+      return item;
+    });
+  },
+
+  [mutationType.UPDATE_LIST](state, data) {
+    console.log('mutations: UPDATE_LIST');
+    state.all.map((item) => {
+      if (item.id === data.id) {
+        switch (data.type) {
+          case 'total':
+            item.task_count_total += data.update;
+            break;
+          default:
+            break;
+        }
+        return item;
+      }
+      return item;
+    });
   }
 
 };
