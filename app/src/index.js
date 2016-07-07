@@ -2,7 +2,10 @@ require('./public/stylesheets/base.less');
 
 import Vue from 'vue';
 import Router from 'vue-router';
+import { sync } from 'vuex-router-sync';
 import VueResource from 'vue-resource';
+
+import store from './vuex/store';
 
 import App from './components/app.vue';
 import TaskView from './components/task/task.vue';
@@ -53,16 +56,9 @@ router.map({
 });
 
 router.redirect({
-  '*': '/lists',
+  '*': '/login',
 });
 
-router.beforeEach((transition) => {
-  console.log('--->');
-  if (transition.to.path === '/forbidden') {
-    transition.abort();
-  } else {
-    transition.next();
-  }
-})
-
 router.start(App, '#app');
+
+sync(store, router);

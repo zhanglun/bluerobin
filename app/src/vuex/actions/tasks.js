@@ -10,9 +10,12 @@ let requestTasks = (query) => {
     .use(baseURL);
 };
 
-export const fetchTasks = ({ dispatch, state }, query) => {
+export const fetchTasks = ({ dispatch, state }, query, callback) => {
   requestTasks(query).then((res) => {
     console.log(mutationType.FETCH_TASKS);
+    if (typeof callback == 'function') {
+      callback(res);
+    }
     dispatch(mutationType.FETCH_TASKS, res.body);
   }, (err) => {
     dispatch(mutationType.FETCH_TASKS_ERROR, err);

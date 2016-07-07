@@ -5,13 +5,16 @@ import baseURL from './base';
 /**
  * 用户认证
  */
-export const authenticate = function({ dispatch, state }) {
+export const authenticate = function({ dispatch, state }, callback) {
   request
     .get('/authenticate')
     .set('x-access-token', window.localStorage.token)
     .use(baseURL)
     .then((res) => {
       dispatch(mutationType.AUTHENTICATE, res.body);
+      if (callback) {
+        callback(res);
+      }
     }, (err) => {
       dispatch(mutationType.AUTHENTICATE_ERROR, err);
     });
