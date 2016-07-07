@@ -57,10 +57,11 @@
   export default {
     vuex: {
       actions: {
-        auth: userActions.authenticate,
+        authenticate: userActions.authenticate,
       },
       getters: {
         user: getters.getUserInfo,
+        route: getters.getRoute,
       }
     },
     data() {
@@ -69,23 +70,32 @@
       };
     },
     computed: {
-      isAuthed() {
-        return this.user ? true : false;
-      },
+
     },
     watch: {
-      isAuthed(val, old) {
-        if (!val) {
-          this.$router.go('lists');
-        } else {
-          this.$router.go('/login');
-        }
-      }
+
+      // user(val, old) {
+      //   console.log(arguments);
+      //   if (val) {
+      //     this.$router.go('/lists');
+      //   } else {
+      //     console.log('login first, please!');
+      //     this.$router.go('/login');
+      //   }
+      // }
     },
     created() {
+      console.log('app.get', this.route);
+        this.authenticate((user) => {
+          if(user){
+             this.$router.go('lists');
+          } else {
+            console.log('login first, please!');
+            this.$router.go('login');
+          }
+        });
     },
     ready() {
-      this.auth();
     },
     methods: {
     },

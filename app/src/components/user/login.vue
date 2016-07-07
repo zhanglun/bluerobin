@@ -55,13 +55,12 @@
           this.$router.go('login');
         }
         if (newVal && newVal.username) {
-          this.$router.go('task');
+          this.$router.go('lists');
         }
       }
     },
     methods: {
       doLogin() {
-        console.log(this.account);
         this.login(this.account);
       }
     }

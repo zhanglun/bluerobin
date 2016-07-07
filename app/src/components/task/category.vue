@@ -7,7 +7,7 @@
     <div class="label-trigger" @click="toggleShowCompletedTask">
       显示已完成的task
     </div>
-    <div class="tasklist--finished" v-show="completedShow">
+    <div class="tasklist--finished" transition="animation_showtask" v-show="completedShow">
       <taskitem v-for="task in completedTasklist" :task="task" :index="$index" track-by="id"></taskitem>
     </div>
   </div>
@@ -48,26 +48,41 @@
       },
       getters: {
         tasks: getters.getTasks,
+        auth: getters.getUserAuth,
       }
     },
     computed: {
       tasklist() {
         return this.tasks.filter((item) => {
-          return item.list_id === this.list_id;
+          return item.list_id === this.list_id && !item.completed;
         });
       },
       completedTasklist() {
-        // return this.tasks.
+        return this.tasks.filter((item) => {
+          return item.list_id === this.list_id && item.completed;
+        });
       },
     },
     data() {
       return {
         list_id: '',
-        completedTasklist: [],
         completedShow: false,
+        loaded: false,
       };
     },
+    watch: {
+      auth: function(val, old) {
+        if(!val){
+          console.log(val);
+          this.$router.go('/login');
+        }
+      }
+    },
+    created() {
+
+    },
     ready() {
+      console.log('--->---create', this.auth);
     },
     components: {
       taskinputer: TaskInputer,
@@ -75,20 +90,20 @@
     },
     methods: {
       'loadCompletedTask'() {
+        console.log('load completed task');
         let param = {
-          list_id: this.$data.listId,
+          list_id: this.list_id,
           completed: true,
         };
-        this.fetchTasks(param);
-        // this.$http.get('tasks', param)
-        //   .then((res) => {
-        //     this.$data.completedTasklist = res.data;
-        //   });
+        this.fetchTasks(param, () =>{
+          this.loaded = true;
+        });
       },
       'toggleShowCompletedTask'() {
-        if (!this.$data.completedShow) {
+        if (!this.loaded) {
           this.loadCompletedTask();
         }
+        console.log(this.completedTasklist);
         this.$data.completedShow = !this.$data.completedShow;
       },
     },

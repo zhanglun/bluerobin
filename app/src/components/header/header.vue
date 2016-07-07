@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import * as actions  from '../../vuex/actions';
+import * as userActions  from '../../vuex/actions/user';
 import * as getters from '../../vuex/getter';
 
 export default {
@@ -21,7 +21,7 @@ export default {
   },
   vuex: {
     actions: {
-      authenticate: actions.authenticate,
+      // authenticate: userActions.authenticate,
     },
     getters: {
       user: getters.getUserInfo,
