@@ -80,6 +80,7 @@
         }
         this.showModal = false;
         this.showCurrentList = false;
+        this.newList.name = '';
       },
     },
     ready() {
