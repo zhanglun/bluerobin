@@ -33,12 +33,15 @@ const mutations = {
 
   [mutationType.UPDATE_LIST](state, data) {
     console.log('mutations: UPDATE_LIST');
+    console.log(data);
     state.all.map((item) => {
       if (item.id === data.id) {
         switch (data.type) {
           case 'total':
             item.task_count_total += data.update;
             break;
+          case 'completed':
+            item.task_count_completed += data.update;
           default:
             break;
         }

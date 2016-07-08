@@ -33,6 +33,7 @@
   width: 280px;
   padding: 20px 30px;
   box-sizing: border-box;
+  position: fixed;
 }
 .side-menu {
   padding: 0;
@@ -90,12 +91,22 @@
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  box-sizing: border-box;
   height: 60px;
   width: 100%;
+  padding: 0 20px;
   background: rgba(255, 255, 255, 0.85);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   position: fixed;
   z-index: 100;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 /* ====================================================== */
 /* Variables
@@ -307,10 +318,14 @@ body {
 }
 body {
   min-height: 100%;
+  max-width: 100%;
   font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', '\5B8B\4F53', '\9ED1\4F53', sans-serif;
   font-weight: 300;
   background-color: #ECECEC;
   background-size: cover;
+  background-image: url(images/2132339aabdcad827d041944252f1121.jpg);
+  background-attachment: fixed;
+  overflow-x: hidden;
 }
 h1,
 h2,
@@ -409,6 +424,9 @@ li {
 }
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(255, 0, 0, 0.4);
+}
+::-webkit-scrollbar {
+  width: 0 !important;
 }
 .robin-input {
   width: 100%;

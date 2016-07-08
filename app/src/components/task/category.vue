@@ -53,13 +53,15 @@
     },
     computed: {
       tasklist() {
-        return this.tasks.filter((item) => {
-          return item.list_id === this.list_id && !item.completed;
+        // return this.tasks.active;
+        return this.tasks.active.filter((item) => {
+          return item.list_id === this.list_id;
         });
       },
       completedTasklist() {
-        return this.tasks.filter((item) => {
-          return item.list_id === this.list_id && item.completed;
+        // return this.tasks.completed;
+        return this.tasks.completed.filter((item) => {
+          return item.list_id === this.list_id;
         });
       },
     },
@@ -72,8 +74,7 @@
     },
     watch: {
       auth: function(val, old) {
-        if(!val){
-          console.log(val);
+        if (!val) {
           this.$router.go('/login');
         }
       }
@@ -82,7 +83,6 @@
 
     },
     ready() {
-      console.log('--->---create', this.auth);
     },
     components: {
       taskinputer: TaskInputer,
@@ -90,12 +90,11 @@
     },
     methods: {
       'loadCompletedTask'() {
-        console.log('load completed task');
         let param = {
           list_id: this.list_id,
           completed: true,
         };
-        this.fetchTasks(param, () =>{
+        this.fetchTasks(param, () => {
           this.loaded = true;
         });
       },
@@ -108,22 +107,6 @@
       },
     },
     events: {
-      'create task'(task) {
-        this.$http.post('tasks', task)
-          .then((res) => {
-            this.tasklist.unshift(res.data);
-            setTimeout(function() {
-              componentHandler.upgradeDom('MaterialCheckbox');
-            }, 0);
-          });
-      },
-      'delete task'(task) {
-        let vm = this;
-        vm.$http.delete('tasks/' + task.id)
-         .then(function() {
-           vm.tasklist.$remove(task);
-         });
-      },
       'edit task'(task) {
         let vm = this;
         vm.$http.put('tasks/' + task.id, task)

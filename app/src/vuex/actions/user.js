@@ -2,9 +2,7 @@ import request from 'superagent';
 import * as mutationType from '../mutationType';
 import baseURL from './base';
 
-/**
- * 用户认证
- */
+// 用户认证
 export const authenticate = function({ dispatch, state }, callback) {
   request
     .get('/authenticate')
@@ -20,12 +18,10 @@ export const authenticate = function({ dispatch, state }, callback) {
     });
 };
 
-/**
- * 用户登录
- */
+// 用户登录
 export const login = function({ dispatch, state }, param) {
   request
-    .post('/user/login')
+    .post('/users/login')
     .use(baseURL)
     .send(param)
     .then((res) => {

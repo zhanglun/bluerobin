@@ -12,8 +12,7 @@ let requestTasks = (query) => {
 
 export const fetchTasks = ({ dispatch, state }, query, callback) => {
   requestTasks(query).then((res) => {
-    console.log(mutationType.FETCH_TASKS);
-    if (typeof callback == 'function') {
+    if (typeof callback === 'function') {
       callback(res);
     }
     dispatch(mutationType.FETCH_TASKS, res.body);
@@ -29,7 +28,6 @@ export const addTask = ({ dispatch, state }, task) => {
     .set('x-access-token', window.localStorage.token)
     .use(baseURL)
     .then((res) => {
-      console.log(mutationType.ADD_TASK);
       dispatch(mutationType.ADD_TASK, res.body);
       dispatch(mutationType.UPDATE_LIST, { id: task.list_id, type: 'total', update: 1 });
     }, (err) => {
@@ -48,6 +46,22 @@ export const toggleTask = ({ dispatch, state }, taskid, param) => {
       if (param.completed) {
         dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'completed', update: 1 });
       } else {
+        dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'completed', update: -1 });
+      }
+    }, (err) => {
+      dispatch(mutationType.EDIT_TASK_ERROR, err);
+    });
+};
+
+export const deleteTask = ({ dispatch, state }, taskid) => {
+  request
+    .delete('/tasks/' + taskid)
+    .set('x-access-token', window.localStorage.token)
+    .use(baseURL)
+    .then((res) => {
+      dispatch(mutationType.DELETE_TASK, res.body);
+      dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'total', update: -1 });
+      if (res.completed) {
         dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'completed', update: -1 });
       }
     }, (err) => {

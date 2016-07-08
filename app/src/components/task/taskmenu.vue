@@ -122,6 +122,7 @@
     width: @sideMenuWidth;
     padding: 20px 30px;
     box-sizing: border-box;
+    position: fixed;
   }
   .side-menu{
     padding: 0;

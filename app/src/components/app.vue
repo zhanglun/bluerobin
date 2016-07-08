@@ -61,7 +61,7 @@
       },
       getters: {
         user: getters.getUserInfo,
-        route: getters.getRoute,
+        // route: getters.getRoute,
       }
     },
     data() {

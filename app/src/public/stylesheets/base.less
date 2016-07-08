@@ -11,11 +11,14 @@ body {
 
 body {
   min-height: 100%;
+  max-width: 100%; 
   font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', '宋体', '黑体', sans-serif;
   font-weight: 300;
   background-color: #ECECEC;
   background-size: cover;
-  // background-image: url('../images/bg7.jpg');
+  background-image: url('../images/bg1.jpg');
+  background-attachment: fixed;
+  overflow-x: hidden;
 }
 
 h1,
@@ -148,6 +151,7 @@ li {
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(255, 0, 0, 0.4);
 }
+::-webkit-scrollbar { width: 0 !important }
 
 @input-height: 40px;
 @input-border: #c3c7d2;

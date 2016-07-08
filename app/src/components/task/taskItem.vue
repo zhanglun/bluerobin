@@ -36,6 +36,7 @@ export default {
   vuex: {
     actions: {
       toggle: tasksActions.toggleTask,
+      delete: tasksActions.deleteTask,
     },
     getters: {
 
@@ -60,7 +61,7 @@ export default {
     }
   },
   methods: {
-    toggleTask(task) {
+    toggleTask() {
       this.task.completed = !this.task.completed;
       this.toggle(this.task.id, {completed: this.task.completed});
     },
@@ -71,7 +72,7 @@ export default {
       this.taskEditing = task;
     },
     deleteTask(task) {
-      this.$dispatch('delete task', task);
+      this.delete(task.id);
     },
 
     doEdit(task) {

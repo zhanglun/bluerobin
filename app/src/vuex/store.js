@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-Vue.config.devtools = true;
+Vue.use(Vuex);
 
 import user from './modules/user';
 import lists from './modules/lists';
@@ -21,17 +21,17 @@ import tasks from './modules/tasks';
 //   }
 // });
 
-const logger = {
+const myMiddleware = {
   onInit(state) {
-    console.log('----?logger');
-    console.log(state);
+    // 记录初始 state
+    console.log('middlewares');
   },
   onMutation(mutation, state) {
-    console.log(mutation);
+    // 每个 mutation 后会被调用
+    // mutation 参数的格式为 { type, payload }
+    console.log('------>mutation');
   }
 };
-
-Vue.use(Vuex);
 
 // 整合初始状态和变更函数，我们就得到了我们所需的 store
 // 至此，这个 store 就可以连接到我们的应用中
@@ -41,5 +41,5 @@ export default new Vuex.Store({
     lists,
     tasks,
   },
-  middlewares: [logger],
+  middlewares: [myMiddleware],
 });

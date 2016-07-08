@@ -1,10 +1,9 @@
 export function getUserInfo(state) {
-	console.log('getUserInfo', state);
   return state.user.data;
 }
 
 export function getUserAuth(state) {
-	return state.user.auth;
+  return state.user.auth;
 }
 
 export function getLists(state) {
@@ -12,5 +11,10 @@ export function getLists(state) {
 }
 
 export function getTasks(state) {
-  return state.tasks.all;
+  // return state.tasks.all;
+  console.log(state);
+  return {
+    active: state.tasks.active,
+    completed: state.tasks.completed,
+  };
 }

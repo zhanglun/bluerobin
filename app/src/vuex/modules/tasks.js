@@ -10,22 +10,22 @@ const state = {
 const mutations = {
   [mutationType.FETCH_TASKS](state, tasks) {
     console.log('mutations: FETCH_TASKS');
-    // tasks.map((task) => {
-    //   if (!task.completed) {
-    //     state.active.push(task);
-    //     return task;
-    //   }
-    //   if (task.completed && task.archieved) {
-    //     state.archieved.push(task);
-    //     return task;
-    //   }
-    //   if (task.completed && !task.archieved) {
-    //     state.completed.push(task);
-    //     return task;
-    //   }
-    //   return task;
-    // });
-    state.all = state.all.concat(tasks);
+    tasks.map((task) => {
+      if (!task.completed) {
+        state.active.push(task);
+        return task;
+      }
+      if (task.completed && task.archieved) {
+        state.archieved.push(task);
+        return task;
+      }
+      if (task.completed && !task.archieved) {
+        state.completed.push(task);
+        return task;
+      }
+      return task;
+    });
+    // state.all = state.all.concat(tasks);
   },
 
   [mutationType.ADD_TASK](state, task) {
@@ -38,6 +38,15 @@ const mutations = {
         return task;
       }
       return item;
+    });
+  },
+
+  [mutationType.DELETE_TASK](state, task) {
+    // var removed = state.all.find((item) => {
+    //   return item.id === task.id;
+    // });
+    state.all = state.all.filter((item) => {
+      return item.id !== task.id;
     });
   }
 
