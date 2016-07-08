@@ -8,24 +8,18 @@ const state = {
 };
 
 const mutations = {
-  [mutationType.FETCH_TASKS](state, tasks) {
+  [mutationType.FETCH_TASKS](state, query, tasks) {
     console.log('mutations: FETCH_TASKS');
-    tasks.map((task) => {
-      if (!task.completed) {
-        state.active.push(task);
-        return task;
-      }
-      if (task.completed && task.archieved) {
-        state.archieved.push(task);
-        return task;
-      }
-      if (task.completed && !task.archieved) {
-        state.completed.push(task);
-        return task;
-      }
-      return task;
-    });
-    // state.all = state.all.concat(tasks);
+    // if (query.completed) {
+    //   state.completed = tasks;
+    // } else {
+    //   state.active = tasks;
+    // }
+    if(query.completed) {
+      state.all = state.all.concat(tasks);
+    }else{
+      state.all = tasks;
+    }
   },
 
   [mutationType.ADD_TASK](state, task) {

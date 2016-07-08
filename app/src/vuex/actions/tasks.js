@@ -15,7 +15,7 @@ export const fetchTasks = ({ dispatch, state }, query, callback) => {
     if (typeof callback === 'function') {
       callback(res);
     }
-    dispatch(mutationType.FETCH_TASKS, res.body);
+    dispatch(mutationType.FETCH_TASKS, query, res.body);
   }, (err) => {
     dispatch(mutationType.FETCH_TASKS_ERROR, err);
   });

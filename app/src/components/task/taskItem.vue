@@ -25,7 +25,7 @@ import * as tasksActions from '../../vuex/actions/tasks';
 
 export default {
   props: ['task', 'index'],
-  data: function() {
+  data() {
     return {
       editing: false,
       titleAfterParse: '',
@@ -42,7 +42,7 @@ export default {
 
     }
   },
-  ready: function() {
+  ready() {
     this.titleAfterParse = twemoji.parse(this.task.title);
     setTimeout(function() {
       componentHandler.upgradeDom();
@@ -104,14 +104,13 @@ export default {
   height: @editbox-height;
   padding: 0 4px;
 }
-
 .task {
   width: 100%;
   box-sizing: border-box;
   font-size: 1.6rem;
   color: #343434;
   background: fade(@white, 85%);
-  // box-shadow: 0 2px 4px rgba(0,0,0,.24);
+  // box-shadow: 0 2px 4px rgba(0, 0, 0, .24);
   border-bottom: 1px solid #DCDCDC;
   padding: 0 0.6em;
   display: flex;
@@ -119,7 +118,8 @@ export default {
   align-items: center;
   position: relative;
   height: 50px;
-  // margin: 2px 0 ;
+  // margin: 2px 0;
+
   &.finished {
     .task-content {
       cursor: default;
@@ -143,36 +143,32 @@ export default {
     }
   }
 }
-
 .task-content {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
+  overflow: hidden;
+  margin-right: 6rem;
+
+  &-input {
+    display: none;
+    width: 100%;
+    padding: 0 5px;
+  }
+  &-box {
+    line-height: 31px;
+    padding: 0 5px;
+    margin-top: -3px;
+    white-space: nowrap;
     overflow: hidden;
-    margin-right: 6rem;
-    &-input {
-      display: none;
-      width: 100%;
-      padding: 0 5px;
-    }
-    &-box {
-      line-height: 31px;
-      padding: 0 5px;
-      margin-top: -3px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      -webkit-user-select: none;
-    }
+    text-overflow: ellipsis;
+    -webkit-user-select: none;
+  }
 }
-
-
 .task-controller {
   display: none;
   position: absolute;
   right: 8px;
   top: 30%;
 }
-
-
 
 /*
   Task item animation
@@ -184,12 +180,15 @@ export default {
   opacity: 0;
   transform: rotateX(180deg);
 }
-.animation_showtask-enter{
-  transform: rotateX(180deg);
+.animation_showtask {
+  &-enter {
+    opacity: 0;
+    transform: rotateX(180deg);
+  }
+  &-levae {
+    opacity: 0;
+    transform: rotateX(180deg);
+    transition: all 0.3s ease;
+  }
 }
-.animation_showtask-leave{
-  transition: all 0.3s ease;
-  transform: translateX(-100%);
-}
-
 </style>

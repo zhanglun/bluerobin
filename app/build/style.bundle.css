@@ -226,14 +226,16 @@
           transform: rotateX(180deg);
 }
 .animation_showtask-enter {
+  opacity: 0;
   -webkit-transform: rotateX(180deg);
           transform: rotateX(180deg);
 }
-.animation_showtask-leave {
+.animation_showtask-levae {
+  opacity: 0;
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  -webkit-transform: translateX(-100%);
-          transform: translateX(-100%);
 }
 /* ====================================================== */
 /* Variables

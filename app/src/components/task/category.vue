@@ -54,14 +54,14 @@
     computed: {
       tasklist() {
         // return this.tasks.active;
-        return this.tasks.active.filter((item) => {
-          return item.list_id === this.list_id;
+        return this.tasks.filter((item) => {
+          return item.list_id === this.list_id && !item.completed;
         });
       },
       completedTasklist() {
         // return this.tasks.completed;
-        return this.tasks.completed.filter((item) => {
-          return item.list_id === this.list_id;
+        return this.tasks.filter((item) => {
+          return item.list_id === this.list_id && item.completed;
         });
       },
     },
