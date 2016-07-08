@@ -73,7 +73,7 @@
       };
     },
     watch: {
-      auth: function(val, old) {
+      auth: function(val) {
         if (!val) {
           this.$router.go('/login');
         }

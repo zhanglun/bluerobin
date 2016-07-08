@@ -17,6 +17,7 @@
       </span>
     </div>
 
+  </div>
     <modal :show="showModal">
       <div slot="header">
         <h3 class="text-center">创建新的清单</h3>
@@ -44,7 +45,6 @@
         <button class="robin-btn robin-btn__default" @click="doEditList">确定</button>
       </div>
     </modal>
-  </div>
 </template>
 <script>
   import * as listsActions from '../../vuex/actions/lists';

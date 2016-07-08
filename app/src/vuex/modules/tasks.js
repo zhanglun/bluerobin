@@ -15,9 +15,9 @@ const mutations = {
     // } else {
     //   state.active = tasks;
     // }
-    if(query.completed) {
+    if (query.completed) {
       state.all = state.all.concat(tasks);
-    }else{
+    } else {
       state.all = tasks;
     }
   },
@@ -25,6 +25,9 @@ const mutations = {
   [mutationType.ADD_TASK](state, task) {
     state.all = [task].concat(state.all);
   },
+
+  // [mutationType.TOGGLE_TASK](state, task) {
+  // },
 
   [mutationType.EDIT_TASK](state, task) {
     state.all.map((item) => {

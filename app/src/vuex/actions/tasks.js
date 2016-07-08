@@ -61,7 +61,7 @@ export const deleteTask = ({ dispatch, state }, taskid) => {
     .then((res) => {
       dispatch(mutationType.DELETE_TASK, res.body);
       dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'total', update: -1 });
-      if (res.completed) {
+      if (res.body.completed) {
         dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'completed', update: -1 });
       }
     }, (err) => {

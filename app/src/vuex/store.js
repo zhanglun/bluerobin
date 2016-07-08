@@ -1,7 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createLogger from 'vuex/logger';
 
 Vue.use(Vuex);
+Vue.config.debug = true;
+const debug = process.env.NODE_ENV !== 'production';
 
 import user from './modules/user';
 import lists from './modules/lists';
@@ -41,5 +44,5 @@ export default new Vuex.Store({
     lists,
     tasks,
   },
-  middlewares: [myMiddleware],
+  moddlewares: debug ? [createLogger(), myMiddleware] : [],
 });
