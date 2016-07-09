@@ -14,7 +14,10 @@ export const authenticate = function({ dispatch, state }, callback) {
         callback(res);
       }
     }, (err) => {
-      dispatch(mutationType.AUTHENTICATE_ERROR, err);
+      dispatch(mutationType.AUTHENTICATE_ERROR, {});
+      if (callback) {
+        callback(null);
+      }
     });
 };
 

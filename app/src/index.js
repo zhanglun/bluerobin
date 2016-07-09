@@ -37,6 +37,9 @@ var router = new Router({
 });
 
 router.map({
+  '/': {
+    component: App,
+  },
   '/lists': {
     component: TaskView,
     subRoutes: {
@@ -56,7 +59,7 @@ router.map({
 });
 
 router.redirect({
-  '*': '/lists',
+  '*': '/',
 });
 
 router.start(App, '#app');

@@ -72,30 +72,20 @@
     computed: {
 
     },
-    watch: {
-
-      // user(val, old) {
-      //   console.log(arguments);
-      //   if (val) {
-      //     this.$router.go('/lists');
-      //   } else {
-      //     console.log('login first, please!');
-      //     this.$router.go('/login');
-      //   }
-      // }
-    },
     created() {
       console.log('app.get', this.route);
-        this.authenticate((user) => {
-          if(user){
-             this.$router.go('lists');
-          } else {
-            console.log('login first, please!');
-            this.$router.go('login');
-          }
-        });
+      this.authenticate((user) => {
+        console.log(user);
+        if(user){
+           this.$router.go('lists');
+        } else {
+          console.log('login first, please!');
+          this.$router.go('/login');
+        }
+      });
     },
     ready() {
+    
     },
     methods: {
     },
