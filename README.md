@@ -10,6 +10,17 @@ gulp
 
 ```
 
+
+### 技术选择
+
+
+Vue.js + Vuex
+
+Webpack
+
+
 ### TODO
 
-[x] 使用vuex管理list列表
+* 使用 vuex 管理清单
+* 清单列表接口的auth
+* 任务拖拽修改所属清单
