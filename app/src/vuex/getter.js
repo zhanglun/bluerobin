@@ -12,9 +12,4 @@ export function getLists(state) {
 
 export function getTasks(state) {
   return state.tasks.all;
-  // console.log(state);
-  // return {
-  //   active: state.tasks.active,
-  //   completed: state.tasks.completed,
-  // };
 }

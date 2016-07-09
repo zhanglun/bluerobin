@@ -39,9 +39,6 @@ const mutations = {
   },
 
   [mutationType.DELETE_TASK](state, task) {
-    // var removed = state.all.find((item) => {
-    //   return item.id === task.id;
-    // });
     state.all = state.all.filter((item) => {
       return item.id !== task.id;
     });
