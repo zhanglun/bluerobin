@@ -402,6 +402,11 @@ li {
 .modal-body {
   margin: 20px 0;
 }
+.modal-footer .footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .modal-default-button {
   float: right;
 }

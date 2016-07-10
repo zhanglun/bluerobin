@@ -11,7 +11,7 @@ body {
 
 body {
   min-height: 100%;
-  max-width: 100%; 
+  max-width: 100%;
   font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', '宋体', '黑体', sans-serif;
   font-weight: 300;
   background-color: #ECECEC;
@@ -111,6 +111,15 @@ li {
   margin: 20px 0;
 }
 
+.modal-footer {
+  .footer-inner {
+    display: flex;
+    // flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
 .modal-default-button {
   float: right;
 }
@@ -151,7 +160,10 @@ li {
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(255, 0, 0, 0.4);
 }
-::-webkit-scrollbar { width: 0 !important }
+
+::-webkit-scrollbar {
+  width: 0 !important
+}
 
 @input-height: 40px;
 @input-border: #c3c7d2;

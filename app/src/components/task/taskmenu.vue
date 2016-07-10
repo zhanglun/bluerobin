@@ -19,28 +19,29 @@
 
   </div>
     <modal :show="showModal">
-      <div slot="header">
+      <div slot="header" class="header-inner">
         <h3 class="text-center">创建新的清单</h3>
       </div>
-      <div slot="body">
+      <div slot="body" class="body-inner">
         <div class="robin-textfield">
           <input type="text" class="robin-input robin-input__default" v-model="newList.name"/>
         </div>
       </div>
-      <div slot="footer">
+      <div slot="footer" class="footer-inner">
+        <span></span>
         <button class="robin-btn robin-btn__default" @click="createNewList">创建</button>
       </div>
     </modal>
     <modal :show="showCurrentList">
-      <div slot="header" class="center">
+      <div slot="header" class="center header-inner">
         <h3>编辑清单</h3>
       </div>
-      <div slot="body">
+      <div slot="body" class="body-inner">
         <div class="robin-textfield">
           <input type="text" class="robin-input robin-input__default" v-model="currentList.name"/>
         </div>
       </div>
-      <div slot="footer">
+      <div slot="footer" class="footer-inner">
         <span class="material-icons" @click="deleteList(this.currentList)">delete</span>
         <button class="robin-btn robin-btn__default" @click="doEditList">确定</button>
       </div>
