@@ -130,8 +130,8 @@
   @labelTriggerBg: #d8d8d8;
 
   .main{
-    padding-left: @sideMenuWidth;
-    padding-right: 100px;
+    padding-left: @sideMenuWidth + 20;
+    padding-right: 20px;
     width: 100%;
     box-sizing: border-box;
     // margin: 0 auto;

@@ -33,7 +33,7 @@
   ],
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "chrome_url_overrides": {
-    "newtab": "build/index.html"
+    // "newtab": "build/index.html"
   },
   "options_ui": {
     "page": "extension/options/options.html",
@@ -60,8 +60,8 @@
       "19": "extension/images/icon-19.png",
       "38": "extension/images/icon-38.png"
     },
-    "default_title": "bluerobin",
-    "default_popup": "extension/popup/popup.html"
+    "default_title": "bluerobin"
+    // "default_popup": "extension/popup/popup.html"
   },
   "web_accessible_resources": [
     "extension/images/icon-48.png"

@@ -122,7 +122,7 @@
   .sidebar{
     float:left;
     width: @sideMenuWidth;
-    padding: 20px 30px;
+    // padding: 20px 30px;
     box-sizing: border-box;
     position: fixed;
   }

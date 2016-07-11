@@ -30,8 +30,7 @@
 }
 .sidebar {
   float: left;
-  width: 280px;
-  padding: 20px 30px;
+  width: 240px;
   box-sizing: border-box;
   position: fixed;
 }
@@ -120,8 +119,8 @@
   white-space: nowrap;
 }
 .main {
-  padding-left: 280px;
-  padding-right: 100px;
+  padding-left: 260px;
+  padding-right: 20px;
   width: 100%;
   box-sizing: border-box;
 }
