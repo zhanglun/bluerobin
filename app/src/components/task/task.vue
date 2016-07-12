@@ -1,14 +1,15 @@
 <template>
   <div class="">
-      <taskmenu></taskmenu>
-      <router-view></router-view>
+      <sidemenu></sidemenu>
+      <router-view ></router-view>
   </div>
 </template>
 
 <script>
-  import TaskMenuView from './taskmenu.vue';
+  import SidemenuView from './sidemenu.vue';
   import CategoryView from './category.vue';
 
+  import * as listsActions from '../../vuex/actions/lists';
   import * as getters from '../../vuex/getter';
 
   export default {
@@ -18,7 +19,7 @@
     },
     vuex: {
       actions: {
-        // fetchTasks: tasksActions.fetchTasks,
+        fetchLists: listsActions.fetchLists,
       },
       getters: {
         // tasks: getters.getTasks,
@@ -26,10 +27,11 @@
       }
     },
     components: {
-      taskmenu: TaskMenuView,
+      sidemenu: SidemenuView,
       category: CategoryView,
     },
     created() {
+      this.fetchLists();
     },
     ready() {
     },

@@ -25,6 +25,7 @@
         var query = {
           list_id: this.list_id,
           completed: false,
+          sort: '-update_time',
         };
         this.fetchTasks(query);
         transition.next();
@@ -93,6 +94,7 @@
         let param = {
           list_id: this.list_id,
           completed: true,
+          sort: '-update_time',
         };
         this.fetchTasks(param, () => {
           this.loaded = true;
@@ -102,7 +104,6 @@
         if (!this.loaded) {
           this.loadCompletedTask();
         }
-        console.log(this.completedTasklist);
         this.$data.completedShow = !this.$data.completedShow;
       },
     },

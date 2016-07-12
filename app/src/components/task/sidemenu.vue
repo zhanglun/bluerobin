@@ -64,7 +64,7 @@
     },
     vuex: {
       actions: {
-        fetchLists: listsActions.fetchLists,
+        // fetchLists: listsActions.fetchLists,
         addList: listsActions.addList,
         deleteList: listsActions.deleteList,
         editList: listsActions.editList,
@@ -85,7 +85,7 @@
       },
     },
     ready() {
-      this.fetchLists();
+      // this.fetchLists();
       document.addEventListener('keyup', (e) => {
         if (e.keyCode === 27) {
           this.showModal = false;

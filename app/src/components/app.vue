@@ -39,7 +39,7 @@
 
 <script>
   import Vue from 'vue';
-  import TaskMenu from './task/taskmenu.vue';
+  import SideMenuView from './task/sidemenu.vue';
   import HeaderView from './header/header.vue';
   import store from '../vuex/store';
 
@@ -76,7 +76,7 @@
       console.log('app.get', this.route);
       this.authenticate((user) => {
         console.log(user);
-        if(user){
+        if (user) {
            this.$router.go('lists');
         } else {
           console.log('login first, please!');
@@ -85,13 +85,12 @@
       });
     },
     ready() {
-    
     },
     methods: {
     },
     components: {
       appheader: HeaderView,
-      taskmenu: TaskMenu,
+      sidemenu: SideMenuView,
     },
     store: store,
   };
