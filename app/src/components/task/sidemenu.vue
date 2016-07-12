@@ -74,14 +74,14 @@
     },
     watch: {
       // 监控左侧 list 列表，默认选中第一个
-      // lists(val) {
-      //   if (this.lists && this.lists.length) {
-      //     this.$router.go({name: 'list', params: {id: this.lists[0].id}});
-      //   }
-      //   this.showModal = false;
-      //   this.showCurrentList = false;
-      //   this.newList.name = '';
-      // },
+      lists(val) {
+        if (this.lists && this.lists.length) {
+          this.$router.go({name: 'list', params: {id: this.lists[0].id}});
+        }
+        this.showModal = false;
+        this.showCurrentList = false;
+        this.newList.name = '';
+      },
     },
     ready() {
       // this.fetchLists();
