@@ -1,6 +1,6 @@
 <template>
   <div class="main" transition="animate_routerview">
-    <taskinputer :listid="listId"></taskinputer>
+    <additem :listid="listId"></additem>
     <div class="tasklist">
       <taskitem v-for="task in tasklist" :task="task" :index="$index" track-by="id"></taskitem>
     </div>
@@ -14,13 +14,14 @@
 </template>
 <script>
   import TaskItemView from './taskItem.vue';
-  import TaskInputer from './taskInputer.vue';
+  import addItemView from './addItem.vue';
   import * as tasksActions from '../../vuex/actions/tasks';
   import * as getters from '../../vuex/getter';
 
   export default {
     route: {
       data(transition) {
+        console.log(this.$route.params);
         this.list_id = this.$route.params.id;
         var query = {
           list_id: this.list_id,
@@ -54,13 +55,11 @@
     },
     computed: {
       tasklist() {
-        // return this.tasks.active;
         return this.tasks.filter((item) => {
           return item.list_id === this.list_id && !item.completed;
         });
       },
       completedTasklist() {
-        // return this.tasks.completed;
         return this.tasks.filter((item) => {
           return item.list_id === this.list_id && item.completed;
         });
@@ -86,7 +85,7 @@
     ready() {
     },
     components: {
-      taskinputer: TaskInputer,
+      additem: addItemView,
       taskitem: TaskItemView,
     },
     methods: {

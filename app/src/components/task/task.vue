@@ -7,7 +7,6 @@
 
 <script>
   import SidemenuView from './sidemenu.vue';
-  import CategoryView from './category.vue';
 
   import * as listsActions from '../../vuex/actions/lists';
   import * as getters from '../../vuex/getter';
@@ -22,13 +21,11 @@
         fetchLists: listsActions.fetchLists,
       },
       getters: {
-        // tasks: getters.getTasks,
         auth: getters.getUserAuth,
       }
     },
     components: {
       sidemenu: SidemenuView,
-      category: CategoryView,
     },
     created() {
       this.fetchLists();

@@ -9,7 +9,7 @@ import VueResource from 'vue-resource';
 
 import App from './components/app.vue';
 import TaskView from './components/task/task.vue';
-import CategoryView from './components/task/category.vue';
+import TaskListView from './components/task/taskList.vue';
 import UserLogin from './components/user/login.vue';
 import UserSignUp from './components/user/signup.vue';
 
@@ -45,7 +45,7 @@ router.map({
     subRoutes: {
       '/:id': {
         name: 'list',
-        component: CategoryView,
+        component: TaskListView,
       },
     },
     auth: true,

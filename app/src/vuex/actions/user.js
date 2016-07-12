@@ -13,7 +13,7 @@ export const authenticate = function({ dispatch, state }, callback) {
       if (callback) {
         callback(res);
       }
-    }, (err) => {
+    }, () => {
       dispatch(mutationType.AUTHENTICATE_ERROR, {});
       if (callback) {
         callback(null);
@@ -30,5 +30,5 @@ export const login = function({ dispatch, state }, param) {
     .then((res) => {
       window.localStorage.token = res.body.token;
       dispatch(mutationType.LOGIN, res.body);
-    }, (err) => {});
+    }, () => {});
 };
