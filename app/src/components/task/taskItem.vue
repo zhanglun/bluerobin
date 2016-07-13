@@ -105,7 +105,9 @@ export default {
   padding: 0 4px;
 }
 .task {
+  // flex: 1 1 320px;
   width: 100%;
+  height: 50px;
   box-sizing: border-box;
   font-size: 1.6rem;
   color: #343434;
@@ -117,8 +119,6 @@ export default {
   flex-direction: row;
   align-items: center;
   position: relative;
-  height: 50px;
-  // margin: 2px 0;
 
   &.finished {
     .task-content {

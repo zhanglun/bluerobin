@@ -134,10 +134,15 @@
     padding-right: 20px;
     width: 100%;
     box-sizing: border-box;
-    // margin: 0 auto;
   }
-  .label-trigger{
-    // display: inline-block;
+  .tasklist {
+    // width: 840px;
+    // margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .label-trigger {
+    display: inline-block;
     margin: 6px 0;
     padding: 6px 12px;
     background: fade(@labelTriggerBg, 80%);
