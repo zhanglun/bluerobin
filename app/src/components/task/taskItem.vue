@@ -6,7 +6,7 @@
       </label>
     </div>
     <div class="task-content">
-      <div class="task-content-box" @dblclick="edit(task)">{{{titleAfterParse}}}</div>
+      <div class="task-content-box" @dblclick="mofidyTask(task)">{{{titleAfterParse}}}</div>
       <div class="mdl-textfield mdl-js-textfield task-content-input">
         <input class="mdl-textfield__input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
       </div>
@@ -19,8 +19,8 @@
     </span>
   </div>
 </template>
-<script>
 
+<script>
 import * as tasksActions from '../../vuex/actions/tasks';
 
 export default {
@@ -37,6 +37,7 @@ export default {
     actions: {
       toggle: tasksActions.toggleTask,
       delete: tasksActions.deleteTask,
+      edit: tasksActions.editTask,
     },
     getters: {
 
@@ -65,7 +66,7 @@ export default {
       this.task.completed = !this.task.completed;
       this.toggle(this.task.id, {completed: this.task.completed});
     },
-    edit(task) {
+    mofidyTask(task) {
       if (task.completed) {
         return false;
       }
@@ -85,7 +86,7 @@ export default {
       this.taskEditing = null;
       task.title = task.title.replace(/</g, "&lt").replace(/>/g, "&gt;");
       this.titleAfterParse = twemoji.parse(task.title);
-      this.$dispatch('edit task', task);
+      this.edit(task);
     },
   },
 };

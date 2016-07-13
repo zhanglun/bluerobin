@@ -68,3 +68,13 @@ export const deleteTask = ({ dispatch, state }, taskid) => {
       dispatch(mutationType.EDIT_TASK_ERROR, err);
     });
 };
+
+export const editTask = ({ dispatch, state }, task) => {
+  request
+    .put('/tasks/' + task.id)
+    .set('x-access-token', window.localStorage.token)
+    .use(baseURL)
+    .then((res) => {
+      dispatch(mutationType.EDIT_TASK, res.body);
+    });
+};

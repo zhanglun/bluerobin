@@ -19,17 +19,17 @@ Vue.config.devtools = true;
 Vue.config.debug = true;
 
 // Vue.http.options.root = 'http://zhanglun.daoapp.io/api';
-Vue.http.options.root = 'http://localhost:1234/api';
+// Vue.http.options.root = 'http://localhost:1234/api';
 
-Vue.http.interceptors.push({
-  request: function(request) {
-    Vue.http.headers.common['x-access-token'] = window.localStorage.token;
-    return request;
-  },
-  response: function(response) {
-    return response;
-  },
-});
+// Vue.http.interceptors.push({
+//   request: function(request) {
+//     Vue.http.headers.common['x-access-token'] = window.localStorage.token;
+//     return request;
+//   },
+//   response: function(response) {
+//     return response;
+//   },
+// });
 
 // routing
 var router = new Router({

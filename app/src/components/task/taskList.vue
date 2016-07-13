@@ -106,22 +106,22 @@
         this.$data.completedShow = !this.$data.completedShow;
       },
     },
-    events: {
-      'edit task'(task) {
-        let vm = this;
-        vm.$http.put('tasks/' + task.id, task)
-          .then(() => {
-            console.log('edit task success!');
-            if (task.completed) {
-              vm.tasklist.$remove(task);
-              vm.completedTasklist.unshift(task);
-            } else {
-              vm.completedTasklist.$remove(task);
-              vm.tasklist.unshift(task);
-            }
-          });
-      },
-    },
+    // events: {
+    //   'edit task'(task) {
+    //     let vm = this;
+    //     vm.$http.put('tasks/' + task.id, task)
+    //       .then(() => {
+    //         console.log('edit task success!');
+    //         if (task.completed) {
+    //           vm.tasklist.$remove(task);
+    //           vm.completedTasklist.unshift(task);
+    //         } else {
+    //           vm.completedTasklist.$remove(task);
+    //           vm.tasklist.unshift(task);
+    //         }
+    //       });
+    //   },
+    // },
   };
 </script>
 <style lang="less">
