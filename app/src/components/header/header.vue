@@ -28,7 +28,6 @@ export default {
     },
   },
   ready() {
-    console.log('header!!!!!');
   },
   methods: {
   },

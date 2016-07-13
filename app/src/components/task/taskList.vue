@@ -21,7 +21,6 @@
   export default {
     route: {
       data(transition) {
-        console.log(this.$route.params);
         this.list_id = this.$route.params.id;
         var query = {
           list_id: this.list_id,

@@ -11,7 +11,7 @@ export const authenticate = function({ dispatch, state }, callback) {
     .then((res) => {
       dispatch(mutationType.AUTHENTICATE, res.body);
       if (callback) {
-        callback(res);
+        callback(res.body);
       }
     }, () => {
       dispatch(mutationType.AUTHENTICATE_ERROR, {});

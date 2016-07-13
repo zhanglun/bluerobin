@@ -73,9 +73,7 @@
 
     },
     created() {
-      console.log('app.get', this.route);
       this.authenticate((user) => {
-        console.log(user);
         if (user) {
           this.$router.go('lists');
         } else {
