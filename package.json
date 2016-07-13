@@ -1,6 +1,12 @@
 {
   "name": "bluerobin",
   "private": true,
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "gulp",
+    "dev": "webpack-dev-server --watch --devtool --inline --hot --content-base ./app/build"
+  },
   "dependencies": {
     "material-design-lite": "^1.1.3",
     "materialize-css": "^0.97.5",
@@ -49,7 +55,8 @@
     "vue-hot-reload-api": "^1.3.2",
     "vue-html-loader": "^1.0.0",
     "vue-loader": "^7.3.0",
-    "webpack": "^1.12.9"
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.1"
   },
   "engines": {
     "node": ">=0.8.0"
