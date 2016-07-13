@@ -1,11 +1,15 @@
 <template>
-  <div class="">
+
+    <appheader></appheader>
+    <div class="page-content">
       <sidemenu></sidemenu>
       <router-view ></router-view>
-  </div>
+    </div>
+
 </template>
 
 <script>
+  import HeaderView from '../header/header.vue';
   import SidemenuView from './sidemenu.vue';
 
   import * as listsActions from '../../vuex/actions/lists';
@@ -25,6 +29,7 @@
       }
     },
     components: {
+      appheader: HeaderView,
       sidemenu: SidemenuView,
     },
     created() {

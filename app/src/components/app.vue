@@ -1,46 +1,42 @@
 <template>
-  <div class="">
-    <appheader></appheader>
-    <div class="page-content">
-      <router-view></router-view>
-    </div>
-    <script type="x-template" id="modal-template">
-      <div class="modal-mask" v-if="show" transition="modal">
-        <div class="modal-wrapper">
-          <div class="modal-container">
+  <div>
+    <router-view></router-view>
+  <script type="x-template" id="modal-template">
+    <div class="modal-mask" v-if="show" transition="modal">
+      <div class="modal-wrapper">
+        <div class="modal-container">
 
-            <div class="modal-header">
-              <slot name="header">
-                default header
-              </slot>
-            </div>
+          <div class="modal-header">
+            <slot name="header">
+              default header
+            </slot>
+          </div>
 
-            <div class="modal-body">
-              <slot name="body">
-                default body
-              </slot>
-            </div>
+          <div class="modal-body">
+            <slot name="body">
+              default body
+            </slot>
+          </div>
 
-            <div class="modal-footer">
-              <slot name="footer">
-                default footer
-                <button class="modal-default-button"
-                  @click="show = false">
-                  OK
-                </button>
-              </slot>
-            </div>
+          <div class="modal-footer">
+            <slot name="footer">
+              default footer
+              <button class="modal-default-button"
+                @click="show = false">
+                OK
+              </button>
+            </slot>
           </div>
         </div>
       </div>
-    </script>
-  </div>
+    </div>
+  </script>
+</div>
 </template>
 
 <script>
   import Vue from 'vue';
   import SideMenuView from './task/sidemenu.vue';
-  import HeaderView from './header/header.vue';
   import store from '../vuex/store';
 
   import * as userActions from '../vuex/actions/user';
@@ -86,7 +82,6 @@
     methods: {
     },
     components: {
-      appheader: HeaderView,
       sidemenu: SideMenuView,
     },
     store: store,
@@ -94,17 +89,22 @@
 </script>
 
 <style lang="less">
+  #app{
+    height: 100%;
+    min-height: 100%;
+  }
   .page-content{
     padding-top: 80px;
+    padding-bottom: 50px;
   }
-  .app{
-    height: 100%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-  }
+  // .app{
+  //   height: 100%;
+  //   position: absolute;
+  //   left: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   top: 0;
+  // }
   .animate_routerview-transition{
     transition: all 0.4s ease;
   }
