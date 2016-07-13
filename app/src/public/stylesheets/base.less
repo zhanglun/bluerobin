@@ -284,37 +284,3 @@ video {
   width: 0 !important
 }
 
-@input-height: 40px;
-@input-border: #c3c7d2;
-.robin {
-  &-input {
-    width: 100%;
-    height: @input-height;
-    padding: 0 13px;
-    font-size: 15px;
-    box-sizing: border-box;
-    border: 1px solid @input-border;
-    border-radius: 3px;
-    outline: none;
-    &__default {
-      :focus {
-        box-shadow: 0 2px 2px 3px red;
-      }
-    }
-  }
-  &-btn {
-    min-width: 90px;
-    height: 40px;
-    padding: 8px;
-    border: none;
-    text-align: center;
-    box-sizing: border-box;
-    border-radius: 3px;
-    color: #fff;
-    font-size: 14px;
-    &__default {
-      background: #00a9e8;
-      border: 1px solid #009ed7;
-    }
-  }
-}

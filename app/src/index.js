@@ -1,4 +1,4 @@
-require('./public/stylesheets/base.less');
+require('./public/stylesheets/style.less');
 
 import Vue from 'vue';
 import Router from 'vue-router';
