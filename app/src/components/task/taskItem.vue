@@ -45,9 +45,6 @@ export default {
   },
   ready() {
     this.titleAfterParse = twemoji.parse(this.task.title);
-    setTimeout(function() {
-      componentHandler.upgradeDom();
-    }, 0);
   },
 
   directives: {

@@ -85,4 +85,5 @@ module.exports = {
       to: BUILD_PATH + '/vendor',
     }]),
   ],
+  devtool: 'eval',
 };
