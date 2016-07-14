@@ -1,12 +1,17 @@
 <template>
   <header class="header">
-  <div class="logo">
-    BlueRobin
-  </div>
-  <div v-if="user" class="navigation-account">
-    <img v-bind:src="user.avatar" alt="">
-    {{user.username}}
-  </div>
+    <div class="logo">
+      BlueRobin
+    </div>
+    <div class="navigation-search">
+      <div class="robin-textfield">
+        <input type="text" class="robin-input robin-input__default" />
+      </div>
+    </div>
+    <div v-if="user" class="navigation-account">
+      <img v-bind:src="user.avatar" alt="">
+      {{user.username}}
+    </div>
   </header>
 </template>
 

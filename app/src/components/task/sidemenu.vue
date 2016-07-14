@@ -151,7 +151,7 @@
       }
       &-content{
         margin-left: 10px;
-        flex: 0 0 68%;
+        flex: 0 0 64%;
         .text-overflow();
       }
     }

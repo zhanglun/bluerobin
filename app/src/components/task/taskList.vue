@@ -1,14 +1,16 @@
 <template>
-  <div class="main" transition="animate_routerview">
-    <additem :listid="listId"></additem>
-    <div class="tasklist">
-      <taskitem v-for="task in tasklist" :task="task" :index="$index" track-by="id"></taskitem>
-    </div>
-    <div class="label-trigger" @click="toggleShowCompletedTask">
-      显示已完成的task
-    </div>
-    <div class="tasklist--finished" transition="animation_showtask" v-show="completedShow">
-      <taskitem v-for="task in completedTasklist" :task="task" :index="$index" track-by="id"></taskitem>
+  <div class="main-container" transition="animate_routerview">
+    <div class="main">
+      <additem :listid="listId"></additem>
+      <div class="tasklist">
+        <taskitem v-for="task in tasklist" :task="task" :index="$index" track-by="id"></taskitem>
+      </div>
+      <div class="label-trigger" @click="toggleShowCompletedTask">
+        显示已完成的task
+      </div>
+      <div class="tasklist--finished" transition="animation_showtask" v-show="completedShow">
+        <taskitem v-for="task in completedTasklist" :task="task" :index="$index" track-by="id"></taskitem>
+      </div>
     </div>
   </div>
 </template>
@@ -128,11 +130,15 @@
 
   @labelTriggerBg: #d8d8d8;
 
-  .main{
+  .main-container {
     padding-left: @sideMenuWidth + 20;
     padding-right: 20px;
     width: 100%;
     box-sizing: border-box;
+  }
+  .main {
+    max-width: 980px;
+    margin: 0 auto;
   }
   .tasklist {
     // width: 840px;

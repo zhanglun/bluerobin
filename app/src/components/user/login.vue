@@ -47,7 +47,6 @@
       }
     },
     ready() {
-      componentHandler.upgradeDom();
     },
     watch: {
       user: function(newVal, old) {
