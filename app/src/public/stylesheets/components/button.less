@@ -1,13 +1,16 @@
 @input-height: 40px;
-@input-border: #c3c7d2;
+@input-border: #969da3;
+
 @btn-width-large: 130px;
 @btn-width-default: 76px;
 @btn-width-mirco: 60px;
+
 @btn-height-large: 46px;
 @btn-height-default: 34px;
 @btn-height-mirco: 26px;
+
 .robin {
-  &-textfield{
+  &-textfield {
     width: 100%;
   }
   &-input {
@@ -17,8 +20,9 @@
     font-size: 15px;
     box-sizing: border-box;
     border: 1px solid @input-border;
-    border-radius: 3px;
+    border-radius: 2px;
     outline: none;
+
     &__default {
       :focus {
         box-shadow: 0 2px 2px 3px red;
@@ -33,6 +37,7 @@
     color: #fff;
     font-size: 13px;
     letter-spacing: 2px;
+
     &__default {
       min-width: @btn-width-default;
       height: @btn-height-default;

@@ -38,9 +38,12 @@ export default {
 
 </script>
 <style lang="less">
+@import '../../public/stylesheets/variables';
+
 .logo {
   font-size: 30px;
-  margin-left: 34px;
+  width: @sideMenuWidth;
+  text-indent: 24px;
 }
 .navigation-account{
   img{
@@ -54,7 +57,7 @@ export default {
   box-sizing: border-box;
   height: 60px;
   width: 100%;
-  padding: 0 30px;
+  // padding: 0 30px;
   background: fade(#fff, 85%);
   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   position: fixed;

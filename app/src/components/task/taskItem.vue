@@ -7,8 +7,8 @@
     </div>
     <div class="task-content">
       <div class="task-content-box" @dblclick="mofidyTask(task)">{{{titleAfterParse}}}</div>
-      <div class="mdl-textfield mdl-js-textfield task-content-input">
-        <input class="mdl-textfield__input" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
+      <div class="robin-textfield task-content-input">
+        <input class="robin-input robin-input__default" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
       </div>
       <div class="" v-if="task.completed">
         {{task.create_time}}
@@ -149,6 +149,7 @@ export default {
   &-input {
     display: none;
     width: 100%;
+    box-sizing: border-box; 
     padding: 0 5px;
   }
   &-box {
