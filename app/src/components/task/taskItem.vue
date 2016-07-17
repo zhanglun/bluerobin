@@ -1,17 +1,19 @@
 <template>
   <div class="task" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
     <div class="task-checkbox">
-      <label class="mdl-checkbox mdl-js-checkbox" v-bind:class="{'is-checked': task.completed}" for="{{task.id}}">
-        <input type="checkbox" id="{{task.id}}" class="mdl-checkbox__input" v-on:change = "toggleTask(task)" :checked="task.completed">
+      <label class="robin-checkbox" v-bind:class="{'is-checked': task.completed}" for="{{task.id}}">
+        <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change = "toggleTask(task)" :checked="task.completed">
+        <span class="robin-checkbox--label"></span>
       </label>
     </div>
     <div class="task-content">
       <div class="task-content-box" @dblclick="mofidyTask(task)">{{{titleAfterParse}}}</div>
       <div class="robin-textfield task-content-input">
-        <input class="robin-input robin-input__default" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
+        <input class="robin-textfield--input robin-textfield--input_default" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
       </div>
-      <div class="" v-if="task.completed">
-        {{task.create_time}}
+      <div class="task-metadata" v-if="task.completed">
+        <span>创建时间：{{task.create_time}}</span>
+        <span>更新时间：{{task.update_time}}</span>
       </div>
     </div>
     <span class="task-controller">
@@ -112,13 +114,14 @@ export default {
   background: fade(@white, 85%);
   // box-shadow: 0 2px 4px rgba(0, 0, 0, .24);
   border-bottom: 1px solid #DCDCDC;
-  padding: 0 0.6em;
+  padding: 0 0.5em;
   display: flex;
   flex-direction: row;
   align-items: center;
   position: relative;
 
   &.finished {
+    font-size: 12px;
     .task-content {
       cursor: default;
       text-decoration: line-through;
@@ -150,11 +153,9 @@ export default {
     display: none;
     width: 100%;
     box-sizing: border-box; 
-    padding: 0 5px;
   }
   &-box {
     line-height: 31px;
-    padding: 0 5px;
     margin-top: -3px;
     white-space: nowrap;
     overflow: hidden;

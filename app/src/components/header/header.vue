@@ -5,7 +5,7 @@
     </div>
     <div class="navigation-search">
       <div class="robin-textfield">
-        <input type="text" class="robin-input robin-input__default" />
+        <input type="text" class="robin-textfield--input robin-textfield--input_default" />
       </div>
     </div>
     <div v-if="user" class="navigation-account">
