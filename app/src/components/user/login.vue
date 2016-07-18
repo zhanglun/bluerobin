@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-container" transition="animate_routerview">
+  <div class="custom-container login-form" transition="animate_routerview">
     <div class="mdl-grid">
       <div class="mdl-cell mdl-cell-6-col">
         <h3>登录</h3>
@@ -7,24 +7,26 @@
     </div>
     <div class="mdl-grid">
       <div class="mdl-cell mdl-cell-6-col">
-          <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" id="email" v-model="account.username">
-            <label class="mdl-textfield__label" for="email">Email</label>
-            </div>
+        <div class="robin-textfield">
+          <label class="mdl-textfield__label" for="email">Email</label>
+          <input class="robin-textfield--input robin-textfield--input_default" type="text" id="email" v-model="account.username">
         </div>
       </div>
-      <div class="mdl-cell mdl-cell-6-col">
-        <div class="mdl-textfield mdl-js-textfield">
-          <input class="mdl-textfield__input" type="password" id="password" v-model="account.password">
-          <label class="mdl-textfield__label" for="password">Password</label>
-        </div>
+    </div>
+    <div class="mdl-cell mdl-cell-6-col">
+      <div class="mdl-textfield mdl-js-textfield">
+        <label class="mdl-textfield__label" for="password">Password</label>
+        <input class="robin-textfield--input robin-textfield--input_default" type="password" id="password" v-model="account.password">
       </div>
-      <div class="mdl-cell mdl-cell-6-col">
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  v-on:click="doLogin">GO!</button>
+    </div>
+    <div class="mdl-cell mdl-cell-6-col">
+      <div class="robin-textfield">
+        <button class="robin-btn robin-btn__default"  v-on:click="doLogin">GO!</button>
         <a v-link="{path: '/signup', exact: true}">还没有账号？立马注册</a>
       </div>
     </div>
   </div>
+</div>
 </template>
 <script>
   import * as userActions from '../../vuex/actions/user';
@@ -50,12 +52,12 @@
     },
     watch: {
       user: function(newVal, old) {
-        if (!newVal) {
-          this.$router.go('login');
-        }
-        if (newVal && newVal.username) {
-          this.$router.go('lists');
-        }
+        // if (!newVal) {
+        //   this.$router.go('login');
+        // }
+        // if (newVal && newVal.username) {
+        //   this.$router.go('lists');
+        // }
       }
     },
     methods: {

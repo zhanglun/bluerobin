@@ -24,7 +24,7 @@
       </div>
       <div slot="body" class="body-inner">
         <div class="robin-textfield">
-          <input type="text" class="robin-input robin-input__default" v-model="newList.name"/>
+          <input type="text" class="robin-textfield--input robin-textfield--input_default" v-model="newList.name"/>
         </div>
       </div>
       <div slot="footer" class="footer-inner">
@@ -38,7 +38,7 @@
       </div>
       <div slot="body" class="body-inner">
         <div class="robin-textfield">
-          <input type="text" class="robin-input robin-input__default" v-model="currentList.name"/>
+          <input type="text" class="robin-textfield--input robin-textfield--input_default" v-model="currentList.name"/>
         </div>
       </div>
       <div slot="footer" class="footer-inner">

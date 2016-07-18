@@ -1,11 +1,9 @@
 <template>
-
     <appheader></appheader>
     <div class="page-content">
       <sidemenu></sidemenu>
       <router-view ></router-view>
     </div>
-
 </template>
 
 <script>
