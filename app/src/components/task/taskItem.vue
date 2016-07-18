@@ -1,7 +1,7 @@
 <template>
   <div class="task" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
     <div class="task-checkbox">
-      <label class="robin-checkbox" v-bind:class="{'is-checked': task.completed}" for="{{task.id}}">
+      <label class="robin-checkbox" for="{{task.id}}">
         <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change = "toggleTask(task)" :checked="task.completed">
         <span class="robin-checkbox--label"></span>
       </label>
@@ -12,8 +12,8 @@
         <input class="robin-textfield--input robin-textfield--input_default" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
       </div>
       <div class="task-metadata" v-if="task.completed">
-        <span>创建时间：{{task.create_time}}</span>
         <span>更新时间：{{task.update_time}}</span>
+        <span>创建时间：{{task.create_time}}</span>
       </div>
     </div>
     <span class="task-controller">
@@ -82,7 +82,10 @@ export default {
       if (!this.taskEditing) {
         return false;
       }
-      this.taskEditing = null;
+      if (this.taskEditing.title === task.title) {
+        this.taskEditing = null;
+        return false;
+      }
       task.title = task.title.replace(/</g, "&lt").replace(/>/g, "&gt;");
       this.titleAfterParse = twemoji.parse(task.title);
       this.edit(task);
@@ -152,7 +155,7 @@ export default {
   &-input {
     display: none;
     width: 100%;
-    box-sizing: border-box; 
+    box-sizing: border-box;
   }
   &-box {
     line-height: 31px;
@@ -160,7 +163,7 @@ export default {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    -webkit-user-select: none;
+    // -webkit-user-select: none;
   }
 }
 .task-controller {

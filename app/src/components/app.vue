@@ -70,7 +70,7 @@
     created() {
       this.authenticate((user) => {
         if (user) {
-          this.$router.go('lists');
+          this.$router.go('/lists');
         } else {
           console.log('login first, please!');
           this.$router.go('/login');

@@ -1,6 +1,6 @@
 <template>
     <div class="task-textfield">
-      <input class="task-textfield__input" type="text" v-model="newTask.title" @keyup.enter="createTask(list_id)">
+      <input class="task-textfield--input" type="text" v-model="newTask.title" @keyup.enter="createTask(list_id)">
     </div>
 </template>
 
@@ -72,10 +72,10 @@ export default {
   background: #fff;
   margin-bottom: 20px;
   box-sizing: border-box;
-  &__input{
+  &--input{
     width: 100%;
-    height: 50px;
-    font-size: 20px;
+    height: 40px;
+    font-size: 18px;
     padding: 6px 10px;
     box-sizing: border-box;
     border: none;

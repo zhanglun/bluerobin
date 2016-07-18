@@ -76,9 +76,18 @@
 .center {
   text-align: center;
 }
+/* ====================================================== */
+/* Variables
+/* ====================================================== */
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .logo {
   font-size: 30px;
-  margin-left: 34px;
+  width: 210px;
+  text-indent: 24px;
 }
 .navigation-account img {
   width: 40px;
@@ -93,7 +102,6 @@
   box-sizing: border-box;
   height: 60px;
   width: 100%;
-  padding: 0 30px;
   background: rgba(255, 255, 255, 0.85);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   position: fixed;
@@ -167,7 +175,7 @@
   color: #343434;
   background: rgba(255, 255, 255, 0.85);
   border-bottom: 1px solid #DCDCDC;
-  padding: 0 0.6em;
+  padding: 0 0.5em;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -182,6 +190,9 @@
       -ms-flex-align: center;
           align-items: center;
   position: relative;
+}
+.task.finished {
+  font-size: 12px;
 }
 .task.finished .task-content {
   cursor: default;
@@ -208,11 +219,10 @@
 .task-content-input {
   display: none;
   width: 100%;
-  padding: 0 5px;
+  box-sizing: border-box;
 }
 .task-content-box {
   line-height: 31px;
-  padding: 0 5px;
   margin-top: -3px;
   white-space: nowrap;
   overflow: hidden;
@@ -577,17 +587,17 @@ video {
 .robin-textfield {
   width: 100%;
 }
-.robin-input {
+.robin-textfield--input {
   width: 100%;
   height: 40px;
   padding: 0 11px;
   font-size: 15px;
   box-sizing: border-box;
-  border: 1px solid #c3c7d2;
-  border-radius: 3px;
+  border: 1px solid #969da3;
+  border-radius: 2px;
   outline: none;
 }
-.robin-input__default :focus {
+.robin-textfield--input_default :focus {
   box-shadow: 0 2px 2px 3px red;
 }
 .robin-btn {
@@ -604,4 +614,33 @@ video {
   height: 34px;
   background: #00a9e8;
   border: 1px solid #009ed7;
+}
+.robin-checkbox {
+  width: 20px;
+  height: 20px;
+  display: block;
+  border: #969da3;
+  border-radius: 2px;
+  background: #fff;
+}
+.robin-checkbox--input {
+  display: none;
+}
+.robin-checkbox--input:checked + .robin-checkbox--label {
+  border: 2px solid #3f51b5;
+  background: #3f51b5 url(images/2c847a603ebb5a8755449891de596b66.png);
+}
+.robin-checkbox--label {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  cursor: pointer;
+  overflow: hidden;
+  border: 2px solid rgba(0, 0, 0, 0.54);
+  border-radius: 2px;
+  transition-duration: .28s;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-property: background;
 }

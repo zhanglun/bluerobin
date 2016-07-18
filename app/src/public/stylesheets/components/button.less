@@ -41,12 +41,13 @@
     }
   }
   &-checkbox {
-    width: 20px;
-    height: 20px;
+    height: 16px;
+    padding: 2px 2px 2px 20px;
     display: block;
     border: @input-border;
     border-radius: 2px;
     background: #fff;
+    position: relative;
     &--input {
       display: none;
       &:checked + .robin-checkbox--label {
@@ -68,6 +69,9 @@
       transition-duration: .28s;
       transition-timing-function: cubic-bezier(.4, 0, .2, 1);
       transition-property: background;
+      position: absolute;
+      left: 2px;
+      top: 2px;
     }
   }
 }
