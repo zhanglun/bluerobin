@@ -137,12 +137,10 @@
     box-sizing: border-box;
   }
   .main {
-    max-width: 980px;
-    margin: 0 auto;
+    // max-width: 980px;
+    // margin: 0 auto;
   }
   .tasklist {
-    // width: 840px;
-    // margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
   }

@@ -1,8 +1,8 @@
 <template>
   <header class="header">
-    <div class="logo">
+<!--     <div class="logo">
       BlueRobin
-    </div>
+    </div> -->
     <div class="navigation-search">
       <div class="robin-textfield">
         <input type="text" class="robin-textfield--input robin-textfield--input_default" />
@@ -16,40 +16,52 @@
 </template>
 
 <script>
-import * as getters from '../../vuex/getter';
-export default {
-  data() {
-    return {
-    };
-  },
-  vuex: {
-    actions: {
+  import * as getters from '../../vuex/getter';
+  export default {
+    data() {
+      return {
+      };
     },
-    getters: {
-      user: getters.getUserInfo,
+    vuex: {
+      actions: {
+      },
+      getters: {
+        user: getters.getUserInfo,
+      },
     },
-  },
-  ready() {
-  },
-  methods: {
-  },
+    ready() {
+    },
+    methods: {
+    },
 
-};
+  };
 
 </script>
 <style lang="less">
 @import '../../public/stylesheets/variables';
 
-.logo {
-  font-size: 30px;
-  width: @sideMenuWidth;
-  text-indent: 24px;
-}
-.navigation-account{
-  img{
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
+// .logo {
+//   font-size: 30px;
+//   width: @sideMenuWidth;
+//   text-indent: 24px;
+// }
+.navigation{
+  &-account{
+    width: @sideMenuWidth - 20;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    img{
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      border-radius: 100%;
+    }
+  }
+
+  &-search{
+    margin-left: 20px;
+    flex: 1 0 auto;
   }
 }
 .header{
@@ -57,12 +69,14 @@ export default {
   box-sizing: border-box;
   height: 60px;
   width: 100%;
-  // padding: 0 30px;
+  padding: 0 20px;
   background: fade(#fff, 85%);
   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
   position: fixed;
   z-index: 100;
   align-items: center;
-  justify-content: space-between;
+  flex-direction: row-reverse;
+  // justify-content: space-between;
+  justify-content: flex-end;
 }
 </style>

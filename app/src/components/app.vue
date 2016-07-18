@@ -94,8 +94,12 @@
     min-height: 100%;
   }
   .page-content{
+    // display: flex;
     padding-top: 80px;
     padding-bottom: 50px;
+    min-height: 100%;
+    height: 100%;
+    box-sizing: border-box;
   }
   // .app{
   //   height: 100%;

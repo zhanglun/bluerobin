@@ -45,19 +45,19 @@
         login: userActions.login,
       },
       getters: {
-        user: getters.getUserInfo
+        // user: getters.getUserInfo
       }
     },
     ready() {
     },
     watch: {
       user: function(newVal, old) {
-        // if (!newVal) {
-        //   this.$router.go('login');
-        // }
-        // if (newVal && newVal.username) {
-        //   this.$router.go('lists');
-        // }
+        if (!newVal) {
+          this.$router.go('login');
+        }
+        if (newVal && newVal.username) {
+          this.$router.go('lists');
+        }
       }
     },
     methods: {
@@ -71,8 +71,8 @@
  .login-form {
   width:400px;
   padding:14px;
-  box-sizing: box-sizing;
-  margin: 0 auto;
+  box-sizing: border-box;
+  margin: 120px auto;
   background: rgba(255,255,255,0.8);
  }
 </style>
