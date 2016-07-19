@@ -82,10 +82,10 @@ export default {
       if (!this.taskEditing) {
         return false;
       }
-      if (this.taskEditing.title === task.title) {
-        this.taskEditing = null;
-        return false;
-      }
+      // if (this.taskEditing.title === task.title) {
+      //   this.taskEditing = null;
+      //   return false;
+      // }
       task.title = task.title.replace(/</g, "&lt").replace(/>/g, "&gt;");
       this.titleAfterParse = twemoji.parse(task.title);
       this.edit(task);
