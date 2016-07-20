@@ -7,7 +7,7 @@
       </label>
     </div>
     <div class="task-content">
-      <div class="task-content-box" @dblclick="mofidyTask(task)">{{{titleAfterParse}}}</div>
+      <div class="task-content-box" @dblclick="showTaskDetail(task)">{{{titleAfterParse}}}</div>
       <div class="robin-textfield task-content-input">
         <input class="robin-textfield--input robin-textfield--input_default" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
       </div>
@@ -40,6 +40,7 @@ export default {
       toggle: tasksActions.toggleTask,
       delete: tasksActions.deleteTask,
       edit: tasksActions.editTask,
+      fetchDetail: tasksActions.fetchTaskDetail,
     },
     getters: {
 
@@ -71,6 +72,9 @@ export default {
       }
       this.taskEditing = task;
     },
+    showTaskDetail(task) {
+      this.fetchDetail(task.id);
+    },
     deleteTask(task) {
       this.delete(task.id);
     },
@@ -83,7 +87,7 @@ export default {
         return false;
       }
       // if (this.taskEditing.title === task.title) {
-      //   this.taskEditing = null;
+      this.taskEditing = null;
       //   return false;
       // }
       task.title = task.title.replace(/</g, "&lt").replace(/>/g, "&gt;");

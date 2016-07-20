@@ -5,6 +5,8 @@ const state = {
   archieved: [],
   completed: [],
   all: [],
+  taskDetail: null,
+  showDetail: false,
 };
 
 const mutations = {
@@ -20,6 +22,11 @@ const mutations = {
     } else {
       state.all = tasks;
     }
+  },
+  [mutationType.FETCH_TASK_DETAIL](state, task) {
+    console.log('mutations: FETCH_TASK_DETAIL');
+    state.showDetail = true;
+    state.taskDetail = task;
   },
 
   [mutationType.ADD_TASK](state, task) {

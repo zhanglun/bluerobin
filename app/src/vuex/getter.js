@@ -13,3 +13,12 @@ export function getLists(state) {
 export function getTasks(state) {
   return state.tasks.all;
 }
+
+export function isShowDetail(state) {
+  console.log(state.tasks.showDeatil);
+  return state.tasks.showDeatil;
+}
+
+export function getTaskDetail(state) {
+  return state.tasks.taskDetail;
+}

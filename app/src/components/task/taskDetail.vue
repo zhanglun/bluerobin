@@ -1,5 +1,5 @@
 <template>
-  <div class="taskdetail-mask">
+  <div class="taskdetail-mask" :v-if="show">
     <div class="taskdetail-wrapper">
       <div class="taskdetail-container">
       <h1>Task Detail</h1>
@@ -9,7 +9,7 @@
 </template>
 <script>
   export default {
-    props: ['show'],
+    props: ['show', 'detail'],
     data() {
       return {
 

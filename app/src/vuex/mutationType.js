@@ -5,6 +5,8 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 
 export const FETCH_TASKS = 'FETCH_TASKS';
 export const FETCH_TASKS_ERROR = 'FETCH_TASKS_ERROR';
+export const FETCH_TASK_DETAIL = 'FETCH_TASK_DETAIL';
+export const FETCH_TASK_DETAIL_ERROR = 'FETCH_TASK_DETAIL_ERROR';
 export const ADD_TASK = 'ADD_TASK';
 export const ADD_TASK_ERROR = 'ADD_TASK_ERROR';
 export const DELETE_TASK = 'DELETE_TASK';

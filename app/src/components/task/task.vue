@@ -3,7 +3,7 @@
     <div class="page-content">
       <sidemenu></sidemenu>
       <router-view ></router-view>
-      <taskdetail ></taskdetail>
+      <taskdetail :show="showDetail" :detail="taskDetail"></taskdetail>
     </div>
 </template>
 
@@ -18,6 +18,7 @@
   export default {
     data() {
       return {
+        showDetail: false,
       };
     },
     vuex: {
@@ -26,6 +27,8 @@
       },
       getters: {
         auth: getters.getUserAuth,
+        // showDetail: getters.isShowDetail,
+        taskDetail: getters.getTaskDetail,
       }
     },
     components: {

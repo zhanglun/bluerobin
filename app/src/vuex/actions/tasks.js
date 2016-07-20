@@ -21,6 +21,18 @@ export const fetchTasks = ({ dispatch, state }, query, callback) => {
   });
 };
 
+export const fetchTaskDetail = ({ dispatch, state }, taskid) => {
+  request
+    .get('/tasks/' + taskid)
+    .set('x-access-token', window.localStorage.token)
+    .use(baseURL)
+    .then((res) => {
+      dispatch(mutationType.FETCH_TASK_DETAIL, res.body);
+    }, (err) => {
+      dispatch(mutationType.FETCH_TASK_DETAIL_ERROR, err);
+    });
+};
+
 export const addTask = ({ dispatch, state }, task) => {
   request
     .post('/tasks')
