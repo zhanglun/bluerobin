@@ -142,6 +142,66 @@
       -ms-flex-pack: end;
           justify-content: flex-end;
 }
+.taskdetail-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+  -webkit-transition: opacity .3s ease;
+  transition: opacity .3s ease;
+}
+.taskdetail-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+.taskdetail-container {
+  width: 740px;
+  height: 540px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  -webkit-transition: all .3s ease;
+  transition: all .3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+.modal-header h3 {
+  margin-top: 0;
+  color: #000000;
+}
+.modal-body {
+  margin: 20px 0;
+}
+.modal-footer .footer-inner {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.modal-default-button {
+  float: right;
+}
+.modal-enter,
+.modal-leave {
+  opacity: 0;
+}
+.modal-enter .modal-container,
+.modal-leave .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
 /* ====================================================== */
 /* Variables
 /* ====================================================== */

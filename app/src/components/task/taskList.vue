@@ -56,9 +56,10 @@
     },
     computed: {
       tasklist() {
-        return this.tasks.filter((item) => {
+        let result = this.tasks.filter((item) => {
           return item.list_id === this.list_id && !item.completed;
         });
+        return result;
       },
       completedTasklist() {
         return this.tasks.filter((item) => {

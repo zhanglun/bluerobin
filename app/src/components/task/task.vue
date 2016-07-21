@@ -1,9 +1,9 @@
 <template>
-    <appheader></appheader>
+    <app-header></app-header>
     <div class="page-content">
-      <sidemenu></sidemenu>
+      <side-menu></side-menu>
       <router-view ></router-view>
-      <taskdetail :show="showDetail" :detail="taskDetail"></taskdetail>
+      <task-detail></task-detail>
     </div>
 </template>
 
@@ -18,7 +18,6 @@
   export default {
     data() {
       return {
-        showDetail: false,
       };
     },
     vuex: {
@@ -27,14 +26,12 @@
       },
       getters: {
         auth: getters.getUserAuth,
-        // showDetail: getters.isShowDetail,
-        taskDetail: getters.getTaskDetail,
       }
     },
     components: {
-      appheader: HeaderView,
-      sidemenu: SidemenuView,
-      taskdetail: TaskDetailView,
+      'app-header': HeaderView,
+      'side-menu': SidemenuView,
+      'task-detail': TaskDetailView,
     },
     created() {
       this.fetchLists();

@@ -2,12 +2,12 @@
   <div class="task" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
     <div class="task-checkbox">
       <label class="robin-checkbox" for="{{task.id}}">
-        <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change = "toggleTask(task)" :checked="task.completed">
+        <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change="toggleTask(task)" :checked="task.completed">
         <span class="robin-checkbox--label"></span>
       </label>
     </div>
     <div class="task-content">
-      <div class="task-content-box" @dblclick="showTaskDetail(task)">{{{titleAfterParse}}}</div>
+      <div class="task-content-box" @click="showTaskDetail(task)">{{task.title}}</div>
       <div class="robin-textfield task-content-input">
         <input class="robin-textfield--input robin-textfield--input_default" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
       </div>
@@ -24,9 +24,9 @@
 
 <script>
 import * as tasksActions from '../../vuex/actions/tasks';
-
+import * as getters from '../../vuex/getter';
 export default {
-  props: ['task', 'index'],
+  props: ['tasktitle', 'task', 'index'],
   data() {
     return {
       editing: false,
@@ -43,11 +43,15 @@ export default {
       fetchDetail: tasksActions.fetchTaskDetail,
     },
     getters: {
-
+      showDetail: getters.isShowDetail,
+    }
+  },
+  computed: {
+    titleAfterParse() {
+      return twemoji.parse(this.task.title);
     }
   },
   ready() {
-    this.titleAfterParse = twemoji.parse(this.task.title);
   },
 
   directives: {
@@ -126,7 +130,9 @@ export default {
   flex-direction: row;
   align-items: center;
   position: relative;
-
+  &:hover {
+    background: fade(#000, 10%)
+  }
   &.finished {
     font-size: 12px;
     .task-content {

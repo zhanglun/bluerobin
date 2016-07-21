@@ -29,6 +29,10 @@ const mutations = {
     state.taskDetail = task;
   },
 
+  [mutationType.HIDE_DETAIL_WINDOW](state) {
+    state.showDetail = false;
+  },
+
   [mutationType.ADD_TASK](state, task) {
     state.all = [task].concat(state.all);
   },
@@ -37,12 +41,14 @@ const mutations = {
   // },
 
   [mutationType.EDIT_TASK](state, task) {
-    state.all.map((item) => {
+    console.log('mutations: EDIT_TASK');
+    state.all = state.all.map((item) => {
       if (item.id === task.id) {
         return task;
       }
       return item;
     });
+    console.log(state);
   },
 
   [mutationType.DELETE_TASK](state, task) {

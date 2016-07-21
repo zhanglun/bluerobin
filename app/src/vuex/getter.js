@@ -15,8 +15,7 @@ export function getTasks(state) {
 }
 
 export function isShowDetail(state) {
-  console.log(state.tasks.showDeatil);
-  return state.tasks.showDeatil;
+  return state.tasks.showDetail;
 }
 
 export function getTaskDetail(state) {

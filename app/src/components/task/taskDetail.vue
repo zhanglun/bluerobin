@@ -1,24 +1,70 @@
 <template>
-  <div class="taskdetail-mask" :v-if="show">
-    <div class="taskdetail-wrapper">
-      <div class="taskdetail-container">
-      <h1>Task Detail</h1>
+  <div class="taskdetail-mask" v-if="show"  transition="taskdetail">
+    <div class="taskdetail-wrapper" @click="close()" >
+      <div class="taskdetail-container" @click.stop>
+        <div class="taskdetail-header">
+          <input class="taskdetail-header--title taskdetail-header--input" v-model="taskDetail.title" v-autofocus="titleEditing" v-on:focus="titleEditing = true" v-on:blur="doEdit" v-on:keyup.enter="doEdit"/>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+  import * as tasksActions from '../../vuex/actions/tasks';
+  import * as getters from '../../vuex/getter';
   export default {
-    props: ['show', 'detail'],
     data() {
       return {
-
+        titleEditing: false,
       };
+    },
+    vuex: {
+      actions: {
+        edit: tasksActions.editTask,
+        hideTaskDetail: tasksActions.hideTaskDetail,
+      },
+      getters: {
+        show: getters.isShowDetail,
+        taskDetail: getters.getTaskDetail,
+      }
+    },
+    ready() {
+      document.addEventListener("keyup", (e) => {
+        if (this.show && e.keyCode === 27) {
+          this.close();
+        }
+      });
+    },
+    directives: {
+      'autofocus'(value) {
+        if (!value) {
+          return;
+        }
+        var el = this.el;
+        setTimeout(() => {
+          el.focus();
+        }, 0);
+      }
+    },
+    methods: {
+      close() {
+        this.hideTaskDetail();
+      },
+      doEdit() {
+        let task = this.taskDetail;
+        let param = {
+          title: task.title,
+        };
+        this.titleEditing = false;
+        this.edit(task.id, param);
+      }
     },
   };
 </script>
 <style lang="less">
-//  modal
+@containerBg: #ececec;
+
+//  taskdetail
 .taskdetail-mask {
   position: fixed;
   z-index: 9998;
@@ -26,7 +72,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, .5);
+  background: rgba(0, 0, 0, .5);
   display: table;
   transition: opacity .3s ease;
 }
@@ -34,49 +80,64 @@
 .taskdetail-wrapper {
   display: table-cell;
   vertical-align: middle;
+  perspective: 1300px;
 }
 
 .taskdetail-container {
   width: 740px;
   height: 540px;
+  padding: 10px;
   margin: 0 auto;
-  background: #fff;
+  background: @containerBg;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  transition: all .3s ease;
-  font-family: Helvetica, Arial, sans-serif;
+  transition: all 300ms 0s;
+  transform-origin: 50% 0;
 }
 
-.modal-header h3 {
+.taskdetail-header {
   margin-top: 0;
   color: spin(#000, 60%);
+  padding: 0 20px;
+  &--input {
+    width: 100%;
+    padding: 8px 8px;
+    background: @containerBg;
+    font-size: 18px;
+    font-weight: bolder;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    &:focus {
+      background: #fff;
+    }
+  }
 }
 
-.modal-body {
+.taskdetail-body {
   margin: 20px 0;
 }
 
-.modal-footer {
+.taskdetail-footer {
   .footer-inner {
     display: flex;
-    // flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
   }
 }
 
-.modal-default-button {
-  float: right;
-}
-
-.modal-enter,
-.modal-leave {
+.taskdetail-enter,
+.taskdetail-leave {
   opacity: 0;
 }
 
-.modal-enter .modal-container,
-.modal-leave .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+.taskdetail-enter .taskdetail-container{
+  transform: rotateX(60deg);
+  opacity: 1;
+}
+
+.taskdetail-leave .taskdetail-container {
+  transform: rotateX(-60deg);
+  opacity: 1;
 }
 </style>

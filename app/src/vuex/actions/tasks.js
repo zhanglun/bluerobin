@@ -33,6 +33,10 @@ export const fetchTaskDetail = ({ dispatch, state }, taskid) => {
     });
 };
 
+export const hideTaskDetail = ({ dispatch }) => {
+  dispatch(mutationType.HIDE_DETAIL_WINDOW);
+};
+
 export const addTask = ({ dispatch, state }, task) => {
   request
     .post('/tasks')
@@ -81,10 +85,11 @@ export const deleteTask = ({ dispatch, state }, taskid) => {
     });
 };
 
-export const editTask = ({ dispatch, state }, task) => {
+export const editTask = ({ dispatch, state }, taskid, param) => {
   request
-    .put('/tasks/' + task.id)
+    .put('/tasks/' + taskid)
     .set('x-access-token', window.localStorage.token)
+    .send(param)
     .use(baseURL)
     .then((res) => {
       dispatch(mutationType.EDIT_TASK, res.body);
