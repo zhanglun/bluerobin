@@ -3,7 +3,8 @@
     <div class="taskdetail-wrapper" @click="close()" >
       <div class="taskdetail-container" @click.stop>
         <div class="taskdetail-header">
-          <input class="taskdetail-header--title taskdetail-header--input" v-model="taskDetail.title" v-autofocus="titleEditing" v-on:focus="titleEditing = true" v-on:blur="doEdit" v-on:keyup.enter="doEdit"/>
+        <span class="">Title:</span>
+          <input class="taskdetail-header--title taskdetail-header--input" v-model="taskDetail.title" v-autoblur="titleEditing" v-on:focus="titleEditing = true" v-on:blur="doEdit" v-on:keyup.enter="doEdit"/>
         </div>
       </div>
     </div>
@@ -43,6 +44,15 @@
         var el = this.el;
         setTimeout(() => {
           el.focus();
+        }, 0);
+      },
+      'autoblur'(value) {
+        if (value) {
+          return;
+        }
+        var el = this.el;
+        setTimeout(() => {
+          el.blur();
         }, 0);
       }
     },
@@ -96,9 +106,11 @@
 }
 
 .taskdetail-header {
+  display: flex;
+  align-items: center;
   margin-top: 0;
   color: spin(#000, 60%);
-  padding: 0 20px;
+  padding: 0 30px;
   &--input {
     width: 100%;
     padding: 8px 8px;
