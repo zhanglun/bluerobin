@@ -3,7 +3,7 @@
     <div class="page-content">
       <side-menu></side-menu>
       <router-view ></router-view>
-      <task-detail></task-detail>
+      <task-detail v-if="show"></task-detail>
     </div>
 </template>
 
@@ -25,6 +25,7 @@
         fetchLists: listsActions.fetchLists,
       },
       getters: {
+        show: getters.isShowDetail,
         auth: getters.getUserAuth,
       }
     },

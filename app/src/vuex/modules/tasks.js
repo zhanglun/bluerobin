@@ -48,7 +48,7 @@ const mutations = {
       }
       return item;
     });
-    console.log(state);
+    state.taskDetail = task;
   },
 
   [mutationType.DELETE_TASK](state, task) {

@@ -1,10 +1,19 @@
 <template>
-  <div class="taskdetail-mask" v-if="show"  transition="taskdetail">
+  <div class="taskdetail-mask" transition="taskdetail">
     <div class="taskdetail-wrapper" @click="close()" >
       <div class="taskdetail-container" @click.stop>
         <div class="taskdetail-header">
-        <span class="">Title:</span>
-          <input class="taskdetail-header--title taskdetail-header--input" v-model="taskDetail.title" v-autoblur="titleEditing" v-on:focus="titleEditing = true" v-on:blur="doEdit" v-on:keyup.enter="doEdit"/>
+          <input class="taskdetail-header--title taskdetail-header--input" :value="task.title" v-autoblur="isEditing" @focus="isEditing = true" @keyup.esc="cancelEdit" @keyup.enter="doEdit" />
+        </div>
+        <div class="taskdetail-body">
+          <div class="taskdetail-metadata">
+            <div class="taskdetail-create">
+              <span>创建时间：</span><span>{{task.create_time}}</span>
+            </div>
+            <div class="taskdetail-deadline">
+              <span>截止时间：</span><span>{{task.deadline}}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -16,7 +25,7 @@
   export default {
     data() {
       return {
-        titleEditing: false,
+        isEditing: false,
       };
     },
     vuex: {
@@ -25,16 +34,10 @@
         hideTaskDetail: tasksActions.hideTaskDetail,
       },
       getters: {
-        show: getters.isShowDetail,
-        taskDetail: getters.getTaskDetail,
+        task: getters.getTaskDetail,
       }
     },
     ready() {
-      document.addEventListener("keyup", (e) => {
-        if (this.show && e.keyCode === 27) {
-          this.close();
-        }
-      });
     },
     directives: {
       'autofocus'(value) {
@@ -60,12 +63,21 @@
       close() {
         this.hideTaskDetail();
       },
-      doEdit() {
-        let task = this.taskDetail;
+      cancelEdit(e) {
+        e.target.value = this.task.title;
+        console.log(this.task.title);
+        console.log('cancel');
+        this.isEditing = false;
+      },
+      doEdit(e) {
+        let task = this.task;
         let param = {
-          title: task.title,
+          title: e.target.value.trim(),
         };
-        this.titleEditing = false;
+        if (!param.title) {
+          return false;
+        }
+        this.isEditing = false;
         this.edit(task.id, param);
       }
     },

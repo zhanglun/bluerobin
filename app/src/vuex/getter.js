@@ -1,23 +1,23 @@
-export function getUserInfo(state) {
+export const getUserInfo = (state) => {
   return state.user.data;
-}
+};
 
-export function getUserAuth(state) {
+export const getUserAuth = (state) => {
   return state.user.auth;
-}
+};
 
-export function getLists(state) {
+export const getLists = (state) => {
   return state.lists.all;
-}
+};
 
-export function getTasks(state) {
+export const getTasks = (state) => {
   return state.tasks.all;
-}
+};
 
-export function isShowDetail(state) {
+export const isShowDetail = (state) => {
   return state.tasks.showDetail;
-}
+};
 
-export function getTaskDetail(state) {
+export const getTaskDetail = (state) => {
   return state.tasks.taskDetail;
-}
+};

@@ -149,7 +149,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   display: table;
   -webkit-transition: opacity .3s ease;
   transition: opacity .3s ease;
@@ -157,26 +157,52 @@
 .taskdetail-wrapper {
   display: table-cell;
   vertical-align: middle;
+  -webkit-perspective: 1300px;
+          perspective: 1300px;
 }
 .taskdetail-container {
   width: 740px;
   height: 540px;
+  padding: 10px;
   margin: 0 auto;
-  background: #fff;
+  background: #ececec;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  -webkit-transition: all .3s ease;
-  transition: all .3s ease;
-  font-family: Helvetica, Arial, sans-serif;
+  -webkit-transition: all 300ms 0s;
+  transition: all 300ms 0s;
+  -webkit-transform-origin: 50% 0;
+          transform-origin: 50% 0;
 }
-.modal-header h3 {
+.taskdetail-header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-top: 0;
   color: #000000;
+  padding: 0 30px;
 }
-.modal-body {
+.taskdetail-header--input {
+  width: 100%;
+  padding: 8px 8px;
+  background: #ececec;
+  font-size: 18px;
+  font-weight: bolder;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+}
+.taskdetail-header--input:focus {
+  background: #fff;
+}
+.taskdetail-body {
   margin: 20px 0;
 }
-.modal-footer .footer-inner {
+.taskdetail-footer .footer-inner {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -190,17 +216,19 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.modal-default-button {
-  float: right;
-}
-.modal-enter,
-.modal-leave {
+.taskdetail-enter,
+.taskdetail-leave {
   opacity: 0;
 }
-.modal-enter .modal-container,
-.modal-leave .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+.taskdetail-enter .taskdetail-container {
+  -webkit-transform: rotateX(60deg);
+          transform: rotateX(60deg);
+  opacity: 1;
+}
+.taskdetail-leave .taskdetail-container {
+  -webkit-transform: rotateX(-60deg);
+          transform: rotateX(-60deg);
+  opacity: 1;
 }
 /* ====================================================== */
 /* Variables
@@ -274,6 +302,9 @@
           align-items: center;
   position: relative;
 }
+.task:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
 .task.finished {
   font-size: 12px;
 }
@@ -298,6 +329,7 @@
           flex: 1 1 auto;
   overflow: hidden;
   margin-right: 6rem;
+  padding: 14px 0;
 }
 .task-content-input {
   display: none;
@@ -704,7 +736,6 @@ video {
   display: block;
   border: #969da3;
   border-radius: 2px;
-  background: #fff;
   position: relative;
 }
 .robin-checkbox--input {

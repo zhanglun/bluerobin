@@ -8,8 +8,9 @@
     </div>
     <div class="task-content">
       <div class="task-content-box" @click="showTaskDetail(task)">{{task.title}}</div>
+      <!-- <div class="task-content-box" @dblclick="modifyTask(task)">{{task.title}}</div> -->
       <div class="robin-textfield task-content-input">
-        <input class="robin-textfield--input robin-textfield--input_default" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
+        <input class="robin-textfield--input robin-textfield--input_default" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)"  v-on:keyup.esc="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
       </div>
       <div class="task-metadata" v-if="task.completed">
         <span>更新时间：{{task.update_time}}</span>
@@ -70,7 +71,7 @@ export default {
       this.task.completed = !this.task.completed;
       this.toggle(this.task.id, {completed: this.task.completed});
     },
-    mofidyTask(task) {
+    modifyTask(task) {
       if (task.completed) {
         return false;
       }
@@ -87,6 +88,7 @@ export default {
       // 如果没有正在编辑的task说明目前并没有编辑操作
       // 这里也解决了 一个问题：在 input上绑定了 blur 和 keyup两个事件
       // 按下 enter 执行完成之后，会触发 blur，所以应该执行之后将 taskEditing 置为 null
+      console.log('taskitem do edit');
       if (!this.taskEditing) {
         return false;
       }
@@ -123,7 +125,6 @@ export default {
   font-size: 1.6rem;
   color: #343434;
   background: fade(@white, 85%);
-  // box-shadow: 0 2px 4px rgba(0, 0, 0, .24);
   border-bottom: 1px solid #DCDCDC;
   padding: 0 0.5em;
   display: flex;
@@ -138,7 +139,7 @@ export default {
     .task-content {
       cursor: default;
       text-decoration: line-through;
-      color: lighten(#343434, 40%)
+      color: lighten(#343434, 40%);
     }
   }
   &.editing {
@@ -161,7 +162,7 @@ export default {
   flex: 1 1 auto;
   overflow: hidden;
   margin-right: 6rem;
-
+  padding: 14px 0;
   &-input {
     display: none;
     width: 100%;
