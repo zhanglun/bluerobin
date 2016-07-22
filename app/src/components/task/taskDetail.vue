@@ -1,5 +1,5 @@
 <template>
-  <div class="modal-mask modal_sign" transition="modal-sign">
+  <div class="modal-mask modal-animation_sign" transition="modal-animation_sign">
     <div class="modal-wrapper" @click="close()" >
       <div class="modal-container" @click.stop>
         <div class="card">
@@ -111,7 +111,6 @@
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all 300ms 0s;
-  transform-origin: 50% 0;
 }
 
 .card-header {

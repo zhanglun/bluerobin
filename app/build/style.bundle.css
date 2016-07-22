@@ -181,8 +181,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   -webkit-transition: all 300ms 0s;
   transition: all 300ms 0s;
-  -webkit-transform-origin: 50% 0;
-          transform-origin: 50% 0;
 }
 .card-header {
   display: -webkit-box;
@@ -663,27 +661,15 @@ video {
 .modal-mask.modal-animation_sign .modal-wrapper {
   perspective: 1300px;
 }
+.modal-mask.modal-animation_sign .modal-container {
+  transform-origin: 50% 0;
+}
 .modal-wrapper {
   display: table-cell;
   vertical-align: middle;
 }
 .modal-container {
   transition: all .3s ease;
-}
-.modal-header h3 {
-  margin-top: 0;
-  color: #000000;
-}
-.modal-body {
-  margin: 20px 0;
-}
-.modal-footer .footer-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.modal-default-button {
-  float: right;
 }
 /**
  * animation default 
