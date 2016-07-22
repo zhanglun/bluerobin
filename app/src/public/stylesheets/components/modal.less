@@ -1,31 +1,30 @@
-
 //  modal
-.modal-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, .5);
-  display: table;
-  transition: opacity .3s ease;
-}
-
-.modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.modal-container {
-  width: 300px;
-  margin: 0px auto;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  transition: all .3s ease;
-  font-family: Helvetica, Arial, sans-serif;
+.modal {
+  &-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    display: table;
+    transition: opacity .3s ease;
+    &.modal-animation_sign {
+      .modal-wrapper {
+        perspective: 1300px;
+      }
+    }
+  }
+  &-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  &-container {
+    // border-radius: 2px;
+    // box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    transition: all .3s ease;
+  }
 }
 
 .modal-header h3 {
@@ -50,13 +49,38 @@
   float: right;
 }
 
-.modal-enter,
-.modal-leave {
+
+/**
+ * animation default 
+ */
+
+.modal-animation_default-enter,
+.modal-animation_default-leave {
   opacity: 0;
 }
 
-.modal-enter .modal-container,
-.modal-leave .modal-container {
+.modal-animation_default-enter .modal-animation_default-container,
+.modal-animation_default-leave .modal-animation_default-container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+
+
+/**
+ * animation sign
+ */
+
+.modal-animation_sign-enter,
+.modal-animation_sign-leave {
+  opacity: 0;
+}
+
+.modal-animation_sign-enter .modal-container {
+  transform: rotateX(60deg);
+  opacity: 1;
+}
+
+.modal-animation_sign-leave .modal-container {
+  transform: rotateX(-60deg);
+  opacity: 1;
 }

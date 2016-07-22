@@ -2,31 +2,10 @@
   <div>
     <router-view></router-view>
   <script type="x-template" id="modal-template">
-    <div class="modal-mask" v-if="show" transition="modal">
+    <div class="modal-mask" v-if="show" transition="modal-animation_default">
       <div class="modal-wrapper">
         <div class="modal-container">
-
-          <div class="modal-header">
-            <slot name="header">
-              default header
-            </slot>
-          </div>
-
-          <div class="modal-body">
-            <slot name="body">
-              default body
-            </slot>
-          </div>
-
-          <div class="modal-footer">
-            <slot name="footer">
-              default footer
-              <button class="modal-default-button"
-                @click="show = false">
-                OK
-              </button>
-            </slot>
-          </div>
+          <slot name="content"></slot>
         </div>
       </div>
     </div>

@@ -18,34 +18,38 @@
     </div>
 
   </div>
-    <modal :show="showModal">
-      <div slot="header" class="header-inner">
-        <h3 class="text-center">创建新的清单</h3>
+  <modal :show="showModal">
+    <div slot="content" class="list-editor">
+      <div class="list-editor-header">
+        <h3 class="list-editor-header--title">创建新的清单</h3>
       </div>
-      <div slot="body" class="body-inner">
+      <div class="list-editor-body">
         <div class="robin-textfield">
           <input type="text" class="robin-textfield--input robin-textfield--input_default" v-model="newList.name"/>
         </div>
       </div>
-      <div slot="footer" class="footer-inner">
+      <div class="list-editor-footer">
         <span></span>
         <button class="robin-btn robin-btn__default" @click="createNewList">创建</button>
       </div>
-    </modal>
-    <modal :show="showCurrentList">
-      <div slot="header" class="center header-inner">
-        <h3>编辑清单</h3>
+    </div>
+  </modal>
+  <modal :show="showCurrentList">
+    <div slot="content" class="list-editor">
+      <div class="list-editor-header">
+        <h3 class="list-editor-header--title">编辑清单</h3>
       </div>
-      <div slot="body" class="body-inner">
+      <div class="list-editor-body">
         <div class="robin-textfield">
           <input type="text" class="robin-textfield--input robin-textfield--input_default" v-model="currentList.name"/>
         </div>
       </div>
-      <div slot="footer" class="footer-inner">
+      <div class="list-editor-footer">
         <span class="material-icons" @click="deleteList(this.currentList)">delete</span>
         <button class="robin-btn robin-btn__default" @click="doEditList">确定</button>
       </div>
-    </modal>
+    </div>
+  </modal>
 </template>
 <script>
   import * as listsActions from '../../vuex/actions/lists';
@@ -84,7 +88,6 @@
       },
     },
     ready() {
-      // this.fetchLists();
       document.addEventListener('keyup', (e) => {
         if (e.keyCode === 27) {
           this.showModal = false;
@@ -155,12 +158,35 @@
         .text-overflow();
       }
     }
-   }
-   .side-actions{
-     font-size: 14px;
-   }
-   .center{
-     text-align: center;
-   }
+  }
+  .side-actions{
+   font-size: 14px;
+ }
+
+ .list-editor {
+  width: 340px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 2px;
+  &-header {
+    padding: 14px 14px 0px;
+    text-align: center;
+    &--title {
+      font-size: 26px;
+      margin: 0px;
+    }
+  }
+  &-body {
+    padding: 4px 14px 10px;
+  }
+  &-footer {
+    padding: 12px;
+    border-top: 1px solid #e0e0df;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
 
 </style>
