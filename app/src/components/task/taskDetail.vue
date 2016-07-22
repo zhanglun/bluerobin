@@ -1,17 +1,25 @@
 <template>
-  <div class="taskdetail-mask" transition="taskdetail">
-    <div class="taskdetail-wrapper" @click="close()" >
-      <div class="taskdetail-container" @click.stop>
-        <div class="taskdetail-header">
-          <input class="taskdetail-header--title taskdetail-header--input" :value="task.title" v-autoblur="isEditing" @focus="isEditing = true" @keyup.esc="cancelEdit" @keyup.enter="doEdit" />
-        </div>
-        <div class="taskdetail-body">
-          <div class="taskdetail-metadata">
-            <div class="taskdetail-create">
-              <span>创建时间：</span><span>{{task.create_time}}</span>
+  <div class="modal-mask modal_sign" transition="modal-sign">
+    <div class="modal-wrapper" @click="close()" >
+      <div class="modal-container" @click.stop>
+        <div class="card">
+        <div class="card-header">
+            <div class="task-checkbox">
+              <label class="robin-checkbox" for="{{task.id}}">
+                <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change="toggleTask(task)" :checked="task.completed">
+                <span class="robin-checkbox--label"></span>
+              </label>
             </div>
-            <div class="taskdetail-deadline">
-              <span>截止时间：</span><span>{{task.deadline}}</span>
+            <input class="card-header--title card-header--input" :value="task.title" v-autoblur="isEditing" @focus="isEditing = true" @keyup.esc="cancelEdit" @keyup.enter="doEdit" />
+          </div>
+          <div class="card-body">
+            <div class="taskdetail-metadata">
+              <div class="taskdetail-create">
+                <span>创建时间：</span><span>{{task.create_time}}</span>
+              </div>
+              <div class="taskdetail-deadline">
+                <span>截止时间：</span><span>{{task.deadline}}</span>
+              </div>
             </div>
           </div>
         </div>
@@ -38,6 +46,12 @@
       }
     },
     ready() {
+      let _this = this;
+      document.addEventListener('keyup', (e) => {
+        if(e.keyCode === 27){
+          _this.hideTaskDetail();
+        }
+      });
     },
     directives: {
       'autofocus'(value) {
@@ -65,9 +79,8 @@
       },
       cancelEdit(e) {
         e.target.value = this.task.title;
-        console.log(this.task.title);
-        console.log('cancel');
         this.isEditing = false;
+        e.stopPropagation();
       },
       doEdit(e) {
         let task = this.task;
@@ -84,65 +97,51 @@
   };
 </script>
 <style lang="less">
-@containerBg: #ececec;
 
-//  taskdetail
-.taskdetail-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, .5);
-  display: table;
-  transition: opacity .3s ease;
-}
+  @container-background: #f7f7f7;
+  @container-header-background: #fff;
+  @modal-spearate-line: #ebebeb;
 
-.taskdetail-wrapper {
-  display: table-cell;
-  vertical-align: middle;
-  perspective: 1300px;
-}
 
-.taskdetail-container {
-  width: 740px;
+.card {
+  width: 680px;
   height: 540px;
-  padding: 10px;
   margin: 0 auto;
-  background: @containerBg;
+  background: @container-background;
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all 300ms 0s;
   transform-origin: 50% 0;
 }
 
-.taskdetail-header {
+.card-header {
   display: flex;
   align-items: center;
   margin-top: 0;
   color: spin(#000, 60%);
-  padding: 0 30px;
+  padding: 10px 14px;
+  border-bottom: 1px solid @modal-spearate-line;
+  background: @container-header-background;
   &--input {
     width: 100%;
     padding: 8px 8px;
-    background: @containerBg;
+    background: @container-header-background;
     font-size: 18px;
     font-weight: bolder;
     box-sizing: border-box;
     border: none;
     outline: none;
     &:focus {
-      background: #fff;
+      background: @container-header-background;
     }
   }
 }
 
-.taskdetail-body {
+.card-body {
   margin: 20px 0;
 }
 
-.taskdetail-footer {
+.card-footer {
   .footer-inner {
     display: flex;
     justify-content: space-between;
@@ -150,18 +149,5 @@
   }
 }
 
-.taskdetail-enter,
-.taskdetail-leave {
-  opacity: 0;
-}
 
-.taskdetail-enter .taskdetail-container{
-  transform: rotateX(60deg);
-  opacity: 1;
-}
-
-.taskdetail-leave .taskdetail-container {
-  transform: rotateX(-60deg);
-  opacity: 1;
-}
 </style>

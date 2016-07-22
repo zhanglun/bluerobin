@@ -162,7 +162,8 @@ export default {
   flex: 1 1 auto;
   overflow: hidden;
   margin-right: 6rem;
-  padding: 14px 0;
+  padding: 11px 0;
+  cursor: pointer;
   &-input {
     display: none;
     width: 100%;
