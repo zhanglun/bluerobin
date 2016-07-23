@@ -19,7 +19,6 @@ window.CONFIG = {
  * }
  * @return {[type]}     [description]
  */
-// APIROOT: 'http://zhanglun.daoapp.io/api'
 function uploadInit(opt, setkey) {
   var Uploader = new Qiniu.uploader({
     runtimes: 'html5,flash,html4', // 上传模式,依次退化

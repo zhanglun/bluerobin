@@ -3,22 +3,25 @@
     <div class="modal-wrapper" @click="close()" >
       <div class="modal-container" @click.stop>
         <div class="card">
-        <div class="card-header">
-            <div class="task-checkbox">
-              <label class="robin-checkbox" for="{{task.id}}">
-                <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change="toggleTask(task)" :checked="task.completed">
-                <span class="robin-checkbox--label"></span>
-              </label>
-            </div>
+          <div class="card-header">
+            <label class="robin-checkbox" for="{{task.id}}">
+              <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change="toggleTask(task)" :checked="task.completed">
+              <span class="robin-checkbox--label"></span>
+            </label>
             <input class="card-header--title card-header--input" :value="task.title" v-autoblur="isEditing" @focus="isEditing = true" @keyup.esc="cancelEdit" @keyup.enter="doEdit" />
           </div>
           <div class="card-body">
-            <div class="taskdetail-metadata">
-              <div class="taskdetail-create">
-                <span>创建时间：</span><span>{{task.create_time}}</span>
+            <div class="card-metadata">
+              <div class="card-metadata-item">
+                <span class="material-icons card-metadata-item--icons">insert_invitation</span>
+                <span class="card-metadata-item--content">{{task.deadline}}</span>
               </div>
-              <div class="taskdetail-deadline">
-                <span>截止时间：</span><span>{{task.deadline}}</span>
+              <div class="card-metadata-item">
+                <span class="material-icons card-metadata-item--icons">create</span>
+                <span class="card-metadata-item--content">{{task.description || '暂无描述'}}</span>
+              </div>
+              <div class="card-metadata-item">
+                <span class="material-icons card-metadata-item--icons">add</span>
               </div>
             </div>
           </div>
@@ -103,41 +106,68 @@
   @modal-spearate-line: #ebebeb;
 
 
-.card {
-  width: 680px;
-  height: 540px;
-  margin: 0 auto;
-  background: @container-background;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  transition: all 300ms 0s;
-}
+  .card {
+    width: 680px;
+    height: 540px;
+    margin: 0 auto;
+    background: @container-background;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    transition: all 300ms 0s;
+  }
 
-.card-header {
-  display: flex;
-  align-items: center;
-  margin-top: 0;
-  color: spin(#000, 60%);
-  padding: 10px 14px;
-  border-bottom: 1px solid @modal-spearate-line;
-  background: @container-header-background;
-  &--input {
-    width: 100%;
-    padding: 8px 8px;
+  .card-header {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    color: spin(#000, 60%);
+    padding: 16px 18px;
+    border-bottom: 1px solid @modal-spearate-line;
     background: @container-header-background;
-    font-size: 18px;
-    font-weight: bolder;
-    box-sizing: border-box;
-    border: none;
-    outline: none;
-    &:focus {
+    &--input {
+      width: 100%;
+      padding: 0 10px;
       background: @container-header-background;
+      font-size: 18px;
+      font-weight: bolder;
+      box-sizing: border-box;
+      border: none;
+      outline: none;
+      &:focus {
+        background: @container-header-background;
+      }
     }
   }
+
+  .card-body {
+  // margin: 20px 0;
 }
 
-.card-body {
-  margin: 20px 0;
+.card-metadata {
+  padding: 8px 0;
+  &-item {
+    display: flex;
+    height: 46px;
+    box-sizing: border-box;
+    align-items: center;
+    padding: 8px 18px;
+    position: relative;
+    &::after {
+      content: '';
+      width: 86%;
+      height: 0;
+      border-bottom: 1px solid @modal-spearate-line;
+      position: absolute;
+      left: 7%;
+      bottom: 0;
+    }
+    &--icons {
+      margin-right: 10px;
+    }
+    &--content {
+      font-size: 14px;
+    }
+  }
 }
 
 .card-footer {
