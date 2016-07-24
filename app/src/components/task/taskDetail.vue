@@ -24,7 +24,7 @@
               <div class="card-metadata-item">
                 <span class="material-icons card-metadata-item--icons">create</span>
                 <div class="card-metadata-item--content" v-bind:class="{editing: isDescEditing}" @dblclick="modifyDesc">
-                  <div class="content-value">{{descriptionPrased}}</div>
+                  <div class="content-value markdownPrased">{{{descriptionMarked}}}</div>
                   <textarea class="content-input" v-autofocus="isDescEditing" @keyup.esc="doEditDesc" @blur="doEditDesc" v-model="task.description"></textarea>
                 </div>
               </div>
@@ -40,7 +40,9 @@
             </div>
           </div>
           <div class="card-footer">
-            <p> 创建于：{{task.create_time}}</p>
+              <span></span>
+              <div> 创建于：{{task.create_time}}</div>
+              <span></span>
           </div>
         </div>
       </div>
@@ -50,6 +52,19 @@
 <script>
   import * as tasksActions from '../../vuex/actions/tasks';
   import * as getters from '../../vuex/getter';
+  import marked from 'marked';
+  import Tool from 'tool';
+  marked.setOptions({
+    renderer: new marked.Renderer(),
+    gfm: true,
+    tables: true,
+    breaks: false,
+    pedantic: false,
+    sanitize: true,
+    smartLists: true,
+    smartypants: false
+  });
+
   export default {
     data() {
       return {
@@ -75,8 +90,11 @@
       });
     },
     computed: {
-      descriptionPrased(){
-        return this.task.description || '暂无描述';
+      descriptionMarked() {
+        return marked(this.task.description || '暂无描述');
+      },
+      descriptionEncode() {
+        return Tool.htmlEncode(this.task.description);
       }
     },
     directives: {
@@ -161,6 +179,8 @@
 
   .card-header {
     display: flex;
+    min-height: 55px;
+    box-sizing: border-box;
     align-items: center;
     margin-top: 0;
     color: spin(#000, 60%);
@@ -183,7 +203,8 @@
   }
 
   .card-body {
-    flex: 1 0 auto;
+    overflow-y: auto;
+    flex: 1 1 auto;
   }
 
   .card-metadata {
@@ -236,14 +257,15 @@
   }
 
   .card-footer {
+    min-height: 56px;
     font-size: 14px;
     color: #a3a3a2;
+    border-top: 1px solid @modal-spearate-line;
+    background: @container-header-background;
     text-align: center;
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
 
