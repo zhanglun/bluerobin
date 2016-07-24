@@ -7,6 +7,7 @@
     "dev": "webpack-dev-server -d --watch --devtool --inline --hot --content-base ./app/build"
   },
   "dependencies": {
+    "marked": "^0.3.5",
     "superagent": "^2.1.0",
     "superagent-prefix": "0.0.2",
     "vue": "^1.0.26",

@@ -20,6 +20,11 @@ module.exports = {
     // publicPath: BUILD_PATH,
     filename: './[name].bundle.js',
   },
+  resolve: {
+   alias: {
+    'tool':  SRC_PATH + '/services/tool.babel.js',
+   } 
+  },
   module: {
     loaders: [{
       test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
