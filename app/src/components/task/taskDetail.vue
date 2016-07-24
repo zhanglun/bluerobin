@@ -1,29 +1,46 @@
 <template>
   <div class="modal-mask modal-animation_sign" transition="modal-animation_sign">
     <div class="modal-wrapper" @click="close()" >
-      <div class="modal-container" @click.stop>
-        <div class="card">
+      <div class="modal-container">
+        <div class="card" @click.stop>
           <div class="card-header">
             <label class="robin-checkbox" for="{{task.id}}">
               <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change="toggleTask(task)" :checked="task.completed">
               <span class="robin-checkbox--label"></span>
             </label>
-            <input class="card-header--title card-header--input" :value="task.title" v-autoblur="isEditing" @focus="isEditing = true" @keyup.esc="cancelEdit" @keyup.enter="doEdit" />
+            <input class="card-header--title card-header--input" :value="task.title" v-autoblur="isTitleEditing" @focus="isTitleEditing = true" @keyup.esc="cancelEdit" @keyup.enter="doEditTitle" />
           </div>
           <div class="card-body">
             <div class="card-metadata">
+              <!--  标签 -->
+<!--               <div class="card-metadata-item">
+                <span class="material-icons card-metadata-item--icons">label_outline</span>
+
+              </div> -->
               <div class="card-metadata-item">
                 <span class="material-icons card-metadata-item--icons">insert_invitation</span>
                 <span class="card-metadata-item--content">{{task.deadline}}</span>
               </div>
               <div class="card-metadata-item">
                 <span class="material-icons card-metadata-item--icons">create</span>
-                <span class="card-metadata-item--content">{{task.description || '暂无描述'}}</span>
+                <div class="card-metadata-item--content" v-bind:class="{editing: isDescEditing}" @dblclick="modifyDesc">
+                  <div class="content-value">{{descriptionPrased}}</div>
+                  <textarea class="content-input" v-autofocus="isDescEditing" @keyup.esc="doEditDesc" @blur="doEditDesc" v-model="task.description"></textarea>
+                </div>
               </div>
-              <div class="card-metadata-item">
-                <span class="material-icons card-metadata-item--icons">add</span>
-              </div>
+              <!-- 子任务 -->
+<!--               <div class="card-subtasks">
+                <ul>
+                  <li></li>
+                </ul>
+                <div class="card-metadata-item">
+                  <span class="material-icons card-metadata-item--icons">add</span>
+                </div>
+              </div> -->
             </div>
+          </div>
+          <div class="card-footer">
+            <p> 创建于：{{task.create_time}}</p>
           </div>
         </div>
       </div>
@@ -36,7 +53,8 @@
   export default {
     data() {
       return {
-        isEditing: false,
+        isTitleEditing: false,
+        isDescEditing: false,
       };
     },
     vuex: {
@@ -55,6 +73,11 @@
           _this.hideTaskDetail();
         }
       });
+    },
+    computed: {
+      descriptionPrased(){
+        return this.task.description || '暂无描述';
+      }
     },
     directives: {
       'autofocus'(value) {
@@ -82,10 +105,14 @@
       },
       cancelEdit(e) {
         e.target.value = this.task.title;
-        this.isEditing = false;
+        this.isTitleEditing = false;
         e.stopPropagation();
       },
-      doEdit(e) {
+      modifyDesc() {
+        console.log('modifyDesc');
+        this.isDescEditing  = true;
+      },
+      doEditTitle(e) {
         let task = this.task;
         let param = {
           title: e.target.value.trim(),
@@ -93,8 +120,20 @@
         if (!param.title) {
           return false;
         }
-        this.isEditing = false;
+        this.isTitleEditing = false;
         this.edit(task.id, param);
+      },
+      doEditDesc(e) {
+        let task = this.task;
+        let param = {
+          description: e.target.value.trim(),
+        };
+        if (!param.description) {
+          return false;
+        }
+        this.isDescEditing = false;
+        this.edit(task.id, param);
+        e.stopPropagation();
       }
     },
   };
@@ -105,9 +144,13 @@
   @container-header-background: #fff;
   @modal-spearate-line: #ebebeb;
 
+  @card-width: 680px;
+
 
   .card {
-    width: 680px;
+    display: flex;
+    flex-direction: column;
+    width: @card-width;
     height: 540px;
     margin: 0 auto;
     background: @container-background;
@@ -140,43 +183,68 @@
   }
 
   .card-body {
-  // margin: 20px 0;
-}
+    flex: 1 0 auto;
+  }
 
-.card-metadata {
-  padding: 8px 0;
-  &-item {
-    display: flex;
-    height: 46px;
-    box-sizing: border-box;
-    align-items: center;
-    padding: 8px 18px;
-    position: relative;
-    &::after {
-      content: '';
-      width: 86%;
-      height: 0;
-      border-bottom: 1px solid @modal-spearate-line;
-      position: absolute;
-      left: 7%;
-      bottom: 0;
-    }
-    &--icons {
-      margin-right: 10px;
-    }
-    &--content {
-      font-size: 14px;
+  .card-metadata {
+    padding: 8px 0;
+    &-item {
+      display: flex;
+      min-height: 46px;
+      box-sizing: border-box;
+      align-items: flex-start;
+      padding: 6px 14px;
+      position: relative;
+      &::after {
+        content: '';
+        height: 0;
+        border-bottom: 1px solid @modal-spearate-line;
+        position: absolute;
+        left: 50px;
+        right: 50px;
+        bottom: 0;
+      }
+      &--icons {
+        margin-right: 6px;
+        padding: 4px;
+      }
+      &--content {
+        font-size: 14px;
+        padding: 5px 0;
+        width: @card-width - 100px;
+        .content-input {
+          display: none;
+          height: 300px;
+          width: 100%;
+          box-sizing: border-box;
+          border: none;
+          resize: none;
+          outline: none;
+          font-size: 14px;
+          background: none;
+        }
+        &.editing {
+          .content-input {
+            display: block;
+          }
+          .content-value {
+            display: none;
+          }
+        }
+      }
     }
   }
-}
 
-.card-footer {
-  .footer-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .card-footer {
+    font-size: 14px;
+    color: #a3a3a2;
+    text-align: center;
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
-}
 
 
 </style>
