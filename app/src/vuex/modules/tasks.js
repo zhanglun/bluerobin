@@ -1,5 +1,4 @@
 import * as mutationType from '../mutationType';
-
 const state = {
   active: [],
   archieved: [],

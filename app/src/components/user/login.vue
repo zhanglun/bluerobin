@@ -45,7 +45,7 @@
         login: userActions.login,
       },
       getters: {
-        // user: getters.getUserInfo
+        user: getters.getUserInfo
       }
     },
     ready() {
