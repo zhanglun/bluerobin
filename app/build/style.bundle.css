@@ -370,7 +370,6 @@
           flex: 1 1 auto;
   overflow: hidden;
   margin-right: 6rem;
-  padding: 11px 0;
   cursor: pointer;
 }
 .task-content-input {
@@ -380,6 +379,7 @@
 }
 .task-content-box {
   line-height: 31px;
+  padding: 9px 0 10px;
   margin-top: -3px;
   white-space: nowrap;
   overflow: hidden;
@@ -505,6 +505,7 @@ body {
   font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', '\5B8B\4F53', '\9ED1\4F53', sans-serif;
   background-color: #ECECEC;
   background-size: cover;
+  background-image: url(images/51943de1ca4e30805245ba1f83295f7c.jpg);
   background-attachment: fixed;
   overflow-x: hidden;
 }

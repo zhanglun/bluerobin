@@ -8,7 +8,7 @@
               <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change="toggleTask(task)" :checked="task.completed">
               <span class="robin-checkbox--label"></span>
             </label>
-            <input class="card-header--title card-header--input" :value="task.title" v-autoblur="isTitleEditing" @focus="isTitleEditing = true" @keyup.esc="cancelEdit" @keyup.enter="doEditTitle" />
+            <input class="card-header--title card-header--input" :value="task.title" v-autoblur="isTitleEditing" @focus="isTitleEditing = true" @keyup.esc="doEditTitle" @keyup.enter="doEditTitle" />
           </div>
           <div class="card-body">
             <div class="card-metadata">
@@ -140,6 +140,7 @@
         }
         this.isTitleEditing = false;
         this.edit(task.id, param);
+        e.stopPropagation();
       },
       doEditDesc(e) {
         let task = this.task;

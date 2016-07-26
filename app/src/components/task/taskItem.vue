@@ -10,7 +10,7 @@
       <div class="task-content-box" @click="showTaskDetail(task)">{{task.title}}</div>
       <!-- <div class="task-content-box" @dblclick="modifyTask(task)">{{task.title}}</div> -->
       <div class="robin-textfield task-content-input">
-        <input class="robin-textfield--input robin-textfield--input_default" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" v-on:blur="doEdit(task)"  v-on:keyup.esc="doEdit(task)" v-on:keyup.enter="doEdit(task, $event)" />
+        <input class="robin-textfield--input robin-textfield--input_default" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" @blur="doEdit(task)"  @keyup.esc="doEdit(task)" @keyup.enter="doEdit(task, $event)" v-model="titleAfterParse"/>
       </div>
       <div class="task-metadata" v-if="task.completed">
         <span>更新时间：{{task.update_time}}</span>
@@ -40,7 +40,7 @@ export default {
     actions: {
       toggle: tasksActions.toggleTask,
       delete: tasksActions.deleteTask,
-      edit: tasksActions.editTask,
+      // edit: tasksActions.editTask,
       fetchDetail: tasksActions.fetchTaskDetail,
     },
     getters: {
@@ -85,9 +85,6 @@ export default {
     },
 
     doEdit(task) {
-      // 如果没有正在编辑的task说明目前并没有编辑操作
-      // 这里也解决了 一个问题：在 input上绑定了 blur 和 keyup两个事件
-      // 按下 enter 执行完成之后，会触发 blur，所以应该执行之后将 taskEditing 置为 null
       console.log('taskitem do edit');
       if (!this.taskEditing) {
         return false;
@@ -162,7 +159,6 @@ export default {
   flex: 1 1 auto;
   overflow: hidden;
   margin-right: 6rem;
-  padding: 11px 0;
   cursor: pointer;
   &-input {
     display: none;
@@ -171,6 +167,7 @@ export default {
   }
   &-box {
     line-height: 31px;
+    padding: 9px 0 10px;
     margin-top: -3px;
     white-space: nowrap;
     overflow: hidden;
