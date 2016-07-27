@@ -1,9 +1,9 @@
 <template>
   <div class="main-container" transition="animate_routerview">
-    <div class="main">
-      <additem :listid="listId"></additem>
+    <div class="main" v-if="!showCollections">
+      <add-item :listid="listId"></add-item>
       <div class="tasklist">
-        <taskitem v-for="task in tasklist" :task="task" :index="$index" track-by="id"></taskitem>
+        <task-item v-for="task in tasklist" :task="task" :index="$index" track-by="id"></task-item>
       </div>
       <div class="label-trigger" @click="toggleShowCompletedTask">
         显示已完成的task
@@ -12,6 +12,15 @@
         <taskitem v-for="task in completedTasklist" :task="task" :index="$index" track-by="id"></taskitem>
       </div>
     </div>
+    <div class="main" v-if="showCollections">
+      <div class="collection" v-for="item in collection">
+        <h5>{{item.name}} count: {{item.count}}</h5>
+        <div class="tasklist">
+          <task-item v-for="task in item.tasks" :task="task" :index="$index" track-by="id"></task-item>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 <script>
@@ -24,8 +33,8 @@
     route: {
       data(transition) {
         let query = {};
-        this.list_id = this.$route.params.id;
-        switch(this.list_id) {
+        let name = this.$route.name;
+        switch(name){
           case 'completed': {
             query = {
               completed: true,
@@ -40,12 +49,18 @@
             };
             break;
           };
-          default:{
+          case 'search': {
+            break;
+          };
+          case 'list': {
+            this.list_id = this.$route.params.id;
             query = {
               list_id: this.list_id,
               completed: false,
               sort: '-update_time',
             };
+          };
+          default: {
             break;
           }
         }
@@ -87,11 +102,45 @@
           return item.list_id === this.list_id && item.completed;
         });
       },
+      collection() {
+        let collection = [];
+        let tasks = this.tasks;
+        this.tasks.sort((a, b) =>{
+          if(a.list_name > b.list_name) {
+            return 1;
+          }else if(a.list_name < b.list_name) {
+            return -1;
+          }else {
+            return 0;
+          }
+        });
+        let flag = 0;
+        this.tasks.map((task,i) => {
+          if(this.tasks[i + 1] && task.list_name !== this.tasks[i+1].list_name) {
+            collection.push({
+              name: task.list_name,
+              count: i + 1 - flag,
+              tasks: this.tasks.slice(flag, i+1),
+            });
+            flag = i+1;
+          }
+          if(i == this.tasks.length -1 ){
+            collection.push({
+              name: task.list_name,
+              count: i + 1 - flag,
+              tasks: this.tasks.slice(flag),
+            });
+          }
+        });
+        console.log(collection);
+        return collection;
+      },
     },
     data() {
       return {
         list_id: '',
         completedShow: false,
+        showCollections: false,
         loaded: false,
       };
     },
@@ -106,10 +155,16 @@
 
     },
     ready() {
+      console.log('list');
+      if(this.$route.name == 'list') {
+        this.showCollections = false;
+      }else {
+        this.showCollections = true;
+      }
     },
     components: {
-      additem: addItemView,
-      taskitem: TaskItemView,
+      'add-item': addItemView,
+      'task-item': TaskItemView,
     },
     methods: {
       'loadCompletedTask'() {
@@ -129,22 +184,6 @@
         this.$data.completedShow = !this.$data.completedShow;
       },
     },
-    // events: {
-    //   'edit task'(task) {
-    //     let vm = this;
-    //     vm.$http.put('tasks/' + task.id, task)
-    //       .then(() => {
-    //         console.log('edit task success!');
-    //         if (task.completed) {
-    //           vm.tasklist.$remove(task);
-    //           vm.completedTasklist.unshift(task);
-    //         } else {
-    //           vm.completedTasklist.$remove(task);
-    //           vm.tasklist.unshift(task);
-    //         }
-    //       });
-    //   },
-    // },
   };
 </script>
 <style lang="less">

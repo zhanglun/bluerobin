@@ -6,7 +6,6 @@
       <task-detail v-if="show"></task-detail>
     </div>
 </template>
-
 <script>
   import HeaderView from '../header/header.vue';
   import SidemenuView from './sidemenu.vue';

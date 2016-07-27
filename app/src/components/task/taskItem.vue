@@ -6,16 +6,16 @@
         <span class="robin-checkbox--label"></span>
       </label>
     </div>
-    <div class="task-content">
-      <div class="task-content-box" @click="showTaskDetail(task)">{{task.title}}</div>
-      <!-- <div class="task-content-box" @dblclick="modifyTask(task)">{{task.title}}</div> -->
-      <div class="robin-textfield task-content-input">
-        <input class="robin-textfield--input robin-textfield--input_default" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" @blur="doEdit(task)"  @keyup.esc="doEdit(task)" @keyup.enter="doEdit(task, $event)" v-model="titleAfterParse"/>
-      </div>
+    <div class="task-content" @click="showTaskDetail(task)">
+      <div class="task-content-box">{{task.title}}</div>
       <div class="task-metadata" v-if="task.completed">
         <span>更新时间：{{task.update_time}}</span>
         <span>创建时间：{{task.create_time}}</span>
       </div>
+<!--       <div class="robin-textfield task-content-input">
+        <input class="robin-textfield--input robin-textfield--input_default" type="text" v-task-autofocus="task == taskEditing" v-model="task.title" class="edit" @blur="doEdit(task)"  @keyup.esc="doEdit(task)" @keyup.enter="doEdit(task, $event)" v-model="titleAfterParse"/>
+      </div>
+  -->     
     </div>
     <span class="task-controller">
       <i class="material-icons" @click="deleteTask(task)">clear</i>
@@ -167,12 +167,10 @@ export default {
   }
   &-box {
     line-height: 31px;
-    padding: 9px 0 10px;
     margin-top: -3px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    // -webkit-user-select: none;
   }
 }
 .task-controller {

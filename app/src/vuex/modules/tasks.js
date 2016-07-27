@@ -16,7 +16,7 @@ const mutations = {
     // } else {
     //   state.active = tasks;
     // }
-    if (query.completed) {
+    if (query.completed && query.list_id) {
       state.all = state.all.concat(tasks);
     } else {
       state.all = tasks;
