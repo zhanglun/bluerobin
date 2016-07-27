@@ -158,21 +158,14 @@
   };
 </script>
 <style lang="less">
-
-  @container-background: #f7f7f7;
-  @container-header-background: #fff;
-  @modal-spearate-line: #ebebeb;
-
-  @card-width: 680px;
-
-
+  @import '../../public/stylesheets/variables';
   .card {
     display: flex;
     flex-direction: column;
-    width: @card-width;
+    width: @modal-card-width;
     height: 540px;
     margin: 0 auto;
-    background: @container-background;
+    background: @modal-container-background;
     border-radius: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
     transition: all 300ms 0s;
@@ -187,18 +180,18 @@
     color: spin(#000, 60%);
     padding: 16px 18px;
     border-bottom: 1px solid @modal-spearate-line;
-    background: @container-header-background;
+    background: @modal-container-header-background;
     &--input {
       width: 100%;
       padding: 0 10px;
-      background: @container-header-background;
+      background: @modal-container-header-background;
       font-size: 18px;
       font-weight: bolder;
       box-sizing: border-box;
       border: none;
       outline: none;
       &:focus {
-        background: @container-header-background;
+        background: @modal-container-header-background;
       }
     }
   }
@@ -233,7 +226,7 @@
       &--content {
         font-size: 14px;
         padding: 5px 0;
-        width: @card-width - 100px;
+        width: @modal-card-width - 100px;
         .content-input {
           display: none;
           height: 300px;
@@ -262,7 +255,7 @@
     font-size: 14px;
     color: #a3a3a2;
     border-top: 1px solid @modal-spearate-line;
-    background: @container-header-background;
+    background: @modal-container-header-background;
     text-align: center;
     display: flex;
     justify-content: space-between;

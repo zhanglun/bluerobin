@@ -1,55 +1,70 @@
 <template>
   <div class="sidebar">
-    <ul class="side-menu">
-      <li v-for="list in lists">
-        <a class="side-menu__item" v-link="{name: 'list', params: {id: list.id}}">
-          <span class="material-icons">list</span>
-          <span class="side-menu__item-content">{{list.name}}</span>
-          <span class="side-menu__item-count">{{list.task_count_total - list.task_count_completed || ''}}</span>
-          <span class="material-icons edit" @click="showCurrent(e, list)">edit</span>
-        </a>
-      </li>
-    </ul>
-    <div class="side-actions">
-      <span class="side-menu__item" @click="showModal = true">
-        <span class="material-icons">add</span>
-        <span class="side-menu__item-content">新建分类</span>
-      </span>
+    <div class="sidebar-container">
+      <ul class="side-menu">
+        <li v-for="list in lists">
+          <a class="side-menu__item" v-link="{name: 'list', params: {id: list.id}}">
+            <span class="material-icons">list</span>
+            <span class="side-menu__item-content">{{list.name}}</span>
+            <span class="side-menu__item-count">{{list.task_count_total - list.task_count_completed || ''}}</span>
+            <span class="material-icons edit" @click="showCurrent(e, list)">edit</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="side-menu">
+        <li>
+          <a class="side-menu__item" v-link="{name: 'list', params: {id: 'completed'}}">
+            <span class="material-icons">done</span>
+            <span class="side-menu__item-content">已完成</span>
+          </a>
+        </li>
+        <li>
+          <a class="side-menu__item" v-link="{name: 'list', params: {id: 'trash'}}">
+            <span class="material-icons">delete</span>
+            <span class="side-menu__item-content">回收站</span>
+          </a>
+        </li>
+      </ul>
+      <div class="side-actions">
+        <span class="side-menu__item" @click="showModal = true">
+          <span class="material-icons">add</span>
+          <span class="side-menu__item-content">新建分类</span>
+        </span>
+      </div>
     </div>
-
+    <modal :show="showModal">
+      <div slot="content" class="list-editor">
+        <div class="list-editor-header">
+          <h3 class="list-editor-header--title">创建新的清单</h3>
+        </div>
+        <div class="list-editor-body">
+          <div class="robin-textfield">
+            <input type="text" class="robin-textfield--input robin-textfield--input_default" v-model="newList.name"/>
+          </div>
+        </div>
+        <div class="list-editor-footer">
+          <span></span>
+          <button class="robin-btn robin-btn__default" @click="createNewList">创建</button>
+        </div>
+      </div>
+    </modal>
+    <modal :show="showCurrentList">
+      <div slot="content" class="list-editor">
+        <div class="list-editor-header">
+          <h3 class="list-editor-header--title">编辑清单</h3>
+        </div>
+        <div class="list-editor-body">
+          <div class="robin-textfield">
+            <input type="text" class="robin-textfield--input robin-textfield--input_default" v-model="currentList.name"/>
+          </div>
+        </div>
+        <div class="list-editor-footer">
+          <span class="material-icons" @click="deleteList(this.currentList)">delete</span>
+          <button class="robin-btn robin-btn__default" @click="doEditList">确定</button>
+        </div>
+      </div>
+    </modal>
   </div>
-  <modal :show="showModal">
-    <div slot="content" class="list-editor">
-      <div class="list-editor-header">
-        <h3 class="list-editor-header--title">创建新的清单</h3>
-      </div>
-      <div class="list-editor-body">
-        <div class="robin-textfield">
-          <input type="text" class="robin-textfield--input robin-textfield--input_default" v-model="newList.name"/>
-        </div>
-      </div>
-      <div class="list-editor-footer">
-        <span></span>
-        <button class="robin-btn robin-btn__default" @click="createNewList">创建</button>
-      </div>
-    </div>
-  </modal>
-  <modal :show="showCurrentList">
-    <div slot="content" class="list-editor">
-      <div class="list-editor-header">
-        <h3 class="list-editor-header--title">编辑清单</h3>
-      </div>
-      <div class="list-editor-body">
-        <div class="robin-textfield">
-          <input type="text" class="robin-textfield--input robin-textfield--input_default" v-model="currentList.name"/>
-        </div>
-      </div>
-      <div class="list-editor-footer">
-        <span class="material-icons" @click="deleteList(this.currentList)">delete</span>
-        <button class="robin-btn robin-btn__default" @click="doEditList">确定</button>
-      </div>
-    </div>
-  </modal>
 </template>
 <script>
   import * as listsActions from '../../vuex/actions/lists';
@@ -123,14 +138,15 @@
   @import '../../public/stylesheets/variables';
   .sidebar{
     float:left;
-    width: @sideMenuWidth;
+    width: @sidemenu-width;
     // padding: 20px 30px;
     box-sizing: border-box;
     position: fixed;
   }
   .side-menu{
-    padding: 0;
+    padding:0 0 16px 0;
     margin: 0;
+    border-bottom: 1px solid @sidemenu-spearate-line;
     &__item{
       box-sizing: border-box;
       border-radius: 2px;
@@ -154,8 +170,11 @@
       }
       &-content{
         margin-left: 10px;
-        flex: 0 0 64%;
+        flex: 1 0 auto;
         .text-overflow();
+      }
+      &-count {
+        margin-right: 8px;
       }
     }
   }

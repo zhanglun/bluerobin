@@ -23,12 +23,33 @@
   export default {
     route: {
       data(transition) {
+        let query = {};
         this.list_id = this.$route.params.id;
-        var query = {
-          list_id: this.list_id,
-          completed: false,
-          sort: '-update_time',
-        };
+        switch(this.list_id) {
+          case 'completed': {
+            query = {
+              completed: true,
+              sort: '-update_time',
+            };
+            break;
+          };
+          case 'trash': {
+            query = {
+              istrash: true,
+              sort: '-update_time',
+            };
+            break;
+          };
+          default:{
+            query = {
+              list_id: this.list_id,
+              completed: false,
+              sort: '-update_time',
+            };
+            break;
+          }
+        }
+
         this.fetchTasks(query);
         transition.next();
       },
@@ -132,7 +153,7 @@
   @labelTriggerBg: #d8d8d8;
 
   .main-container {
-    padding-left: @sideMenuWidth + 20;
+    padding-left: @sidemenu-width + 20;
     padding-right: 20px;
     width: 100%;
     box-sizing: border-box;

@@ -40,14 +40,9 @@
 <style lang="less">
 @import '../../public/stylesheets/variables';
 
-// .logo {
-//   font-size: 30px;
-//   width: @sideMenuWidth;
-//   text-indent: 24px;
-// }
 .navigation{
   &-account{
-    width: @sideMenuWidth - 20;
+    width: @sidemenu-width - 20;
     display: flex;
     align-items: center;
     justify-content: flex-start;
