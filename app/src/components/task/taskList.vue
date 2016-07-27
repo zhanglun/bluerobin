@@ -9,7 +9,7 @@
         显示已完成的task
       </div>
       <div class="tasklist--finished" transition="animation_showtask" v-show="completedShow">
-        <taskitem v-for="task in completedTasklist" :task="task" :index="$index" track-by="id"></taskitem>
+        <task-item v-for="task in completedTasklist" :task="task" :index="$index" track-by="id"></task-item>
       </div>
     </div>
     <div class="main" v-if="showCollections">
