@@ -13,7 +13,7 @@
       </ul>
       <ul class="side-menu">
         <li>
-          <a class="side-menu__item" v-link="{name: 'list', params: {id: 'completed'}}">
+          <a class="side-menu__item" v-link="{name: 'completed', params: {id: 'completed'}}">
             <span class="material-icons">done</span>
             <span class="side-menu__item-content">已完成</span>
           </a>

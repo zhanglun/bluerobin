@@ -65,6 +65,7 @@
     vuex: {
       actions: {
         fetchTasks: tasksActions.fetchTasks,
+        resetTasks: tasksActions.resetTasks, // state.tasks还没有修改就切换了路由，导致会以之前路由对应的数据渲染一次。所以手动清空一次
       },
       getters: {
         tasks: getters.getTasks,
@@ -73,6 +74,7 @@
     },
     computed: {
       collection() {
+        console.log('collection computed');
         let collection = [];
         let tasks = this.tasks;
         this.tasks.sort((a, b) =>{
@@ -114,6 +116,7 @@
       }
     },
     ready() {
+      this.resetTasks();
     },
     components: {
       'task-item': TaskItemView,

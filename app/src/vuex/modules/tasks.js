@@ -11,17 +11,13 @@ const state = {
 const mutations = {
   [mutationType.FETCH_TASKS](state, query, tasks) {
     console.log('mutations: FETCH_TASKS');
-    // if (query.completed) {
-    //   state.completed = tasks;
-    // } else {
-    //   state.active = tasks;
-    // }
     if (query.completed && query.list_id) {
       state.all = state.all.concat(tasks);
     } else {
       state.all = tasks;
     }
   },
+
   [mutationType.FETCH_TASK_DETAIL](state, task) {
     console.log('mutations: FETCH_TASK_DETAIL');
     state.showDetail = true;
@@ -35,9 +31,6 @@ const mutations = {
   [mutationType.ADD_TASK](state, task) {
     state.all = [task].concat(state.all);
   },
-
-  // [mutationType.TOGGLE_TASK](state, task) {
-  // },
 
   [mutationType.EDIT_TASK](state, task) {
     console.log('mutations: EDIT_TASK');
@@ -54,7 +47,11 @@ const mutations = {
     state.all = state.all.filter((item) => {
       return item.id !== task.id;
     });
-  }
+  },
+
+  [mutationType.RESET_TASKS](state, task) {
+    state.all = [];
+  },
 
 };
 

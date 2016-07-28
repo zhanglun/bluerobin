@@ -1,6 +1,6 @@
 <template>
   <div class="main-container" transition="animate_routerview">
-    <div class="main" v-if="!showCollections">
+    <div class="main">
       <add-item :listid="listId"></add-item>
       <div class="tasklist">
         <task-item v-for="task in tasklist" :task="task" :index="$index" track-by="id"></task-item>
@@ -12,15 +12,6 @@
         <task-item v-for="task in completedTasklist" :task="task" :index="$index" track-by="id"></task-item>
       </div>
     </div>
-    <div class="main" v-if="showCollections">
-      <div class="collection" v-for="item in collection">
-        <h5>{{item.name}} count: {{item.count}}</h5>
-        <div class="tasklist">
-          <task-item v-for="task in item.tasks" :task="task" :index="$index" track-by="id"></task-item>
-        </div>
-      </div>
-    </div>
-
   </div>
 </template>
 <script>
@@ -84,6 +75,7 @@
     vuex: {
       actions: {
         fetchTasks: tasksActions.fetchTasks,
+        resetTasks: tasksActions.resetTasks, // state.tasks还没有修改就切换了路由，导致会以之前路由对应的数据渲染一次。所以手动清空一次
       },
       getters: {
         tasks: getters.getTasks,
@@ -155,12 +147,7 @@
 
     },
     ready() {
-      console.log('list');
-      if(this.$route.name == 'list') {
-        this.showCollections = false;
-      }else {
-        this.showCollections = true;
-      }
+      this.resetTasks();
     },
     components: {
       'add-item': addItemView,

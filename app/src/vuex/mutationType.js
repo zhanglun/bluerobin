@@ -10,6 +10,7 @@ export const FETCH_TASK_DETAIL_ERROR = 'FETCH_TASK_DETAIL_ERROR';
 export const HIDE_DETAIL_WINDOW = 'HIDE_DETAIL_WINDOW';
 export const ADD_TASK = 'ADD_TASK';
 export const ADD_TASK_ERROR = 'ADD_TASK_ERROR';
+export const RESET_TASKS = 'RESET_TASKS';
 export const DELETE_TASK = 'DELETE_TASK';
 export const EDIT_TASK = 'EDIT_TASK';
 export const COMPLETE_TASK = 'COMPLETE_TASK';

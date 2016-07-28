@@ -23,7 +23,7 @@ module.exports = {
   resolve: {
    alias: {
     'tool':  SRC_PATH + '/services/tool.babel.js',
-   } 
+   },
   },
   module: {
     loaders: [{
@@ -90,5 +90,5 @@ module.exports = {
       to: BUILD_PATH + '/vendor',
     }]),
   ],
-  devtool: 'eval',
+  devtool: 'eval-source-map',
 };

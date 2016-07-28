@@ -95,3 +95,7 @@ export const editTask = ({ dispatch, state }, taskid, param) => {
       dispatch(mutationType.EDIT_TASK, res.body);
     });
 };
+
+export const resetTasks = ({ dispatch, state }, taskid, param) => {
+  dispatch(mutationType.RESET_TASKS);
+}

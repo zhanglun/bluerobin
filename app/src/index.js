@@ -28,7 +28,7 @@ router.map({
     subRoutes: {
       '/completed': {
         name: 'completed',
-        component: TaskListView,
+        component: CollectionsView,
       },
       '/search': {
         name: 'search',
@@ -44,6 +44,23 @@ router.map({
       },
     },
     auth: true,
+  },
+  '/collections': {
+    component: TaskView,
+    subRoutes: {
+      '/completed': {
+        name: 'completed',
+        component: CollectionsView,
+      },
+      '/search': {
+        name: 'search',
+        component: TaskListView,
+      },
+      '/trash': {
+        name: 'trash',
+        component: TaskListView,
+      },
+    },
   },
   '/login': {
     component: UserLogin,
