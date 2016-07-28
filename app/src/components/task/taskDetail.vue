@@ -7,6 +7,7 @@
             <label class="robin-checkbox" for="{{task.id}}">
               <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change="toggleTask(task)" :checked="task.completed">
               <span class="robin-checkbox--label"></span>
+              <span class="robin-checkbox--tick"></span>
             </label>
             <input class="card-header--title card-header--input" :value="task.title" v-autoblur="isTitleEditing" @focus="isTitleEditing = true" @keyup.esc="doEditTitle" @keyup.enter="doEditTitle" />
           </div>
@@ -40,9 +41,9 @@
             </div>
           </div>
           <div class="card-footer">
-              <span></span>
-              <div> 创建于：{{task.create_time}}</div>
-              <span></span>
+            <span></span>
+            <div> 创建于：{{task.create_time}}</div>
+            <span></span>
           </div>
         </div>
       </div>

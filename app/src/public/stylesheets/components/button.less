@@ -6,6 +6,8 @@
 @btn-height-large: 46px;
 @btn-height-default: 34px;
 @btn-height-mirco: 26px;
+@checkbox-background: #7fcb9f;
+@checkbox-border: #7fcb9f;
 .robin {
   &-textfield {
     width: 100%;
@@ -43,16 +45,19 @@
   }
   &-checkbox {
     height: 16px;
-    padding: 2px 2px 2px 20px;
+    padding: 2px 0 2px 20px;
     display: block;
     border: @input-border;
     border-radius: 2px;
     position: relative;
     &--input {
       display: none;
-      &:checked + .robin-checkbox--label {
-        border: 2px solid #3f51b5;
-        background: #3f51b5 url("../../images/checkbox.png");
+      &:checked ~ .robin-checkbox--label {
+        border: 2px solid @checkbox-border;
+        background: @checkbox-background url("../../images/checkbox.png");
+      }
+      &:checked ~ .robin-checkbox--tick {
+        display: block;
       }
       &_default {}
     }
@@ -72,6 +77,26 @@
       position: absolute;
       left: 2px;
       top: 2px;
+    }
+    &--tick {
+      display: none;
+      box-sizing: border-box;
+      width: 12px;
+      height: 6px;
+      margin: 0;
+      cursor: pointer;
+      overflow: hidden;
+      border-radius: 2px;
+      transition-duration: .28s;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-property: background;
+      position: absolute;
+      left: 4px;
+      top: 6px;
+      border-style: solid;
+      border-color: transparent transparent #fff #fff;
+      border-width: 0 0 2px 2px;
+      transform: rotateZ(-50deg);
     }
   }
 }
