@@ -2,7 +2,7 @@
  <div class="main-container" transition="animate_routerview">
   <div class="main">
     <div class="collection" v-for="item in collection">
-      <h4>{{item.name}} count: {{item.count}}</h4>
+      <div class="collection--title">{{item.name}}</div>
       <div class="tasklist">
         <task-item v-for="task in item.tasks" :task="task" :index="$index" track-by="id"></task-item>
       </div>
@@ -124,5 +124,12 @@
   };
 </script>
 <style lang="less">
-
+  .collection {
+    padding-top: 2px;
+    &--title{
+      font-size: 22px;
+      padding: 10px 0;
+    }
+  }
+  
 </style>

@@ -23,11 +23,17 @@
 /* ====================================================== */
 /* Variables
 /* ====================================================== */
+/**
+ * side menu
+ */
 .text-overflow {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+/**
+ * task detail card
+ */
 .sidebar {
   float: left;
   width: 210px;
@@ -35,8 +41,9 @@
   position: fixed;
 }
 .side-menu {
-  padding: 0;
+  padding: 0 0 16px 0;
   margin: 0;
+  border-bottom: 1px solid #ebebeb;
 }
 .side-menu__item {
   box-sizing: border-box;
@@ -64,12 +71,15 @@
 }
 .side-menu__item-content {
   margin-left: 10px;
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 64%;
-          flex: 0 0 64%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.side-menu__item-count {
+  margin-right: 8px;
 }
 .side-actions {
   font-size: 14px;
@@ -107,11 +117,17 @@
 /* ====================================================== */
 /* Variables
 /* ====================================================== */
+/**
+ * side menu
+ */
 .text-overflow {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+/**
+ * task detail card
+ */
 .navigation-account {
   width: 190px;
   display: -webkit-box;
@@ -159,6 +175,20 @@
       -ms-flex-pack: end;
           justify-content: flex-end;
 }
+/* ====================================================== */
+/* Variables
+/* ====================================================== */
+/**
+ * side menu
+ */
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/**
+ * task detail card
+ */
 .card {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -280,11 +310,17 @@
 /* ====================================================== */
 /* Variables
 /* ====================================================== */
+/**
+ * side menu
+ */
 .text-overflow {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+/**
+ * task detail card
+ */
 .main-container {
   padding-left: 230px;
   padding-right: 20px;
@@ -311,11 +347,17 @@
 /* ====================================================== */
 /* Variables
 /* ====================================================== */
+/**
+ * side menu
+ */
 .text-overflow {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+/**
+ * task detail card
+ */
 .modify {
   width: 100%;
   box-sizing: border-box;
@@ -379,7 +421,6 @@
 }
 .task-content-box {
   line-height: 31px;
-  padding: 9px 0 10px;
   margin-top: -3px;
   white-space: nowrap;
   overflow: hidden;
@@ -419,11 +460,17 @@
 /* ====================================================== */
 /* Variables
 /* ====================================================== */
+/**
+ * side menu
+ */
 .text-overflow {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+/**
+ * task detail card
+ */
 .modal.bottom-sheet {
   max-height: 60%;
 }
@@ -444,6 +491,13 @@
 }
 .task-textfield--input:focus {
   box-shadow: 0 0 5px #ABABAB;
+}
+.collection {
+  padding-top: 2px;
+}
+.collection--title {
+  font-size: 22px;
+  padding: 10px 0;
 }
 .login-form {
   width: 400px;
@@ -484,11 +538,17 @@
 /* ====================================================== */
 /* Variables
 /* ====================================================== */
+/**
+ * side menu
+ */
 .text-overflow {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+/**
+ * task detail card
+ */
 html,
 body {
   font-size: 10px;
@@ -505,7 +565,6 @@ body {
   font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', '\5B8B\4F53', '\9ED1\4F53', sans-serif;
   background-color: #ECECEC;
   background-size: cover;
-  background-image: url(images/51943de1ca4e30805245ba1f83295f7c.jpg);
   background-attachment: fixed;
   overflow-x: hidden;
 }
