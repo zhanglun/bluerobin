@@ -32,8 +32,8 @@
         </span>
       </div>
     </div>
-
-    <modal :show="showModal">
+  </div>
+      <modal :show="showModal">
       <div slot="content" class="list-editor">
         <div class="list-editor-header">
           <h3 class="list-editor-header--title">创建新的清单</h3>
@@ -65,7 +65,6 @@
         </div>
       </div>
     </modal>
-  </div>
 </template>
 <script>
   import * as listsActions from '../../vuex/actions/lists';
