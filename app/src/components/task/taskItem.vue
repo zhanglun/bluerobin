@@ -13,6 +13,9 @@
         <span>更新时间：{{task.update_time}}</span>
         <span>创建时间：{{task.create_time}}</span>
       </div>
+      <div v-if="iscollection">
+        <span>{{task.list_name}}</span>
+      </div>
     </div>
     <span class="task-controller">
       <i class="material-icons" @click="deleteTask(task)">clear</i>
@@ -24,7 +27,7 @@
 import * as tasksActions from '../../vuex/actions/tasks';
 import * as getters from '../../vuex/getter';
 export default {
-  props: ['tasktitle', 'task', 'index'],
+  props: ['iscollection', 'task', 'index'],
   data() {
     return {
       editing: false,

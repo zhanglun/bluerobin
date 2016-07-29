@@ -26,12 +26,13 @@
         </li>
       </ul>
       <div class="side-actions">
-        <span class="side-menu__item" @click="showModal = true">
+        <span class="side-actions__item" @click="showModal = true">
           <span class="material-icons">add</span>
-          <span class="side-menu__item-content">新建分类</span>
+          <span class="side-actions__item-content">新建分类</span>
         </span>
       </div>
     </div>
+
     <modal :show="showModal">
       <div slot="content" class="list-editor">
         <div class="list-editor-header">
@@ -142,9 +143,16 @@
     // padding: 20px 30px;
     box-sizing: border-box;
     position: fixed;
+    bottom: 0;
+    top: 70px;
+    overflow: auto;
+    z-index: 2;
+    &-container {
+      padding-bottom: 40px;
+    }
   }
   .side-menu{
-    padding:0 0 16px 0;
+    padding:10px 0 16px 0;
     margin: 0;
     border-bottom: 1px solid @sidemenu-spearate-line;
     &__item{
@@ -179,33 +187,60 @@
     }
   }
   .side-actions{
-   font-size: 14px;
- }
-
- .list-editor {
-  width: 340px;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 2px;
-  &-header {
-    padding: 14px 14px 0px;
-    text-align: center;
-    &--title {
-      font-size: 26px;
-      margin: 0px;
+    position: fixed;
+    bottom: 0;
+    width: @sidemenu-width;
+    background: @body-background;
+    border-top: 1px solid @sidemenu-spearate-line;
+    font-size: 14px;
+    &__item {
+      width: 100%;
+      box-sizing: border-box;
+      border-radius: 2px;
+      line-height: 24px;
+      padding: 10px;
+      color: #000;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      &:hover{
+        background: rgba(0,0,0,.03);
+      }
+      &-content {
+        margin-left: 10px;
+        flex: 0 1 76px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
     }
   }
-  &-body {
-    padding: 4px 14px 10px;
+
+  .list-editor {
+    width: 340px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 2px;
+    &-header {
+      padding: 14px 14px 0px;
+      text-align: center;
+      &--title {
+        font-size: 26px;
+        margin: 0px;
+      }
+    }
+    &-body {
+      padding: 4px 14px 10px;
+    }
+    &-footer {
+      padding: 12px;
+      border-top: 1px solid #e0e0df;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
-  &-footer {
-    padding: 12px;
-    border-top: 1px solid #e0e0df;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-}
 
 
 </style>

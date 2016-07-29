@@ -1,11 +1,8 @@
 <template>
  <div class="main-container" transition="animate_routerview">
   <div class="main">
-    <div class="collection" v-for="item in collection">
-      <div class="collection--title">{{item.name}}</div>
-      <div class="tasklist">
-        <task-item v-for="task in item.tasks" :task="task" :index="$index" track-by="id"></task-item>
-      </div>
+    <div class="tasklist">
+    <task-item v-for="task in tasks" :task="task" :index="$index" :iscollection="true" track-by="id"></task-item>
     </div>
   </div>
 </div>
@@ -22,7 +19,6 @@
     route: {
       data(transition) {
         let name = this.$route.name;
-        console.log(this.$route.name);
         let query = {};
         switch(name){
           case 'completed': {
@@ -73,40 +69,6 @@
       }
     },
     computed: {
-      collection() {
-        console.log('collection computed');
-        let collection = [];
-        let tasks = this.tasks;
-        this.tasks.sort((a, b) =>{
-          if(a.list_name > b.list_name) {
-            return 1;
-          }else if(a.list_name < b.list_name) {
-            return -1;
-          }else {
-            return 0;
-          }
-        });
-        let flag = 0;
-        this.tasks.map((task,i) => {
-          if(this.tasks[i + 1] && task.list_name !== this.tasks[i+1].list_name) {
-            collection.push({
-              name: task.list_name,
-              count: i + 1 - flag,
-              tasks: this.tasks.slice(flag, i+1),
-            });
-            flag = i+1;
-          }
-          if(i == this.tasks.length -1 ){
-            collection.push({
-              name: task.list_name,
-              count: i + 1 - flag,
-              tasks: this.tasks.slice(flag),
-            });
-          }
-        });
-        console.log(collection);
-        return collection;
-      },
     },
     watch: {
       auth: function(val) {
@@ -116,7 +78,7 @@
       }
     },
     ready() {
-      this.resetTasks();
+      // this.resetTasks();
     },
     components: {
       'task-item': TaskItemView,
