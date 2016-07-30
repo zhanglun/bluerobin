@@ -373,6 +373,9 @@
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 .label-trigger {
   display: inline-block;
@@ -472,19 +475,56 @@
   right: 8px;
   top: 30%;
 }
-@media screen and (min-width: 1366px) {
+.collection-item {
+  background: #fff;
+  padding: 10px;
+  min-width: 300px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  font-size: 1.4rem;
+  color: #343434;
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid #DCDCDC;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+.collection-item .task-content {
+  margin-right: 6px;
+}
+.collection-item .task-metadata--item {
+  display: inline-block;
+}
+@media only screen and (max-width: 961px) {
   .collection-item {
-    width: 25%;
+    width: 100%;
   }
 }
-@media and (max-width: 1366px) {
+@media only screen and (min-width: 961px) {
   .collection-item {
-    width: 33%;
+    width: 46.5%;
+  }
+}
+@media only screen and (min-width: 1025px) {
+  .collection-item {
+    width: 32.6%;
+  }
+}
+@media only screen and (min-width: 1367px) {
+  .collection-item {
+    width: 19.4%;
   }
 }
 /*
   Task item animation
- */
+  */
 .animation_showtask-transition {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
