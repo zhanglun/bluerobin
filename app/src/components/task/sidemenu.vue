@@ -118,6 +118,8 @@
         var param = {
           name: this.newList.name,
         };
+        this.showModal = false;
+        this.newList.name = '';
         this.addList(param);
       },
       showCurrent(e, list) {
@@ -127,6 +129,7 @@
       doEditList() {
         let param = {};
         param.name = this.currentList.name;
+        this.showCurrentList = false;
         this.editList(this.currentList.id, param);
       },
     },
@@ -177,11 +180,11 @@
       }
       &-content{
         margin-left: 10px;
-        flex: 1 0 auto;
+        flex: 1 0 26px;
         .text-overflow();
       }
       &-count {
-        margin-right: 8px;
+        margin-right: 6px;
       }
     }
   }
