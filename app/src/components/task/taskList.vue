@@ -191,6 +191,7 @@
   .tasklist {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
   }
   .label-trigger {
     display: inline-block;

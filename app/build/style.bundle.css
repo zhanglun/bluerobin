@@ -39,11 +39,18 @@
   width: 210px;
   box-sizing: border-box;
   position: fixed;
+  bottom: 0;
+  top: 70px;
+  overflow: auto;
+  z-index: 2;
+}
+.sidebar-container {
+  padding-bottom: 40px;
 }
 .side-menu {
-  padding: 0 0 16px 0;
+  padding: 10px 0 16px 0;
   margin: 0;
-  border-bottom: 1px solid #ebebeb;
+  border-bottom: 1px solid #cecece;
 }
 .side-menu__item {
   box-sizing: border-box;
@@ -72,17 +79,50 @@
 .side-menu__item-content {
   margin-left: 10px;
   -webkit-box-flex: 1;
-      -ms-flex: 1 0 auto;
-          flex: 1 0 auto;
+      -ms-flex: 1 0 26px;
+          flex: 1 0 26px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 .side-menu__item-count {
-  margin-right: 8px;
+  margin-right: 6px;
 }
 .side-actions {
+  position: fixed;
+  bottom: 0;
+  width: 210px;
+  background: #eceff1;
+  border-top: 1px solid #cecece;
   font-size: 14px;
+}
+.side-actions__item {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 2px;
+  line-height: 24px;
+  padding: 10px;
+  color: #000;
+  text-decoration: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+}
+.side-actions__item:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+.side-actions__item-content {
+  margin-left: 10px;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 76px;
+          flex: 0 1 76px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .list-editor {
   width: 340px;
@@ -163,7 +203,7 @@
   background: rgba(255, 255, 255, 0.85);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   position: fixed;
-  z-index: 100;
+  z-index: 1;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -432,6 +472,16 @@
   right: 8px;
   top: 30%;
 }
+@media screen and (min-width: 1366px) {
+  .collection-item {
+    width: 25%;
+  }
+}
+@media and (max-width: 1366px) {
+  .collection-item {
+    width: 33%;
+  }
+}
 /*
   Task item animation
  */
@@ -563,7 +613,7 @@ body {
   min-height: 100%;
   max-width: 100%;
   font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', '\5B8B\4F53', '\9ED1\4F53', sans-serif;
-  background-color: #ECECEC;
+  background-color: #eceff1;
   background-size: cover;
   background-attachment: fixed;
   overflow-x: hidden;
@@ -837,7 +887,7 @@ video {
 .robin-checkbox {
   height: 16px;
   padding: 2px 0 2px 20px;
-  display: block;
+  display: inline-block;
   border: #969da3;
   border-radius: 2px;
   position: relative;

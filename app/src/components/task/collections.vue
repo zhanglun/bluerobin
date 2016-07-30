@@ -72,6 +72,14 @@
       completedTasks() {
         return this.tasks.filter((task) => {
           return task.completed;
+        }).sort((a, b) => {
+          if (a.list_name > b.list_name) {
+            return 1;
+          } else if (a.list_name < b.list_name) {
+            return -1;
+          } else {
+            return 0;
+          }
         });
       }
     },
