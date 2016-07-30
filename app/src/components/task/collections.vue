@@ -2,7 +2,7 @@
  <div class="main-container" transition="animate_routerview">
   <div class="main">
     <div class="tasklist">
-    <task-item v-for="task in tasks" :task="task" :index="$index" :iscollection="true" track-by="id"></task-item>
+    <task-item v-for="task in completedTasks" :task="task" :index="$index" :iscollection="true" track-by="id"></task-item>
     </div>
   </div>
 </div>
@@ -69,6 +69,11 @@
       }
     },
     computed: {
+      completedTasks() {
+        return this.tasks.filter((task) => {
+          return task.completed;
+        });
+      }
     },
     watch: {
       auth: function(val) {

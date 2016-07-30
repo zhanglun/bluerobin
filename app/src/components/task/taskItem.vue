@@ -1,5 +1,5 @@
 <template>
-  <div class="task" transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing}" >
+  <div transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, 'collection-item': iscollection, 'task': !iscollection}" >
     <div class="task-checkbox">
       <label class="robin-checkbox" for="{{task.id}}">
         <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change="toggleTask(task)" :checked="task.completed">
