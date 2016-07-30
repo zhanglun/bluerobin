@@ -19,7 +19,7 @@
           </a>
         </li>
         <li>
-          <a class="side-menu__item" v-link="{name: 'list', params: {id: 'trash'}}">
+          <a class="side-menu__item" v-link="{name: 'trash', params: {id: 'trash'}}">
             <span class="material-icons">delete</span>
             <span class="side-menu__item-content">回收站</span>
           </a>

@@ -2,7 +2,7 @@
  <div class="main-container" transition="animate_routerview">
   <div class="main">
     <div class="tasklist">
-    <task-item v-for="task in completedTasks" :task="task" :index="$index" :iscollection="true" track-by="id"></task-item>
+      <task-item v-for="task in tasksComputed" :task="task" :index="$index" :iscollection="true" track-by="id"></task-item>
     </div>
   </div>
 </div>
@@ -69,10 +69,19 @@
       }
     },
     computed: {
-      completedTasks() {
-        return this.tasks.filter((task) => {
-          return task.completed;
-        }).sort((a, b) => {
+      tasksComputed() {
+        var result = null;
+        if(this.$route.name == 'completed') {
+          result = this.tasks.filter((task) => {
+            return task.completed && !task.istrash;
+          });
+        }
+        if(this.$route.name == 'trash') {
+          result = this.tasks.filter((task) => {
+            return task.istrash;
+          });
+        }
+        result.sort((a, b) => {
           if (a.list_name > b.list_name) {
             return 1;
           } else if (a.list_name < b.list_name) {
@@ -81,7 +90,8 @@
             return 0;
           }
         });
-      }
+        return result;
+      },
     },
     watch: {
       auth: function(val) {

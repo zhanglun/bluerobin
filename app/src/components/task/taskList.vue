@@ -55,7 +55,7 @@
             break;
           }
         }
-
+        query.istrash = false;
         this.fetchTasks(query);
         transition.next();
       },
@@ -124,7 +124,6 @@
             });
           }
         });
-        console.log(collection);
         return collection;
       },
     },

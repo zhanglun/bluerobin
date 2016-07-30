@@ -26,18 +26,6 @@ router.map({
   '/lists': {
     component: TaskView,
     subRoutes: {
-      '/completed': {
-        name: 'completed',
-        component: CollectionsView,
-      },
-      '/search': {
-        name: 'search',
-        component: TaskListView,
-      },
-      '/trash': {
-        name: 'trash',
-        component: TaskListView,
-      },
       '/:id': {
         name: 'list',
         component: TaskListView,
@@ -58,7 +46,7 @@ router.map({
       },
       '/trash': {
         name: 'trash',
-        component: TaskListView,
+        component: CollectionsView,
       },
     },
   },

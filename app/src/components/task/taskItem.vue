@@ -7,7 +7,7 @@
     </label>
     <div class="task-content" @click="showTaskDetail(task)">
       <div class="task-content-box">{{task.title}}</div>
-      <div class="task-metadata" v-if="task.completed">
+      <div class="task-metadata" v-if="task.completed || task.istrash">
         <span class="task-metadata--item">更新时间：{{task.update_time}}</span>
         <span class="task-metadata--item">创建时间：{{task.create_time}}</span>
       </div>
