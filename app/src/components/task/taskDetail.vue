@@ -43,7 +43,10 @@
           <div class="card-footer">
             <span></span>
             <div> 创建于：{{task.create_time}}</div>
-            <span></span>
+            <div class="card-footer--actions">
+              <i class="material-icons" @click="deleteTask(task)">delete</i>
+              <span>删除</span>
+            </div>
           </div>
         </div>
       </div>
@@ -76,6 +79,7 @@
     vuex: {
       actions: {
         edit: tasksActions.editTask,
+        delete: tasksActions.deleteTask,
         hideTaskDetail: tasksActions.hideTaskDetail,
       },
       getters: {
@@ -131,6 +135,9 @@
         console.log('modifyDesc');
         this.isDescEditing  = true;
       },
+          deleteTask(task) {
+      this.delete(task.id);
+    },
       doEditTitle(e) {
         let task = this.task;
         let param = {
@@ -191,6 +198,7 @@
       box-sizing: border-box;
       border: none;
       outline: none;
+      .text-overflow();
       &:focus {
         background: @modal-container-header-background;
       }
@@ -252,8 +260,9 @@
   }
 
   .card-footer {
-    min-height: 56px;
+    min-height: 46px;
     font-size: 14px;
+    padding: 14px;
     color: #a3a3a2;
     border-top: 1px solid @modal-spearate-line;
     background: @modal-container-header-background;
@@ -261,6 +270,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    &--actions {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      color: fadeout(#000, 30%);
+      &:hover{
+        color:#000;
+      }
+    }
   }
 
 

@@ -1,10 +1,10 @@
 <template>
   <div transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, 'collection-item': iscollection, 'task': !iscollection}" >
-    <label class="robin-checkbox" for="{{task.id}}">
+<!--     <label class="robin-checkbox" for="{{task.id}}" v-if="!task.istrash && !task.completed">
       <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change="toggleTask(task)" :checked="task.completed">
       <span class="robin-checkbox--label"></span>
       <span class="robin-checkbox--tick"></span>
-    </label>
+    </label> -->
     <div class="task-content" @click="showTaskDetail(task)">
       <div class="task-content-box">{{task.title}}</div>
       <div class="task-metadata" v-if="task.completed || task.istrash">
@@ -16,7 +16,8 @@
       </div>
     </div>
     <span class="task-controller">
-      <i class="material-icons" @click="deleteTask(task)">clear</i>
+      <i class="material-icons" @click="toggleTask(task)" data-tooltip="完成" data-tooltip-pos="down">done</i>
+      <i class="material-icons" @click="deleteTask(task)" data-tooltip="删除">delete</i>
     </span>
   </div>
 </template>
@@ -37,8 +38,7 @@
       actions: {
         toggle: tasksActions.toggleTask,
         delete: tasksActions.deleteTask,
-      // edit: tasksActions.editTask,
-      fetchDetail: tasksActions.fetchTaskDetail,
+        fetchDetail: tasksActions.fetchTaskDetail,
     },
     getters: {
       showDetail: getters.isShowDetail,

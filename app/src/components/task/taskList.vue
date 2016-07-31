@@ -5,7 +5,7 @@
       <div class="tasklist">
         <task-item v-for="task in tasklist" :task="task" :index="$index" track-by="id"></task-item>
       </div>
-      <div class="label-trigger" @click="toggleShowCompletedTask">
+      <div class="label-trigger" @click="toggleShowCompletedTask" data-tooltip="显示已完成的task">
         显示已完成的task
       </div>
       <div class="tasklist--finished" transition="animation_showtask" v-show="completedShow">
