@@ -5,11 +5,11 @@
       <div class="tasklist">
         <task-item v-for="task in tasklist" :task="task" :index="$index" track-by="id"></task-item>
       </div>
-      <div class="label-trigger" @click="toggleShowCompletedTask" data-tooltip="显示已完成的task">
-        显示已完成的task
+      <div class="label-trigger" @click="toggleShowArchivedTask">
+        显示当前清单下已经归档的任务
       </div>
-      <div class="tasklist--finished" transition="animation_showtask" v-show="completedShow">
-        <task-item v-for="task in completedTasklist" :task="task" :index="$index" track-by="id"></task-item>
+      <div class="tasklist--finished" transition="animation_showtask" v-show="showArchived">
+        <task-item v-for="task in archivedTasklist" :task="task" :index="$index" track-by="id"></task-item>
       </div>
     </div>
   </div>
@@ -26,9 +26,9 @@
         let query = {};
         let name = this.$route.name;
         switch(name){
-          case 'completed': {
+          case 'archived': {
             query = {
-              completed: true,
+              archived: true,
               sort: '-update_time',
             };
             break;
@@ -47,7 +47,7 @@
             this.list_id = this.$route.params.id;
             query = {
               list_id: this.list_id,
-              completed: false,
+              archived: false,
               sort: '-update_time',
             };
           };
@@ -85,13 +85,13 @@
     computed: {
       tasklist() {
         let result = this.tasks.filter((item) => {
-          return item.list_id === this.list_id && !item.completed;
+          return item.list_id === this.list_id && !item.archived;
         });
         return result;
       },
-      completedTasklist() {
+      archivedTasklist() {
         return this.tasks.filter((item) => {
-          return item.list_id === this.list_id && item.completed;
+          return item.list_id === this.list_id && item.archived;
         });
       },
       collection() {
@@ -130,7 +130,7 @@
     data() {
       return {
         list_id: '',
-        completedShow: false,
+        showArchived: false,
         showCollections: false,
         loaded: false,
       };
@@ -153,21 +153,21 @@
       'task-item': TaskItemView,
     },
     methods: {
-      'loadCompletedTask'() {
+      'loadArchivedTask'() {
         let param = {
           list_id: this.list_id,
-          completed: true,
+          archived: true,
           sort: '-update_time',
         };
         this.fetchTasks(param, () => {
           this.loaded = true;
         });
       },
-      'toggleShowCompletedTask'() {
+      'toggleShowArchivedTask'() {
         if (!this.loaded) {
-          this.loadCompletedTask();
+          this.loadArchivedTask();
         }
-        this.$data.completedShow = !this.$data.completedShow;
+        this.$data.showArchived = !this.$data.showArchived;
       },
     },
   };

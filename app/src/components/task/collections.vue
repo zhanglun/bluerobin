@@ -25,8 +25,9 @@
         let name = this.$route.name;
         let query = {};
         switch(name){
-          case 'completed': {
+          case 'archive': {
             query = {
+              // archived: true,
               completed: true,
               sort: '-update_time',
             };
@@ -35,6 +36,7 @@
           case 'trash': {
             query = {
               istrash: true,
+              completed: false,
               sort: '-update_time',
             };
             break;
@@ -75,9 +77,9 @@
     computed: {
       tasksComputed() {
         var result = null;
-        if(this.$route.name == 'completed') {
+        if(this.$route.name == 'archive') {
           result = this.tasks.filter((task) => {
-            return task.completed && !task.istrash;
+            return task.archived && !task.istrash || task.computed !== undefined ;
           });
         }
         if(this.$route.name == 'trash') {

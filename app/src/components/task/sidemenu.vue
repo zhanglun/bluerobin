@@ -13,9 +13,9 @@
       </ul>
       <ul class="side-menu">
         <li>
-          <a class="side-menu__item" v-link="{name: 'completed', params: {id: 'completed'}}">
-            <span class="material-icons">done_all</span>
-            <span class="side-menu__item-content">已完成</span>
+          <a class="side-menu__item" v-link="{name: 'archive', params: {id: 'archive'}}">
+            <span class="material-icons">archive</span>
+            <span class="side-menu__item-content">归档</span>
           </a>
         </li>
         <li>
@@ -147,7 +147,8 @@
     position: fixed;
     bottom: 0;
     top: 70px;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     z-index: 2;
     &-container {
       padding-bottom: 40px;

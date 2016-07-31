@@ -19,7 +19,7 @@
 
               </div> -->
               <div class="card-metadata-item">
-                <span class="material-icons card-metadata-item--icons">insert_invitation</span>
+                <span class="material-icons card-metadata-item--icons">alarm</span>
                 <span class="card-metadata-item--content">{{task.deadline}}</span>
               </div>
               <div class="card-metadata-item">

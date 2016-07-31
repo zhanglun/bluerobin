@@ -40,8 +40,8 @@ const mutations = {
           case 'total':
             item.task_count_total += data.update;
             break;
-          case 'completed':
-            item.task_count_completed += data.update;
+          case 'archived':
+            item.task_count_archived += data.update;
           default:
             break;
         }

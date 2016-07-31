@@ -1,13 +1,13 @@
 <template>
-  <div transition="animation_showtask" v-bind:class="{finished: task.completed, editing: task == taskEditing, 'collection-item': iscollection, 'task': !iscollection}" >
-<!--     <label class="robin-checkbox" for="{{task.id}}" v-if="!task.istrash && !task.completed">
-      <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change="toggleTask(task)" :checked="task.completed">
+  <div transition="animation_showtask" v-bind:class="{finished: task.archived, editing: task == taskEditing, 'collection-item': iscollection, 'task': !iscollection}" >
+<!--     <label class="robin-checkbox" for="{{task.id}}" v-if="!task.istrash && !task.archived">
+      <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change="toggleTask(task)" :checked="task.archived">
       <span class="robin-checkbox--label"></span>
       <span class="robin-checkbox--tick"></span>
     </label> -->
     <div class="task-content" @click="showTaskDetail(task)">
       <div class="task-content-box">{{task.title}}</div>
-      <div class="task-metadata" v-if="task.completed || task.istrash">
+      <div class="task-metadata" v-if="task.archived || task.istrash">
         <span class="task-metadata--item">更新时间：{{task.update_time}}</span>
         <span class="task-metadata--item">创建时间：{{task.create_time}}</span>
       </div>
@@ -16,7 +16,8 @@
       </div>
     </div>
     <span class="task-controller">
-      <i class="material-icons" @click="toggleTask(task)" data-tooltip="完成" data-tooltip-pos="down">done</i>
+      <i class="material-icons" @click="toggleTask(task)" data-tooltip="归档" data-tooltip-pos="down" v-if="!task.archived">archive</i>
+      <i class="material-icons" @click="toggleTask(task)" data-tooltip="取消归档" data-tooltip-pos="down" v-if="task.archived">unarchive</i>
       <i class="material-icons" @click="deleteTask(task)" data-tooltip="删除">delete</i>
     </span>
   </div>
@@ -65,11 +66,11 @@
   },
   methods: {
     toggleTask() {
-      this.task.completed = !this.task.completed;
-      this.toggle(this.task.id, {completed: this.task.completed});
+      this.task.archived = !this.task.archived;
+      this.toggle(this.task.id, {archived: this.task.archived});
     },
     modifyTask(task) {
-      if (task.completed) {
+      if (task.archived) {
         return false;
       }
       this.taskEditing = task;

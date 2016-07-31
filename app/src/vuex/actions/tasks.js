@@ -59,10 +59,10 @@ export const toggleTask = ({ dispatch, state }, taskid, param) => {
     .use(baseURL)
     .then((res) => {
       dispatch(mutationType.EDIT_TASK, res.body);
-      if (param.completed) {
-        dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'completed', update: 1 });
+      if (param.archived) {
+        dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'archived', update: 1 });
       } else {
-        dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'completed', update: -1 });
+        dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'archived', update: -1 });
       }
     }, (err) => {
       dispatch(mutationType.EDIT_TASK_ERROR, err);
@@ -77,8 +77,8 @@ export const deleteTask = ({ dispatch, state }, taskid) => {
     .then((res) => {
       dispatch(mutationType.DELETE_TASK, res.body);
       dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'total', update: -1 });
-      if (res.body.completed) {
-        dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'completed', update: -1 });
+      if (res.body.archived) {
+        dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'archived', update: -1 });
       }
     }, (err) => {
       dispatch(mutationType.EDIT_TASK_ERROR, err);

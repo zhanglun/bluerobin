@@ -2,7 +2,6 @@ import * as mutationType from '../mutationType';
 const state = {
   active: [],
   archieved: [],
-  completed: [],
   all: [],
   taskDetail: null,
   showDetail: false,
@@ -11,7 +10,7 @@ const state = {
 const mutations = {
   [mutationType.FETCH_TASKS](state, query, tasks) {
     console.log('mutations: FETCH_TASKS');
-    if (query.completed && query.list_id) {
+    if (query.archived && query.list_id) {
       state.all = state.all.concat(tasks);
     } else {
       state.all = tasks;

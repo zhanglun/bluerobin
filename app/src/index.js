@@ -36,8 +36,8 @@ router.map({
   '/collections': {
     component: TaskView,
     subRoutes: {
-      '/completed': {
-        name: 'completed',
+      '/archive': {
+        name: 'archive',
         component: CollectionsView,
       },
       '/search': {
