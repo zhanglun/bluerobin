@@ -208,7 +208,7 @@
     width: 32.6%;
   }
   @media only screen and (min-width : 1367px) {
-    width: 19.4%;
+    width: 24.5%;
   }
 }
 

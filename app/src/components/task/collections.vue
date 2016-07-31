@@ -3,6 +3,10 @@
   <div class="main">
     <div class="tasklist">
       <task-item v-for="task in tasksComputed" :task="task" :index="$index" :iscollection="true" track-by="id"></task-item>
+      <div class="ghost-item"></div>
+      <div class="ghost-item"></div>
+      <div class="ghost-item"></div>
+      <div class="ghost-item"></div>
     </div>
   </div>
 </div>
@@ -115,5 +119,11 @@
       font-size: 22px;
       padding: 10px 0;
     }
+  }
+  .ghost-item {
+    visibility: hidden;
+    padding: 10px;
+    min-width: 300px;
+    margin-bottom: 10px;
   }
 </style>

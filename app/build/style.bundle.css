@@ -519,7 +519,7 @@
 }
 @media only screen and (min-width: 1367px) {
   .collection-item {
-    width: 19.4%;
+    width: 24.5%;
   }
 }
 /*
@@ -588,6 +588,12 @@
 .collection--title {
   font-size: 22px;
   padding: 10px 0;
+}
+.ghost-item {
+  visibility: hidden;
+  padding: 10px;
+  min-width: 300px;
+  margin-bottom: 10px;
 }
 .login-form {
   width: 400px;
