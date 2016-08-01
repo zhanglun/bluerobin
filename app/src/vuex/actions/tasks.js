@@ -93,6 +93,11 @@ export const editTask = ({ dispatch, state }, taskid, param) => {
     .use(baseURL)
     .then((res) => {
       dispatch(mutationType.EDIT_TASK, res.body);
+      if (param.istrash) {
+        dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'istrash', update: 1 });
+      } else {
+        dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'istrash', update: -1 });
+      }
     });
 };
 

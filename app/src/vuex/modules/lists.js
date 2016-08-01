@@ -42,6 +42,8 @@ const mutations = {
             break;
           case 'archived':
             item.task_count_archived += data.update;
+          case 'istrash':
+            item.task_count_istrash += data.update;
           default:
             break;
         }
