@@ -79,12 +79,14 @@ button[data-tooltip] {
   position: relative; // alt. absolute or fixed
   &:before,
   &:after {
+    font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', '\5B8B\4F53', '\9ED1\4F53', sans-serif;
     .base-effects();
-    bottom: 100%;
+    bottom: auto;
+    top: 100%;
     left: 50%;
     position: absolute;
     z-index: 10;
-    transform: translate(-50%, 10px);
+    transform: translate(-50%, -10px);
     transform-origin: top;
   }
   &:after {
@@ -96,13 +98,14 @@ button[data-tooltip] {
     padding: 0.6em 0.8em;
     white-space: nowrap;
     line-height: 16px;
-    margin-bottom: @tooltip-arrow-size + (@tooltip-arrow-size - 3);
+    margin-top: @tooltip-arrow-size + 3;
   }
   &:before {
     .svg-arrow(@tooltip-bg,
-    up);
+    down);
     content: "";
-    margin-bottom: @tooltip-arrow-size - 3;
+    margin-top: @tooltip-arrow-size - 1;
+    margin-bottom: 0;
   }
   &:hover,
   &[data-tooltip-visible] {
@@ -129,12 +132,12 @@ button[data-tooltip] {
     transform: translate(-50%, 10px);
   }
   &:after {
-    margin-bottom: @tooltip-arrow-size + 5;
+    margin-bottom: @tooltip-arrow-size + (@tooltip-arrow-size - 3);
   }
   &:before {
     .svg-arrow(@tooltip-bg,
-    down);
-    margin-bottom: @tooltip-arrow-size - 1;
+    up);
+    margin-bottom: @tooltip-arrow-size - 3;
     margin-left: 0;
   }
   &:hover,
