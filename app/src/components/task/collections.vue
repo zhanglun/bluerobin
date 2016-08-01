@@ -1,6 +1,7 @@
 <template>
  <div class="main-container" transition="animate_routerview">
   <div class="main">
+    <h6 v-if="istrash">回收站中的任务会在7天后删除</h6>
     <div class="tasklist">
       <task-item v-for="task in tasksComputed" :task="task" :index="$index" :iscollection="true" track-by="id"></task-item>
       <div class="ghost-item"></div>
@@ -18,6 +19,8 @@
   export default {
     data() {
       return {
+        isarchive: false,
+        istrash: false,
       };
     },
     route: {
@@ -26,17 +29,19 @@
         let query = {};
         switch(name){
           case 'archive': {
+            this.isarchive = true;
             query = {
-              // archived: true,
-              completed: true,
+              istrash: false,
+              archived: true,
               sort: '-update_time',
             };
             break;
           };
           case 'trash': {
+            this.istrash = true;
             query = {
               istrash: true,
-              completed: false,
+              // archived: false,
               sort: '-update_time',
             };
             break;
@@ -61,7 +66,7 @@
         return true;
       },
       canReuse() {
-        return true;
+        return false;
       },
     },
     vuex: {

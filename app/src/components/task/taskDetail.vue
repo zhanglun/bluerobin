@@ -4,11 +4,11 @@
       <div class="modal-container">
         <div class="card" @click.stop>
           <div class="card-header">
-            <label class="robin-checkbox" for="{{task.id}}">
-              <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change="toggleTask(task)" :checked="task.completed">
+<!--             <label class="robin-checkbox" for="{{task.id}}">
+              <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change="toggleTask(task)" :checked="task.archived">
               <span class="robin-checkbox--label"></span>
               <span class="robin-checkbox--tick"></span>
-            </label>
+            </label> -->
             <input class="card-header--title card-header--input" :value="task.title" v-autoblur="isTitleEditing" @focus="isTitleEditing = true" @keyup.esc="doEditTitle" @keyup.enter="doEditTitle" />
           </div>
           <div class="card-body">
@@ -19,8 +19,10 @@
 
               </div> -->
               <div class="card-metadata-item">
-                <span class="material-icons card-metadata-item--icons">alarm</span>
-                <span class="card-metadata-item--content">{{task.deadline}}</span>
+                <i class="material-icons card-metadata-item--icons" data-tooltip="更新时间">update</i>
+                <span class="card-metadata-item--content">{{task.update_time}}</span>
+                <i class="material-icons card-metadata-item--icons" data-tooltip="截止时间">alarm</i>
+                <span class="card-metadata-item--content">Due: {{task.deadline}}</span>
               </div>
               <div class="card-metadata-item">
                 <span class="material-icons card-metadata-item--icons">create</span>
@@ -43,9 +45,11 @@
           <div class="card-footer">
             <span></span>
             <div> 创建于：{{task.create_time}}</div>
-            <div class="card-footer--actions">
-              <i class="material-icons" @click="deleteTask(task)">delete</i>
-              <span>删除</span>
+            <div class="card-footer--toolbar">
+              <i class="material-icons" @click="toggleTask(task)" data-tooltip="归档" data-tooltip-pos="down" v-if="!task.archived">archive</i>
+              <i class="material-icons" @click="toggleTask(task)" data-tooltip="取消归档" data-tooltip-pos="down" v-if="task.archived">unarchive</i>
+              <i class="material-icons" @click="deleteTask(task)" v-if="task.istrash" data-tooltip="彻底删除">delete_forever</i>
+              <i class="material-icons" @click="deleteTask(task)" v-if="!task.istarsh" data-tooltip="删除">delete</i>
             </div>
           </div>
         </div>
@@ -135,9 +139,9 @@
         console.log('modifyDesc');
         this.isDescEditing  = true;
       },
-          deleteTask(task) {
-      this.delete(task.id);
-    },
+      deleteTask(task) {
+        this.delete(task.id);
+      },
       doEditTitle(e) {
         let task = this.task;
         let param = {
@@ -191,7 +195,6 @@
     background: @modal-container-header-background;
     &--input {
       width: 100%;
-      padding: 0 10px;
       background: @modal-container-header-background;
       font-size: 18px;
       font-weight: bolder;
@@ -270,7 +273,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    &--actions {
+    &--toolbar {
       cursor: pointer;
       display: flex;
       align-items: center;

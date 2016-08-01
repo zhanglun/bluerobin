@@ -6,7 +6,7 @@
           <a class="side-menu__item" v-link="{name: 'list', params: {id: list.id}}">
             <span class="material-icons">list</span>
             <span class="side-menu__item-content">{{list.name}}</span>
-            <span class="side-menu__item-count">{{list.task_count_total - list.task_count_completed - list.task_count_istrash || ''}}</span>
+            <span class="side-menu__item-count">{{list.task_count_total - list.task_count_archived - list.task_count_istrash || ''}}</span>
             <span class="material-icons edit" @click="showCurrent(e, list)" data-tooltip="编辑" data-tooltip-pos="down">edit</span>
           </a>
         </li>

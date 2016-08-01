@@ -1,24 +1,17 @@
 <template>
-  <div transition="animation_showtask" v-bind:class="{finished: task.archived, editing: task == taskEditing, 'collection-item': iscollection, 'task': !iscollection}" >
-<!--     <label class="robin-checkbox" for="{{task.id}}" v-if="!task.istrash && !task.archived">
-      <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change="toggleTask(task)" :checked="task.archived">
-      <span class="robin-checkbox--label"></span>
-      <span class="robin-checkbox--tick"></span>
-    </label> -->
-    <div class="task-content" @click="showTaskDetail(task)">
+  <div transition="animation_showtask" v-bind:class="{finished: task.archived, editing: task == taskEditing, 'collection-item': iscollection, 'task': !iscollection}" @click="showTaskDetail(task)">
+    <div class="task-content">
       <div class="task-content-box">{{task.title}}</div>
-      <div class="task-metadata" v-if="task.archived || task.istrash">
-        <span class="task-metadata--item">更新时间：{{task.update_time}}</span>
-        <span class="task-metadata--item">创建时间：{{task.create_time}}</span>
-      </div>
-      <div v-if="iscollection">
-        <span>{{task.list_name}}</span>
-      </div>
     </div>
-    <span class="task-controller">
-      <i class="material-icons" @click="toggleTask(task)" data-tooltip="归档" data-tooltip-pos="down" v-if="!task.archived">archive</i>
-      <i class="material-icons" @click="toggleTask(task)" data-tooltip="取消归档" data-tooltip-pos="down" v-if="task.archived">unarchive</i>
-      <i class="material-icons" @click="deleteTask(task)" data-tooltip="删除">delete</i>
+    <div class="task-labels" v-if="iscollection">
+      <span class="task-labels--item">{{task.list_name}}</span>
+    </div>
+    <div class="task-toolbar" @click.stop>
+      <i class="material-icons task-toolbar--icons" @click="toggleTask(task)" data-tooltip="归档" v-if="!task.archived && !task.istrash">archive</i>
+      <i class="material-icons task-toolbar--icons" @click="toggleTask(task)" data-tooltip="取消归档" v-if="task.archived && !task.istrash">unarchive</i>
+      <i class="material-icons task-toolbar--icons" v-if="task.istrash" data-tooltip="还原" @click="undoTask(task)">undo</i>
+      <i class="material-icons task-toolbar--icons" @click="deleteTask(task)" v-if="task.istrash" data-tooltip="彻底删除">delete_forever</i>
+      <i class="material-icons task-toolbar--icons" @click="deleteTask(task)" v-if="!task.istrash" data-tooltip="删除">delete</i>
     </span>
   </div>
 </template>
@@ -39,64 +32,61 @@
       actions: {
         toggle: tasksActions.toggleTask,
         delete: tasksActions.deleteTask,
+        edit: tasksActions.editTask,
         fetchDetail: tasksActions.fetchTaskDetail,
-    },
-    getters: {
-      showDetail: getters.isShowDetail,
-    }
-  },
-  computed: {
-    titleAfterParse() {
-      return twemoji.parse(this.task.title);
-    }
-  },
-  ready() {
-  },
-
-  directives: {
-    'task-autofocus'(value) {
-      if (!value) {
-        return;
+      },
+      getters: {
+        showDetail: getters.isShowDetail,
       }
-      var el = this.el;
-      setTimeout(() => {
-        el.focus();
-      }, 0);
-    }
-  },
-  methods: {
-    toggleTask() {
-      this.task.archived = !this.task.archived;
-      this.toggle(this.task.id, {archived: this.task.archived});
     },
-    modifyTask(task) {
-      if (task.archived) {
-        return false;
+    computed: {
+      titleAfterParse() {
+        return twemoji.parse(this.task.title);
       }
-      this.taskEditing = task;
     },
-    showTaskDetail(task) {
-      this.fetchDetail(task.id);
-    },
-    deleteTask(task) {
-      this.delete(task.id);
+    ready() {
     },
 
-    doEdit(task) {
-      console.log('taskitem do edit');
-      if (!this.taskEditing) {
-        return false;
+    directives: {
+      'task-autofocus'(value) {
+        if (!value) {
+          return;
+        }
+        var el = this.el;
+        setTimeout(() => {
+          el.focus();
+        }, 0);
       }
-      // if (this.taskEditing.title === task.title) {
-        this.taskEditing = null;
-      //   return false;
-      // }
-      task.title = task.title.replace(/</g, "&lt").replace(/>/g, "&gt;");
-      this.titleAfterParse = twemoji.parse(task.title);
-      this.edit(task);
     },
-  },
-};
+    methods: {
+      toggleTask() {
+        this.task.archived = !this.task.archived;
+        this.toggle(this.task.id, {archived: this.task.archived});
+      },
+      modifyTask(task) {
+        if (task.archived) {
+          return false;
+        }
+        this.taskEditing = task;
+      },
+      showTaskDetail(task) {
+        if(!this.istrash){
+          this.fetchDetail(task.id);
+        }
+      },
+      deleteTask(task) {
+        this.delete(task.id);
+      },
+
+      undoTask(task) {
+        let param = {
+          istrash: false,
+        };
+        this.edit(task.id, param);
+        task.istrash = false;
+      },
+    },
+  };
 </script>
 
 <style lang="less">
@@ -113,105 +103,141 @@
     padding: 0 4px;
   }
   .task {
-  // flex: 1 1 320px;
-  width: 100%;
-  height: 50px;
-  box-sizing: border-box;
-  font-size: 1.6rem;
-  color: #343434;
-  background: fade(@white, 85%);
-  border-bottom: 1px solid #DCDCDC;
-  padding: 0 0.5em;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  position: relative;
-  &:hover {
-    background: fade(#000, 10%)
-  }
-  &.finished {
-    font-size: 12px;
-    .task-content {
-      cursor: default;
-      text-decoration: line-through;
-      color: lighten(#343434, 40%);
+    width: 100%;
+    height: 50px;
+    box-sizing: border-box;
+    font-size: 1.6rem;
+    color: #343434;
+    background: fade(@white, 85%);
+    border-bottom: 1px solid #DCDCDC;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    &:hover {
+      background: fade(#000, 10%)
     }
-  }
-  &.editing {
-    .task-content {
-      &-box {
-        display: none;
+    &.finished {
+      font-size: 12px;
+      .task-content {
+        cursor: default;
+        text-decoration: line-through;
+        color: lighten(#343434, 40%);
       }
-      &-input {
+    }
+    &.editing {
+      .task-content {
+        &-box {
+          display: none;
+        }
+        &-input {
+          display: block;
+        }
+      }
+    }
+    &:hover {
+      .task-toolbar {
         display: block;
       }
     }
   }
-  &:hover {
-    .task-controller {
-      display: block;
-    }
-  }
-}
-.task-content {
-  flex: 1 1 auto;
-  overflow: hidden;
-  margin-right: 6rem;
-  margin-left: 4px;
-  cursor: pointer;
-  &-input {
-    display: none;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  &-box {
-    line-height: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-.task-controller {
-  display: none;
-  position: absolute;
-  right: 8px;
-  top: 30%;
-}
-
-.collection-item{
-  background: #fff;
-  padding: 10px;
-  min-width: 300px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-  font-size: 1.4rem;
-  color: #343434;
-  background: rgba(255, 255, 255, 0.85);
-  border-bottom: 1px solid #DCDCDC;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
   .task-content {
-    margin-right: 6px;
-  }
-  .task-metadata{
-    &--item{
-      display: inline-block;
+    flex: 1 1 auto;
+    overflow: hidden;
+    margin-right: 6rem;
+    padding: 12px;
+    cursor: pointer;
+    &-input {
+      display: none;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    &-box {
+      line-height: 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
-  @media only screen and (max-width : 961px) {
-    width: 100%;
+  .task-toolbar {
+    display: none;
+    font-size: 0;
+    position: absolute;
+    right: 8px;
+    top: 30%;
+    &--icons {
+      margin:0 2px;
+      cursor: pointer;
+    }
   }
-  @media only screen and (min-width : 961px) {
-    width: 46.5%;
+
+  .collection-item{
+    background: #fff;
+    min-width: 300px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    font-size: 1.4rem;
+    color: #343434;
+    background: rgba(255, 255, 255, 0.85);
+    border-bottom: 1px solid #DCDCDC;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    &:hover {
+      .task-toolbar {
+        visibility: visible;
+        display: flex;
+      }
+    }
+    .task-content {
+      padding: 12px;
+    }
+    .task-labels {
+      width: 100%;
+      padding: 2px 12px;
+      box-sizing: border-box;
+
+      &--item{
+        padding: 2px 4px;
+        border-radius: 2px;
+        background-color: #d4d4d4;
+      }
+    }
+    .task-metadata {
+      padding: 6px 10px;
+      &--item {
+        display: inline-block;
+      }
+    }
+    .task-toolbar {
+      visibility: hidden;
+      display: flex;
+      width: 100%;
+      position: static;
+      padding: 2px 6px 6px;
+      box-sizing: border-box;
+      font-size: 0;
+      line-height: normal;
+      align-items: center;
+      justify-content: flex-end;
+      &--icons {
+        margin: 0 2px;
+        cursor: pointer;
+      }
+    }
+    @media only screen and (max-width : 961px) {
+      width: 100%;
+    }
+    @media only screen and (min-width : 961px) {
+      width: 46.5%;
+    }
+    @media only screen and (min-width : 1025px) {
+      width: 32.6%;
+    }
+    @media only screen and (min-width : 1367px) {
+      width: 24.5%;
+    }
   }
-  @media only screen and (min-width : 1025px) {
-    width: 32.6%;
-  }
-  @media only screen and (min-width : 1367px) {
-    width: 24.5%;
-  }
-}
 
 
 /*
