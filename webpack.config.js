@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
 // 定义了一些文件夹的路径
 var ROOT_PATH = path.resolve(__dirname);
@@ -14,6 +15,7 @@ var BUILD_PATH = path.resolve(APP_PATH, 'build');
 module.exports = {
   entry: {
     index: SRC_PATH + '/index.js',
+    vue: ['vue'],
   },
   output: {
     path: BUILD_PATH,
@@ -32,8 +34,6 @@ module.exports = {
     }, {
       test: /\.(jpe?g|png|gif|svg)$/i,
       loaders: [
-        // 'file?hash=sha512&digest=hex&name=images/[hash].[ext]',
-        // 'image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}, svgo:{plugins:[{removeViewBox: false},{removeEmptyAttrs: false}]}}',
         'url?limit=10000&&hash=sha512&digest=hex&name=images/[hash].[ext]'
       ],
     }, {
@@ -89,6 +89,10 @@ module.exports = {
       from: SRC_PATH + '/vendor',
       to: BUILD_PATH + '/vendor',
     }]),
+    new CommonsChunkPlugin({
+      name: ['vue'],
+      minChunks: Infinity
+    }),
   ],
   devtool: 'eval-source-map',
 };
