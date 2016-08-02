@@ -8,6 +8,8 @@
       <div class="ghost-item"></div>
       <div class="ghost-item"></div>
       <div class="ghost-item"></div>
+      <div class="ghost-item"></div>
+
     </div>
   </div>
 </div>
@@ -129,8 +131,7 @@
   }
   .ghost-item {
     visibility: hidden;
-    padding: 10px;
-    min-width: 300px;
-    margin-bottom: 10px;
+    flex: 1 0 20%;
+    margin: 5px 5px;
   }
 </style>

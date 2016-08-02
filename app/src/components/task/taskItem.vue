@@ -172,8 +172,6 @@
   }
 
   .collection-item{
-    background: #fff;
-    min-width: 300px;
     margin-bottom: 10px;
     box-sizing: border-box;
     font-size: 1.4rem;
@@ -183,6 +181,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    flex: 1 0 20%;
+    margin: 5px 5px;
     &:hover {
       .task-toolbar {
         visibility: visible;
@@ -191,6 +191,9 @@
     }
     .task-content {
       padding: 12px;
+      width: 100%;
+      margin: 0;
+      box-sizing: border-box;
     }
     .task-labels {
       width: 100%;
@@ -198,9 +201,10 @@
       box-sizing: border-box;
 
       &--item{
-        padding: 2px 4px;
+        padding: 2px 6x;
         border-radius: 2px;
-        background-color: #d4d4d4;
+        font-size: 12px;
+        background-color: #6e6e6e;
       }
     }
     .task-metadata {
