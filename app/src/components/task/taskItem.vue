@@ -75,7 +75,7 @@
         }
       },
       deleteTask(task) {
-        this.delete(task.id);
+        this.delete(task);
       },
 
       undoTask(task) {

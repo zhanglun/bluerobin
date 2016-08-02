@@ -43,6 +43,7 @@ const mutations = {
   },
 
   [mutationType.DELETE_TASK](state, task) {
+    console.log('mutations: DELETE_TASK');
     state.all = state.all.filter((item) => {
       return item.id !== task.id;
     });

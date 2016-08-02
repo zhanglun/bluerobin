@@ -1,7 +1,7 @@
 <template>
  <div class="main-container" transition="animate_routerview">
   <div class="main">
-    <h6 v-if="istrash">回收站中的任务会在7天后删除</h6>
+    <div v-if="istrash">回收站中的任务会在7天后删除</div>
     <div class="tasklist">
       <task-item v-for="task in tasksComputed" :task="task" :index="$index" :iscollection="true" track-by="id"></task-item>
       <div class="ghost-item"></div>

@@ -58,10 +58,11 @@ export const toggleTask = ({ dispatch, state }, taskid, param) => {
     .set('x-access-token', window.localStorage.token)
     .use(baseURL)
     .then((res) => {
+      console.log('actions toggle task');
       dispatch(mutationType.EDIT_TASK, res.body);
-      if (param.archived) {
+      if (param.hasOwnProperty('archived') && param.archived) {
         dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'archived', update: 1 });
-      } else {
+      } else if (param.hasOwnProperty('archived') && !param.archived) {
         dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'archived', update: -1 });
       }
     }, (err) => {
@@ -69,14 +70,16 @@ export const toggleTask = ({ dispatch, state }, taskid, param) => {
     });
 };
 
-export const deleteTask = ({ dispatch, state }, taskid) => {
+export const deleteTask = ({ dispatch, state }, task) => {
   request
-    .delete('/tasks/' + taskid)
+    .delete('/tasks/' + task.id)
     .set('x-access-token', window.localStorage.token)
     .use(baseURL)
     .then((res) => {
       dispatch(mutationType.DELETE_TASK, res.body);
-      dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'total', update: -1 });
+      if (task.istrash == false) {
+        dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'total', update: -1 });
+      }
       if (res.body.archived) {
         dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'archived', update: -1 });
       }
@@ -92,6 +95,7 @@ export const editTask = ({ dispatch, state }, taskid, param) => {
     .send(param)
     .use(baseURL)
     .then((res) => {
+      console.log('actions edit task');
       dispatch(mutationType.EDIT_TASK, res.body);
       if (param.istrash) {
         dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'istrash', update: 1 });
