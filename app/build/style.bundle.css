@@ -495,6 +495,12 @@
 .task-toolbar--icons {
   margin: 0 2px;
   cursor: pointer;
+  -webkit-transition: all 0.3 ease-in-out 0s;
+  transition: all 0.3 ease-in-out 0s;
+  color: rgba(0, 0, 0, 0.7);
+}
+.task-toolbar--icons:hover {
+  color: #000;
 }
 .collection-item {
   margin-bottom: 10px;
@@ -536,10 +542,11 @@
   box-sizing: border-box;
 }
 .collection-item .task-labels--item {
-  padding: 2px 6x;
+  padding: 4px 6px;
   border-radius: 2px;
   font-size: 12px;
-  background-color: #6e6e6e;
+  background-color: #e8e8e8;
+  color: rgba(0, 0, 0, 0.7);
 }
 .collection-item .task-metadata {
   padding: 6px 10px;
@@ -568,6 +575,10 @@
 .collection-item .task-toolbar--icons {
   margin: 0 2px;
   cursor: pointer;
+  color: rgba(0, 0, 0, 0.7);
+}
+.collection-item .task-toolbar--icons:hover {
+  color: #000;
 }
 @media only screen and (max-width: 961px) {
   .collection-item {
@@ -611,8 +622,8 @@
   opacity: 0;
   -webkit-transform: rotateX(180deg);
           transform: rotateX(180deg);
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+  -webkit-transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
 }
 /* ====================================================== */
 /* Variables

@@ -1,16 +1,16 @@
 <template>
   <div>
     <router-view></router-view>
-  <script type="x-template" id="modal-template">
-    <div class="modal-mask" v-if="show" transition="modal-animation_default">
-      <div class="modal-wrapper">
-        <div class="modal-container">
-          <slot name="content"></slot>
+    <script type="x-template" id="modal-template">
+      <div class="modal-mask" v-if="show" transition="modal-animation_default">
+        <div class="modal-wrapper">
+          <div class="modal-container">
+            <slot name="content"></slot>
+          </div>
         </div>
       </div>
-    </div>
-  </script>
-</div>
+    </script>
+  </div>
 </template>
 
 <script>
@@ -36,6 +36,7 @@
       },
       getters: {
         user: getters.getUserInfo,
+        lists: getters.getLists,
       }
     },
     data() {
@@ -49,9 +50,15 @@
     created() {
       this.authenticate((user) => {
         if (user) {
-          this.$router.go('/lists');
+          let firstId = '';
+          let toId = '';
+          if(this.lists && this.lists.length) {
+            firstId = this.lists[0].id;
+          }
+          toId = this.$route.params.id || firstId;
+
+          this.$router.go({name: 'list', params: {id: toId}});
         } else {
-          console.log('login first, please!');
           this.$router.go('/login');
         }
       });

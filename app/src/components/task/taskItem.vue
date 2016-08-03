@@ -168,6 +168,11 @@
     &--icons {
       margin:0 2px;
       cursor: pointer;
+      transition: all 0.3 ease-in-out 0s;
+      color: fadeout(#000, 30%);
+      &:hover{
+        color: #000;
+      }
     }
   }
 
@@ -201,10 +206,11 @@
       box-sizing: border-box;
 
       &--item{
-        padding: 2px 6x;
+        padding: 4px 6px;
         border-radius: 2px;
         font-size: 12px;
-        background-color: #6e6e6e;
+        background-color: #e8e8e8;
+        color: rgba(0,0,0,0.7);
       }
     }
     .task-metadata {
@@ -227,6 +233,10 @@
       &--icons {
         margin: 0 2px;
         cursor: pointer;
+        color: fadeout(#000, 30%);
+        &:hover{
+          color: #000;
+        }
       }
     }
     @media only screen and (max-width : 961px) {
@@ -262,7 +272,7 @@
     &-levae {
       opacity: 0;
       transform: rotateX(180deg);
-      transition: all 0.3s ease;
+      transition: all 0.5s cubic-bezier(0.55,0,0.1,1);
     }
   }
 </style>

@@ -94,38 +94,6 @@
           return item.list_id === this.list_id && item.archived;
         });
       },
-      collection() {
-        let collection = [];
-        let tasks = this.tasks;
-        this.tasks.sort((a, b) =>{
-          if(a.list_name > b.list_name) {
-            return 1;
-          }else if(a.list_name < b.list_name) {
-            return -1;
-          }else {
-            return 0;
-          }
-        });
-        let flag = 0;
-        this.tasks.map((task,i) => {
-          if(this.tasks[i + 1] && task.list_name !== this.tasks[i+1].list_name) {
-            collection.push({
-              name: task.list_name,
-              count: i + 1 - flag,
-              tasks: this.tasks.slice(flag, i+1),
-            });
-            flag = i+1;
-          }
-          if(i == this.tasks.length -1 ){
-            collection.push({
-              name: task.list_name,
-              count: i + 1 - flag,
-              tasks: this.tasks.slice(flag),
-            });
-          }
-        });
-        return collection;
-      },
     },
     data() {
       return {
