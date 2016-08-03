@@ -94,6 +94,7 @@
     watch: {
       // 监控左侧 list 列表，默认选中第一个
       lists() {
+        console.log(this.$route);
         this.showModal = false;
         this.showCurrentList = false;
         this.newList.name = '';

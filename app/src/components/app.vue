@@ -45,19 +45,22 @@
       };
     },
     computed: {
-
+    },
+    watch: {
+      lists() {
+        let firstId = '';
+        let toId = '';
+        if(this.lists && this.lists.length) {
+          firstId = this.lists[0].id;
+        }
+        toId = this.$route.params.id || firstId;
+        this.$router.go({name: 'list', params: {id: toId}});
+      }
     },
     created() {
       this.authenticate((user) => {
         if (user) {
-          let firstId = '';
-          let toId = '';
-          if(this.lists && this.lists.length) {
-            firstId = this.lists[0].id;
-          }
-          toId = this.$route.params.id || firstId;
 
-          this.$router.go({name: 'list', params: {id: toId}});
         } else {
           this.$router.go('/login');
         }

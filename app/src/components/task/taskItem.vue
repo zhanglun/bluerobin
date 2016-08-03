@@ -188,6 +188,7 @@
     align-items: flex-start;
     flex: 1 0 20%;
     margin: 5px 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
     &:hover {
       .task-toolbar {
         visibility: visible;
