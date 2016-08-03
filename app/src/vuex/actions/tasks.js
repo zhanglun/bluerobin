@@ -78,10 +78,14 @@ export const deleteTask = ({ dispatch, state }, task) => {
     .then((res) => {
       dispatch(mutationType.DELETE_TASK, res.body);
       if (task.istrash == false) {
-        dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'total', update: -1 });
+        dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'istrash', update: 1 });
       }
-      if (res.body.archived) {
+      if (task.archived == true) {
         dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'archived', update: -1 });
+      }
+      if (task.istrash == true) {
+        dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'istrash', update: -1 });
+        dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'total', update: -1 });
       }
     }, (err) => {
       dispatch(mutationType.EDIT_TASK_ERROR, err);

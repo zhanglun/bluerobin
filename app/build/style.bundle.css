@@ -497,8 +497,6 @@
   cursor: pointer;
 }
 .collection-item {
-  background: #fff;
-  min-width: 300px;
   margin-bottom: 10px;
   box-sizing: border-box;
   font-size: 1.4rem;
@@ -515,6 +513,10 @@
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 20%;
+          flex: 1 0 20%;
+  margin: 5px 5px;
 }
 .collection-item:hover .task-toolbar {
   visibility: visible;
@@ -524,6 +526,9 @@
 }
 .collection-item .task-content {
   padding: 12px;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
 }
 .collection-item .task-labels {
   width: 100%;
@@ -531,9 +536,10 @@
   box-sizing: border-box;
 }
 .collection-item .task-labels--item {
-  padding: 2px 4px;
+  padding: 2px 6x;
   border-radius: 2px;
-  background-color: #d4d4d4;
+  font-size: 12px;
+  background-color: #6e6e6e;
 }
 .collection-item .task-metadata {
   padding: 6px 10px;
@@ -652,9 +658,10 @@
 }
 .ghost-item {
   visibility: hidden;
-  padding: 10px;
-  min-width: 300px;
-  margin-bottom: 10px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 20%;
+          flex: 1 0 20%;
+  margin: 5px 5px;
 }
 .login-form {
   width: 400px;
