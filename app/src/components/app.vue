@@ -60,7 +60,7 @@
     created() {
       this.authenticate((user) => {
         if (user) {
-
+           this.$router.go('/lists');
         } else {
           this.$router.go('/login');
         }
