@@ -1,8 +1,11 @@
 <template>
   <div class="modal-mask modal-animation_sign" transition="modal-animation_sign">
     <div class="modal-wrapper" @click="close()" >
-      <div class="modal-container">
+    <div class="modal-container">
         <div class="card" @click.stop>
+          <div class="card-status card-status__archived" v-if="task.archived && !task.istrash">
+            该任务已经归档
+          </div>
           <div class="card-header">
 <!--             <label class="robin-checkbox" for="{{task.id}}">
               <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change="toggleTask(task)" :checked="task.archived">
@@ -83,6 +86,7 @@
     vuex: {
       actions: {
         edit: tasksActions.editTask,
+        toggle: tasksActions.toggleTask,
         delete: tasksActions.deleteTask,
         hideTaskDetail: tasksActions.hideTaskDetail,
       },
@@ -139,6 +143,10 @@
         console.log('modifyDesc');
         this.isDescEditing  = true;
       },
+      toggleTask(task) {
+        task.archived = !task.archived;
+        this.toggle(task.id, {archived: task.archived});
+      },
       deleteTask(task) {
         this.delete(task.id);
       },
@@ -181,6 +189,18 @@
     border-radius: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
     transition: all 300ms 0s;
+    &-status{
+      color: fadeout(#000, 60%);
+      font-size: 12px;
+      padding: 6px 18px;
+      &__archived{
+        background-color: #fdfae5;
+        background-image: -webkit-linear-gradient(top left, rgba(0,0,0,.05) 25%, transparent 25%, transparent 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.05) 75%, transparent 75%, transparent);
+        background-image: -o-linear-gradient(top left, rgba(0,0,0,.05) 25%, transparent 25%, transparent 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.05) 75%, transparent 75%, transparent);
+        background-image: linear-gradient(to bottom right, rgba(0,0,0,.05) 25%, transparent 25%, transparent 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.05) 75%, transparent 75%, transparent);
+        background-size: 14px 14px;
+      }
+    }
   }
 
   .card-header {
@@ -188,14 +208,14 @@
     min-height: 55px;
     box-sizing: border-box;
     align-items: center;
+    color: fadeout(#000, 60%);
     margin-top: 0;
-    color: spin(#000, 60%);
     padding: 16px 18px;
     border-bottom: 1px solid @modal-spearate-line;
     background: @modal-container-header-background;
     &--input {
       width: 100%;
-      background: @modal-container-header-background;
+      background: none;
       font-size: 18px;
       font-weight: bolder;
       box-sizing: border-box;

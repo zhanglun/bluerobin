@@ -99,12 +99,13 @@ export const editTask = ({ dispatch, state }, taskid, param) => {
     .send(param)
     .use(baseURL)
     .then((res) => {
-      console.log('actions edit task');
       dispatch(mutationType.EDIT_TASK, res.body);
-      if (param.istrash) {
-        dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'istrash', update: 1 });
-      } else {
-        dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'istrash', update: -1 });
+      if (param.hasOwnProperty('istrash')) {
+        if (param.istrash) {
+          dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'istrash', update: 1 });
+        } else {
+          dispatch(mutationType.UPDATE_LIST, { id: res.body.list_id, type: 'istrash', update: -1 });
+        }
       }
     });
 };
