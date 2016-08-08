@@ -90,14 +90,10 @@
     height: 100%;
     box-sizing: border-box;
   }
-  // .app{
-  //   height: 100%;
-  //   position: absolute;
-  //   left: 0;
-  //   right: 0;
-  //   bottom: 0;
-  //   top: 0;
-  // }
+  .main {
+    max-width: 1024px;
+    margin: 0 auto;
+  }
   .animate_routerview-transition{
     transition: all 0.4s ease;
   }
