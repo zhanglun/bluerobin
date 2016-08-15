@@ -156,6 +156,9 @@
     padding:10px 0 16px 0;
     margin: 0;
     border-bottom: 1px solid @sidemenu-spearate-line;
+    li {
+      list-style-type: none;
+    }
     &__item{
       box-sizing: border-box;
       border-radius: 2px;

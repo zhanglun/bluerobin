@@ -57,6 +57,9 @@
   margin: 0;
   border-bottom: 1px solid #ddd;
 }
+.side-menu li {
+  list-style-type: none;
+}
 .side-menu__item {
   box-sizing: border-box;
   border-radius: 2px;
@@ -860,9 +863,6 @@ ol {
 }
 input {
   font-family: 'Helvetica Neue', Tahoma, Arial, 'Microsoft Yahei', '\5B8B\4F53', '\9ED1\4F53', sans-serif;
-}
-li {
-  list-style-type: none;
 }
 audio,
 canvas,
