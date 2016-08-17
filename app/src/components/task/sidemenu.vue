@@ -141,10 +141,11 @@
     float:left;
     width: @sidemenu-width;
     // padding: 20px 30px;
+    background: fade(#fff, 85%);
     box-sizing: border-box;
     position: fixed;
     bottom: 0;
-    top: 70px;
+    top: 80px;
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 2;
@@ -162,7 +163,7 @@
     &__item{
       box-sizing: border-box;
       border-radius: 2px;
-      padding: 10px 10px 10px 22px;
+      padding: 10px 14px 10px 20px;
       color: #000;
       text-decoration: none;
       display: flex;
@@ -194,7 +195,7 @@
     position: fixed;
     bottom: 0;
     width: @sidemenu-width;
-    background: @body-background;
+    background: fade(#fff, 85%);
     border-top: 1px solid @sidemenu-spearate-line;
     font-size: 14px;
     &__item {

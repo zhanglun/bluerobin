@@ -50,10 +50,11 @@
 .sidebar {
   float: left;
   width: 210px;
+  background: rgba(255, 255, 255, 0.85);
   box-sizing: border-box;
   position: fixed;
   bottom: 0;
-  top: 70px;
+  top: 80px;
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 2;
@@ -72,7 +73,7 @@
 .side-menu__item {
   box-sizing: border-box;
   border-radius: 2px;
-  padding: 10px 10px 10px 22px;
+  padding: 10px 14px 10px 20px;
   color: #000;
   text-decoration: none;
   display: -webkit-box;
@@ -109,7 +110,7 @@
   position: fixed;
   bottom: 0;
   width: 210px;
-  background: #eceff1;
+  background: rgba(255, 255, 255, 0.85);
   border-top: 1px solid #ddd;
   font-size: 14px;
 }
