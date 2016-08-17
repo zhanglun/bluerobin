@@ -186,7 +186,8 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    flex: 1 0 20%;
+    // flex: 1 0 300px;
+    width: 330px;
     margin: 5px 5px;
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
     &:hover {
@@ -240,18 +241,18 @@
         }
       }
     }
-    @media only screen and (max-width : 961px) {
-      width: 100%;
-    }
-    @media only screen and (min-width : 961px) {
-      width: 46.5%;
-    }
-    @media only screen and (min-width : 1025px) {
-      width: 32.6%;
-    }
-    @media only screen and (min-width : 1367px) {
-      width: 24.5%;
-    }
+    // @media only screen and (max-width : 961px) {
+    //   width: 100%;
+    // }
+    // @media only screen and (min-width : 961px) {
+    //   width: 46.5%;
+    // }
+    // @media only screen and (min-width : 1025px) {
+    //   width: 32.6%;
+    // }
+    // @media only screen and (min-width : 1367px) {
+    //   width: 24.5%;
+    // }
   }
 
 

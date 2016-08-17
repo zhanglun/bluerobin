@@ -1,5 +1,8 @@
 <template>
   <div>
+  <div class="loading" v-if="!finished">
+    <h1>loading...</h1>
+  </div>
     <router-view></router-view>
     <script type="x-template" id="modal-template">
       <div class="modal-mask" v-if="show" transition="modal-animation_default">
@@ -42,6 +45,7 @@
     data() {
       return {
         msg: 'Hello from BlueRobin',
+        finished: false,
       };
     },
     computed: {
@@ -55,6 +59,7 @@
         }
         toId = this.$route.params.id || firstId;
         this.$router.go({name: 'list', params: {id: toId}});
+        this.finished = true;
       }
     },
     created() {
@@ -101,6 +106,15 @@
     opacity: 0;
     height:0;
     transform: translate3d(20px, 0, 0);
+  }
+  .loading{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: #f1f1f1;
+    z-index: 100;
+    height: 100%;
   }
 
 </style>

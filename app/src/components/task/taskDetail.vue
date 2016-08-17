@@ -2,17 +2,15 @@
   <div class="modal-mask modal-animation_sign" transition="modal-animation_sign">
     <div class="modal-wrapper" @click="close()" >
     <div class="modal-container">
-        <div class="card" @click.stop>
+        <div class="card" @click.stop v-bind:class="{card__trash: task.istrash}">
           <div class="card-status card-status__archived" v-if="task.archived && !task.istrash">
             该任务已经归档
           </div>
+          <div class="card-status card-status__trash" v-if="task.istrash">
+            该任务已被删除，无法编辑
+          </div>
           <div class="card-header">
-<!--             <label class="robin-checkbox" for="{{task.id}}">
-              <input type="checkbox" id="{{task.id}}" class="robin-checkbox--input" v-on:change="toggleTask(task)" :checked="task.archived">
-              <span class="robin-checkbox--label"></span>
-              <span class="robin-checkbox--tick"></span>
-            </label> -->
-            <input class="card-header--title card-header--input" :value="task.title" v-autoblur="isTitleEditing" @focus="isTitleEditing = true" @keyup.esc="doEditTitle" @keyup.enter="doEditTitle" />
+            <input class="card-header--title card-header--input" :value="task.title" v-autoblur="isTitleEditing" @focus="isTitleEditing = true" @keyup.esc="doEditTitle" @keyup.enter="doEditTitle" :disabled="task.istrash" />
           </div>
           <div class="card-body">
             <div class="card-metadata">
@@ -52,7 +50,7 @@
               <i class="material-icons" @click="toggleTask(task)" data-tooltip="归档" data-tooltip-pos="down" v-if="!task.archived">archive</i>
               <i class="material-icons" @click="toggleTask(task)" data-tooltip="取消归档" data-tooltip-pos="down" v-if="task.archived">unarchive</i>
               <i class="material-icons" @click="deleteTask(task)" v-if="task.istrash" data-tooltip="彻底删除">delete_forever</i>
-              <i class="material-icons" @click="deleteTask(task)" v-if="!task.istarsh" data-tooltip="删除">delete</i>
+              <i class="material-icons" @click="deleteTask(task)" v-if="!task.istrash" data-tooltip="删除">delete</i>
             </div>
           </div>
         </div>
@@ -141,6 +139,10 @@
       },
       modifyDesc() {
         console.log('modifyDesc');
+        if(this.task.istrash){
+          this.isDescEditing  = false;
+          return false;
+        }
         this.isDescEditing  = true;
       },
       toggleTask(task) {
@@ -189,11 +191,23 @@
     border-radius: 2px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
     transition: all 300ms 0s;
+    &__trash {
+      .card-header, .card-metadata {
+        cursor: not-allowed;
+      }
+    }
     &-status{
       color: fadeout(#000, 60%);
       font-size: 12px;
       padding: 6px 18px;
       &__archived{
+        background-color: #fdfae5;
+        background-image: -webkit-linear-gradient(top left, rgba(0,0,0,.05) 25%, transparent 25%, transparent 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.05) 75%, transparent 75%, transparent);
+        background-image: -o-linear-gradient(top left, rgba(0,0,0,.05) 25%, transparent 25%, transparent 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.05) 75%, transparent 75%, transparent);
+        background-image: linear-gradient(to bottom right, rgba(0,0,0,.05) 25%, transparent 25%, transparent 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.05) 75%, transparent 75%, transparent);
+        background-size: 14px 14px;
+      }
+      &__trash{
         background-color: #fdfae5;
         background-image: -webkit-linear-gradient(top left, rgba(0,0,0,.05) 25%, transparent 25%, transparent 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.05) 75%, transparent 75%, transparent);
         background-image: -o-linear-gradient(top left, rgba(0,0,0,.05) 25%, transparent 25%, transparent 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.05) 75%, transparent 75%, transparent);
