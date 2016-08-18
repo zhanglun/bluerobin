@@ -114,17 +114,11 @@
     flex-direction: row;
     align-items: center;
     position: relative;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
     &:hover {
       background: fade(#000, 10%)
     }
-    &.finished {
-      font-size: 12px;
-      .task-content {
-        cursor: default;
-        text-decoration: line-through;
-        color: lighten(#343434, 40%);
-      }
-    }
+
     &.editing {
       .task-content {
         &-box {
@@ -177,19 +171,26 @@
   }
 
   .collection-item{
-    margin-bottom: 10px;
+    width: 100%;
+    height: 50px;
     box-sizing: border-box;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: #343434;
-    background: rgba(255, 255, 255, 0.85);
+    background: fade(@white, 85%);
     border-bottom: 1px solid #DCDCDC;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    // flex: 1 0 300px;
-    width: 330px;
-    margin: 5px 5px;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+    &.finished {
+      font-size: 12px;
+      .task-content {
+        cursor: default;
+        text-decoration: line-through;
+        color: lighten(#343434, 40%);
+      }
+    }
     &:hover {
       .task-toolbar {
         visibility: visible;
@@ -211,8 +212,8 @@
         padding: 4px 6px;
         border-radius: 2px;
         font-size: 12px;
-        background-color: #e8e8e8;
-        color: rgba(0,0,0,0.7);
+        background-color: #ff7473;
+        color: #fff;
       }
     }
     .task-metadata {

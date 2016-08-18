@@ -198,8 +198,8 @@
     }
     &-status{
       color: fadeout(#000, 60%);
-      font-size: 12px;
-      padding: 6px 18px;
+      font-size: 14px;
+      padding: 12px 18px;
       &__archived{
         background-color: #fdfae5;
         background-image: -webkit-linear-gradient(top left, rgba(0,0,0,.05) 25%, transparent 25%, transparent 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.05) 75%, transparent 75%, transparent);
@@ -208,10 +208,8 @@
         background-size: 14px 14px;
       }
       &__trash{
-        background-color: #fdfae5;
-        background-image: -webkit-linear-gradient(top left, rgba(0,0,0,.05) 25%, transparent 25%, transparent 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.05) 75%, transparent 75%, transparent);
-        background-image: -o-linear-gradient(top left, rgba(0,0,0,.05) 25%, transparent 25%, transparent 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.05) 75%, transparent 75%, transparent);
-        background-image: linear-gradient(to bottom right, rgba(0,0,0,.05) 25%, transparent 25%, transparent 50%, rgba(0,0,0,.05) 50%, rgba(0,0,0,.05) 75%, transparent 75%, transparent);
+        background-color: fade(#ff7473, 80%);
+        background-image: linear-gradient(to bottom right, #ff7473 25%, transparent 25%, transparent 50%, #ff7473 50%, #ff7473 75%, transparent 75%, transparent);
         background-size: 14px 14px;
       }
     }

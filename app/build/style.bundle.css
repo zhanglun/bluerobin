@@ -259,8 +259,8 @@
 }
 .card-status {
   color: rgba(0, 0, 0, 0.4);
-  font-size: 12px;
-  padding: 6px 18px;
+  font-size: 14px;
+  padding: 12px 18px;
 }
 .card-status__archived {
   background-color: #fdfae5;
@@ -269,9 +269,9 @@
   background-size: 14px 14px;
 }
 .card-status__trash {
-  background-color: #fdfae5;
-  background-image: -webkit-linear-gradient(top left, rgba(0, 0, 0, 0.05) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.05) 75%, transparent 75%, transparent);
-  background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.05) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.05) 75%, transparent 75%, transparent);
+  background-color: rgba(255, 116, 115, 0.8);
+  background-image: -webkit-linear-gradient(top left, #ff7473 25%, transparent 25%, transparent 50%, #ff7473 50%, #ff7473 75%, transparent 75%, transparent);
+  background-image: linear-gradient(to bottom right, #ff7473 25%, transparent 25%, transparent 50%, #ff7473 50%, #ff7473 75%, transparent 75%, transparent);
   background-size: 14px 14px;
 }
 .card-header {
@@ -471,17 +471,10 @@
       -ms-flex-align: center;
           align-items: center;
   position: relative;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
 }
 .task:hover {
   background: rgba(0, 0, 0, 0.1);
-}
-.task.finished {
-  font-size: 12px;
-}
-.task.finished .task-content {
-  cursor: default;
-  text-decoration: line-through;
-  color: #9a9a9a;
 }
 .task.editing .task-content-box {
   display: none;
@@ -530,25 +523,33 @@
   color: #000;
 }
 .collection-item {
-  margin-bottom: 10px;
+  width: 100%;
+  height: 50px;
   box-sizing: border-box;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: #343434;
   background: rgba(255, 255, 255, 0.85);
   border-bottom: 1px solid #DCDCDC;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
-  width: 330px;
-  margin: 5px 5px;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+}
+.collection-item.finished {
+  font-size: 12px;
+}
+.collection-item.finished .task-content {
+  cursor: default;
+  text-decoration: line-through;
+  color: #9a9a9a;
 }
 .collection-item:hover .task-toolbar {
   visibility: visible;
@@ -571,8 +572,8 @@
   padding: 4px 6px;
   border-radius: 2px;
   font-size: 12px;
-  background-color: #e8e8e8;
-  color: rgba(0, 0, 0, 0.7);
+  background-color: #ff7473;
+  color: #fff;
 }
 .collection-item .task-metadata {
   padding: 6px 10px;
@@ -1174,8 +1175,8 @@ button[data-tooltip] {
   display: none;
 }
 .robin-checkbox--input:checked ~ .robin-checkbox--label {
-  border: 2px solid #7fcb9f;
-  background: #7fcb9f;
+  border: 2px solid #47b8e0;
+  background: #47b8e0;
 }
 .robin-checkbox--input:checked ~ .robin-checkbox--tick {
   display: block;
