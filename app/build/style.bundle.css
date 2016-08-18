@@ -9,10 +9,6 @@
   height: 100%;
   box-sizing: border-box;
 }
-.main {
-  max-width: 1024px;
-  margin: 0 auto;
-}
 .animate_routerview-transition {
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
@@ -49,12 +45,11 @@
  */
 .sidebar {
   float: left;
-  width: 210px;
-  background: rgba(255, 255, 255, 0.85);
+  width: 250px;
   box-sizing: border-box;
   position: fixed;
   bottom: 0;
-  top: 80px;
+  top: 70px;
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 2;
@@ -109,8 +104,7 @@
 .side-actions {
   position: fixed;
   bottom: 0;
-  width: 210px;
-  background: rgba(255, 255, 255, 0.85);
+  width: 250px;
   border-top: 1px solid #ddd;
   font-size: 14px;
 }
@@ -187,7 +181,6 @@
  * task detail card
  */
 .navigation-account {
-  width: 190px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -218,20 +211,16 @@
   height: 60px;
   width: 100%;
   padding: 0 20px;
-  background: rgba(255, 255, 255, 0.85);
+  background: #ffc952;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   position: fixed;
   z-index: 1;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: reverse;
-      -ms-flex-direction: row-reverse;
-          flex-direction: row-reverse;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 /* ====================================================== */
 /* Variables
@@ -416,8 +405,8 @@
 /**
  * task detail card
  */
-.main-container {
-  padding-left: 230px;
+.main {
+  padding-left: 270px;
   padding-right: 20px;
   width: 100%;
   box-sizing: border-box;
@@ -1175,7 +1164,8 @@ button[data-tooltip] {
 .robin-checkbox {
   height: 16px;
   padding: 2px 0 2px 20px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   border: #969da3;
   border-radius: 2px;
   position: relative;

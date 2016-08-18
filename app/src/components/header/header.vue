@@ -13,7 +13,7 @@
     </label>
     <div v-if="user" class="navigation-account">
       <img v-bind:src="user.avatar" alt="">
-      {{user.username}}
+      <!-- {{user.username}} -->
     </div>
 
   </header>
@@ -54,7 +54,7 @@
 
   .navigation{
     &-account{
-      width: @sidemenu-width - 20;
+      // width: @sidemenu-width - 20;
       display: flex;
       align-items: center;
       justify-content: flex-start;
@@ -77,13 +77,13 @@
     height: 60px;
     width: 100%;
     padding: 0 20px;
-    background: fade(#fff, 85%);
+    background: #ffc952;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     position: fixed;
     z-index: 1;
     align-items: center;
-    flex-direction: row-reverse;
-  // justify-content: space-between;
-  justify-content: flex-end;
+    // flex-direction: row-reverse;
+    justify-content: space-between;
+  // justify-content: flex-end;
 }
 </style>

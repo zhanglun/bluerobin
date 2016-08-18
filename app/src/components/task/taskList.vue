@@ -1,16 +1,14 @@
 <template>
-  <div class="main-container" transition="animate_routerview">
-    <div class="main">
-      <add-item :listid="listId"></add-item>
-      <div class="tasklist">
-        <task-item v-for="task in tasklist" :task="task" :index="$index" track-by="id"></task-item>
-      </div>
-      <div class="label-trigger" @click="toggleShowArchivedTask">
-        显示当前清单下已经归档的任务
-      </div>
-      <div class="tasklist--finished" transition="animation_showtask" v-show="showArchived">
-        <task-item v-for="task in archivedTasklist" :task="task" :index="$index" track-by="id"></task-item>
-      </div>
+  <div class="main" transition="animate_routerview">
+    <add-item :listid="listId"></add-item>
+    <div class="tasklist">
+      <task-item v-for="task in tasklist" :task="task" :index="$index" track-by="id"></task-item>
+    </div>
+    <div class="label-trigger" @click="toggleShowArchivedTask">
+      显示当前清单下已经归档的任务
+    </div>
+    <div class="tasklist--finished" transition="animation_showtask" v-show="showArchived">
+      <task-item v-for="task in archivedTasklist" :task="task" :index="$index" track-by="id"></task-item>
     </div>
   </div>
 </template>
@@ -48,7 +46,7 @@
             query = {
               list_id: this.list_id,
               archived: false,
-              sort: '-update_time',
+              sort: '-create_time',
             };
           };
           default: {
@@ -145,15 +143,11 @@
 
   @labelTriggerBg: #d8d8d8;
 
-  .main-container {
+  .main {
     padding-left: @sidemenu-width + 20;
     padding-right: 20px;
     width: 100%;
     box-sizing: border-box;
-  }
-  .main {
-    // max-width: 980px;
-    // margin: 0 auto;
   }
   .tasklist {
     display: flex;

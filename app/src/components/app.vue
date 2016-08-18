@@ -1,8 +1,8 @@
 <template>
   <div>
-  <div class="loading" v-if="!finished">
+<!--   <div class="loading" v-if="!finished">
     <h1>loading...</h1>
-  </div>
+  </div> -->
     <router-view></router-view>
     <script type="x-template" id="modal-template">
       <div class="modal-mask" v-if="show" transition="modal-animation_default">
@@ -88,16 +88,11 @@
     min-height: 100%;
   }
   .page-content{
-    // display: flex;
     padding-top: 80px;
     padding-bottom: 50px;
     min-height: 100%;
     height: 100%;
     box-sizing: border-box;
-  }
-  .main {
-    max-width: 1024px;
-    margin: 0 auto;
   }
   .animate_routerview-transition{
     transition: all 0.4s ease;

@@ -141,11 +141,11 @@
     float:left;
     width: @sidemenu-width;
     // padding: 20px 30px;
-    background: fade(#fff, 85%);
+    // background: fade(#fff, 85%);
     box-sizing: border-box;
     position: fixed;
     bottom: 0;
-    top: 80px;
+    top: 70px;
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 2;
@@ -195,7 +195,7 @@
     position: fixed;
     bottom: 0;
     width: @sidemenu-width;
-    background: fade(#fff, 85%);
+    // background: fade(#fff, 85%);
     border-top: 1px solid @sidemenu-spearate-line;
     font-size: 14px;
     &__item {
