@@ -5,9 +5,13 @@ const state = {
   all: [],
   taskDetail: null,
   showDetail: false,
+  isFetching: false,
 };
 
 const mutations = {
+  [mutationType.FETCHING](state) {
+    state.isFetching = true;
+  },
   [mutationType.FETCH_TASKS](state, query, tasks) {
     console.log('mutations: FETCH_TASKS');
     if (query.archived && query.list_id) {
@@ -20,6 +24,7 @@ const mutations = {
   [mutationType.FETCH_TASK_DETAIL](state, task) {
     console.log('mutations: FETCH_TASK_DETAIL');
     state.showDetail = true;
+    state.isFetching = false;
     state.taskDetail = task;
   },
 

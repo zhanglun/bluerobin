@@ -25,3 +25,5 @@ export const DELETE_LIST = 'DELETE_LIST';
 export const DELETE_LIST_ERROR = 'DELETE_LIST_ERROR';
 
 export const UPDATE_LIST = 'UPDATE_LIST';
+
+export const FETCHING = 'FETCHING';

@@ -1,5 +1,5 @@
 <template>
-  <div transition="animation_showtask" v-bind:class="{finished: task.archived, editing: task == taskEditing, 'collection-item': iscollection, 'task': !iscollection}" @click="showTaskDetail(task)">
+  <div transition="animation_showtask" v-bind:class="{archived: task.archived, editing: task == taskEditing, 'collection-item': iscollection, 'task': !iscollection}" @click="showTaskDetail(task)">
     <div class="task-content">
       <div class="task-content-box">{{task.title}}</div>
     </div>
@@ -13,6 +13,7 @@
       <i class="material-icons task-toolbar--icons" @click="deleteTask(task)" v-if="task.istrash" data-tooltip="彻底删除">delete_forever</i>
       <i class="material-icons task-toolbar--icons" @click="deleteTask(task)" v-if="!task.istrash" data-tooltip="删除">delete</i>
     </span>
+
   </div>
 </template>
 <script>
@@ -118,6 +119,14 @@
     &:hover {
       background: fade(#000, 10%)
     }
+    &.archived {
+      font-size: 12px;
+      .task-content {
+        cursor: default;
+        text-decoration: line-through;
+        color: lighten(#343434, 40%);
+      }
+    }
 
     &.editing {
       .task-content {
@@ -183,7 +192,7 @@
     align-items: center;
     position: relative;
     box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
-    &.finished {
+    &.archived {
       font-size: 12px;
       .task-content {
         cursor: default;
@@ -199,12 +208,10 @@
     }
     .task-content {
       padding: 12px;
-      width: 100%;
       margin: 0;
       box-sizing: border-box;
     }
     .task-labels {
-      width: 100%;
       padding: 2px 12px;
       box-sizing: border-box;
 
@@ -225,7 +232,6 @@
     .task-toolbar {
       visibility: hidden;
       display: flex;
-      width: 100%;
       position: static;
       padding: 2px 6px 6px;
       box-sizing: border-box;

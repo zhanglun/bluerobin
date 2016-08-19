@@ -22,6 +22,7 @@ export const fetchTasks = ({ dispatch, state }, query, callback) => {
 };
 
 export const fetchTaskDetail = ({ dispatch, state }, taskid) => {
+  dispatch(mutationType.FETCHING);
   request
     .get('/tasks/' + taskid)
     .set('x-access-token', window.localStorage.token)

@@ -476,6 +476,14 @@
 .task:hover {
   background: rgba(0, 0, 0, 0.1);
 }
+.task.archived {
+  font-size: 12px;
+}
+.task.archived .task-content {
+  cursor: default;
+  text-decoration: line-through;
+  color: #9a9a9a;
+}
 .task.editing .task-content-box {
   display: none;
 }
@@ -543,10 +551,10 @@
   position: relative;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
 }
-.collection-item.finished {
+.collection-item.archived {
   font-size: 12px;
 }
-.collection-item.finished .task-content {
+.collection-item.archived .task-content {
   cursor: default;
   text-decoration: line-through;
   color: #9a9a9a;
@@ -559,12 +567,10 @@
 }
 .collection-item .task-content {
   padding: 12px;
-  width: 100%;
   margin: 0;
   box-sizing: border-box;
 }
 .collection-item .task-labels {
-  width: 100%;
   padding: 2px 12px;
   box-sizing: border-box;
 }
@@ -586,7 +592,6 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  width: 100%;
   position: static;
   padding: 2px 6px 6px;
   box-sizing: border-box;
