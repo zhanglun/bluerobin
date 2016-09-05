@@ -63,14 +63,26 @@
   import * as getters from '../../vuex/getter';
   import marked from 'marked';
   import Tool from 'tool';
+
+  let markedRenderer = new marked.Renderer();
+  markedRenderer.listitem = function(text) {
+    if (/^\s*\[[x ]\]\s*/.test(text)) {
+      text = text
+        .replace(/^\s*\[ \]\s*/, '<input type="checkbox" class="empty checkbox icon" />')
+        .replace(/^\s*\[x\]\s*/, '<input type="checkbox" checked class="checked checkbox icon" />');
+      return '<li style="list-style: none">' + text + '</li>';
+    } else {
+      return '<li>' + text + '</li>';
+    }
+  };
   marked.setOptions({
-    renderer: new marked.Renderer(),
+    renderer: markedRenderer,
     gfm: true,
     tables: true,
     breaks: false,
     pedantic: false,
     sanitize: true,
-    smartLists: true,
+    // smartLists: true,
     smartypants: false
   });
 
