@@ -6,6 +6,8 @@ a chrome extension
 
 simple tasklist for you ~~
 
+(live view)[http://zhanglun.github.io/bluerobin/#!/lists/576746bfb6388112008235cb]
+
 ```js
 npm install 
 gulp
