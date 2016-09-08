@@ -1,13 +1,16 @@
 #app {
-  height: 100%;
   min-height: 100%;
+  height: 100%;
 }
 .page-content {
-  padding-top: 80px;
-  padding-bottom: 50px;
+  padding-top: 76px;
   min-height: 100%;
   height: 100%;
   box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
 }
 .animate_routerview-transition {
   -webkit-transition: all 0.4s ease;
@@ -44,18 +47,17 @@
  * task detail card
  */
 .sidebar {
-  float: left;
   width: 250px;
   box-sizing: border-box;
-  position: fixed;
-  bottom: 0;
-  top: 70px;
   overflow-y: auto;
   overflow-x: hidden;
-  z-index: 2;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
 }
 .sidebar-container {
   padding-bottom: 40px;
+  margin-top: -10px;
 }
 .side-menu {
   padding: 10px 0 16px 0;
@@ -244,12 +246,13 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 680px;
-  height: 540px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 380px;
+          flex: 1 0 380px;
+  height: 100%;
   margin: 0 auto;
   background: #f7f7f7;
   border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   -webkit-transition: all 300ms 0s;
   transition: all 300ms 0s;
 }
@@ -341,7 +344,7 @@
 .card-metadata-item--content {
   font-size: 14px;
   padding: 5px 0;
-  width: 580px;
+  width: 280px;
 }
 .card-metadata-item--content .content-input {
   display: none;
@@ -361,9 +364,9 @@
   display: none;
 }
 .card-footer {
-  min-height: 46px;
   font-size: 14px;
-  padding: 14px;
+  padding: 12px;
+  min-height: 26px;
   color: #a3a3a2;
   border-top: 1px solid #ebebeb;
   background: #fff;
@@ -406,9 +409,10 @@
  * task detail card
  */
 .main {
-  padding-left: 270px;
-  padding-right: 20px;
+  padding: 0 14px 14px;
   width: 100%;
+  min-height: 100%;
+  overflow-y: auto;
   box-sizing: border-box;
 }
 .tasklist {
@@ -471,7 +475,6 @@
       -ms-flex-align: center;
           align-items: center;
   position: relative;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
 }
 .task:hover {
   background: rgba(0, 0, 0, 0.1);

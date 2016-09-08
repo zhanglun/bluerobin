@@ -84,15 +84,16 @@
 
 <style lang="less">
   #app{
-    height: 100%;
     min-height: 100%;
+    height: 100%;
   }
   .page-content{
-    padding-top: 80px;
-    padding-bottom: 50px;
+    padding-top: 76px;
     min-height: 100%;
     height: 100%;
     box-sizing: border-box;
+    display: flex;
+    overflow: hidden;
   }
   .animate_routerview-transition{
     transition: all 0.4s ease;

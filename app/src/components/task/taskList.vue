@@ -1,5 +1,5 @@
 <template>
-  <div class="main" transition="animate_routerview">
+  <div class="main" >
     <add-item :listid="listId"></add-item>
     <div class="tasklist">
       <task-item v-for="task in tasklist" :task="task" :index="$index" track-by="id"></task-item>
@@ -144,9 +144,10 @@
   @labelTriggerBg: #d8d8d8;
 
   .main {
-    padding-left: @sidemenu-width + 20;
-    padding-right: 20px;
+    padding: 0 14px 14px;
     width: 100%;
+    min-height: 100%;
+    overflow-y: auto;
     box-sizing: border-box;
   }
   .tasklist {

@@ -138,19 +138,14 @@
 
   @import '../../public/stylesheets/variables';
   .sidebar{
-    float:left;
     width: @sidemenu-width;
-    // padding: 20px 30px;
-    // background: fade(#fff, 85%);
     box-sizing: border-box;
-    position: fixed;
-    bottom: 0;
-    top: 70px;
     overflow-y: auto;
     overflow-x: hidden;
-    z-index: 2;
+    flex: 1 0 auto;
     &-container {
       padding-bottom: 40px;
+      margin-top: -10px;
     }
   }
   .side-menu{

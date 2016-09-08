@@ -1,5 +1,5 @@
 <template>
- <div class="main-container" transition="animate_routerview">
+ <div class="main-container">
   <div class="main">
     <div v-if="istrash">回收站中的任务会在7天后删除</div>
     <div class="tasklist">
