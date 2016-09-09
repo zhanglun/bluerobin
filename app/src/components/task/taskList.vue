@@ -144,7 +144,7 @@
   @labelTriggerBg: #d8d8d8;
 
   .main {
-    padding: 0 14px 14px;
+    padding: 0 10px 10px;
     width: 100%;
     min-height: 100%;
     overflow-y: auto;
@@ -158,7 +158,7 @@
   .label-trigger {
     display: inline-block;
     margin: 6px 0;
-    padding: 6px 12px;
+    padding: 4px 8px;
     background: fade(@labelTriggerBg, 80%);
     cursor: pointer;
     &:hover{

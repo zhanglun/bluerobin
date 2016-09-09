@@ -37,7 +37,7 @@
         fetchDetail: tasksActions.fetchTaskDetail,
       },
       getters: {
-        showDetail: getters.isShowDetail,
+        // showDetail: getters.isShowDetail,
       }
     },
     computed: {
@@ -105,9 +105,9 @@
   }
   .task {
     width: 100%;
-    height: 50px;
+    height: 46px;
     box-sizing: border-box;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: #343434;
     background: fade(@white, 85%);
     border-bottom: 1px solid #DCDCDC;

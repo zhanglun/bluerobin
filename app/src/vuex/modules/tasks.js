@@ -14,6 +14,8 @@ const mutations = {
   },
   [mutationType.FETCH_TASKS](state, query, tasks) {
     console.log('mutations: FETCH_TASKS');
+    state.showDetail = false;
+    state.isFetching = false;
     if (query.archived && query.list_id) {
       state.all = state.all.concat(tasks);
     } else {

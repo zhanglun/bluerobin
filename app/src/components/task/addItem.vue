@@ -70,12 +70,12 @@ export default {
 .task-textfield{
   width: 100%;
   background: #fff;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   box-sizing: border-box;
   &--input{
     width: 100%;
-    height: 40px;
-    font-size: 18px;
+    height: 46px;
+    font-size: 15px;
     padding: 6px 10px;
     box-sizing: border-box;
     border: none;

@@ -88,7 +88,7 @@
     height: 100%;
   }
   .page-content{
-    padding-top: 60px;
+    padding-top: 55px;
     min-height: 100%;
     height: 100%;
     box-sizing: border-box;

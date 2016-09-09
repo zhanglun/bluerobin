@@ -158,7 +158,7 @@
     &__item{
       box-sizing: border-box;
       border-radius: 2px;
-      padding: 10px 14px 10px 20px;
+      padding: 8px 14px 8px 20px;
       color: #000;
       text-decoration: none;
       display: flex;
