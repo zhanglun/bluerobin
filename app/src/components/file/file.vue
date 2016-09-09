@@ -12,8 +12,8 @@
 
 </template>
 <script>
-	import Uploader from '../../services/upload.babel.js';
-	import Tool from '../../services/tool.babel.js';
+	import Uploader from '../../services/upload';
+	import Tool from '../../services/tool';
 	export default{
 		data(){
 			return {

@@ -6,17 +6,17 @@ a chrome extension
 
 simple tasklist for you ~~
 
-(live view)[http://zhanglun.github.io/bluerobin/#!/lists/576746bfb6388112008235cb]
+[live view](http://zhanglun.github.io/bluerobin/)
 
 ```js
-npm install 
+npm install
 gulp
 ```
 
 ### 技术选择
 
-[Vue.js](https://vuejs.org/) 
-[Vuex](http://vuex.vuejs.org/en/intro.html) 
+[Vue.js](https://vuejs.org/)
+[Vuex](http://vuex.vuejs.org/en/intro.html)
 [gulp](http://gulpjs.com/)
 [Webpack](http://webpack.github.io/)
 
