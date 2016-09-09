@@ -59,8 +59,8 @@
       align-items: center;
       justify-content: flex-start;
       img{
-        width: 40px;
-        height: 40px;
+        width: 32px;
+        height: 32px;
         margin-right: 10px;
         border-radius: 100%;
       }
@@ -74,7 +74,7 @@
   .header{
     display: flex;
     box-sizing: border-box;
-    height: 60px;
+    height: 45px;
     width: 100%;
     padding: 0 20px;
     background: #ffc952;
