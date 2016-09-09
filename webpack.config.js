@@ -24,7 +24,7 @@ module.exports = {
   },
   resolve: {
    alias: {
-    'tool':  SRC_PATH + '/services/tool.babel.js',
+    'tool':  SRC_PATH + '/services/tool.js',
    },
   },
   module: {

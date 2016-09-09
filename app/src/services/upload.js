@@ -1,12 +1,8 @@
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 var plupload = window.plupload;
 
 window.CONFIG = {
-  APIROOT: 'http://localhost:1234/api'
+  APIROOT: 'http://localhost:1234/api',
+  // APIROOT: 'http://zhanglun.daoapp.io/api'
 };
 
 /**
@@ -42,20 +38,20 @@ function uploadInit(opt, setkey) {
     'chunk_size': '4mb', // 分块上传时，每片的体积
     'auto_start': true, // 选择文件后自动上传，若关闭需要自己绑定事件触发上传,
     init: {
-      FilesAdded: function FilesAdded(up, files) {
-        plupload.each(files, function (file) {
+      FilesAdded: function(up, files) {
+        plupload.each(files, function(file) {
           // 文件添加进队列后,处理相关的事情
           //   console.log(file);
         });
       },
-      'BeforeUpload': function BeforeUpload(up, file) {
+      'BeforeUpload': function(up, file) {
         console.log(file);
         // 每个文件上传前,处理相关的事情
       },
-      'UploadProgress': function UploadProgress(up, file) {
+      'UploadProgress': function(up, file) {
         // 每个文件上传时,处理相关的事情
       },
-      'FileUploaded': function FileUploaded(up, file, info) {
+      'FileUploaded': function(up, file, info) {
         // 每个文件上传成功后,处理相关的事情
         // 其中 info 是文件上传成功后，服务端返回的json，形式如
         // {
@@ -67,13 +63,13 @@ function uploadInit(opt, setkey) {
         // var res = parseJSON(info);
         // var sourceLink = domain + res.key; 获取上传成功后的文件的Url
       },
-      'Error': function Error(up, err, errTip) {
+      'Error': function(up, err, errTip) {
         // 上传出错时,处理相关的事情
       },
-      'UploadComplete': function UploadComplete() {
+      'UploadComplete': function() {
         // 队列文件处理完毕后,处理相关的事情
       },
-      'Key': function Key(up, file) {
+      'Key': function(up, file) {
         // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
         // 该配置必须要在 unique_names: false , save_key: false 时才生效
         // var key = "";
@@ -81,11 +77,10 @@ function uploadInit(opt, setkey) {
         //   return 'test_prefixer_hahhahah_______' + file.name;
         // return window.account.username + '/' + file.name;
         return setkey(up, file);
-      }
-    }
+      },
+    },
   });
   return Uploader;
 }
 
-exports.default = uploadInit;
-//# sourceMappingURL=upload.babel.js.map
+export default uploadInit;

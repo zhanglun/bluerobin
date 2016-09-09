@@ -1,11 +1,6 @@
-'use strict';
+let Tool = {};
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var Tool = {};
-
-Tool.uploadImageSrc = function (filename, w, h) {
+Tool.uploadImageSrc = (filename, w, h) => {
   var query = '';
   if (w && h) {
     query = '?imageView2/1/w/' + w + '/h/' + h;
@@ -13,21 +8,24 @@ Tool.uploadImageSrc = function (filename, w, h) {
   return 'http://7xnrrd.com1.z0.glb.clouddn.com/' + filename + query;
 };
 
-Tool.createImagePreviewUrl = function (origin, w, h) {
+Tool.createImagePreviewUrl = (origin, w, h) => {
   w = w || 40;
   h = h || 40;
   return origin + '?imageView2/1/w/' + w + '/h/' + h;
 };
 
-Tool.guid = function () {
+Tool.guid = () => {
   function s4() {
-    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    return Math.floor((1 + Math.random()) * 0x10000)
+      .toString(16)
+      .substring(1);
   }
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+    s4() + '-' + s4() + s4() + s4();
 };
 
-Tool.htmlDecode = function (str) {
-  var s = "";
+Tool.htmlDecode = (str) => {
+  let s = "";
   if (str.length == 0) return "";
   s = str.replace(/&/g, "&amp;");
   s = s.replace(/</g, "&lt;");
@@ -39,8 +37,8 @@ Tool.htmlDecode = function (str) {
   return s;
 };
 
-Tool.htmlEncode = function (str) {
-  var s = "";
+Tool.htmlEncode = (str) => {
+  let s = "";
   if (str.length == 0) return "";
   s = str.replace(/&amp;/g, "&");
   s = s.replace(/&lt;/g, "<");
@@ -52,5 +50,4 @@ Tool.htmlEncode = function (str) {
   return s;
 };
 
-exports.default = Tool;
-//# sourceMappingURL=tool.babel.js.map
+export default Tool;
