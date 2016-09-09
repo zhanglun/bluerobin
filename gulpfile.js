@@ -28,12 +28,12 @@ webpackConfigDev.debug = true;
 // create a single instance of the compiler to allow caching
 var devCompiler = webpack(webpackConfigDev);
 
-gulp.task('webpack:build-dev', function() {
+gulp.task('webpack:dev', function() {
   devCompiler.run(function(err, status) {
     if (err) {
-      throw new gutil.PluginError('webpack:build-dev', err);
+      throw new gutil.PluginError('webpack:dev', err);
     }
-    gutil.log('[webpack:build-dev]', status.toString({
+    gutil.log('[webpack:dev]', status.toString({
       colors: true
     }));
   });
@@ -62,18 +62,25 @@ gulp.task('webpack:build', function() {
     gutil.log('[webpack:build]', stats.toString({
       colors: true
     }));
-    callback();
+    // callback();
   });
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['./app/**/*.js', './app/src/components/*.vue', './app/src/components/**/*.vue', './app/**/*.less'], ['webpack:build-dev']);
+  gulp.watch(['./app/**/*.js', './app/src/components/*.vue', './app/src/components/**/*.vue', './app/**/*.less'], ['webpack:dev']);
 });
 
 gulp.task('default', [
-  'webpack:build-dev',
+  'webpack:dev',
   'babel',
   'watch'
 ]);
 
 gulp.task('build', ['webpack:build']);
+
+gulp.task('gh-pages', function(){
+    return gulp.src('./app/build/**/*')
+        .pipe(gulp.dest('./'));
+});
+
+gulp.task('publish', ['build','gh-pages']);

@@ -93,6 +93,5 @@ module.exports = {
       name: ['vue'],
       minChunks: Infinity
     }),
-  ],
-  devtool: 'eval-source-map',
+  ]
 };
