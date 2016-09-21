@@ -8,7 +8,7 @@
     <div class="mdl-grid">
       <div class="mdl-cell mdl-cell-6-col">
         <div class="robin-textfield">
-          <label class="mdl-textfield__label" for="email">Email</label>
+          <label class="" for="email">Email</label>
           <input class="robin-textfield--input robin-textfield--input_default" type="text" id="email" v-model="account.username">
         </div>
       </div>
