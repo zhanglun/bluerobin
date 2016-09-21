@@ -6,7 +6,7 @@ const state = {
   taskDetail: null,
   showDetail: false,
   isRequestingTasks: false,
-  isRequestingTasksDetail: false,
+  isRequestingTaskDetail: false,
 };
 
 const mutations = {
@@ -14,7 +14,7 @@ const mutations = {
     state.isRequestingTasks = true;
   },
   [mutationType.REQUST_TASKS_DETAIL](state) {
-    state.isRequestingTasksDetail = true;
+    state.isRequestingTaskDetail = true;
   },
   [mutationType.RECEIVE_TASKS](state, query, tasks) {
     state.showDetail = false;
@@ -29,7 +29,7 @@ const mutations = {
   [mutationType.RECEIVE_TASK_DETAIL](state, task) {
     console.log('mutations: RECEIVE_TASK_DETAIL');
     state.showDetail = true;
-    state.isRequestingTasksDetail = false;
+    state.isRequestingTaskDetail = false;
     state.taskDetail = task;
   },
 
