@@ -1,14 +1,20 @@
 <template>
   <div class="main" >
     <add-item :listid="listId"></add-item>
-    <div class="tasklist">
+    <div class="loader" v-show="isRequestingTasks">
+      <div class="loader-inner ball-clip-rotate-multiple">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div class="tasklist" v-show="!isRequestingTasks"> 
       <task-item v-for="task in tasklist" :task="task" :index="$index" track-by="id"></task-item>
-    </div>
-    <div class="label-trigger" @click="toggleShowArchivedTask">
-      显示当前清单下已经归档的任务
-    </div>
-    <div class="tasklist--finished" transition="animation_showtask" v-show="showArchived">
-      <task-item v-for="task in archivedTasklist" :task="task" :index="$index" track-by="id"></task-item>
+      <div class="label-trigger" @click="toggleShowArchivedTask">
+        显示当前清单下已经归档的任务
+      </div>
+      <div class="tasklist--finished" transition="animation_showtask" v-show="showArchived">
+        <task-item v-for="task in archivedTasklist" :task="task" :index="$index" track-by="id"></task-item>
+      </div>
     </div>
   </div>
 </template>
@@ -77,6 +83,7 @@
       },
       getters: {
         tasks: getters.getTasks,
+        isRequestingTasks: getters.isRequestingTasks,
         auth: getters.getUserAuth,
       }
     },

@@ -21,3 +21,14 @@ export const isShowDetail = (state) => {
 export const getTaskDetail = (state) => {
   return state.tasks.taskDetail;
 };
+
+
+
+
+// ajax 加载相关
+export const isRequestingTaskDetail = (state) => {
+	return state.tasks.isRequestingTaskDetail;
+}
+export const isRequestingTasks = (state) => {
+	return state.tasks.isRequestingTasks;
+}

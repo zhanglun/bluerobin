@@ -11,26 +11,27 @@ let requestTasks = (query) => {
 };
 
 export const fetchTasks = ({ dispatch, state }, query, callback) => {
+  dispatch(mutationType.REQUST_TASKS);
   requestTasks(query).then((res) => {
     if (typeof callback === 'function') {
       callback(res);
     }
-    dispatch(mutationType.FETCH_TASKS, query, res.body);
+    dispatch(mutationType.RECEIVE_TASKS, query, res.body);
   }, (err) => {
-    dispatch(mutationType.FETCH_TASKS_ERROR, err);
+    dispatch(mutationType.RECEIVE_TASKS_ERROR, err);
   });
 };
 
 export const fetchTaskDetail = ({ dispatch, state }, taskid) => {
-  dispatch(mutationType.FETCHING);
+  dispatch(mutationType.REQUEST_TASK_DETAIL);
   request
     .get('/tasks/' + taskid)
     .set('x-access-token', window.localStorage.token)
     .use(baseURL)
     .then((res) => {
-      dispatch(mutationType.FETCH_TASK_DETAIL, res.body);
+      dispatch(mutationType.RECEIVE_TASK_DETAIL, res.body);
     }, (err) => {
-      dispatch(mutationType.FETCH_TASK_DETAIL_ERROR, err);
+      dispatch(mutationType.RECEIVE_TASK_DETAIL_ERROR, err);
     });
 };
 

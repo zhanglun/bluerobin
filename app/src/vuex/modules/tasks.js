@@ -5,17 +5,20 @@ const state = {
   all: [],
   taskDetail: null,
   showDetail: false,
-  isFetching: false,
+  isRequestingTasks: false,
+  isRequestingTasksDetail: false,
 };
 
 const mutations = {
-  [mutationType.FETCHING](state) {
-    state.isFetching = true;
+  [mutationType.REQUST_TASKS](state) {
+    state.isRequestingTasks = true;
   },
-  [mutationType.FETCH_TASKS](state, query, tasks) {
-    console.log('mutations: FETCH_TASKS');
+  [mutationType.REQUST_TASKS_DETAIL](state) {
+    state.isRequestingTasksDetail = true;
+  },
+  [mutationType.RECEIVE_TASKS](state, query, tasks) {
     state.showDetail = false;
-    state.isFetching = false;
+    state.isRequestingTasks = false;
     if (query.archived && query.list_id) {
       state.all = state.all.concat(tasks);
     } else {
@@ -23,10 +26,10 @@ const mutations = {
     }
   },
 
-  [mutationType.FETCH_TASK_DETAIL](state, task) {
-    console.log('mutations: FETCH_TASK_DETAIL');
+  [mutationType.RECEIVE_TASK_DETAIL](state, task) {
+    console.log('mutations: RECEIVE_TASK_DETAIL');
     state.showDetail = true;
-    state.isFetching = false;
+    state.isRequestingTasksDetail = false;
     state.taskDetail = task;
   },
 

@@ -250,3 +250,55 @@ video {
 ::-webkit-scrollbar {
   width: 0 !important
 }
+
+
+
+// loading
+.loader{
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+}
+.ball-clip-rotate-multiple {
+    position: relative
+}
+
+.ball-clip-rotate-multiple>div {
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 2px solid #000;
+    border-bottom-color: transparent;
+    border-top-color: transparent;
+    border-radius: 100%;
+    height: 35px;
+    width: 35px;
+    animation: rotate 1s 0s ease-in-out infinite
+}
+
+.ball-clip-rotate-multiple>div:last-child {
+    display: inline-block;
+    top: 10px;
+    left: 10px;
+    width: 15px;
+    height: 15px;
+    animation-duration: .5s;
+    border-color: #000 transparent;
+    animation-direction: reverse
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+        transform: rotate(0)
+    }
+
+    50% {
+        transform: rotate(180deg);
+        transform: rotate(180deg)
+    }
+
+    100% {
+        transform: rotate(360deg);
+        transform: rotate(360deg)
+    }
+}

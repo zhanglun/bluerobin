@@ -1,17 +1,23 @@
 <template>
-<div class="card" @click.stop v-bind:class="{card__trash: task.istrash}">
-  <div class="card-status card-status__archived" v-if="task.archived && !task.istrash">
-    该任务已经归档
-  </div>
-  <div class="card-status card-status__trash" v-if="task.istrash">
-    该任务已被删除，无法编辑
-  </div>
-  <div class="card-header">
-    <input class="card-header--title card-header--input" :value="task.title" v-autoblur="isTitleEditing" @focus="isTitleEditing = true" @keyup.esc="doEditTitle" @keyup.enter="doEditTitle" :disabled="task.istrash" />
-  </div>
-  <div class="card-body">
-    <div class="card-metadata">
-      <!--  标签 -->
+  <div class="card" @click.stop v-bind:class="{card__trash: task.istrash}">
+  <div class="loader" v-show="isRequestingTasksDetail">
+      <div class="loader-inner ball-clip-rotate-multiple">
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div class="card-status card-status__archived" v-if="task.archived && !task.istrash">
+      该任务已经归档
+    </div>
+    <div class="card-status card-status__trash" v-if="task.istrash">
+      该任务已被删除，无法编辑
+    </div>
+    <div class="card-header">
+      <input class="card-header--title card-header--input" :value="task.title" v-autoblur="isTitleEditing" @focus="isTitleEditing = true" @keyup.esc="doEditTitle" @keyup.enter="doEditTitle" :disabled="task.istrash" />
+    </div>
+    <div class="card-body">
+      <div class="card-metadata">
+        <!--  标签 -->
 <!--               <div class="card-metadata-item">
           <span class="material-icons card-metadata-item--icons">label_outline</span>
 
@@ -64,8 +70,8 @@
   markedRenderer.listitem = function(text) {
     if (/^\s*\[[x ]\]\s*/.test(text)) {
       text = text
-        .replace(/^\s*\[ \]\s*/, '<input type="checkbox" class="empty checkbox icon" />')
-        .replace(/^\s*\[x\]\s*/, '<input type="checkbox" checked class="checked checkbox icon" />');
+      .replace(/^\s*\[ \]\s*/, '<input type="checkbox" class="empty checkbox icon" />')
+      .replace(/^\s*\[x\]\s*/, '<input type="checkbox" checked class="checked checkbox icon" />');
       return '<li style="list-style: none">' + text + '</li>';
     } else {
       return '<li>' + text + '</li>';
@@ -98,6 +104,7 @@
       },
       getters: {
         task: getters.getTaskDetail,
+        isRequestingTasksDetail: getters.isRequestingTasksDetail,
       }
     },
     ready() {

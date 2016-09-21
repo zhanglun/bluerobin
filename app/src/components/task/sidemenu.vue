@@ -139,11 +139,11 @@
 
   @import '../../public/stylesheets/variables';
   .sidebar{
-    width: @sidemenu-width;
+    max-width: @sidemenu-width;
     box-sizing: border-box;
     overflow-y: auto;
     overflow-x: hidden;
-    flex: 1 0 auto;
+    flex: 1 0 @sidemenu-width;
     &-container {
       padding-bottom: 40px;
       margin-top: -10px;

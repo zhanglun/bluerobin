@@ -43,7 +43,6 @@
             this.istrash = true;
             query = {
               istrash: true,
-              // archived: false,
               sort: '-update_time',
             };
             break;

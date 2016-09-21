@@ -38,7 +38,7 @@
       signUp() {
         let vm = this;
         let data = this.$data.registerData;
-        vm.$http.post('user/signup', data)
+        vm.$http.post('http://zhanglun.daoapp.io/api/users/signup', data)
         .then(res => {
           localStorage.token = res.token;
           vm.$router.go('/task');
