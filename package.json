@@ -1,6 +1,6 @@
 {
   "name": "bluerobin",
-  "private": true,
+  "private": false,
   "version": "0.0.1",
   "scripts": {
     "start": "gulp",
@@ -11,6 +11,7 @@
     "superagent": "^2.1.0",
     "superagent-prefix": "0.0.2",
     "vue": "^1.0.26",
+    "vue-resource": "^1.0.2",
     "vue-router": "^0.7.13",
     "vuex": "^1.0.0-rc.2"
   },

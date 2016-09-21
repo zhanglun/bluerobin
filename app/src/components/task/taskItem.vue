@@ -115,12 +115,10 @@
     flex-direction: row;
     align-items: center;
     position: relative;
-    // box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
     &:hover {
       background: fade(#000, 10%)
     }
     &.archived {
-      font-size: 12px;
       .task-content {
         cursor: default;
         text-decoration: line-through;

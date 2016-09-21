@@ -9,7 +9,6 @@ var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
 var SRC_PATH = path.resolve(APP_PATH, 'src');
-console.log(SRC_PATH);
 var BUILD_PATH = path.resolve(APP_PATH, 'build');
 
 module.exports = {
@@ -19,7 +18,6 @@ module.exports = {
   },
   output: {
     path: BUILD_PATH,
-    // publicPath: BUILD_PATH,
     filename: './[name].bundle.js',
   },
   resolve: {
@@ -52,11 +50,11 @@ module.exports = {
       include: SRC_PATH,
     }, {
       test: /\.css$|\.less$/,
-      // loaders: ['style-loader', 'css-loader?sourceMap', 'sass-loader'],
-      loader: ExtractTextPlugin.extract([
-        'css-loader?sourceMap',
-        'less-loader',
-      ]),
+      loaders: ['style-loader', 'css-loader?sourceMap', 'less-loader'],
+      // loader: ExtractTextPlugin.extract([
+      //   'css-loader?sourceMap',
+      //   'less-loader',
+      // ]),
       include: SRC_PATH,
     }],
   },
