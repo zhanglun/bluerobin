@@ -21,9 +21,9 @@ module.exports = {
     filename: './[name].bundle.js',
   },
   resolve: {
-    alias: {
-      'tool': SRC_PATH + '/services/tool.js',
-    },
+   alias: {
+    'tool':  SRC_PATH + '/services/tool.js',
+   },
   },
   module: {
     loaders: [{
@@ -51,17 +51,13 @@ module.exports = {
     }, {
       test: /\.css$|\.less$/,
       loaders: ['style-loader', 'css-loader?sourceMap', 'less-loader'],
-      // loader: ExtractTextPlugin.extract([
-      //   'css-loader?sourceMap',
-      //   'less-loader',
-      // ]),
       include: SRC_PATH,
     }],
   },
   vue: {
     loaders: {
-      // css: ExtractTextPlugin.extract("css"),
-      // less: ExtractTextPlugin.extract("css!less"),
+      css: ExtractTextPlugin.extract("css"),
+      less: ExtractTextPlugin.extract("css!less"),
     },
   },
   babel: {
@@ -75,10 +71,10 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: '"development"',
+        NODE_ENV: '"production"',
       }
     }),
-    // new ExtractTextPlugin('style.bundle.css'),
+    new ExtractTextPlugin('style.bundle.css'),
     new HtmlWebpackPlugin({
       template: SRC_PATH + '/index.html',
       filename: 'index.html',
@@ -91,7 +87,7 @@ module.exports = {
       name: ['vue'],
       minChunks: Infinity
     }),
-  ],
-  devtool: 'eval-source-map',
-  debug: true,
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin(),
+  ]
 };
