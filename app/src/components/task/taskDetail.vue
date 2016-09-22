@@ -1,6 +1,6 @@
 <template>
   <div class="card" @click.stop v-bind:class="{card__trash: task.istrash}">
-    <div class="loader" v-show="isRequestingTaskDetail">
+    <div class="loader loader--hover" v-show="isRequestingTaskDetail" transition="animation-loader">
       <div class="loader-inner ball-clip-rotate-multiple">
         <div></div>
         <div></div>
@@ -206,6 +206,7 @@
     border-radius: 2px;
     // box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
     transition: all 300ms 0s;
+    position: relative;
     &__trash {
       .card-header, .card-metadata {
         cursor: not-allowed;
