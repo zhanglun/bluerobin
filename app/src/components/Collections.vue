@@ -9,9 +9,9 @@
 </div>
 </template>
 <script>
-  import TaskItemView from './taskItem.vue';
-  import * as tasksActions from '../../vuex/actions/tasks';
-  import * as getters from '../../vuex/getter';
+import TaskItemView from './TaskItem.vue';
+  import * as tasksActions from '../vuex/actions/tasks';
+  import * as getters from '../vuex/getter';
   export default {
     data() {
       return {

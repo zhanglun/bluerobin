@@ -1,6 +1,15 @@
 <template>
   <div class="sidebar">
-    <div class="sidebar-container">
+    <div class="sidebar-header">
+      <span class="material-icons">list</span>
+    </div>
+    <div class="sidebar-toolbar">
+      <div v-if="user" class="sidebar-toolbar-account">
+        <img v-bind:src="user.avatar" alt="">
+        {{user.username}}
+      </div> 
+    </div>
+    <div class="sidebar-body list-scroll">
       <ul class="side-menu">
         <li v-for="list in lists">
           <a class="side-menu__item" v-link="{name: 'list', params: {id: list.id}}">
@@ -11,7 +20,7 @@
           </a>
         </li>
       </ul>
-<!--       <ul class="side-menu">
+      <ul class="side-menu">
         <li>
           <a class="side-menu__item" v-link="{name: 'archive', params: {id: 'archive'}}">
             <span class="material-icons">archive</span>
@@ -24,7 +33,9 @@
             <span class="side-menu__item-content">回收站</span>
           </a>
         </li>
-      </ul> -->
+      </ul>
+    </div>
+    <div class="sidebar-footer">
       <div class="side-actions">
         <span class="side-actions__item" @click="showModal = true">
           <span class="material-icons">add</span>
@@ -90,6 +101,7 @@
       },
       getters: {
         lists: getters.getLists,
+        user: getters.getUserInfo,
       }
     },
     watch: {
@@ -141,16 +153,40 @@
   .sidebar{
     max-width: @sidemenu-width;
     box-sizing: border-box;
-    overflow-y: auto;
-    overflow-x: hidden;
     flex: 1 0 @sidemenu-width;
-    &-container {
-      padding-bottom: 40px;
-      margin-top: -10px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    &-header{
+      flex: 1 0 45px;
+      background: #ffc952 ;
+    }
+    &-body {
+      flex: 1 1 auto;
+      overflow-y: auto;
+    }
+    &-toolbar {
+      flex: 1 0 auto;
+      padding: 6px 0 6px;
+      box-sizing: border-box;
+      display: flex;
+      &-account{
+        width: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        img{
+          width: 32px;
+          height: 32px;
+          border-radius: 100%;
+          padding: 0 8px 0 8px;
+        }
+      }
     }
   }
+
   .side-menu{
-    padding:10px 0 16px 0;
+    padding:2px 0 12px 0;
     margin: 0;
     border-bottom: 1px solid @sidemenu-spearate-line;
     li {
@@ -159,7 +195,7 @@
     &__item{
       box-sizing: border-box;
       border-radius: 2px;
-      padding: 8px 14px 8px 20px;
+      padding: 8px 14px 8px 12px;
       color: #000;
       text-decoration: none;
       display: flex;
@@ -187,33 +223,34 @@
       }
     }
   }
-  .side-actions{
-    position: fixed;
-    bottom: 0;
-    width: @sidemenu-width;
-    // background: fade(#fff, 85%);
-    border-top: 1px solid @sidemenu-spearate-line;
-    font-size: 14px;
-    &__item {
-      width: 100%;
-      box-sizing: border-box;
-      border-radius: 2px;
-      line-height: 24px;
-      padding: 10px;
-      color: #000;
-      text-decoration: none;
-      display: flex;
-      justify-content: center;
-      cursor: pointer;
-      &:hover{
-        background: rgba(0,0,0,.03);
-      }
-      &-content {
-        margin-left: 10px;
-        flex: 0 1 76px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+  // .side-actions{
+  .sidebar-footer{
+    flex: 1 0 45px;
+    .side-actions{
+      width: @sidemenu-width;
+      border-top: 1px solid @sidemenu-spearate-line;
+      font-size: 14px;
+      &__item {
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 2px;
+        line-height: 24px;
+        padding: 10px;
+        color: #000;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        cursor: pointer;
+        &:hover{
+          background: rgba(0,0,0,.03);
+        }
+        &-content {
+          margin-left: 10px;
+          flex: 0 1 76px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
       }
     }
   }
@@ -244,4 +281,4 @@
   }
 
 
-</style>
+  </style>

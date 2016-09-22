@@ -1,6 +1,5 @@
 <template>
-  <div class="main" >
-    <!-- <app-header></app-header> -->
+  <div class="main-body" >
     <add-item :listid="listId"></add-item>
     <div class="tasklist">
       <task-item v-for="task in tasklist" :task="task" :index="$index" track-by="id"></task-item>
@@ -17,6 +16,7 @@
     <div class="tasklist--finished" transition="animation_showtask" v-show="showArchived">
       <task-item v-for="task in archivedTasklist" :task="task" :index="$index" track-by="id"></task-item>
     </div>
+
   </div>
 </template>
 <script>
@@ -89,6 +89,7 @@
         tasks: getters.getTasks,
         isRequestingTasks: getters.isRequestingTasks,
         auth: getters.getUserAuth,
+
       }
     },
     computed: {
@@ -127,6 +128,7 @@
     },
     components: {
       'add-item': addItemView,
+
       'task-item': TaskItemView,
     },
     methods: {
@@ -155,12 +157,14 @@
 
   @labelTriggerBg: #d8d8d8;
 
-  .main {
-    padding: 0 10px 10px;
+  .main-body {
+    padding: 10px;
     width: 100%;
     min-height: 100%;
     overflow-y: auto;
     box-sizing: border-box;
+    flex: 1 1 auto;
+    overflow-y: auto;
   }
   .tasklist {
     display: flex;

@@ -1,21 +1,10 @@
 <template>
-  <div>
-    <side-container></side-container>
-    <div class="page-content">
-      <app-header></app-header>
-      <router-view ></router-view>
-      <task-detail v-if="show" transition="animation-showtaskdetail"></task-detail>
-    </div>
-    <script type="x-template" id="modal-template">
-      <div class="modal-mask" v-if="show" transition="modal-animation_default">
-        <div class="modal-wrapper">
-          <div class="modal-container">
-            <slot name="content"></slot>
-          </div>
-        </div>
-      </div>
-    </script>
+  <side-container></side-container>
+  <div class="main">
+    <main-header></main-header>
+    <router-view ></router-view>
   </div>
+  <task-detail v-if="show" transition="animation-showtaskdetail"></task-detail>
 </template>
 
 <script>
@@ -23,29 +12,37 @@
   import store from '../vuex/store';
 
   import * as userActions from '../vuex/actions/user';
+  import * as listsActions from '../vuex/actions/lists';
   import * as getters from '../vuex/getter';
 
   import SideContainerView from './SideContainer.vue';
-  import HeaderView from './Header.vue';
-  import TaskContainerView from './TaskContainer.vue';
   import TaskDetailView from './TaskDetail.vue';
+
+  import HeaderView from './Header.vue';
 
   // 创建 modal 组件
   Vue.component('modal', {
-    template: "#modal-template",
+    template: '' + 
+    '<div class="modal-mask" v-if="show" transition="modal-animation_default">' +
+    '<div class="modal-wrapper">' + 
+    '<div class="modal-container">' + 
+    '<slot name="content"></slot>' + 
+    '</div>' + 
+    '</div>' + 
+    '</div>',
     props: [
-      'show',
+    'show',
     ],
   });
 
   export default {
     vuex: {
       actions: {
-        authenticate: userActions.authenticate,
+        fetchLists: listsActions.fetchLists,
       },
       getters: {
-        user: getters.getUserInfo,
-        lists: getters.getLists,
+        auth: getters.getUserAuth,
+        show: getters.isShowDetail,
       }
     },
     data() {
@@ -69,13 +66,7 @@
       }
     },
     created() {
-      this.authenticate((user) => {
-        if (user) {
-           this.$router.go('/lists');
-        } else {
-          this.$router.go('/login');
-        }
-      });
+      this.fetchLists();
     },
     ready() {
     },
@@ -83,26 +74,25 @@
     },
     components: {
       'side-container': SideContainerView,
-      'task-container': TaskContainerView,
+      'main-header': HeaderView,
       'task-detail': TaskDetailView,
-      'app-header': HeaderView,
     },
-    store: store,
   };
 </script>
 
 <style lang="less">
-  #app{
+  .app {
     min-height: 100%;
     height: 100%;
     display: flex;
   }
-  .page-content{
-    padding-top: 55px;
+  .main{
     min-height: 100%;
     height: 100%;
     box-sizing: border-box;
     display: flex;
+    flex: 1;
+    flex-direction: column;
     overflow: hidden;
   }
   .animate_routerview-transition{

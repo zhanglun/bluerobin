@@ -18,10 +18,9 @@
     <div class="card-body">
       <div class="card-metadata">
         <!--  标签 -->
-<!--               <div class="card-metadata-item">
+        <div class="card-metadata-item">
           <span class="material-icons card-metadata-item--icons">label_outline</span>
-
-        </div> -->
+        </div>
         <div class="card-metadata-item">
           <i class="material-icons card-metadata-item--icons" data-tooltip="更新时间">update</i>
           <span class="card-metadata-item--content">{{task.update_time}}</span>
@@ -198,8 +197,7 @@
   .card {
     display: flex;
     flex-direction: column;
-    // width: @taskdetail-card-width;
-    flex: 1 0 @taskdetail-card-width;
+    flex: 0 0 @taskdetail-card-width;
     height: 100%;
     margin: 0 auto;
     background: @taskdetail-container-background;
@@ -344,7 +342,7 @@
     }
     &-enter,
     &-leave {
-      flex: 1 0 0;
+      flex: 0;
     }
   }
 
