@@ -33,14 +33,16 @@
           case 'archived': {
             query = {
               archived: true,
-              sort: '-update_time',
+              sort: 'desc',
+              order: 'update_time',
             };
             break;
           };
           case 'trash': {
             query = {
               istrash: true,
-              sort: '-update_time',
+              sort: 'desc',
+              order: 'update_time',
             };
             break;
           };
@@ -52,7 +54,8 @@
             query = {
               list_id: this.list_id,
               archived: false,
-              sort: '-create_time',
+              sort: 'desc',
+              order: 'create_time',
             };
           };
           default: {
