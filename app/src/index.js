@@ -4,10 +4,9 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import VueResource from 'vue-resource';
 
-import App from './components/app.vue';
-import TaskView from './components/task/task.vue';
-import TaskListView from './components/task/taskList.vue';
-import CollectionsView from './components/task/collections.vue';
+import App from './components/App.vue';
+import TaskListView from './components/TaskList.vue';
+// import CollectionsView from './components/task/collections.vue';
 import UserLogin from './components/user/login.vue';
 import UserSignUp from './components/user/signup.vue';
 
@@ -22,11 +21,11 @@ var router = new Router({
 });
 
 router.map({
-  '/': {
+  '/app': {
     component: App,
   },
   '/lists': {
-    component: TaskView,
+    component: TaskListView,
     subRoutes: {
       '/:id': {
         name: 'list',
@@ -35,23 +34,23 @@ router.map({
     },
     auth: true,
   },
-  '/collections': {
-    component: TaskView,
-    subRoutes: {
-      '/archive': {
-        name: 'archive',
-        component: CollectionsView,
-      },
-      '/search': {
-        name: 'search',
-        component: TaskListView,
-      },
-      '/trash': {
-        name: 'trash',
-        component: CollectionsView,
-      },
-    },
-  },
+  // '/collections': {
+  //   component: TaskView,
+  //   subRoutes: {
+  //     '/archive': {
+  //       name: 'archive',
+  //       component: CollectionsView,
+  //     },
+  //     '/search': {
+  //       name: 'search',
+  //       component: TaskListView,
+  //     },
+  //     '/trash': {
+  //       name: 'trash',
+  //       component: CollectionsView,
+  //     },
+  //   },
+  // },
   '/login': {
     component: UserLogin,
   },
@@ -61,7 +60,7 @@ router.map({
 });
 
 router.redirect({
-  '*': '/',
+  '*': '/app',
 });
 
 router.start(App, '#app');

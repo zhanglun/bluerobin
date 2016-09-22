@@ -17,8 +17,8 @@
   </div>
 </template>
 <script>
-  import * as tasksActions from '../../vuex/actions/tasks';
-  import * as getters from '../../vuex/getter';
+  import * as tasksActions from '../vuex/actions/tasks';
+  import * as getters from '../vuex/getter';
   export default {
     props: ['iscollection', 'task', 'index'],
     data() {
@@ -92,7 +92,7 @@
 
 <style lang="less">
 
-  @import '../../public/stylesheets/variables';
+  @import '../public/stylesheets/variables';
 
   @editbox-height: 34px;
 

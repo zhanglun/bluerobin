@@ -5,8 +5,7 @@
 </template>
 
 <script>
-import * as taskActions from '../../vuex/actions/tasks';
-// import * as getters from '../../vuex/getter';
+import * as taskActions from '../vuex/actions/tasks';
 
 export default {
   data() {
@@ -61,7 +60,7 @@ export default {
 
 <style lang="less">
 
-@import '../../public/stylesheets/variables';
+@import '../public/stylesheets/variables';
 
 .modal.bottom-sheet{
   max-height: 60%;

@@ -61,8 +61,8 @@
   </div>
 </template>
 <script>
-  import * as tasksActions from '../../vuex/actions/tasks';
-  import * as getters from '../../vuex/getter';
+  import * as tasksActions from '../vuex/actions/tasks';
+  import * as getters from '../vuex/getter';
   import marked from 'marked';
   import Tool from 'tool';
 
@@ -194,7 +194,7 @@
   };
 </script>
 <style lang="less">
-  @import '../../public/stylesheets/variables';
+  @import '../public/stylesheets/variables';
   .card {
     display: flex;
     flex-direction: column;

@@ -1,6 +1,6 @@
 <template>
   <div class="main" >
-    <app-header></app-header>
+    <!-- <app-header></app-header> -->
     <add-item :listid="listId"></add-item>
     <div class="tasklist">
       <task-item v-for="task in tasklist" :task="task" :index="$index" track-by="id"></task-item>
@@ -20,11 +20,10 @@
   </div>
 </template>
 <script>
-  import HeaderView from '../header.vue';
-  import TaskItemView from './taskItem.vue';
-  import addItemView from './addItem.vue';
-  import * as tasksActions from '../../vuex/actions/tasks';
-  import * as getters from '../../vuex/getter';
+  import TaskItemView from './TaskItem.vue';
+  import addItemView from './AddItem.vue';
+  import * as tasksActions from '../vuex/actions/tasks';
+  import * as getters from '../vuex/getter';
 
   export default {
     route: {
@@ -128,7 +127,6 @@
     },
     components: {
       'add-item': addItemView,
-      'app-header': HeaderView,
       'task-item': TaskItemView,
     },
     methods: {
@@ -153,7 +151,7 @@
   };
 </script>
 <style lang="less">
-  @import '../../public/stylesheets/variables';
+  @import '../public/stylesheets/variables';
 
   @labelTriggerBg: #d8d8d8;
 

@@ -1,9 +1,11 @@
 <template>
   <div>
-<!--   <div class="loading" v-if="!finished">
-    <h1>loading...</h1>
-  </div> -->
-    <router-view></router-view>
+    <side-container></side-container>
+    <div class="page-content">
+      <app-header></app-header>
+      <router-view ></router-view>
+      <task-detail v-if="show" transition="animation-showtaskdetail"></task-detail>
+    </div>
     <script type="x-template" id="modal-template">
       <div class="modal-mask" v-if="show" transition="modal-animation_default">
         <div class="modal-wrapper">
@@ -23,6 +25,10 @@
   import * as userActions from '../vuex/actions/user';
   import * as getters from '../vuex/getter';
 
+  import SideContainerView from './SideContainer.vue';
+  import HeaderView from './Header.vue';
+  import TaskContainerView from './TaskContainer.vue';
+  import TaskDetailView from './TaskDetail.vue';
 
   // 创建 modal 组件
   Vue.component('modal', {
@@ -76,6 +82,10 @@
     methods: {
     },
     components: {
+      'side-container': SideContainerView,
+      'task-container': TaskContainerView,
+      'task-detail': TaskDetailView,
+      'app-header': HeaderView,
     },
     store: store,
   };
@@ -85,6 +95,7 @@
   #app{
     min-height: 100%;
     height: 100%;
+    display: flex;
   }
   .page-content{
     padding-top: 55px;

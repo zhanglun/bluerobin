@@ -11,7 +11,7 @@
           </a>
         </li>
       </ul>
-      <ul class="side-menu">
+<!--       <ul class="side-menu">
         <li>
           <a class="side-menu__item" v-link="{name: 'archive', params: {id: 'archive'}}">
             <span class="material-icons">archive</span>
@@ -24,7 +24,7 @@
             <span class="side-menu__item-content">回收站</span>
           </a>
         </li>
-      </ul>
+      </ul> -->
       <div class="side-actions">
         <span class="side-actions__item" @click="showModal = true">
           <span class="material-icons">add</span>
@@ -32,7 +32,7 @@
         </span>
       </div>
     </div>
-    <modal :show="showModal">
+<!--     <modal :show="showModal">
       <div slot="content" class="list-editor">
         <div class="list-editor-header">
           <h3 class="list-editor-header--title">创建新的清单</h3>
@@ -63,13 +63,13 @@
           <button class="robin-btn robin-btn__default" @click="doEditList">确定</button>
         </div>
       </div>
-    </modal>
+    </modal> -->
   </div>
 
 </template>
 <script>
-  import * as listsActions from '../../vuex/actions/lists';
-  import * as getters from '../../vuex/getter';
+  import * as listsActions from '../vuex/actions/lists';
+  import * as getters from '../vuex/getter';
 
   export default {
     data() {
@@ -137,7 +137,7 @@
 
 <style lang="less">
 
-  @import '../../public/stylesheets/variables';
+  @import '../public/stylesheets/variables';
   .sidebar{
     max-width: @sidemenu-width;
     box-sizing: border-box;

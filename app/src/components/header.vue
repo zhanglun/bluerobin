@@ -1,10 +1,5 @@
 <template>
   <header class="header">
-    <!-- <div class="navigation-search">
-      <div class="robin-textfield">
-        <input type="text" class="robin-textfield--input robin-textfield--input_default" />
-      </div>
-    </div> -->
     <label class="robin-checkbox" for="qwer1234">
       <input type="checkbox" id="qwer1234" class="robin-checkbox--input" v-on:change="switchAPI(useRemoteAPI)" :checked="useRemoteAPI" v-model="useRemoteAPI">
       <span class="robin-checkbox--label"></span>
