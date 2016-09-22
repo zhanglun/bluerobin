@@ -1,6 +1,6 @@
 <template>
   <div class="card" @click.stop v-bind:class="{card__trash: task.istrash}">
-  <div class="loader" v-show="isRequestingTaskDetail">
+    <div class="loader" v-show="isRequestingTaskDetail">
       <div class="loader-inner ball-clip-rotate-multiple">
         <div></div>
         <div></div>
@@ -331,5 +331,19 @@
     }
   }
 
+  /**
+   * animation slide
+   */
 
-</style>
+  .animation-showtaskdetail{
+    &-transition {
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    &-enter,
+    &-leave {
+      flex: 1 0 0;
+    }
+  }
+
+  </style>

@@ -1,13 +1,11 @@
 <template>
-    <app-header></app-header>
     <div class="page-content">
       <side-menu></side-menu>
       <router-view ></router-view>
-      <task-detail v-if="show"></task-detail>
+      <task-detail v-if="show" transition="animation-showtaskdetail"></task-detail>
     </div>
 </template>
 <script>
-  import HeaderView from '../header/header.vue';
   import SidemenuView from './sidemenu.vue';
   import TaskDetailView from './taskDetail.vue';
 
@@ -29,7 +27,6 @@
       }
     },
     components: {
-      'app-header': HeaderView,
       'side-menu': SidemenuView,
       'task-detail': TaskDetailView,
     },
