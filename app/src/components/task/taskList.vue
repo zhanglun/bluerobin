@@ -1,5 +1,6 @@
 <template>
   <div class="main" >
+    <app-header></app-header>
     <add-item :listid="listId"></add-item>
     <div class="tasklist">
       <task-item v-for="task in tasklist" :task="task" :index="$index" track-by="id"></task-item>
@@ -19,6 +20,7 @@
   </div>
 </template>
 <script>
+  import HeaderView from '../header.vue';
   import TaskItemView from './taskItem.vue';
   import addItemView from './addItem.vue';
   import * as tasksActions from '../../vuex/actions/tasks';
@@ -126,6 +128,7 @@
     },
     components: {
       'add-item': addItemView,
+      'app-header': HeaderView,
       'task-item': TaskItemView,
     },
     methods: {
@@ -133,7 +136,8 @@
         let param = {
           list_id: this.list_id,
           archived: true,
-          sort: '-update_time',
+          sort: 'update_time',
+          order: 'desc',
         };
         this.fetchTasks(param, () => {
           this.loaded = true;

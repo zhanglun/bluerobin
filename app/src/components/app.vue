@@ -3,7 +3,6 @@
 <!--   <div class="loading" v-if="!finished">
     <h1>loading...</h1>
   </div> -->
-    <app-header></app-header>
     <router-view></router-view>
     <script type="x-template" id="modal-template">
       <div class="modal-mask" v-if="show" transition="modal-animation_default">
@@ -24,7 +23,6 @@
   import * as userActions from '../vuex/actions/user';
   import * as getters from '../vuex/getter';
 
-  import HeaderView from './header.vue';
 
   // 创建 modal 组件
   Vue.component('modal', {
@@ -78,7 +76,6 @@
     methods: {
     },
     components: {
-      'app-header': HeaderView,
     },
     store: store,
   };

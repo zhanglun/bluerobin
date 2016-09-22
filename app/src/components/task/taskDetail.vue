@@ -1,6 +1,6 @@
 <template>
   <div class="card" @click.stop v-bind:class="{card__trash: task.istrash}">
-    <div class="loader loader--hover" v-show="isRequestingTaskDetail" transition="animation-loader">
+    <div class="loader loader__hover" v-show="isRequestingTaskDetail" transition="animation-loader">
       <div class="loader-inner ball-clip-rotate-multiple">
         <div></div>
         <div></div>
@@ -287,6 +287,7 @@
         font-size: 14px;
         padding: 5px 0;
         width: @taskdetail-card-width - 100px;
+        word-break: all;
         .content-input {
           display: none;
           height: 300px;

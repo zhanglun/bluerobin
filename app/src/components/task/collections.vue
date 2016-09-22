@@ -4,12 +4,6 @@
     <div v-if="istrash">回收站中的任务会在7天后删除</div>
     <div class="tasklist">
       <task-item v-for="task in tasksComputed" :task="task" :index="$index" :iscollection="true" track-by="id"></task-item>
-      <div class="ghost-item"></div>
-      <div class="ghost-item"></div>
-      <div class="ghost-item"></div>
-      <div class="ghost-item"></div>
-      <div class="ghost-item"></div>
-
     </div>
   </div>
 </div>
@@ -35,7 +29,8 @@
             query = {
               istrash: false,
               archived: true,
-              sort: '-update_time',
+              sort: 'update_time',
+              order: 'desc',
             };
             break;
           };
@@ -43,7 +38,8 @@
             this.istrash = true;
             query = {
               istrash: true,
-              sort: '-update_time',
+              sort: 'update_time',
+              order: 'desc',
             };
             break;
           };
