@@ -43,7 +43,7 @@
         </span>
       </div>
     </div>
-<!--     <modal :show="showModal">
+    <modal :show="showModal">
       <div slot="content" class="list-editor">
         <div class="list-editor-header">
           <h3 class="list-editor-header--title">创建新的清单</h3>
@@ -74,7 +74,7 @@
           <button class="robin-btn robin-btn__default" @click="doEditList">确定</button>
         </div>
       </div>
-    </modal> -->
+    </modal>
   </div>
 
 </template>
@@ -222,9 +222,8 @@
       }
     }
   }
-  // .side-actions{
   .sidebar-footer {
-    min-height: 45px;
+    min-height: 40px;
     .side-actions{
       width: @sidemenu-width;
       border-top: 1px solid @sidemenu-spearate-line;
@@ -234,7 +233,7 @@
         box-sizing: border-box;
         border-radius: 2px;
         line-height: 24px;
-        padding: 10px;
+        padding: 8px;
         color: #000;
         text-decoration: none;
         display: flex;
