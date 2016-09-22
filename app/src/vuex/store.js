@@ -24,17 +24,6 @@ const logger = createLogger({
   }
 });
 
-const myMiddleware = {
-  onInit(state) {
-    // 记录初始 state
-    console.log('middlewares');
-  },
-  onMutation(mutation, state) {
-    // 每个 mutation 后会被调用
-    // mutation 参数的格式为 { type, payload }
-    console.log('------>mutation');
-  }
-};
 
 // 整合初始状态和变更函数，我们就得到了我们所需的 store
 // 至此，这个 store 就可以连接到我们的应用中
@@ -44,5 +33,5 @@ export default new Vuex.Store({
     lists,
     tasks,
   },
-  middlewares: [myMiddleware],
+ plugins: [logger]
 });

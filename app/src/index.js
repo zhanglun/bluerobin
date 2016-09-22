@@ -65,5 +65,3 @@ router.redirect({
 });
 
 router.start(App, '#app');
-
-// sync(store, router);
