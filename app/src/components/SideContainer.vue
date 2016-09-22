@@ -158,7 +158,7 @@
     display: flex;
     flex-direction: column;
     &-header{
-      flex: 1 0 45px;
+      min-height: 45px;
       background: #ffc952 ;
     }
     &-body {
@@ -166,7 +166,6 @@
       overflow-y: auto;
     }
     &-toolbar {
-      flex: 1 0 auto;
       padding: 6px 0 6px;
       box-sizing: border-box;
       display: flex;
@@ -224,8 +223,8 @@
     }
   }
   // .side-actions{
-  .sidebar-footer{
-    flex: 1 0 45px;
+  .sidebar-footer {
+    min-height: 45px;
     .side-actions{
       width: @sidemenu-width;
       border-top: 1px solid @sidemenu-spearate-line;
