@@ -285,7 +285,7 @@
         font-size: 14px;
         padding: 5px 0;
         width: @taskdetail-card-width - 100px;
-        word-break: all;
+        word-break: break-all;
         .content-input {
           display: none;
           height: 300px;
