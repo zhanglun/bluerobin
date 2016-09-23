@@ -22,13 +22,13 @@
 
   // 创建 modal 组件
   Vue.component('modal', {
-    template: '' + 
+    template: '' +
     '<div class="modal-mask" v-if="show" transition="modal-animation_default">' +
-    '<div class="modal-wrapper">' + 
-    '<div class="modal-container">' + 
-    '<slot name="content"></slot>' + 
-    '</div>' + 
-    '</div>' + 
+    '<div class="modal-wrapper">' +
+    '<div class="modal-container">' +
+    '<slot name="content"></slot>' +
+    '</div>' +
+    '</div>' +
     '</div>',
     props: [
     'show',
@@ -63,6 +63,11 @@
         toId = this.$route.params.id || firstId;
         this.$router.go({name: 'list', params: {id: toId}});
         this.finished = true;
+      },
+      auth() {
+        if (!this.auth) {
+          this.$router.go('/login');
+        }
       }
     },
     created() {

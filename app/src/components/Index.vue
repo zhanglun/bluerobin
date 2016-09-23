@@ -30,23 +30,9 @@
     },
     computed: {
     },
-    watch: {
-      lists() {
-        let firstId = '';
-        let toId = '';
-        if(this.lists && this.lists.length) {
-          firstId = this.lists[0].id;
-        }
-        toId = this.$route.params.id || firstId;
-        this.$router.go({name: 'list', params: {id: toId}});
-        this.finished = true;
-      }
-    },
     created() {
       this.authenticate((user) => {
-        if (user) {
-           this.$router.go('/lists');
-        } else {
+        if (!user) {
           this.$router.go('/login');
         }
       });
@@ -55,11 +41,6 @@
     },
     methods: {
     },
-
     store: store,
   };
 </script>
-
-<style lang="less">
-
-</style>

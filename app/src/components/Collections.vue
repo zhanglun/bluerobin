@@ -1,11 +1,9 @@
 <template>
- <div class="main-container">
-  <div class="main">
+ <div class="main-body">
     <div v-if="istrash">回收站中的任务会在7天后删除</div>
     <div class="tasklist">
       <task-item v-for="task in tasksComputed" :task="task" :index="$index" :iscollection="true" track-by="id"></task-item>
     </div>
-  </div>
 </div>
 </template>
 <script>
@@ -123,10 +121,5 @@ import TaskItemView from './TaskItem.vue';
       font-size: 22px;
       padding: 10px 0;
     }
-  }
-  .ghost-item {
-    visibility: hidden;
-    flex: 1 0 20%;
-    margin: 5px 5px;
   }
 </style>

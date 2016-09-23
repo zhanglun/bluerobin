@@ -2,6 +2,7 @@ import * as mutationType from '../mutationType';
 
 const state = {
   all: [],
+  current: {},
 };
 
 // 创建一个对象存储一系列我们接下来要写的 mutation 函数
@@ -32,8 +33,6 @@ const mutations = {
   },
 
   [mutationType.UPDATE_LIST](state, data) {
-    console.log('mutations: UPDATE_LIST');
-    console.log(data);
     state.all.map((item) => {
       if (item.id === data.id) {
         switch (data.type) {

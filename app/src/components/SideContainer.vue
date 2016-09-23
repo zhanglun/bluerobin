@@ -7,19 +7,9 @@
       <div v-if="user" class="sidebar-toolbar-account">
         <img v-bind:src="user.avatar" alt="">
         {{user.username}}
-      </div> 
+      </div>
     </div>
     <div class="sidebar-body list-scroll">
-      <ul class="side-menu">
-        <li v-for="list in lists">
-          <a class="side-menu__item" v-link="{name: 'list', params: {id: list.id}}">
-            <span class="material-icons">list</span>
-            <span class="side-menu__item-content">{{list.name}}</span>
-            <span class="side-menu__item-count">{{list.task_count_total - list.task_count_archived - list.task_count_istrash || ''}}</span>
-            <span class="material-icons edit" @click="showCurrent(e, list)" data-tooltip="编辑" data-tooltip-pos="down">edit</span>
-          </a>
-        </li>
-      </ul>
       <ul class="side-menu">
         <li>
           <a class="side-menu__item" v-link="{name: 'archive', params: {id: 'archive'}}">
@@ -34,6 +24,17 @@
           </a>
         </li>
       </ul>
+      <ul class="side-menu">
+        <li v-for="list in lists">
+          <a class="side-menu__item" v-link="{name: 'list', params: {id: list.id}}">
+            <span class="material-icons">list</span>
+            <span class="side-menu__item-content">{{list.name}}</span>
+            <span class="side-menu__item-count">{{list.task_count_total - list.task_count_archived - list.task_count_istrash || ''}}</span>
+            <span class="material-icons edit" @click="showCurrent(e, list)" data-tooltip="编辑" data-tooltip-pos="down">edit</span>
+          </a>
+        </li>
+      </ul>
+
     </div>
     <div class="sidebar-footer">
       <div class="side-actions">
@@ -107,7 +108,6 @@
     watch: {
       // 监控左侧 list 列表，默认选中第一个
       lists() {
-        console.log(this.$route);
         this.showModal = false;
         this.showCurrentList = false;
         this.newList.name = '';
@@ -177,15 +177,16 @@
         img{
           width: 32px;
           height: 32px;
+          flex: 0 1;
           border-radius: 100%;
-          padding: 0 8px 0 8px;
+          padding: 0 6px 0 6px;
         }
       }
     }
   }
 
   .side-menu{
-    padding:2px 0 12px 0;
+    padding:2px 0;
     margin: 0;
     border-bottom: 1px solid @sidemenu-spearate-line;
     li {

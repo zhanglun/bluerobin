@@ -107,7 +107,7 @@
     width: 100%;
     height: 46px;
     box-sizing: border-box;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: #343434;
     background: fade(@white, 85%);
     border-bottom: 1px solid #DCDCDC;
@@ -179,9 +179,9 @@
 
   .collection-item{
     width: 100%;
-    height: 50px;
+    height: 46px;
     box-sizing: border-box;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: #343434;
     background: fade(@white, 85%);
     border-bottom: 1px solid #DCDCDC;
@@ -267,18 +267,14 @@
   .animation_showtask-transition {
     transition: all 0.5s ease;
   }
-  .animation_showtask-enter, .animation_showtask-leave {
-    opacity: 0;
-    transform: rotateX(180deg);
-  }
   .animation_showtask {
     &-enter {
       opacity: 0;
-      transform: rotateX(180deg);
+      // transform: rotateX(180deg);
     }
-    &-levae {
+    &-leave {
       opacity: 0;
-      transform: rotateX(180deg);
+      // transform: rotateX(180deg);
       transition: all 0.5s cubic-bezier(0.55,0,0.1,1);
     }
   }

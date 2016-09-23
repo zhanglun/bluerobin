@@ -5,7 +5,7 @@
       <task-item v-for="task in tasklist" :task="task" :index="$index" track-by="id"></task-item>
     </div>
     <div class="label-trigger" @click="toggleShowArchivedTask">
-      显示当前清单下已经归档的任务
+      显示已经归档的任务
     </div>
     <div class="loader" v-show="isRequestingTasks">
       <div class="loader-inner ball-clip-rotate-multiple">
@@ -173,7 +173,7 @@
   }
   .label-trigger {
     display: inline-block;
-    margin: 6px 0;
+    margin: 10px 0;
     padding: 4px 8px;
     background: fade(@labelTriggerBg, 80%);
     cursor: pointer;
