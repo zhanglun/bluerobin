@@ -1,6 +1,6 @@
 <template>
  <div class="main-body">
-    <div v-if="istrash">回收站中的任务会在7天后删除</div>
+    <!-- <div v-if="istrash">回收站中的任务会在7天后删除</div> -->
     <div class="tasklist">
       <task-item v-for="task in tasksComputed" :task="task" :index="$index" :iscollection="true" track-by="id"></task-item>
     </div>
