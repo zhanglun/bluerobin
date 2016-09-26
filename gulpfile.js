@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var ghPages = require('gulp-gh-pages');
 var sourcemaps = require('gulp-sourcemaps');
 var babel = require('gulp-babel');
 var gutil = require('gulp-util');
@@ -35,7 +36,7 @@ gulp.task('webpack:build', function() {
   });
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', ['webpack:dev'], function() {
   gulp.watch(['./app/**/*.js', './app/src/components/*.vue', './app/src/components/**/*.vue', './app/**/*.less'], ['webpack:dev']);
 });
 
@@ -46,9 +47,9 @@ gulp.task('default', [
 
 gulp.task('build', ['webpack:build']);
 
-gulp.task('gh-pages', function(){
-    return gulp.src('./app/build/**/*')
-        .pipe(gulp.dest('./'));
+gulp.task('deploy', function() {
+  return gulp.src('./app/dist/**/*')
+    .pipe(ghPages());
 });
 
-gulp.task('publish', ['build','gh-pages']);
+gulp.task('publish', ['build', 'deploy']);

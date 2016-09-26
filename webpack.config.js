@@ -9,7 +9,7 @@ var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
 var SRC_PATH = path.resolve(APP_PATH, 'src');
-var BUILD_PATH = path.resolve(APP_PATH, 'build');
+var BUILD_PATH = path.resolve(APP_PATH, 'dist');
 
 module.exports = {
   entry: {

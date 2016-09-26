@@ -9,7 +9,7 @@ var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'app');
 var SRC_PATH = path.resolve(APP_PATH, 'src');
-var BUILD_PATH = path.resolve(APP_PATH, 'build');
+var BUILD_PATH = path.resolve(APP_PATH, 'dist');
 
 module.exports = {
   entry: {
@@ -79,15 +79,15 @@ module.exports = {
       template: SRC_PATH + '/index.html',
       filename: 'index.html',
     }),
-    new CopyWebpackPlugin([{
-      from: SRC_PATH + '/vendor',
-      to: BUILD_PATH + '/vendor',
-    }]),
+    // new CopyWebpackPlugin([{
+    //   from: SRC_PATH + '/vendor',
+    //   to: BUILD_PATH + '/vendor',
+    // }]),
     new CommonsChunkPlugin({
       name: ['vue'],
       minChunks: Infinity
     }),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
+    // new webpack.optimize.UglifyJsPlugin(),
   ]
 };
