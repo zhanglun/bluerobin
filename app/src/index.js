@@ -57,8 +57,8 @@ router.map({
   },
 });
 
-// router.redirect({
-//   '*': '/app',
-// });
+router.redirect({
+  '*': '/lists',
+});
 
 router.start(IndexView, '#app');
