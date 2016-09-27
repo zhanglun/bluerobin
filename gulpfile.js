@@ -47,7 +47,7 @@ gulp.task('default', [
 
 gulp.task('build', ['webpack:build']);
 
-gulp.task('deploy', function() {
+gulp.task('deploy', ['build'], function() {
   return gulp.src('./app/dist/**/*')
     .pipe(ghPages());
 });
