@@ -24,25 +24,21 @@ webpackJsonp([0],[
 
 	var _Index2 = _interopRequireDefault(_Index);
 
-	var _TaskList = __webpack_require__(68);
+	var _mainContainer = __webpack_require__(68);
 
-	var _TaskList2 = _interopRequireDefault(_TaskList);
+	var _mainContainer2 = _interopRequireDefault(_mainContainer);
 
-	var _Collections = __webpack_require__(82);
-
-	var _Collections2 = _interopRequireDefault(_Collections);
-
-	var _login = __webpack_require__(86);
+	var _login = __webpack_require__(82);
 
 	var _login2 = _interopRequireDefault(_login);
 
-	var _signup = __webpack_require__(90);
+	var _signup = __webpack_require__(86);
 
 	var _signup2 = _interopRequireDefault(_signup);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(93);
+	__webpack_require__(89);
 
 	_vue2.default.use(_vueRouter2.default);
 	_vue2.default.use(_vueResource2.default);
@@ -60,27 +56,10 @@ webpackJsonp([0],[
 	    subRoutes: {
 	      '/:id': {
 	        name: 'list',
-	        component: _TaskList2.default
+	        component: _mainContainer2.default
 	      }
 	    },
 	    auth: true
-	  },
-	  '/collections': {
-	    component: _App2.default,
-	    subRoutes: {
-	      '/archive': {
-	        name: 'archive',
-	        component: _Collections2.default
-	      },
-	      // '/search': {
-	      //   name: 'search',
-	      //   component: TaskListView,
-	      // },
-	      '/trash': {
-	        name: 'trash',
-	        component: _Collections2.default
-	      }
-	    }
 	  },
 	  '/login': {
 	    component: _login2.default
@@ -92,6 +71,10 @@ webpackJsonp([0],[
 
 	router.redirect({
 	  '*': '/lists'
+	});
+
+	router.afterEach(function (transition) {
+	  console.log('成功浏览到: ' + transition.to.path);
 	});
 
 	router.start(_Index2.default, '#app');
@@ -4337,6 +4320,7 @@ webpackJsonp([0],[
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
 	__webpack_require__(10)
 	__vue_script__ = __webpack_require__(12)
 	if (__vue_script__ &&
@@ -4346,9 +4330,15 @@ webpackJsonp([0],[
 	__vue_template__ = __webpack_require__(64)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
 	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	__vue_options__.template = __vue_template__
 	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
@@ -4473,8 +4463,7 @@ webpackJsonp([0],[
 	// <template>
 	//   <side-container></side-container>
 	//   <div class="main">
-	//     <main-header></main-header>
-	//     <router-view ></router-view>
+	//     <router-view></router-view>
 	//   </div>
 	//   <task-detail v-if="show" transition="animation-showtaskdetail"></task-detail>
 	// </template>
@@ -4492,28 +4481,17 @@ webpackJsonp([0],[
 	    },
 	    getters: {
 	      auth: getters.getUserAuth,
-	      show: getters.isShowDetail
+	      show: getters.isShowDetail,
+	      lists: getters.getLists
 	    }
 	  },
 	  data: function data() {
-	    return {
-	      msg: 'Hello from BlueRobin',
-	      finished: false
-	    };
+	    return {};
 	  },
 
 	  computed: {},
 	  watch: {
-	    lists: function lists() {
-	      var firstId = '';
-	      var toId = '';
-	      if (this.lists && this.lists.length) {
-	        firstId = this.lists[0].id;
-	      }
-	      toId = this.$route.params.id || firstId;
-	      this.$router.go({ name: 'list', params: { id: toId } });
-	      this.finished = true;
-	    },
+	    lists: function lists() {},
 	    auth: function auth() {
 	      if (!this.auth) {
 	        this.$router.go('/login');
@@ -7668,6 +7646,7 @@ webpackJsonp([0],[
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
 	__webpack_require__(50)
 	__vue_script__ = __webpack_require__(51)
 	if (__vue_script__ &&
@@ -7677,9 +7656,15 @@ webpackJsonp([0],[
 	__vue_template__ = __webpack_require__(52)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
 	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	__vue_options__.template = __vue_template__
 	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
@@ -7728,13 +7713,13 @@ webpackJsonp([0],[
 	//     <div class="sidebar-body list-scroll">
 	//       <ul class="side-menu">
 	//         <li>
-	//           <a class="side-menu__item" v-link="{name: 'archive', params: {id: 'archive'}}">
+	//           <a class="side-menu__item" v-link="{name: 'list', params: {id: 'archive'}}">
 	//             <span class="material-icons">archive</span>
 	//             <span class="side-menu__item-content">归档</span>
 	//           </a>
 	//         </li>
 	//         <li>
-	//           <a class="side-menu__item" v-link="{name: 'trash', params: {id: 'trash'}}">
+	//           <a class="side-menu__item" v-link="{name: 'list', params: {id: 'trash'}}">
 	//             <span class="material-icons">delete</span>
 	//             <span class="side-menu__item-content">回收站</span>
 	//           </a>
@@ -7776,18 +7761,18 @@ webpackJsonp([0],[
 	//         </div>
 	//       </div>
 	//     </modal>
-	//     <modal :show="showCurrentList">
+	//     <modal :show="showSelectedList">
 	//       <div slot="content" class="list-editor">
 	//         <div class="list-editor-header">
 	//           <h3 class="list-editor-header--title">编辑清单</h3>
 	//         </div>
 	//         <div class="list-editor-body">
 	//           <div class="robin-textfield">
-	//             <input type="text" class="robin-textfield--input robin-textfield--input_default" v-model="currentList.name"/>
+	//             <input type="text" class="robin-textfield--input robin-textfield--input_default" v-model="selectedList.name"/>
 	//           </div>
 	//         </div>
 	//         <div class="list-editor-footer">
-	//           <span class="material-icons" @click="deleteList(this.currentList)">delete</span>
+	//           <span class="material-icons" @click="deleteList(this.selectedList)">delete</span>
 	//           <button class="robin-btn robin-btn__default" @click="doEditList">确定</button>
 	//         </div>
 	//       </div>
@@ -7803,8 +7788,8 @@ webpackJsonp([0],[
 	      newList: {
 	        name: ''
 	      },
-	      currentList: null,
-	      showCurrentList: false
+	      selectedList: null,
+	      showSelectedList: false
 	    };
 	  },
 
@@ -7823,7 +7808,7 @@ webpackJsonp([0],[
 	    // 监控左侧 list 列表，默认选中第一个
 	    lists: function lists() {
 	      this.showModal = false;
-	      this.showCurrentList = false;
+	      this.showSelectedList = false;
 	      this.newList.name = '';
 	    }
 	  },
@@ -7833,7 +7818,7 @@ webpackJsonp([0],[
 	    document.addEventListener('keyup', function (e) {
 	      if (e.keyCode === 27) {
 	        _this.showModal = false;
-	        _this.showCurrentList = false;
+	        _this.showSelectedList = false;
 	      }
 	    });
 	  },
@@ -7851,14 +7836,14 @@ webpackJsonp([0],[
 	      this.addList(param);
 	    },
 	    showCurrent: function showCurrent(e, list) {
-	      this.currentList = list;
-	      this.showCurrentList = true;
+	      this.selectedList = list;
+	      this.showSelectedList = true;
 	    },
 	    doEditList: function doEditList() {
 	      var param = {};
-	      param.name = this.currentList.name;
-	      this.showCurrentList = false;
-	      this.editList(this.currentList.id, param);
+	      param.name = this.selectedList.name;
+	      this.showSelectedList = false;
+	      this.editList(this.selectedList.id, param);
 	    }
 	  }
 	};
@@ -8003,13 +7988,14 @@ webpackJsonp([0],[
 /* 52 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"sidebar\">\n  <div class=\"sidebar-header\">\n    <span class=\"material-icons\">list</span>\n  </div>\n  <div class=\"sidebar-toolbar\">\n    <div v-if=\"user\" class=\"sidebar-toolbar-account\">\n      <img v-bind:src=\"user.avatar\" alt=\"\">\n      {{user.username}}\n    </div>\n  </div>\n  <div class=\"sidebar-body list-scroll\">\n    <ul class=\"side-menu\">\n      <li>\n        <a class=\"side-menu__item\" v-link=\"{name: 'archive', params: {id: 'archive'}}\">\n          <span class=\"material-icons\">archive</span>\n          <span class=\"side-menu__item-content\">归档</span>\n        </a>\n      </li>\n      <li>\n        <a class=\"side-menu__item\" v-link=\"{name: 'trash', params: {id: 'trash'}}\">\n          <span class=\"material-icons\">delete</span>\n          <span class=\"side-menu__item-content\">回收站</span>\n        </a>\n      </li>\n    </ul>\n    <ul class=\"side-menu\">\n      <li v-for=\"list in lists\">\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: list.id}}\">\n          <span class=\"material-icons\">list</span>\n          <span class=\"side-menu__item-content\">{{list.name}}</span>\n          <span class=\"side-menu__item-count\">{{list.task_count_total - list.task_count_archived - list.task_count_istrash || ''}}</span>\n          <span class=\"material-icons edit\" @click=\"showCurrent(e, list)\" data-tooltip=\"编辑\" data-tooltip-pos=\"down\">edit</span>\n        </a>\n      </li>\n    </ul>\n\n  </div>\n  <div class=\"sidebar-footer\">\n    <div class=\"side-actions\">\n      <span class=\"side-actions__item\" @click=\"showModal = true\">\n        <span class=\"material-icons\">add</span>\n        <span class=\"side-actions__item-content\">新建分类</span>\n      </span>\n    </div>\n  </div>\n  <modal :show=\"showModal\">\n    <div slot=\"content\" class=\"list-editor\">\n      <div class=\"list-editor-header\">\n        <h3 class=\"list-editor-header--title\">创建新的清单</h3>\n      </div>\n      <div class=\"list-editor-body\">\n        <div class=\"robin-textfield\">\n          <input type=\"text\" class=\"robin-textfield--input robin-textfield--input_default\" v-model=\"newList.name\"/>\n        </div>\n      </div>\n      <div class=\"list-editor-footer\">\n        <span></span>\n        <button class=\"robin-btn robin-btn__default\" @click=\"createNewList\">创建</button>\n      </div>\n    </div>\n  </modal>\n  <modal :show=\"showCurrentList\">\n    <div slot=\"content\" class=\"list-editor\">\n      <div class=\"list-editor-header\">\n        <h3 class=\"list-editor-header--title\">编辑清单</h3>\n      </div>\n      <div class=\"list-editor-body\">\n        <div class=\"robin-textfield\">\n          <input type=\"text\" class=\"robin-textfield--input robin-textfield--input_default\" v-model=\"currentList.name\"/>\n        </div>\n      </div>\n      <div class=\"list-editor-footer\">\n        <span class=\"material-icons\" @click=\"deleteList(this.currentList)\">delete</span>\n        <button class=\"robin-btn robin-btn__default\" @click=\"doEditList\">确定</button>\n      </div>\n    </div>\n  </modal>\n</div>\n\n";
+	module.exports = "\n<div class=\"sidebar\">\n  <div class=\"sidebar-header\">\n    <span class=\"material-icons\">list</span>\n  </div>\n  <div class=\"sidebar-toolbar\">\n    <div v-if=\"user\" class=\"sidebar-toolbar-account\">\n      <img v-bind:src=\"user.avatar\" alt=\"\">\n      {{user.username}}\n    </div>\n  </div>\n  <div class=\"sidebar-body list-scroll\">\n    <ul class=\"side-menu\">\n      <li>\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: 'archive'}}\">\n          <span class=\"material-icons\">archive</span>\n          <span class=\"side-menu__item-content\">归档</span>\n        </a>\n      </li>\n      <li>\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: 'trash'}}\">\n          <span class=\"material-icons\">delete</span>\n          <span class=\"side-menu__item-content\">回收站</span>\n        </a>\n      </li>\n    </ul>\n    <ul class=\"side-menu\">\n      <li v-for=\"list in lists\">\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: list.id}}\">\n          <span class=\"material-icons\">list</span>\n          <span class=\"side-menu__item-content\">{{list.name}}</span>\n          <span class=\"side-menu__item-count\">{{list.task_count_total - list.task_count_archived - list.task_count_istrash || ''}}</span>\n          <span class=\"material-icons edit\" @click=\"showCurrent(e, list)\" data-tooltip=\"编辑\" data-tooltip-pos=\"down\">edit</span>\n        </a>\n      </li>\n    </ul>\n\n  </div>\n  <div class=\"sidebar-footer\">\n    <div class=\"side-actions\">\n      <span class=\"side-actions__item\" @click=\"showModal = true\">\n        <span class=\"material-icons\">add</span>\n        <span class=\"side-actions__item-content\">新建分类</span>\n      </span>\n    </div>\n  </div>\n  <modal :show=\"showModal\">\n    <div slot=\"content\" class=\"list-editor\">\n      <div class=\"list-editor-header\">\n        <h3 class=\"list-editor-header--title\">创建新的清单</h3>\n      </div>\n      <div class=\"list-editor-body\">\n        <div class=\"robin-textfield\">\n          <input type=\"text\" class=\"robin-textfield--input robin-textfield--input_default\" v-model=\"newList.name\"/>\n        </div>\n      </div>\n      <div class=\"list-editor-footer\">\n        <span></span>\n        <button class=\"robin-btn robin-btn__default\" @click=\"createNewList\">创建</button>\n      </div>\n    </div>\n  </modal>\n  <modal :show=\"showSelectedList\">\n    <div slot=\"content\" class=\"list-editor\">\n      <div class=\"list-editor-header\">\n        <h3 class=\"list-editor-header--title\">编辑清单</h3>\n      </div>\n      <div class=\"list-editor-body\">\n        <div class=\"robin-textfield\">\n          <input type=\"text\" class=\"robin-textfield--input robin-textfield--input_default\" v-model=\"selectedList.name\"/>\n        </div>\n      </div>\n      <div class=\"list-editor-footer\">\n        <span class=\"material-icons\" @click=\"deleteList(this.selectedList)\">delete</span>\n        <button class=\"robin-btn robin-btn__default\" @click=\"doEditList\">确定</button>\n      </div>\n    </div>\n  </modal>\n</div>\n\n";
 
 /***/ },
 /* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
 	__webpack_require__(54)
 	__vue_script__ = __webpack_require__(55)
 	if (__vue_script__ &&
@@ -8019,9 +8005,15 @@ webpackJsonp([0],[
 	__vue_template__ = __webpack_require__(59)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
 	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	__vue_options__.template = __vue_template__
 	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
@@ -9911,6 +9903,7 @@ webpackJsonp([0],[
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
 	__webpack_require__(61)
 	__vue_script__ = __webpack_require__(62)
 	if (__vue_script__ &&
@@ -9920,9 +9913,15 @@ webpackJsonp([0],[
 	__vue_template__ = __webpack_require__(63)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
 	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	__vue_options__.template = __vue_template__
 	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
@@ -9954,6 +9953,7 @@ webpackJsonp([0],[
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	exports.default = {
+	  props: ['list'],
 	  data: function data() {
 	    return {
 	      useRemoteAPI: window.localStorage.apiurl == 'http://zhanglun.daoapp.io/api' ? true : false
@@ -9988,7 +9988,7 @@ webpackJsonp([0],[
 	//   }
 	//   .header-toolbar {
 	//     &__title{
-	//       font-size: 24px;
+	//       font-size: 20px;
 	//       color: #fff;
 	//     }
 	//   }
@@ -9996,7 +9996,7 @@ webpackJsonp([0],[
 	// <template>
 	//   <div class="main-header header-toolbar">
 	//     <div class="header-toolbar__title">
-	//       {{currentTitle}}
+	//       {{list.name}}
 	//     </div>
 	//   </div>
 	// </template>
@@ -10007,19 +10007,20 @@ webpackJsonp([0],[
 /* 63 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"main-header header-toolbar\">\n  <div class=\"header-toolbar__title\">\n    {{currentTitle}}\n  </div>\n</div>\n";
+	module.exports = "\n<div class=\"main-header header-toolbar\">\n  <div class=\"header-toolbar__title\">\n    {{list.name}}\n  </div>\n</div>\n";
 
 /***/ },
 /* 64 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<side-container></side-container>\n<div class=\"main\">\n  <main-header></main-header>\n  <router-view ></router-view>\n</div>\n<task-detail v-if=\"show\" transition=\"animation-showtaskdetail\"></task-detail>\n";
+	module.exports = "\n<side-container></side-container>\n<div class=\"main\">\n  <router-view></router-view>\n</div>\n<task-detail v-if=\"show\" transition=\"animation-showtaskdetail\"></task-detail>\n";
 
 /***/ },
 /* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
 	__vue_script__ = __webpack_require__(66)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
@@ -10028,9 +10029,15 @@ webpackJsonp([0],[
 	__vue_template__ = __webpack_require__(67)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
 	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	__vue_options__.template = __vue_template__
 	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
@@ -10125,23 +10132,30 @@ webpackJsonp([0],[
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
 	__webpack_require__(69)
 	__vue_script__ = __webpack_require__(70)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] app\\src\\components\\TaskList.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] app\\src\\components\\mainContainer.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(81)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
 	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	__vue_options__.template = __vue_template__
 	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-42309664/TaskList.vue"
+	  var id = "_v-094994d2/mainContainer.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -10160,6 +10174,10 @@ webpackJsonp([0],[
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _Header = __webpack_require__(60);
+
+	var _Header2 = _interopRequireDefault(_Header);
 
 	var _TaskItem = __webpack_require__(71);
 
@@ -10181,41 +10199,20 @@ webpackJsonp([0],[
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// <template>
-	//   <div class="main-body" >
-	//     <add-item :listid="listId"></add-item>
-	//     <div class="tasklist">
-	//       <task-item v-for="task in tasklist" :task="task" :index="$index" track-by="id"></task-item>
-	//     </div>
-	//     <div class="label-trigger" @click="toggleShowArchivedTask">
-	//       显示已经归档的任务
-	//     </div>
-	//     <div class="loader" v-show="isRequestingTasks">
-	//       <div class="loader-inner ball-clip-rotate-multiple">
-	//         <div></div>
-	//         <div></div>
-	//       </div>
-	//     </div>
-	//     <div class="tasklist--finished" transition="animation_showtask" v-show="showArchived">
-	//       <task-item v-for="task in archivedTasklist" :task="task" :index="$index" track-by="id"></task-item>
-	//     </div>
-	//
-	//   </div>
-	// </template>
-	// <script>
 	exports.default = {
 	  route: {
 	    data: function data(transition) {
 	      var query = {};
-	      var name = this.$route.name;
-	      switch (name) {
-	        case 'archived':
+	      var id = this.$route.params.id;
+	      switch (id) {
+	        case 'archive':
 	          {
 	            query = {
 	              archived: true,
 	              sort: 'desc',
 	              order: 'update_time'
 	            };
+	            this.isCollection = true;
 	            break;
 	          };
 	        case 'trash':
@@ -10225,32 +10222,47 @@ webpackJsonp([0],[
 	              sort: 'desc',
 	              order: 'update_time'
 	            };
+	            this.isCollection = true;
 	            break;
 	          };
 	        case 'search':
 	          {
 	            break;
 	          };
-	        case 'list':
+	        default:
 	          {
-	            this.list_id = this.$route.params.id;
+	            this.list_id = id;
+	            this.showInputer = true;
 	            query = {
 	              list_id: this.list_id,
 	              archived: false,
 	              sort: 'desc',
-	              order: 'create_time'
+	              order: 'create_time',
+	              istrash: false
 	            };
-	          };
-	        default:
-	          {
+
 	            break;
 	          }
 	      }
-	      query.istrash = false;
 	      this.fetchTasks(query);
 	      transition.next();
 	    },
 	    activate: function activate(transition) {
+	      // 每次切换路由时
+	      var id = this.$route.params.id;
+	      if (id == 'archive') {
+	        this.currentList = {
+	          name: '归档'
+	        };
+	      } else if (id == 'trash') {
+	        this.currentList = {
+	          name: '回收站'
+	        };
+	      } else {
+	        this.currentList = this.lists.filter(function (list) {
+	          return list.id === id;
+	        })[0];
+	      }
 	      transition.next();
 	    },
 	    deactivate: function deactivate(transition) {
@@ -10270,7 +10282,8 @@ webpackJsonp([0],[
 	    getters: {
 	      tasks: getters.getTasks,
 	      isRequestingTasks: getters.isRequestingTasks,
-	      auth: getters.getUserAuth
+	      auth: getters.getUserAuth,
+	      lists: getters.getLists
 
 	    }
 	  },
@@ -10278,8 +10291,29 @@ webpackJsonp([0],[
 	    tasklist: function tasklist() {
 	      var _this = this;
 
-	      var result = this.tasks.filter(function (item) {
-	        return item.list_id === _this.list_id && !item.archived;
+	      var result = null;
+	      var id = this.$route.params.id;
+	      if (id == 'archive') {
+	        result = this.tasks.filter(function (task) {
+	          return task.archived && !task.istrash;
+	        });
+	      } else if (id == 'trash') {
+	        result = this.tasks.filter(function (task) {
+	          return task.istrash;
+	        });
+	      } else {
+	        result = this.tasks.filter(function (item) {
+	          return item.list_id === _this.list_id && !item.archived;
+	        });
+	      }
+	      result.sort(function (a, b) {
+	        if (a.list_name > b.list_name) {
+	          return 1;
+	        } else if (a.list_name < b.list_name) {
+	          return -1;
+	        } else {
+	          return 0;
+	        }
 	      });
 	      return result;
 	    },
@@ -10295,8 +10329,9 @@ webpackJsonp([0],[
 	    return {
 	      list_id: '',
 	      showArchived: false,
-	      showCollections: false,
-	      loaded: false
+	      showInputer: false,
+	      loaded: false,
+	      currentList: {}
 	    };
 	  },
 
@@ -10305,16 +10340,33 @@ webpackJsonp([0],[
 	      if (!val) {
 	        this.$router.go('/login');
 	      }
+	    },
+	    lists: function lists() {
+	      var currentListId = this.$route.params.id;
+	      if (currentListId == 'archive') {
+	        this.currentList = {
+	          name: '归档'
+	        };
+	      } else if (currentListId == 'archive') {
+	        this.currentList = {
+	          name: '回收站'
+	        };
+	      } else {
+	        this.currentList = this.lists.filter(function (list) {
+	          return list.id === currentListId;
+	        })[0];
+	      }
 	    }
 	  },
 	  created: function created() {},
 	  ready: function ready() {
+
 	    this.resetTasks();
 	  },
 
 	  components: {
+	    'main-header': _Header2.default,
 	    'add-item': _AddItem2.default,
-
 	    'task-item': _TaskItem2.default
 	  },
 	  methods: {
@@ -10346,7 +10398,7 @@ webpackJsonp([0],[
 	//   @labelTriggerBg: #d8d8d8;
 	//
 	//   .main-body {
-	//     padding: 10px;
+	//     padding: 14px;
 	//     width: 100%;
 	//     min-height: 100%;
 	//     overflow-y: auto;
@@ -10370,12 +10422,36 @@ webpackJsonp([0],[
 	//     }
 	//   }
 	// </style>
+	// <template>
+	//   <main-header :list="currentList"></main-header>
+	//   <div class="main-body" >
+	//     <add-item :listid="listId" v-show="showInputer"></add-item>
+	//     <div class="tasklist">
+	//       <task-item v-for="task in tasklist" :task="task" :index="$index" track-by="id" :iscollection='isCollection'></task-item>
+	//     </div>
+	//     <div class="label-trigger" @click="toggleShowArchivedTask"  v-show="showInputer">
+	//       显示已经归档的任务
+	//     </div>
+	//     <div class="loader" v-show="isRequestingTasks">
+	//       <div class="loader-inner ball-clip-rotate-multiple">
+	//         <div></div>
+	//         <div></div>
+	//       </div>
+	//     </div>
+	//     <div class="tasklist--finished" transition="animation_showtask" v-show="showArchived">
+	//       <task-item v-for="task in archivedTasklist" :task="task" :index="$index" track-by="id"></task-item>
+	//     </div>
+	//
+	//   </div>
+	// </template>
+	// <script>
 
 /***/ },
 /* 71 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
 	__webpack_require__(72)
 	__vue_script__ = __webpack_require__(73)
 	if (__vue_script__ &&
@@ -10385,9 +10461,15 @@ webpackJsonp([0],[
 	__vue_template__ = __webpack_require__(74)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
 	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	__vue_options__.template = __vue_template__
 	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
@@ -10668,18 +10750,6 @@ webpackJsonp([0],[
 	//         }
 	//       }
 	//     }
-	//     // @media only screen and (max-width : 961px) {
-	//     //   width: 100%;
-	//     // }
-	//     // @media only screen and (min-width : 961px) {
-	//     //   width: 46.5%;
-	//     // }
-	//     // @media only screen and (min-width : 1025px) {
-	//     //   width: 32.6%;
-	//     // }
-	//     // @media only screen and (min-width : 1367px) {
-	//     //   width: 24.5%;
-	//     // }
 	//   }
 	//
 	//
@@ -10713,6 +10783,7 @@ webpackJsonp([0],[
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
 	__webpack_require__(76)
 	__vue_script__ = __webpack_require__(77)
 	if (__vue_script__ &&
@@ -10722,9 +10793,15 @@ webpackJsonp([0],[
 	__vue_template__ = __webpack_require__(80)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
 	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	__vue_options__.template = __vue_template__
 	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
@@ -10844,7 +10921,7 @@ webpackJsonp([0],[
 	// </style>
 	// <template>
 	//     <div class="task-textfield">
-	//       <input class="task-textfield--input" type="text" v-model="newTask.title" @keyup.enter="createTask(list_id)">
+	//       <input class="task-textfield--input" type="text" v-model="newTask.title" @keyup.enter="createTask(list_id)" placeholder="添加任务...">
 	//     </div>
 	// </template>
 	//
@@ -10870,222 +10947,38 @@ webpackJsonp([0],[
 /* 80 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"task-textfield\">\n  <input class=\"task-textfield--input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask(list_id)\">\n</div>\n";
+	module.exports = "\n<div class=\"task-textfield\">\n  <input class=\"task-textfield--input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask(list_id)\" placeholder=\"添加任务...\">\n</div>\n";
 
 /***/ },
 /* 81 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"main-body\" >\n  <add-item :listid=\"listId\"></add-item>\n  <div class=\"tasklist\">\n    <task-item v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\"></task-item>\n  </div>\n  <div class=\"label-trigger\" @click=\"toggleShowArchivedTask\">\n    显示已经归档的任务\n  </div>\n  <div class=\"loader\" v-show=\"isRequestingTasks\">\n    <div class=\"loader-inner ball-clip-rotate-multiple\">\n      <div></div>\n      <div></div>\n    </div>\n  </div>\n  <div class=\"tasklist--finished\" transition=\"animation_showtask\" v-show=\"showArchived\">\n    <task-item v-for=\"task in archivedTasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\"></task-item>\n  </div>\n\n</div>\n";
+	module.exports = "\n<main-header :list=\"currentList\"></main-header>\n<div class=\"main-body\" >\n  <add-item :listid=\"listId\" v-show=\"showInputer\"></add-item>\n  <div class=\"tasklist\">\n    <task-item v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\" :iscollection='isCollection'></task-item>\n  </div>\n  <div class=\"label-trigger\" @click=\"toggleShowArchivedTask\"  v-show=\"showInputer\">\n    显示已经归档的任务\n  </div>\n  <div class=\"loader\" v-show=\"isRequestingTasks\">\n    <div class=\"loader-inner ball-clip-rotate-multiple\">\n      <div></div>\n      <div></div>\n    </div>\n  </div>\n  <div class=\"tasklist--finished\" transition=\"animation_showtask\" v-show=\"showArchived\">\n    <task-item v-for=\"task in archivedTasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\"></task-item>\n  </div>\n\n</div>\n";
 
 /***/ },
 /* 82 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
+	var __vue_styles__ = {}
 	__webpack_require__(83)
 	__vue_script__ = __webpack_require__(84)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] app\\src\\components\\Collections.vue: named exports in *.vue files are ignored.")}
+	  console.warn("[vue-loader] app\\src\\components\\user\\login.vue: named exports in *.vue files are ignored.")}
 	__vue_template__ = __webpack_require__(85)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
 	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	__vue_options__.template = __vue_template__
 	}
-	if (false) {(function () {  module.hot.accept()
-	  var hotAPI = require("vue-hot-reload-api")
-	  hotAPI.install(require("vue"), false)
-	  if (!hotAPI.compatible) return
-	  var id = "_v-70b080f8/Collections.vue"
-	  if (!module.hot.data) {
-	    hotAPI.createRecord(id, module.exports)
-	  } else {
-	    hotAPI.update(id, module.exports, __vue_template__)
-	  }
-	})()}
-
-/***/ },
-/* 83 */
-10,
-/* 84 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _TaskItem = __webpack_require__(71);
-
-	var _TaskItem2 = _interopRequireDefault(_TaskItem);
-
-	var _tasks = __webpack_require__(56);
-
-	var tasksActions = _interopRequireWildcard(_tasks);
-
-	var _getter = __webpack_require__(48);
-
-	var getters = _interopRequireWildcard(_getter);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = {
-	  data: function data() {
-	    return {
-	      isarchive: false,
-	      istrash: false
-	    };
-	  },
-
-	  route: {
-	    data: function data(transition) {
-	      var name = this.$route.name;
-	      var query = {};
-	      switch (name) {
-	        case 'archive':
-	          {
-	            this.isarchive = true;
-	            query = {
-	              istrash: false,
-	              archived: true,
-	              sort: 'update_time',
-	              order: 'desc'
-	            };
-	            break;
-	          };
-	        case 'trash':
-	          {
-	            this.istrash = true;
-	            query = {
-	              istrash: true,
-	              sort: 'update_time',
-	              order: 'desc'
-	            };
-	            break;
-	          };
-	        case 'search':
-	          {
-	            break;
-	          };
-	        default:
-	          {
-	            break;
-	          }
-	      }
-	      this.fetchTasks(query);
-	      transition.next();
-	    },
-	    activate: function activate(transition) {
-	      transition.next();
-	    },
-	    deactivate: function deactivate(transition) {
-	      transition.next();
-	    },
-	    canDeactivate: function canDeactivate() {
-	      return true;
-	    },
-	    canReuse: function canReuse() {
-	      return false;
-	    }
-	  },
-	  vuex: {
-	    actions: {
-	      fetchTasks: tasksActions.fetchTasks,
-	      resetTasks: tasksActions.resetTasks },
-	    getters: {
-	      tasks: getters.getTasks,
-	      auth: getters.getUserAuth
-	    }
-	  },
-	  computed: {
-	    tasksComputed: function tasksComputed() {
-	      var result = null;
-	      if (this.$route.name == 'archive') {
-	        result = this.tasks.filter(function (task) {
-	          return task.archived && !task.istrash || task.computed !== undefined;
-	        });
-	      }
-	      if (this.$route.name == 'trash') {
-	        result = this.tasks.filter(function (task) {
-	          return task.istrash;
-	        });
-	      }
-	      result.sort(function (a, b) {
-	        if (a.list_name > b.list_name) {
-	          return 1;
-	        } else if (a.list_name < b.list_name) {
-	          return -1;
-	        } else {
-	          return 0;
-	        }
-	      });
-	      return result;
-	    }
-	  },
-	  watch: {
-	    auth: function auth(val) {
-	      if (!val) {
-	        this.$router.go('/login');
-	      }
-	    }
-	  },
-	  ready: function ready() {
-	    // this.resetTasks();
-	  },
-
-	  components: {
-	    'task-item': _TaskItem2.default
-	  }
-	};
-	// </script>
-	// <style lang="less">
-	//   .collection {
-	//     padding-top: 2px;
-	//     &--title{
-	//       font-size: 22px;
-	//       padding: 10px 0;
-	//     }
-	//   }
-	// </style>
-	// <template>
-	//  <div class="main-body">
-	//     <!-- <div v-if="istrash">回收站中的任务会在7天后删除</div> -->
-	//     <div class="tasklist">
-	//       <task-item v-for="task in tasksComputed" :task="task" :index="$index" :iscollection="true" track-by="id"></task-item>
-	//     </div>
-	// </div>
-	// </template>
-	// <script>
-
-/***/ },
-/* 85 */
-/***/ function(module, exports) {
-
-	module.exports = "\n <div class=\"main-body\">\n    <!-- <div v-if=\"istrash\">回收站中的任务会在7天后删除</div> -->\n    <div class=\"tasklist\">\n      <task-item v-for=\"task in tasksComputed\" :task=\"task\" :index=\"$index\" :iscollection=\"true\" track-by=\"id\"></task-item>\n    </div>\n</div>\n";
-
-/***/ },
-/* 86 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __vue_script__, __vue_template__
-	__webpack_require__(87)
-	__vue_script__ = __webpack_require__(88)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] app\\src\\components\\user\\login.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(89)
-	module.exports = __vue_script__ || {}
-	if (module.exports.__esModule) module.exports = module.exports.default
-	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
-	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
@@ -11099,9 +10992,9 @@ webpackJsonp([0],[
 	})()}
 
 /***/ },
-/* 87 */
+/* 83 */
 10,
-/* 88 */
+/* 84 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11199,27 +11092,34 @@ webpackJsonp([0],[
 	// </style>
 
 /***/ },
-/* 89 */
+/* 85 */
 /***/ function(module, exports) {
 
 	module.exports = "\n  <div class=\"custom-container login-form\" transition=\"animate_routerview\">\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <h3>登录</h3>\n      </div>\n    </div>\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <div class=\"robin-textfield\">\n          <label class=\"\" for=\"email\">Email</label>\n          <input class=\"robin-textfield--input robin-textfield--input_default\" type=\"text\" id=\"email\" v-model=\"account.username\">\n        </div>\n      </div>\n    </div>\n    <div class=\"mdl-cell mdl-cell-6-col\">\n      <div class=\"mdl-textfield mdl-js-textfield\">\n        <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\n        <input class=\"robin-textfield--input robin-textfield--input_default\" type=\"password\" id=\"password\" v-model=\"account.password\">\n      </div>\n    </div>\n    <div class=\"mdl-cell mdl-cell-6-col\">\n      <div class=\"robin-textfield\">\n        <button class=\"robin-btn robin-btn__default\"  v-on:click=\"doLogin\">GO!</button>\n        <a v-link=\"{path: '/signup', exact: true}\">还没有账号？立马注册</a>\n      </div>\n    </div>\n  </div>\n</div>\n";
 
 /***/ },
-/* 90 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
-	__vue_script__ = __webpack_require__(91)
+	var __vue_styles__ = {}
+	__vue_script__ = __webpack_require__(87)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] app\\src\\components\\user\\signup.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(92)
+	__vue_template__ = __webpack_require__(88)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
+	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
 	if (__vue_template__) {
-	(typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports).template = __vue_template__
+	__vue_options__.template = __vue_template__
 	}
+	if (!__vue_options__.computed) __vue_options__.computed = {}
+	Object.keys(__vue_styles__).forEach(function (key) {
+	var module = __vue_styles__[key]
+	__vue_options__.computed[key] = function () { return module }
+	})
 	if (false) {(function () {  module.hot.accept()
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
@@ -11233,7 +11133,7 @@ webpackJsonp([0],[
 	})()}
 
 /***/ },
-/* 91 */
+/* 87 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -11294,22 +11194,22 @@ webpackJsonp([0],[
 	// </script>
 
 /***/ },
-/* 92 */
+/* 88 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"custom-container login-form\" transition=\"animate_routerview\">\n  <div class=\"mdl-grid\">\n    <div class=\"mdl-cell mdl-cell-6-col\">\n      <h3>注册</h3>\n    </div>\n    <div class=\"robin-textfield\">\n      <label class=\"mdl-textfield__label\" for=\"email\">邮箱</label>\n      <input class=\"robin-textfield--input robin-textfield--input_default\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\n    </div>\n    <div class=\"robin-textfield\">\n      <label class=\"mdl-textfield__label\" for=\"password\">密码</label>\n      <input class=\"robin-textfield--input robin-textfield--input_default\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\n    </div>\n    <div class=\"robin-textfield\">\n      <button class=\"robin-btn robin-btn__default\" v-on:click=\"signUp()\">注册</button>\n      <a v-link=\"'login'\">已有账号？直接登录</a>\n    </div>\n  </div>\n</div>\n";
 
 /***/ },
-/* 93 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(94);
+	var content = __webpack_require__(90);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(95)(content, {});
+	var update = __webpack_require__(91)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -11326,7 +11226,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 94 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(11)();
@@ -11340,7 +11240,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 95 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*

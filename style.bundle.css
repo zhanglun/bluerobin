@@ -439,7 +439,7 @@
           justify-content: space-between;
 }
 .header-toolbar__title {
-  font-size: 24px;
+  font-size: 20px;
   color: #fff;
 }
 /* ====================================================== */
@@ -457,7 +457,7 @@
  * task detail card
  */
 .main-body {
-  padding: 10px;
+  padding: 14px;
   width: 100%;
   min-height: 100%;
   box-sizing: border-box;
@@ -712,13 +712,6 @@
 }
 .task-textfield--input:focus {
   box-shadow: 0 0 5px #ABABAB;
-}
-.collection {
-  padding-top: 2px;
-}
-.collection--title {
-  font-size: 22px;
-  padding: 10px 0;
 }
 .login-form {
   width: 400px;
