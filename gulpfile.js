@@ -49,7 +49,9 @@ gulp.task('build', ['webpack:build']);
 
 gulp.task('deploy', ['build'], function() {
   return gulp.src('./app/dist/**/*')
-    .pipe(ghPages());
+    .pipe(ghPages({
+      force: true,
+    }));
 });
 
 gulp.task('publish', ['build', 'deploy']);

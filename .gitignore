@@ -10,5 +10,6 @@ scripts/*.js
 scripts/*.map
 
 .idea
+.publish
 
 dump.rdb
