@@ -1,7 +1,7 @@
 <template>
   <div class="main-header header-toolbar">
     <div class="header-toolbar__title">
-      {{currentTitle}}
+      {{list.name}}
     </div>
   </div>
 </template>
@@ -9,6 +9,7 @@
 <script>
   import * as getters from '../vuex/getter';
   export default {
+    props: ['list'],
     data() {
       return {
         useRemoteAPI: window.localStorage.apiurl == 'http://zhanglun.daoapp.io/api' ? true : false,
@@ -45,7 +46,7 @@
   }
   .header-toolbar {
     &__title{
-      font-size: 24px;
+      font-size: 20px;
       color: #fff;
     }
   }

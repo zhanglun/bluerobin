@@ -246,18 +246,6 @@
         }
       }
     }
-    // @media only screen and (max-width : 961px) {
-    //   width: 100%;
-    // }
-    // @media only screen and (min-width : 961px) {
-    //   width: 46.5%;
-    // }
-    // @media only screen and (min-width : 1025px) {
-    //   width: 32.6%;
-    // }
-    // @media only screen and (min-width : 1367px) {
-    //   width: 24.5%;
-    // }
   }
 
 

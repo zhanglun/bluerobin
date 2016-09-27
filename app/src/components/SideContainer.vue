@@ -12,13 +12,13 @@
     <div class="sidebar-body list-scroll">
       <ul class="side-menu">
         <li>
-          <a class="side-menu__item" v-link="{name: 'archive', params: {id: 'archive'}}">
+          <a class="side-menu__item" v-link="{name: 'list', params: {id: 'archive'}}">
             <span class="material-icons">archive</span>
             <span class="side-menu__item-content">归档</span>
           </a>
         </li>
         <li>
-          <a class="side-menu__item" v-link="{name: 'trash', params: {id: 'trash'}}">
+          <a class="side-menu__item" v-link="{name: 'list', params: {id: 'trash'}}">
             <span class="material-icons">delete</span>
             <span class="side-menu__item-content">回收站</span>
           </a>
@@ -60,18 +60,18 @@
         </div>
       </div>
     </modal>
-    <modal :show="showCurrentList">
+    <modal :show="showSelectedList">
       <div slot="content" class="list-editor">
         <div class="list-editor-header">
           <h3 class="list-editor-header--title">编辑清单</h3>
         </div>
         <div class="list-editor-body">
           <div class="robin-textfield">
-            <input type="text" class="robin-textfield--input robin-textfield--input_default" v-model="currentList.name"/>
+            <input type="text" class="robin-textfield--input robin-textfield--input_default" v-model="selectedList.name"/>
           </div>
         </div>
         <div class="list-editor-footer">
-          <span class="material-icons" @click="deleteList(this.currentList)">delete</span>
+          <span class="material-icons" @click="deleteList(this.selectedList)">delete</span>
           <button class="robin-btn robin-btn__default" @click="doEditList">确定</button>
         </div>
       </div>
@@ -90,8 +90,8 @@
         newList: {
           name: '',
         },
-        currentList: null,
-        showCurrentList: false,
+        selectedList: null,
+        showSelectedList: false,
       };
     },
     vuex: {
@@ -109,7 +109,7 @@
       // 监控左侧 list 列表，默认选中第一个
       lists() {
         this.showModal = false;
-        this.showCurrentList = false;
+        this.showSelectedList = false;
         this.newList.name = '';
       },
     },
@@ -117,7 +117,7 @@
       document.addEventListener('keyup', (e) => {
         if (e.keyCode === 27) {
           this.showModal = false;
-          this.showCurrentList = false;
+          this.showSelectedList = false;
         }
       });
     },
@@ -134,14 +134,14 @@
         this.addList(param);
       },
       showCurrent(e, list) {
-        this.currentList = list;
-        this.showCurrentList = true;
+        this.selectedList = list;
+        this.showSelectedList = true;
       },
       doEditList() {
         let param = {};
-        param.name = this.currentList.name;
-        this.showCurrentList = false;
-        this.editList(this.currentList.id, param);
+        param.name = this.selectedList.name;
+        this.showSelectedList = false;
+        this.editList(this.selectedList.id, param);
       },
     },
   };

@@ -1,8 +1,7 @@
 <template>
   <side-container></side-container>
   <div class="main">
-    <main-header></main-header>
-    <router-view ></router-view>
+    <router-view></router-view>
   </div>
   <task-detail v-if="show" transition="animation-showtaskdetail"></task-detail>
 </template>
@@ -43,26 +42,17 @@
       getters: {
         auth: getters.getUserAuth,
         show: getters.isShowDetail,
+        lists: getters.getLists
       }
     },
     data() {
       return {
-        msg: 'Hello from BlueRobin',
-        finished: false,
       };
     },
     computed: {
     },
     watch: {
       lists() {
-        let firstId = '';
-        let toId = '';
-        if(this.lists && this.lists.length) {
-          firstId = this.lists[0].id;
-        }
-        toId = this.$route.params.id || firstId;
-        this.$router.go({name: 'list', params: {id: toId}});
-        this.finished = true;
       },
       auth() {
         if (!this.auth) {

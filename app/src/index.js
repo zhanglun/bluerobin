@@ -6,8 +6,7 @@ import VueResource from 'vue-resource';
 
 import AppView from './components/App.vue';
 import IndexView  from './components/Index.vue';
-import TaskListView from './components/TaskList.vue';
-import CollectionsView from './components/Collections.vue';
+import MainContainerView from './components/mainContainer.vue';
 import UserLoginView from './components/user/login.vue';
 import UserSignUp from './components/user/signup.vue';
 
@@ -27,27 +26,10 @@ router.map({
     subRoutes: {
       '/:id': {
         name: 'list',
-        component: TaskListView,
+        component: MainContainerView,
       },
     },
     auth: true,
-  },
-  '/collections': {
-    component: AppView,
-    subRoutes: {
-      '/archive': {
-        name: 'archive',
-        component: CollectionsView,
-      },
-      // '/search': {
-      //   name: 'search',
-      //   component: TaskListView,
-      // },
-      '/trash': {
-        name: 'trash',
-        component: CollectionsView,
-      },
-    },
   },
   '/login': {
     component: UserLoginView
@@ -60,5 +42,9 @@ router.map({
 router.redirect({
   '*': '/lists',
 });
+
+router.afterEach(function (transition) {
+  console.log('成功浏览到: ' + transition.to.path)
+})
 
 router.start(IndexView, '#app');
