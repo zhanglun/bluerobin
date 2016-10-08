@@ -177,7 +177,7 @@
         img{
           width: 32px;
           height: 32px;
-          flex: 0 1;
+          flex: 0 1 32px;
           border-radius: 100%;
           padding: 0 6px 0 6px;
         }
