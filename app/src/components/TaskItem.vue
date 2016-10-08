@@ -1,7 +1,7 @@
 <template>
   <div transition="animation_showtask" v-bind:class="{archived: task.archived, editing: task == taskEditing, 'collection-item': iscollection, 'task': !iscollection}" @click="showTaskDetail(task)">
     <div class="task-content">
-      <div class="task-content-box">{{task.title}}</div>
+      <div class="task-content-box" v-html="titleAfterParse"></div>
     </div>
     <div class="task-labels" v-if="iscollection">
       <span class="task-labels--item">{{task.list_name}}</span>
@@ -19,6 +19,8 @@
 <script>
   import * as tasksActions from '../vuex/actions/tasks';
   import * as getters from '../vuex/getter';
+  import Tool from 'tool';
+
   export default {
     props: ['iscollection', 'task', 'index'],
     data() {
@@ -37,12 +39,11 @@
         fetchDetail: tasksActions.fetchTaskDetail,
       },
       getters: {
-        // showDetail: getters.isShowDetail,
       }
     },
     computed: {
       titleAfterParse() {
-        return twemoji.parse(this.task.title);
+        return Tool.linkify(this.task.title);
       }
     },
     ready() {
