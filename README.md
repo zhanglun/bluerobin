@@ -2,7 +2,6 @@
 
 ![bluerobin](./bluerobin.png)
 
-a chrome extension
 
 simple tasklist for you ~~
 
