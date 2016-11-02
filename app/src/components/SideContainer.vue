@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <div class="sidebar-header">
-      <span class="material-icons">list</span>
+      <!-- <span class="material-icons">list</span> -->
     </div>
     <div class="sidebar-toolbar">
       <div v-if="user" class="sidebar-toolbar-account">
