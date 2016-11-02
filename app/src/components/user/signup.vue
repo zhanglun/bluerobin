@@ -41,8 +41,8 @@
         vm.$http.post('http://zhanglun.daoapp.io/api/users/signup', data)
         // vm.$http.post('http://localhost:1234/api/users/signup', data)
         .then(res => {
-          localStorage.token = res.token;
-          vm.$router.go('/lists');
+          localStorage.token = res.body.token;
+          vm.$router.go('/');
         }, err => {
           console.log(err);
         });
