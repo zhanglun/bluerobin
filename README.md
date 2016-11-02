@@ -9,7 +9,7 @@ simple tasklist for you ~~
 
 ```js
 npm install
-gulp
+npm run dev
 ```
 
 ### 技术选择
@@ -29,8 +29,6 @@ gulp
 - [x] 清单列表接口的auth
 - [ ] 详情卡片中 markdown 解析之后的样式
 - [ ] 任务拖拽修改所属清单
-
-以后用 issue 记录 todo
 
 ### 编码规范
 
