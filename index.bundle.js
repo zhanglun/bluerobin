@@ -20,25 +20,25 @@ webpackJsonp([0],[
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _Index = __webpack_require__(65);
+	var _Index = __webpack_require__(64);
 
 	var _Index2 = _interopRequireDefault(_Index);
 
-	var _mainContainer = __webpack_require__(68);
+	var _mainContainer = __webpack_require__(67);
 
 	var _mainContainer2 = _interopRequireDefault(_mainContainer);
 
-	var _login = __webpack_require__(82);
+	var _login = __webpack_require__(81);
 
 	var _login2 = _interopRequireDefault(_login);
 
-	var _signup = __webpack_require__(86);
+	var _signup = __webpack_require__(85);
 
 	var _signup2 = _interopRequireDefault(_signup);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(89);
+	__webpack_require__(88);
 
 	_vue2.default.use(_vueRouter2.default);
 	_vue2.default.use(_vueResource2.default);
@@ -2804,7 +2804,7 @@ webpackJsonp([0],[
 /***/ function(module, exports) {
 
 	/*!
-	 * vue-resource v1.0.2
+	 * vue-resource v1.0.3
 	 * https://github.com/vuejs/vue-resource
 	 * Released under the MIT License.
 	 */
@@ -3575,25 +3575,30 @@ webpackJsonp([0],[
 	    return new PromiseObj(function (resolve) {
 
 	        var xdr = new XDomainRequest(),
-	            handler = function (event) {
+	            handler = function (_ref) {
+	            var type = _ref.type;
 
-	            var response = request.respondWith(xdr.responseText, {
-	                status: xdr.status,
-	                statusText: xdr.statusText
-	            });
 
-	            resolve(response);
+	            var status = 0;
+
+	            if (type === 'load') {
+	                status = 200;
+	            } else if (type === 'error') {
+	                status = 500;
+	            }
+
+	            resolve(request.respondWith(xdr.responseText, { status: status }));
 	        };
 
 	        request.abort = function () {
 	            return xdr.abort();
 	        };
 
-	        xdr.open(request.method, request.getUrl(), true);
+	        xdr.open(request.method, request.getUrl());
 	        xdr.timeout = 0;
 	        xdr.onload = handler;
 	        xdr.onerror = handler;
-	        xdr.ontimeout = function () {};
+	        xdr.ontimeout = handler;
 	        xdr.onprogress = function () {};
 	        xdr.send(request.getBody());
 	    });
@@ -3694,14 +3699,16 @@ webpackJsonp([0],[
 	            handler,
 	            script;
 
-	        handler = function (event) {
+	        handler = function (_ref) {
+	            var type = _ref.type;
+
 
 	            var status = 0;
 
-	            if (event.type === 'load' && body !== null) {
+	            if (type === 'load' && body !== null) {
 	                status = 200;
-	            } else if (event.type === 'error') {
-	                status = 404;
+	            } else if (type === 'error') {
+	                status = 500;
 	            }
 
 	            resolve(request.respondWith(body, { status: status }));
@@ -4327,7 +4334,7 @@ webpackJsonp([0],[
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] app\\src\\components\\App.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(64)
+	__vue_template__ = __webpack_require__(63)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -4343,7 +4350,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-0dca95e0/App.vue"
+	  var id = "_v-2ad1124e/App.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -4431,27 +4438,27 @@ webpackJsonp([0],[
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _user = __webpack_require__(39);
+	var _user = __webpack_require__(38);
 
 	var userActions = _interopRequireWildcard(_user);
 
-	var _lists = __webpack_require__(47);
+	var _lists = __webpack_require__(46);
 
 	var listsActions = _interopRequireWildcard(_lists);
 
-	var _getter = __webpack_require__(48);
+	var _getter = __webpack_require__(47);
 
 	var getters = _interopRequireWildcard(_getter);
 
-	var _SideContainer = __webpack_require__(49);
+	var _SideContainer = __webpack_require__(48);
 
 	var _SideContainer2 = _interopRequireDefault(_SideContainer);
 
-	var _TaskDetail = __webpack_require__(53);
+	var _TaskDetail = __webpack_require__(52);
 
 	var _TaskDetail2 = _interopRequireDefault(_TaskDetail);
 
-	var _Header = __webpack_require__(60);
+	var _Header = __webpack_require__(59);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
@@ -4565,19 +4572,15 @@ webpackJsonp([0],[
 
 	var _vuex2 = _interopRequireDefault(_vuex);
 
-	var _logger = __webpack_require__(15);
-
-	var _logger2 = _interopRequireDefault(_logger);
-
-	var _user = __webpack_require__(16);
+	var _user = __webpack_require__(15);
 
 	var _user2 = _interopRequireDefault(_user);
 
-	var _lists = __webpack_require__(37);
+	var _lists = __webpack_require__(36);
 
 	var _lists2 = _interopRequireDefault(_lists);
 
-	var _tasks = __webpack_require__(38);
+	var _tasks = __webpack_require__(37);
 
 	var _tasks2 = _interopRequireDefault(_tasks);
 
@@ -4587,20 +4590,6 @@ webpackJsonp([0],[
 	_vue2.default.config.debug = true;
 	var debug = ("production") !== 'production';
 
-	var logger = (0, _logger2.default)({
-	  collapsed: false, // 自动展开输出的 mutations
-	  transformer: function transformer(state) {
-	    // 输出前对 state 进行转换
-	    // 比如说只返回一个 sub-tree
-	    return state;
-	  },
-	  mutationTransformer: function mutationTransformer(mutation) {
-	    // mutations 会格式化为 { type, payload } 输出
-	    // 我们可以按照自己的需求格式化成任何我们想要的结构
-	    return mutation.type;
-	  }
-	});
-
 	// 整合初始状态和变更函数，我们就得到了我们所需的 store
 	// 至此，这个 store 就可以连接到我们的应用中
 	exports.default = new _vuex2.default.Store({
@@ -4608,8 +4597,7 @@ webpackJsonp([0],[
 	    user: _user2.default,
 	    lists: _lists2.default,
 	    tasks: _tasks2.default
-	  },
-	  plugins: [logger]
+	  }
 	});
 
 /***/ },
@@ -5281,74 +5269,6 @@ webpackJsonp([0],[
 
 /***/ },
 /* 15 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	// Credits: borrowed code from fcomb/redux-logger
-
-	function createLogger() {
-	  var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-	  var _ref$collapsed = _ref.collapsed;
-	  var collapsed = _ref$collapsed === undefined ? true : _ref$collapsed;
-	  var _ref$transformer = _ref.transformer;
-	  var transformer = _ref$transformer === undefined ? function (state) {
-	    return state;
-	  } : _ref$transformer;
-	  var _ref$mutationTransfor = _ref.mutationTransformer;
-	  var mutationTransformer = _ref$mutationTransfor === undefined ? function (mut) {
-	    return mut;
-	  } : _ref$mutationTransfor;
-
-	  return function (store) {
-	    var prevState = JSON.parse(JSON.stringify(store.state));
-
-	    store.subscribe(function (mutation, state) {
-	      if (typeof console === 'undefined') {
-	        return;
-	      }
-	      var nextState = JSON.parse(JSON.stringify(state));
-	      var time = new Date();
-	      var formattedTime = ' @ ' + pad(time.getHours(), 2) + ':' + pad(time.getMinutes(), 2) + ':' + pad(time.getSeconds(), 2) + '.' + pad(time.getMilliseconds(), 3);
-	      var formattedMutation = mutationTransformer(mutation);
-	      var message = 'mutation ' + mutation.type + formattedTime;
-	      var startMessage = collapsed ? console.groupCollapsed : console.group;
-
-	      // render
-	      try {
-	        startMessage.call(console, message);
-	      } catch (e) {
-	        console.log(message);
-	      }
-
-	      console.log('%c prev state', 'color: #9E9E9E; font-weight: bold', prevState);
-	      console.log('%c mutation', 'color: #03A9F4; font-weight: bold', formattedMutation);
-	      console.log('%c next state', 'color: #4CAF50; font-weight: bold', nextState);
-
-	      try {
-	        console.groupEnd();
-	      } catch (e) {
-	        console.log('—— log end ——');
-	      }
-
-	      prevState = nextState;
-	    });
-	  };
-	}
-
-	function repeat(str, times) {
-	  return new Array(times + 1).join(str);
-	}
-
-	function pad(num, maxLength) {
-	  return repeat('0', maxLength - num.toString().length) + num;
-	}
-
-	module.exports = createLogger;
-
-/***/ },
-/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5357,13 +5277,13 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _defineProperty2 = __webpack_require__(17);
+	var _defineProperty2 = __webpack_require__(16);
 
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
 	var _mutations;
 
-	var _mutationType = __webpack_require__(36);
+	var _mutationType = __webpack_require__(35);
 
 	var mutationType = _interopRequireWildcard(_mutationType);
 
@@ -5396,14 +5316,14 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _defineProperty = __webpack_require__(18);
+	var _defineProperty = __webpack_require__(17);
 
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -5425,37 +5345,37 @@ webpackJsonp([0],[
 	};
 
 /***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(18), __esModule: true };
+
+/***/ },
 /* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(19), __esModule: true };
-
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(20);
-	var $Object = __webpack_require__(23).Object;
+	__webpack_require__(19);
+	var $Object = __webpack_require__(22).Object;
 	module.exports = function defineProperty(it, key, desc){
 	  return $Object.defineProperty(it, key, desc);
 	};
 
 /***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $export = __webpack_require__(20);
+	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+	$export($export.S + $export.F * !__webpack_require__(30), 'Object', {defineProperty: __webpack_require__(26).f});
+
+/***/ },
 /* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var $export = __webpack_require__(21);
-	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-	$export($export.S + $export.F * !__webpack_require__(31), 'Object', {defineProperty: __webpack_require__(27).f});
-
-/***/ },
-/* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var global    = __webpack_require__(22)
-	  , core      = __webpack_require__(23)
-	  , ctx       = __webpack_require__(24)
-	  , hide      = __webpack_require__(26)
+	var global    = __webpack_require__(21)
+	  , core      = __webpack_require__(22)
+	  , ctx       = __webpack_require__(23)
+	  , hide      = __webpack_require__(25)
 	  , PROTOTYPE = 'prototype';
 
 	var $export = function(type, name, source){
@@ -5515,7 +5435,7 @@ webpackJsonp([0],[
 	module.exports = $export;
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports) {
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -5524,18 +5444,18 @@ webpackJsonp([0],[
 	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports) {
 
 	var core = module.exports = {version: '2.4.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// optional / simple context binding
-	var aFunction = __webpack_require__(25);
+	var aFunction = __webpack_require__(24);
 	module.exports = function(fn, that, length){
 	  aFunction(fn);
 	  if(that === undefined)return fn;
@@ -5556,7 +5476,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -5565,12 +5485,12 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var dP         = __webpack_require__(27)
-	  , createDesc = __webpack_require__(35);
-	module.exports = __webpack_require__(31) ? function(object, key, value){
+	var dP         = __webpack_require__(26)
+	  , createDesc = __webpack_require__(34);
+	module.exports = __webpack_require__(30) ? function(object, key, value){
 	  return dP.f(object, key, createDesc(1, value));
 	} : function(object, key, value){
 	  object[key] = value;
@@ -5578,15 +5498,15 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var anObject       = __webpack_require__(28)
-	  , IE8_DOM_DEFINE = __webpack_require__(30)
-	  , toPrimitive    = __webpack_require__(34)
+	var anObject       = __webpack_require__(27)
+	  , IE8_DOM_DEFINE = __webpack_require__(29)
+	  , toPrimitive    = __webpack_require__(33)
 	  , dP             = Object.defineProperty;
 
-	exports.f = __webpack_require__(31) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+	exports.f = __webpack_require__(30) ? Object.defineProperty : function defineProperty(O, P, Attributes){
 	  anObject(O);
 	  P = toPrimitive(P, true);
 	  anObject(Attributes);
@@ -5599,17 +5519,17 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(29);
+	var isObject = __webpack_require__(28);
 	module.exports = function(it){
 	  if(!isObject(it))throw TypeError(it + ' is not an object!');
 	  return it;
 	};
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports) {
 
 	module.exports = function(it){
@@ -5617,24 +5537,24 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = !__webpack_require__(31) && !__webpack_require__(32)(function(){
-	  return Object.defineProperty(__webpack_require__(33)('div'), 'a', {get: function(){ return 7; }}).a != 7;
+	module.exports = !__webpack_require__(30) && !__webpack_require__(31)(function(){
+	  return Object.defineProperty(__webpack_require__(32)('div'), 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Thank's IE8 for his funny defineProperty
-	module.exports = !__webpack_require__(32)(function(){
+	module.exports = !__webpack_require__(31)(function(){
 	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports) {
 
 	module.exports = function(exec){
@@ -5646,11 +5566,11 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 33 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(29)
-	  , document = __webpack_require__(22).document
+	var isObject = __webpack_require__(28)
+	  , document = __webpack_require__(21).document
 	  // in old IE typeof document.createElement is 'object'
 	  , is = isObject(document) && isObject(document.createElement);
 	module.exports = function(it){
@@ -5658,11 +5578,11 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 34 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.1 ToPrimitive(input [, PreferredType])
-	var isObject = __webpack_require__(29);
+	var isObject = __webpack_require__(28);
 	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
 	// and the second argument - flag - preferred type is a string
 	module.exports = function(it, S){
@@ -5675,7 +5595,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 35 */
+/* 34 */
 /***/ function(module, exports) {
 
 	module.exports = function(bitmap, value){
@@ -5688,7 +5608,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 36 */
+/* 35 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5729,7 +5649,7 @@ webpackJsonp([0],[
 	var FETCHING = exports.FETCHING = 'FETCHING';
 
 /***/ },
-/* 37 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5738,13 +5658,13 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _defineProperty2 = __webpack_require__(17);
+	var _defineProperty2 = __webpack_require__(16);
 
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
 	var _mutations;
 
-	var _mutationType = __webpack_require__(36);
+	var _mutationType = __webpack_require__(35);
 
 	var mutationType = _interopRequireWildcard(_mutationType);
 
@@ -5802,7 +5722,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 38 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5811,13 +5731,13 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _defineProperty2 = __webpack_require__(17);
+	var _defineProperty2 = __webpack_require__(16);
 
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
 	var _mutations;
 
-	var _mutationType = __webpack_require__(36);
+	var _mutationType = __webpack_require__(35);
 
 	var mutationType = _interopRequireWildcard(_mutationType);
 
@@ -5880,7 +5800,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 39 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5890,15 +5810,15 @@ webpackJsonp([0],[
 	});
 	exports.login = exports.authenticate = undefined;
 
-	var _superagent = __webpack_require__(40);
+	var _superagent = __webpack_require__(39);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
-	var _mutationType = __webpack_require__(36);
+	var _mutationType = __webpack_require__(35);
 
 	var mutationType = _interopRequireWildcard(_mutationType);
 
-	var _base = __webpack_require__(45);
+	var _base = __webpack_require__(44);
 
 	var _base2 = _interopRequireDefault(_base);
 
@@ -5908,8 +5828,8 @@ webpackJsonp([0],[
 
 	// 用户认证
 	var authenticate = exports.authenticate = function authenticate(_ref, callback) {
-	  var dispatch = _ref.dispatch;
-	  var state = _ref.state;
+	  var dispatch = _ref.dispatch,
+	      state = _ref.state;
 
 	  _superagent2.default.get('/authenticate').set('x-access-token', window.localStorage.token).use(_base2.default).then(function (res) {
 	    dispatch(mutationType.AUTHENTICATE, res.body);
@@ -5926,8 +5846,8 @@ webpackJsonp([0],[
 
 	// 用户登录
 	var login = exports.login = function login(_ref2, param) {
-	  var dispatch = _ref2.dispatch;
-	  var state = _ref2.state;
+	  var dispatch = _ref2.dispatch,
+	      state = _ref2.state;
 
 	  _superagent2.default.post('/users/login').use(_base2.default).send(param).then(function (res) {
 	    window.localStorage.token = res.body.token;
@@ -5936,7 +5856,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 40 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5953,9 +5873,9 @@ webpackJsonp([0],[
 	  root = this;
 	}
 
-	var Emitter = __webpack_require__(41);
-	var requestBase = __webpack_require__(42);
-	var isObject = __webpack_require__(43);
+	var Emitter = __webpack_require__(40);
+	var requestBase = __webpack_require__(41);
+	var isObject = __webpack_require__(42);
 
 	/**
 	 * Noop.
@@ -5967,7 +5887,7 @@ webpackJsonp([0],[
 	 * Expose `request`.
 	 */
 
-	var request = module.exports = __webpack_require__(44).bind(null, Request);
+	var request = module.exports = __webpack_require__(43).bind(null, Request);
 
 	/**
 	 * Determine XHR.
@@ -6011,9 +5931,7 @@ webpackJsonp([0],[
 	  if (!isObject(obj)) return obj;
 	  var pairs = [];
 	  for (var key in obj) {
-	    if (null != obj[key]) {
-	      pushEncodedKeyValuePair(pairs, key, obj[key]);
-	    }
+	    pushEncodedKeyValuePair(pairs, key, obj[key]);
 	  }
 	  return pairs.join('&');
 	}
@@ -6028,18 +5946,22 @@ webpackJsonp([0],[
 	 */
 
 	function pushEncodedKeyValuePair(pairs, key, val) {
-	  if (Array.isArray(val)) {
-	    return val.forEach(function(v) {
-	      pushEncodedKeyValuePair(pairs, key, v);
-	    });
-	  } else if (isObject(val)) {
-	    for(var subkey in val) {
-	      pushEncodedKeyValuePair(pairs, key + '[' + subkey + ']', val[subkey]);
+	  if (val != null) {
+	    if (Array.isArray(val)) {
+	      val.forEach(function(v) {
+	        pushEncodedKeyValuePair(pairs, key, v);
+	      });
+	    } else if (isObject(val)) {
+	      for(var subkey in val) {
+	        pushEncodedKeyValuePair(pairs, key + '[' + subkey + ']', val[subkey]);
+	      }
+	    } else {
+	      pairs.push(encodeURIComponent(key)
+	        + '=' + encodeURIComponent(val));
 	    }
-	    return;
+	  } else if (val === null) {
+	    pairs.push(encodeURIComponent(key));
 	  }
-	  pairs.push(encodeURIComponent(key)
-	    + '=' + encodeURIComponent(val));
 	}
 
 	/**
@@ -6712,24 +6634,24 @@ webpackJsonp([0],[
 	  };
 
 	  // progress
-	  var handleProgress = function(e){
+	  var handleProgress = function(direction, e) {
 	    if (e.total > 0) {
 	      e.percent = e.loaded / e.total * 100;
 	    }
-	    e.direction = 'download';
+	    e.direction = direction;
 	    self.emit('progress', e);
-	  };
-	  if (this.hasListeners('progress')) {
-	    xhr.onprogress = handleProgress;
 	  }
-	  try {
-	    if (xhr.upload && this.hasListeners('progress')) {
-	      xhr.upload.onprogress = handleProgress;
+	  if (this.hasListeners('progress')) {
+	    try {
+	      xhr.onprogress = handleProgress.bind(null, 'download');
+	      if (xhr.upload) {
+	        xhr.upload.onprogress = handleProgress.bind(null, 'upload');
+	      }
+	    } catch(e) {
+	      // Accessing xhr.upload fails in IE from a web worker, so just pretend it doesn't exist.
+	      // Reported here:
+	      // https://connect.microsoft.com/IE/feedback/details/837245/xmlhttprequest-upload-throws-invalid-argument-when-used-from-web-worker-context
 	    }
-	  } catch(e) {
-	    // Accessing xhr.upload fails in IE from a web worker, so just pretend it doesn't exist.
-	    // Reported here:
-	    // https://connect.microsoft.com/IE/feedback/details/837245/xmlhttprequest-upload-throws-invalid-argument-when-used-from-web-worker-context
 	  }
 
 	  // timeout
@@ -6916,7 +6838,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 41 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -7085,13 +7007,13 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 42 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(43);
+	var isObject = __webpack_require__(42);
 
 	/**
 	 * Clear previous timeout.
@@ -7166,6 +7088,10 @@ webpackJsonp([0],[
 	  }
 	  return this._fullfilledPromise.then(resolve, reject);
 	}
+
+	exports.catch = function(cb) {
+	  return this.then(undefined, cb);
+	};
 
 	/**
 	 * Allow for extension
@@ -7256,21 +7182,42 @@ webpackJsonp([0],[
 	};
 
 	/**
-	 * Write the field `name` and `val` for "multipart/form-data"
-	 * request bodies.
+	 * Write the field `name` and `val`, or multiple fields with one object
+	 * for "multipart/form-data" request bodies.
 	 *
 	 * ``` js
 	 * request.post('/upload')
 	 *   .field('foo', 'bar')
 	 *   .end(callback);
+	 *
+	 * request.post('/upload')
+	 *   .field({ foo: 'bar', baz: 'qux' })
+	 *   .end(callback);
 	 * ```
 	 *
-	 * @param {String} name
+	 * @param {String|Object} name
 	 * @param {String|Blob|File|Buffer|fs.ReadStream} val
 	 * @return {Request} for chaining
 	 * @api public
 	 */
 	exports.field = function(name, val) {
+
+	  // name should be either a string or an object.
+	  if (null === name ||  undefined === name) {
+	    throw new Error('.field(name, val) name can not be empty');
+	  }
+
+	  if (isObject(name)) {
+	    for (var key in name) {
+	      this.field(key, name[key]);
+	    }
+	    return this;
+	  }
+
+	  // val should be defined now
+	  if (null === val || undefined === val) {
+	    throw new Error('.field(name, val) val can not be empty');
+	  }
 	  this._getFormData().append(name, val);
 	  return this;
 	};
@@ -7438,7 +7385,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 43 */
+/* 42 */
 /***/ function(module, exports) {
 
 	/**
@@ -7457,7 +7404,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 44 */
+/* 43 */
 /***/ function(module, exports) {
 
 	// The node and browser modules expose versions of this with the
@@ -7495,7 +7442,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 45 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7504,7 +7451,7 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _superagentPrefix = __webpack_require__(46);
+	var _superagentPrefix = __webpack_require__(45);
 
 	var _superagentPrefix2 = _interopRequireDefault(_superagentPrefix);
 
@@ -7519,7 +7466,7 @@ webpackJsonp([0],[
 	exports.default = baseURL;
 
 /***/ },
-/* 46 */
+/* 45 */
 /***/ function(module, exports) {
 
 	module.exports = function (prefix) {
@@ -7533,7 +7480,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 47 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7543,15 +7490,15 @@ webpackJsonp([0],[
 	});
 	exports.editList = exports.deleteList = exports.addList = exports.fetchLists = undefined;
 
-	var _superagent = __webpack_require__(40);
+	var _superagent = __webpack_require__(39);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
-	var _mutationType = __webpack_require__(36);
+	var _mutationType = __webpack_require__(35);
 
 	var mutationType = _interopRequireWildcard(_mutationType);
 
-	var _base = __webpack_require__(45);
+	var _base = __webpack_require__(44);
 
 	var _base2 = _interopRequireDefault(_base);
 
@@ -7601,7 +7548,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 48 */
+/* 47 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -7642,18 +7589,18 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 49 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(50)
-	__vue_script__ = __webpack_require__(51)
+	__webpack_require__(49)
+	__vue_script__ = __webpack_require__(50)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] app\\src\\components\\SideContainer.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(52)
+	__vue_template__ = __webpack_require__(51)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -7669,7 +7616,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-24946e99/SideContainer.vue"
+	  var id = "_v-85376dbc/SideContainer.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -7678,9 +7625,9 @@ webpackJsonp([0],[
 	})()}
 
 /***/ },
-/* 50 */
+/* 49 */
 10,
-/* 51 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7689,11 +7636,11 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _lists = __webpack_require__(47);
+	var _lists = __webpack_require__(46);
 
 	var listsActions = _interopRequireWildcard(_lists);
 
-	var _getter = __webpack_require__(48);
+	var _getter = __webpack_require__(47);
 
 	var getters = _interopRequireWildcard(_getter);
 
@@ -7702,7 +7649,7 @@ webpackJsonp([0],[
 	// <template>
 	//   <div class="sidebar">
 	//     <div class="sidebar-header">
-	//       <span class="material-icons">list</span>
+	//       <!-- <span class="material-icons">list</span> -->
 	//     </div>
 	//     <div class="sidebar-toolbar">
 	//       <div v-if="user" class="sidebar-toolbar-account">
@@ -7877,6 +7824,7 @@ webpackJsonp([0],[
 	//         align-items: center;
 	//         justify-content: flex-start;
 	//         img{
+	//           min-width: 32px;
 	//           width: 32px;
 	//           height: 32px;
 	//           flex: 0 1 32px;
@@ -7985,24 +7933,24 @@ webpackJsonp([0],[
 	//   </style>
 
 /***/ },
-/* 52 */
+/* 51 */
 /***/ function(module, exports) {
 
-	module.exports = "\n<div class=\"sidebar\">\n  <div class=\"sidebar-header\">\n    <span class=\"material-icons\">list</span>\n  </div>\n  <div class=\"sidebar-toolbar\">\n    <div v-if=\"user\" class=\"sidebar-toolbar-account\">\n      <img v-bind:src=\"user.avatar\" alt=\"\">\n      {{user.username}}\n    </div>\n  </div>\n  <div class=\"sidebar-body list-scroll\">\n    <ul class=\"side-menu\">\n      <li>\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: 'archive'}}\">\n          <span class=\"material-icons\">archive</span>\n          <span class=\"side-menu__item-content\">归档</span>\n        </a>\n      </li>\n      <li>\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: 'trash'}}\">\n          <span class=\"material-icons\">delete</span>\n          <span class=\"side-menu__item-content\">回收站</span>\n        </a>\n      </li>\n    </ul>\n    <ul class=\"side-menu\">\n      <li v-for=\"list in lists\">\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: list.id}}\">\n          <span class=\"material-icons\">list</span>\n          <span class=\"side-menu__item-content\">{{list.name}}</span>\n          <span class=\"side-menu__item-count\">{{list.task_count_total - list.task_count_archived - list.task_count_istrash || ''}}</span>\n          <span class=\"material-icons edit\" @click=\"showCurrent(e, list)\" data-tooltip=\"编辑\" data-tooltip-pos=\"down\">edit</span>\n        </a>\n      </li>\n    </ul>\n\n  </div>\n  <div class=\"sidebar-footer\">\n    <div class=\"side-actions\">\n      <span class=\"side-actions__item\" @click=\"showModal = true\">\n        <span class=\"material-icons\">add</span>\n        <span class=\"side-actions__item-content\">新建分类</span>\n      </span>\n    </div>\n  </div>\n  <modal :show=\"showModal\">\n    <div slot=\"content\" class=\"list-editor\">\n      <div class=\"list-editor-header\">\n        <h3 class=\"list-editor-header--title\">创建新的清单</h3>\n      </div>\n      <div class=\"list-editor-body\">\n        <div class=\"robin-textfield\">\n          <input type=\"text\" class=\"robin-textfield--input robin-textfield--input_default\" v-model=\"newList.name\"/>\n        </div>\n      </div>\n      <div class=\"list-editor-footer\">\n        <span></span>\n        <button class=\"robin-btn robin-btn__default\" @click=\"createNewList\">创建</button>\n      </div>\n    </div>\n  </modal>\n  <modal :show=\"showSelectedList\">\n    <div slot=\"content\" class=\"list-editor\">\n      <div class=\"list-editor-header\">\n        <h3 class=\"list-editor-header--title\">编辑清单</h3>\n      </div>\n      <div class=\"list-editor-body\">\n        <div class=\"robin-textfield\">\n          <input type=\"text\" class=\"robin-textfield--input robin-textfield--input_default\" v-model=\"selectedList.name\"/>\n        </div>\n      </div>\n      <div class=\"list-editor-footer\">\n        <span class=\"material-icons\" @click=\"deleteList(this.selectedList)\">delete</span>\n        <button class=\"robin-btn robin-btn__default\" @click=\"doEditList\">确定</button>\n      </div>\n    </div>\n  </modal>\n</div>\n\n";
+	module.exports = "\n<div class=\"sidebar\">\n  <div class=\"sidebar-header\">\n    <!-- <span class=\"material-icons\">list</span> -->\n  </div>\n  <div class=\"sidebar-toolbar\">\n    <div v-if=\"user\" class=\"sidebar-toolbar-account\">\n      <img v-bind:src=\"user.avatar\" alt=\"\">\n      {{user.username}}\n    </div>\n  </div>\n  <div class=\"sidebar-body list-scroll\">\n    <ul class=\"side-menu\">\n      <li>\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: 'archive'}}\">\n          <span class=\"material-icons\">archive</span>\n          <span class=\"side-menu__item-content\">归档</span>\n        </a>\n      </li>\n      <li>\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: 'trash'}}\">\n          <span class=\"material-icons\">delete</span>\n          <span class=\"side-menu__item-content\">回收站</span>\n        </a>\n      </li>\n    </ul>\n    <ul class=\"side-menu\">\n      <li v-for=\"list in lists\">\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: list.id}}\">\n          <span class=\"material-icons\">list</span>\n          <span class=\"side-menu__item-content\">{{list.name}}</span>\n          <span class=\"side-menu__item-count\">{{list.task_count_total - list.task_count_archived - list.task_count_istrash || ''}}</span>\n          <span class=\"material-icons edit\" @click=\"showCurrent(e, list)\" data-tooltip=\"编辑\" data-tooltip-pos=\"down\">edit</span>\n        </a>\n      </li>\n    </ul>\n\n  </div>\n  <div class=\"sidebar-footer\">\n    <div class=\"side-actions\">\n      <span class=\"side-actions__item\" @click=\"showModal = true\">\n        <span class=\"material-icons\">add</span>\n        <span class=\"side-actions__item-content\">新建分类</span>\n      </span>\n    </div>\n  </div>\n  <modal :show=\"showModal\">\n    <div slot=\"content\" class=\"list-editor\">\n      <div class=\"list-editor-header\">\n        <h3 class=\"list-editor-header--title\">创建新的清单</h3>\n      </div>\n      <div class=\"list-editor-body\">\n        <div class=\"robin-textfield\">\n          <input type=\"text\" class=\"robin-textfield--input robin-textfield--input_default\" v-model=\"newList.name\"/>\n        </div>\n      </div>\n      <div class=\"list-editor-footer\">\n        <span></span>\n        <button class=\"robin-btn robin-btn__default\" @click=\"createNewList\">创建</button>\n      </div>\n    </div>\n  </modal>\n  <modal :show=\"showSelectedList\">\n    <div slot=\"content\" class=\"list-editor\">\n      <div class=\"list-editor-header\">\n        <h3 class=\"list-editor-header--title\">编辑清单</h3>\n      </div>\n      <div class=\"list-editor-body\">\n        <div class=\"robin-textfield\">\n          <input type=\"text\" class=\"robin-textfield--input robin-textfield--input_default\" v-model=\"selectedList.name\"/>\n        </div>\n      </div>\n      <div class=\"list-editor-footer\">\n        <span class=\"material-icons\" @click=\"deleteList(this.selectedList)\">delete</span>\n        <button class=\"robin-btn robin-btn__default\" @click=\"doEditList\">确定</button>\n      </div>\n    </div>\n  </modal>\n</div>\n\n";
 
 /***/ },
-/* 53 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(54)
-	__vue_script__ = __webpack_require__(55)
+	__webpack_require__(53)
+	__vue_script__ = __webpack_require__(54)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] app\\src\\components\\TaskDetail.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(59)
+	__vue_template__ = __webpack_require__(58)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -8018,7 +7966,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-63d31917/TaskDetail.vue"
+	  var id = "_v-6177732e/TaskDetail.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -8027,9 +7975,9 @@ webpackJsonp([0],[
 	})()}
 
 /***/ },
-/* 54 */
+/* 53 */
 10,
-/* 55 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8038,19 +7986,19 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _tasks = __webpack_require__(56);
+	var _tasks = __webpack_require__(55);
 
 	var tasksActions = _interopRequireWildcard(_tasks);
 
-	var _getter = __webpack_require__(48);
+	var _getter = __webpack_require__(47);
 
 	var getters = _interopRequireWildcard(_getter);
 
-	var _marked = __webpack_require__(57);
+	var _marked = __webpack_require__(56);
 
 	var _marked2 = _interopRequireDefault(_marked);
 
-	var _tool = __webpack_require__(58);
+	var _tool = __webpack_require__(57);
 
 	var _tool2 = _interopRequireDefault(_tool);
 
@@ -8404,7 +8352,7 @@ webpackJsonp([0],[
 	//   </style>
 
 /***/ },
-/* 56 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8414,15 +8362,15 @@ webpackJsonp([0],[
 	});
 	exports.resetTasks = exports.editTask = exports.deleteTask = exports.toggleTask = exports.addTask = exports.hideTaskDetail = exports.fetchTaskDetail = exports.fetchTasks = undefined;
 
-	var _superagent = __webpack_require__(40);
+	var _superagent = __webpack_require__(39);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
-	var _mutationType = __webpack_require__(36);
+	var _mutationType = __webpack_require__(35);
 
 	var mutationType = _interopRequireWildcard(_mutationType);
 
-	var _base = __webpack_require__(45);
+	var _base = __webpack_require__(44);
 
 	var _base2 = _interopRequireDefault(_base);
 
@@ -8435,8 +8383,8 @@ webpackJsonp([0],[
 	};
 
 	var fetchTasks = exports.fetchTasks = function fetchTasks(_ref, query, callback) {
-	  var dispatch = _ref.dispatch;
-	  var state = _ref.state;
+	  var dispatch = _ref.dispatch,
+	      state = _ref.state;
 
 	  dispatch(mutationType.REQUST_TASKS);
 	  requestTasks(query).then(function (res) {
@@ -8450,8 +8398,8 @@ webpackJsonp([0],[
 	};
 
 	var fetchTaskDetail = exports.fetchTaskDetail = function fetchTaskDetail(_ref2, taskid) {
-	  var dispatch = _ref2.dispatch;
-	  var state = _ref2.state;
+	  var dispatch = _ref2.dispatch,
+	      state = _ref2.state;
 
 	  dispatch(mutationType.REQUEST_TASK_DETAIL);
 	  _superagent2.default.get('/tasks/' + taskid).set('x-access-token', window.localStorage.token).use(_base2.default).then(function (res) {
@@ -8468,8 +8416,8 @@ webpackJsonp([0],[
 	};
 
 	var addTask = exports.addTask = function addTask(_ref4, task) {
-	  var dispatch = _ref4.dispatch;
-	  var state = _ref4.state;
+	  var dispatch = _ref4.dispatch,
+	      state = _ref4.state;
 
 	  _superagent2.default.post('/tasks').send(task).set('x-access-token', window.localStorage.token).use(_base2.default).then(function (res) {
 	    dispatch(mutationType.ADD_TASK, res.body);
@@ -8480,8 +8428,8 @@ webpackJsonp([0],[
 	};
 
 	var toggleTask = exports.toggleTask = function toggleTask(_ref5, taskid, param) {
-	  var dispatch = _ref5.dispatch;
-	  var state = _ref5.state;
+	  var dispatch = _ref5.dispatch,
+	      state = _ref5.state;
 
 	  _superagent2.default.put('/tasks/' + taskid).send(param).set('x-access-token', window.localStorage.token).use(_base2.default).then(function (res) {
 	    console.log('actions toggle task');
@@ -8497,8 +8445,8 @@ webpackJsonp([0],[
 	};
 
 	var deleteTask = exports.deleteTask = function deleteTask(_ref6, task) {
-	  var dispatch = _ref6.dispatch;
-	  var state = _ref6.state;
+	  var dispatch = _ref6.dispatch,
+	      state = _ref6.state;
 
 	  _superagent2.default.delete('/tasks/' + task.id).set('x-access-token', window.localStorage.token).use(_base2.default).then(function (res) {
 	    dispatch(mutationType.DELETE_TASK, res.body);
@@ -8518,8 +8466,8 @@ webpackJsonp([0],[
 	};
 
 	var editTask = exports.editTask = function editTask(_ref7, taskid, param) {
-	  var dispatch = _ref7.dispatch;
-	  var state = _ref7.state;
+	  var dispatch = _ref7.dispatch,
+	      state = _ref7.state;
 
 	  _superagent2.default.put('/tasks/' + taskid).set('x-access-token', window.localStorage.token).send(param).use(_base2.default).then(function (res) {
 	    dispatch(mutationType.EDIT_TASK, res.body);
@@ -8534,14 +8482,14 @@ webpackJsonp([0],[
 	};
 
 	var resetTasks = exports.resetTasks = function resetTasks(_ref8, taskid, param) {
-	  var dispatch = _ref8.dispatch;
-	  var state = _ref8.state;
+	  var dispatch = _ref8.dispatch,
+	      state = _ref8.state;
 
 	  dispatch(mutationType.RESET_TASKS);
 	};
 
 /***/ },
-/* 57 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
@@ -9640,7 +9588,8 @@ webpackJsonp([0],[
 	}
 
 	function unescape(html) {
-	  return html.replace(/&([#\w]+);/g, function(_, n) {
+		// explicitly match decimal, hex, and named HTML entities 
+	  return html.replace(/&(#(?:\d+)|(?:#x[0-9A-Fa-f]+)|(?:\w+));?/g, function(_, n) {
 	    n = n.toLowerCase();
 	    if (n === 'colon') return ':';
 	    if (n.charAt(0) === '#') {
@@ -9833,7 +9782,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 58 */
+/* 57 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -9905,24 +9854,24 @@ webpackJsonp([0],[
 	exports.default = Tool;
 
 /***/ },
-/* 59 */
+/* 58 */
 /***/ function(module, exports) {
 
 	module.exports = "\n  <div class=\"card\" @click.stop v-bind:class=\"{card__trash: task.istrash}\">\n    <div class=\"loader loader__hover\" v-show=\"isRequestingTaskDetail\" transition=\"animation-loader\">\n      <div class=\"loader-inner ball-clip-rotate-multiple\">\n        <div></div>\n        <div></div>\n      </div>\n    </div>\n    <div class=\"card-status card-status__archived\" v-if=\"task.archived && !task.istrash\">\n      该任务已经归档\n    </div>\n    <div class=\"card-status card-status__trash\" v-if=\"task.istrash\">\n      该任务已被删除，无法编辑\n    </div>\n    <div class=\"card-header\">\n      <input class=\"card-header--title card-header--input\" :value=\"task.title\" v-autoblur=\"isTitleEditing\" @focus=\"isTitleEditing = true\" @keyup.esc=\"doEditTitle\" @keyup.enter=\"doEditTitle\" :disabled=\"task.istrash\" />\n    </div>\n    <div class=\"card-body\">\n      <div class=\"card-metadata\">\n        <!--  标签 -->\n        <div class=\"card-metadata-item\">\n          <span class=\"material-icons card-metadata-item--icons\">label_outline</span>\n        </div>\n        <div class=\"card-metadata-item\">\n          <i class=\"material-icons card-metadata-item--icons\" data-tooltip=\"更新时间\">update</i>\n          <span class=\"card-metadata-item--content\">{{task.update_time}}</span>\n        </div>\n        <div class=\"card-metadata-item\">\n          <i class=\"material-icons card-metadata-item--icons\" data-tooltip=\"截止时间\">alarm</i>\n          <span class=\"card-metadata-item--content\">Due: {{task.deadline}}</span>\n        </div>\n        <div class=\"card-metadata-item\">\n          <span class=\"material-icons card-metadata-item--icons\">create</span>\n          <div class=\"card-metadata-item--content\" v-bind:class=\"{editing: isDescEditing}\" @dblclick=\"modifyDesc\">\n            <div class=\"content-value markdownPrased\">{{{descriptionMarked}}}</div>\n            <textarea class=\"content-input\" v-autofocus=\"isDescEditing\" @keyup.esc=\"doEditDesc\" @blur=\"doEditDesc\" v-model=\"task.description\"></textarea>\n          </div>\n        </div>\n        <!-- 子任务 -->\n<!--               <div class=\"card-subtasks\">\n          <ul>\n            <li></li>\n          </ul>\n          <div class=\"card-metadata-item\">\n            <span class=\"material-icons card-metadata-item--icons\">add</span>\n          </div>\n        </div> -->\n      </div>\n    </div>\n    <div class=\"card-footer\">\n      <span></span>\n      <div> 创建于：{{task.create_time}}</div>\n      <div class=\"card-footer--toolbar\">\n        <i class=\"material-icons\" @click=\"toggleTask(task)\" data-tooltip=\"归档\" data-tooltip-pos=\"down\" v-if=\"!task.archived\">archive</i>\n        <i class=\"material-icons\" @click=\"toggleTask(task)\" data-tooltip=\"取消归档\" data-tooltip-pos=\"down\" v-if=\"task.archived\">unarchive</i>\n        <i class=\"material-icons\" @click=\"deleteTask(task)\" v-if=\"task.istrash\" data-tooltip=\"彻底删除\">delete_forever</i>\n        <i class=\"material-icons\" @click=\"deleteTask(task)\" v-if=\"!task.istrash\" data-tooltip=\"删除\">delete</i>\n      </div>\n    </div>\n  </div>\n";
 
 /***/ },
-/* 60 */
+/* 59 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(61)
-	__vue_script__ = __webpack_require__(62)
+	__webpack_require__(60)
+	__vue_script__ = __webpack_require__(61)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] app\\src\\components\\Header.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(63)
+	__vue_template__ = __webpack_require__(62)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -9938,7 +9887,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-61be7b24/Header.vue"
+	  var id = "_v-17887ff6/Header.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -9947,9 +9896,9 @@ webpackJsonp([0],[
 	})()}
 
 /***/ },
-/* 61 */
+/* 60 */
 10,
-/* 62 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9958,7 +9907,7 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _getter = __webpack_require__(48);
+	var _getter = __webpack_require__(47);
 
 	var getters = _interopRequireWildcard(_getter);
 
@@ -10016,29 +9965,29 @@ webpackJsonp([0],[
 	// <script>
 
 /***/ },
-/* 63 */
+/* 62 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"main-header header-toolbar\">\n  <div class=\"header-toolbar__title\">\n    {{list.name}}\n  </div>\n</div>\n";
 
 /***/ },
-/* 64 */
+/* 63 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<side-container></side-container>\n<div class=\"main\">\n  <router-view></router-view>\n</div>\n<task-detail v-if=\"show\" transition=\"animation-showtaskdetail\"></task-detail>\n";
 
 /***/ },
-/* 65 */
+/* 64 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__vue_script__ = __webpack_require__(66)
+	__vue_script__ = __webpack_require__(65)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] app\\src\\components\\Index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(67)
+	__vue_template__ = __webpack_require__(66)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10054,7 +10003,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-5aa26cfe/Index.vue"
+	  var id = "_v-58023d0a/Index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -10063,7 +10012,7 @@ webpackJsonp([0],[
 	})()}
 
 /***/ },
-/* 66 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10080,11 +10029,11 @@ webpackJsonp([0],[
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _user = __webpack_require__(39);
+	var _user = __webpack_require__(38);
 
 	var userActions = _interopRequireWildcard(_user);
 
-	var _getter = __webpack_require__(48);
+	var _getter = __webpack_require__(47);
 
 	var getters = _interopRequireWildcard(_getter);
 
@@ -10134,24 +10083,24 @@ webpackJsonp([0],[
 	// </script>
 
 /***/ },
-/* 67 */
+/* 66 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"app\">\n  <router-view ></router-view>\n</div>\n";
 
 /***/ },
-/* 68 */
+/* 67 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(69)
-	__vue_script__ = __webpack_require__(70)
+	__webpack_require__(68)
+	__vue_script__ = __webpack_require__(69)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] app\\src\\components\\mainContainer.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(81)
+	__vue_template__ = __webpack_require__(80)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10167,7 +10116,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-094994d2/mainContainer.vue"
+	  var id = "_v-d7a9dfc0/mainContainer.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -10176,9 +10125,9 @@ webpackJsonp([0],[
 	})()}
 
 /***/ },
-/* 69 */
+/* 68 */
 10,
-/* 70 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10187,23 +10136,23 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _Header = __webpack_require__(60);
+	var _Header = __webpack_require__(59);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _TaskItem = __webpack_require__(71);
+	var _TaskItem = __webpack_require__(70);
 
 	var _TaskItem2 = _interopRequireDefault(_TaskItem);
 
-	var _AddItem = __webpack_require__(75);
+	var _AddItem = __webpack_require__(74);
 
 	var _AddItem2 = _interopRequireDefault(_AddItem);
 
-	var _tasks = __webpack_require__(56);
+	var _tasks = __webpack_require__(55);
 
 	var tasksActions = _interopRequireWildcard(_tasks);
 
-	var _getter = __webpack_require__(48);
+	var _getter = __webpack_require__(47);
 
 	var getters = _interopRequireWildcard(_getter);
 
@@ -10459,18 +10408,18 @@ webpackJsonp([0],[
 	// <script>
 
 /***/ },
-/* 71 */
+/* 70 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(72)
-	__vue_script__ = __webpack_require__(73)
+	__webpack_require__(71)
+	__vue_script__ = __webpack_require__(72)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] app\\src\\components\\TaskItem.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(74)
+	__vue_template__ = __webpack_require__(73)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10486,7 +10435,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-382b1e59/TaskItem.vue"
+	  var id = "_v-fb05dba0/TaskItem.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -10495,9 +10444,9 @@ webpackJsonp([0],[
 	})()}
 
 /***/ },
-/* 72 */
+/* 71 */
 10,
-/* 73 */
+/* 72 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10506,15 +10455,15 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _tasks = __webpack_require__(56);
+	var _tasks = __webpack_require__(55);
 
 	var tasksActions = _interopRequireWildcard(_tasks);
 
-	var _getter = __webpack_require__(48);
+	var _getter = __webpack_require__(47);
 
 	var getters = _interopRequireWildcard(_getter);
 
-	var _tool = __webpack_require__(58);
+	var _tool = __webpack_require__(57);
 
 	var _tool2 = _interopRequireDefault(_tool);
 
@@ -10789,24 +10738,24 @@ webpackJsonp([0],[
 	// <script>
 
 /***/ },
-/* 74 */
+/* 73 */
 /***/ function(module, exports) {
 
-	module.exports = "\n  <div transition=\"animation_showtask\" v-bind:class=\"{archived: task.archived, editing: task == taskEditing, 'collection-item': iscollection, 'task': !iscollection}\" @click=\"showTaskDetail(task)\">\n    <div class=\"task-content\">\n      <div class=\"task-content-box\" v-html=\"titleAfterParse\"></div>\n    </div>\n    <div class=\"task-labels\" v-if=\"iscollection\">\n      <span class=\"task-labels--item\">{{task.list_name}}</span>\n    </div>\n    <div class=\"task-toolbar\" @click.stop>\n      <i class=\"material-icons task-toolbar--icons\" @click=\"toggleTask(task)\" data-tooltip=\"归档\" v-if=\"!task.archived && !task.istrash\">archive</i>\n      <i class=\"material-icons task-toolbar--icons\" @click=\"toggleTask(task)\" data-tooltip=\"取消归档\" v-if=\"task.archived && !task.istrash\">unarchive</i>\n      <i class=\"material-icons task-toolbar--icons\" v-if=\"task.istrash\" data-tooltip=\"还原\" @click=\"undoTask(task)\">undo</i>\n      <i class=\"material-icons task-toolbar--icons\" @click=\"deleteTask(task)\" v-if=\"task.istrash\" data-tooltip=\"彻底删除\">delete_forever</i>\n      <i class=\"material-icons task-toolbar--icons\" @click=\"deleteTask(task)\" v-if=\"!task.istrash\" data-tooltip=\"删除\">delete</i>\n    </span>\n\n  </div>\n</template>";
+	module.exports = "\n<div transition=\"animation_showtask\" v-bind:class=\"{archived: task.archived, editing: task == taskEditing, 'collection-item': iscollection, 'task': !iscollection}\" @click=\"showTaskDetail(task)\">\n  <div class=\"task-content\">\n    <div class=\"task-content-box\" v-html=\"titleAfterParse\"></div>\n  </div>\n  <div class=\"task-labels\" v-if=\"iscollection\">\n    <span class=\"task-labels--item\">{{task.list_name}}</span>\n  </div>\n  <div class=\"task-toolbar\" @click.stop>\n    <i class=\"material-icons task-toolbar--icons\" @click=\"toggleTask(task)\" data-tooltip=\"归档\" v-if=\"!task.archived && !task.istrash\">archive</i>\n    <i class=\"material-icons task-toolbar--icons\" @click=\"toggleTask(task)\" data-tooltip=\"取消归档\" v-if=\"task.archived && !task.istrash\">unarchive</i>\n    <i class=\"material-icons task-toolbar--icons\" v-if=\"task.istrash\" data-tooltip=\"还原\" @click=\"undoTask(task)\">undo</i>\n    <i class=\"material-icons task-toolbar--icons\" @click=\"deleteTask(task)\" v-if=\"task.istrash\" data-tooltip=\"彻底删除\">delete_forever</i>\n    <i class=\"material-icons task-toolbar--icons\" @click=\"deleteTask(task)\" v-if=\"!task.istrash\" data-tooltip=\"删除\">delete</i>\n  </span>\n\n</div>\n";
 
 /***/ },
-/* 75 */
+/* 74 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(76)
-	__vue_script__ = __webpack_require__(77)
+	__webpack_require__(75)
+	__vue_script__ = __webpack_require__(76)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] app\\src\\components\\AddItem.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(80)
+	__vue_template__ = __webpack_require__(79)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10822,7 +10771,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-45bf557a/AddItem.vue"
+	  var id = "_v-5b650a8c/AddItem.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -10831,9 +10780,9 @@ webpackJsonp([0],[
 	})()}
 
 /***/ },
-/* 76 */
+/* 75 */
 10,
-/* 77 */
+/* 76 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10842,11 +10791,11 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _stringify = __webpack_require__(78);
+	var _stringify = __webpack_require__(77);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
-	var _tasks = __webpack_require__(56);
+	var _tasks = __webpack_require__(55);
 
 	var taskActions = _interopRequireWildcard(_tasks);
 
@@ -10944,46 +10893,46 @@ webpackJsonp([0],[
 	// <script>
 
 /***/ },
+/* 77 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(78), __esModule: true };
+
+/***/ },
 /* 78 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(79), __esModule: true };
-
-/***/ },
-/* 79 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var core  = __webpack_require__(23)
+	var core  = __webpack_require__(22)
 	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
 	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
 	  return $JSON.stringify.apply($JSON, arguments);
 	};
 
 /***/ },
-/* 80 */
+/* 79 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"task-textfield\">\n  <input class=\"task-textfield--input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask(list_id)\" placeholder=\"添加任务...\">\n</div>\n";
 
 /***/ },
-/* 81 */
+/* 80 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<main-header :list=\"currentList\"></main-header>\n<div class=\"main-body\" >\n  <add-item :listid=\"listId\" v-show=\"showInputer\"></add-item>\n  <div class=\"tasklist\">\n    <task-item v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\" :iscollection='isCollection'></task-item>\n  </div>\n  <div class=\"label-trigger\" @click=\"toggleShowArchivedTask\"  v-show=\"showInputer\">\n    显示已经归档的任务\n  </div>\n  <div class=\"loader\" v-show=\"isRequestingTasks\">\n    <div class=\"loader-inner ball-clip-rotate-multiple\">\n      <div></div>\n      <div></div>\n    </div>\n  </div>\n  <div class=\"tasklist--finished\" transition=\"animation_showtask\" v-show=\"showArchived\">\n    <task-item v-for=\"task in archivedTasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\"></task-item>\n  </div>\n\n</div>\n";
 
 /***/ },
-/* 82 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(83)
-	__vue_script__ = __webpack_require__(84)
+	__webpack_require__(82)
+	__vue_script__ = __webpack_require__(83)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] app\\src\\components\\user\\login.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(85)
+	__vue_template__ = __webpack_require__(84)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10999,7 +10948,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-1807b9d9/login.vue"
+	  var id = "_v-15ac13f0/login.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -11008,9 +10957,9 @@ webpackJsonp([0],[
 	})()}
 
 /***/ },
-/* 83 */
+/* 82 */
 10,
-/* 84 */
+/* 83 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11019,11 +10968,11 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _user = __webpack_require__(39);
+	var _user = __webpack_require__(38);
 
 	var userActions = _interopRequireWildcard(_user);
 
-	var _getter = __webpack_require__(48);
+	var _getter = __webpack_require__(47);
 
 	var getters = _interopRequireWildcard(_getter);
 
@@ -11108,23 +11057,23 @@ webpackJsonp([0],[
 	// </style>
 
 /***/ },
-/* 85 */
+/* 84 */
 /***/ function(module, exports) {
 
 	module.exports = "\n  <div class=\"custom-container login-form\" transition=\"animate_routerview\">\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <h3>登录</h3>\n      </div>\n    </div>\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <div class=\"robin-textfield\">\n          <label class=\"\" for=\"email\">Email</label>\n          <input class=\"robin-textfield--input robin-textfield--input_default\" type=\"text\" id=\"email\" v-model=\"account.username\">\n        </div>\n      </div>\n    </div>\n    <div class=\"mdl-cell mdl-cell-6-col\">\n      <div class=\"mdl-textfield mdl-js-textfield\">\n        <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\n        <input class=\"robin-textfield--input robin-textfield--input_default\" type=\"password\" id=\"password\" v-model=\"account.password\">\n      </div>\n    </div>\n    <div class=\"mdl-cell mdl-cell-6-col\">\n      <div class=\"robin-textfield\">\n        <button class=\"robin-btn robin-btn__default\"  v-on:click=\"doLogin\">GO!</button>\n        <a v-link=\"{path: '/signup', exact: true}\">还没有账号？立马注册</a>\n      </div>\n    </div>\n  </div>\n</div>\n";
 
 /***/ },
-/* 86 */
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__vue_script__ = __webpack_require__(87)
+	__vue_script__ = __webpack_require__(86)
 	if (__vue_script__ &&
 	    __vue_script__.__esModule &&
 	    Object.keys(__vue_script__).length > 1) {
 	  console.warn("[vue-loader] app\\src\\components\\user\\signup.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(88)
+	__vue_template__ = __webpack_require__(87)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -11140,7 +11089,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-35496e58/signup.vue"
+	  var id = "_v-279f51be/signup.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -11149,7 +11098,7 @@ webpackJsonp([0],[
 	})()}
 
 /***/ },
-/* 87 */
+/* 86 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -11197,10 +11146,11 @@ webpackJsonp([0],[
 	    signUp: function signUp() {
 	      var vm = this;
 	      var data = this.$data.registerData;
-	      // vm.$http.post('http://zhanglun.daoapp.io/api/users/signup', data)
-	      vm.$http.post('http://localhost:1234/api/users/signup', data).then(function (res) {
-	        localStorage.token = res.token;
-	        vm.$router.go('/lists');
+	      vm.$http.post('http://zhanglun.daoapp.io/api/users/signup', data)
+	      // vm.$http.post('http://localhost:1234/api/users/signup', data)
+	      .then(function (res) {
+	        localStorage.token = res.body.token;
+	        vm.$router.go('/');
 	      }, function (err) {
 	        console.log(err);
 	      });
@@ -11210,22 +11160,22 @@ webpackJsonp([0],[
 	// </script>
 
 /***/ },
-/* 88 */
+/* 87 */
 /***/ function(module, exports) {
 
 	module.exports = "\n<div class=\"custom-container login-form\" transition=\"animate_routerview\">\n  <div class=\"mdl-grid\">\n    <div class=\"mdl-cell mdl-cell-6-col\">\n      <h3>注册</h3>\n    </div>\n    <div class=\"robin-textfield\">\n      <label class=\"mdl-textfield__label\" for=\"email\">邮箱</label>\n      <input class=\"robin-textfield--input robin-textfield--input_default\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\n    </div>\n    <div class=\"robin-textfield\">\n      <label class=\"mdl-textfield__label\" for=\"password\">密码</label>\n      <input class=\"robin-textfield--input robin-textfield--input_default\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\n    </div>\n    <div class=\"robin-textfield\">\n      <button class=\"robin-btn robin-btn__default\" v-on:click=\"signUp()\">注册</button>\n      <a v-link=\"'login'\">已有账号？直接登录</a>\n    </div>\n  </div>\n</div>\n";
 
 /***/ },
-/* 89 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(90);
+	var content = __webpack_require__(89);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(91)(content, {});
+	var update = __webpack_require__(90)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -11242,7 +11192,7 @@ webpackJsonp([0],[
 	}
 
 /***/ },
-/* 90 */
+/* 89 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(11)();
@@ -11256,7 +11206,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 91 */
+/* 90 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
