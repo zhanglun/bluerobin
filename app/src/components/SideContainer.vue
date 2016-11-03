@@ -175,6 +175,7 @@
         align-items: center;
         justify-content: flex-start;
         img{
+          min-width: 32px;
           width: 32px;
           height: 32px;
           flex: 0 1 32px;
