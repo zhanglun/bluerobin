@@ -1,6 +1,6 @@
 webpackJsonp([0],[
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -16,29 +16,29 @@ webpackJsonp([0],[
 
 	var _vueResource2 = _interopRequireDefault(_vueResource);
 
-	var _App = __webpack_require__(9);
+	var _App = __webpack_require__(10);
 
 	var _App2 = _interopRequireDefault(_App);
 
-	var _Index = __webpack_require__(64);
+	var _Index = __webpack_require__(65);
 
 	var _Index2 = _interopRequireDefault(_Index);
 
-	var _mainContainer = __webpack_require__(67);
+	var _mainContainer = __webpack_require__(68);
 
 	var _mainContainer2 = _interopRequireDefault(_mainContainer);
 
-	var _login = __webpack_require__(81);
+	var _login = __webpack_require__(82);
 
 	var _login2 = _interopRequireDefault(_login);
 
-	var _signup = __webpack_require__(85);
+	var _signup = __webpack_require__(86);
 
 	var _signup2 = _interopRequireDefault(_signup);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	__webpack_require__(88);
+	__webpack_require__(89);
 
 	_vue2.default.use(_vueRouter2.default);
 	_vue2.default.use(_vueResource2.default);
@@ -79,7 +79,7 @@ webpackJsonp([0],[
 
 	router.start(_Index2.default, '#app');
 
-/***/ },
+/***/ }),
 /* 1 */,
 /* 2 */,
 /* 3 */,
@@ -87,7 +87,7 @@ webpackJsonp([0],[
 /* 5 */,
 /* 6 */,
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/*!
 	 * vue-router v0.7.13
@@ -2799,13 +2799,13 @@ webpackJsonp([0],[
 
 	}));
 
-/***/ },
+/***/ }),
 /* 8 */
-/***/ function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/*!
-	 * vue-resource v1.0.3
-	 * https://github.com/vuejs/vue-resource
+	 * vue-resource v1.3.3
+	 * https://github.com/pagekit/vue-resource
 	 * Released under the MIT License.
 	 */
 
@@ -2817,7 +2817,7 @@ webpackJsonp([0],[
 
 	var RESOLVED = 0;
 	var REJECTED = 1;
-	var PENDING = 2;
+	var PENDING  = 2;
 
 	function Promise$1(executor) {
 
@@ -2852,8 +2852,7 @@ webpackJsonp([0],[
 
 	Promise$1.all = function all(iterable) {
 	    return new Promise$1(function (resolve, reject) {
-	        var count = 0,
-	            result = [];
+	        var count = 0, result = [];
 
 	        if (iterable.length === 0) {
 	            resolve(result);
@@ -2905,6 +2904,7 @@ webpackJsonp([0],[
 	                        promise.resolve(x);
 	                    }
 	                    called = true;
+
 	                }, function (r) {
 	                    if (!called) {
 	                        promise.reject(r);
@@ -3054,25 +3054,36 @@ webpackJsonp([0],[
 	p.finally = function (callback) {
 
 	    return this.then(function (value) {
-	        callback.call(this);
-	        return value;
-	    }, function (reason) {
-	        callback.call(this);
-	        return Promise.reject(reason);
-	    });
+	            callback.call(this);
+	            return value;
+	        }, function (reason) {
+	            callback.call(this);
+	            return Promise.reject(reason);
+	        }
+	    );
 	};
 
 	/**
 	 * Utility functions.
 	 */
 
-	var debug = false;var util = {};var slice = [].slice;
+	var ref = {};
+	var hasOwnProperty = ref.hasOwnProperty;
 
+	var ref$1 = [];
+	var slice = ref$1.slice;
+	var debug = false;
+	var ntick;
 
-	function Util (Vue) {
-	    util = Vue.util;
-	    debug = Vue.config.debug || !Vue.config.silent;
-	}
+	var inBrowser = typeof window !== 'undefined';
+
+	var Util = function (ref) {
+	    var config = ref.config;
+	    var nextTick = ref.nextTick;
+
+	    ntick = nextTick;
+	    debug = config.debug || !config.silent;
+	};
 
 	function warn(msg) {
 	    if (typeof console !== 'undefined' && debug) {
@@ -3087,11 +3098,24 @@ webpackJsonp([0],[
 	}
 
 	function nextTick(cb, ctx) {
-	    return util.nextTick(cb, ctx);
+	    return ntick(cb, ctx);
 	}
 
 	function trim(str) {
-	    return str.replace(/^\s*|\s*$/g, '');
+	    return str ? str.replace(/^\s*|\s*$/g, '') : '';
+	}
+
+	function trimEnd(str, chars) {
+
+	    if (str && chars === undefined) {
+	        return str.replace(/\s+$/, '');
+	    }
+
+	    if (!str || !chars) {
+	        return str;
+	    }
+
+	    return str.replace(new RegExp(("[" + chars + "]+$")), '');
 	}
 
 	function toLower(str) {
@@ -3108,9 +3132,7 @@ webpackJsonp([0],[
 	    return typeof val === 'string';
 	}
 
-	function isBoolean(val) {
-	    return val === true || val === false;
-	}
+
 
 	function isFunction(val) {
 	    return typeof val === 'function';
@@ -3151,20 +3173,20 @@ webpackJsonp([0],[
 	        opts = opts.call(obj);
 	    }
 
-	    return merge(fn.bind({ $vm: obj, $options: opts }), fn, { $options: opts });
+	    return merge(fn.bind({$vm: obj, $options: opts}), fn, {$options: opts});
 	}
 
 	function each(obj, iterator) {
 
 	    var i, key;
 
-	    if (obj && typeof obj.length == 'number') {
+	    if (isArray(obj)) {
 	        for (i = 0; i < obj.length; i++) {
 	            iterator.call(obj[i], obj[i], i);
 	        }
 	    } else if (isObject(obj)) {
 	        for (key in obj) {
-	            if (obj.hasOwnProperty(key)) {
+	            if (hasOwnProperty.call(obj, key)) {
 	                iterator.call(obj[key], obj[key], key);
 	            }
 	        }
@@ -3197,6 +3219,7 @@ webpackJsonp([0],[
 	                target[key] = source[key];
 	            }
 	        }
+
 	    });
 
 	    return target;
@@ -3233,28 +3256,26 @@ webpackJsonp([0],[
 	 * Root Prefix Transform.
 	 */
 
-	function root (options, next) {
+	var root = function (options$$1, next) {
 
-	    var url = next(options);
+	    var url = next(options$$1);
 
-	    if (isString(options.root) && !url.match(/^(https?:)?\//)) {
-	        url = options.root + '/' + url;
+	    if (isString(options$$1.root) && !/^(https?:)?\//.test(url)) {
+	        url = trimEnd(options$$1.root, '/') + '/' + url;
 	    }
 
 	    return url;
-	}
+	};
 
 	/**
 	 * Query Parameter Transform.
 	 */
 
-	function query (options, next) {
+	var query = function (options$$1, next) {
 
-	    var urlParams = Object.keys(Url.options.params),
-	        query = {},
-	        url = next(options);
+	    var urlParams = Object.keys(Url.options.params), query = {}, url = next(options$$1);
 
-	    each(options.params, function (value, key) {
+	    each(options$$1.params, function (value, key) {
 	        if (urlParams.indexOf(key) === -1) {
 	            query[key] = value;
 	        }
@@ -3267,7 +3288,7 @@ webpackJsonp([0],[
 	    }
 
 	    return url;
-	}
+	};
 
 	/**
 	 * URL Template v2.0.6 (https://github.com/bramstein/url-template)
@@ -3275,8 +3296,7 @@ webpackJsonp([0],[
 
 	function expand(url, params, variables) {
 
-	    var tmpl = parse(url),
-	        expanded = tmpl.expand(params);
+	    var tmpl = parse(url), expanded = tmpl.expand(params);
 
 	    if (variables) {
 	        variables.push.apply(variables, tmpl.vars);
@@ -3287,17 +3307,15 @@ webpackJsonp([0],[
 
 	function parse(template) {
 
-	    var operators = ['+', '#', '.', '/', ';', '?', '&'],
-	        variables = [];
+	    var operators = ['+', '#', '.', '/', ';', '?', '&'], variables = [];
 
 	    return {
 	        vars: variables,
-	        expand: function (context) {
+	        expand: function expand(context) {
 	            return template.replace(/\{([^\{\}]+)\}|([^\{\}]+)/g, function (_, expression, literal) {
 	                if (expression) {
 
-	                    var operator = null,
-	                        values = [];
+	                    var operator = null, values = [];
 
 	                    if (operators.indexOf(expression.charAt(0)) !== -1) {
 	                        operator = expression.charAt(0);
@@ -3324,6 +3342,7 @@ webpackJsonp([0],[
 	                    } else {
 	                        return values.join(',');
 	                    }
+
 	                } else {
 	                    return encodeReserved(literal);
 	                }
@@ -3334,8 +3353,7 @@ webpackJsonp([0],[
 
 	function getValues(context, operator, key, modifier) {
 
-	    var value = context[key],
-	        result = [];
+	    var value = context[key], result = [];
 
 	    if (isDefined(value) && value !== '') {
 	        if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
@@ -3405,7 +3423,7 @@ webpackJsonp([0],[
 
 	function encodeValue(operator, value, key) {
 
-	    value = operator === '+' || operator === '#' ? encodeReserved(value) : encodeURIComponent(value);
+	    value = (operator === '+' || operator === '#') ? encodeReserved(value) : encodeURIComponent(value);
 
 	    if (key) {
 	        return encodeURIComponent(key) + '=' + value;
@@ -3427,42 +3445,44 @@ webpackJsonp([0],[
 	 * URL Template (RFC 6570) Transform.
 	 */
 
-	function template (options) {
+	var template = function (options) {
 
-	    var variables = [],
-	        url = expand(options.url, options.params, variables);
+	    var variables = [], url = expand(options.url, options.params, variables);
 
 	    variables.forEach(function (key) {
 	        delete options.params[key];
 	    });
 
 	    return url;
-	}
+	};
 
 	/**
 	 * Service for URL templating.
 	 */
 
-	var ie = document.documentMode;
-	var el = document.createElement('a');
-
 	function Url(url, params) {
 
-	    var self = this || {},
-	        options = url,
-	        transform;
+	    var self = this || {}, options$$1 = url, transform;
 
 	    if (isString(url)) {
-	        options = { url: url, params: params };
+	        options$$1 = {url: url, params: params};
 	    }
 
-	    options = merge({}, Url.options, self.$options, options);
+	    options$$1 = merge({}, Url.options, self.$options, options$$1);
 
 	    Url.transforms.forEach(function (handler) {
-	        transform = factory(handler, transform, self.$vm);
+
+	        if (isString(handler)) {
+	            handler = Url.transform[handler];
+	        }
+
+	        if (isFunction(handler)) {
+	            transform = factory(handler, transform, self.$vm);
+	        }
+
 	    });
 
-	    return transform(options);
+	    return transform(options$$1);
 	}
 
 	/**
@@ -3479,7 +3499,8 @@ webpackJsonp([0],[
 	 * Url transforms.
 	 */
 
-	Url.transforms = [template, query, root];
+	Url.transform = {template: template, query: query, root: root};
+	Url.transforms = ['template', 'query', 'root'];
 
 	/**
 	 * Encodes a Url parameter string.
@@ -3489,8 +3510,7 @@ webpackJsonp([0],[
 
 	Url.params = function (obj) {
 
-	    var params = [],
-	        escape = encodeURIComponent;
+	    var params = [], escape = encodeURIComponent;
 
 	    params.add = function (key, value) {
 
@@ -3518,7 +3538,9 @@ webpackJsonp([0],[
 
 	Url.parse = function (url) {
 
-	    if (ie) {
+	    var el = document.createElement('a');
+
+	    if (document.documentMode) {
 	        el.href = url;
 	        url = el.href;
 	    }
@@ -3538,16 +3560,14 @@ webpackJsonp([0],[
 	};
 
 	function factory(handler, next, vm) {
-	    return function (options) {
-	        return handler.call(vm, options, next);
+	    return function (options$$1) {
+	        return handler.call(vm, options$$1, next);
 	    };
 	}
 
 	function serialize(params, obj, scope) {
 
-	    var array = isArray(obj),
-	        plain = isPlainObject(obj),
-	        hash;
+	    var array = isArray(obj), plain = isPlainObject(obj), hash;
 
 	    each(obj, function (value, key) {
 
@@ -3571,12 +3591,11 @@ webpackJsonp([0],[
 	 * XDomain client (Internet Explorer).
 	 */
 
-	function xdrClient (request) {
+	var xdrClient = function (request) {
 	    return new PromiseObj(function (resolve) {
 
-	        var xdr = new XDomainRequest(),
-	            handler = function (_ref) {
-	            var type = _ref.type;
+	        var xdr = new XDomainRequest(), handler = function (ref) {
+	            var type = ref.type;
 
 
 	            var status = 0;
@@ -3587,120 +3606,127 @@ webpackJsonp([0],[
 	                status = 500;
 	            }
 
-	            resolve(request.respondWith(xdr.responseText, { status: status }));
+	            resolve(request.respondWith(xdr.responseText, {status: status}));
 	        };
 
-	        request.abort = function () {
-	            return xdr.abort();
-	        };
+	        request.abort = function () { return xdr.abort(); };
 
 	        xdr.open(request.method, request.getUrl());
-	        xdr.timeout = 0;
+
+	        if (request.timeout) {
+	            xdr.timeout = request.timeout;
+	        }
+
 	        xdr.onload = handler;
+	        xdr.onabort = handler;
 	        xdr.onerror = handler;
 	        xdr.ontimeout = handler;
 	        xdr.onprogress = function () {};
 	        xdr.send(request.getBody());
 	    });
-	}
+	};
 
 	/**
 	 * CORS Interceptor.
 	 */
 
-	var ORIGIN_URL = Url.parse(location.href);
-	var SUPPORTS_CORS = 'withCredentials' in new XMLHttpRequest();
+	var SUPPORTS_CORS = inBrowser && 'withCredentials' in new XMLHttpRequest();
 
-	function cors (request, next) {
+	var cors = function (request, next) {
 
-	    if (!isBoolean(request.crossOrigin) && crossOrigin(request)) {
-	        request.crossOrigin = true;
-	    }
+	    if (inBrowser) {
 
-	    if (request.crossOrigin) {
+	        var orgUrl = Url.parse(location.href);
+	        var reqUrl = Url.parse(request.getUrl());
 
-	        if (!SUPPORTS_CORS) {
-	            request.client = xdrClient;
+	        if (reqUrl.protocol !== orgUrl.protocol || reqUrl.host !== orgUrl.host) {
+
+	            request.crossOrigin = true;
+	            request.emulateHTTP = false;
+
+	            if (!SUPPORTS_CORS) {
+	                request.client = xdrClient;
+	            }
 	        }
-
-	        delete request.emulateHTTP;
 	    }
 
 	    next();
-	}
-
-	function crossOrigin(request) {
-
-	    var requestUrl = Url.parse(Url(request));
-
-	    return requestUrl.protocol !== ORIGIN_URL.protocol || requestUrl.host !== ORIGIN_URL.host;
-	}
+	};
 
 	/**
-	 * Body Interceptor.
+	 * Form data Interceptor.
 	 */
 
-	function body (request, next) {
+	var form = function (request, next) {
 
 	    if (isFormData(request.body)) {
 
 	        request.headers.delete('Content-Type');
-	    } else if (isObject(request.body) || isArray(request.body)) {
 
-	        if (request.emulateJSON) {
-	            request.body = Url.params(request.body);
-	            request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
-	        } else {
-	            request.body = JSON.stringify(request.body);
-	        }
+	    } else if (isObject(request.body) && request.emulateJSON) {
+
+	        request.body = Url.params(request.body);
+	        request.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+	    }
+
+	    next();
+	};
+
+	/**
+	 * JSON Interceptor.
+	 */
+
+	var json = function (request, next) {
+
+	    var type = request.headers.get('Content-Type') || '';
+
+	    if (isObject(request.body) && type.indexOf('application/json') === 0) {
+	        request.body = JSON.stringify(request.body);
 	    }
 
 	    next(function (response) {
 
-	        Object.defineProperty(response, 'data', {
-	            get: function () {
-	                return this.body;
-	            },
-	            set: function (body) {
-	                this.body = body;
-	            }
-	        });
-
 	        return response.bodyText ? when(response.text(), function (text) {
 
-	            var type = response.headers.get('Content-Type');
+	            type = response.headers.get('Content-Type') || '';
 
-	            if (isString(type) && type.indexOf('application/json') === 0) {
+	            if (type.indexOf('application/json') === 0 || isJson(text)) {
 
 	                try {
 	                    response.body = JSON.parse(text);
 	                } catch (e) {
 	                    response.body = null;
 	                }
+
 	            } else {
 	                response.body = text;
 	            }
 
 	            return response;
+
 	        }) : response;
+
 	    });
+	};
+
+	function isJson(str) {
+
+	    var start = str.match(/^\[|^\{(?!\{)/), end = {'[': /]$/, '{': /}$/};
+
+	    return start && end[start[0]].test(str);
 	}
 
 	/**
-	 * JSONP client.
+	 * JSONP client (Browser).
 	 */
 
-	function jsonpClient (request) {
+	var jsonpClient = function (request) {
 	    return new PromiseObj(function (resolve) {
 
-	        var name = request.jsonp || 'callback',
-	            callback = '_jsonp' + Math.random().toString(36).substr(2),
-	            body = null,
-	            handler,
-	            script;
+	        var name = request.jsonp || 'callback', callback = request.jsonpCallback || '_jsonp' + Math.random().toString(36).substr(2), body = null, handler, script;
 
-	        handler = function (_ref) {
-	            var type = _ref.type;
+	        handler = function (ref) {
+	            var type = ref.type;
 
 
 	            var status = 0;
@@ -3711,17 +3737,27 @@ webpackJsonp([0],[
 	                status = 500;
 	            }
 
-	            resolve(request.respondWith(body, { status: status }));
+	            if (status && window[callback]) {
+	                delete window[callback];
+	                document.body.removeChild(script);
+	            }
 
-	            delete window[callback];
-	            document.body.removeChild(script);
+	            resolve(request.respondWith(body, {status: status}));
 	        };
-
-	        request.params[name] = callback;
 
 	        window[callback] = function (result) {
 	            body = JSON.stringify(result);
 	        };
+
+	        request.abort = function () {
+	            handler({type: 'abort'});
+	        };
+
+	        request.params[name] = callback;
+
+	        if (request.timeout) {
+	            setTimeout(request.abort, request.timeout);
+	        }
 
 	        script = document.createElement('script');
 	        script.src = request.getUrl();
@@ -3732,50 +3768,39 @@ webpackJsonp([0],[
 
 	        document.body.appendChild(script);
 	    });
-	}
+	};
 
 	/**
 	 * JSONP Interceptor.
 	 */
 
-	function jsonp (request, next) {
+	var jsonp = function (request, next) {
 
 	    if (request.method == 'JSONP') {
 	        request.client = jsonpClient;
 	    }
 
-	    next(function (response) {
-
-	        if (request.method == 'JSONP') {
-
-	            return when(response.json(), function (json) {
-
-	                response.body = json;
-
-	                return response;
-	            });
-	        }
-	    });
-	}
+	    next();
+	};
 
 	/**
 	 * Before Interceptor.
 	 */
 
-	function before (request, next) {
+	var before = function (request, next) {
 
 	    if (isFunction(request.before)) {
 	        request.before.call(this, request);
 	    }
 
 	    next();
-	}
+	};
 
 	/**
 	 * HTTP method override Interceptor.
 	 */
 
-	function method (request, next) {
+	var method = function (request, next) {
 
 	    if (request.emulateHTTP && /^(PUT|PATCH|DELETE)$/i.test(request.method)) {
 	        request.headers.set('X-HTTP-Method-Override', request.method);
@@ -3783,15 +3808,18 @@ webpackJsonp([0],[
 	    }
 
 	    next();
-	}
+	};
 
 	/**
 	 * Header Interceptor.
 	 */
 
-	function header (request, next) {
+	var header = function (request, next) {
 
-	    var headers = assign({}, Http.headers.common, !request.crossOrigin ? Http.headers.custom : {}, Http.headers[toLower(request.method)]);
+	    var headers = assign({}, Http.headers.common,
+	        !request.crossOrigin ? Http.headers.custom : {},
+	        Http.headers[toLower(request.method)]
+	    );
 
 	    each(headers, function (value, name) {
 	        if (!request.headers.has(name)) {
@@ -3800,42 +3828,23 @@ webpackJsonp([0],[
 	    });
 
 	    next();
-	}
+	};
 
 	/**
-	 * Timeout Interceptor.
+	 * XMLHttp client (Browser).
 	 */
 
-	function timeout (request, next) {
-
-	    var timeout;
-
-	    if (request.timeout) {
-	        timeout = setTimeout(function () {
-	            request.abort();
-	        }, request.timeout);
-	    }
-
-	    next(function (response) {
-
-	        clearTimeout(timeout);
-	    });
-	}
-
-	/**
-	 * XMLHttp client.
-	 */
-
-	function xhrClient (request) {
+	var xhrClient = function (request) {
 	    return new PromiseObj(function (resolve) {
 
-	        var xhr = new XMLHttpRequest(),
-	            handler = function (event) {
+	        var xhr = new XMLHttpRequest(), handler = function (event) {
 
-	            var response = request.respondWith('response' in xhr ? xhr.response : xhr.responseText, {
-	                status: xhr.status === 1223 ? 204 : xhr.status, // IE9 status bug
-	                statusText: xhr.status === 1223 ? 'No Content' : trim(xhr.statusText)
-	            });
+	            var response = request.respondWith(
+	                'response' in xhr ? xhr.response : xhr.responseText, {
+	                    status: xhr.status === 1223 ? 204 : xhr.status, // IE9 status bug
+	                    statusText: xhr.status === 1223 ? 'No Content' : trim(xhr.statusText)
+	                }
+	            );
 
 	            each(trim(xhr.getAllResponseHeaders()).split('\n'), function (row) {
 	                response.headers.append(row.slice(0, row.indexOf(':')), row.slice(row.indexOf(':') + 1));
@@ -3844,9 +3853,7 @@ webpackJsonp([0],[
 	            resolve(response);
 	        };
 
-	        request.abort = function () {
-	            return xhr.abort();
-	        };
+	        request.abort = function () { return xhr.abort(); };
 
 	        if (request.progress) {
 	            if (request.method === 'GET') {
@@ -3858,34 +3865,78 @@ webpackJsonp([0],[
 
 	        xhr.open(request.method, request.getUrl(), true);
 
-	        if ('responseType' in xhr) {
-	            xhr.responseType = 'blob';
+	        if (request.timeout) {
+	            xhr.timeout = request.timeout;
 	        }
 
-	        if (request.credentials === true) {
+	        if (request.responseType && 'responseType' in xhr) {
+	            xhr.responseType = request.responseType;
+	        }
+
+	        if (request.withCredentials || request.credentials) {
 	            xhr.withCredentials = true;
+	        }
+
+	        if (!request.crossOrigin) {
+	            request.headers.set('X-Requested-With', 'XMLHttpRequest');
 	        }
 
 	        request.headers.forEach(function (value, name) {
 	            xhr.setRequestHeader(name, value);
 	        });
 
-	        xhr.timeout = 0;
 	        xhr.onload = handler;
+	        xhr.onabort = handler;
 	        xhr.onerror = handler;
+	        xhr.ontimeout = handler;
 	        xhr.send(request.getBody());
 	    });
-	}
+	};
+
+	/**
+	 * Http client (Node).
+	 */
+
+	var nodeClient = function (request) {
+
+	    var client = __webpack_require__(9);
+
+	    return new PromiseObj(function (resolve) {
+
+	        var url = request.getUrl();
+	        var body = request.getBody();
+	        var method = request.method;
+	        var headers = {}, handler;
+
+	        request.headers.forEach(function (value, name) {
+	            headers[name] = value;
+	        });
+
+	        client(url, {body: body, method: method, headers: headers}).then(handler = function (resp) {
+
+	            var response = request.respondWith(resp.body, {
+	                    status: resp.statusCode,
+	                    statusText: trim(resp.statusMessage)
+	                }
+	            );
+
+	            each(resp.headers, function (value, name) {
+	                response.headers.set(name, value);
+	            });
+
+	            resolve(response);
+
+	        }, function (error$$1) { return handler(error$$1.response); });
+	    });
+	};
 
 	/**
 	 * Base client.
 	 */
 
-	function Client (context) {
+	var Client = function (context) {
 
-	    var reqHandlers = [sendRequest],
-	        resHandlers = [],
-	        handler;
+	    var reqHandlers = [sendRequest], resHandlers = [], handler;
 
 	    if (!isObject(context)) {
 	        context = null;
@@ -3901,7 +3952,7 @@ webpackJsonp([0],[
 	                if (isFunction(handler)) {
 	                    handler.call(context, request, next);
 	                } else {
-	                    warn('Invalid interceptor of type ' + typeof handler + ', must be a function');
+	                    warn(("Invalid interceptor of type " + (typeof handler) + ", must be a function"));
 	                    next();
 	                }
 	            }
@@ -3911,6 +3962,7 @@ webpackJsonp([0],[
 	                if (isFunction(response)) {
 
 	                    resHandlers.unshift(response);
+
 	                } else if (isObject(response)) {
 
 	                    resHandlers.forEach(function (handler) {
@@ -3928,6 +3980,7 @@ webpackJsonp([0],[
 	            }
 
 	            exec();
+
 	        }, context);
 	    }
 
@@ -3936,85 +3989,73 @@ webpackJsonp([0],[
 	    };
 
 	    return Client;
-	}
+	};
 
 	function sendRequest(request, resolve) {
 
-	    var client = request.client || xhrClient;
+	    var client = request.client || (inBrowser ? xhrClient : nodeClient);
 
 	    resolve(client(request));
 	}
-
-	var classCallCheck = function (instance, Constructor) {
-	  if (!(instance instanceof Constructor)) {
-	    throw new TypeError("Cannot call a class as a function");
-	  }
-	};
 
 	/**
 	 * HTTP Headers.
 	 */
 
-	var Headers = function () {
-	    function Headers(headers) {
-	        var _this = this;
-
-	        classCallCheck(this, Headers);
+	var Headers = function Headers(headers) {
+	    var this$1 = this;
 
 
-	        this.map = {};
+	    this.map = {};
 
-	        each(headers, function (value, name) {
-	            return _this.append(name, value);
-	        });
+	    each(headers, function (value, name) { return this$1.append(name, value); });
+	};
+
+	Headers.prototype.has = function has (name) {
+	    return getName(this.map, name) !== null;
+	};
+
+	Headers.prototype.get = function get (name) {
+
+	    var list = this.map[getName(this.map, name)];
+
+	    return list ? list.join() : null;
+	};
+
+	Headers.prototype.getAll = function getAll (name) {
+	    return this.map[getName(this.map, name)] || [];
+	};
+
+	Headers.prototype.set = function set (name, value) {
+	    this.map[normalizeName(getName(this.map, name) || name)] = [trim(value)];
+	};
+
+	Headers.prototype.append = function append (name, value){
+
+	    var list = this.map[getName(this.map, name)];
+
+	    if (list) {
+	        list.push(trim(value));
+	    } else {
+	        this.set(name, value);
 	    }
+	};
 
-	    Headers.prototype.has = function has(name) {
-	        return getName(this.map, name) !== null;
-	    };
+	Headers.prototype.delete = function delete$1 (name){
+	    delete this.map[getName(this.map, name)];
+	};
 
-	    Headers.prototype.get = function get(name) {
+	Headers.prototype.deleteAll = function deleteAll (){
+	    this.map = {};
+	};
 
-	        var list = this.map[getName(this.map, name)];
+	Headers.prototype.forEach = function forEach (callback, thisArg) {
+	        var this$1 = this;
 
-	        return list ? list[0] : null;
-	    };
-
-	    Headers.prototype.getAll = function getAll(name) {
-	        return this.map[getName(this.map, name)] || [];
-	    };
-
-	    Headers.prototype.set = function set(name, value) {
-	        this.map[normalizeName(getName(this.map, name) || name)] = [trim(value)];
-	    };
-
-	    Headers.prototype.append = function append(name, value) {
-
-	        var list = this.getAll(name);
-
-	        if (list.length) {
-	            list.push(trim(value));
-	        } else {
-	            this.set(name, value);
-	        }
-	    };
-
-	    Headers.prototype.delete = function _delete(name) {
-	        delete this.map[getName(this.map, name)];
-	    };
-
-	    Headers.prototype.forEach = function forEach(callback, thisArg) {
-	        var _this2 = this;
-
-	        each(this.map, function (list, name) {
-	            each(list, function (value) {
-	                return callback.call(thisArg, value, name, _this2);
-	            });
-	        });
-	    };
-
-	    return Headers;
-	}();
+	    each(this.map, function (list, name) {
+	        each(list, function (value) { return callback.call(thisArg, value, name, this$1); });
+	    });
+	};
 
 	function getName(map, name) {
 	    return Object.keys(map).reduce(function (prev, curr) {
@@ -4035,51 +4076,57 @@ webpackJsonp([0],[
 	 * HTTP Response.
 	 */
 
-	var Response = function () {
-	    function Response(body, _ref) {
-	        var url = _ref.url;
-	        var headers = _ref.headers;
-	        var status = _ref.status;
-	        var statusText = _ref.statusText;
-	        classCallCheck(this, Response);
+	var Response = function Response(body, ref) {
+	    var url = ref.url;
+	    var headers = ref.headers;
+	    var status = ref.status;
+	    var statusText = ref.statusText;
 
 
-	        this.url = url;
-	        this.ok = status >= 200 && status < 300;
-	        this.status = status || 0;
-	        this.statusText = statusText || '';
-	        this.headers = new Headers(headers);
-	        this.body = body;
+	    this.url = url;
+	    this.ok = status >= 200 && status < 300;
+	    this.status = status || 0;
+	    this.statusText = statusText || '';
+	    this.headers = new Headers(headers);
+	    this.body = body;
 
-	        if (isString(body)) {
+	    if (isString(body)) {
 
-	            this.bodyText = body;
-	        } else if (isBlob(body)) {
+	        this.bodyText = body;
 
-	            this.bodyBlob = body;
+	    } else if (isBlob(body)) {
 
-	            if (isBlobText(body)) {
-	                this.bodyText = blobText(body);
-	            }
+	        this.bodyBlob = body;
+
+	        if (isBlobText(body)) {
+	            this.bodyText = blobText(body);
 	        }
 	    }
+	};
 
-	    Response.prototype.blob = function blob() {
-	        return when(this.bodyBlob);
-	    };
+	Response.prototype.blob = function blob () {
+	    return when(this.bodyBlob);
+	};
 
-	    Response.prototype.text = function text() {
-	        return when(this.bodyText);
-	    };
+	Response.prototype.text = function text () {
+	    return when(this.bodyText);
+	};
 
-	    Response.prototype.json = function json() {
-	        return when(this.text(), function (text) {
-	            return JSON.parse(text);
-	        });
-	    };
+	Response.prototype.json = function json () {
+	    return when(this.text(), function (text) { return JSON.parse(text); });
+	};
 
-	    return Response;
-	}();
+	Object.defineProperty(Response.prototype, 'data', {
+
+	    get: function get() {
+	        return this.body;
+	    },
+
+	    set: function set(body) {
+	        this.body = body;
+	    }
+
+	});
 
 	function blobText(body) {
 	    return new PromiseObj(function (resolve) {
@@ -4090,6 +4137,7 @@ webpackJsonp([0],[
 	        reader.onload = function () {
 	            resolve(reader.result);
 	        };
+
 	    });
 	}
 
@@ -4101,60 +4149,61 @@ webpackJsonp([0],[
 	 * HTTP Request.
 	 */
 
-	var Request = function () {
-	    function Request(options) {
-	        classCallCheck(this, Request);
+	var Request = function Request(options$$1) {
 
+	    this.body = null;
+	    this.params = {};
 
-	        this.body = null;
-	        this.params = {};
+	    assign(this, options$$1, {
+	        method: toUpper(options$$1.method || 'GET')
+	    });
 
-	        assign(this, options, {
-	            method: toUpper(options.method || 'GET')
-	        });
-
-	        if (!(this.headers instanceof Headers)) {
-	            this.headers = new Headers(this.headers);
-	        }
+	    if (!(this.headers instanceof Headers)) {
+	        this.headers = new Headers(this.headers);
 	    }
+	};
 
-	    Request.prototype.getUrl = function getUrl() {
-	        return Url(this);
-	    };
+	Request.prototype.getUrl = function getUrl (){
+	    return Url(this);
+	};
 
-	    Request.prototype.getBody = function getBody() {
-	        return this.body;
-	    };
+	Request.prototype.getBody = function getBody (){
+	    return this.body;
+	};
 
-	    Request.prototype.respondWith = function respondWith(body, options) {
-	        return new Response(body, assign(options || {}, { url: this.getUrl() }));
-	    };
-
-	    return Request;
-	}();
+	Request.prototype.respondWith = function respondWith (body, options$$1) {
+	    return new Response(body, assign(options$$1 || {}, {url: this.getUrl()}));
+	};
 
 	/**
 	 * Service for sending network requests.
 	 */
 
-	var CUSTOM_HEADERS = { 'X-Requested-With': 'XMLHttpRequest' };
-	var COMMON_HEADERS = { 'Accept': 'application/json, text/plain, */*' };
-	var JSON_CONTENT_TYPE = { 'Content-Type': 'application/json;charset=utf-8' };
+	var COMMON_HEADERS = {'Accept': 'application/json, text/plain, */*'};
+	var JSON_CONTENT_TYPE = {'Content-Type': 'application/json;charset=utf-8'};
 
-	function Http(options) {
+	function Http(options$$1) {
 
-	    var self = this || {},
-	        client = Client(self.$vm);
+	    var self = this || {}, client = Client(self.$vm);
 
-	    defaults(options || {}, self.$options, Http.options);
+	    defaults(options$$1 || {}, self.$options, Http.options);
 
 	    Http.interceptors.forEach(function (handler) {
-	        client.use(handler);
+
+	        if (isString(handler)) {
+	            handler = Http.interceptor[handler];
+	        }
+
+	        if (isFunction(handler)) {
+	            client.use(handler);
+	        }
+
 	    });
 
-	    return client(new Request(options)).then(function (response) {
+	    return client(new Request(options$$1)).then(function (response) {
 
 	        return response.ok ? response : PromiseObj.reject(response);
+
 	    }, function (response) {
 
 	        if (response instanceof Error) {
@@ -4172,40 +4221,45 @@ webpackJsonp([0],[
 	    post: JSON_CONTENT_TYPE,
 	    patch: JSON_CONTENT_TYPE,
 	    delete: JSON_CONTENT_TYPE,
-	    custom: CUSTOM_HEADERS,
-	    common: COMMON_HEADERS
+	    common: COMMON_HEADERS,
+	    custom: {}
 	};
 
-	Http.interceptors = [before, timeout, method, body, jsonp, header, cors];
+	Http.interceptor = {before: before, method: method, jsonp: jsonp, json: json, form: form, header: header, cors: cors};
+	Http.interceptors = ['before', 'method', 'jsonp', 'json', 'form', 'header', 'cors'];
 
-	['get', 'delete', 'head', 'jsonp'].forEach(function (method) {
+	['get', 'delete', 'head', 'jsonp'].forEach(function (method$$1) {
 
-	    Http[method] = function (url, options) {
-	        return this(assign(options || {}, { url: url, method: method }));
+	    Http[method$$1] = function (url, options$$1) {
+	        return this(assign(options$$1 || {}, {url: url, method: method$$1}));
 	    };
+
 	});
 
-	['post', 'put', 'patch'].forEach(function (method) {
+	['post', 'put', 'patch'].forEach(function (method$$1) {
 
-	    Http[method] = function (url, body, options) {
-	        return this(assign(options || {}, { url: url, method: method, body: body }));
+	    Http[method$$1] = function (url, body, options$$1) {
+	        return this(assign(options$$1 || {}, {url: url, method: method$$1, body: body}));
 	    };
+
 	});
 
 	/**
 	 * Service for interacting with RESTful services.
 	 */
 
-	function Resource(url, params, actions, options) {
+	function Resource(url, params, actions, options$$1) {
 
-	    var self = this || {},
-	        resource = {};
+	    var self = this || {}, resource = {};
 
-	    actions = assign({}, Resource.actions, actions);
+	    actions = assign({},
+	        Resource.actions,
+	        actions
+	    );
 
 	    each(actions, function (action, name) {
 
-	        action = merge({ url: url, params: assign({}, params) }, options, action);
+	        action = merge({url: url, params: assign({}, params)}, options$$1, action);
 
 	        resource[name] = function () {
 	            return (self.$http || Http)(opts(action, arguments));
@@ -4217,9 +4271,7 @@ webpackJsonp([0],[
 
 	function opts(action, args) {
 
-	    var options = assign({}, action),
-	        params = {},
-	        body;
+	    var options$$1 = assign({}, action), params = {}, body;
 
 	    switch (args.length) {
 
@@ -4232,7 +4284,7 @@ webpackJsonp([0],[
 
 	        case 1:
 
-	            if (/^(POST|PUT|PATCH)$/i.test(options.method)) {
+	            if (/^(POST|PUT|PATCH)$/i.test(options$$1.method)) {
 	                body = args[0];
 	            } else {
 	                params = args[0];
@@ -4246,23 +4298,23 @@ webpackJsonp([0],[
 
 	        default:
 
-	            throw 'Expected up to 4 arguments [params, body], got ' + args.length + ' arguments';
+	            throw 'Expected up to 2 arguments [params, body], got ' + args.length + ' arguments';
 	    }
 
-	    options.body = body;
-	    options.params = assign({}, options.params, params);
+	    options$$1.body = body;
+	    options$$1.params = assign({}, options$$1.params, params);
 
-	    return options;
+	    return options$$1;
 	}
 
 	Resource.actions = {
 
-	    get: { method: 'GET' },
-	    save: { method: 'POST' },
-	    query: { method: 'GET' },
-	    update: { method: 'PUT' },
-	    remove: { method: 'DELETE' },
-	    delete: { method: 'DELETE' }
+	    get: {method: 'GET'},
+	    save: {method: 'POST'},
+	    query: {method: 'GET'},
+	    update: {method: 'PUT'},
+	    remove: {method: 'DELETE'},
+	    delete: {method: 'DELETE'}
 
 	};
 
@@ -4286,30 +4338,28 @@ webpackJsonp([0],[
 	    Object.defineProperties(Vue.prototype, {
 
 	        $url: {
-	            get: function () {
+	            get: function get() {
 	                return options(Vue.url, this, this.$options.url);
 	            }
 	        },
 
 	        $http: {
-	            get: function () {
+	            get: function get() {
 	                return options(Vue.http, this, this.$options.http);
 	            }
 	        },
 
 	        $resource: {
-	            get: function () {
+	            get: function get() {
 	                return Vue.resource.bind(this);
 	            }
 	        },
 
 	        $promise: {
-	            get: function () {
-	                var _this = this;
+	            get: function get() {
+	                var this$1 = this;
 
-	                return function (executor) {
-	                    return new Vue.Promise(executor, _this);
-	                };
+	                return function (executor) { return new Vue.Promise(executor, this$1); };
 	            }
 	        }
 
@@ -4322,19 +4372,24 @@ webpackJsonp([0],[
 
 	module.exports = plugin;
 
-/***/ },
+
+/***/ }),
 /* 9 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
+
+	/* (ignored) */
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(10)
-	__vue_script__ = __webpack_require__(12)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] app\\src\\components\\App.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(63)
+	__webpack_require__(11)
+	__vue_script__ = __webpack_require__(13)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] app/src/components/App.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(64)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -4350,7 +4405,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-2ad1124e/App.vue"
+	  var id = "_v-13476bd7/App.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -4358,15 +4413,15 @@ webpackJsonp([0],[
 	  }
 	})()}
 
-/***/ },
-/* 10 */
-/***/ function(module, exports) {
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
-/***/ },
-/* 11 */
-/***/ function(module, exports) {
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -4420,9 +4475,9 @@ webpackJsonp([0],[
 	};
 
 
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -4434,31 +4489,31 @@ webpackJsonp([0],[
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _store = __webpack_require__(13);
+	var _store = __webpack_require__(14);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _user = __webpack_require__(38);
+	var _user = __webpack_require__(39);
 
 	var userActions = _interopRequireWildcard(_user);
 
-	var _lists = __webpack_require__(46);
+	var _lists = __webpack_require__(47);
 
 	var listsActions = _interopRequireWildcard(_lists);
 
-	var _getter = __webpack_require__(47);
+	var _getter = __webpack_require__(48);
 
 	var getters = _interopRequireWildcard(_getter);
 
-	var _SideContainer = __webpack_require__(48);
+	var _SideContainer = __webpack_require__(49);
 
 	var _SideContainer2 = _interopRequireDefault(_SideContainer);
 
-	var _TaskDetail = __webpack_require__(52);
+	var _TaskDetail = __webpack_require__(53);
 
 	var _TaskDetail2 = _interopRequireDefault(_TaskDetail);
 
-	var _Header = __webpack_require__(59);
+	var _Header = __webpack_require__(60);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
@@ -4554,9 +4609,9 @@ webpackJsonp([0],[
 	//
 	// </style>
 
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -4568,19 +4623,19 @@ webpackJsonp([0],[
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _vuex = __webpack_require__(14);
+	var _vuex = __webpack_require__(15);
 
 	var _vuex2 = _interopRequireDefault(_vuex);
 
-	var _user = __webpack_require__(15);
+	var _user = __webpack_require__(16);
 
 	var _user2 = _interopRequireDefault(_user);
 
-	var _lists = __webpack_require__(36);
+	var _lists = __webpack_require__(37);
 
 	var _lists2 = _interopRequireDefault(_lists);
 
-	var _tasks = __webpack_require__(37);
+	var _tasks = __webpack_require__(38);
 
 	var _tasks2 = _interopRequireDefault(_tasks);
 
@@ -4600,676 +4655,737 @@ webpackJsonp([0],[
 	  }
 	});
 
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/*!
-	 * Vuex v1.0.0-rc.2
-	 * (c) 2016 Evan You
+	 * Vuex v1.0.1
+	 * (c) 2017 Evan You
 	 * Released under the MIT License.
 	 */
 	(function (global, factory) {
-	   true ? module.exports = factory() :
-	  typeof define === 'function' && define.amd ? define(factory) :
-	  (global.Vuex = factory());
-	}(this, function () { 'use strict';
+		 true ? module.exports = factory() :
+		typeof define === 'function' && define.amd ? define(factory) :
+		(global.Vuex = factory());
+	}(this, (function () { 'use strict';
 
-	  var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-	    return typeof obj;
-	  } : function (obj) {
-	    return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;
-	  };
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+	  return typeof obj;
+	} : function (obj) {
+	  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+	};
 
-	  var classCallCheck = function (instance, Constructor) {
-	    if (!(instance instanceof Constructor)) {
-	      throw new TypeError("Cannot call a class as a function");
+
+
+
+
+
+
+
+
+
+
+	var classCallCheck = function (instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError("Cannot call a class as a function");
+	  }
+	};
+
+	var createClass = function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];
+	      descriptor.enumerable = descriptor.enumerable || false;
+	      descriptor.configurable = true;
+	      if ("value" in descriptor) descriptor.writable = true;
+	      Object.defineProperty(target, descriptor.key, descriptor);
 	    }
+	  }
+
+	  return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+	    if (staticProps) defineProperties(Constructor, staticProps);
+	    return Constructor;
 	  };
+	}();
 
-	  var createClass = function () {
-	    function defineProperties(target, props) {
-	      for (var i = 0; i < props.length; i++) {
-	        var descriptor = props[i];
-	        descriptor.enumerable = descriptor.enumerable || false;
-	        descriptor.configurable = true;
-	        if ("value" in descriptor) descriptor.writable = true;
-	        Object.defineProperty(target, descriptor.key, descriptor);
-	      }
-	    }
 
-	    return function (Constructor, protoProps, staticProps) {
-	      if (protoProps) defineProperties(Constructor.prototype, protoProps);
-	      if (staticProps) defineProperties(Constructor, staticProps);
-	      return Constructor;
-	    };
-	  }();
 
-	  var toConsumableArray = function (arr) {
-	    if (Array.isArray(arr)) {
-	      for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
 
-	      return arr2;
-	    } else {
-	      return Array.from(arr);
-	    }
-	  };
 
-	  /**
-	   * Merge an array of objects into one.
-	   *
-	   * @param {Array<Object>} arr
-	   * @return {Object}
-	   */
 
-	  function mergeObjects(arr) {
-	    return arr.reduce(function (prev, obj) {
-	      Object.keys(obj).forEach(function (key) {
-	        var existing = prev[key];
-	        if (existing) {
-	          // allow multiple mutation objects to contain duplicate
-	          // handlers for the same mutation type
-	          if (Array.isArray(existing)) {
-	            prev[key] = existing.concat(obj[key]);
-	          } else {
-	            prev[key] = [existing].concat(obj[key]);
-	          }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	var toConsumableArray = function (arr) {
+	  if (Array.isArray(arr)) {
+	    for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+	    return arr2;
+	  } else {
+	    return Array.from(arr);
+	  }
+	};
+
+	/**
+	 * Merge an array of objects into one.
+	 *
+	 * @param {Array<Object>} arr
+	 * @return {Object}
+	 */
+
+	function mergeObjects(arr) {
+	  return arr.reduce(function (prev, obj) {
+	    Object.keys(obj).forEach(function (key) {
+	      var existing = prev[key];
+	      if (existing) {
+	        // allow multiple mutation objects to contain duplicate
+	        // handlers for the same mutation type
+	        if (Array.isArray(existing)) {
+	          prev[key] = existing.concat(obj[key]);
 	        } else {
-	          prev[key] = obj[key];
+	          prev[key] = [existing].concat(obj[key]);
 	        }
-	      });
-	      return prev;
-	    }, {});
-	  }
-
-	  /**
-	   * Check whether the given value is Object or not
-	   *
-	   * @param {*} obj
-	   * @return {Boolean}
-	   */
-
-	  function isObject(obj) {
-	    return obj !== null && (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object';
-	  }
-
-	  /**
-	   * Get state sub tree by given keys.
-	   *
-	   * @param {Object} state
-	   * @param {Array<String>} nestedKeys
-	   * @return {Object}
-	   */
-	  function getNestedState(state, nestedKeys) {
-	    return nestedKeys.reduce(function (state, key) {
-	      return state[key];
-	    }, state);
-	  }
-
-	  /**
-	   * Hacks to get access to Vue internals.
-	   * Maybe we should expose these...
-	   */
-
-	  var Watcher = void 0;
-	  function getWatcher(vm) {
-	    if (!Watcher) {
-	      var noop = function noop() {};
-	      var unwatch = vm.$watch(noop, noop);
-	      Watcher = vm._watchers[0].constructor;
-	      unwatch();
-	    }
-	    return Watcher;
-	  }
-
-	  var Dep = void 0;
-	  function getDep(vm) {
-	    if (!Dep) {
-	      Dep = vm._data.__ob__.dep.constructor;
-	    }
-	    return Dep;
-	  }
-
-	  var hook = typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
-
-	  function devtoolPlugin(store) {
-	    if (!hook) return;
-
-	    hook.emit('vuex:init', store);
-
-	    hook.on('vuex:travel-to-state', function (targetState) {
-	      store.replaceState(targetState);
-	    });
-
-	    store.subscribe(function (mutation, state) {
-	      hook.emit('vuex:mutation', mutation, state);
-	    });
-	  }
-
-	  function override (Vue) {
-	    var version = Number(Vue.version.split('.')[0]);
-
-	    if (version >= 2) {
-	      var usesInit = Vue.config._lifecycleHooks.indexOf('init') > -1;
-	      Vue.mixin(usesInit ? { init: vuexInit } : { beforeCreate: vuexInit });
-	    } else {
-	      (function () {
-	        // override init and inject vuex init procedure
-	        // for 1.x backwards compatibility.
-	        var _init = Vue.prototype._init;
-	        Vue.prototype._init = function () {
-	          var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-	          options.init = options.init ? [vuexInit].concat(options.init) : vuexInit;
-	          _init.call(this, options);
-	        };
-	      })();
-	    }
-
-	    /**
-	     * Vuex init hook, injected into each instances init hooks list.
-	     */
-
-	    function vuexInit() {
-	      var options = this.$options;
-	      var store = options.store;
-	      var vuex = options.vuex;
-	      // store injection
-
-	      if (store) {
-	        this.$store = store;
-	      } else if (options.parent && options.parent.$store) {
-	        this.$store = options.parent.$store;
-	      }
-	      // vuex option handling
-	      if (vuex) {
-	        if (!this.$store) {
-	          console.warn('[vuex] store not injected. make sure to ' + 'provide the store option in your root component.');
-	        }
-	        var state = vuex.state;
-	        var actions = vuex.actions;
-	        var getters = vuex.getters;
-	        // handle deprecated state option
-
-	        if (state && !getters) {
-	          console.warn('[vuex] vuex.state option will been deprecated in 1.0. ' + 'Use vuex.getters instead.');
-	          getters = state;
-	        }
-	        // getters
-	        if (getters) {
-	          options.computed = options.computed || {};
-	          for (var key in getters) {
-	            defineVuexGetter(this, key, getters[key]);
-	          }
-	        }
-	        // actions
-	        if (actions) {
-	          options.methods = options.methods || {};
-	          for (var _key in actions) {
-	            options.methods[_key] = makeBoundAction(this.$store, actions[_key], _key);
-	          }
-	        }
-	      }
-	    }
-
-	    /**
-	     * Setter for all getter properties.
-	     */
-
-	    function setter() {
-	      throw new Error('vuex getter properties are read-only.');
-	    }
-
-	    /**
-	     * Define a Vuex getter on an instance.
-	     *
-	     * @param {Vue} vm
-	     * @param {String} key
-	     * @param {Function} getter
-	     */
-
-	    function defineVuexGetter(vm, key, getter) {
-	      if (typeof getter !== 'function') {
-	        console.warn('[vuex] Getter bound to key \'vuex.getters.' + key + '\' is not a function.');
 	      } else {
-	        Object.defineProperty(vm, key, {
-	          enumerable: true,
-	          configurable: true,
-	          get: makeComputedGetter(vm.$store, getter),
-	          set: setter
-	        });
+	        prev[key] = obj[key];
+	      }
+	    });
+	    return prev;
+	  }, {});
+	}
+
+	/**
+	 * Deep copy the given object considering circular structure.
+	 * This function caches all nested objects and its copies.
+	 * If it detects circular structure, use cached copy to avoid infinite loop.
+	 *
+	 * @param {*} obj
+	 * @param {Array<Object>} cache
+	 * @return {*}
+	 */
+
+
+	/**
+	 * Check whether the given value is Object or not
+	 *
+	 * @param {*} obj
+	 * @return {Boolean}
+	 */
+
+	function isObject(obj) {
+	  return obj !== null && (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object';
+	}
+
+	/**
+	 * Get state sub tree by given keys.
+	 *
+	 * @param {Object} state
+	 * @param {Array<String>} nestedKeys
+	 * @return {Object}
+	 */
+	function getNestedState(state, nestedKeys) {
+	  return nestedKeys.reduce(function (state, key) {
+	    return state[key];
+	  }, state);
+	}
+
+	/**
+	 * Hacks to get access to Vue internals.
+	 * Maybe we should expose these...
+	 */
+
+	var Watcher = void 0;
+	function getWatcher(vm) {
+	  if (!Watcher) {
+	    var noop = function noop() {};
+	    var unwatch = vm.$watch(noop, noop);
+	    Watcher = vm._watchers[0].constructor;
+	    unwatch();
+	  }
+	  return Watcher;
+	}
+
+	var Dep = void 0;
+	function getDep(vm) {
+	  if (!Dep) {
+	    Dep = vm._data.__ob__.dep.constructor;
+	  }
+	  return Dep;
+	}
+
+	var hook = typeof window !== 'undefined' && window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
+
+	function devtoolPlugin(store) {
+	  if (!hook) return;
+
+	  hook.emit('vuex:init', store);
+
+	  hook.on('vuex:travel-to-state', function (targetState) {
+	    store.replaceState(targetState);
+	  });
+
+	  store.subscribe(function (mutation, state) {
+	    hook.emit('vuex:mutation', mutation, state);
+	  });
+	}
+
+	var override = function (Vue) {
+	  var version = Number(Vue.version.split('.')[0]);
+
+	  if (version >= 2) {
+	    var usesInit = Vue.config._lifecycleHooks.indexOf('init') > -1;
+	    Vue.mixin(usesInit ? { init: vuexInit } : { beforeCreate: vuexInit });
+	  } else {
+	    (function () {
+	      // override init and inject vuex init procedure
+	      // for 1.x backwards compatibility.
+	      var _init = Vue.prototype._init;
+	      Vue.prototype._init = function () {
+	        var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+	        options.init = options.init ? [vuexInit].concat(options.init) : vuexInit;
+	        _init.call(this, options);
+	      };
+	    })();
+	  }
+
+	  /**
+	   * Vuex init hook, injected into each instances init hooks list.
+	   */
+
+	  function vuexInit() {
+	    var options = this.$options;
+	    var store = options.store,
+	        vuex = options.vuex;
+	    // store injection
+
+	    if (store) {
+	      this.$store = store;
+	    } else if (options.parent && options.parent.$store) {
+	      this.$store = options.parent.$store;
+	    }
+	    // vuex option handling
+	    if (vuex) {
+	      if (!this.$store) {
+	        console.warn('[vuex] store not injected. make sure to ' + 'provide the store option in your root component.');
+	      }
+	      var state = vuex.state,
+	          actions = vuex.actions;
+	      var getters = vuex.getters;
+	      // handle deprecated state option
+
+	      if (state && !getters) {
+	        console.warn('[vuex] vuex.state option will been deprecated in 1.0. ' + 'Use vuex.getters instead.');
+	        getters = state;
+	      }
+	      // getters
+	      if (getters) {
+	        options.computed = options.computed || {};
+	        for (var key in getters) {
+	          defineVuexGetter(this, key, getters[key]);
+	        }
+	      }
+	      // actions
+	      if (actions) {
+	        options.methods = options.methods || {};
+	        for (var _key in actions) {
+	          options.methods[_key] = makeBoundAction(this.$store, actions[_key], _key);
+	        }
 	      }
 	    }
+	  }
 
-	    /**
-	     * Make a computed getter, using the same caching mechanism of computed
-	     * properties. In addition, it is cached on the raw getter function using
-	     * the store's unique cache id. This makes the same getter shared
-	     * across all components use the same underlying watcher, and makes
-	     * the getter evaluated only once during every flush.
-	     *
-	     * @param {Store} store
-	     * @param {Function} getter
-	     */
+	  /**
+	   * Setter for all getter properties.
+	   */
 
-	    function makeComputedGetter(store, getter) {
-	      var id = store._getterCacheId;
+	  function setter() {
+	    throw new Error('vuex getter properties are read-only.');
+	  }
 
-	      // cached
-	      if (getter[id]) {
-	        return getter[id];
-	      }
-	      var vm = store._vm;
-	      var Watcher = getWatcher(vm);
-	      var Dep = getDep(vm);
-	      var watcher = new Watcher(vm, function (vm) {
-	        return getter(vm.state);
-	      }, null, { lazy: true });
-	      var computedGetter = function computedGetter() {
-	        if (watcher.dirty) {
-	          watcher.evaluate();
-	        }
-	        if (Dep.target) {
-	          watcher.depend();
-	        }
-	        return watcher.value;
-	      };
-	      getter[id] = computedGetter;
-	      return computedGetter;
+	  /**
+	   * Define a Vuex getter on an instance.
+	   *
+	   * @param {Vue} vm
+	   * @param {String} key
+	   * @param {Function} getter
+	   */
+
+	  function defineVuexGetter(vm, key, getter) {
+	    if (typeof getter !== 'function') {
+	      console.warn('[vuex] Getter bound to key \'vuex.getters.' + key + '\' is not a function.');
+	    } else {
+	      Object.defineProperty(vm, key, {
+	        enumerable: true,
+	        configurable: true,
+	        get: makeComputedGetter(vm.$store, getter),
+	        set: setter
+	      });
 	    }
+	  }
 
-	    /**
-	     * Make a bound-to-store version of a raw action function.
-	     *
-	     * @param {Store} store
-	     * @param {Function} action
-	     * @param {String} key
-	     */
+	  /**
+	   * Make a computed getter, using the same caching mechanism of computed
+	   * properties. In addition, it is cached on the raw getter function using
+	   * the store's unique cache id. This makes the same getter shared
+	   * across all components use the same underlying watcher, and makes
+	   * the getter evaluated only once during every flush.
+	   *
+	   * @param {Store} store
+	   * @param {Function} getter
+	   */
 
-	    function makeBoundAction(store, action, key) {
-	      if (typeof action !== 'function') {
-	        console.warn('[vuex] Action bound to key \'vuex.actions.' + key + '\' is not a function.');
-	      }
-	      return function vuexBoundAction() {
-	        for (var _len = arguments.length, args = Array(_len), _key2 = 0; _key2 < _len; _key2++) {
-	          args[_key2] = arguments[_key2];
-	        }
+	  function makeComputedGetter(store, getter) {
+	    var id = store._getterCacheId;
 
-	        return action.call.apply(action, [this, store].concat(args));
-	      };
+	    // cached
+	    if (getter[id]) {
+	      return getter[id];
 	    }
+	    var vm = store._vm;
+	    var Watcher = getWatcher(vm);
+	    var Dep = getDep(vm);
+	    var watcher = new Watcher(vm, function (vm) {
+	      return getter(vm.state);
+	    }, null, { lazy: true });
+	    var computedGetter = function computedGetter() {
+	      if (watcher.dirty) {
+	        watcher.evaluate();
+	      }
+	      if (Dep.target) {
+	        watcher.depend();
+	      }
+	      return watcher.value;
+	    };
+	    getter[id] = computedGetter;
+	    return computedGetter;
+	  }
 
-	    // option merging
-	    var merge = Vue.config.optionMergeStrategies.computed;
-	    Vue.config.optionMergeStrategies.vuex = function (toVal, fromVal) {
-	      if (!toVal) return fromVal;
-	      if (!fromVal) return toVal;
-	      return {
-	        getters: merge(toVal.getters, fromVal.getters),
-	        state: merge(toVal.state, fromVal.state),
-	        actions: merge(toVal.actions, fromVal.actions)
-	      };
+	  /**
+	   * Make a bound-to-store version of a raw action function.
+	   *
+	   * @param {Store} store
+	   * @param {Function} action
+	   * @param {String} key
+	   */
+
+	  function makeBoundAction(store, action, key) {
+	    if (typeof action !== 'function') {
+	      console.warn('[vuex] Action bound to key \'vuex.actions.' + key + '\' is not a function.');
+	    }
+	    return function vuexBoundAction() {
+	      for (var _len = arguments.length, args = Array(_len), _key2 = 0; _key2 < _len; _key2++) {
+	        args[_key2] = arguments[_key2];
+	      }
+
+	      return action.call.apply(action, [this, store].concat(args));
 	    };
 	  }
 
-	  var Vue = void 0;
-	  var uid = 0;
-
-	  var Store = function () {
-
-	    /**
-	     * @param {Object} options
-	     *        - {Object} state
-	     *        - {Object} actions
-	     *        - {Object} mutations
-	     *        - {Array} plugins
-	     *        - {Boolean} strict
-	     */
-
-	    function Store() {
-	      var _this = this;
-
-	      var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-	      var _ref$state = _ref.state;
-	      var state = _ref$state === undefined ? {} : _ref$state;
-	      var _ref$mutations = _ref.mutations;
-	      var mutations = _ref$mutations === undefined ? {} : _ref$mutations;
-	      var _ref$modules = _ref.modules;
-	      var modules = _ref$modules === undefined ? {} : _ref$modules;
-	      var _ref$plugins = _ref.plugins;
-	      var plugins = _ref$plugins === undefined ? [] : _ref$plugins;
-	      var _ref$strict = _ref.strict;
-	      var strict = _ref$strict === undefined ? false : _ref$strict;
-	      classCallCheck(this, Store);
-
-	      this._getterCacheId = 'vuex_store_' + uid++;
-	      this._dispatching = false;
-	      this._rootMutations = this._mutations = mutations;
-	      this._modules = modules;
-	      this._subscribers = [];
-	      // bind dispatch to self
-	      var dispatch = this.dispatch;
-	      this.dispatch = function () {
-	        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	          args[_key] = arguments[_key];
-	        }
-
-	        dispatch.apply(_this, args);
-	      };
-	      // use a Vue instance to store the state tree
-	      // suppress warnings just in case the user has added
-	      // some funky global mixins
-	      if (!Vue) {
-	        throw new Error('[vuex] must call Vue.use(Vuex) before creating a store instance.');
-	      }
-	      var silent = Vue.config.silent;
-	      Vue.config.silent = true;
-	      this._vm = new Vue({
-	        data: {
-	          state: state
-	        }
-	      });
-	      Vue.config.silent = silent;
-	      this._setupModuleState(state, modules);
-	      this._setupModuleMutations(modules);
-	      // add extra warnings in strict mode
-	      if (strict) {
-	        this._setupMutationCheck();
-	      }
-	      // apply plugins
-	      devtoolPlugin(this);
-	      plugins.forEach(function (plugin) {
-	        return plugin(_this);
-	      });
-	    }
-
-	    /**
-	     * Getter for the entire state tree.
-	     * Read only.
-	     *
-	     * @return {Object}
-	     */
-
-	    createClass(Store, [{
-	      key: 'replaceState',
-
-
-	      /**
-	       * Replace root state.
-	       *
-	       * @param {Object} state
-	       */
-
-	      value: function replaceState(state) {
-	        this._dispatching = true;
-	        this._vm.state = state;
-	        this._dispatching = false;
-	      }
-
-	      /**
-	       * Dispatch an action.
-	       *
-	       * @param {String} type
-	       */
-
-	    }, {
-	      key: 'dispatch',
-	      value: function dispatch(type) {
-	        var _this2 = this;
-
-	        for (var _len2 = arguments.length, payload = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-	          payload[_key2 - 1] = arguments[_key2];
-	        }
-
-	        var silent = false;
-	        var isObjectStyleDispatch = false;
-	        // compatibility for object actions, e.g. FSA
-	        if ((typeof type === 'undefined' ? 'undefined' : _typeof(type)) === 'object' && type.type && arguments.length === 1) {
-	          isObjectStyleDispatch = true;
-	          payload = type;
-	          if (type.silent) silent = true;
-	          type = type.type;
-	        }
-	        var handler = this._mutations[type];
-	        var state = this.state;
-	        if (handler) {
-	          this._dispatching = true;
-	          // apply the mutation
-	          if (Array.isArray(handler)) {
-	            handler.forEach(function (h) {
-	              isObjectStyleDispatch ? h(state, payload) : h.apply(undefined, [state].concat(toConsumableArray(payload)));
-	            });
-	          } else {
-	            isObjectStyleDispatch ? handler(state, payload) : handler.apply(undefined, [state].concat(toConsumableArray(payload)));
-	          }
-	          this._dispatching = false;
-	          if (!silent) {
-	            (function () {
-	              var mutation = isObjectStyleDispatch ? payload : { type: type, payload: payload };
-	              _this2._subscribers.forEach(function (sub) {
-	                return sub(mutation, state);
-	              });
-	            })();
-	          }
-	        } else {
-	          console.warn('[vuex] Unknown mutation: ' + type);
-	        }
-	      }
-
-	      /**
-	       * Watch state changes on the store.
-	       * Same API as Vue's $watch, except when watching a function,
-	       * the function gets the state as the first argument.
-	       *
-	       * @param {Function} fn
-	       * @param {Function} cb
-	       * @param {Object} [options]
-	       */
-
-	    }, {
-	      key: 'watch',
-	      value: function watch(fn, cb, options) {
-	        var _this3 = this;
-
-	        if (typeof fn !== 'function') {
-	          console.error('Vuex store.watch only accepts function.');
-	          return;
-	        }
-	        return this._vm.$watch(function () {
-	          return fn(_this3.state);
-	        }, cb, options);
-	      }
-
-	      /**
-	       * Subscribe to state changes. Fires after every mutation.
-	       */
-
-	    }, {
-	      key: 'subscribe',
-	      value: function subscribe(fn) {
-	        var subs = this._subscribers;
-	        if (subs.indexOf(fn) < 0) {
-	          subs.push(fn);
-	        }
-	        return function () {
-	          var i = subs.indexOf(fn);
-	          if (i > -1) {
-	            subs.splice(i, 1);
-	          }
-	        };
-	      }
-
-	      /**
-	       * Hot update mutations & modules.
-	       *
-	       * @param {Object} options
-	       *        - {Object} [mutations]
-	       *        - {Object} [modules]
-	       */
-
-	    }, {
-	      key: 'hotUpdate',
-	      value: function hotUpdate() {
-	        var _ref2 = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-	        var mutations = _ref2.mutations;
-	        var modules = _ref2.modules;
-
-	        this._rootMutations = this._mutations = mutations || this._rootMutations;
-	        this._setupModuleMutations(modules || this._modules);
-	      }
-
-	      /**
-	       * Attach sub state tree of each module to the root tree.
-	       *
-	       * @param {Object} state
-	       * @param {Object} modules
-	       */
-
-	    }, {
-	      key: '_setupModuleState',
-	      value: function _setupModuleState(state, modules) {
-	        var _this4 = this;
-
-	        if (!isObject(modules)) return;
-
-	        Object.keys(modules).forEach(function (key) {
-	          var module = modules[key];
-
-	          // set this module's state
-	          Vue.set(state, key, module.state || {});
-
-	          // retrieve nested modules
-	          _this4._setupModuleState(state[key], module.modules);
-	        });
-	      }
-
-	      /**
-	       * Bind mutations for each module to its sub tree and
-	       * merge them all into one final mutations map.
-	       *
-	       * @param {Object} updatedModules
-	       */
-
-	    }, {
-	      key: '_setupModuleMutations',
-	      value: function _setupModuleMutations(updatedModules) {
-	        var modules = this._modules;
-	        Object.keys(updatedModules).forEach(function (key) {
-	          modules[key] = updatedModules[key];
-	        });
-	        var updatedMutations = this._createModuleMutations(modules, []);
-	        this._mutations = mergeObjects([this._rootMutations].concat(toConsumableArray(updatedMutations)));
-	      }
-
-	      /**
-	       * Helper method for _setupModuleMutations.
-	       * The method retrieve nested sub modules and
-	       * bind each mutations to its sub tree recursively.
-	       *
-	       * @param {Object} modules
-	       * @param {Array<String>} nestedKeys
-	       * @return {Array<Object>}
-	       */
-
-	    }, {
-	      key: '_createModuleMutations',
-	      value: function _createModuleMutations(modules, nestedKeys) {
-	        var _this5 = this;
-
-	        if (!isObject(modules)) return [];
-
-	        return Object.keys(modules).map(function (key) {
-	          var module = modules[key];
-	          var newNestedKeys = nestedKeys.concat(key);
-
-	          // retrieve nested modules
-	          var nestedMutations = _this5._createModuleMutations(module.modules, newNestedKeys);
-
-	          if (!module || !module.mutations) {
-	            return mergeObjects(nestedMutations);
-	          }
-
-	          // bind mutations to sub state tree
-	          var mutations = {};
-	          Object.keys(module.mutations).forEach(function (name) {
-	            var original = module.mutations[name];
-	            mutations[name] = function (state) {
-	              for (var _len3 = arguments.length, args = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
-	                args[_key3 - 1] = arguments[_key3];
-	              }
-
-	              original.apply(undefined, [getNestedState(state, newNestedKeys)].concat(args));
-	            };
-	          });
-
-	          // merge mutations of this module and nested modules
-	          return mergeObjects([mutations].concat(toConsumableArray(nestedMutations)));
-	        });
-	      }
-
-	      /**
-	       * Setup mutation check: if the vuex instance's state is mutated
-	       * outside of a mutation handler, we throw en error. This effectively
-	       * enforces all mutations to the state to be trackable and hot-reloadble.
-	       * However, this comes at a run time cost since we are doing a deep
-	       * watch on the entire state tree, so it is only enalbed with the
-	       * strict option is set to true.
-	       */
-
-	    }, {
-	      key: '_setupMutationCheck',
-	      value: function _setupMutationCheck() {
-	        var _this6 = this;
-
-	        var Watcher = getWatcher(this._vm);
-	        /* eslint-disable no-new */
-	        new Watcher(this._vm, 'state', function () {
-	          if (!_this6._dispatching) {
-	            throw new Error('[vuex] Do not mutate vuex store state outside mutation handlers.');
-	          }
-	        }, { deep: true, sync: true });
-	        /* eslint-enable no-new */
-	      }
-	    }, {
-	      key: 'state',
-	      get: function get() {
-	        return this._vm.state;
-	      },
-	      set: function set(v) {
-	        throw new Error('[vuex] Use store.replaceState() to explicit replace store state.');
-	      }
-	    }]);
-	    return Store;
-	  }();
-
-	  function install(_Vue) {
-	    if (Vue) {
-	      console.warn('[vuex] already installed. Vue.use(Vuex) should be called only once.');
-	      return;
-	    }
-	    Vue = _Vue;
-	    override(Vue);
-	  }
-
-	  // auto install in dist mode
-	  if (typeof window !== 'undefined' && window.Vue) {
-	    install(window.Vue);
-	  }
-
-	  var index = {
-	    Store: Store,
-	    install: install
+	  // option merging
+	  var merge = Vue.config.optionMergeStrategies.computed;
+	  Vue.config.optionMergeStrategies.vuex = function (toVal, fromVal) {
+	    if (!toVal) return fromVal;
+	    if (!fromVal) return toVal;
+	    return {
+	      getters: merge(toVal.getters, fromVal.getters),
+	      state: merge(toVal.state, fromVal.state),
+	      actions: merge(toVal.actions, fromVal.actions)
+	    };
 	  };
+	};
 
-	  return index;
+	var Vue = void 0;
+	var uid = 0;
 
-	}));
+	var Store = function () {
 
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
+	  /**
+	   * @param {Object} options
+	   *        - {Object} state
+	   *        - {Object} actions
+	   *        - {Object} mutations
+	   *        - {Array} plugins
+	   *        - {Boolean} strict
+	   */
+
+	  function Store() {
+	    var _this = this;
+
+	    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+	        _ref$state = _ref.state,
+	        state = _ref$state === undefined ? {} : _ref$state,
+	        _ref$mutations = _ref.mutations,
+	        mutations = _ref$mutations === undefined ? {} : _ref$mutations,
+	        _ref$modules = _ref.modules,
+	        modules = _ref$modules === undefined ? {} : _ref$modules,
+	        _ref$plugins = _ref.plugins,
+	        plugins = _ref$plugins === undefined ? [] : _ref$plugins,
+	        _ref$strict = _ref.strict,
+	        strict = _ref$strict === undefined ? false : _ref$strict;
+
+	    classCallCheck(this, Store);
+
+	    this._getterCacheId = 'vuex_store_' + uid++;
+	    this._dispatching = false;
+	    this._rootMutations = this._mutations = mutations;
+	    this._modules = modules;
+	    this._subscribers = [];
+	    // bind dispatch to self
+	    var dispatch = this.dispatch;
+	    this.dispatch = function () {
+	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	        args[_key] = arguments[_key];
+	      }
+
+	      dispatch.apply(_this, args);
+	    };
+	    // use a Vue instance to store the state tree
+	    // suppress warnings just in case the user has added
+	    // some funky global mixins
+	    if (!Vue) {
+	      throw new Error('[vuex] must call Vue.use(Vuex) before creating a store instance.');
+	    }
+	    var silent = Vue.config.silent;
+	    Vue.config.silent = true;
+	    this._vm = new Vue({
+	      data: {
+	        state: state
+	      }
+	    });
+	    Vue.config.silent = silent;
+	    this._setupModuleState(state, modules);
+	    this._setupModuleMutations(modules);
+	    // add extra warnings in strict mode
+	    if (strict) {
+	      this._setupMutationCheck();
+	    }
+	    // apply plugins
+	    devtoolPlugin(this);
+	    plugins.forEach(function (plugin) {
+	      return plugin(_this);
+	    });
+	  }
+
+	  /**
+	   * Getter for the entire state tree.
+	   * Read only.
+	   *
+	   * @return {Object}
+	   */
+
+	  createClass(Store, [{
+	    key: 'replaceState',
+
+
+	    /**
+	     * Replace root state.
+	     *
+	     * @param {Object} state
+	     */
+
+	    value: function replaceState(state) {
+	      this._dispatching = true;
+	      this._vm.state = state;
+	      this._dispatching = false;
+	    }
+
+	    /**
+	     * Dispatch an action.
+	     *
+	     * @param {String} type
+	     */
+
+	  }, {
+	    key: 'dispatch',
+	    value: function dispatch(type) {
+	      var _this2 = this;
+
+	      for (var _len2 = arguments.length, payload = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+	        payload[_key2 - 1] = arguments[_key2];
+	      }
+
+	      var silent = false;
+	      var isObjectStyleDispatch = false;
+	      // compatibility for object actions, e.g. FSA
+	      if ((typeof type === 'undefined' ? 'undefined' : _typeof(type)) === 'object' && type.type && arguments.length === 1) {
+	        isObjectStyleDispatch = true;
+	        payload = type;
+	        if (type.silent) silent = true;
+	        type = type.type;
+	      }
+	      var handler = this._mutations[type];
+	      var state = this.state;
+	      if (handler) {
+	        this._dispatching = true;
+	        // apply the mutation
+	        if (Array.isArray(handler)) {
+	          handler.forEach(function (h) {
+	            isObjectStyleDispatch ? h(state, payload) : h.apply(undefined, [state].concat(toConsumableArray(payload)));
+	          });
+	        } else {
+	          isObjectStyleDispatch ? handler(state, payload) : handler.apply(undefined, [state].concat(toConsumableArray(payload)));
+	        }
+	        this._dispatching = false;
+	        if (!silent) {
+	          (function () {
+	            var mutation = isObjectStyleDispatch ? payload : { type: type, payload: payload };
+	            _this2._subscribers.forEach(function (sub) {
+	              return sub(mutation, state);
+	            });
+	          })();
+	        }
+	      } else {
+	        console.warn('[vuex] Unknown mutation: ' + type);
+	      }
+	    }
+
+	    /**
+	     * Watch state changes on the store.
+	     * Same API as Vue's $watch, except when watching a function,
+	     * the function gets the state as the first argument.
+	     *
+	     * @param {Function} fn
+	     * @param {Function} cb
+	     * @param {Object} [options]
+	     */
+
+	  }, {
+	    key: 'watch',
+	    value: function watch(fn, cb, options) {
+	      var _this3 = this;
+
+	      if (typeof fn !== 'function') {
+	        console.error('Vuex store.watch only accepts function.');
+	        return;
+	      }
+	      return this._vm.$watch(function () {
+	        return fn(_this3.state);
+	      }, cb, options);
+	    }
+
+	    /**
+	     * Subscribe to state changes. Fires after every mutation.
+	     */
+
+	  }, {
+	    key: 'subscribe',
+	    value: function subscribe(fn) {
+	      var subs = this._subscribers;
+	      if (subs.indexOf(fn) < 0) {
+	        subs.push(fn);
+	      }
+	      return function () {
+	        var i = subs.indexOf(fn);
+	        if (i > -1) {
+	          subs.splice(i, 1);
+	        }
+	      };
+	    }
+
+	    /**
+	     * Hot update mutations & modules.
+	     *
+	     * @param {Object} options
+	     *        - {Object} [mutations]
+	     *        - {Object} [modules]
+	     */
+
+	  }, {
+	    key: 'hotUpdate',
+	    value: function hotUpdate() {
+	      var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+	          mutations = _ref2.mutations,
+	          modules = _ref2.modules;
+
+	      this._rootMutations = this._mutations = mutations || this._rootMutations;
+	      this._setupModuleMutations(modules || this._modules);
+	    }
+
+	    /**
+	     * Attach sub state tree of each module to the root tree.
+	     *
+	     * @param {Object} state
+	     * @param {Object} modules
+	     */
+
+	  }, {
+	    key: '_setupModuleState',
+	    value: function _setupModuleState(state, modules) {
+	      var _this4 = this;
+
+	      if (!isObject(modules)) return;
+
+	      Object.keys(modules).forEach(function (key) {
+	        var module = modules[key];
+
+	        // set this module's state
+	        Vue.set(state, key, module.state || {});
+
+	        // retrieve nested modules
+	        _this4._setupModuleState(state[key], module.modules);
+	      });
+	    }
+
+	    /**
+	     * Bind mutations for each module to its sub tree and
+	     * merge them all into one final mutations map.
+	     *
+	     * @param {Object} updatedModules
+	     */
+
+	  }, {
+	    key: '_setupModuleMutations',
+	    value: function _setupModuleMutations(updatedModules) {
+	      var modules = this._modules;
+	      Object.keys(updatedModules).forEach(function (key) {
+	        modules[key] = updatedModules[key];
+	      });
+	      var updatedMutations = this._createModuleMutations(modules, []);
+	      this._mutations = mergeObjects([this._rootMutations].concat(toConsumableArray(updatedMutations)));
+	    }
+
+	    /**
+	     * Helper method for _setupModuleMutations.
+	     * The method retrieve nested sub modules and
+	     * bind each mutations to its sub tree recursively.
+	     *
+	     * @param {Object} modules
+	     * @param {Array<String>} nestedKeys
+	     * @return {Array<Object>}
+	     */
+
+	  }, {
+	    key: '_createModuleMutations',
+	    value: function _createModuleMutations(modules, nestedKeys) {
+	      var _this5 = this;
+
+	      if (!isObject(modules)) return [];
+
+	      return Object.keys(modules).map(function (key) {
+	        var module = modules[key];
+	        var newNestedKeys = nestedKeys.concat(key);
+
+	        // retrieve nested modules
+	        var nestedMutations = _this5._createModuleMutations(module.modules, newNestedKeys);
+
+	        if (!module || !module.mutations) {
+	          return mergeObjects(nestedMutations);
+	        }
+
+	        // bind mutations to sub state tree
+	        var mutations = {};
+	        Object.keys(module.mutations).forEach(function (name) {
+	          var original = module.mutations[name];
+	          mutations[name] = function (state) {
+	            for (var _len3 = arguments.length, args = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+	              args[_key3 - 1] = arguments[_key3];
+	            }
+
+	            original.apply(undefined, [getNestedState(state, newNestedKeys)].concat(args));
+	          };
+	        });
+
+	        // merge mutations of this module and nested modules
+	        return mergeObjects([mutations].concat(toConsumableArray(nestedMutations)));
+	      });
+	    }
+
+	    /**
+	     * Setup mutation check: if the Vuex instance's state is mutated
+	     * outside of a mutation handler, we throw en error. This effectively
+	     * enforces all mutations to the state to be trackable and hot-reloadable.
+	     * However, this comes at a run time cost since we are doing a deep
+	     * watch on the entire state tree, so it is only enabled if the
+	     * strict option is set to true.
+	     */
+
+	  }, {
+	    key: '_setupMutationCheck',
+	    value: function _setupMutationCheck() {
+	      var _this6 = this;
+
+	      var Watcher = getWatcher(this._vm);
+	      /* eslint-disable no-new */
+	      new Watcher(this._vm, 'state', function () {
+	        if (!_this6._dispatching) {
+	          throw new Error('[vuex] Do not mutate vuex store state outside mutation handlers.');
+	        }
+	      }, { deep: true, sync: true });
+	      /* eslint-enable no-new */
+	    }
+	  }, {
+	    key: 'state',
+	    get: function get$$1() {
+	      return this._vm.state;
+	    },
+	    set: function set$$1(v) {
+	      throw new Error('[vuex] Use store.replaceState() to explicit replace store state.');
+	    }
+	  }]);
+	  return Store;
+	}();
+
+	function install(_Vue) {
+	  if (Vue) {
+	    console.warn('[vuex] already installed. Vue.use(Vuex) should be called only once.');
+	    return;
+	  }
+	  Vue = _Vue;
+	  override(Vue);
+	}
+
+	// auto install in dist mode
+	if (typeof window !== 'undefined' && window.Vue) {
+	  install(window.Vue);
+	}
+
+	var index = {
+	  Store: Store,
+	  install: install
+	};
+
+	return index;
+
+	})));
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -5277,13 +5393,13 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _defineProperty2 = __webpack_require__(16);
+	var _defineProperty2 = __webpack_require__(17);
 
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
 	var _mutations;
 
-	var _mutationType = __webpack_require__(35);
+	var _mutationType = __webpack_require__(36);
 
 	var mutationType = _interopRequireWildcard(_mutationType);
 
@@ -5315,15 +5431,15 @@ webpackJsonp([0],[
 	  mutations: mutations
 	};
 
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	exports.__esModule = true;
 
-	var _defineProperty = __webpack_require__(17);
+	var _defineProperty = __webpack_require__(18);
 
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 
@@ -5344,38 +5460,38 @@ webpackJsonp([0],[
 	  return obj;
 	};
 
-/***/ },
-/* 17 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(18), __esModule: true };
-
-/***/ },
+/***/ }),
 /* 18 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(19);
-	var $Object = __webpack_require__(22).Object;
+	module.exports = { "default": __webpack_require__(19), __esModule: true };
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	__webpack_require__(20);
+	var $Object = __webpack_require__(23).Object;
 	module.exports = function defineProperty(it, key, desc){
 	  return $Object.defineProperty(it, key, desc);
 	};
 
-/***/ },
-/* 19 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $export = __webpack_require__(20);
-	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-	$export($export.S + $export.F * !__webpack_require__(30), 'Object', {defineProperty: __webpack_require__(26).f});
-
-/***/ },
+/***/ }),
 /* 20 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	var global    = __webpack_require__(21)
-	  , core      = __webpack_require__(22)
-	  , ctx       = __webpack_require__(23)
-	  , hide      = __webpack_require__(25)
+	var $export = __webpack_require__(21);
+	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+	$export($export.S + $export.F * !__webpack_require__(31), 'Object', {defineProperty: __webpack_require__(27).f});
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var global    = __webpack_require__(22)
+	  , core      = __webpack_require__(23)
+	  , ctx       = __webpack_require__(24)
+	  , hide      = __webpack_require__(26)
 	  , PROTOTYPE = 'prototype';
 
 	var $export = function(type, name, source){
@@ -5434,28 +5550,28 @@ webpackJsonp([0],[
 	$export.R = 128; // real proto method for `library` 
 	module.exports = $export;
 
-/***/ },
-/* 21 */
-/***/ function(module, exports) {
+/***/ }),
+/* 22 */
+/***/ (function(module, exports) {
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
 	var global = module.exports = typeof window != 'undefined' && window.Math == Math
 	  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
 	if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
 
-/***/ },
-/* 22 */
-/***/ function(module, exports) {
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
 
 	var core = module.exports = {version: '2.4.0'};
 	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
-/***/ },
-/* 23 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	// optional / simple context binding
-	var aFunction = __webpack_require__(24);
+	var aFunction = __webpack_require__(25);
 	module.exports = function(fn, that, length){
 	  aFunction(fn);
 	  if(that === undefined)return fn;
@@ -5475,38 +5591,38 @@ webpackJsonp([0],[
 	  };
 	};
 
-/***/ },
-/* 24 */
-/***/ function(module, exports) {
+/***/ }),
+/* 25 */
+/***/ (function(module, exports) {
 
 	module.exports = function(it){
 	  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
 	  return it;
 	};
 
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
 
-	var dP         = __webpack_require__(26)
-	  , createDesc = __webpack_require__(34);
-	module.exports = __webpack_require__(30) ? function(object, key, value){
+	var dP         = __webpack_require__(27)
+	  , createDesc = __webpack_require__(35);
+	module.exports = __webpack_require__(31) ? function(object, key, value){
 	  return dP.f(object, key, createDesc(1, value));
 	} : function(object, key, value){
 	  object[key] = value;
 	  return object;
 	};
 
-/***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
 
-	var anObject       = __webpack_require__(27)
-	  , IE8_DOM_DEFINE = __webpack_require__(29)
-	  , toPrimitive    = __webpack_require__(33)
+	var anObject       = __webpack_require__(28)
+	  , IE8_DOM_DEFINE = __webpack_require__(30)
+	  , toPrimitive    = __webpack_require__(34)
 	  , dP             = Object.defineProperty;
 
-	exports.f = __webpack_require__(30) ? Object.defineProperty : function defineProperty(O, P, Attributes){
+	exports.f = __webpack_require__(31) ? Object.defineProperty : function defineProperty(O, P, Attributes){
 	  anObject(O);
 	  P = toPrimitive(P, true);
 	  anObject(Attributes);
@@ -5518,44 +5634,44 @@ webpackJsonp([0],[
 	  return O;
 	};
 
-/***/ },
-/* 27 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(28);
+	var isObject = __webpack_require__(29);
 	module.exports = function(it){
 	  if(!isObject(it))throw TypeError(it + ' is not an object!');
 	  return it;
 	};
 
-/***/ },
-/* 28 */
-/***/ function(module, exports) {
+/***/ }),
+/* 29 */
+/***/ (function(module, exports) {
 
 	module.exports = function(it){
 	  return typeof it === 'object' ? it !== null : typeof it === 'function';
 	};
 
-/***/ },
-/* 29 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = !__webpack_require__(30) && !__webpack_require__(31)(function(){
-	  return Object.defineProperty(__webpack_require__(32)('div'), 'a', {get: function(){ return 7; }}).a != 7;
+	module.exports = !__webpack_require__(31) && !__webpack_require__(32)(function(){
+	  return Object.defineProperty(__webpack_require__(33)('div'), 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
-/***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	// Thank's IE8 for his funny defineProperty
-	module.exports = !__webpack_require__(31)(function(){
+	module.exports = !__webpack_require__(32)(function(){
 	  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
 	});
 
-/***/ },
-/* 31 */
-/***/ function(module, exports) {
+/***/ }),
+/* 32 */
+/***/ (function(module, exports) {
 
 	module.exports = function(exec){
 	  try {
@@ -5565,24 +5681,24 @@ webpackJsonp([0],[
 	  }
 	};
 
-/***/ },
-/* 32 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(28)
-	  , document = __webpack_require__(21).document
+	var isObject = __webpack_require__(29)
+	  , document = __webpack_require__(22).document
 	  // in old IE typeof document.createElement is 'object'
 	  , is = isObject(document) && isObject(document.createElement);
 	module.exports = function(it){
 	  return is ? document.createElement(it) : {};
 	};
 
-/***/ },
-/* 33 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	// 7.1.1 ToPrimitive(input [, PreferredType])
-	var isObject = __webpack_require__(28);
+	var isObject = __webpack_require__(29);
 	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
 	// and the second argument - flag - preferred type is a string
 	module.exports = function(it, S){
@@ -5594,9 +5710,9 @@ webpackJsonp([0],[
 	  throw TypeError("Can't convert object to primitive value");
 	};
 
-/***/ },
-/* 34 */
-/***/ function(module, exports) {
+/***/ }),
+/* 35 */
+/***/ (function(module, exports) {
 
 	module.exports = function(bitmap, value){
 	  return {
@@ -5607,9 +5723,9 @@ webpackJsonp([0],[
 	  };
 	};
 
-/***/ },
-/* 35 */
-/***/ function(module, exports) {
+/***/ }),
+/* 36 */
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -5648,9 +5764,9 @@ webpackJsonp([0],[
 
 	var FETCHING = exports.FETCHING = 'FETCHING';
 
-/***/ },
-/* 36 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 37 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -5658,13 +5774,13 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _defineProperty2 = __webpack_require__(16);
+	var _defineProperty2 = __webpack_require__(17);
 
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
 	var _mutations;
 
-	var _mutationType = __webpack_require__(35);
+	var _mutationType = __webpack_require__(36);
 
 	var mutationType = _interopRequireWildcard(_mutationType);
 
@@ -5721,9 +5837,9 @@ webpackJsonp([0],[
 	  mutations: mutations
 	};
 
-/***/ },
-/* 37 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -5731,13 +5847,13 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _defineProperty2 = __webpack_require__(16);
+	var _defineProperty2 = __webpack_require__(17);
 
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
 	var _mutations;
 
-	var _mutationType = __webpack_require__(35);
+	var _mutationType = __webpack_require__(36);
 
 	var mutationType = _interopRequireWildcard(_mutationType);
 
@@ -5799,9 +5915,9 @@ webpackJsonp([0],[
 	  mutations: mutations
 	};
 
-/***/ },
-/* 38 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -5810,15 +5926,15 @@ webpackJsonp([0],[
 	});
 	exports.login = exports.authenticate = undefined;
 
-	var _superagent = __webpack_require__(39);
+	var _superagent = __webpack_require__(40);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
-	var _mutationType = __webpack_require__(35);
+	var _mutationType = __webpack_require__(36);
 
 	var mutationType = _interopRequireWildcard(_mutationType);
 
-	var _base = __webpack_require__(44);
+	var _base = __webpack_require__(45);
 
 	var _base2 = _interopRequireDefault(_base);
 
@@ -5855,9 +5971,9 @@ webpackJsonp([0],[
 	  }, function () {});
 	};
 
-/***/ },
-/* 39 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Root reference for iframes.
@@ -5873,9 +5989,9 @@ webpackJsonp([0],[
 	  root = this;
 	}
 
-	var Emitter = __webpack_require__(40);
-	var requestBase = __webpack_require__(41);
-	var isObject = __webpack_require__(42);
+	var Emitter = __webpack_require__(41);
+	var requestBase = __webpack_require__(42);
+	var isObject = __webpack_require__(43);
 
 	/**
 	 * Noop.
@@ -5887,7 +6003,7 @@ webpackJsonp([0],[
 	 * Expose `request`.
 	 */
 
-	var request = module.exports = __webpack_require__(43).bind(null, Request);
+	var request = module.exports = __webpack_require__(44).bind(null, Request);
 
 	/**
 	 * Determine XHR.
@@ -6837,9 +6953,9 @@ webpackJsonp([0],[
 	};
 
 
-/***/ },
-/* 40 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	
 	/**
@@ -7006,14 +7122,14 @@ webpackJsonp([0],[
 	};
 
 
-/***/ },
-/* 41 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(42);
+	var isObject = __webpack_require__(43);
 
 	/**
 	 * Clear previous timeout.
@@ -7384,9 +7500,9 @@ webpackJsonp([0],[
 	};
 
 
-/***/ },
-/* 42 */
-/***/ function(module, exports) {
+/***/ }),
+/* 43 */
+/***/ (function(module, exports) {
 
 	/**
 	 * Check if `obj` is an object.
@@ -7403,9 +7519,9 @@ webpackJsonp([0],[
 	module.exports = isObject;
 
 
-/***/ },
-/* 43 */
-/***/ function(module, exports) {
+/***/ }),
+/* 44 */
+/***/ (function(module, exports) {
 
 	// The node and browser modules expose versions of this with the
 	// appropriate constructor function bound as first argument
@@ -7441,9 +7557,9 @@ webpackJsonp([0],[
 	module.exports = request;
 
 
-/***/ },
-/* 44 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -7451,13 +7567,14 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _superagentPrefix = __webpack_require__(45);
+	var _superagentPrefix = __webpack_require__(46);
 
 	var _superagentPrefix2 = _interopRequireDefault(_superagentPrefix);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var url = window.localStorage.apiurl || 'http://zhanglun.daoapp.io/api';
+	var url = 'http://localhost:1234/api';
 
 	var baseURL = (0, _superagentPrefix2.default)(url);
 	// let baseURL = agentPrefix('http://localhost:1234/api');
@@ -7465,9 +7582,9 @@ webpackJsonp([0],[
 
 	exports.default = baseURL;
 
-/***/ },
-/* 45 */
-/***/ function(module, exports) {
+/***/ }),
+/* 46 */
+/***/ (function(module, exports) {
 
 	module.exports = function (prefix) {
 	    return function (request) {
@@ -7479,9 +7596,9 @@ webpackJsonp([0],[
 	    };
 	}
 
-/***/ },
-/* 46 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -7490,15 +7607,15 @@ webpackJsonp([0],[
 	});
 	exports.editList = exports.deleteList = exports.addList = exports.fetchLists = undefined;
 
-	var _superagent = __webpack_require__(39);
+	var _superagent = __webpack_require__(40);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
-	var _mutationType = __webpack_require__(35);
+	var _mutationType = __webpack_require__(36);
 
 	var mutationType = _interopRequireWildcard(_mutationType);
 
-	var _base = __webpack_require__(44);
+	var _base = __webpack_require__(45);
 
 	var _base2 = _interopRequireDefault(_base);
 
@@ -7547,9 +7664,9 @@ webpackJsonp([0],[
 	  });
 	};
 
-/***/ },
-/* 47 */
-/***/ function(module, exports) {
+/***/ }),
+/* 48 */
+/***/ (function(module, exports) {
 
 	"use strict";
 
@@ -7588,19 +7705,17 @@ webpackJsonp([0],[
 	  return state.tasks.isRequestingTasks;
 	};
 
-/***/ },
-/* 48 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(49)
-	__vue_script__ = __webpack_require__(50)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] app\\src\\components\\SideContainer.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(51)
+	__webpack_require__(50)
+	__vue_script__ = __webpack_require__(51)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] app/src/components/SideContainer.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(52)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -7616,7 +7731,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-85376dbc/SideContainer.vue"
+	  var id = "_v-66c6cec0/SideContainer.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -7624,11 +7739,11 @@ webpackJsonp([0],[
 	  }
 	})()}
 
-/***/ },
-/* 49 */
-10,
+/***/ }),
 /* 50 */
-/***/ function(module, exports, __webpack_require__) {
+11,
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -7636,11 +7751,11 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _lists = __webpack_require__(46);
+	var _lists = __webpack_require__(47);
 
 	var listsActions = _interopRequireWildcard(_lists);
 
-	var _getter = __webpack_require__(47);
+	var _getter = __webpack_require__(48);
 
 	var getters = _interopRequireWildcard(_getter);
 
@@ -7932,25 +8047,23 @@ webpackJsonp([0],[
 	//
 	//   </style>
 
-/***/ },
-/* 51 */
-/***/ function(module, exports) {
+/***/ }),
+/* 52 */
+/***/ (function(module, exports) {
 
 	module.exports = "\n<div class=\"sidebar\">\n  <div class=\"sidebar-header\">\n    <!-- <span class=\"material-icons\">list</span> -->\n  </div>\n  <div class=\"sidebar-toolbar\">\n    <div v-if=\"user\" class=\"sidebar-toolbar-account\">\n      <img v-bind:src=\"user.avatar\" alt=\"\">\n      {{user.username}}\n    </div>\n  </div>\n  <div class=\"sidebar-body list-scroll\">\n    <ul class=\"side-menu\">\n      <li>\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: 'archive'}}\">\n          <span class=\"material-icons\">archive</span>\n          <span class=\"side-menu__item-content\">归档</span>\n        </a>\n      </li>\n      <li>\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: 'trash'}}\">\n          <span class=\"material-icons\">delete</span>\n          <span class=\"side-menu__item-content\">回收站</span>\n        </a>\n      </li>\n    </ul>\n    <ul class=\"side-menu\">\n      <li v-for=\"list in lists\">\n        <a class=\"side-menu__item\" v-link=\"{name: 'list', params: {id: list.id}}\">\n          <span class=\"material-icons\">list</span>\n          <span class=\"side-menu__item-content\">{{list.name}}</span>\n          <span class=\"side-menu__item-count\">{{list.task_count_total - list.task_count_archived - list.task_count_istrash || ''}}</span>\n          <span class=\"material-icons edit\" @click=\"showCurrent(e, list)\" data-tooltip=\"编辑\" data-tooltip-pos=\"down\">edit</span>\n        </a>\n      </li>\n    </ul>\n\n  </div>\n  <div class=\"sidebar-footer\">\n    <div class=\"side-actions\">\n      <span class=\"side-actions__item\" @click=\"showModal = true\">\n        <span class=\"material-icons\">add</span>\n        <span class=\"side-actions__item-content\">新建分类</span>\n      </span>\n    </div>\n  </div>\n  <modal :show=\"showModal\">\n    <div slot=\"content\" class=\"list-editor\">\n      <div class=\"list-editor-header\">\n        <h3 class=\"list-editor-header--title\">创建新的清单</h3>\n      </div>\n      <div class=\"list-editor-body\">\n        <div class=\"robin-textfield\">\n          <input type=\"text\" class=\"robin-textfield--input robin-textfield--input_default\" v-model=\"newList.name\"/>\n        </div>\n      </div>\n      <div class=\"list-editor-footer\">\n        <span></span>\n        <button class=\"robin-btn robin-btn__default\" @click=\"createNewList\">创建</button>\n      </div>\n    </div>\n  </modal>\n  <modal :show=\"showSelectedList\">\n    <div slot=\"content\" class=\"list-editor\">\n      <div class=\"list-editor-header\">\n        <h3 class=\"list-editor-header--title\">编辑清单</h3>\n      </div>\n      <div class=\"list-editor-body\">\n        <div class=\"robin-textfield\">\n          <input type=\"text\" class=\"robin-textfield--input robin-textfield--input_default\" v-model=\"selectedList.name\"/>\n        </div>\n      </div>\n      <div class=\"list-editor-footer\">\n        <span class=\"material-icons\" @click=\"deleteList(this.selectedList)\">delete</span>\n        <button class=\"robin-btn robin-btn__default\" @click=\"doEditList\">确定</button>\n      </div>\n    </div>\n  </modal>\n</div>\n\n";
 
-/***/ },
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(53)
-	__vue_script__ = __webpack_require__(54)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] app\\src\\components\\TaskDetail.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(58)
+	__webpack_require__(54)
+	__vue_script__ = __webpack_require__(55)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] app/src/components/TaskDetail.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(59)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -7966,7 +8079,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-6177732e/TaskDetail.vue"
+	  var id = "_v-d3d0f720/TaskDetail.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -7974,11 +8087,11 @@ webpackJsonp([0],[
 	  }
 	})()}
 
-/***/ },
-/* 53 */
-10,
+/***/ }),
 /* 54 */
-/***/ function(module, exports, __webpack_require__) {
+11,
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -7986,19 +8099,19 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _tasks = __webpack_require__(55);
+	var _tasks = __webpack_require__(56);
 
 	var tasksActions = _interopRequireWildcard(_tasks);
 
-	var _getter = __webpack_require__(47);
+	var _getter = __webpack_require__(48);
 
 	var getters = _interopRequireWildcard(_getter);
 
-	var _marked = __webpack_require__(56);
+	var _marked = __webpack_require__(57);
 
 	var _marked2 = _interopRequireDefault(_marked);
 
-	var _tool = __webpack_require__(57);
+	var _tool = __webpack_require__(58);
 
 	var _tool2 = _interopRequireDefault(_tool);
 
@@ -8351,9 +8464,9 @@ webpackJsonp([0],[
 	//
 	//   </style>
 
-/***/ },
-/* 55 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 56 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -8362,15 +8475,15 @@ webpackJsonp([0],[
 	});
 	exports.resetTasks = exports.editTask = exports.deleteTask = exports.toggleTask = exports.addTask = exports.hideTaskDetail = exports.fetchTaskDetail = exports.fetchTasks = undefined;
 
-	var _superagent = __webpack_require__(39);
+	var _superagent = __webpack_require__(40);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
-	var _mutationType = __webpack_require__(35);
+	var _mutationType = __webpack_require__(36);
 
 	var mutationType = _interopRequireWildcard(_mutationType);
 
-	var _base = __webpack_require__(44);
+	var _base = __webpack_require__(45);
 
 	var _base2 = _interopRequireDefault(_base);
 
@@ -8488,9 +8601,9 @@ webpackJsonp([0],[
 	  dispatch(mutationType.RESET_TASKS);
 	};
 
-/***/ },
-/* 56 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/**
 	 * marked - a markdown parser
@@ -9781,9 +9894,9 @@ webpackJsonp([0],[
 
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ },
-/* 57 */
-/***/ function(module, exports) {
+/***/ }),
+/* 58 */
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -9853,25 +9966,23 @@ webpackJsonp([0],[
 	};
 	exports.default = Tool;
 
-/***/ },
-/* 58 */
-/***/ function(module, exports) {
+/***/ }),
+/* 59 */
+/***/ (function(module, exports) {
 
 	module.exports = "\n  <div class=\"card\" @click.stop v-bind:class=\"{card__trash: task.istrash}\">\n    <div class=\"loader loader__hover\" v-show=\"isRequestingTaskDetail\" transition=\"animation-loader\">\n      <div class=\"loader-inner ball-clip-rotate-multiple\">\n        <div></div>\n        <div></div>\n      </div>\n    </div>\n    <div class=\"card-status card-status__archived\" v-if=\"task.archived && !task.istrash\">\n      该任务已经归档\n    </div>\n    <div class=\"card-status card-status__trash\" v-if=\"task.istrash\">\n      该任务已被删除，无法编辑\n    </div>\n    <div class=\"card-header\">\n      <input class=\"card-header--title card-header--input\" :value=\"task.title\" v-autoblur=\"isTitleEditing\" @focus=\"isTitleEditing = true\" @keyup.esc=\"doEditTitle\" @keyup.enter=\"doEditTitle\" :disabled=\"task.istrash\" />\n    </div>\n    <div class=\"card-body\">\n      <div class=\"card-metadata\">\n        <!--  标签 -->\n        <div class=\"card-metadata-item\">\n          <span class=\"material-icons card-metadata-item--icons\">label_outline</span>\n        </div>\n        <div class=\"card-metadata-item\">\n          <i class=\"material-icons card-metadata-item--icons\" data-tooltip=\"更新时间\">update</i>\n          <span class=\"card-metadata-item--content\">{{task.update_time}}</span>\n        </div>\n        <div class=\"card-metadata-item\">\n          <i class=\"material-icons card-metadata-item--icons\" data-tooltip=\"截止时间\">alarm</i>\n          <span class=\"card-metadata-item--content\">Due: {{task.deadline}}</span>\n        </div>\n        <div class=\"card-metadata-item\">\n          <span class=\"material-icons card-metadata-item--icons\">create</span>\n          <div class=\"card-metadata-item--content\" v-bind:class=\"{editing: isDescEditing}\" @dblclick=\"modifyDesc\">\n            <div class=\"content-value markdownPrased\">{{{descriptionMarked}}}</div>\n            <textarea class=\"content-input\" v-autofocus=\"isDescEditing\" @keyup.esc=\"doEditDesc\" @blur=\"doEditDesc\" v-model=\"task.description\"></textarea>\n          </div>\n        </div>\n        <!-- 子任务 -->\n<!--               <div class=\"card-subtasks\">\n          <ul>\n            <li></li>\n          </ul>\n          <div class=\"card-metadata-item\">\n            <span class=\"material-icons card-metadata-item--icons\">add</span>\n          </div>\n        </div> -->\n      </div>\n    </div>\n    <div class=\"card-footer\">\n      <span></span>\n      <div> 创建于：{{task.create_time}}</div>\n      <div class=\"card-footer--toolbar\">\n        <i class=\"material-icons\" @click=\"toggleTask(task)\" data-tooltip=\"归档\" data-tooltip-pos=\"down\" v-if=\"!task.archived\">archive</i>\n        <i class=\"material-icons\" @click=\"toggleTask(task)\" data-tooltip=\"取消归档\" data-tooltip-pos=\"down\" v-if=\"task.archived\">unarchive</i>\n        <i class=\"material-icons\" @click=\"deleteTask(task)\" v-if=\"task.istrash\" data-tooltip=\"彻底删除\">delete_forever</i>\n        <i class=\"material-icons\" @click=\"deleteTask(task)\" v-if=\"!task.istrash\" data-tooltip=\"删除\">delete</i>\n      </div>\n    </div>\n  </div>\n";
 
-/***/ },
-/* 59 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(60)
-	__vue_script__ = __webpack_require__(61)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] app\\src\\components\\Header.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(62)
+	__webpack_require__(61)
+	__vue_script__ = __webpack_require__(62)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] app/src/components/Header.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(63)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -9887,7 +9998,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-17887ff6/Header.vue"
+	  var id = "_v-6eea7b72/Header.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -9895,11 +10006,11 @@ webpackJsonp([0],[
 	  }
 	})()}
 
-/***/ },
-/* 60 */
-10,
+/***/ }),
 /* 61 */
-/***/ function(module, exports, __webpack_require__) {
+11,
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -9907,7 +10018,7 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _getter = __webpack_require__(47);
+	var _getter = __webpack_require__(48);
 
 	var getters = _interopRequireWildcard(_getter);
 
@@ -9917,7 +10028,7 @@ webpackJsonp([0],[
 	  props: ['list'],
 	  data: function data() {
 	    return {
-	      useRemoteAPI: window.localStorage.apiurl == 'http://zhanglun.daoapp.io/api' ? true : false
+	      useRemoteAPI: window.localStorage.apiurl === 'http://zhanglun.daoapp.io/api' ? true : false
 	    };
 	  },
 
@@ -9964,30 +10075,28 @@ webpackJsonp([0],[
 	//
 	// <script>
 
-/***/ },
-/* 62 */
-/***/ function(module, exports) {
+/***/ }),
+/* 63 */
+/***/ (function(module, exports) {
 
 	module.exports = "\n<div class=\"main-header header-toolbar\">\n  <div class=\"header-toolbar__title\">\n    {{list.name}}\n  </div>\n</div>\n";
 
-/***/ },
-/* 63 */
-/***/ function(module, exports) {
+/***/ }),
+/* 64 */
+/***/ (function(module, exports) {
 
 	module.exports = "\n<side-container></side-container>\n<div class=\"main\">\n  <router-view></router-view>\n</div>\n<task-detail v-if=\"show\" transition=\"animation-showtaskdetail\"></task-detail>\n";
 
-/***/ },
-/* 64 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__vue_script__ = __webpack_require__(65)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] app\\src\\components\\Index.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(66)
+	__vue_script__ = __webpack_require__(66)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] app/src/components/Index.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(67)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10003,7 +10112,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-58023d0a/Index.vue"
+	  var id = "_v-1488ea88/Index.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -10011,9 +10120,9 @@ webpackJsonp([0],[
 	  }
 	})()}
 
-/***/ },
-/* 65 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -10025,15 +10134,15 @@ webpackJsonp([0],[
 
 	var _vue2 = _interopRequireDefault(_vue);
 
-	var _store = __webpack_require__(13);
+	var _store = __webpack_require__(14);
 
 	var _store2 = _interopRequireDefault(_store);
 
-	var _user = __webpack_require__(38);
+	var _user = __webpack_require__(39);
 
 	var userActions = _interopRequireWildcard(_user);
 
-	var _getter = __webpack_require__(47);
+	var _getter = __webpack_require__(48);
 
 	var getters = _interopRequireWildcard(_getter);
 
@@ -10067,13 +10176,11 @@ webpackJsonp([0],[
 
 	  computed: {},
 	  created: function created() {
-	    var _this = this;
-
-	    this.authenticate(function (user) {
-	      if (!user) {
-	        _this.$router.go('/login');
-	      }
-	    });
+	    // this.authenticate((user) => {
+	    //   if (!user) {
+	    // this.$router.push('/login');
+	    // }
+	    // });
 	  },
 	  ready: function ready() {},
 
@@ -10082,25 +10189,23 @@ webpackJsonp([0],[
 	};
 	// </script>
 
-/***/ },
-/* 66 */
-/***/ function(module, exports) {
+/***/ }),
+/* 67 */
+/***/ (function(module, exports) {
 
 	module.exports = "\n<div class=\"app\">\n  <router-view ></router-view>\n</div>\n";
 
-/***/ },
-/* 67 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 68 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(68)
-	__vue_script__ = __webpack_require__(69)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] app\\src\\components\\mainContainer.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(80)
+	__webpack_require__(69)
+	__vue_script__ = __webpack_require__(70)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] app/src/components/mainContainer.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(81)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10116,7 +10221,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-d7a9dfc0/mainContainer.vue"
+	  var id = "_v-b93940c4/mainContainer.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -10124,11 +10229,11 @@ webpackJsonp([0],[
 	  }
 	})()}
 
-/***/ },
-/* 68 */
-10,
+/***/ }),
 /* 69 */
-/***/ function(module, exports, __webpack_require__) {
+11,
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -10136,23 +10241,23 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _Header = __webpack_require__(59);
+	var _Header = __webpack_require__(60);
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _TaskItem = __webpack_require__(70);
+	var _TaskItem = __webpack_require__(71);
 
 	var _TaskItem2 = _interopRequireDefault(_TaskItem);
 
-	var _AddItem = __webpack_require__(74);
+	var _AddItem = __webpack_require__(75);
 
 	var _AddItem2 = _interopRequireDefault(_AddItem);
 
-	var _tasks = __webpack_require__(55);
+	var _tasks = __webpack_require__(56);
 
 	var tasksActions = _interopRequireWildcard(_tasks);
 
-	var _getter = __webpack_require__(47);
+	var _getter = __webpack_require__(48);
 
 	var getters = _interopRequireWildcard(_getter);
 
@@ -10407,19 +10512,17 @@ webpackJsonp([0],[
 	// </template>
 	// <script>
 
-/***/ },
-/* 70 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(71)
-	__vue_script__ = __webpack_require__(72)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] app\\src\\components\\TaskItem.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(73)
+	__webpack_require__(72)
+	__vue_script__ = __webpack_require__(73)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] app/src/components/TaskItem.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(74)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10435,7 +10538,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-fb05dba0/TaskItem.vue"
+	  var id = "_v-7f148bf2/TaskItem.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -10443,11 +10546,11 @@ webpackJsonp([0],[
 	  }
 	})()}
 
-/***/ },
-/* 71 */
-10,
+/***/ }),
 /* 72 */
-/***/ function(module, exports, __webpack_require__) {
+11,
+/* 73 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -10455,15 +10558,15 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _tasks = __webpack_require__(55);
+	var _tasks = __webpack_require__(56);
 
 	var tasksActions = _interopRequireWildcard(_tasks);
 
-	var _getter = __webpack_require__(47);
+	var _getter = __webpack_require__(48);
 
 	var getters = _interopRequireWildcard(_getter);
 
-	var _tool = __webpack_require__(57);
+	var _tool = __webpack_require__(58);
 
 	var _tool2 = _interopRequireDefault(_tool);
 
@@ -10737,25 +10840,23 @@ webpackJsonp([0],[
 	// </template>
 	// <script>
 
-/***/ },
-/* 73 */
-/***/ function(module, exports) {
+/***/ }),
+/* 74 */
+/***/ (function(module, exports) {
 
 	module.exports = "\n<div transition=\"animation_showtask\" v-bind:class=\"{archived: task.archived, editing: task == taskEditing, 'collection-item': iscollection, 'task': !iscollection}\" @click=\"showTaskDetail(task)\">\n  <div class=\"task-content\">\n    <div class=\"task-content-box\" v-html=\"titleAfterParse\"></div>\n  </div>\n  <div class=\"task-labels\" v-if=\"iscollection\">\n    <span class=\"task-labels--item\">{{task.list_name}}</span>\n  </div>\n  <div class=\"task-toolbar\" @click.stop>\n    <i class=\"material-icons task-toolbar--icons\" @click=\"toggleTask(task)\" data-tooltip=\"归档\" v-if=\"!task.archived && !task.istrash\">archive</i>\n    <i class=\"material-icons task-toolbar--icons\" @click=\"toggleTask(task)\" data-tooltip=\"取消归档\" v-if=\"task.archived && !task.istrash\">unarchive</i>\n    <i class=\"material-icons task-toolbar--icons\" v-if=\"task.istrash\" data-tooltip=\"还原\" @click=\"undoTask(task)\">undo</i>\n    <i class=\"material-icons task-toolbar--icons\" @click=\"deleteTask(task)\" v-if=\"task.istrash\" data-tooltip=\"彻底删除\">delete_forever</i>\n    <i class=\"material-icons task-toolbar--icons\" @click=\"deleteTask(task)\" v-if=\"!task.istrash\" data-tooltip=\"删除\">delete</i>\n  </span>\n\n</div>\n";
 
-/***/ },
-/* 74 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(75)
-	__vue_script__ = __webpack_require__(76)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] app\\src\\components\\AddItem.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(79)
+	__webpack_require__(76)
+	__vue_script__ = __webpack_require__(77)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] app/src/components/AddItem.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(80)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10771,7 +10872,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-5b650a8c/AddItem.vue"
+	  var id = "_v-10f6508a/AddItem.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -10779,11 +10880,11 @@ webpackJsonp([0],[
 	  }
 	})()}
 
-/***/ },
-/* 75 */
-10,
+/***/ }),
 /* 76 */
-/***/ function(module, exports, __webpack_require__) {
+11,
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -10791,11 +10892,11 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _stringify = __webpack_require__(77);
+	var _stringify = __webpack_require__(78);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
-	var _tasks = __webpack_require__(55);
+	var _tasks = __webpack_require__(56);
 
 	var taskActions = _interopRequireWildcard(_tasks);
 
@@ -10892,47 +10993,45 @@ webpackJsonp([0],[
 	//
 	// <script>
 
-/***/ },
-/* 77 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(78), __esModule: true };
-
-/***/ },
+/***/ }),
 /* 78 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	var core  = __webpack_require__(22)
+	module.exports = { "default": __webpack_require__(79), __esModule: true };
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(23)
 	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
 	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
 	  return $JSON.stringify.apply($JSON, arguments);
 	};
 
-/***/ },
-/* 79 */
-/***/ function(module, exports) {
+/***/ }),
+/* 80 */
+/***/ (function(module, exports) {
 
 	module.exports = "\n<div class=\"task-textfield\">\n  <input class=\"task-textfield--input\" type=\"text\" v-model=\"newTask.title\" @keyup.enter=\"createTask(list_id)\" placeholder=\"添加任务...\">\n</div>\n";
 
-/***/ },
-/* 80 */
-/***/ function(module, exports) {
+/***/ }),
+/* 81 */
+/***/ (function(module, exports) {
 
 	module.exports = "\n<main-header :list=\"currentList\"></main-header>\n<div class=\"main-body\" >\n  <add-item :listid=\"listId\" v-show=\"showInputer\"></add-item>\n  <div class=\"tasklist\">\n    <task-item v-for=\"task in tasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\" :iscollection='isCollection'></task-item>\n  </div>\n  <div class=\"label-trigger\" @click=\"toggleShowArchivedTask\"  v-show=\"showInputer\">\n    显示已经归档的任务\n  </div>\n  <div class=\"loader\" v-show=\"isRequestingTasks\">\n    <div class=\"loader-inner ball-clip-rotate-multiple\">\n      <div></div>\n      <div></div>\n    </div>\n  </div>\n  <div class=\"tasklist--finished\" transition=\"animation_showtask\" v-show=\"showArchived\">\n    <task-item v-for=\"task in archivedTasklist\" :task=\"task\" :index=\"$index\" track-by=\"id\"></task-item>\n  </div>\n\n</div>\n";
 
-/***/ },
-/* 81 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__webpack_require__(82)
-	__vue_script__ = __webpack_require__(83)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] app\\src\\components\\user\\login.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(84)
+	__webpack_require__(83)
+	__vue_script__ = __webpack_require__(84)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] app/src/components/user/login.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(85)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -10948,7 +11047,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-15ac13f0/login.vue"
+	  var id = "_v-596342bf/login.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -10956,11 +11055,11 @@ webpackJsonp([0],[
 	  }
 	})()}
 
-/***/ },
-/* 82 */
-10,
+/***/ }),
 /* 83 */
-/***/ function(module, exports, __webpack_require__) {
+11,
+/* 84 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -10968,11 +11067,11 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _user = __webpack_require__(38);
+	var _user = __webpack_require__(39);
 
 	var userActions = _interopRequireWildcard(_user);
 
-	var _getter = __webpack_require__(47);
+	var _getter = __webpack_require__(48);
 
 	var getters = _interopRequireWildcard(_getter);
 
@@ -11056,24 +11155,22 @@ webpackJsonp([0],[
 	//  }
 	// </style>
 
-/***/ },
-/* 84 */
-/***/ function(module, exports) {
+/***/ }),
+/* 85 */
+/***/ (function(module, exports) {
 
 	module.exports = "\n  <div class=\"custom-container login-form\" transition=\"animate_routerview\">\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <h3>登录</h3>\n      </div>\n    </div>\n    <div class=\"mdl-grid\">\n      <div class=\"mdl-cell mdl-cell-6-col\">\n        <div class=\"robin-textfield\">\n          <label class=\"\" for=\"email\">Email</label>\n          <input class=\"robin-textfield--input robin-textfield--input_default\" type=\"text\" id=\"email\" v-model=\"account.username\">\n        </div>\n      </div>\n    </div>\n    <div class=\"mdl-cell mdl-cell-6-col\">\n      <div class=\"mdl-textfield mdl-js-textfield\">\n        <label class=\"mdl-textfield__label\" for=\"password\">Password</label>\n        <input class=\"robin-textfield--input robin-textfield--input_default\" type=\"password\" id=\"password\" v-model=\"account.password\">\n      </div>\n    </div>\n    <div class=\"mdl-cell mdl-cell-6-col\">\n      <div class=\"robin-textfield\">\n        <button class=\"robin-btn robin-btn__default\"  v-on:click=\"doLogin\">GO!</button>\n        <a v-link=\"{path: '/signup', exact: true}\">还没有账号？立马注册</a>\n      </div>\n    </div>\n  </div>\n</div>\n";
 
-/***/ },
-/* 85 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 86 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	var __vue_script__, __vue_template__
 	var __vue_styles__ = {}
-	__vue_script__ = __webpack_require__(86)
-	if (__vue_script__ &&
-	    __vue_script__.__esModule &&
-	    Object.keys(__vue_script__).length > 1) {
-	  console.warn("[vue-loader] app\\src\\components\\user\\signup.vue: named exports in *.vue files are ignored.")}
-	__vue_template__ = __webpack_require__(87)
+	__vue_script__ = __webpack_require__(87)
+	if (Object.keys(__vue_script__).some(function (key) { return key !== "default" && key !== "__esModule" })) {
+	  console.warn("[vue-loader] app/src/components/user/signup.vue: named exports in *.vue files are ignored.")}
+	__vue_template__ = __webpack_require__(88)
 	module.exports = __vue_script__ || {}
 	if (module.exports.__esModule) module.exports = module.exports.default
 	var __vue_options__ = typeof module.exports === "function" ? (module.exports.options || (module.exports.options = {})) : module.exports
@@ -11089,7 +11186,7 @@ webpackJsonp([0],[
 	  var hotAPI = require("vue-hot-reload-api")
 	  hotAPI.install(require("vue"), false)
 	  if (!hotAPI.compatible) return
-	  var id = "_v-279f51be/signup.vue"
+	  var id = "_v-1f5f0232/signup.vue"
 	  if (!module.hot.data) {
 	    hotAPI.createRecord(id, module.exports)
 	  } else {
@@ -11097,9 +11194,9 @@ webpackJsonp([0],[
 	  }
 	})()}
 
-/***/ },
-/* 86 */
-/***/ function(module, exports) {
+/***/ }),
+/* 87 */
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -11159,30 +11256,30 @@ webpackJsonp([0],[
 	};
 	// </script>
 
-/***/ },
-/* 87 */
-/***/ function(module, exports) {
+/***/ }),
+/* 88 */
+/***/ (function(module, exports) {
 
 	module.exports = "\n<div class=\"custom-container login-form\" transition=\"animate_routerview\">\n  <div class=\"mdl-grid\">\n    <div class=\"mdl-cell mdl-cell-6-col\">\n      <h3>注册</h3>\n    </div>\n    <div class=\"robin-textfield\">\n      <label class=\"mdl-textfield__label\" for=\"email\">邮箱</label>\n      <input class=\"robin-textfield--input robin-textfield--input_default\" type=\"text\" id=\"email\" v-model=\"registerData.email\"/>\n    </div>\n    <div class=\"robin-textfield\">\n      <label class=\"mdl-textfield__label\" for=\"password\">密码</label>\n      <input class=\"robin-textfield--input robin-textfield--input_default\" type=\"password\" id=\"password\" v-model=\"registerData.password\"/>\n    </div>\n    <div class=\"robin-textfield\">\n      <button class=\"robin-btn robin-btn__default\" v-on:click=\"signUp()\">注册</button>\n      <a v-link=\"'login'\">已有账号？直接登录</a>\n    </div>\n  </div>\n</div>\n";
 
-/***/ },
-/* 88 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 89 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(89);
+	var content = __webpack_require__(90);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(90)(content, {});
+	var update = __webpack_require__(91)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/less-loader/index.js!./style.less", function() {
-				var newContent = require("!!./../../../../node_modules/css-loader/index.js?sourceMap!./../../../../node_modules/less-loader/index.js!./style.less");
+			module.hot.accept("!!../../../../node_modules/css-loader/index.js?sourceMap!../../../../node_modules/less-loader/index.js!./style.less", function() {
+				var newContent = require("!!../../../../node_modules/css-loader/index.js?sourceMap!../../../../node_modules/less-loader/index.js!./style.less");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -11191,11 +11288,11 @@ webpackJsonp([0],[
 		module.hot.dispose(function() { update(); });
 	}
 
-/***/ },
-/* 89 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(11)();
+	exports = module.exports = __webpack_require__(12)();
 	// imports
 
 
@@ -11205,9 +11302,9 @@ webpackJsonp([0],[
 	// exports
 
 
-/***/ },
-/* 90 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -11222,7 +11319,7 @@ webpackJsonp([0],[
 			};
 		},
 		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+			return /msie [6-9]\b/.test(self.navigator.userAgent.toLowerCase());
 		}),
 		getHeadElement = memoize(function () {
 			return document.head || document.getElementsByTagName("head")[0];
@@ -11457,5 +11554,5 @@ webpackJsonp([0],[
 	}
 
 
-/***/ }
+/***/ })
 ]);
