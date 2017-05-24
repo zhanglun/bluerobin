@@ -31,11 +31,11 @@
     computed: {
     },
     created() {
-      this.authenticate((user) => {
-        if (!user) {
-          this.$router.go('/login');
-        }
-      });
+      // this.authenticate((user) => {
+      //   if (!user) {
+          // this.$router.push('/login');
+        // }
+      // });
     },
     ready() {
     },

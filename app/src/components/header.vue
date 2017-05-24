@@ -12,7 +12,7 @@
     props: ['list'],
     data() {
       return {
-        useRemoteAPI: window.localStorage.apiurl == 'http://zhanglun.daoapp.io/api' ? true : false,
+        useRemoteAPI: window.localStorage.apiurl === 'http://zhanglun.daoapp.io/api' ? true : false,
       };
     },
     vuex: {
