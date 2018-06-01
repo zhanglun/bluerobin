@@ -1,9 +1,10 @@
 {
   "name": "bluerobin",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.1.1",
   "scripts": {
     "start": "gulp",
+    "release": "standard-version",
     "dev": "webpack-dev-server -d --watch --devtool --inline --hot --content-base ./app/dist"
   },
   "dependencies": {
@@ -33,6 +34,7 @@
     "html-webpack-plugin": "^2.22.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "standard-version": "^4.4.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "vue-hot-reload-api": "^1.3.2",
