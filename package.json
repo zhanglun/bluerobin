@@ -5,6 +5,7 @@
   "scripts": {
     "start": "gulp",
     "release": "standard-version",
+    "change": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "dev": "webpack-dev-server -d --watch --devtool --inline --hot --content-base ./app/dist"
   },
   "dependencies": {
